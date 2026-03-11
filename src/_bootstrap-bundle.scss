@@ -1,0 +1,15 @@
+// All Bootstrap @imports in a single file so their shared Sass variable scope
+// is preserved when loaded via meta.load-css() inside an @layer block.
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/vendor/rfs';
+
+// CSS output partials
+@import 'bootstrap/scss/root';
+@import 'bootstrap/scss/reboot';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/type';
