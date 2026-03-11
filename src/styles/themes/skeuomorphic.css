@@ -849,8 +849,6 @@ ol li {
 
 /* Base Button Style */
 .btn {
-  width: 70px;
-  height: 70px;
   border-radius: 4px;
   /* Slight rounding */
   border: none;

@@ -1,0 +1,68 @@
+:root {
+    /* --- Metallic Palette --- */
+
+    /* Generic Metals */
+    --metal-silver-light: #f7f9fa;
+    --metal-silver-mid: #dcdfe3;
+    --metal-silver-dark: #b0bfd6; /* slight blue tint for realism */
+    --metal-grey-dark: #4a5059;
+    --metal-grey-deep: #2c3138;
+    
+    /* Chrome/Hightlights */
+    --chrome-highlight: #ffffff;
+    --chrome-reflection: #eef2f5;
+    
+    /* Shadows */
+    --shadow-soft: rgba(0, 0, 0, 0.15);
+    --shadow-deep: rgba(0, 0, 0, 0.45);
+    --shadow-inset: rgba(0, 0, 0, 0.25);
+    
+    /* Text */
+    --text-engraved: rgba(40, 45, 55, 0.75);
+    --text-raised: rgba(255, 255, 255, 0.9);
+    
+    /* --- Specific Metals --- */
+    
+    /* Brushed Aluminum (Linear) */
+    --bg-aluminum-linear: linear-gradient(
+        180deg, 
+        #f5f7f9 0%, 
+        #d8dbe0 50%, 
+        #b8bec5 51%, 
+        #f0f2f5 100%
+    );
+    
+    /* Brushed Aluminum (Radial/Spinner) */
+    --bg-aluminum-radial: radial-gradient(
+        ellipse at top left,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.0) 60%
+    ),
+    conic-gradient(
+        from 45deg,
+        #d8dbe0 0%,
+        #f5f7f9 25%,
+        #b8bec5 50%,
+        #f5f7f9 75%,
+        #d8dbe0 100%
+    );
+
+    /* Dark/Inset Panel */
+    --bg-panel-dark: #2a2e33;
+    --bg-track-inset: #1a1c20;
+
+    /* Highlight Rims */
+    --rim-outer: linear-gradient(135deg, #bbb, #fff);
+    --rim-inner: linear-gradient(135deg, #fff, #bbb);
+
+    /* --- LED Colors --- */
+    --led-green-off: #205020;
+    --led-green-on: #44ff44;
+    --led-red-off: #502020;
+    --led-red-on: #ff3333;
+    --led-blue-off: #202050;
+    --led-blue-on: #3388ff;
+    
+    /* --- Fonts --- */
+    --font-primary: 'Roboto', sans-serif;
+}

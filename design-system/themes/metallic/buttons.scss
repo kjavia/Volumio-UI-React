@@ -1,0 +1,151 @@
+@import './variables';
+
+/* =============================================================
+   Metallic Theme — Buttons (Brushed Aluminum Style)
+   ============================================================= */
+
+/* ── Base Button Structure ──────────────────────────────────── */
+.btn {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-primary, sans-serif);
+    font-weight: 500;
+    color: var(--metal-grey-dark, #4a5059);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    outline: none;
+    
+    /* Simulate mental weight */
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    
+    /* Default Shape */
+    padding: 10px 20px;
+    border-radius: 4px;
+    
+    /* Default Metal Finish (Linear Brushed) */
+    background: var(--metal-silver-light);
+    background-image: var(--bg-aluminum-linear);
+    
+    /* 3D Effects: Two layers of shadow for beveled edge + drop shadow */
+    box-shadow:
+        /* Top Highlight Bezel */
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+        /* Bottom Shadow Bezel */
+        inset 0 -1px 1px 0 rgba(0, 0, 0, 0.15),
+        /* Drop Shadow */
+        0 2px 4px 0 rgba(0, 0, 0, 0.2),
+        0 8px 16px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn:active,
+.btn.active {
+    transform: translateY(1px);
+    
+    /* Pressed State: Darker & Inset */
+    background: #d8dbe0; /* Simpler fill on press */
+    box-shadow:
+        /* Deep Press Shadow */
+        inset 0 2px 5px 0 rgba(0, 0, 0, 0.25),
+        /* Highlight at bottom (light catching bottom rim) */
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.6),
+        /* Smaller external shadow */
+        0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ── Shapes ─────────────────────────────────────────────────── */
+
+/* Circular Knob / Button (Radial Finish) */
+.btn-round {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    padding: 0;
+    
+    /* Radial Spun Metal Finish */
+    background-image: 
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0) 20%),
+        conic-gradient(#e0e0e0, #fcfcfc, #d0d0d0, #fcfcfc, #e0e0e0, #d0d0d0, #e0e0e0);
+        
+    /* Stronger concentric rings for knob feel */
+    box-shadow:
+        /* Inner face rim */
+        inset 0 0 0 1px rgba(255, 255, 255, 0.4),
+        /* Outer bevel */
+        inset 0 2px 4px rgba(255, 255, 255, 1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.15),
+        /* Drop shadow */
+        0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.btn-round:active {
+    background-image: conic-gradient(#d0d0d0, #e0e0e0, #c0c0c0, #e0e0e0, #d0d0d0);
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.3);
+    transform: scale(0.98);
+}
+
+/* Square / Rect (Linear brushed look) */
+.btn-square {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    padding: 0;
+    justify-content: center;
+}
+
+/* Pill / Toggle shape */
+.btn-pill {
+    border-radius: 20px;
+    padding: 8px 24px;
+}
+
+/* ── Variants ───────────────────────────────────────────────── */
+
+/* Dark Metal (e.g., 'Off' toggle) */
+.btn-dark {
+    background: linear-gradient(180deg, #444 0%, #222 100%);
+    color: #ccc;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.1),
+        inset 0 -1px 0 rgba(0,0,0,0.5),
+        0 2px 4px rgba(0,0,0,0.4);
+}
+.btn-dark:active {
+    background: #222;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* Chrome / Shiny (High Reflectivity) */
+.btn-chrome {
+    background: linear-gradient(180deg, #fff 0%, #e0e0e0 48%, #d0d0d0 50%, #f0f0f0 100%);
+    color: #444;
+    font-weight: bold;
+}
+
+/* ── Indicators ─────────────────────────────────────────────── */
+.led {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--led-red-off);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.2);
+    margin: 4px;
+    border: 1px solid rgba(0,0,0,0.3);
+}
+
+/* Status variants */
+.led.green-on { background-color: var(--led-green-on); box-shadow: 0 0 5px var(--led-green-on), inset 0 1px 2px rgba(255,255,255,0.5); }
+.led.red-on   { background-color: var(--led-red-on);   box-shadow: 0 0 5px var(--led-red-on),   inset 0 1px 2px rgba(255,255,255,0.5); }
+.led.blue-on  { background-color: var(--led-blue-on);  box-shadow: 0 0 5px var(--led-blue-on),  inset 0 1px 2px rgba(255,255,255,0.5); }
+
+/* Indicator within button */
+.btn .led {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+

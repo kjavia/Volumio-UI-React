@@ -1,0 +1,344 @@
+@import './variables';
+
+/* =============================================================
+   Metallic Theme — Forms (Based on Skeuomorphic Structure)
+   ============================================================= */
+
+/* ── Container Styles ──────────────────────────────────────── */
+.settings-panel {
+    width: 100%;
+    max-width: 800px;
+    background-color: var(--metal-silver-light);
+    border-radius: 8px; /* Sharper corners for metal look */
+    padding: 40px;
+    
+    /* Panel Texture: Brushed Aluminum */
+    background-image: var(--bg-aluminum-linear);
+    
+    /* Strong Metallic Bevel */
+    box-shadow: 
+        inset 1px 1px 0 rgba(255, 255, 255, 0.8),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.3);
+    
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border: 1px solid #999;
+}
+
+.panel-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ── Form Layout ───────────────────────────────────────────── */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section-title {
+    font-family: var(--font-primary, sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--metal-grey-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+    
+    /* Indented line look */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    align-items: center;
+}
+
+.form-group.stacked {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+label {
+    font-family: var(--font-primary, sans-serif);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--metal-grey-deep);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.input-desc {
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+    display: block;
+    font-weight: 400;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+
+/* ── Input Fields ──────────────────────────────────────────── */
+.input-field {
+    width: 100%;
+    /* Recessed dark screen look */
+    background-color: var(--bg-track-inset, #1a1c20);
+    border: none;
+    border-radius: 4px;
+    padding: 12px 15px;
+    
+    /* LCD style text */
+    color: var(--led-blue-on);
+    font-family: 'Courier New', monospace; 
+    font-weight: 600;
+    font-size: 14px;
+    
+    /* Deep Inset Shadow */
+    box-shadow:
+        inset 2px 2px 6px rgba(0, 0, 0, 0.6),
+        inset -1px -1px 1px rgba(255, 255, 255, 0.05),
+        0 1px 0 rgba(255, 255, 255, 0.4); /* Bottom reflective lip */
+        
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+.input-field:focus {
+    outline: none;
+    background-color: #101215;
+    box-shadow:
+        inset 2px 2px 6px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(51, 136, 255, 0.3); /* Subtle blue glow focus */
+}
+
+/* ── Select Dropdown ───────────────────────────────────────── */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.select-field {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    background-color: var(--metal-silver-mid);
+    background-image: var(--bg-aluminum-linear);
+    
+    border: none;
+    border-radius: 4px;
+    padding: 12px 15px;
+    color: var(--metal-grey-deep);
+    font-family: var(--font-primary, sans-serif);
+    font-weight: 600;
+    font-size: 14px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+    
+    /* Convex Button feel */
+    box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.8),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.2),
+        0 2px 4px rgba(0, 0, 0, 0.15);
+        
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.select-field:active {
+    background-color: var(--metal-silver-dark);
+    box-shadow:
+        inset 2px 2px 4px rgba(0, 0, 0, 0.3),
+        0 1px 0 rgba(255, 255, 255, 0.5);
+    transform: translateY(1px);
+}
+
+.select-arrow {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #666;
+    font-size: 12px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+}
+
+/* ── Toggle Switch ─────────────────────────────────────────── */
+.toggle-switch {
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 26px;
+    margin-right: 10px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The Track */
+.toggle-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #222; /* Dark recessed track */
+    border-radius: 26px;
+    border: 1px solid rgba(0,0,0,0.3);
+    
+    /* Deep shadow */
+    box-shadow: 
+        inset 0 2px 6px rgba(0,0,0,0.6), 
+        0 1px 0 rgba(255,255,255,0.3);
+    transition: 0.3s;
+}
+
+/* The Thumb (Chrome) */
+.toggle-switch .slider:before {
+    position: absolute;
+    content: '';
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+    background: radial-gradient(circle at 30% 30%, #fff, #d0d0d0 60%, #999 100%);
+    border-radius: 50%;
+    
+    /* Chrome shine */
+    box-shadow: 
+        0 2px 4px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+        
+    transition: 0.3s;
+}
+
+/* Checked Actions */
+.toggle-switch input:checked + .slider {
+    /* Optional: Glow inside the track */
+    background-color: #1a1c20;
+    box-shadow: 
+        inset 0 2px 6px rgba(0,0,0,0.6), 
+        inset 0 0 8px var(--led-blue-on);
+}
+
+.toggle-switch input:checked + .slider:before {
+    transform: translateX(24px);
+    /* Reflecting the blue light on the chrome knob */
+    background: radial-gradient(circle at 30% 30%, #eef, #cce 60%, #99b 100%);
+}
+
+/* ── Radio & Checkbox Items ────────────────────────────────── */
+.radio-group, .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radio-option, .checkbox-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: var(--font-primary, sans-serif);
+    font-size: 14px;
+    color: var(--metal-grey-dark);
+    user-select: none;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.radio-option input, .checkbox-option input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* ── Radio Mark (Round) ────────────────────────────────────── */
+.radio-option .checkmark {
+    position: relative;
+    height: 22px;
+    width: 22px;
+    margin-right: 12px;
+    background-color: var(--metal-silver-mid);
+    border-radius: 50%;
+    
+    /* Spun metal look */
+    background-image: conic-gradient(from 45deg, #ccc 0%, #f0f0f0 25%, #bbb 50%, #f0f0f0 75%, #ccc 100%);
+    
+    /* Inset well */
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.4),
+        0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* LED Indicator center */
+.radio-option .checkmark:after {
+    content: '';
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--led-blue-on);
+    /* Soft glow */
+    box-shadow: 0 0 6px var(--led-blue-on), inset 0 1px 2px rgba(255,255,255,0.4);
+}
+
+.radio-option input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* ── Checkbox Mark (Square) ────────────────────────────────── */
+.checkbox-option .checkmark {
+    position: relative;
+    height: 22px;
+    width: 22px;
+    margin-right: 12px;
+    background-color: var(--metal-silver-mid);
+    border-radius: 4px;
+    
+    /* Brushed Linear */
+    background-image: var(--bg-aluminum-linear);
+    
+    /* Pressed/Inset Look */
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.4),
+        0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* LED Indicator (Square or Dot) */
+.checkbox-option .checkmark:after {
+    content: '';
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: var(--led-red-on); /* Red for variety, or stick to blue */
+    box-shadow: 0 0 6px var(--led-red-on), inset 0 1px 2px rgba(255,255,255,0.4);
+}
+
+.checkbox-option input:checked ~ .checkmark:after {
+    display: block;
+}
+

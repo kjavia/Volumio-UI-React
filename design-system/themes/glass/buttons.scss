@@ -1,0 +1,191 @@
+/* =============================================================
+   Glass Theme — Buttons
+   Inspired by Neon Glass Music Player aesthetic:
+   Deep blur, thin glowing borders, soft gradients, rounded forms.
+   ============================================================= */
+
+/* ── Base Button ────────────────────────────────────────────── */
+.btn {
+    /* Layout */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    font-family: var(--font-label, 'Roboto', sans-serif);
+    
+    /* Shape */
+    border-radius: 20px;
+    padding: 12px 20px;
+    
+    /* Glass Effect (The core style) */
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.12) 0%, 
+        rgba(255, 255, 255, 0.04) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    /* Border: Thin, subtle, slightly glowing white */
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    
+    /* Shadow: Deep, ambient shadow to lift it off the BG */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+
+    /* Text */
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    
+    /* Animation */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    isolation: isolate;
+}
+
+.btn:hover {
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.20) 0%, 
+        rgba(255, 255, 255, 0.08) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.20);
+    transform: translateY(-2px);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.btn:active,
+.btn.active {
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.25) 0%, 
+        rgba(255, 255, 255, 0.15) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ── Shapes ─────────────────────────────────────────────────── */
+
+/* Round Buttons (Play, Skip, Heart) - Pure Circle */
+.btn-round {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    
+    /* Extra gloss for round buttons */
+    box-shadow: 
+        0 8px 32px 0 rgba(0, 0, 0, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05); 
+}
+
+/* Main Play Button (Larger, prominent) */
+.btn-play-large, 
+.btn-large {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    font-size: 28px;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        rgba(255, 255, 255, 0.08) 100%
+    );
+}
+
+/* Square / Rect variants */
+.btn-square {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    flex-direction: column;
+}
+
+.btn-rect-small {
+    height: 40px;
+    border-radius: 12px;
+    padding: 0 16px;
+}
+
+.btn-rect-medium {
+    height: 50px;
+    border-radius: 15px;
+    padding: 0 24px;
+}
+
+/* ── Colors ─────────────────────────────────────────────────── */
+
+.btn-black {
+    background: linear-gradient(
+        135deg, 
+        rgba(20, 20, 25, 0.6) 0%, 
+        rgba(10, 10, 15, 0.3) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.1);
+}
+.btn-black:hover {
+    background: linear-gradient(
+        135deg, 
+        rgba(40, 40, 50, 0.7) 0%, 
+        rgba(20, 20, 30, 0.4) 100%
+    );
+}
+
+.btn-white {
+    /* Standard glass is already white-ish */
+}
+
+.btn-orange {
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 120, 80, 0.4) 0%, 
+        rgba(255, 80, 40, 0.1) 100%
+    );
+    border-color: rgba(255, 180, 150, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(255, 100, 50, 0.15);
+}
+.btn-orange:hover {
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 140, 100, 0.5) 0%, 
+        rgba(255, 100, 60, 0.2) 100%
+    );
+    box-shadow: 0 12px 40px 0 rgba(255, 100, 50, 0.25);
+}
+
+/* ── Content Layout ─────────────────────────────────────────── */
+.btn .primary-text {
+    font-size: 16px;
+    z-index: 2;
+}
+
+.btn .secondary-text {
+    font-size: 11px;
+    opacity: 0.75;
+    margin-top: 2px;
+    z-index: 2;
+}
+
+/* ── Status Indicators ──────────────────────────────────────── */
+.led {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+}
+.led.on {
+    background: #ff4757;
+    box-shadow: 0 0 8px #ff4757, 0 0 16px rgba(255, 71, 87, 0.4);
+}
+
