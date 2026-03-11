@@ -1,0 +1,252 @@
+@use './variables.scss';
+
+// ─── Google Fonts ────────────────────────────────────────────────────────────
+@import url('https://fonts.googleapis.com/css2?family=Michroma&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap');
+
+// ─── Base ────────────────────────────────────────────────────────────────────
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    font-weight: 400;
+    line-height: var(--leading-normal);
+    color: var(--text-dark);
+    background-color: var(--bg-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// ─── Headings ────────────────────────────────────────────────────────────────
+// Michroma gives the tech-device aesthetic; engraved text-shadow on light
+// surfaces, glowing on dark panels.
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-dark);
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    // Engraved look: bright highlight above, dark shadow below
+    text-shadow:
+        0 1px 0 var(--highlight-50),
+        0 -1px 0 var(--shadow-20);
+}
+
+h1 {
+    font-size: var(--text-4xl);
+    letter-spacing: var(--tracking-widest);
+}
+h2 {
+    font-size: var(--text-3xl);
+    letter-spacing: var(--tracking-wider);
+}
+h3 {
+    font-size: var(--text-2xl);
+    letter-spacing: var(--tracking-wider);
+}
+h4 {
+    font-size: var(--text-xl);
+}
+h5 {
+    font-size: var(--text-lg);
+}
+h6 {
+    font-size: var(--text-base);
+    letter-spacing: var(--tracking-normal);
+    text-transform: none;
+}
+
+// ─── Display Heading (dark panel, glowing) ───────────────────────────────────
+.display-heading {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: 400;
+    color: var(--text-light);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-shadow:
+        0 0 20px var(--glow-orange-40),
+        0 2px 4px var(--shadow-80);
+}
+
+// ─── Paragraphs ──────────────────────────────────────────────────────────────
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    line-height: var(--leading-relaxed);
+}
+
+// ─── Lead Text ───────────────────────────────────────────────────────────────
+.lead {
+    font-size: var(--text-lg);
+    font-weight: 300;
+    line-height: var(--leading-relaxed);
+    color: var(--text-dim);
+}
+
+// ─── Links ───────────────────────────────────────────────────────────────────
+a {
+    color: var(--text-orange);
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+        color: var(--color-orange-light);
+        text-decoration: underline;
+    }
+
+    &:active {
+        color: var(--color-orange-dark);
+    }
+}
+
+// ─── Tech Label ──────────────────────────────────────────────────────────────
+// Knob labels, scale captions, readout titles — Michroma, uppercase, tracked.
+.label-tech {
+    font-family: var(--font-tech);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    line-height: var(--leading-tight);
+}
+
+// ─── UI Label ────────────────────────────────────────────────────────────────
+// Button labels, field captions — Roboto, small, slightly tracked.
+.label-ui {
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-dark);
+}
+
+// ─── Value Readout ───────────────────────────────────────────────────────────
+// BPM counter, time display, numeric readouts — recessed LCD panel feel.
+.readout {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    letter-spacing: var(--tracking-wide);
+    color: var(--text-light);
+    background-color: var(--panel-bg-dark);
+    padding: 0.25em 0.5em;
+    border-radius: 3px;
+    box-shadow:
+        inset 2px 2px 4px var(--shadow-80),
+        inset -1px -1px 2px var(--highlight-05),
+        0 1px 0 var(--highlight-20);
+}
+
+.readout-orange {
+    color: var(--color-orange-light);
+    text-shadow: 0 0 8px var(--glow-orange-40);
+}
+
+// ─── Section Title ───────────────────────────────────────────────────────────
+.section-title {
+    font-family: var(--font-tech);
+    font-size: var(--text-base);
+    font-weight: 400;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--border-light);
+    // Engraved underline effect
+    box-shadow: 0 1px 0 var(--highlight-40);
+}
+
+// ─── Code / Pre ──────────────────────────────────────────────────────────────
+code,
+kbd,
+samp {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-orange-light);
+    background-color: var(--panel-bg-dark);
+    padding: 0.15em 0.4em;
+    border-radius: 2px;
+}
+
+pre {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-light);
+    background-color: var(--panel-bg-dark);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    box-shadow:
+        inset 2px 2px 5px var(--shadow-80),
+        0 1px 0 var(--highlight-10);
+
+    code {
+        background: none;
+        padding: 0;
+        color: inherit;
+    }
+}
+
+// ─── Blockquote ──────────────────────────────────────────────────────────────
+blockquote {
+    margin: 0 0 1rem;
+    padding: 0.75em 1em;
+    border-left: 3px solid var(--color-orange-vivid);
+    background-color: var(--list-item-bg);
+    color: var(--text-light);
+    font-style: italic;
+    box-shadow: inset 1px 0 0 var(--highlight-05);
+}
+
+// ─── Horizontal Rule ─────────────────────────────────────────────────────────
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+    margin: 1.5rem 0;
+    // Double-line engraved effect
+    box-shadow: 0 1px 0 var(--highlight-30);
+}
+
+// ─── Lists ───────────────────────────────────────────────────────────────────
+ul,
+ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+
+    li {
+        margin-bottom: 0.25em;
+        line-height: var(--leading-relaxed);
+    }
+}
+
+// ─── Text Color Utilities ────────────────────────────────────────────────────
+.text-orange {
+    color: var(--text-orange) !important;
+}
+.text-light {
+    color: var(--text-light) !important;
+}
+.text-dark {
+    color: var(--text-dark) !important;
+}
+.text-muted {
+    color: var(--text-muted) !important;
+}
+.text-dim {
+    color: var(--text-dim) !important;
+}
+.text-accent {
+    color: var(--color-orange-vivid) !important;
+}

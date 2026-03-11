@@ -1,8 +1,13 @@
-@use './variables.scss';
-@use './typography.scss';
-@use './button.scss';
-@use './forms.scss';
-@use './progressbar.scss';
-@use './sliders.scss';
-@use './knobs.scss';
-@use './tabs.scss';
+@import './variables.scss';
+@import './typography.scss';
+@import './colors.scss';
+@import './button.scss';
+@import './forms.scss';
+@import './progressbar.scss';
+@import './sliders.scss';
+@import './knobs.scss';
+@import './tabs.scss';
+
+body {
+    background-color: var(--bg-color);
+}
