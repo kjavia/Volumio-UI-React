@@ -2,11 +2,11 @@ import Button from './components/Button';
 
 const App = () => {
     return (
-        <div classNameName="container-fluid">
-            <div classNameName="row">
-                <div classNameName="col-12">
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col-12">
                     <h1>Volumio UI React</h1>
-                    <div classNameName="my-5">
+                    <div className="my-5">
                         <div className="settings-panel">
                             <div className="panel-header">
                                 <h1>System Configuration</h1>
@@ -23,7 +23,7 @@ const App = () => {
                                     {/* <!-- Text Input --> */}
                                     <div className="form-group">
                                         <div>
-                                            <label for="device-name">Device Name</label>
+                                            <label htmlFor="device-name">Device Name</label>
                                             <span className="input-desc">
                                                 Network identifier for this player
                                             </span>
@@ -40,7 +40,7 @@ const App = () => {
                                     {/* <!-- Select Dropdown --> */}
                                     <div className="form-group">
                                         <div>
-                                            <label for="wifi-network">Wi-Fi Network</label>
+                                            <label htmlFor="wifi-network">Wi-Fi Network</label>
                                             <span className="input-desc">
                                                 Select primary connection point
                                             </span>
@@ -123,13 +123,13 @@ const App = () => {
                                     <div className="section-title">Account</div>
                                     {/* <!-- Password Input --> */}
                                     <div className="form-group">
-                                        <label for="api-key">API Key</label>
+                                        <label htmlFor="api-key">API Key</label>
                                         <input
                                             type="password"
                                             id="api-key"
                                             className="input-field"
                                             value="dk29s-293d-293s"
-                                            readonly
+                                            readOnly
                                         />
                                     </div>
                                 </div>
