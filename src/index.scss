@@ -8,7 +8,7 @@
 // meta.load-css() generates the CSS inline here (unlike @import/@use which are
 // compile-time directives and cannot be nested inside @layer).
 @layer bootstrap {
-    @include meta.load-css('bootstrap-bundle');
+  @include meta.load-css('bootstrap-bundle');
 }
 
 // // Design-system theme — outside any layer, so it wins over @layer bootstrap

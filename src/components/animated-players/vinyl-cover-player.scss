@@ -1,168 +1,168 @@
 /* Unique Styles for Vinyl Sleeve Layout */
 .vinyl-sleeve-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
 }
 
 /* The Spinning Vinyl Record */
 .vinyl-disc {
-    width: 290px;
-    height: 290px;
-    background-color: var(--color-gray-900);
-    border-radius: 50%;
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    z-index: 1;
-    /* Behind sleeve */
-    box-shadow: 0 0 20px var(--shadow-60);
-    /* Shadow cast on right/under */
+  width: 290px;
+  height: 290px;
+  background-color: var(--color-gray-900);
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1;
+  /* Behind sleeve */
+  box-shadow: 0 0 20px var(--shadow-60);
+  /* Shadow cast on right/under */
 
-    /* The "sticking out" mechanism */
-    /* We want it 50% exposed. Width is 290px. Half is 145px. */
-    /* The parent container is 300px wide. */
-    /* We want centered disc to move RIGHT. */
-    /* left: 5px + 120px = 125px */
-    transform-origin: center;
-    animation: spin 4s linear infinite;
+  /* The "sticking out" mechanism */
+  /* We want it 50% exposed. Width is 290px. Half is 145px. */
+  /* The parent container is 300px wide. */
+  /* We want centered disc to move RIGHT. */
+  /* left: 5px + 120px = 125px */
+  transform-origin: center;
+  animation: spin 4s linear infinite;
 }
 
 @keyframes spin {
-    /* 120px shift on 290px disc ~ 41% */
-    from {
-        transform: translateX(41%) rotate(0deg);
-    }
+  /* 120px shift on 290px disc ~ 41% */
+  from {
+    transform: translateX(41%) rotate(0deg);
+  }
 
-    to {
-        transform: translateX(41%) rotate(360deg);
-    }
+  to {
+    transform: translateX(41%) rotate(360deg);
+  }
 }
 
 /* Inner details of the record */
 .vinyl-grooves {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50%;
-    background: repeating-radial-gradient(
-        var(--color-gray-850),
-        var(--color-gray-850) 2px,
-        var(--color-gray-900) 3px,
-        var(--color-gray-900) 4px
-    );
-    box-shadow: inset 0 0 20px var(--shadow-80);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+      var(--color-gray-850),
+      var(--color-gray-850) 2px,
+      var(--color-gray-900) 3px,
+      var(--color-gray-900) 4px
+  );
+  box-shadow: inset 0 0 20px var(--shadow-80);
 }
 
 /* Shine overlay */
 .vinyl-shine {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50%;
-    background: linear-gradient(
-        135deg,
-        var(--highlight-10) 0%,
-        transparent 40%,
-        transparent 60%,
-        var(--highlight-05) 100%
-    );
-    z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+      135deg,
+      var(--highlight-10) 0%,
+      transparent 40%,
+      transparent 60%,
+      var(--highlight-05) 100%
+  );
+  z-index: 10;
 }
 
 .vinyl-label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 35%;
-    height: 35%;
-    background-color: var(--color-red-vivid);
-    border-radius: 50%;
-    z-index: 5;
-    box-shadow: 0 0 5px var(--shadow-50);
-    border: 4px solid var(--color-gray-900);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35%;
+  height: 35%;
+  background-color: var(--color-red-vivid);
+  border-radius: 50%;
+  z-index: 5;
+  box-shadow: 0 0 5px var(--shadow-50);
+  border: 4px solid var(--color-gray-900);
 }
 
 .vinyl-label::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 6%;
-    height: 6%;
-    background: var(--color-black);
-    border-radius: 50%;
-    border: 1px solid var(--color-gray-700);
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6%;
+  height: 6%;
+  background: var(--color-black);
+  border-radius: 50%;
+  border: 1px solid var(--color-gray-700);
 }
 
 /* Album Art on Sleeve */
 .album-sleeve {
-    /* Responsive: fill container height */
-    width: auto;
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    /* width: 300px; height: 300px; replaced */
-    background: linear-gradient(135deg, var(--color-gray-700), var(--color-gray-850));
-    border-radius: 4px;
-    z-index: 10;
-    position: absolute;
-    left: 0;
-    top: 0;
-    box-shadow: 0 10px 30px var(--shadow-50);
+  /* Responsive: fill container height */
+  width: auto;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  /* width: 300px; height: 300px; replaced */
+  background: linear-gradient(135deg, var(--color-gray-700), var(--color-gray-850));
+  border-radius: 4px;
+  z-index: 10;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-shadow: 0 10px 30px var(--shadow-50);
 }
 
 @media (min-width: 768px) {
-    .vinyl-sleeve-container {
-        width: 40vw;
-        height: auto;
-        aspect-ratio: 1.4;
-        max-width: 600px;
-        display: block;
-    }
+  .vinyl-sleeve-container {
+    width: 40vw;
+    height: auto;
+    aspect-ratio: 1.4;
+    max-width: 600px;
+    display: block;
+  }
 
-    .vinyl-disc {
-        /* Scale relative to container */
-        width: auto;
-        height: 96%;
-        /* 290/300 approx */
-        aspect-ratio: 1/1;
-        /* Reset fixed */
-        top: 2%;
-        left: 1%;
-    }
+  .vinyl-disc {
+    /* Scale relative to container */
+    width: auto;
+    height: 96%;
+    /* 290/300 approx */
+    aspect-ratio: 1/1;
+    /* Reset fixed */
+    top: 2%;
+    left: 1%;
+  }
 }
 
 .sleeve-art {
-    width: 100%;
-    height: 100%;
-    /* background-image set inline or via JS */
-    background-size: cover;
-    background-position: center;
-    background-image: repeating-linear-gradient(
-        45deg,
-        var(--color-red-vivid),
-        var(--color-red-vivid) 10px,
-        var(--color-red-deep) 10px,
-        var(--color-red-deep) 20px
-    );
+  width: 100%;
+  height: 100%;
+  /* background-image set inline or via JS */
+  background-size: cover;
+  background-position: center;
+  background-image: repeating-linear-gradient(
+      45deg,
+      var(--color-red-vivid),
+      var(--color-red-vivid) 10px,
+      var(--color-red-deep) 10px,
+      var(--color-red-deep) 20px
+  );
 }
 
 /* Responsive adjustments */
 @media (min-width: 768px) {
-    .vinyl-sleeve-container {
-        /* Scale up for desktop */
-        transform: scale(1.1);
-        /* Shift left to center the composition visually since disc sticks out right */
-        margin-left: 0;
-    }
+  .vinyl-sleeve-container {
+    /* Scale up for desktop */
+    transform: scale(1.1);
+    /* Shift left to center the composition visually since disc sticks out right */
+    margin-left: 0;
+  }
 }
