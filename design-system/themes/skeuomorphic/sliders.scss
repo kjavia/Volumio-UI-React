@@ -1,0 +1,90 @@
+.slider-group {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+/* The vertical track */
+.fader-track {
+    width: 12px;
+    height: 200px;
+    background-color: var(--color-gray-850, #1a1a1a);
+    border-radius: 6px;
+    box-shadow:
+        inset 2px 2px 4px var(--shadow-80),
+        inset -1px -1px 2px var(--highlight-10),
+        0 0 0 1px var(--highlight-05);
+    /* Outer edge highlight */
+    position: relative;
+    margin: 0 20px;
+}
+
+/* The cap/knob */
+.fader-cap {
+    width: 50px;
+    /* Wide cap like the image */
+    height: 30px;
+    background: linear-gradient(
+        135deg,
+        var(--color-gray-600, #444),
+        var(--color-gray-750, #2a2a2a)
+    );
+    border-radius: 4px;
+    position: absolute;
+    left: 50%;
+    /* Default position */
+    transform: translate(-50%, -50%);
+    box-shadow:
+        0 4px 6px var(--shadow-40),
+        0 1px 2px var(--shadow-30),
+        inset 1px 1px 1px var(--highlight-20),
+        inset -1px -1px 1px var(--shadow-50);
+    cursor: ns-resize;
+
+    /* Texture or center line */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fader-cap::after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-gray-900, #111);
+    box-shadow: 0 1px 0 var(--highlight-10);
+}
+
+.fader-cap:hover {
+    background: linear-gradient(
+        135deg,
+        var(--color-gray-550, #4d4d4d),
+        var(--color-gray-700, #333)
+    );
+}
+
+/* Tick marks for scale */
+.scale {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -20px;
+    width: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--color-gray-400, #777);
+    font-size: 10px;
+    font-family: var(--font-tech);
+}
+
+.scale-mark {
+    width: 8px;
+    height: 1px;
+    background-color: var(--color-gray-250, #999);
+}
+
+.scale-mark.long {
+    width: 14px;
+    background-color: var(--color-gray-500, #555);
+}

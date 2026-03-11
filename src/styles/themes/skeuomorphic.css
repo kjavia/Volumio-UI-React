@@ -1,0 +1,501 @@
+:root {
+  /* --- Base Palette --- */
+  /* Neutrals */
+  --color-black: #000000;
+  --color-gray-950: #050505;
+  --color-gray-900: #111111;
+  --color-gray-850: #1a1a1a;
+  --color-gray-800: #222222;
+  --color-gray-750: #2a2a2a;
+  --color-gray-700: #333333;
+  --color-gray-600: #444444;
+  --color-gray-550: #4d4d4d;
+  --color-gray-500: #555555;
+  --color-gray-400: #666666;
+  --color-gray-300: #888888;
+  --color-gray-250: #999999;
+  --color-gray-200: #aaaaaa;
+  --color-gray-150: #bbbbbb;
+  --color-gray-100: #cccccc;
+  --color-gray-075: #d0d0d0;
+  --color-gray-050: #e0e0e0;
+  --color-gray-025: #f0f0f0;
+  --color-gray-010: #f5f5f5;
+  --color-white: #ffffff;
+  /* Accents (Orange/Red) */
+  --color-orange-vivid: #ff4500;
+  /* Main Accent */
+  --color-orange-light: #ff7043;
+  --color-orange-dark: #d84315;
+  --color-orange-deep: #bf360c;
+  --color-red-vivid: #ff3333;
+  --color-red-deep: #b71c1c;
+  --color-red-dark: #552222;
+  /* --- Semantic Variables (Mapping to Palette) --- */
+  /* Global */
+  --bg-color: var(--color-gray-050);
+  /* #e0e0e0 */
+  --device-surface: #bcbcbc;
+  /* Keeping original hex to match exactly */
+  /* Text */
+  --text-dark: var(--color-gray-800);
+  --text-light: var(--color-gray-025);
+  --text-muted: var(--color-gray-400);
+  /* #666 */
+  --text-dim: var(--color-gray-500);
+  /* #555 */
+  --text-orange: var(--color-orange-vivid);
+  /* Buttons */
+  --btn-bg-dark: #202020;
+  --btn-bg-light: #e6e6e6;
+  --btn-bg-orange: var(--color-orange-vivid);
+  /* UI Components */
+  --panel-bg-dark: var(--color-gray-850);
+  /* #1a1a1a */
+  --list-item-bg: #252525;
+  --list-item-bg-hover: var(--color-gray-750);
+  /* Functional */
+  --led-red-on: var(--color-red-vivid);
+  --led-red-off: var(--color-red-dark);
+  --border-dark: var(--color-gray-900);
+  --border-light: var(--color-gray-300);
+  /* Gradients */
+  --grad-orange-vivid: linear-gradient(90deg, var(--color-orange-light), var(--color-orange-dark));
+  --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
+  /* Button Specific Gradients & Colors */
+  --btn-black-top: var(--color-gray-700);
+  --btn-black-btm: var(--color-gray-800);
+  --btn-white-top: #eaeaea;
+  --btn-white-btm: #cdcdcd;
+  --btn-orange-top: #ff6622;
+  --btn-orange-btm: #e64a19;
+}
+
+/* Base Button Style */
+.btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 4px;
+  /* Slight rounding */
+  border: none;
+  position: relative;
+  cursor: pointer;
+  font-family: var(--font-label, "Roboto", sans-serif);
+  /* For the button label */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  user-select: none;
+  transition: all 0.1s;
+  /* Box Shadow creates the height feel */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 1px 0 0 rgba(255, 255, 255, 0.1), inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn:active,
+.btn.active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* Pressed in shadow */
+}
+
+/* Button Colors */
+.btn-black {
+  background: linear-gradient(180deg, var(--btn-black-top, #333) 0%, var(--btn-black-btm, #222) 100%);
+  color: var(--color-gray-100, #ccc);
+  border-bottom: 2px solid var(--color-gray-900, #111);
+}
+
+.btn-white {
+  background: linear-gradient(180deg, var(--btn-white-top, #eaeaea) 0%, var(--btn-white-btm, #cdcdcd) 100%);
+  color: var(--color-gray-500, #555);
+  border-bottom: 2px solid var(--color-gray-250, #999);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 var(--color-white, #fff);
+}
+
+.btn-white:active {
+  background: var(--btn-white-btm, #cdcdcd);
+  color: var(--color-gray-600, #444);
+}
+
+.btn-orange {
+  background: linear-gradient(180deg, var(--btn-orange-top, #ff6622) 0%, var(--btn-orange-btm, #e64a19) 100%);
+  color: var(--color-white, #fff);
+  /* or dark text? */
+  border-bottom: 2px solid var(--color-red-deep, #b71c1c);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.btn-orange:active {
+  background: var(--btn-orange-btm, #e64a19);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Text inside button */
+.btn .primary-text {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.btn .secondary-text {
+  font-size: 10px;
+  opacity: 0.7;
+  align-self: flex-start;
+}
+
+/* Different button sizes */
+.btn-rect-small {
+  width: 70px;
+  height: 35px;
+  /* Half height */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-rect-medium {
+  width: 70px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Round Button Style */
+.btn-round {
+  width: 60px;
+  height: 60px;
+  /* Default round size in DS */
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.btn-round .primary-text {
+  font-size: 14px;
+  /* Slightly smaller for round buttons usually */
+}
+
+/* Square Button Style - extracted from media-player.html as it seems to be a variation of btn-white but specific size */
+.btn-square {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--btn-white-top, #eaeaea) 0%, var(--btn-white-btm, #cdcdcd) 100%);
+  color: var(--color-gray-600, #444);
+  border-bottom: 2px solid var(--color-gray-250, #999);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), inset 0 1px 0 var(--color-white, #fff);
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.1s;
+  position: relative;
+}
+
+.btn-square:active,
+.btn-square.active {
+  background: var(--btn-white-btm, #cdcdcd);
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-bottom: 0;
+}
+
+.btn-square.active {
+  background: #bbb;
+  /* Keeping explicit color here as var might differ */
+  color: var(--color-gray-800, #222);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+/* LED Indicator simulating part of panel */
+.led {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--led-red-off, #552222);
+  /* Off state */
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.8);
+  margin-bottom: 5px;
+  position: absolute;
+  top: -15px;
+  /* Place it above button like in the image */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.led.on {
+  background-color: var(--led-red-on, #ff3333);
+  box-shadow: 0 0 5px var(--led-red-on, #ff3300), inset 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.button-group {
+  position: relative;
+  /* For LED positioning relative to button */
+  display: inline-block;
+}
+
+.label-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.progress-group {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 250px;
+}
+
+/* 1: LED Segment Style */
+.led-bar-container {
+  display: flex;
+  gap: 4px;
+  background-color: #1a1a1a;
+  padding: 4px;
+  border-radius: 4px;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.led-segment {
+  flex: 1;
+  height: 10px;
+  background-color: #442222;
+  /* dim red */
+  border-radius: 1px;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.8);
+}
+
+.led-segment.on {
+  background-color: #ff3300;
+  box-shadow: 0 0 4px #ff3300;
+}
+
+/* 2: Smooth recessed bar */
+.smooth-bar-track {
+  height: 8px;
+  width: 100%;
+  background-color: #333;
+  border-radius: 4px;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  position: relative;
+}
+
+.smooth-bar-fill {
+  height: 100%;
+  width: 60%;
+  background: linear-gradient(90deg, #ff7043, #d84315);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  position: relative;
+}
+
+/* Highlight on the bar */
+.smooth-bar-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.slider-group {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+/* The vertical track */
+.fader-track {
+  width: 12px;
+  height: 200px;
+  background-color: var(--color-gray-850, #1a1a1a);
+  border-radius: 6px;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.8), inset -1px -1px 2px rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  /* Outer edge highlight */
+  position: relative;
+  margin: 0 20px;
+}
+
+/* The cap/knob */
+.fader-cap {
+  width: 50px;
+  /* Wide cap like the image */
+  height: 30px;
+  background: linear-gradient(135deg, var(--color-gray-600, #444), var(--color-gray-750, #2a2a2a));
+  border-radius: 4px;
+  position: absolute;
+  left: 50%;
+  /* Default position */
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3), inset 1px 1px 1px rgba(255, 255, 255, 0.2), inset -1px -1px 1px rgba(0, 0, 0, 0.5);
+  cursor: ns-resize;
+  /* Texture or center line */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fader-cap::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-gray-900, #111);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.fader-cap:hover {
+  background: linear-gradient(135deg, var(--color-gray-550, #4d4d4d), var(--color-gray-700, #333));
+}
+
+/* Tick marks for scale */
+.scale {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -20px;
+  width: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--color-gray-400, #777);
+  font-size: 10px;
+  font-family: var(--font-tech);
+}
+
+.scale-mark {
+  width: 8px;
+  height: 1px;
+  background-color: var(--color-gray-250, #999);
+}
+
+.scale-mark.long {
+  width: 14px;
+  background-color: var(--color-gray-500, #555);
+}
+
+.knob-container {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.knob-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Base Knob */
+.knob {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  /* Top edge light */
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: grab;
+}
+
+.knob:active {
+  cursor: grabbing;
+}
+
+/* Dimple / Indicator */
+.knob::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+  /* Indentation shadow */
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.4), inset -1px -1px 1px rgba(255, 255, 255, 0.1);
+  /* Inner highlight */
+}
+
+/* White Knob (Volume) */
+.knob-white {
+  background: radial-gradient(circle at 30% 30%, var(--color-gray-010, #f5f5f5), var(--color-gray-075, #d0d0d0));
+  /* Subtle texture */
+  background-image: radial-gradient(circle at 30% 30%, transparent 0%, rgba(0, 0, 0, 0.05) 100%), conic-gradient(var(--color-gray-025, #f0f0f0) 0%, var(--color-gray-050, #e0e0e0) 25%, var(--color-gray-025, #f0f0f0) 50%, var(--color-gray-050, #e0e0e0) 75%, var(--color-gray-025, #f0f0f0) 100%);
+}
+
+/* Orange Knob (BPM) */
+.knob-orange {
+  background: radial-gradient(circle at 30% 30%, var(--color-orange-light, #ff7043), var(--color-orange-dark, #d84315));
+  border: 1px solid var(--color-orange-deep, #bf360c);
+}
+
+.knob-orange::after {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Black Knob (Metronome) */
+.knob-black {
+  background: radial-gradient(circle at 30% 30%, var(--color-gray-600, #444), var(--color-gray-850, #1a1a1a));
+  border: 1px solid var(--color-black, #000);
+}
+
+.knob-black::after {
+  background-color: rgba(0, 0, 0, 0.6);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.9), inset -1px -1px 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Ticks/Marks around the knob */
+.ticks {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50%;
+  z-index: -1;
+  /* Example ticks using conic gradient - simple version */
+  background: conic-gradient(from 220deg, transparent 0deg, transparent 10deg, var(--color-gray-200, #aaa) 10.5deg, transparent 11deg, transparent 20deg);
+  opacity: 0.5;
+  display: none;
+  /* Hidden for now as it overrides clean look */
+}
+
+/* Range Indicators (UI around the knob) */
+.range-indicator {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  /* border-top-color: orange; */
+  transform: rotate(-135deg);
+  pointer-events: none;
+}
+
+/* Label styles */
+.knob-label {
+  font-family: var(--font-tech, "Michroma", sans-serif);
+  font-size: 10px;
+  color: var(--color-gray-400, #666);
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/*# sourceMappingURL=skeuomorphic.css.map */

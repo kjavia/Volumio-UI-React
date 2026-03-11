@@ -1,0 +1,117 @@
+:root {
+    /* --- Base Palette --- */
+
+    /* Neutrals */
+    --color-black: #000000;
+    --color-gray-950: #050505;
+    --color-gray-900: #111111;
+    --color-gray-850: #1a1a1a;
+    --color-gray-800: #222222;
+    --color-gray-750: #2a2a2a;
+    --color-gray-700: #333333;
+    --color-gray-600: #444444;
+    --color-gray-550: #4d4d4d;
+    --color-gray-500: #555555;
+    --color-gray-400: #666666;
+    --color-gray-300: #888888;
+    --color-gray-250: #999999;
+    --color-gray-200: #aaaaaa;
+    --color-gray-150: #bbbbbb;
+    --color-gray-100: #cccccc;
+    --color-gray-075: #d0d0d0;
+    --color-gray-050: #e0e0e0;
+    --color-gray-025: #f0f0f0;
+    --color-gray-010: #f5f5f5;
+    --color-white: #ffffff;
+
+    /* Accents (Orange/Red) */
+    --color-orange-vivid: #ff4500;
+    /* Main Accent */
+    --color-orange-light: #ff7043;
+    --color-orange-dark: #d84315;
+    --color-orange-deep: #bf360c;
+
+    --color-red-vivid: #ff3333;
+    --color-red-deep: #b71c1c;
+    --color-red-dark: #552222;
+
+    /* --- Semantic Variables (Mapping to Palette) --- */
+
+    /* Global */
+    --bg-color: var(--color-gray-050);
+    /* #e0e0e0 */
+    --device-surface: #bcbcbc;
+    /* Keeping original hex to match exactly */
+
+    /* Text */
+    --text-dark: var(--color-gray-800);
+    --text-light: var(--color-gray-025);
+    --text-muted: var(--color-gray-400);
+    /* #666 */
+    --text-dim: var(--color-gray-500);
+    /* #555 */
+    --text-orange: var(--color-orange-vivid);
+
+    /* Buttons */
+    --btn-bg-dark: #202020;
+    --btn-bg-light: #e6e6e6;
+    --btn-bg-orange: var(--color-orange-vivid);
+
+    /* UI Components */
+    --panel-bg-dark: var(--color-gray-850);
+    /* #1a1a1a */
+    --list-item-bg: #252525;
+    --list-item-bg-hover: var(--color-gray-750);
+
+    /* Functional */
+    --led-red-on: var(--color-red-vivid);
+    --led-red-off: var(--color-red-dark);
+    --border-dark: var(--color-gray-900);
+    --border-light: var(--color-gray-300);
+
+    /* Gradients */
+    --grad-orange-vivid: linear-gradient(
+        90deg,
+        var(--color-orange-light),
+        var(--color-orange-dark)
+    );
+    --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
+
+    /* Button Specific Gradients & Colors */
+    --btn-black-top: var(--color-gray-700);
+    --btn-black-btm: var(--color-gray-800);
+
+    --btn-white-top: #eaeaea;
+    --btn-white-btm: #cdcdcd;
+
+    --btn-orange-top: #ff6622;
+    --btn-orange-btm: #e64a19;
+
+    /* Shadow Overlays (black with alpha) */
+    --shadow-02: rgba(0, 0, 0, 0.02);
+    --shadow-03: rgba(0, 0, 0, 0.03);
+    --shadow-05: rgba(0, 0, 0, 0.05);
+    --shadow-10: rgba(0, 0, 0, 0.1);
+    --shadow-15: rgba(0, 0, 0, 0.15);
+    --shadow-20: rgba(0, 0, 0, 0.2);
+    --shadow-30: rgba(0, 0, 0, 0.3);
+    --shadow-40: rgba(0, 0, 0, 0.4);
+    --shadow-50: rgba(0, 0, 0, 0.5);
+    --shadow-60: rgba(0, 0, 0, 0.6);
+    --shadow-80: rgba(0, 0, 0, 0.8);
+    --shadow-90: rgba(0, 0, 0, 0.9);
+
+    /* Highlight Overlays (white with alpha) */
+    --highlight-03: rgba(255, 255, 255, 0.03);
+    --highlight-05: rgba(255, 255, 255, 0.05);
+    --highlight-10: rgba(255, 255, 255, 0.1);
+    --highlight-15: rgba(255, 255, 255, 0.15);
+    --highlight-20: rgba(255, 255, 255, 0.2);
+    --highlight-30: rgba(255, 255, 255, 0.3);
+    --highlight-40: rgba(255, 255, 255, 0.4);
+    --highlight-50: rgba(255, 255, 255, 0.5);
+    --highlight-60: rgba(255, 255, 255, 0.6);
+
+    /* Glow Colors */
+    --glow-orange-40: rgba(255, 69, 0, 0.4);
+}

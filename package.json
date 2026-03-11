@@ -1,0 +1,40 @@
+{
+    "name": "volumio-ui-react",
+    "private": true,
+    "version": "0.0.1",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "npm run build:themes && vite build",
+        "build:themes": "sass --load-path=node_modules design-system/themes/glass/index.scss:src/styles/themes/glass.css design-system/themes/metallic/index.scss:src/styles/themes/metallic.css design-system/themes/skeuomorphic/index.scss:src/styles/themes/skeuomorphic.css",
+        "build:themes:watch": "sass --load-path=node_modules --watch design-system/themes/glass/index.scss:src/styles/themes/glass.css design-system/themes/metallic/index.scss:src/styles/themes/metallic.css design-system/themes/skeuomorphic/index.scss:src/styles/themes/skeuomorphic.css",
+        "lint": "eslint .",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@hookform/resolvers": "5.2.2",
+        "@tanstack/react-query": "5.90.21",
+        "axios": "1.13.6",
+        "bootstrap": "5.3.8",
+        "luxon": "3.7.2",
+        "react": "19.2.4",
+        "react-dom": "19.2.4",
+        "react-hook-form": "7.71.2",
+        "yup": "1.7.1"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.21.0",
+        "@types/react": "19.2.14",
+        "@types/react-dom": "19.2.3",
+        "@vitejs/plugin-react": "5.1.4",
+        "eslint": "^9.21.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.5",
+        "eslint-plugin-react-hooks": "^5.1.0",
+        "eslint-plugin-react-refresh": "^0.4.19",
+        "globals": "17.4.0",
+        "prettier": "^3.8.1",
+        "sass": "^1.98.0",
+        "vite": "7.3.1"
+    }
+}

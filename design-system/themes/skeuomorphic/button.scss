@@ -1,0 +1,208 @@
+@use './variables.scss';
+
+/* Base Button Style */
+.btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 4px;
+    /* Slight rounding */
+    border: none;
+    position: relative;
+    cursor: pointer;
+    font-family: var(--font-label, 'Roboto', sans-serif);
+    /* For the button label */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    user-select: none;
+    transition: all 0.1s;
+
+    /* Box Shadow creates the height feel */
+    box-shadow:
+        0 4px 6px var(--shadow-30),
+        /* Key drop shadow */ inset 0 1px 0 var(--highlight-20),
+        /* Top rim highlight */ inset 1px 0 0 var(--highlight-10),
+        /* Left rim highlight */ inset -1px 0 0 var(--shadow-10);
+}
+
+.btn:active,
+.btn.active {
+    transform: translateY(2px);
+    box-shadow:
+        0 2px 3px var(--shadow-20),
+        inset 0 2px 5px var(--shadow-20);
+    /* Pressed in shadow */
+}
+
+/* Button Colors */
+.btn-black {
+    background: linear-gradient(
+        180deg,
+        var(--btn-black-top, #333) 0%,
+        var(--btn-black-btm, #222) 100%
+    );
+    color: var(--color-gray-100, #ccc);
+    border-bottom: 2px solid var(--color-gray-900, #111);
+}
+
+.btn-white {
+    background: linear-gradient(
+        180deg,
+        var(--btn-white-top, #eaeaea) 0%,
+        var(--btn-white-btm, #cdcdcd) 100%
+    );
+    color: var(--color-gray-500, #555);
+    border-bottom: 2px solid var(--color-gray-250, #999);
+    box-shadow:
+        0 4px 6px var(--shadow-15),
+        inset 0 1px 0 var(--color-white, #fff);
+}
+
+.btn-white:active {
+    background: var(--btn-white-btm, #cdcdcd);
+    color: var(--color-gray-600, #444);
+}
+
+.btn-orange {
+    background: linear-gradient(
+        180deg,
+        var(--btn-orange-top, #ff6622) 0%,
+        var(--btn-orange-btm, #e64a19) 100%
+    );
+    color: var(--color-white, #fff);
+    /* or dark text? */
+    border-bottom: 2px solid var(--color-red-deep, #b71c1c);
+    text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.btn-orange:active {
+    background: var(--btn-orange-btm, #e64a19);
+    box-shadow: inset 0 2px 5px var(--shadow-30);
+}
+
+/* Text inside button */
+.btn .primary-text {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.btn .secondary-text {
+    font-size: 10px;
+    opacity: 0.7;
+    align-self: flex-start;
+}
+
+/* Different button sizes */
+.btn-rect-small {
+    width: 70px;
+    height: 35px;
+    /* Half height */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-rect-medium {
+    width: 70px;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Round Button Style */
+.btn-round {
+    width: 60px;
+    height: 60px;
+    /* Default round size in DS */
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.btn-round .primary-text {
+    font-size: 14px;
+    /* Slightly smaller for round buttons usually */
+}
+
+/* Square Button Style - extracted from media-player.html as it seems to be a variation of btn-white but specific size */
+.btn-square {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    background: linear-gradient(
+        180deg,
+        var(--btn-white-top, #eaeaea) 0%,
+        var(--btn-white-btm, #cdcdcd) 100%
+    );
+    color: var(--color-gray-600, #444);
+    border-bottom: 2px solid var(--color-gray-250, #999);
+    box-shadow:
+        0 4px 6px var(--shadow-20),
+        inset 0 1px 0 var(--color-white, #fff);
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.1s;
+    position: relative;
+}
+
+.btn-square:active,
+.btn-square.active {
+    background: var(--btn-white-btm, #cdcdcd);
+    transform: translateY(2px);
+    box-shadow: inset 0 2px 4px var(--shadow-20);
+    border-bottom: 0;
+}
+
+.btn-square.active {
+    background: var(--color-gray-150);
+    color: var(--color-gray-800, #222);
+    box-shadow:
+        inset 0 2px 4px var(--shadow-30),
+        0 0 5px var(--highlight-20);
+}
+
+/* LED Indicator simulating part of panel */
+.led {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--led-red-off, #552222);
+    /* Off state */
+    box-shadow: inset 1px 1px 2px var(--shadow-80);
+    margin-bottom: 5px;
+    position: absolute;
+    top: -15px;
+    /* Place it above button like in the image */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.led.on {
+    background-color: var(--led-red-on, #ff3333);
+    box-shadow:
+        0 0 5px var(--led-red-on, #ff3300),
+        inset 1px 1px 2px var(--highlight-50);
+}
+
+.button-group {
+    position: relative;
+    /* For LED positioning relative to button */
+    display: inline-block;
+}
+
+.label-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}

@@ -1,0 +1,178 @@
+@use './variables.scss';
+
+/* --- Main Content Area --- */
+.content-display {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.tab-pane {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 100%;
+    max-width: 800px;
+}
+
+.tab-pane.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Placeholder Content Styling */
+.placeholder-icon {
+    font-size: 80px;
+    color: var(--shadow-10);
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 0 var(--highlight-50);
+}
+
+h2 {
+    font-family: var(--font-tech);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* --- Bottom Tab Bar --- */
+.tab-bar {
+    height: 90px;
+    background-color: var(--device-surface);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+    /* Minimal padding */
+    gap: 10px;
+    /* Minimal gap */
+    box-sizing: border-box;
+
+    /* Industrial Top Bevel */
+    border-top: 1px solid var(--highlight-40);
+    box-shadow:
+        0 -4px 10px var(--shadow-10),
+        inset 0 1px 0 var(--highlight-30);
+
+    /* Texture */
+    background-image:
+        linear-gradient(var(--highlight-03), var(--shadow-03)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.03' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'/%3E%3C/svg%3E");
+    z-index: 100;
+}
+
+/* Tab Buttons */
+.tab-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    height: 70px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+
+    /* Default State: Slight pop-out */
+    background: linear-gradient(180deg, var(--highlight-10) 0%, var(--shadow-05) 100%);
+    box-shadow:
+        2px 2px 5px var(--shadow-10),
+        inset 1px 1px 0 var(--highlight-20);
+    border: 1px solid var(--shadow-05);
+}
+
+.tab-icon {
+    font-size: 28px;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+    transition: color 0.2s;
+    text-shadow: 0 1px 0 var(--highlight-50);
+}
+
+.tab-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Hover State */
+.tab-btn:hover {
+    background: linear-gradient(180deg, var(--highlight-20) 0%, var(--shadow-02) 100%);
+    transform: translateY(-1px);
+}
+
+/* Active State: Deeply Inset & Glowing */
+.tab-btn.active {
+    background-color: var(--device-surface);
+    box-shadow:
+        inset 3px 3px 6px var(--shadow-30),
+        inset -1px -1px 2px var(--highlight-60);
+    border: 1px solid transparent;
+    transform: translateY(1px);
+}
+
+.tab-btn.active .tab-icon {
+    color: var(--text-orange);
+    /* Soft LED Glow for Icon */
+    text-shadow: 0 0 10px var(--glow-orange-40);
+}
+
+.tab-btn.active .tab-label {
+    color: var(--color-gray-600);
+    font-weight: 700;
+}
+
+/* Indicator Light (Optional - small dot below icon) */
+.tab-btn::after {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--color-gray-500);
+    margin-top: 4px;
+    box-shadow: inset 0 1px 1px var(--shadow-50);
+    transition: all 0.3s;
+}
+
+.tab-btn.active::after {
+    background-color: var(--led-red-on);
+    box-shadow: 0 0 5px var(--led-red-on);
+}
+
+/* --- Tab-specific layout overrides --- */
+/* Browse Grid simulation */
+.browse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+}
+
+.grid-item {
+    aspect-ratio: 1;
+    background: var(--color-gray-100);
+    border-radius: 8px;
+    box-shadow: var(--shadow-component);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Playback simple view */
+.playback-info {
+    text-align: center;
+}
