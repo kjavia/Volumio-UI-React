@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../Volumio2-UI"
+		}
+	],
+	"settings": {}
+}

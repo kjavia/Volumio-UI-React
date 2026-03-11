@@ -1,0 +1,274 @@
+/* Reel to Reel Specific Styles */
+.reel-deck-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    width: 340px;
+    height: 260px;
+    margin: 0 auto;
+}
+
+.reel-machine-body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #d7d7d7 0%, #bdc3c7 100%);
+    /* Brushed metal look */
+    border-radius: 8px;
+    position: relative;
+    box-shadow:
+        inset 1px 1px 0 var(--highlight-50),
+        0 10px 20px var(--shadow-30);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-gray-250);
+}
+
+/* Top section for Reels */
+.reels-area {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 10px;
+}
+
+/* The Reel Assembly */
+.reel-assembly {
+    width: 140px;
+    height: 140px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Spinning metal part */
+.metal-reel-spin {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 10;
+    border: 3px solid rgba(200, 200, 200, 0.4);
+    background: rgba(200, 200, 200, 0.1);
+    box-shadow: inset 0 0 10px var(--shadow-20);
+    animation: spin-ccw 4s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* The spokes/cutouts need to be children of the spinning part */
+.reel-cutouts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Gradient mask to create the 3 propeller-like spokes */
+    background: conic-gradient(
+        transparent 15deg,
+        rgba(220, 220, 220, 0.9) 25deg,
+        rgba(160, 160, 160, 0.9) 85deg,
+        transparent 95deg,
+        transparent 135deg,
+        rgba(220, 220, 220, 0.9) 145deg,
+        rgba(160, 160, 160, 0.9) 205deg,
+        transparent 215deg,
+        transparent 255deg,
+        rgba(220, 220, 220, 0.9) 265deg,
+        rgba(160, 160, 160, 0.9) 325deg,
+        transparent 335deg
+    );
+    /* Add blending/edge */
+    border-radius: 50%;
+    box-shadow: inset 0 0 5px var(--shadow-50);
+    /* Mask to make hub empty */
+    -webkit-mask: radial-gradient(circle at center, transparent 20%, black 21%);
+    mask: radial-gradient(circle at center, transparent 20%, black 21%);
+}
+
+/* Hub Cap stays static in center? No it spins with reel usually. */
+.reel-hub-cap {
+    width: 28px;
+    height: 28px;
+    background: radial-gradient(circle, #ddd 10%, var(--color-gray-300) 100%);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 20;
+    /* Center of assembly, not spinning part to avoid wobble if any */
+    box-shadow: 0 1px 3px var(--shadow-50);
+    border: 1px solid var(--color-gray-400);
+    /* Add slots */
+    background-image: linear-gradient(
+        0deg,
+        transparent 48%,
+        var(--color-gray-600) 48%,
+        var(--color-gray-600) 52%,
+        transparent 52%
+    );
+}
+
+/* The Tape Pack (Dark Tape on the Reel) - BEHIND reel */
+.tape-pack {
+    position: absolute;
+    background: #2a1a1a;
+    border-radius: 50%;
+    z-index: 1;
+    /* Behind metal reel */
+    box-shadow: 0 0 5px var(--shadow-80);
+    /* Texture */
+    background-image: repeating-radial-gradient(#2a1a1a, #2a1a1a 2px, #1a0a0a 3px);
+}
+
+.tape-full {
+    width: 125px;
+    height: 125px;
+}
+
+.tape-empty {
+    width: 45px;
+    /* Hub size */
+    height: 45px;
+}
+
+/* Animation */
+@keyframes spin-ccw {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+/* Tape Path & Heads */
+.heads-area {
+    height: 80px;
+    position: relative;
+    background: var(--color-gray-700);
+    /* Dark lower section */
+    border-top: 2px solid var(--color-gray-500);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head-cover {
+    width: 80px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--color-gray-600), var(--color-gray-800));
+    border-radius: 4px;
+    box-shadow: 0 2px 5px var(--shadow-50);
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 5px;
+    color: var(--color-gray-200);
+    font-size: 10px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--color-gray-900);
+}
+
+.head-cover::after {
+    content: '4-TRACK';
+    opacity: 0.7;
+}
+
+/* Tension Arm Rollers */
+.tension-roller {
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle, var(--color-white), var(--color-gray-250));
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    z-index: 5;
+    box-shadow: 0 2px 3px var(--shadow-50);
+}
+
+.roller-left {
+    left: 40px;
+}
+
+.roller-right {
+    right: 40px;
+}
+
+/* The Tape Strip going across */
+.tape-strip {
+    position: absolute;
+    top: 18px;
+    /* Aligned with bottom of reels approx */
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #2a1a1a;
+    z-index: 4;
+    /* Simple straight line for now, mimicking tension */
+    box-shadow: 0 1px 2px var(--shadow-50);
+}
+
+/* VU Meters (Small simulation) */
+.vu-meter-group {
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.vu-meter {
+    width: 40px;
+    height: 25px;
+    background: #fdf6e3;
+    border: 1px solid var(--color-gray-400);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.vu-needle {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    height: 20px;
+    background: #c00;
+    transform-origin: bottom center;
+    animation: vu-bounce 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes vu-bounce {
+    from {
+        transform: rotate(-30deg);
+    }
+
+    to {
+        transform: rotate(10deg);
+    }
+}
+
+/* Buttons / Knobs on Deck */
+.deck-knob {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ddd, var(--color-gray-250));
+    border: 1px solid var(--color-gray-400);
+    box-shadow: 1px 1px 3px var(--shadow-40);
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
+}

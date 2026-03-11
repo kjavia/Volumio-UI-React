@@ -1,0 +1,112 @@
+/* VINYL STYLES */
+.vinyl-record {
+    width: 95%;
+    /* Adjust relative to container */
+    height: 95%;
+    background-color: var(--color-gray-900);
+    border-radius: 50%;
+    position: relative;
+    box-shadow:
+        0 10px 20px var(--shadow-40),
+        0 0 0 2px var(--color-gray-950);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: spin 6s linear infinite;
+}
+
+/* Grooves (Texture) */
+.vinyl-grooves {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    right: 2%;
+    bottom: 2%;
+    border-radius: 50%;
+    background: repeating-radial-gradient(
+        var(--color-gray-850),
+        var(--color-gray-850) 2px,
+        var(--color-gray-900) 3px,
+        var(--color-gray-900) 4px
+    );
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+/* Shine / Reflection */
+.vinyl-shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Center Label */
+.vinyl-label {
+    width: 35%;
+    /* Relative to record */
+    height: 35%;
+    background-color: var(--color-red-vivid);
+    /* Red Label Default */
+    border-radius: 50%;
+    position: relative;
+    z-index: 5;
+    box-shadow: 0 0 5px var(--shadow-50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 4px solid var(--color-gray-900);
+}
+
+.album-art-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Placeholder pattern if no image */
+    background: repeating-linear-gradient(
+        45deg,
+        var(--color-red-vivid),
+        var(--color-red-vivid) 10px,
+        var(--color-red-deep) 10px,
+        var(--color-red-deep) 20px
+    );
+}
+
+/* Spindle Hole */
+.vinyl-label::after {
+    content: '';
+    position: absolute;
+    width: 6%;
+    /* Relative hole size */
+    height: 6%;
+    background: var(--color-gray-800);
+    /* Match screen bg behind it roughly */
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 1px 1px 2px var(--shadow-50);
+    border: 1px solid var(--color-black);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
