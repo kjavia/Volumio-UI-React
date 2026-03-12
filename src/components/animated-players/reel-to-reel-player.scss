@@ -18,8 +18,9 @@
   /* Brushed metal look */
   border-radius: 8px;
   position: relative;
-  box-shadow: inset 1px 1px 0 var(--highlight-50),
-  0 10px 20px var(--shadow-30);
+  box-shadow:
+    inset 1px 1px 0 var(--highlight-50),
+    0 10px 20px var(--shadow-30);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -57,10 +58,15 @@
   background: rgba(200, 200, 200, 0.1);
   box-shadow: inset 0 0 10px var(--shadow-20);
   animation: spin-ccw 4s linear infinite;
+  animation-play-state: paused;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+}
+
+.metal-reel-spin.playing {
+  animation-play-state: running;
 }
 
 /* The spokes/cutouts need to be children of the spinning part */
@@ -72,18 +78,18 @@
   bottom: 0;
   /* Gradient mask to create the 3 propeller-like spokes */
   background: conic-gradient(
-      transparent 15deg,
-      rgba(220, 220, 220, 0.9) 25deg,
-      rgba(160, 160, 160, 0.9) 85deg,
-      transparent 95deg,
-      transparent 135deg,
-      rgba(220, 220, 220, 0.9) 145deg,
-      rgba(160, 160, 160, 0.9) 205deg,
-      transparent 215deg,
-      transparent 255deg,
-      rgba(220, 220, 220, 0.9) 265deg,
-      rgba(160, 160, 160, 0.9) 325deg,
-      transparent 335deg
+    transparent 15deg,
+    rgba(220, 220, 220, 0.9) 25deg,
+    rgba(160, 160, 160, 0.9) 85deg,
+    transparent 95deg,
+    transparent 135deg,
+    rgba(220, 220, 220, 0.9) 145deg,
+    rgba(160, 160, 160, 0.9) 205deg,
+    transparent 215deg,
+    transparent 255deg,
+    rgba(220, 220, 220, 0.9) 265deg,
+    rgba(160, 160, 160, 0.9) 325deg,
+    transparent 335deg
   );
   /* Add blending/edge */
   border-radius: 50%;
@@ -106,11 +112,11 @@
   border: 1px solid var(--color-gray-400);
   /* Add slots */
   background-image: linear-gradient(
-      0deg,
-      transparent 48%,
-      var(--color-gray-600) 48%,
-      var(--color-gray-600) 52%,
-      transparent 52%
+    0deg,
+    transparent 48%,
+    var(--color-gray-600) 48%,
+    var(--color-gray-600) 52%,
+    transparent 52%
   );
 }
 
@@ -247,6 +253,11 @@
   background: #c00;
   transform-origin: bottom center;
   animation: vu-bounce 0.4s ease-in-out infinite alternate;
+  animation-play-state: paused;
+
+  &.playing {
+    animation-play-state: running;
+  }
 }
 
 @keyframes vu-bounce {

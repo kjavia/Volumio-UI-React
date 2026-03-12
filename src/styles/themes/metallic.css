@@ -20,25 +20,25 @@
   /* --- Specific Metals --- */
   /* Brushed Aluminum (Linear) */
   --bg-aluminum-linear: linear-gradient(
-    180deg,
-    #f5f7f9 0%,
-    #d8dbe0 50%,
-    #b8bec5 51%,
-    #f0f2f5 100%
+      180deg,
+      #f5f7f9 0%,
+      #d8dbe0 50%,
+      #b8bec5 51%,
+      #f0f2f5 100%
   );
   /* Brushed Aluminum (Radial/Spinner) */
   --bg-aluminum-radial: radial-gradient(
-    ellipse at top left,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.0) 60%
+      ellipse at top left,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.0) 60%
   ),
   conic-gradient(
-    from 45deg,
-    #d8dbe0 0%,
-    #f5f7f9 25%,
-    #b8bec5 50%,
-    #f5f7f9 75%,
-    #d8dbe0 100%
+      from 45deg,
+      #d8dbe0 0%,
+      #f5f7f9 25%,
+      #b8bec5 50%,
+      #f5f7f9 75%,
+      #d8dbe0 100%
   );
   /* Dark/Inset Panel */
   --bg-panel-dark: #2a2e33;
@@ -78,25 +78,25 @@
   /* --- Specific Metals --- */
   /* Brushed Aluminum (Linear) */
   --bg-aluminum-linear: linear-gradient(
-    180deg,
-    #f5f7f9 0%,
-    #d8dbe0 50%,
-    #b8bec5 51%,
-    #f0f2f5 100%
+      180deg,
+      #f5f7f9 0%,
+      #d8dbe0 50%,
+      #b8bec5 51%,
+      #f0f2f5 100%
   );
   /* Brushed Aluminum (Radial/Spinner) */
   --bg-aluminum-radial: radial-gradient(
-    ellipse at top left,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.0) 60%
+      ellipse at top left,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.0) 60%
   ),
   conic-gradient(
-    from 45deg,
-    #d8dbe0 0%,
-    #f5f7f9 25%,
-    #b8bec5 50%,
-    #f5f7f9 75%,
-    #d8dbe0 100%
+      from 45deg,
+      #d8dbe0 0%,
+      #f5f7f9 25%,
+      #b8bec5 50%,
+      #f5f7f9 75%,
+      #d8dbe0 100%
   );
   /* Dark/Inset Panel */
   --bg-panel-dark: #2a2e33;
@@ -262,25 +262,25 @@
   /* --- Specific Metals --- */
   /* Brushed Aluminum (Linear) */
   --bg-aluminum-linear: linear-gradient(
-    180deg,
-    #f5f7f9 0%,
-    #d8dbe0 50%,
-    #b8bec5 51%,
-    #f0f2f5 100%
+      180deg,
+      #f5f7f9 0%,
+      #d8dbe0 50%,
+      #b8bec5 51%,
+      #f0f2f5 100%
   );
   /* Brushed Aluminum (Radial/Spinner) */
   --bg-aluminum-radial: radial-gradient(
-    ellipse at top left,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.0) 60%
+      ellipse at top left,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.0) 60%
   ),
   conic-gradient(
-    from 45deg,
-    #d8dbe0 0%,
-    #f5f7f9 25%,
-    #b8bec5 50%,
-    #f5f7f9 75%,
-    #d8dbe0 100%
+      from 45deg,
+      #d8dbe0 0%,
+      #f5f7f9 25%,
+      #b8bec5 50%,
+      #f5f7f9 75%,
+      #d8dbe0 100%
   );
   /* Dark/Inset Panel */
   --bg-panel-dark: #2a2e33;

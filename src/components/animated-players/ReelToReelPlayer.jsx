@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './reel-to-reel-player.scss';
 
-const ReelToReelPlayer = ({isPlaying}) => {
+const ReelToReelPlayer = ({ isPlaying }) => {
   return (
     <div className="reel-deck-container">
       <div className="reel-machine-body">
@@ -10,7 +10,7 @@ const ReelToReelPlayer = ({isPlaying}) => {
           {/* <!-- Left Reel (Supply) --> */}
           <div className="reel-assembly">
             <div className="tape-pack tape-full"></div>
-            <div className="metal-reel-spin">
+            <div className={`metal-reel-spin ${isPlaying ? 'playing' : ''}`}>
               <div className="reel-cutouts"></div>
             </div>
             <div className="reel-hub-cap"></div>
@@ -19,7 +19,7 @@ const ReelToReelPlayer = ({isPlaying}) => {
           {/* <!-- Right Reel (Take-up) --> */}
           <div className="reel-assembly">
             <div className="tape-pack tape-empty"></div>
-            <div className="metal-reel-spin">
+            <div className={`metal-reel-spin ${isPlaying ? 'playing' : ''}`}>
               <div className="reel-cutouts"></div>
             </div>
             <div className="reel-hub-cap"></div>
@@ -41,10 +41,16 @@ const ReelToReelPlayer = ({isPlaying}) => {
           {/* <!-- Decor: VU Meters --> */}
           <div className="vu-meter-group">
             <div className="vu-meter">
-              <div className="vu-needle" style={{animationDelay: '0s'}}></div>
+              <div
+                className={`vu-needle ${isPlaying ? 'playing' : ''}`}
+                style={{ animationDelay: '0s' }}
+              ></div>
             </div>
             <div className="vu-meter">
-              <div className="vu-needle" style={{animationDelay: '0.1s'}}></div>
+              <div
+                className={`vu-needle ${isPlaying ? 'playing' : ''}`}
+                style={{ animationDelay: '0.1s' }}
+              ></div>
             </div>
           </div>
 

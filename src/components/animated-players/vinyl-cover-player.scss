@@ -30,6 +30,11 @@
   /* left: 5px + 120px = 125px */
   transform-origin: center;
   animation: spin 4s linear infinite;
+  animation-play-state: paused;
+
+  &.playing {
+    animation-play-state: running;
+  }
 }
 
 @keyframes spin {
@@ -52,10 +57,10 @@
   bottom: 0;
   border-radius: 50%;
   background: repeating-radial-gradient(
-      var(--color-gray-850),
-      var(--color-gray-850) 2px,
-      var(--color-gray-900) 3px,
-      var(--color-gray-900) 4px
+    var(--color-gray-850),
+    var(--color-gray-850) 2px,
+    var(--color-gray-900) 3px,
+    var(--color-gray-900) 4px
   );
   box-shadow: inset 0 0 20px var(--shadow-80);
 }
@@ -68,12 +73,14 @@
   right: 0;
   bottom: 0;
   border-radius: 50%;
-  background: linear-gradient(
-      135deg,
-      var(--highlight-10) 0%,
-      transparent 40%,
-      transparent 60%,
-      var(--highlight-05) 100%
+  background: conic-gradient(
+    from 90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 10%,
+    transparent 20%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.3) 60%,
+    transparent 70%
   );
   z-index: 10;
 }
@@ -149,11 +156,11 @@
   background-size: cover;
   background-position: center;
   background-image: repeating-linear-gradient(
-      45deg,
-      var(--color-red-vivid),
-      var(--color-red-vivid) 10px,
-      var(--color-red-deep) 10px,
-      var(--color-red-deep) 20px
+    45deg,
+    var(--color-red-vivid),
+    var(--color-red-vivid) 10px,
+    var(--color-red-deep) 10px,
+    var(--color-red-deep) 20px
   );
 }
 

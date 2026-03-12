@@ -20,16 +20,17 @@
   /* Dark plastic color */
   border-radius: 10px;
   position: relative;
-  box-shadow: inset 1px 1px 2px var(--highlight-10),
-  inset -1px -1px 2px var(--shadow-50),
-  5px 5px 15px var(--shadow-50);
+  box-shadow:
+    inset 1px 1px 2px var(--highlight-10),
+    inset -1px -1px 2px var(--shadow-50),
+    5px 5px 15px var(--shadow-50);
   /* Texture */
   background-image: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 2px,
-      rgba(255, 255, 255, 0.02) 2px,
-      rgba(255, 255, 255, 0.02) 4px
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.02) 2px,
+    rgba(255, 255, 255, 0.02) 4px
   );
 }
 
@@ -46,8 +47,9 @@
   border-radius: 4px;
   z-index: 1;
   /* Subtle paper texture */
-  background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-  repeating-linear-gradient(to bottom, #ddd, #ddd 1px, transparent 1px, transparent 20px);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+    repeating-linear-gradient(to bottom, #ddd, #ddd 1px, transparent 1px, transparent 20px);
   box-shadow: 0 1px 2px var(--shadow-20);
   overflow: hidden;
 }
@@ -115,6 +117,11 @@
   height: 100%;
   position: absolute;
   animation: spin 3s linear infinite;
+  animation-play-state: paused;
+}
+
+.spool-inner.playing {
+  animation-play-state: running;
 }
 
 /* Teeth of the spool */
@@ -124,27 +131,28 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
+  background:
+    linear-gradient(
       0deg,
       transparent 45%,
       var(--color-gray-700) 45%,
       var(--color-gray-700) 55%,
       transparent 55%
-  ),
-  linear-gradient(
+    ),
+    linear-gradient(
       60deg,
       transparent 45%,
       var(--color-gray-700) 45%,
       var(--color-gray-700) 55%,
       transparent 55%
-  ),
-  linear-gradient(
+    ),
+    linear-gradient(
       120deg,
       transparent 45%,
       var(--color-gray-700) 45%,
       var(--color-gray-700) 55%,
       transparent 55%
-  );
+    );
   border-radius: 50%;
   clip-path: circle(40%);
   /* Only show center part */

@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Michroma&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap");
-
 :root {
   /* --- Base Palette --- */
   /* Neutrals */
@@ -63,9 +62,9 @@
   --border-light: var(--color-gray-300);
   /* Gradients */
   --grad-orange-vivid: linear-gradient(
-    90deg,
-    var(--color-orange-light),
-    var(--color-orange-dark)
+      90deg,
+      var(--color-orange-light),
+      var(--color-orange-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
   /* Button Specific Gradients & Colors */
@@ -200,9 +199,9 @@
   --border-light: var(--color-gray-300);
   /* Gradients */
   --grad-orange-vivid: linear-gradient(
-    90deg,
-    var(--color-orange-light),
-    var(--color-orange-dark)
+      90deg,
+      var(--color-orange-light),
+      var(--color-orange-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
   /* Button Specific Gradients & Colors */
@@ -359,12 +358,10 @@ a {
   text-decoration: none;
   transition: color 0.2s;
 }
-
 a:hover {
   color: var(--color-orange-light);
   text-decoration: underline;
 }
-
 a:active {
   color: var(--color-orange-dark);
 }
@@ -440,7 +437,6 @@ pre {
   margin-bottom: 1rem;
   box-shadow: inset 2px 2px 5px var(--shadow-80), 0 1px 0 var(--highlight-10);
 }
-
 pre code {
   background: none;
   padding: 0;
@@ -470,7 +466,6 @@ ol {
   padding-left: 1.5rem;
   margin-bottom: 1rem;
 }
-
 ul li,
 ol li {
   margin-bottom: 0.25em;
@@ -564,9 +559,9 @@ ol li {
   --border-light: var(--color-gray-300);
   /* Gradients */
   --grad-orange-vivid: linear-gradient(
-    90deg,
-    var(--color-orange-light),
-    var(--color-orange-dark)
+      90deg,
+      var(--color-orange-light),
+      var(--color-orange-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
   /* Button Specific Gradients & Colors */
@@ -711,7 +706,6 @@ ol li {
   box-shadow: 0 1px 0 var(--highlight-05);
   transition: background-color 0.15s;
 }
-
 .list-item:hover {
   background-color: var(--list-item-bg-hover);
 }
@@ -779,9 +773,9 @@ ol li {
   --border-light: var(--color-gray-300);
   /* Gradients */
   --grad-orange-vivid: linear-gradient(
-    90deg,
-    var(--color-orange-light),
-    var(--color-orange-dark)
+      90deg,
+      var(--color-orange-light),
+      var(--color-orange-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
   /* Button Specific Gradients & Colors */
@@ -1090,9 +1084,9 @@ ol li {
   --border-light: var(--color-gray-300);
   /* Gradients */
   --grad-orange-vivid: linear-gradient(
-    90deg,
-    var(--color-orange-light),
-    var(--color-orange-dark)
+      90deg,
+      var(--color-orange-light),
+      var(--color-orange-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
   /* Button Specific Gradients & Colors */
@@ -1506,12 +1500,10 @@ input:checked + .slider:after {
     gap: 8px;
     align-items: start;
   }
-
   .settings-panel {
     padding: 20px;
   }
 }
-
 :root {
   /* --- Base Palette --- */
   /* Neutrals */
@@ -1575,9 +1567,9 @@ input:checked + .slider:after {
   --border-light: var(--color-gray-300);
   /* Gradients */
   --grad-orange-vivid: linear-gradient(
-    90deg,
-    var(--color-orange-light),
-    var(--color-orange-dark)
+      90deg,
+      var(--color-orange-light),
+      var(--color-orange-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
   /* Button Specific Gradients & Colors */
@@ -1961,9 +1953,9 @@ input:checked + .slider:after {
   --border-light: var(--color-gray-300);
   /* Gradients */
   --grad-orange-vivid: linear-gradient(
-    90deg,
-    var(--color-orange-light),
-    var(--color-orange-dark)
+      90deg,
+      var(--color-orange-light),
+      var(--color-orange-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
   /* Button Specific Gradients & Colors */
@@ -2447,7 +2439,6 @@ body {
     padding: 60px;
     gap: 60px;
   }
-
   .media-section {
     flex: 1;
     max-width: none;
@@ -2455,7 +2446,6 @@ body {
     justify-content: center;
     align-items: center;
   }
-
   .screen-frame {
     width: 100%;
     max-width: 500px;
@@ -2463,7 +2453,6 @@ body {
     aspect-ratio: 1/1.1;
     justify-content: center;
   }
-
   /* Common container size override */
   .album-art-container,
   .vinyl-container,
@@ -2473,7 +2462,6 @@ body {
     aspect-ratio: 1;
     margin-bottom: 20px;
   }
-
   .controls-section {
     flex: 1;
     height: 100%;
@@ -2482,39 +2470,32 @@ body {
     max-width: none;
     gap: 40px;
   }
-
   .controls-section > * {
     width: 100%;
     max-width: 500px;
   }
-
   .utility-row {
     margin-top: 20px;
   }
 }
-
 /* Ultrawide 2560x720 specific optimization */
 @media (min-aspect-ratio: 21/9) {
   .player-casing {
     max-width: none;
   }
-
   .transport-controls .btn-round {
     transform: scale(1.1);
   }
-
   .transport-controls .btn-orange {
     transform: scale(1.1);
   }
 }
-
 /* 4K Scaling / High DPI Large Screens */
 @media (min-width: 2500px) {
   body {
     zoom: 1.5;
   }
 }
-
 body {
   background-color: var(--bg-color);
 }

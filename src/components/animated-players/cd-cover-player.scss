@@ -22,9 +22,10 @@
   position: absolute;
   left: 0;
   top: 0;
-  box-shadow: 5px 5px 15px var(--shadow-30),
-  inset 1px 1px 0 var(--highlight-30),
-  inset -1px -1px 0 var(--shadow-20);
+  box-shadow:
+    5px 5px 15px var(--shadow-30),
+    inset 1px 1px 0 var(--highlight-30),
+    inset -1px -1px 0 var(--shadow-20);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,11 +52,11 @@
   /* Placeholder art pattern */
   background-color: var(--color-gray-800);
   background-image: repeating-linear-gradient(
-      135deg,
-      #0d47a1,
-      #0d47a1 10px,
-      #1565c0 10px,
-      #1565c0 20px
+    135deg,
+    #0d47a1,
+    #0d47a1 10px,
+    #1565c0 10px,
+    #1565c0 20px
   );
   background-size: cover;
   background-position: center;
@@ -73,15 +74,15 @@
   bottom: 0;
   left: 0;
   background: linear-gradient(
-      125deg,
-      var(--highlight-20) 0%,
-      transparent 30%,
-      transparent 45%,
-      var(--highlight-10) 48%,
-      var(--highlight-20) 50%,
-      var(--highlight-10) 52%,
-      transparent 60%,
-      transparent 100%
+    125deg,
+    var(--highlight-20) 0%,
+    transparent 30%,
+    transparent 45%,
+    var(--highlight-10) 48%,
+    var(--highlight-20) 50%,
+    var(--highlight-10) 52%,
+    transparent 60%,
+    transparent 100%
   );
   z-index: 11;
   pointer-events: none;
@@ -104,13 +105,19 @@
   /* 240px wide, sticking out ~50% = 120px */
   transform-origin: center;
   animation: spin 4s linear infinite;
+  animation-play-state: paused;
+
+  &.playing {
+    animation-play-state: running;
+  }
 
   background-color: var(--color-gray-050);
   overflow: hidden;
 
   /* Iridescent CD Surface */
-  background-image: radial-gradient(circle, transparent 60%, var(--shadow-10) 68%, transparent 70%),
-  conic-gradient(
+  background-image:
+    radial-gradient(circle, transparent 60%, var(--shadow-10) 68%, transparent 70%),
+    conic-gradient(
       from 0deg,
       transparent 0%,
       rgba(255, 0, 0, 0.15) 10%,
@@ -121,8 +128,8 @@
       transparent 80%,
       rgba(255, 0, 255, 0.15) 90%,
       transparent 100%
-  ),
-  conic-gradient(
+    ),
+    conic-gradient(
       from 180deg,
       transparent 0%,
       #ffffff 15%,
@@ -132,7 +139,7 @@
       #ffffff 75%,
       #bdc3c7 90%,
       transparent 100%
-  );
+    );
   background-blend-mode: normal, overlay, normal;
 }
 
@@ -146,11 +153,11 @@
   border-radius: 50%;
   z-index: 2;
   background: linear-gradient(
-      135deg,
-      var(--highlight-30) 0%,
-      transparent 40%,
-      transparent 60%,
-      var(--highlight-10) 100%
+    135deg,
+    var(--highlight-30) 0%,
+    transparent 40%,
+    transparent 60%,
+    var(--highlight-10) 100%
   );
   pointer-events: none;
 }
@@ -185,8 +192,9 @@
   background-color: var(--color-gray-850);
   border-radius: 50%;
   z-index: 4;
-  box-shadow: inset 1px 1px 2px var(--shadow-90),
-  0 0 0 2px var(--highlight-10);
+  box-shadow:
+    inset 1px 1px 2px var(--shadow-90),
+    0 0 0 2px var(--highlight-10);
 }
 
 @keyframes spin {

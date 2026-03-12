@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import './cd-player.scss';
 
-const CdPlayer = ({isPlaying}) => {
+const CdPlayer = ({ isPlaying }) => {
   return (
     <div className="cd-container">
-      <div className="cd-disc">
+      <div className={`cd-disc ${isPlaying ? 'playing' : ''}`}>
         <div className="cd-surface"></div>
         <div className="cd-inner-ring"></div>
         <div className="cd-hole"></div>

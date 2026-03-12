@@ -8,11 +8,18 @@
   justify-content: center;
   align-items: center;
   animation: spin 6s linear infinite;
+  animation-play-state: paused;
+
+  &.playing {
+    animation-play-state: running;
+  }
+
   overflow: hidden;
 
   background-color: var(--color-gray-050);
-  background-image: radial-gradient(circle, transparent 65%, var(--shadow-10) 68%, transparent 70%),
-  conic-gradient(
+  background-image:
+    radial-gradient(circle, transparent 65%, var(--shadow-10) 68%, transparent 70%),
+    conic-gradient(
       from 0deg,
       transparent 0%,
       rgba(255, 0, 0, 0.15) 10%,
@@ -23,8 +30,8 @@
       transparent 80%,
       rgba(255, 0, 255, 0.15) 90%,
       transparent 100%
-  ),
-  conic-gradient(
+    ),
+    conic-gradient(
       from 180deg,
       transparent 0%,
       #ffffff 15%,
@@ -34,7 +41,7 @@
       #ffffff 75%,
       #bdc3c7 90%,
       transparent 100%
-  );
+    );
   background-blend-mode: normal, overlay, normal;
 }
 
@@ -51,11 +58,11 @@
   border-radius: 50%;
   z-index: 2;
   background: linear-gradient(
-      135deg,
-      var(--highlight-30) 0%,
-      transparent 40%,
-      transparent 60%,
-      var(--highlight-10) 100%
+    135deg,
+    var(--highlight-30) 0%,
+    transparent 40%,
+    transparent 60%,
+    var(--highlight-10) 100%
   );
   pointer-events: none;
 }
@@ -79,8 +86,9 @@
   background-color: var(--color-gray-850);
   border-radius: 50%;
   z-index: 4;
-  box-shadow: inset 1px 1px 2px var(--shadow-90),
-  0 0 0 4px #2c3e50;
+  box-shadow:
+    inset 1px 1px 2px var(--shadow-90),
+    0 0 0 4px #2c3e50;
 }
 
 @keyframes spin {

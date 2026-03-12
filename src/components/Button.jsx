@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-const Button = ({label, onClick, classNames}) => {
+const Button = ({ label, onClick, classNames, children }) => {
   return (
     <button className={cn('btn', classNames)} onClick={onClick}>
-      {label}
+      {children ? children : label}
     </button>
   );
 };

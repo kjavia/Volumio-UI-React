@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './cassette-player.scss';
 
-const CassettePlayer = ({isPlaying}) => {
+const CassettePlayer = ({ isPlaying }) => {
   return (
     <div className="cassette-container">
       <div className="cassette-body">
@@ -51,17 +51,17 @@ const CassettePlayer = ({isPlaying}) => {
 
           {/* <!-- Spools --> */}
           <div className="spool spool-left">
-            <div className="spool-inner">
+            <div className={`spool-inner ${isPlaying ? 'playing' : ''}`}>
               <div className="spool-teeth"></div>
             </div>
             <div className="spool-hole"></div>
           </div>
 
           <div className="spool spool-right">
-            <div className="spool-inner">
+            <div className={`spool-inner ${isPlaying ? 'playing' : ''}`}>
               <div className="spool-teeth"></div>
             </div>
-            <div class="spool-hole"></div>
+            <div className="spool-hole"></div>
           </div>
         </div>
 

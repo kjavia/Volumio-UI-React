@@ -6,12 +6,18 @@
   background-color: var(--color-gray-900);
   border-radius: 50%;
   position: relative;
-  box-shadow: 0 10px 20px var(--shadow-40),
-  0 0 0 2px var(--color-gray-950);
+  box-shadow:
+    0 10px 20px var(--shadow-40),
+    0 0 0 2px var(--color-gray-950);
   display: flex;
   justify-content: center;
   align-items: center;
   animation: spin 6s linear infinite;
+  animation-play-state: paused;
+}
+
+.vinyl-record.playing {
+  animation-play-state: running;
 }
 
 /* Grooves (Texture) */
@@ -23,10 +29,10 @@
   bottom: 2%;
   border-radius: 50%;
   background: repeating-radial-gradient(
-      var(--color-gray-850),
-      var(--color-gray-850) 2px,
-      var(--color-gray-900) 3px,
-      var(--color-gray-900) 4px
+    var(--color-gray-850),
+    var(--color-gray-850) 2px,
+    var(--color-gray-900) 3px,
+    var(--color-gray-900) 4px
   );
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
   pointer-events: none;
@@ -40,12 +46,14 @@
   right: 0;
   bottom: 0;
   border-radius: 50%;
-  background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 40%,
-      transparent 60%,
-      rgba(255, 255, 255, 0.05) 100%
+  background: conic-gradient(
+    from 90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 10%,
+    transparent 20%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.3) 60%,
+    transparent 70%
   );
   pointer-events: none;
   z-index: 10;
@@ -75,11 +83,11 @@
   object-fit: cover;
   /* Placeholder pattern if no image */
   background: repeating-linear-gradient(
-      45deg,
-      var(--color-red-vivid),
-      var(--color-red-vivid) 10px,
-      var(--color-red-deep) 10px,
-      var(--color-red-deep) 20px
+    45deg,
+    var(--color-red-vivid),
+    var(--color-red-vivid) 10px,
+    var(--color-red-deep) 10px,
+    var(--color-red-deep) 20px
   );
 }
 
