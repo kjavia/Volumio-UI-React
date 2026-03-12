@@ -1,41 +1,28 @@
+import AlbumBrowser from '@/components/AlbumBroswer';
 import React from 'react';
 
 const Home = () => {
   return (
     <div className="container mt-4">
-      <div className="box">
-        <div className="boxHeader d-flex justify-content-between align-items-center mb-3">
-          <div className="title">
-            <h2 className="m-0">Home</h2>
-          </div>
-          <a
-            href="https://volumio.org/"
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-outline-secondary d-flex align-items-center gap-2"
-            id="myvolumio-info"
-          >
-            <span className="material-icons" style={{ fontSize: '1rem' }}>
-              help_outline
-            </span>
-            <span className="d-none d-sm-inline">Volumio</span>
-          </a>
-        </div>
-
-        <div className="card">
-          <div className="card-header">
-            <h3 className="card-title h5 m-0 d-flex align-items-center gap-2">
-              <span className="material-icons">home</span>
-              <span>Home</span>
-            </h3>
-          </div>
-
-          <div className="card-body">
-            <h4>Discover all your best music and streams</h4>
-            {/* Content to be populated */}
-          </div>
-        </div>
-      </div>
+      <AlbumBrowser
+        albums={[
+          { title: 'Album 1', artist: 'Artist A' },
+          { title: 'Album 2', artist: 'Artist B' },
+          { title: 'Album 3', artist: 'Artist C' },
+          { title: 'Album 4', artist: 'Artist D' },
+          { title: 'Album 5', artist: 'Artist E' },
+          { title: 'Album 6', artist: 'Artist F' },
+          { title: 'Album 7', artist: 'Artist G' },
+          { title: 'Album 8', artist: 'Artist H' },
+          { title: 'Album 9', artist: 'Artist I' },
+          { title: 'Album 10', artist: 'Artist J' },
+          { title: 'Album 11', artist: 'Artist K' },
+          { title: 'Album 12', artist: 'Artist L' },
+          { title: 'Album 13', artist: 'Artist M' },
+          { title: 'Album 14', artist: 'Artist N' },
+          { title: 'Album 15', artist: 'Artist O' },
+        ]}
+      />
     </div>
   );
 };
