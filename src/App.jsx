@@ -1,27 +1,26 @@
-import { useState } from 'react';
-import Button from './components/Button.jsx';
-import VinylPlayer from './components/animated-players/VinylPlayer.jsx';
-import CdCoverPlayer from './components/animated-players/CdCoverPlayer.jsx';
-import CdPlayer from './components/animated-players/CdPlayer.jsx';
-import classNames from 'classnames';
+import { SocketProvider } from './contexts/SocketContext';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+// import './App.scss'; // Assuming you might have app-specific styles or use index.scss
 
 const App = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
   return (
-    <div className="container-fluid">
-      <h1 className="my-5">Volumio UI React</h1>
-      <div className="row my-5">
-        <div className="col-6">
-          <CdPlayer isPlaying={isPlaying} />
+    <SocketProvider>
+      <Router>
+        <div className="d-flex flex-column min-vh-100">
+          <Header />
+          <main className="flex-grow-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              {/* Add more routes as needed */}
+            </Routes>
+          </main>
+          <Footer />
         </div>
-        <div className="col-6">
-          <Button classNames="btn-square primary-text" onClick={() => setIsPlaying(!isPlaying)}>
-            <div className={classNames('led', { on: isPlaying })}></div>
-            {isPlaying ? 'Pause' : 'Play'}
-          </Button>
-        </div>
-      </div>
-    </div>
+      </Router>
+    </SocketProvider>
   );
 };
 
