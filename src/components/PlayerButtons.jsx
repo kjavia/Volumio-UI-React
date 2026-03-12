@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaPlay, FaPause, FaStepBackward, FaStepForward } from 'react-icons/fa';
 
 const PlayerButtons = ({ isInFooter }) => {
   return (
@@ -7,14 +6,14 @@ const PlayerButtons = ({ isInFooter }) => {
       className={`player-buttons ${isInFooter ? 'text-center' : ''} d-flex gap-2 justify-content-center`}
     >
       <button className="btn btn-outline-light btn-sm">
-        <FaStepBackward />
+        <span className="material-icons">skip_previous</span>
       </button>
       <button className="btn btn-primary btn-sm">
-        <FaPlay />
+        <span className="material-icons">play_arrow</span>
       </button>
-      {/* <button className="btn btn-primary"><FaPause /></button> */}
+      {/* <button className="btn btn-primary"><span className="material-icons">pause</span></button> */}
       <button className="btn btn-outline-light btn-sm">
-        <FaStepForward />
+        <span className="material-icons">skip_next</span>
       </button>
     </div>
   );

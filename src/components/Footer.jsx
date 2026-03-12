@@ -6,7 +6,6 @@ import TrackInfo from './TrackInfo';
 import PlayerButtons from './PlayerButtons';
 import VolumeManager from './VolumeManager';
 import AudioOutputs from './AudioOutputs';
-import { FaMusic, FaSearch, FaCog, FaList, FaSpeakerDeck } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 
 const Footer = () => {
@@ -56,10 +55,10 @@ const Footer = () => {
           {/* Play Queue / Outputs Buttons */}
           <div className="play-mode-container col-md-1 d-flex justify-content-end gap-2">
             <Link to="/queue" className="btn btn-link text-white p-0" title="Queue">
-              <FaList />
+              <span className="material-icons">queue_music</span>
             </Link>
             <button className="btn btn-link text-white p-0" title="Outputs">
-              <FaSpeakerDeck />
+              <span className="material-icons">speaker_group</span>
             </button>
           </div>
         </div>
@@ -89,7 +88,7 @@ const Footer = () => {
                 to="/queue"
                 className="btn btn-link text-white d-flex flex-column align-items-center p-0"
               >
-                <FaList />
+                <span className="material-icons">queue_music</span>
                 <span className="small" style={{ fontSize: '0.7rem' }}>
                   Queue
                 </span>
@@ -97,7 +96,7 @@ const Footer = () => {
             </div>
             <div className="col">
               <button className="btn btn-link text-white d-flex flex-column align-items-center p-0">
-                <FaSpeakerDeck />
+                <span className="material-icons">speaker_group</span>
                 <span className="small" style={{ fontSize: '0.7rem' }}>
                   Outputs
                 </span>
@@ -115,4 +114,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

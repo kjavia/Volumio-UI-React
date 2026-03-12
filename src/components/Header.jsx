@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import { useSocket } from '../contexts/SocketContext';
 import PlayerButtons from './PlayerButtons';
 import SideMenu from './SideMenu';
-import { FaSignOutAlt } from 'react-icons/fa';
 
 const Header = () => {
   const { isConnected } = useSocket();
@@ -69,7 +68,9 @@ const Header = () => {
             className="btn btn-danger btn-sm d-flex align-items-center gap-2"
             onClick={logout}
           >
-            <FaSignOutAlt />
+            <span className="material-icons" style={{ fontSize: '1rem' }}>
+              exit_to_app
+            </span>
             Logout
           </button>
         </div>
@@ -88,4 +89,3 @@ const Header = () => {
 };
 
 export default Header;
-

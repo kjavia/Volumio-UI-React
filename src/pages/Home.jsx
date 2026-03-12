@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaQuestion, FaHome } from 'react-icons/fa';
 
 const Home = () => {
   return (
@@ -16,7 +15,9 @@ const Home = () => {
             className="btn btn-outline-secondary d-flex align-items-center gap-2"
             id="myvolumio-info"
           >
-            <FaQuestion />
+            <span className="material-icons" style={{ fontSize: '1rem' }}>
+              help_outline
+            </span>
             <span className="d-none d-sm-inline">Volumio</span>
           </a>
         </div>
@@ -24,7 +25,7 @@ const Home = () => {
         <div className="card">
           <div className="card-header">
             <h3 className="card-title h5 m-0 d-flex align-items-center gap-2">
-              <FaHome />
+              <span className="material-icons">home</span>
               <span>Home</span>
             </h3>
           </div>
@@ -40,4 +41,3 @@ const Home = () => {
 };
 
 export default Home;
-

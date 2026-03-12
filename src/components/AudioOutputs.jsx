@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaSpeakerDeck } from 'react-icons/fa';
 
 const AudioOutputs = () => {
   return (
