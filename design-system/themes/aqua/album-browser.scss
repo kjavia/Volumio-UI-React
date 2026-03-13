@@ -1,0 +1,231 @@
+@use './variables.scss';
+
+// ─── Page-level wrapper ───────────────────────────────────────────────────────
+// Identical contract to skeuomorphic: apply to the outermost album browser element
+.album-browser-page {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: var(--bg-color);
+}
+
+// ─── Outer casing ─────────────────────────────────────────────────────────────
+// Aqua: macOS window chrome — light gradient, subtle drop-shadow, rounded corners
+.browser-casing {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  max-width: none;
+  background-color: #ececec;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #ececec,
+    #ececec 2px,
+    #ffffff 2px,
+    #ffffff 4px
+  );
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  box-shadow:
+    0 8px 32px var(--shadow-20),
+    0 2px 8px var(--shadow-08),
+    inset 0 1px 0 var(--highlight-80);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+// ─── Screen / content area ────────────────────────────────────────────────────
+// Aqua: a smooth dark viewport inside a lighter panel
+.screen-frame {
+  background: linear-gradient(180deg, #1c1c1e, #242426);
+  border-radius: 10px;
+  padding: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  box-shadow:
+    inset 0 2px 6px var(--shadow-30),
+    0 1px 0 var(--highlight-30);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+// ─── Nav bar / search bar ─────────────────────────────────────────────────────
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.screen-title {
+  font-family: var(--font-body);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-normal);
+}
+
+// Aqua search field — pill-shaped, frosted
+.search-bar {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 6px 16px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 360px;
+  backdrop-filter: blur(6px);
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+
+  &:focus-within {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: var(--color-aqua-vivid);
+    box-shadow: 0 0 0 3px var(--glow-aqua-20);
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+// ─── Scrollable album list ────────────────────────────────────────────────────
+.album-list-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+// Webkit scrollbar — thin Aqua blue style
+.album-list-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.album-list-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.album-list-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-aqua-bright), var(--color-aqua-mid));
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.album-list-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5aabff, var(--color-aqua-bright));
+}
+
+// ─── Album Grid ───────────────────────────────────────────────────────────────
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+// ─── Album Card ───────────────────────────────────────────────────────────────
+.album-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 8px;
+  transition:
+    background 0.1s,
+    transform 0.1s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.album-art {
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #383840, #1c1c1e);
+  border-radius: 8px;
+  box-shadow:
+    0 4px 12px var(--shadow-30),
+    0 1px 3px var(--shadow-20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  // Reflection gloss on corner — Aqua cover art effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent);
+    border-radius: 8px 8px 0 0;
+    pointer-events: none;
+  }
+}
+
+.album-art::after {
+  content: 'ALBUM';
+  font-family: var(--font-label);
+  color: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+  letter-spacing: 2px;
+  transform: rotate(-45deg);
+}
+
+.album-info {
+  font-family: var(--font-body);
+}
+
+.album-title {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.album-artist {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ─── External hardware controls ───────────────────────────────────────────────
+.browser-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+// .btn-square is defined in button.scss — no overrides needed

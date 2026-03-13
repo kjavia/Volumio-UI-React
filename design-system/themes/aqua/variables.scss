@@ -1,0 +1,156 @@
+:root {
+  // ─── Base Palette ──────────────────────────────────────────────────────────
+
+  // Neutrals — macOS Aqua uses very light silver/grey backgrounds
+  --color-black: #000000;
+  --color-gray-950: #1a1a1a;
+  --color-gray-900: #2c2c2c;
+  --color-gray-850: #323232; // Added for vinyl player compatibility
+  --color-gray-800: #3a3a3a;
+  --color-gray-700: #555555;
+  --color-gray-600: #6e6e6e;
+  --color-gray-500: #888888;
+  --color-gray-400: #ababab;
+  --color-gray-300: #c4c4c4;
+  --color-gray-200: #d6d6d6;
+  --color-gray-150: #e0e0e0;
+  --color-gray-100: #ebebeb; // Classic macOS window background
+  --color-gray-050: #f2f2f2;
+  --color-gray-025: #f7f7f7;
+  --color-gray-010: #fafafa;
+  --color-white: #ffffff;
+
+  // Aqua Blues — the signature macOS Aqua accent (Classic Gel)
+  --color-aqua-vivid: #147aff;
+  --color-aqua-bright: #6cabff;
+  --color-aqua-mid: #1060e8;
+  --color-aqua-deep: #0036ab;
+  --color-aqua-dark: #002275;
+
+  // Classic Aqua Gradients
+  --aqua-blue-top: #6db3f2;
+  --aqua-blue-btm: #1e69de;
+  --aqua-blue-border: #134db3;
+
+  --aqua-silver-top: #ffffff;
+  --aqua-silver-btm: #dcdcdc;
+  --aqua-silver-border: #a0a0a0;
+
+  // Aqua teal-cyan (classic Aqua era highlight)
+  --color-teal-vivid: #00b4d8;
+  --color-teal-light: #48cae4;
+  --color-teal-dark: #0077b6;
+
+  // Accent greens (traffic-light / active states)
+  --color-green-vivid: #28c840;
+  --color-green-dark: #1ea832;
+  --color-yellow-vivid: #ffbd2e;
+  --color-red-vivid: #ff5f57;
+  --color-red-deep: #b03030; // Added for vinyl player compatibility
+
+  // ─── Semantic Variables ────────────────────────────────────────────────────
+
+  // Global
+  --bg-color: var(--color-gray-100); // #ebebeb macOS window grey
+  --device-surface: #dcdcdc; // brushed aluminium panel
+
+  // Text
+  --text-dark: #1d1d1f; // Apple's near-black
+  --text-light: var(--color-white);
+  --text-muted: var(--color-gray-600);
+  --text-dim: var(--color-gray-500);
+  --text-accent: var(--color-aqua-vivid);
+
+  // Buttons
+  --btn-bg-dark: #3a3a3c;
+  --btn-bg-light: var(--color-white);
+  --btn-bg-accent: var(--color-aqua-vivid);
+
+  // UI Components
+  --panel-bg-dark: #1c1c1e;
+  --panel-bg-light: rgba(255, 255, 255, 0.72); // vibrancy / frosted glass
+  --list-item-bg: rgba(255, 255, 255, 0.6);
+  --list-item-bg-hover: rgba(20, 122, 255, 0.12);
+
+  // Functional
+  --led-green-on: var(--color-green-vivid);
+  --led-green-off: #1a5c24;
+  --border-dark: rgba(0, 0, 0, 0.12);
+  --border-light: rgba(255, 255, 255, 0.8);
+  --border-accent: var(--color-aqua-vivid);
+
+  // Gradients — glossy Aqua gel effect
+  --grad-accent: linear-gradient(180deg, var(--color-aqua-bright), var(--color-aqua-mid));
+  --grad-surface: linear-gradient(180deg, #f5f5f5, #d8d8d8);
+  --grad-window: linear-gradient(180deg, #e8e8e8 0%, #d4d4d4 100%);
+
+  // Button-specific gradients
+  --btn-default-top: #f0f0f0;
+  --btn-default-btm: #d8d8d8;
+  --btn-accent-top: var(--color-aqua-bright);
+  --btn-accent-btm: var(--color-aqua-mid);
+  --btn-dark-top: #5a5a5c;
+  --btn-dark-btm: #3a3a3c;
+
+  // Highlight / shadow overlays
+  --highlight-80: rgba(255, 255, 255, 0.8);
+  --highlight-60: rgba(255, 255, 255, 0.6);
+  --highlight-50: rgba(255, 255, 255, 0.5);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-03: rgba(255, 255, 255, 0.03);
+
+  --shadow-90: rgba(0, 0, 0, 0.9);
+  --shadow-80: rgba(0, 0, 0, 0.8);
+  --shadow-60: rgba(0, 0, 0, 0.6);
+  --shadow-50: rgba(0, 0, 0, 0.5);
+  --shadow-40: rgba(0, 0, 0, 0.4);
+  --shadow-30: rgba(0, 0, 0, 0.3);
+  --shadow-20: rgba(0, 0, 0, 0.2);
+  --shadow-15: rgba(0, 0, 0, 0.15);
+  --shadow-10: rgba(0, 0, 0, 0.1);
+  --shadow-08: rgba(0, 0, 0, 0.08);
+  --shadow-05: rgba(0, 0, 0, 0.05);
+  --shadow-03: rgba(0, 0, 0, 0.03);
+  --shadow-02: rgba(0, 0, 0, 0.02);
+
+  // Aqua glow
+  --glow-aqua-60: rgba(20, 122, 255, 0.6);
+  --glow-aqua-40: rgba(20, 122, 255, 0.4);
+  --glow-aqua-20: rgba(20, 122, 255, 0.2);
+
+  // ─── Typography ───────────────────────────────────────────────────────────
+
+  // Apple's system fonts (San Francisco → Helvetica Neue fallback)
+  --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
+  --font-tech: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+
+  // Type scale
+  --text-xs: 0.6875rem; // 11px — macOS menu/label size
+  --text-sm: 0.8125rem; // 13px — macOS default UI size
+  --text-base: 0.875rem; // 14px
+  --text-md: 1rem; // 16px
+  --text-lg: 1.125rem; // 18px
+  --text-xl: 1.25rem; // 20px
+  --text-2xl: 1.5rem; // 24px
+  --text-3xl: 2rem; // 32px
+  --text-4xl: 2.5rem; // 40px
+
+  // Line heights
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+
+  // Letter spacing — Apple uses tighter tracking than industrial fonts
+  --tracking-tight: -0.025em;
+  --tracking-normal: -0.01em;
+  --tracking-wide: 0.01em;
+  --tracking-wider: 0.03em;
+  --tracking-widest: 0.06em;
+}

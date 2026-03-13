@@ -1,0 +1,415 @@
+@use './variables.scss';
+
+// ─── Settings Panel ───────────────────────────────────────────────────────────
+// Maps exactly to .settings-panel used in skeuomorphic/forms.scss
+.settings-panel {
+  width: 100%;
+  max-width: 800px;
+  background: linear-gradient(180deg, #f6f6f6 0%, #ececec 100%);
+  border-radius: 16px;
+  padding: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 8px 32px var(--shadow-15),
+    0 2px 8px var(--shadow-10),
+    inset 0 1px 0 var(--highlight-80);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// ─── Panel header ─────────────────────────────────────────────────────────────
+.panel-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// ─── Form sections ────────────────────────────────────────────────────────────
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-title {
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.form-group.stacked {
+  grid-template-columns: 1fr;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+label {
+  font-family: var(--font-label);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  color: var(--text-dark);
+  letter-spacing: var(--tracking-normal);
+}
+
+.input-desc {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: 3px;
+  display: block;
+  font-weight: 400;
+}
+
+// ─── Text Inputs & Textareas ─────────────────────────────────────────────────
+// Aqua: white inset field, rounded corners, blue focus ring
+.input-field {
+  width: 100%;
+  background-color: var(--color-white);
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  box-shadow: inset 0 1px 2px var(--shadow-08);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-aqua-vivid);
+    box-shadow:
+      inset 0 1px 2px var(--shadow-08),
+      0 0 0 3px var(--glow-aqua-20);
+  }
+
+  &::placeholder {
+    color: var(--color-gray-300);
+  }
+}
+
+textarea.input-field {
+  resize: vertical;
+  min-height: 80px;
+}
+
+// ─── Native & Custom Selects ─────────────────────────────────────────────────
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-field {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 6px 32px 6px 10px;
+  border-radius: 6px;
+  background-color: var(--color-white);
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--text-dark);
+  box-shadow: inset 0 1px 2px var(--shadow-08);
+  // Custom double-arrow icon (macOS default sort)
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='14' viewBox='0 0 12 14'%3E%3Cpath fill='%23555' d='M6 0l5 6H1zM6 14l-5-6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-aqua-vivid);
+    box-shadow:
+      inset 0 1px 2px var(--shadow-08),
+      0 0 0 3px var(--glow-aqua-20);
+  }
+}
+
+// Hide custom arrow element if present (we use background-image)
+.select-arrow {
+  display: none;
+}
+
+// ─── Toggle / Checkbox ───────────────────────────────────────────────────────
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+// Support for .toggle-switch structure (checkbox hack)
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+// The Toggle Track
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, #dcdcdc 0%, #f0f0f0 100%);
+  border: 1px solid #a0a0a0;
+  transition: 0.2s;
+  border-radius: 20px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+// The Toggle Knob
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  left: 0px;
+  bottom: 0px; // account for border
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid #a0a0a0;
+  transition: 0.2s;
+}
+
+// Checked State (Blue)
+input:checked + .slider {
+  background: linear-gradient(to bottom, #6db3f2 0%, #1e69de 50%, #1254c0 51%, #539fe1 100%);
+  border-color: #104191;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+  border-color: #104191;
+  box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+// ─── Checkbox (Direct Input Styling) ─────────────────────────────────────────
+/* .aqua-checkbox class for direct inputs */
+.aqua-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid #7c7c7c;
+
+  // Base State: Inset white box
+  background: white;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+
+  &:checked {
+    border-color: #104191;
+    // Blue Gel Gradient
+    background: linear-gradient(to bottom, #8abaed 0%, #1e69de 50%, #1254c0 51%, #539fe1 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      0 1px 2px rgba(0, 0, 0, 0.2);
+
+    // The "Check" Mark
+    &::after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 4px;
+      width: 4px;
+      height: 8px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+    }
+  }
+}
+
+.aqua-radio {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid #7c7c7c;
+
+  // Base State: Inset
+  background: white;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+
+  &:checked {
+    border-color: #104191;
+    background: #ffffff; // Keep bg white, dot is blue
+
+    // The Blue Dot (Gel)
+    &::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      bottom: 2px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 30%, #a4d7ff 0%, #1e69de 60%, #1254c0 100%);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+// ─── Radio Group & Options ───────────────────────────────────────────────────
+/* Skeuomorphic-compatible layout */
+.radio-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.radio-option {
+  position: relative;
+  cursor: pointer;
+  padding-left: 24px; // indent for checkmark
+  line-height: 20px;
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  user-select: none;
+
+  // The hidden input
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  /* The Custom Radio (Aqua) */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+
+    // Inset white base
+    background-color: white;
+    border: 1px solid #7c7c7c;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+
+    // The "Light" / Indicator
+    &:after {
+      content: '';
+      position: absolute;
+      display: none;
+
+      // Aqua Blue Gel Dot
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      bottom: 2px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 30%, #a4d7ff 0%, #1e69de 60%, #1254c0 100%);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // Active / Checked
+  input:checked ~ .checkmark {
+    background-color: #fff; // keep base white
+    border-color: #104191;
+    &:after {
+      display: block; // show dot
+    }
+  }
+}
+
+// ─── Button Actions ──────────────────────────────────────────────────────────
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+// ─── Aqua segmented control (maps to button-group) ───────────────────────────
+.segmented-control {
+  display: inline-flex;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #999;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background: white;
+
+  button {
+    flex: 1;
+    padding: 4px 12px;
+    // Standard Silver Segment
+    background: linear-gradient(to bottom, #fcfcfc 0%, #e2e2e2 50%, #d4d4d4 51%, #f4f4f4 100%);
+    border: none;
+    border-right: 1px solid #adadad;
+
+    font-size: 11px;
+    font-family: var(--font-label);
+    font-weight: 500;
+    color: #333;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+
+    cursor: pointer;
+    position: relative;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    // Pressed State
+    &:active {
+      background: linear-gradient(to bottom, #a0a0a0 0%, #b8b8b8 50%, #d0d0d0 51%, #e0e0e0 100%);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    // Active / Selected State (Blue Gel)
+    &.active,
+    &[data-state='on'] {
+      background: linear-gradient(to bottom, #6db3f2 0%, #1e69de 50%, #1254c0 51%, #539fe1 100%);
+      color: white;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
+}

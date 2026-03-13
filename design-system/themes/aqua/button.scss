@@ -1,0 +1,204 @@
+@use './variables.scss';
+
+// ─── Aqua accent (blue gel) button — DEFAULT ─────────────────────────────────
+// The "Blue Pill" button is the primary action button in Aqua.
+.btn {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 20px;
+  min-height: 26px;
+
+  // Base Blue Gradient
+  background: linear-gradient(to bottom, #74b0e6 0%, #1e69de 50%, #1254c0 51%, #539fe1 100%);
+  border: 1px solid #104191;
+  border-radius: 18px;
+
+  // Text
+  font-family: 'Lucida Grande', sans-serif; // Classic Aqua font if available, fallback
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 400;
+  color: #ffffff;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
+
+  cursor: pointer;
+  user-select: none;
+  transition: none; // Aqua buttons snap, they don't fade usually
+
+  // Shadows: Drop shadow + Top Highlight
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  // Active State (pushed in)
+  &:active,
+  &.active {
+    background: linear-gradient(to bottom, #10428d 0%, #195ac9 50%, #2972e6 51%, #5ba7ef 100%);
+    box-shadow:
+      inset 0 1px 3px rgba(0, 0, 0, 0.3),
+      0 1px 0 rgba(255, 255, 255, 0.4);
+    border-color: #0c3372;
+  }
+
+  // Focus ring
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 3px rgba(118, 178, 240, 0.6),
+      0 1px 2px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+}
+
+// ─── Gel shine overlay — the signature Aqua highlight arc ────────────────────
+// This creates the "glassy" top half
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  right: 2px;
+  height: 48%;
+  border-radius: 14px 14px 4px 4px; // Top rounded, bottom slightly less
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+// ─── Secondary (Silver/Gray) Aqua button ──────────────────────────────────────
+.btn-secondary,
+.btn-white {
+  background: linear-gradient(to bottom, #fcfcfc 0%, #e2e2e2 50%, #d4d4d4 51%, #f4f4f4 100%);
+  border: 1px solid #9c9c9c;
+  color: #000000;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+
+  &:active {
+    background: linear-gradient(to bottom, #a0a0a0 0%, #b8b8b8 50%, #d0d0d0 51%, #e0e0e0 100%);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+    border-color: #888888;
+  }
+
+  &::after {
+    // Silver buttons have a more subtle shine
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.2) 100%
+    );
+  }
+}
+
+// Compatibility with existing classes
+.btn-primary {
+  // Inherits default blue styles
+}
+
+// ─── Orange / destructive mapped to Aqua red ─────────────────────────────────
+.btn-orange {
+  // Use a red gel gradient
+  background: linear-gradient(to bottom, #ff9e9e 0%, #e85555 50%, #d62d2d 51%, #ff6b6b 100%);
+  border: 1px solid #b02020;
+
+  &:active {
+    background: linear-gradient(to bottom, #b02020 0%, #c03030 50%, #d62d2d 51%, #e85555 100%);
+  }
+}
+
+// ─── Square-style button (hardware-style) ────────────────────────────────────
+.btn-square {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px; // Aqua uses more rounded corners than sharp
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, var(--btn-default-top), var(--btn-default-btm));
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  box-shadow:
+    0 2px 5px var(--shadow-20),
+    inset 0 1px 0 var(--highlight-60);
+  cursor: pointer;
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 4px var(--shadow-15);
+  }
+}
+
+// ─── LED (traffic light style dot) ───────────────────────────────────────────
+.led {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--led-green-off);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+
+  &.on {
+    background: var(--color-green-vivid);
+    box-shadow:
+      0 0 6px var(--color-green-vivid),
+      0 0 0 1px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// ─── Text inside button ───────────────────────────────────────────────────────
+.btn .primary-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+.btn .secondary-text {
+  font-size: 10px;
+  opacity: 0.7;
+  align-self: flex-start;
+}
+
+// ─── Sizes ────────────────────────────────────────────────────────────────────
+.btn-rect-small {
+  width: 70px;
+  height: 35px;
+}
+.btn-rect-medium {
+  width: 100px;
+  height: 50px;
+}
+.btn-rect-large {
+  width: 140px;
+  height: 70px;
+}
+
+// ─── Traffic-light window controls ───────────────────────────────────────────
+// Optional: use .traffic-lights wrapper for window chrome decoration
+.traffic-lights {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.traffic-light {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+
+  &.close {
+    background: var(--color-red-vivid);
+    border-color: #e04347;
+  }
+  &.minimise {
+    background: var(--color-yellow-vivid);
+    border-color: #d9a820;
+  }
+  &.maximise {
+    background: var(--color-green-vivid);
+    border-color: #16aa29;
+  }
+}

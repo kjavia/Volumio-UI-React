@@ -1,0 +1,84 @@
+@use './variables.scss';
+
+.knob-container {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.knob-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+// ─── Base Knob ────────────────────────────────────────────────────────────────
+// Aqua knob: glossy dome, soft drop-shadow, centre indicator pip
+.knob {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  box-shadow:
+    0 6px 14px var(--shadow-20),
+    0 2px 4px var(--shadow-15),
+    inset 0 2px 4px var(--highlight-60); // dome highlight
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+// Glossy cap sheen — Aqua gel arc
+.knob::before {
+  content: '';
+  position: absolute;
+  top: 8%;
+  left: 12%;
+  right: 12%;
+  height: 40%;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.1) 100%);
+  pointer-events: none;
+}
+
+// Indicator pip
+.knob::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.18);
+  box-shadow: inset 1px 1px 2px var(--shadow-20);
+}
+
+// ─── White/Silver Knob (Volume) ───────────────────────────────────────────────
+.knob-white {
+  background: radial-gradient(circle at 35% 35%, #ffffff, #c8c8c8);
+}
+
+// ─── Blue Aqua Knob (replaces orange) ────────────────────────────────────────
+// .knob-orange class kept for compatibility — mapped to Aqua blue tint
+.knob-orange {
+  background: radial-gradient(circle at 35% 35%, var(--color-aqua-bright), var(--color-aqua-deep));
+}
+
+// ─── Knob label ───────────────────────────────────────────────────────────────
+.knob-label {
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+

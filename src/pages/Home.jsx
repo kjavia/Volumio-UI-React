@@ -3,7 +3,7 @@ import React from 'react';
 
 const Home = () => {
   return (
-    <div className="container mt-4">
+    <div className="container-fluid mt-4">
       <AlbumBrowser
         albums={[
           { title: 'Album 1', artist: 'Artist A' },

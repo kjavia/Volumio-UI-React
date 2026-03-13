@@ -1,0 +1,112 @@
+@use './variables.scss';
+
+// ─── Main content area ────────────────────────────────────────────────────────
+.content-display {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.tab-pane {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  width: 100%;
+  max-width: 800px;
+}
+
+.tab-pane.active {
+  display: flex;
+  opacity: 1;
+}
+
+// ─── Placeholder ─────────────────────────────────────────────────────────────
+.placeholder-icon {
+  font-size: 80px;
+  color: var(--color-gray-300);
+  margin-bottom: 20px;
+}
+
+// ─── Bottom Tab Bar ───────────────────────────────────────────────────────────
+// Aqua: frosted glass toolbar — translucent white, hairline top border
+.tab-bar {
+  height: 80px;
+  background: rgba(236, 236, 236, 0.85);
+  backdrop-filter: blur(16px) saturate(1.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 8px;
+  gap: 6px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -1px 0 var(--highlight-60);
+  z-index: 100;
+}
+
+// ─── Tab Buttons ──────────────────────────────────────────────────────────────
+// Standard macOS toolbar icon-button style
+.tab-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  height: 64px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  transition: background 0.12s;
+  user-select: none;
+  padding: 6px 4px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  &.active,
+  &.selected {
+    background: rgba(20, 122, 255, 0.1);
+    .tab-icon {
+      color: var(--color-aqua-vivid);
+    }
+    .tab-label {
+      color: var(--color-aqua-vivid);
+      font-weight: 600;
+    }
+  }
+
+  &:active {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(0.97);
+  }
+}
+
+.tab-icon {
+  font-size: 26px;
+  color: var(--text-dim);
+  margin-bottom: 3px;
+  transition: color 0.15s;
+}
+
+.tab-label {
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  letter-spacing: var(--tracking-normal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+

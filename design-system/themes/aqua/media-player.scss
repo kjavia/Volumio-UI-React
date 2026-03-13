@@ -1,0 +1,173 @@
+@use './variables.scss';
+
+// ─── Media Player Layout ──────────────────────────────────────────────────────
+// Maps 1-to-1 with skeuomorphic/media-player.scss class names
+
+.player-casing {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  // Aqua Background: Pinstripes
+  background-color: #f2f2f2;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.7) 0px,
+    rgba(255, 255, 255, 0.7) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+
+  border-radius: 20px;
+  padding: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 8px 32px var(--shadow-20),
+    0 2px 8px var(--shadow-10),
+    inset 0 1px 0 var(--highlight-80);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  position: relative;
+  transition: max-width 0.3s ease;
+
+  // No ::before needed for pinstripes now
+}
+
+// ─── Layout wrappers ─────────────────────────────────────────────────────────
+.media-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.controls-section {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+// ─── Screen Area ─────────────────────────────────────────────────────────────
+// Aqua screen: dark inset with frosted glass border, not industrial
+.screen-frame {
+  background: linear-gradient(180deg, #1c1c1e, #2c2c2e);
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  box-shadow:
+    inset 0 2px 6px var(--shadow-30),
+    0 1px 0 var(--highlight-40);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  justify-content: center;
+}
+
+// ─── Album art containers ─────────────────────────────────────────────────────
+.album-art-container,
+.vinyl-container,
+.cd-container {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
+}
+
+// ─── Track Info ───────────────────────────────────────────────────────────────
+.track-info {
+  font-family: var(--font-body);
+  color: var(--color-gray-100);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.track-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: var(--tracking-tight);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artist-name,
+.album-name {
+  font-size: var(--text-sm);
+  color: var(--color-gray-300);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ─── Seekbar ─────────────────────────────────────────────────────────────────
+// Uses sliders.scss range styling — no extra overrides needed
+.seekbar-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.time-display {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-gray-300);
+  min-width: 38px;
+  text-align: center;
+}
+
+// ─── Playback control buttons ────────────────────────────────────────────────
+.controls-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.control-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(180deg, #f0f0f0, #d8d8d8);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  box-shadow:
+    0 2px 5px var(--shadow-15),
+    inset 0 1px 0 var(--highlight-70);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text-dark);
+  font-size: 20px;
+  transition: all 0.1s;
+
+  &.play-btn {
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(180deg, var(--color-aqua-bright), var(--color-aqua-mid));
+    color: white;
+    border-color: var(--color-aqua-deep);
+    box-shadow:
+      0 3px 8px var(--glow-aqua-40),
+      inset 0 1px 0 var(--highlight-40);
+  }
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: 0 1px 2px var(--shadow-15);
+  }
+}

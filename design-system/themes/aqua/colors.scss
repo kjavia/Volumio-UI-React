@@ -1,0 +1,98 @@
+@use './variables.scss';
+
+// ─── Background Utilities ──────────────────────────────────────────────────
+.bg-dark {
+  background-color: var(--panel-bg-dark) !important;
+}
+.bg-surface {
+  background-color: var(--device-surface) !important;
+}
+.bg-app {
+  background-color: var(--bg-color) !important;
+}
+.bg-list-item {
+  background-color: var(--list-item-bg) !important;
+}
+.bg-accent {
+  background: var(--grad-accent) !important;
+}
+.bg-metallic {
+  background: var(--grad-surface) !important;
+}
+
+// ─── Border Utilities ──────────────────────────────────────────────────────
+.border-dark {
+  border-color: var(--border-dark) !important;
+}
+.border-light {
+  border-color: var(--border-light) !important;
+}
+.border-accent {
+  border-color: var(--border-accent) !important;
+}
+
+// ─── Surface Patterns ─────────────────────────────────────────────────────
+
+// Recessed panel — inset shadow, frosted glass feel
+.panel {
+  background: var(--panel-bg-light);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+  box-shadow:
+    inset 0 1px 0 var(--highlight-60),
+    0 4px 16px var(--shadow-10);
+}
+
+// Raised metallic surface — Aqua aluminium
+.surface {
+  background: var(--grad-surface);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 1px 3px var(--shadow-15),
+    inset 0 1px 0 var(--highlight-80);
+}
+
+// Device chrome — outer panel / window titlebar feel
+.device-chrome {
+  background: var(--grad-window);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  box-shadow:
+    0 4px 20px var(--shadow-20),
+    inset 0 1px 0 var(--highlight-80);
+}
+
+// Inset well — text fields / display areas
+.inset-well {
+  background-color: var(--color-white);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow:
+    inset 0 1px 3px var(--shadow-10),
+    0 1px 0 var(--highlight-60);
+}
+
+// ─── Dividers ─────────────────────────────────────────────────────────────
+// Thin hairline — macOS separator style
+.divider {
+  border: none;
+  height: 1px;
+  background-color: var(--border-dark);
+  margin: 0.5rem 0;
+}
+
+// ─── List Item ────────────────────────────────────────────────────────────
+.list-item {
+  background-color: var(--list-item-bg);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: background-color 0.1s;
+  padding: 6px 12px;
+
+  &:hover {
+    background-color: var(--list-item-bg-hover);
+    border-radius: 6px;
+  }
+}
+

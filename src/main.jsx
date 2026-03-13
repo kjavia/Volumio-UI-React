@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './index.scss';
 import App from './App.jsx';
-import '../src/styles/themes/skeuomorphic.css';
+import '../src/styles/themes/aqua.css';
 
 const queryClient = new QueryClient();
 
