@@ -116,7 +116,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  animation: spin 3s linear infinite;
+  animation: cassette-spin 3s linear infinite;
   animation-play-state: paused;
 }
 
@@ -253,12 +253,7 @@
 /* Rotating spools inside the cassette */
 /* We need to select spools and apply spin */
 .spool-hole {
-  animation: cassette-spin 4s linear infinite;
-  animation-play-state: paused;
-}
-
-.playing .spool-hole {
-  animation-play-state: running;
+  /* No animation on the hole itself */
 }
 
 .screw::after {
