@@ -2270,12 +2270,13 @@ h2 {
 }
 
 .track-title {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 700;
   margin-bottom: 5px;
   letter-spacing: 0.5px;
   white-space: nowrap;
   overflow: hidden;
+  color: var(--color-gray-200, #eee);
   text-overflow: ellipsis;
 }
 
