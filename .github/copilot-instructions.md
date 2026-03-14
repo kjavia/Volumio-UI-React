@@ -23,3 +23,4 @@
 - Use PropTypes for component props validation
 - Use `src/contexts/` for React Context providers (e.g. SocketContext)
 - Use `src/pages/` for page-level components that represent routes
+- Volumio-UI and Volumio-Theme are read only for reference. All new code should be in this repo.

@@ -239,15 +239,22 @@
 }
 
 .vu-meter {
-  width: 12%;
+  width: 20px;
   aspect-ratio: 1.6;
   height: auto;
-  min-width: 20px;
   background: #fdf6e3;
   border: 1px solid var(--color-gray-400);
   border-radius: 2px;
   position: relative;
   overflow: hidden;
+
+  @media (min-width: 576px) {
+    width: 30px;
+  }
+
+  @media (min-width: 992px) {
+    width: 40px;
+  }
 }
 
 .vu-needle {
@@ -255,7 +262,7 @@
   bottom: 0;
   left: 50%;
   width: 1px;
-  height: 20px;
+  height: 80%;
   background: #c00;
   transform-origin: bottom center;
   animation: vu-bounce 0.4s ease-in-out infinite alternate;
@@ -275,7 +282,10 @@
     transform: rotate(10deg);
   }
 }
-7.3%;
+
+/* Buttons / Knobs on Deck */
+.deck-knob {
+  width: 7.3%;
   aspect-ratio: 1/1;
   height: auto;
   border-radius: 50%;
@@ -284,8 +294,5 @@
   box-shadow: 1px 1px 3px var(--shadow-40);
   position: absolute;
   right: 9%;
-  bottom: 12%1px 1px 3px var(--shadow-40);
-  position: absolute;
-  right: 30px;
-  bottom: 10px;
+  bottom: 12%;
 }
