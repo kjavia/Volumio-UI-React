@@ -10,8 +10,8 @@ export const SocketProvider = ({ children }) => {
   useEffect(() => {
     // In a real app, you might fetch the host from an API or config
     // For now, we'll connect to the window's hostname or a default
-    const host = window.location.hostname;
-    // const host = 'localhost'; // Or some other default
+    const host = 'http://192.168.0.132:3000';
+    // const host = 'localhost:3000'; // Or some other default
     // Using default port or inferring from window.location.port
 
     const newSocket = io(host, {
@@ -67,4 +67,3 @@ export const useSocket = () => {
   }
   return context;
 };
-
