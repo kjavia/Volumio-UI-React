@@ -1,10 +1,24 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import VinylPlayer from '@/components/animated-players/VinylPlayer';
+import VinylCoverPlayer from '@/components/animated-players/VinylCoverPlayer';
+import CdPlayer from '@/components/animated-players/CdPlayer';
+import CdCoverPlayer from '@/components/animated-players/CdCoverPlayer';
+import CassettePlayer from '@/components/animated-players/CassettePlayer';
+import ReelToReelPlayer from '@/components/animated-players/ReelToReelPlayer';
 import PlayerControls from '@/components/PlayerControls';
 import TrackInfo from '@/components/TrackInfo';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
 import VolumeManager from '@/components/VolumeManager';
+
+const PLAYERS = [
+  VinylPlayer,
+  VinylCoverPlayer,
+  CdPlayer,
+  CdCoverPlayer,
+  CassettePlayer,
+  ReelToReelPlayer,
+];
 
 const Home = () => {
   const {
@@ -25,6 +39,27 @@ const Home = () => {
     setVolume,
     toggleMute,
   } = useVolumioStatus();
+
+  const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+  const touchTimer = useRef(null);
+
+  const cyclePlayer = () => {
+    setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % PLAYERS.length);
+  };
+
+  const handleTouchStart = () => {
+    touchTimer.current = setTimeout(() => {
+      cyclePlayer();
+    }, 800); // 800ms for long press
+  };
+
+  const handleTouchEnd = () => {
+    if (touchTimer.current) {
+      clearTimeout(touchTimer.current);
+    }
+  };
+
+  const CurrentPlayerComponent = PLAYERS[currentPlayerIndex];
 
   // Construct full album art URL
   const host = 'http://192.168.0.132:3000';
@@ -63,10 +98,19 @@ const Home = () => {
         className="row flex-grow-1 align-items-center justify-content-center position-relative m-0"
         style={{ zIndex: 1 }}
       >
-        {/* Left Side: Vinyl Player */}
+        {/* Left Side: Player */}
         <div className="col-12 col-md-5 offset-md-1 d-flex justify-content-center align-items-center h-100">
-          <div style={{ transform: 'scale(1.1)' }}>
-            <VinylPlayer isPlaying={isPlaying} albumArt={fullAlbumArt} />
+          <div
+            className="d-flex justify-content-center align-items-center w-100 h-100"
+            style={{ transform: 'scale(1.1)', cursor: 'pointer' }}
+            onDoubleClick={cyclePlayer}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleTouchStart}
+            onMouseUp={handleTouchEnd}
+            onMouseLeave={handleTouchEnd}
+          >
+            <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
           </div>
         </div>
 

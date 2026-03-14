@@ -104,7 +104,8 @@
   /* The "sticking out" mechanism */
   /* 240px wide, sticking out ~50% = 120px */
   transform-origin: center;
-  animation: spin 4s linear infinite;
+  transform: translateX(42%);
+  animation: cd-cover-spin 4s linear infinite;
   animation-play-state: paused;
 
   &.playing {
@@ -197,7 +198,7 @@
     0 0 0 2px var(--highlight-10);
 }
 
-@keyframes spin {
+@keyframes cd-cover-spin {
   /* Use % translation for responsiveness */
   /* 100px shift for 240px wide disc ~ 42% */
   from {

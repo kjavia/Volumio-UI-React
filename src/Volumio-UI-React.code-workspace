@@ -1,11 +1,14 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		},
-		{
-			"path": "../../Volumio2-UI"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "..",
+    },
+    {
+      "path": "../../Volumio2-UI",
+    },
+    {
+      "path": "../../Volumio-Theme",
+    },
+  ],
+  "settings": {},
 }

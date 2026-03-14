@@ -29,7 +29,8 @@
   /* We want centered disc to move RIGHT. */
   /* left: 5px + 120px = 125px */
   transform-origin: center;
-  animation: spin 4s linear infinite;
+  transform: translateX(41%);
+  animation: vinyl-cover-spin 4s linear infinite;
   animation-play-state: paused;
 
   &.playing {
@@ -37,7 +38,7 @@
   }
 }
 
-@keyframes spin {
+@keyframes vinyl-cover-spin {
   /* 120px shift on 290px disc ~ 41% */
   from {
     transform: translateX(41%) rotate(0deg);

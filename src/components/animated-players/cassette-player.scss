@@ -246,6 +246,19 @@
   position: absolute;
   z-index: 4;
   box-shadow: inset 1px 1px 1px var(--shadow-80);
+
+  /* Animation for screws? No usually static. But maybe spools need spin? */
+}
+
+/* Rotating spools inside the cassette */
+/* We need to select spools and apply spin */
+.spool-hole {
+  animation: cassette-spin 4s linear infinite;
+  animation-play-state: paused;
+}
+
+.playing .spool-hole {
+  animation-play-state: running;
 }
 
 .screw::after {
@@ -298,7 +311,7 @@
 
 /* Middle screw often present below window */
 
-@keyframes spin {
+@keyframes cassette-spin {
   from {
     transform: rotate(0deg);
   }

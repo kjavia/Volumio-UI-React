@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: spin 6s linear infinite;
+  animation: cd-spin 6s linear infinite;
   animation-play-state: paused;
 
   &.playing {
@@ -91,7 +91,7 @@
     0 0 0 4px #2c3e50;
 }
 
-@keyframes spin {
+@keyframes cd-spin {
   from {
     transform: rotate(0deg);
   }
