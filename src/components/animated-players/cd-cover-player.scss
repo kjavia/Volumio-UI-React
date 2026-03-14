@@ -4,16 +4,18 @@
   align-items: center;
   justify-content: center;
   /* Default small screen size */
-  width: 280px;
-  height: 250px;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1.6;
   position: relative;
   margin: 0 auto;
 }
 
 /* The CD Jewel Case Cover */
 .cd-jewel-case {
-  width: 250px;
-  height: 250px;
+  height: 100%;
+  aspect-ratio: 1/1;
+  width: auto;
   /* When container grows, this stays proportional if we switch to % */
   background: var(--highlight-10);
   /* Glassy feel */
@@ -90,13 +92,13 @@
 
 /* The Spinning CD Disc */
 .cd-disc-spinning {
-  width: 240px;
-  /* Nearly same size as case */
-  height: 240px;
+  height: 96%;
+  width: auto;
+  aspect-ratio: 1/1;
   border-radius: 50%;
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 2%;
+  left: 0;
   z-index: 1;
   /* Behind case */
   box-shadow: 0 0 10px var(--shadow-40);

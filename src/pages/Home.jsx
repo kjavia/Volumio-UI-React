@@ -99,10 +99,17 @@ const Home = () => {
         style={{ zIndex: 1 }}
       >
         {/* Left Side: Player */}
-        <div className="col-12 col-md-5 offset-md-1 d-flex justify-content-center align-items-center h-100">
+        <div className="col-6 d-flex justify-content-center align-items-center h-100">
           <div
-            className="d-flex justify-content-center align-items-center w-100 h-100"
-            style={{ transform: 'scale(1.1)', cursor: 'pointer' }}
+            className="d-flex justify-content-center align-items-center"
+            style={{
+              height: '50vh',
+              aspectRatio: '1/1',
+              maxHeight: '100%',
+              maxWidth: '100%',
+              transform: 'scale(1.1)',
+              cursor: 'pointer',
+            }}
             onDoubleClick={cyclePlayer}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
@@ -115,14 +122,14 @@ const Home = () => {
         </div>
 
         {/* Right Side: Controls */}
-        <div className="col-12 col-md-5 px-4 px-lg-5 text-white h-100 d-flex align-items-center justify-content-center">
+        <div className="col-6 px-2 px-md-4 px-lg-5 text-white h-100 d-flex align-items-center justify-content-center">
           <div
             className="d-flex flex-column align-items-center justify-content-center w-100"
             style={{ maxWidth: '450px' }}
           >
             <TrackInfo title={title} artist={artist} album={album} />
 
-            <div className="w-100 my-4">
+            <div className="w-100 my-1 my-md-3 my-lg-4">
               <PlayerSeekbar seek={seek} duration={duration} onSeek={seekTo} />
             </div>
 
@@ -133,7 +140,7 @@ const Home = () => {
               onPrev={prev}
             />
 
-            <div className="mt-5 w-100 px-4">
+            <div className="mt-1 mt-md-3 mt-lg-5 w-100 px-2 px-lg-4">
               <VolumeManager
                 volume={volume}
                 mute={mute}

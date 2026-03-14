@@ -4,10 +4,11 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  max-width: 450px;
+  aspect-ratio: 1.3;
+  height: auto;
   position: relative;
-  width: 340px;
-  height: 260px;
+  /* width: 340px; height: 260px; */
   margin: 0 auto;
 }
 
@@ -34,13 +35,14 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding-top: 10px;
+  padding-top: 5%;
 }
 
 /* The Reel Assembly */
 .reel-assembly {
-  width: 140px;
-  height: 140px;
+  width: 41%;
+  aspect-ratio: 1/1;
+  height: auto;
   position: relative;
   display: flex;
   justify-content: center;
@@ -49,8 +51,8 @@
 
 /* Spinning metal part */
 .metal-reel-spin {
-  width: 130px;
-  height: 130px;
+  width: 93%;
+  height: 93%;
   border-radius: 50%;
   position: absolute;
   z-index: 10;
@@ -101,8 +103,9 @@
 
 /* Hub Cap stays static in center? No it spins with reel usually. */
 .reel-hub-cap {
-  width: 28px;
-  height: 28px;
+  width: 21%;
+  aspect-ratio: 1/1;
+  height: auto;
   background: radial-gradient(circle, #ddd 10%, var(--color-gray-300) 100%);
   border-radius: 50%;
   position: absolute;
@@ -133,14 +136,14 @@
 }
 
 .tape-full {
-  width: 125px;
-  height: 125px;
+  width: 89%;
+  height: 89%;
 }
 
 .tape-empty {
-  width: 45px;
+  width: 32%;
   /* Hub size */
-  height: 45px;
+  height: 32%;
 }
 
 /* Animation */
@@ -156,7 +159,7 @@
 
 /* Tape Path & Heads */
 .heads-area {
-  height: 80px;
+  height: 31%;
   position: relative;
   background: var(--color-gray-700);
   /* Dark lower section */
@@ -167,8 +170,8 @@
 }
 
 .head-cover {
-  width: 80px;
-  height: 50px;
+  width: 23%;
+  height: 62%;
   background: linear-gradient(to bottom, var(--color-gray-600), var(--color-gray-800));
   border-radius: 4px;
   box-shadow: 0 2px 5px var(--shadow-50);
@@ -179,7 +182,7 @@
   align-items: flex-end;
   padding-bottom: 5px;
   color: var(--color-gray-200);
-  font-size: 10px;
+  font-size: clamp(6px, 1.5vw, 10px);
   font-family: sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -193,28 +196,29 @@
 
 /* Tension Arm Rollers */
 .tension-roller {
-  width: 16px;
-  height: 16px;
+  width: 4.7%;
+  aspect-ratio: 1/1;
+  height: auto;
   background: radial-gradient(circle, var(--color-white), var(--color-gray-250));
   border-radius: 50%;
   position: absolute;
-  top: 10px;
+  top: 12%;
   z-index: 5;
   box-shadow: 0 2px 3px var(--shadow-50);
 }
 
 .roller-left {
-  left: 40px;
+  left: 12%;
 }
 
 .roller-right {
-  right: 40px;
+  right: 12%;
 }
 
 /* The Tape Strip going across */
 .tape-strip {
   position: absolute;
-  top: 18px;
+  top: 22%;
   /* Aligned with bottom of reels approx */
   left: 0;
   right: 0;
@@ -228,15 +232,17 @@
 /* VU Meters (Small simulation) */
 .vu-meter-group {
   position: absolute;
-  left: 20px;
-  bottom: 10px;
+  left: 6%;
+  bottom: 12%;
   display: flex;
   gap: 5px;
 }
 
 .vu-meter {
-  width: 40px;
-  height: 25px;
+  width: 12%;
+  aspect-ratio: 1.6;
+  height: auto;
+  min-width: 20px;
   background: #fdf6e3;
   border: 1px solid var(--color-gray-400);
   border-radius: 2px;
@@ -269,15 +275,16 @@
     transform: rotate(10deg);
   }
 }
-
-/* Buttons / Knobs on Deck */
-.deck-knob {
-  width: 25px;
-  height: 25px;
+7.3%;
+  aspect-ratio: 1/1;
+  height: auto;
   border-radius: 50%;
   background: radial-gradient(circle, #ddd, var(--color-gray-250));
   border: 1px solid var(--color-gray-400);
   box-shadow: 1px 1px 3px var(--shadow-40);
+  position: absolute;
+  right: 9%;
+  bottom: 12%1px 1px 3px var(--shadow-40);
   position: absolute;
   right: 30px;
   bottom: 10px;

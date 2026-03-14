@@ -3,9 +3,9 @@ import Button from './Button';
 
 const PlayerControls = ({ isPlaying, onPlayPause, onNext, onPrev }) => {
   return (
-    <div className="player-controls d-flex gap-4 justify-content-center align-items-center my-4">
+    <div className="player-controls d-flex gap-3 gap-md-4 justify-content-center align-items-center my-2 my-md-4">
       <Button classNames="btn-round btn-white" onClick={onPrev} label="Previous">
-        <span className="material-icons">skip_previous</span>
+        <span className="material-icons fs-5 fs-md-4">skip_previous</span>
       </Button>
 
       <Button
@@ -13,13 +13,11 @@ const PlayerControls = ({ isPlaying, onPlayPause, onNext, onPrev }) => {
         onClick={onPlayPause}
         label={isPlaying ? 'Pause' : 'Play'}
       >
-        <span className="material-icons" style={{ fontSize: '24px' }}>
-          {isPlaying ? 'pause' : 'play_arrow'}
-        </span>
+        <span className="material-icons fs-4 fs-md-3">{isPlaying ? 'pause' : 'play_arrow'}</span>
       </Button>
 
       <Button classNames="btn-round btn-white" onClick={onNext} label="Next">
-        <span className="material-icons">skip_next</span>
+        <span className="material-icons fs-5 fs-md-4">skip_next</span>
       </Button>
     </div>
   );

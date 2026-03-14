@@ -4,30 +4,29 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  max-width: 450px; /* Cap for large screens */
+  aspect-ratio: 1.5; /* Widescreen ratio for sleeve + stick-out disc */
   margin: 0 auto;
 }
 
 /* The Spinning Vinyl Record */
 .vinyl-disc {
-  width: 290px;
-  height: 290px;
+  height: 94%; /* Slightly smaller than sleeve */
+  width: auto;
+  aspect-ratio: 1/1; /* Maintain square */
   background-color: var(--color-gray-900);
   border-radius: 50%;
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 3%;
+  left: 0; /* Aligned with sleeve initially */
   z-index: 1;
   /* Behind sleeve */
   box-shadow: 0 0 20px var(--shadow-60);
   /* Shadow cast on right/under */
 
   /* The "sticking out" mechanism */
-  /* We want it 50% exposed. Width is 290px. Half is 145px. */
-  /* The parent container is 300px wide. */
-  /* We want centered disc to move RIGHT. */
-  /* left: 5px + 120px = 125px */
+  /* Move disc to the right */
   transform-origin: center;
   transform: translateX(41%);
   animation: vinyl-cover-spin 4s linear infinite;
@@ -39,7 +38,6 @@
 }
 
 @keyframes vinyl-cover-spin {
-  /* 120px shift on 290px disc ~ 41% */
   from {
     transform: translateX(41%) rotate(0deg);
   }
@@ -116,10 +114,9 @@
 /* Album Art on Sleeve */
 .album-sleeve {
   /* Responsive: fill container height */
-  width: auto;
-  height: 100%;
-  aspect-ratio: 1 / 1;
-  /* width: 300px; height: 300px; replaced */
+  height: 100%; /* Height drives dimensions */
+  aspect-ratio: 1/1; /* Square */
+  width: auto; /* Let aspect ratio define width */
   background: linear-gradient(135deg, var(--color-gray-700), var(--color-gray-850));
   border-radius: 4px;
   z-index: 10;
@@ -129,26 +126,26 @@
   box-shadow: 0 10px 30px var(--shadow-50);
 }
 
-@media (min-width: 768px) {
-  .vinyl-sleeve-container {
-    width: 40vw;
-    height: auto;
-    aspect-ratio: 1.4;
-    max-width: 600px;
-    display: block;
-  }
+/* @media (min-width: 768px) { */
+/*   .vinyl-sleeve-container { */
+/*     width: 40vw; */
+/*     height: auto; */
+/*     aspect-ratio: 1.4; */
+/*     max-width: 600px; */
+/*     display: block; */
+/*   } */
 
-  .vinyl-disc {
-    /* Scale relative to container */
-    width: auto;
-    height: 96%;
-    /* 290/300 approx */
-    aspect-ratio: 1/1;
-    /* Reset fixed */
-    top: 2%;
-    left: 1%;
-  }
-}
+/*   .vinyl-disc { */
+/*     /\* Scale relative to container *\/ */
+/*     width: auto; */
+/*     height: 96%; */
+/*     /\* 290/300 approx *\/ */
+/*     aspect-ratio: 1/1; */
+/*     /\* Reset fixed *\/ */
+/*     top: 2%; */
+/*     left: 1%; */
+/*   } */
+/* } */
 
 .sleeve-art {
   width: 100%;

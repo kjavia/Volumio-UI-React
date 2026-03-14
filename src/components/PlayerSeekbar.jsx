@@ -19,9 +19,14 @@ const PlayerSeekbar = ({ seek, duration, onSeek }) => {
   const progressPercent = durationSeconds > 0 ? (currentSeconds / durationSeconds) * 100 : 0;
 
   return (
-    <div className="slider-container px-3">
-      <span className="time-label text-end text-white-50">{formatTime(currentSeconds)}</span>
-      <div className="slider-track position-relative flex-grow-1">
+    <div className="slider-container px-2 px-md-3">
+      <span
+        className="time-label text-end text-white-50"
+        style={{ fontSize: '0.75rem', width: '35px' }}
+      >
+        {formatTime(currentSeconds)}
+      </span>
+      <div className="slider-track position-relative flex-grow-1 mx-2">
         <input
           type="range"
           className="form-range position-absolute w-100 h-100 top-0 start-0 opacity-0 z-2"
@@ -35,7 +40,12 @@ const PlayerSeekbar = ({ seek, duration, onSeek }) => {
           <div className="slider-cap"></div>
         </div>
       </div>
-      <span className="time-label text-start text-white-50">{formatTime(durationSeconds)}</span>
+      <span
+        className="time-label text-start text-white-50"
+        style={{ fontSize: '0.75rem', width: '35px' }}
+      >
+        {formatTime(durationSeconds)}
+      </span>
     </div>
   );
 };

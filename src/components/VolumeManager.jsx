@@ -5,14 +5,14 @@ import Button from './Button';
 const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => {
   return (
     <div
-      className={`volume-manager d-flex align-items-center gap-3 ${isOnFooter ? 'text-white' : 'text-white'}`}
+      className={`volume-manager d-flex align-items-center gap-2 gap-md-3 ${isOnFooter ? 'text-white' : 'text-white'}`}
     >
       <Button
         classNames="btn-link text-white p-0 d-flex align-items-center border-0 text-decoration-none"
         onClick={onMute}
         label={mute ? 'Unmute' : 'Mute'}
       >
-        <span className="material-icons">
+        <span className="material-icons fs-5 fs-md-4">
           {mute || volume === 0 ? 'volume_off' : volume < 50 ? 'volume_down' : 'volume_up'}
         </span>
       </Button>
@@ -31,7 +31,10 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
           <div className="slider-cap"></div>
         </div>
       </div>
-      <span className="small text-white-50 ms-1 fw-bold text-center" style={{ width: '30px' }}>
+      <span
+        className="small text-white-50 ms-1 fw-bold text-center"
+        style={{ width: '30px', fontSize: '0.8rem' }}
+      >
         {volume}
       </span>
     </div>
