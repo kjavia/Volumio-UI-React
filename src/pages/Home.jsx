@@ -10,6 +10,8 @@ import PlayerControls from '@/components/PlayerControls';
 import TrackInfo from '@/components/TrackInfo';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
 import VolumeManager from '@/components/VolumeManager';
+import SpectrumAnalyzer from '@/components/spectrum-analyzers/SpectrumAnalyzer';
+import DisconnectedScreen from '@/components/DisconnectedScreen';
 
 const PLAYERS = [
   VinylPlayer,
@@ -67,7 +69,7 @@ const Home = () => {
   const CurrentPlayerComponent = PLAYERS[currentPlayerIndex];
 
   // Construct full album art URL
-  const host = 'http://192.168.0.132:3000';
+  const host = 'http://192.168.0.132';
   const fullAlbumArt = useMemo(() => {
     if (!albumart) return '';
     if (albumart.startsWith('http')) return albumart;
@@ -75,12 +77,7 @@ const Home = () => {
   }, [albumart]);
 
   if (!isConnected) {
-    return (
-      <div className="d-flex vh-100 justify-content-center align-items-center text-white bg-dark">
-        <div className="spinner-border text-primary me-3" role="status"></div>
-        <span>Connecting to Volumio...</span>
-      </div>
-    );
+    return <DisconnectedScreen isRetrying host={host} />;
   }
 
   return (
@@ -162,10 +159,10 @@ const Home = () => {
 
       {/* Visualization Section - Hidden on small screens */}
       <div
-        className="d-none d-md-flex justify-content-center align-items-center w-100"
+        className="d-none d-md-flex w-100"
         style={{ height: '15vh', minHeight: '120px', zIndex: 1 }}
       >
-        <div className="text-white-50">Visualization Area</div>
+        <SpectrumAnalyzer streamUrl={`${host}:8000`} isPlaying={isPlaying} />
       </div>
     </div>
   );
