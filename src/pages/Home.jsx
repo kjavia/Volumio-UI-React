@@ -159,10 +159,10 @@ const Home = () => {
 
       {/* Visualization Section - Hidden on small screens */}
       <div
-        className="d-none d-md-flex w-100"
+        className="d-none d-md-block w-100"
         style={{ height: '15vh', minHeight: '120px', zIndex: 1 }}
       >
-        <SpectrumAnalyzer streamUrl={`${host}:8000`} isPlaying={isPlaying} />
+        <SpectrumAnalyzer streamUrl={`${host}:8000`} />
       </div>
     </div>
   );
