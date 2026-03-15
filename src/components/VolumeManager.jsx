@@ -8,11 +8,11 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
       className={`volume-manager d-flex align-items-center gap-2 gap-md-3 ${isOnFooter ? 'text-white' : 'text-white'}`}
     >
       <Button
-        classNames="btn-link text-white p-0 d-flex align-items-center border-0 text-decoration-none"
+        classNames={`btn-square ${mute ? 'active' : ''}`}
         onClick={onMute}
         label={mute ? 'Unmute' : 'Mute'}
       >
-        <span className="material-icons fs-5 fs-md-4">
+        <span className={`material-icons fs-5 fs-md-4 ${mute ? 'text-orange' : ''}`}>
           {mute || volume === 0 ? 'volume_off' : volume < 50 ? 'volume_down' : 'volume_up'}
         </span>
       </Button>

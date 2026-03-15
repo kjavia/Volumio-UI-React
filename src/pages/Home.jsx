@@ -38,6 +38,11 @@ const Home = () => {
     seekTo,
     setVolume,
     toggleMute,
+    random,
+    repeat,
+    toggleRandom,
+    toggleRepeat,
+    disableVolumeControl,
   } = useVolumioStatus();
 
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
@@ -95,21 +100,13 @@ const Home = () => {
       )}
 
       <div
-        className="row flex-grow-1 align-items-center justify-content-center position-relative m-0"
+        className="d-flex flex-column flex-md-row flex-grow-1 justify-content-center position-relative m-0 home-container w-100"
         style={{ zIndex: 1 }}
       >
         {/* Left Side: Player */}
-        <div className="col-6 d-flex justify-content-center align-items-center h-100">
+        <div className="home-panel d-flex justify-content-center align-items-start align-items-md-center pt-5 pt-md-0">
           <div
-            className="d-flex justify-content-center align-items-center"
-            style={{
-              height: '50vh',
-              aspectRatio: '1/1',
-              maxHeight: '100%',
-              maxWidth: '100%',
-              transform: 'scale(1.1)',
-              cursor: 'pointer',
-            }}
+            className="player-responsive d-flex justify-content-center align-items-center"
             onDoubleClick={cyclePlayer}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
@@ -122,7 +119,7 @@ const Home = () => {
         </div>
 
         {/* Right Side: Controls */}
-        <div className="col-6 px-2 px-md-4 px-lg-5 text-white h-100 d-flex align-items-center justify-content-center">
+        <div className="home-panel px-2 px-md-4 px-lg-5 text-white d-flex align-items-end align-items-md-center justify-content-center pb-5 pb-md-0">
           <div
             className="d-flex flex-column align-items-center justify-content-center w-100"
             style={{ maxWidth: '450px' }}
@@ -138,16 +135,22 @@ const Home = () => {
               onPlayPause={togglePlay}
               onNext={next}
               onPrev={prev}
+              shuffle={random}
+              repeat={repeat}
+              onShuffle={toggleRandom}
+              onRepeat={toggleRepeat}
             />
 
-            <div className="mt-1 mt-md-3 mt-lg-5 w-100 px-2 px-lg-4">
-              <VolumeManager
-                volume={volume}
-                mute={mute}
-                onVolumeChange={setVolume}
-                onMute={toggleMute}
-              />
-            </div>
+            {!disableVolumeControl && (
+              <div className="mt-1 mt-md-3 mt-lg-5 w-100 px-2 px-lg-4">
+                <VolumeManager
+                  volume={volume}
+                  mute={mute}
+                  onVolumeChange={setVolume}
+                  onMute={toggleMute}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

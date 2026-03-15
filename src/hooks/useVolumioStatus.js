@@ -12,6 +12,10 @@ const useVolumioStatus = () => {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0);
   const [mute, setMute] = useState(false);
+  const [random, setRandom] = useState(false);
+  const [repeat, setRepeat] = useState(false);
+  const [repeatSingle, setRepeatSingle] = useState(false);
+  const [disableVolumeControl, setDisableVolumeControl] = useState(false);
   const [samplerate, setSamplerate] = useState('');
   const [bitdepth, setBitdepth] = useState('');
 
@@ -29,6 +33,10 @@ const useVolumioStatus = () => {
       setDuration(data.duration);
       setVolume(data.volume);
       setMute(data.mute);
+      setRandom(data.random);
+      setRepeat(data.repeat);
+      setRepeatSingle(data.repeatSingle);
+      setDisableVolumeControl(data.disableVolumeControl);
       setSamplerate(data.samplerate);
       setBitdepth(data.bitdepth); // or check exact key
     };
@@ -64,9 +72,20 @@ const useVolumioStatus = () => {
 
   const next = () => socket.emit('next');
   const prev = () => socket.emit('prev');
+  const toggleRandom = () => socket.emit('setRandom', { value: !random });
+  const toggleRepeat = () => socket.emit('setRepeat', { value: !repeat });
   const stop = () => socket.emit('stop');
-  const setVol = (val) => socket.emit('volume', val);
-  const toggleMute = () => socket.emit('volume', mute ? 'unmute' : 'mute');
+
+  const setVol = (val) => {
+    setVolume(val);
+    socket.emit('volume', val);
+  };
+
+  const toggleMute = () => {
+    const newMute = !mute;
+    setMute(newMute);
+    socket.emit(newMute ? 'mute' : 'unmute');
+  };
 
   // Seek expects seconds usually for Volumio but UI might use ms.
   // Volumio `seek` command expects seconds
@@ -87,6 +106,10 @@ const useVolumioStatus = () => {
     duration,
     volume,
     mute,
+    random,
+    repeat,
+    repeatSingle,
+    disableVolumeControl,
     samplerate,
     bitdepth,
     togglePlay,
@@ -95,6 +118,8 @@ const useVolumioStatus = () => {
     stop,
     setVolume: setVol,
     toggleMute,
+    toggleRandom,
+    toggleRepeat,
     seekTo,
   };
 };
