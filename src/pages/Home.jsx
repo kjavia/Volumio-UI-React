@@ -114,7 +114,12 @@ const Home = () => {
             onMouseUp={handleTouchEnd}
             onMouseLeave={handleTouchEnd}
           >
-            <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
+            <CurrentPlayerComponent
+              isPlaying={isPlaying}
+              albumArt={fullAlbumArt}
+              seek={seek}
+              duration={duration}
+            />
           </div>
         </div>
 
@@ -153,6 +158,14 @@ const Home = () => {
             )}
           </div>
         </div>
+      </div>
+
+      {/* Visualization Section - Hidden on small screens */}
+      <div
+        className="d-none d-md-flex justify-content-center align-items-center w-100"
+        style={{ height: '15vh', minHeight: '120px', zIndex: 1 }}
+      >
+        <div className="text-white-50">Visualization Area</div>
       </div>
     </div>
   );

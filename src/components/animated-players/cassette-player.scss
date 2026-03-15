@@ -78,10 +78,9 @@
 /* Clear Window in the Middle */
 .cassette-window {
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* adjust vertical center within label */
   width: 70%;
   height: 40%;
   background-color: rgba(44, 62, 80, 0.4);
@@ -91,8 +90,6 @@
   border: 1px solid var(--color-gray-100);
   z-index: 2;
   overflow: hidden;
-  /* Remove flex centering, use absolute for contents */
-  position: relative;
 }
 
 /* Spools */
@@ -104,7 +101,6 @@
   border-radius: 50%;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   /* Cog-like look */
   background-image: radial-gradient(circle, transparent 30%, #ddd 31%, var(--color-white) 35%);
   display: flex;
@@ -167,6 +163,9 @@
   border-radius: 50%;
   z-index: 5;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Tape Reels (Dark circles behind spools seen through window) */
@@ -174,10 +173,9 @@
 .reel-L {
   position: absolute;
   left: 27%;
-  /* Alignment Center */
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 45%;
+  width: 38%;
   aspect-ratio: 1/1;
   height: auto;
   background: var(--color-gray-850);
@@ -188,11 +186,10 @@
 
 .reel-R {
   position: absolute;
-  right: 27%;
-  /* Alignment Center */
+  left: 73%;
   top: 50%;
-  transform: translate(50%, -50%);
-  width: 22%;
+  transform: translate(-50%, -50%);
+  width: 38%;
   aspect-ratio: 1/1;
   height: auto;
   background: var(--color-gray-850);
@@ -203,15 +200,14 @@
 
 /* Adjust spool positions to match reels */
 .spool-left {
-  left: 17%;
+  left: 27%;
+  transform: translate(-50%, -50%);
 }
 
-/* 55px center - 20px half-width = 35px */
 .spool-right {
-  right: 17%;
+  left: 73%;
+  transform: translate(-50%, -50%);
 }
-
-/* 55px center - 20px half-width = 35px */
 
 /* Bottom Trapezoid Area */
 .cassette-bottom {
