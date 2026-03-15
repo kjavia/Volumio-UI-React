@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import './SlidePanel.css';
 
 const SlidePanel = ({ open, onClose, title, children, width = '300px' }) => {
   const panelRef = useRef(null);
@@ -44,10 +43,10 @@ const SlidePanel = ({ open, onClose, title, children, width = '300px' }) => {
       >
         {/* Header */}
         <div className="slide-panel-header d-flex align-items-center justify-content-between px-3 py-2">
-          {title && <h5 className="slide-panel-title m-0 text-white">{title}</h5>}
+          {title && <h5 className="slide-panel-title m-0">{title}</h5>}
           <button
             type="button"
-            className="btn btn-link text-white p-0 ms-auto"
+            className="btn btn-link p-0 ms-auto"
             onClick={onClose}
             aria-label="Close"
           >

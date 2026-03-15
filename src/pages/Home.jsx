@@ -12,6 +12,7 @@ import PlayerSeekbar from '@/components/PlayerSeekbar';
 import VolumeManager from '@/components/VolumeManager';
 import SpectrumAnalyzer from '@/components/spectrum-analyzers/SpectrumAnalyzer';
 import StreamInfo from '@/components/StreamInfo';
+import Playlist from '@/components/Playlist';
 import DisconnectedScreen from '@/components/DisconnectedScreen';
 
 const PLAYERS = [
@@ -51,9 +52,14 @@ const Home = () => {
     trackType,
     bitrate,
     service,
+    position,
+    queue,
+    removeFromQueue,
+    playFromQueue,
   } = useVolumioStatus();
 
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+  const [showPlaylist, setShowPlaylist] = useState(false);
   const touchTimer = useRef(null);
 
   const cyclePlayer = () => {
@@ -156,9 +162,7 @@ const Home = () => {
               onAddToPlaylist={() => {
                 /* TODO: implement add to playlist */
               }}
-              onShowPlaylist={() => {
-                /* TODO: implement show playlist */
-              }}
+              onShowPlaylist={() => setShowPlaylist(true)}
             />
 
             {!disableVolumeControl && (
@@ -179,6 +183,18 @@ const Home = () => {
           <SpectrumAnalyzer streamUrl={`${host}:8000`} />
         </div>
       </div>
+
+      {/* Playlist Slide Panel */}
+      <Playlist
+        open={showPlaylist}
+        onClose={() => setShowPlaylist(false)}
+        queue={queue}
+        currentPosition={position}
+        isPlaying={isPlaying}
+        onPlay={playFromQueue}
+        onRemove={removeFromQueue}
+        host={host}
+      />
     </div>
   );
 };

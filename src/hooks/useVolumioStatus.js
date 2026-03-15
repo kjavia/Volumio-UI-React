@@ -21,6 +21,8 @@ const useVolumioStatus = () => {
   const [trackType, setTrackType] = useState('');
   const [bitrate, setBitrate] = useState('');
   const [service, setService] = useState('');
+  const [position, setPosition] = useState(0);
+  const [queue, setQueue] = useState([]);
 
   useEffect(() => {
     if (!socket) return;
@@ -45,14 +47,23 @@ const useVolumioStatus = () => {
       setTrackType(data.trackType || '');
       setBitrate(data.bitrate || '');
       setService(data.service || '');
+      if (data.position !== undefined) setPosition(data.position);
     };
 
     socket.on('pushState', handlePushState);
+
+    const handlePushQueue = (data) => {
+      if (Array.isArray(data)) setQueue(data);
+    };
+    socket.on('pushQueue', handlePushQueue);
+
     // Initial state request
     socket.emit('getState', '');
+    socket.emit('getQueue');
 
     return () => {
       socket.off('pushState', handlePushState);
+      socket.off('pushQueue', handlePushQueue);
     };
   }, [socket]);
 
@@ -100,6 +111,14 @@ const useVolumioStatus = () => {
     setSeek(val * 1000); // Optimistic update
   };
 
+  const removeFromQueue = (index) => {
+    socket.emit('removeFromQueue', { value: index });
+  };
+
+  const playFromQueue = (index) => {
+    socket.emit('play', { value: index });
+  };
+
   return {
     isConnected,
     status,
@@ -121,6 +140,8 @@ const useVolumioStatus = () => {
     trackType,
     bitrate,
     service,
+    position,
+    queue,
     togglePlay,
     next,
     prev,
@@ -130,6 +151,8 @@ const useVolumioStatus = () => {
     toggleRandom,
     toggleRepeat,
     seekTo,
+    removeFromQueue,
+    playFromQueue,
   };
 };
 

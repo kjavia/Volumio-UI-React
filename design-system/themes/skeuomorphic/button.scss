@@ -18,6 +18,8 @@
   font-weight: 500;
   user-select: none;
   transition: all 0.1s;
+  /* Default text color — dark, contrasts with default light button bg */
+  color: var(--color-gray-600, #444);
 
   /* Box Shadow creates the height feel */
   box-shadow:
