@@ -1,0 +1,56 @@
+/* ── Backdrop ── */
+.slide-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1040;
+  background: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  transition: background 0.3s ease;
+}
+
+.slide-panel-backdrop.show {
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+}
+
+/* ── Panel ── */
+.slide-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  max-width: 80vw; /* never exceed 80% of screen on mobile */
+  background: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  outline: none;
+}
+
+.slide-panel.open {
+  transform: translateX(0);
+}
+
+/* ── Header ── */
+.slide-panel-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.slide-panel-title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ── Body ── */
+.slide-panel-body {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+}
