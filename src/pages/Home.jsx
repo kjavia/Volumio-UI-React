@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef } from 'react';
+import React, { useMemo, useState, useRef, useEffect } from 'react';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import VinylPlayer from '@/components/animated-players/VinylPlayer';
 import VinylCoverPlayer from '@/components/animated-players/VinylCoverPlayer';
@@ -82,14 +82,26 @@ const Home = () => {
 
   // Construct full album art URL
   const host = 'http://192.168.0.132';
+  const webSocketPort = '3000';
   const fullAlbumArt = useMemo(() => {
     if (!albumart) return '';
     if (albumart.startsWith('http')) return albumart;
     return `${host}${albumart}`;
   }, [albumart]);
 
+  // After 5 minutes of no connection, stop showing the retrying state
+  const [isRetrying, setIsRetrying] = useState(true);
+  useEffect(() => {
+    if (isConnected) {
+      setIsRetrying(true);
+      return;
+    }
+    const timer = setTimeout(() => setIsRetrying(false), 5 * 60 * 1000);
+    return () => clearTimeout(timer);
+  }, [isConnected]);
+
   if (!isConnected) {
-    return <DisconnectedScreen isRetrying host={host} />;
+    return <DisconnectedScreen isRetrying={isRetrying} host={`${host}:${webSocketPort}`} />;
   }
 
   return (

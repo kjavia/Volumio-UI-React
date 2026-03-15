@@ -19,10 +19,10 @@ const DisconnectedScreen = ({ isRetrying = false, host }) => {
       </div>
 
       <div className="text-center">
-        <h5 className="mb-1 fw-semibold">
+        <h5 className="mb-1 fw-semibold text-white">
           {isRetrying ? 'Connecting to Volumio…' : 'Disconnected'}
         </h5>
-        {host && <p className="text-white-50 small mb-0">{host}</p>}
+        {host && <p className="text-white-50 mb-0">{host}</p>}
         {!isRetrying && (
           <p className="text-white-50 small mb-0 mt-1">
             Check that Volumio is running and reachable.
@@ -37,8 +37,8 @@ const DisconnectedScreen = ({ isRetrying = false, host }) => {
               key={i}
               className="rounded-circle bg-secondary"
               style={{
-                width: '6px',
-                height: '6px',
+                width: '16px',
+                height: '16px',
                 animation: `disconnected-pulse 1.2s ease-in-out ${i * 0.2}s infinite`,
               }}
             />
