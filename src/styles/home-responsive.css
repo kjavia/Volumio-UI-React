@@ -1,33 +1,108 @@
-/* .home-panel responsive styles */
-.home-panel {
-  width: 100%;
-  height: 50%;
+/*
+  HOME LAYOUT
+  ===========
+  Mobile  (<768px)  : Player / Controls stacked top-to-bottom. No spectrum.
+  Desktop (768–2499): Player+Controls top row (70%), Spectrum bottom row (30%).
+  Ultra-wide (≥2500): Player | Controls | Spectrum side-by-side, full height.
+
+  Guarantee: NO scrollbar, ever. Content scales to available space.
+*/
+
+/* ── Page-level overflow kill ── */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
 }
 
-/* Player responsive container */
-.player-responsive {
-  height: 50vh;
-  aspect-ratio: 1/1;
-  transform: scale(1.1);
-  cursor: pointer;
+/* ── Grid Container ── */
+.home-grid {
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh; /* dynamic viewport height — handles mobile browser chrome */
+  overflow: hidden;
+
+  /* MOBILE (default): two equal rows, one column */
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    'player'
+    'controls';
+}
+
+/* ── Grid area assignments ── */
+.area-player {
+  grid-area: player;
+}
+.area-controls {
+  grid-area: controls;
+}
+.area-spectrum {
+  grid-area: spectrum;
+}
+
+/* ── Panel base ──
+   Every panel fills its grid cell, centers its child, and NEVER overflows.
+   container-type: size  →  children can use cqw/cqh units (container-relative).
+   min-width/min-height: 0  →  lets grid children shrink below content size.
+*/
+.home-panel,
+.spectrum-panel {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* Default mobile: restrict to 80% of available area */
-  max-width: 80%;
-  max-height: 80%;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  container-type: size;
 }
 
-@media (min-width: 768px) {
-  .home-panel {
-    width: 50%;
-    height: 100%;
+/* Hidden on mobile (grid has no "spectrum" area so it wouldn't show anyway,
+   but display:none guarantees the element is removed from flow). */
+.spectrum-panel {
+  display: none;
+}
+
+/* ── Player responsive container ──
+   A perfect square whose side = 90% of the SMALLER parent dimension.
+   min(90cqw, 90cqh) adapts to whichever axis is tighter.
+*/
+.player-responsive {
+  width: min(90cqw, 90cqh);
+  height: min(90cqw, 90cqh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* ── DESKTOP  (768 px – 2 499 px) ── */
+@media (min-width: 768px) and (max-width: 2499px) {
+  .home-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 70fr 30fr; /* 70 / 30 split */
+    grid-template-areas:
+      'player  controls'
+      'spectrum spectrum';
   }
 
-  .player-responsive {
-    /* Desktop: full size allowed */
-    max-width: 100%;
-    max-height: 100%;
+  .spectrum-panel {
+    display: flex;
+  }
+}
+
+/* ── ULTRA-WIDE  (≥ 2 500 px) ── */
+@media (min-width: 2500px) {
+  .home-grid {
+    grid-template-columns: 1fr 1fr 1fr; /* three equal columns */
+    grid-template-rows: 1fr; /* single full-height row */
+    grid-template-areas: 'player controls spectrum';
+  }
+
+  .spectrum-panel {
+    display: flex;
   }
 }

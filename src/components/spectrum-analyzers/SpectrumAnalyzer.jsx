@@ -112,7 +112,6 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2 }) =>
       style={{
         width: '100%',
         height: '100%',
-        minHeight: '120px',
         position: 'relative',
         cursor: 'pointer',
         userSelect: 'none',
@@ -137,7 +136,7 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2 }) =>
       onMouseUp={handleTouchEnd}
       onMouseLeave={handleTouchEnd}
     >
-      <div ref={containerRef} style={{ width: '100%', height: '100%', minHeight: '120px' }} />
+      <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
 
       {!enabled && (
         <div

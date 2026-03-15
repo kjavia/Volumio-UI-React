@@ -81,7 +81,7 @@ const Home = () => {
   }
 
   return (
-    <div className="container-fluid d-flex flex-column flex-grow-1 h-100 bg-dark overflow-hidden position-relative p-0 start-0 top-0 w-100">
+    <div className="container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100">
       {/* Optional Background Blur */}
       {fullAlbumArt && (
         <div
@@ -96,14 +96,12 @@ const Home = () => {
         />
       )}
 
-      <div
-        className="d-flex flex-column flex-md-row flex-grow-1 justify-content-center position-relative m-0 home-container w-100"
-        style={{ zIndex: 1 }}
-      >
-        {/* Left Side: Player */}
-        <div className="home-panel d-flex justify-content-center align-items-start align-items-md-center pt-5 pt-md-0">
+      {/* Main Grid Layout */}
+      <div className="home-grid position-relative" style={{ zIndex: 1 }}>
+        {/* PLAYER SECTION */}
+        <div className="home-panel area-player">
           <div
-            className="player-responsive d-flex justify-content-center align-items-center"
+            className="player-responsive"
             onDoubleClick={cyclePlayer}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
@@ -120,8 +118,8 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Right Side: Controls */}
-        <div className="home-panel px-2 px-md-4 px-lg-5 text-white d-flex align-items-end align-items-md-center justify-content-center pb-5 pb-md-0">
+        {/* CONTROLS SECTION */}
+        <div className="home-panel area-controls text-white">
           <div
             className="d-flex flex-column align-items-center justify-content-center w-100"
             style={{ maxWidth: '450px' }}
@@ -155,14 +153,11 @@ const Home = () => {
             )}
           </div>
         </div>
-      </div>
 
-      {/* Visualization Section - Hidden on small screens */}
-      <div
-        className="d-none d-md-block w-100"
-        style={{ height: '15vh', minHeight: '120px', zIndex: 1 }}
-      >
-        <SpectrumAnalyzer streamUrl={`${host}:8000`} />
+        {/* VISUALIZATION SECTION */}
+        <div className="spectrum-panel area-spectrum">
+          <SpectrumAnalyzer streamUrl={`${host}:8000`} />
+        </div>
       </div>
     </div>
   );
