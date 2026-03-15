@@ -11,6 +11,7 @@ import TrackInfo from '@/components/TrackInfo';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
 import VolumeManager from '@/components/VolumeManager';
 import SpectrumAnalyzer from '@/components/spectrum-analyzers/SpectrumAnalyzer';
+import StreamInfo from '@/components/StreamInfo';
 import DisconnectedScreen from '@/components/DisconnectedScreen';
 
 const PLAYERS = [
@@ -45,6 +46,11 @@ const Home = () => {
     toggleRandom,
     toggleRepeat,
     disableVolumeControl,
+    samplerate,
+    bitdepth,
+    trackType,
+    bitrate,
+    service,
   } = useVolumioStatus();
 
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
@@ -126,6 +132,14 @@ const Home = () => {
           >
             <TrackInfo title={title} artist={artist} album={album} />
 
+            <StreamInfo
+              trackType={trackType}
+              samplerate={samplerate}
+              bitdepth={bitdepth}
+              bitrate={bitrate}
+              service={service}
+            />
+
             <div className="w-100 my-1 my-md-3 my-lg-4">
               <PlayerSeekbar seek={seek} duration={duration} onSeek={seekTo} />
             </div>
@@ -139,6 +153,12 @@ const Home = () => {
               repeat={repeat}
               onShuffle={toggleRandom}
               onRepeat={toggleRepeat}
+              onAddToPlaylist={() => {
+                /* TODO: implement add to playlist */
+              }}
+              onShowPlaylist={() => {
+                /* TODO: implement show playlist */
+              }}
             />
 
             {!disableVolumeControl && (

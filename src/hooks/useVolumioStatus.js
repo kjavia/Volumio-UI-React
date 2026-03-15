@@ -18,6 +18,9 @@ const useVolumioStatus = () => {
   const [disableVolumeControl, setDisableVolumeControl] = useState(false);
   const [samplerate, setSamplerate] = useState('');
   const [bitdepth, setBitdepth] = useState('');
+  const [trackType, setTrackType] = useState('');
+  const [bitrate, setBitrate] = useState('');
+  const [service, setService] = useState('');
 
   useEffect(() => {
     if (!socket) return;
@@ -38,7 +41,10 @@ const useVolumioStatus = () => {
       setRepeatSingle(data.repeatSingle);
       setDisableVolumeControl(data.disableVolumeControl);
       setSamplerate(data.samplerate);
-      setBitdepth(data.bitdepth); // or check exact key
+      setBitdepth(data.bitdepth);
+      setTrackType(data.trackType || '');
+      setBitrate(data.bitrate || '');
+      setService(data.service || '');
     };
 
     socket.on('pushState', handlePushState);
@@ -112,6 +118,9 @@ const useVolumioStatus = () => {
     disableVolumeControl,
     samplerate,
     bitdepth,
+    trackType,
+    bitrate,
+    service,
     togglePlay,
     next,
     prev,
