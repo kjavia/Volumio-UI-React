@@ -1,11 +1,15 @@
 import React, { useMemo, useState, useRef, useEffect } from 'react';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
+import usePluginConfig from '@/hooks/usePluginConfig';
+import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
+import AlbumArtPlayer from '@/components/animated-players/AlbumArtPlayer';
 import VinylPlayer from '@/components/animated-players/VinylPlayer';
 import VinylCoverPlayer from '@/components/animated-players/VinylCoverPlayer';
 import CdPlayer from '@/components/animated-players/CdPlayer';
 import CdCoverPlayer from '@/components/animated-players/CdCoverPlayer';
 import CassettePlayer from '@/components/animated-players/CassettePlayer';
 import ReelToReelPlayer from '@/components/animated-players/ReelToReelPlayer';
+import RadioPlayer from '@/components/animated-players/RadioPlayer';
 import PlayerControls from '@/components/PlayerControls';
 import TrackInfo from '@/components/TrackInfo';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
@@ -15,16 +19,33 @@ import StreamInfo from '@/components/StreamInfo';
 import Playlist from '@/components/Playlist';
 import DisconnectedScreen from '@/components/DisconnectedScreen';
 
-const PLAYERS = [
+const PLAYER_MAP = {
+  albumArt: AlbumArtPlayer,
+  vinyl: VinylPlayer,
+  vinylCover: VinylCoverPlayer,
+  cd: CdPlayer,
+  cdCover: CdCoverPlayer,
+  cassette: CassettePlayer,
+  reelToReel: ReelToReelPlayer,
+  radio: RadioPlayer,
+};
+
+const RANDOM_PLAYERS = [
   VinylPlayer,
   VinylCoverPlayer,
   CdPlayer,
   CdCoverPlayer,
   CassettePlayer,
   ReelToReelPlayer,
+  RadioPlayer,
+  AlbumArtPlayer,
 ];
 
 const Home = () => {
+  const { data: pluginConfig } = usePluginConfig();
+  console.log('Plugin config:', pluginConfig);
+  const playerType = pluginConfig?.playerType || 'radio';
+
   const {
     isConnected,
     isPlaying,
@@ -56,14 +77,24 @@ const Home = () => {
     queue,
     removeFromQueue,
     playFromQueue,
+    isFavourite,
+    toggleFavourite,
   } = useVolumioStatus();
 
-  const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+  const [cycleIndex, setCycleIndex] = useState(null);
   const [showPlaylist, setShowPlaylist] = useState(false);
   const touchTimer = useRef(null);
 
+  // Reset manual cycle when the config setting changes
+  useEffect(() => {
+    setCycleIndex(null);
+  }, [playerType]);
+
   const cyclePlayer = () => {
-    setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % PLAYERS.length);
+    setCycleIndex((prev) => {
+      const currentIdx = prev !== null ? prev : RANDOM_PLAYERS.indexOf(PLAYER_MAP[playerType]);
+      return (currentIdx + 1) % RANDOM_PLAYERS.length;
+    });
   };
 
   const handleTouchStart = () => {
@@ -78,15 +109,18 @@ const Home = () => {
     }
   };
 
-  const CurrentPlayerComponent = PLAYERS[currentPlayerIndex];
+  const CurrentPlayerComponent =
+    cycleIndex !== null
+      ? RANDOM_PLAYERS[cycleIndex]
+      : playerType === 'random'
+        ? RANDOM_PLAYERS[0]
+        : PLAYER_MAP[playerType] || AlbumArtPlayer;
 
   // Construct full album art URL
-  const host = 'http://192.168.0.132';
-  const webSocketPort = '3000';
   const fullAlbumArt = useMemo(() => {
     if (!albumart) return '';
     if (albumart.startsWith('http')) return albumart;
-    return `${host}${albumart}`;
+    return `${VOLUMIO_BASE_URL}${albumart}`;
   }, [albumart]);
 
   // After 5 minutes of no connection, stop showing the retrying state
@@ -101,7 +135,7 @@ const Home = () => {
   }, [isConnected]);
 
   if (!isConnected) {
-    return <DisconnectedScreen isRetrying={isRetrying} host={`${host}:${webSocketPort}`} />;
+    return <DisconnectedScreen isRetrying={isRetrying} host={VOLUMIO_BASE_URL} />;
   }
 
   return (
@@ -175,6 +209,8 @@ const Home = () => {
                 /* TODO: implement add to playlist */
               }}
               onShowPlaylist={() => setShowPlaylist(true)}
+              isFavourite={isFavourite}
+              onToggleFavourite={toggleFavourite}
             />
 
             {!disableVolumeControl && (
@@ -192,7 +228,7 @@ const Home = () => {
 
         {/* VISUALIZATION SECTION */}
         <div className="spectrum-panel area-spectrum">
-          <SpectrumAnalyzer streamUrl={`${host}:8000`} />
+          <SpectrumAnalyzer streamUrl={SPECTRUM_STREAM_URL} />
         </div>
       </div>
 
@@ -205,7 +241,7 @@ const Home = () => {
         isPlaying={isPlaying}
         onPlay={playFromQueue}
         onRemove={removeFromQueue}
-        host={host}
+        host={VOLUMIO_BASE_URL}
       />
     </div>
   );

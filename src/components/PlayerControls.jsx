@@ -12,6 +12,8 @@ const PlayerControls = ({
   onRepeat,
   onAddToPlaylist,
   onShowPlaylist,
+  isFavourite,
+  onToggleFavourite,
 }) => {
   return (
     <div className="player-controls d-flex flex-column align-items-center w-100">
@@ -56,6 +58,14 @@ const PlayerControls = ({
           <span className="material-icons">playlist_add</span>
         </Button>
 
+        <Button
+          classNames={`btn-icon ${isFavourite ? 'active' : ''}`}
+          onClick={onToggleFavourite}
+          label={isFavourite ? 'Remove from Favourites' : 'Add to Favourites'}
+        >
+          <span className="material-icons">{isFavourite ? 'favorite' : 'favorite_border'}</span>
+        </Button>
+
         <Button classNames="btn-icon" onClick={onShowPlaylist} label="Show Playlist">
           <span className="material-icons">queue_music</span>
         </Button>
@@ -75,6 +85,8 @@ PlayerControls.propTypes = {
   onRepeat: PropTypes.func,
   onAddToPlaylist: PropTypes.func,
   onShowPlaylist: PropTypes.func,
+  isFavourite: PropTypes.bool,
+  onToggleFavourite: PropTypes.func,
 };
 
 export default PlayerControls;

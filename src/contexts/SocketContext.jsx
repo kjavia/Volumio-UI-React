@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import io from 'socket.io-client';
+import { VOLUMIO_BASE_URL } from '@/config';
 
 export const SocketContext = createContext(null);
 
@@ -8,13 +9,7 @@ export const SocketProvider = ({ children }) => {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    // In a real app, you might fetch the host from an API or config
-    // For now, we'll connect to the window's hostname or a default
-    const host = 'http://192.168.0.132:3000';
-    // const host = 'localhost:3000'; // Or some other default
-    // Using default port or inferring from window.location.port
-
-    const newSocket = io(host, {
+    const newSocket = io(VOLUMIO_BASE_URL, {
       transports: ['websocket'],
       autoConnect: true,
     });

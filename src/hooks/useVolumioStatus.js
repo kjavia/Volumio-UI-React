@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSocket } from '../contexts/SocketContext';
+import useFavourites from './useFavourites';
 
 const useVolumioStatus = () => {
   const { socket, isConnected } = useSocket();
+  const { favouritesUris, refetchFavourites } = useFavourites();
   const [status, setStatus] = useState('stop');
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
@@ -119,6 +121,20 @@ const useVolumioStatus = () => {
     socket.emit('play', { value: index });
   };
 
+  const toggleFavourite = () => {
+    const uri = queue[position]?.uri;
+    if (!uri) return;
+    if (favouritesUris.has(uri)) {
+      socket.emit('removeFromFavourites', { uri, service });
+    } else {
+      socket.emit('addToFavourites', { uri, title, artist, album, albumart, service });
+    }
+    // Wait briefly for Volumio to process, then re-fetch authoritative list
+    setTimeout(refetchFavourites, 500);
+  };
+
+  const isFavourite = Boolean(queue[position]?.uri && favouritesUris.has(queue[position].uri));
+
   return {
     isConnected,
     status,
@@ -153,6 +169,8 @@ const useVolumioStatus = () => {
     seekTo,
     removeFromQueue,
     playFromQueue,
+    isFavourite,
+    toggleFavourite,
   };
 };
 
