@@ -1,18 +1,22 @@
 /* ── Flip Clock ───────────────────────────────────────────────────────────── */
 
-// Digit sizing — change these to resize everything
-$digit-w: 2.5rem;
-$digit-h: 3.6rem;
+// Digit sizing — scales with container via CSS custom properties.
+// --digit-h picks the smaller of 70% container height or ~17% container width
+// so the clock fills vertically while never overflowing horizontally
+// (6 digits + 2 colons + ampm ≈ 5.5× digit-h wide).
 
 .flip-clock {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   user-select: none;
+  container-type: size;
+
+  --digit-h: min(70cqh, 17cqw);
+  --digit-w: calc(var(--digit-h) * 0.7);
 }
 
 /* Clock body — border frame with stand */
@@ -21,7 +25,7 @@ $digit-h: 3.6rem;
   display: flex;
   align-items: center;
   gap: 1px;
-  border: 6px solid var(--color-gray-100, #ebebeb);
+  border: max(4px, calc(var(--digit-h) * 0.04)) solid var(--color-gray-100, #ebebeb);
   border-radius: 6px;
   box-shadow: 0 8px 32px var(--shadow-40, rgba(0, 0, 0, 0.4));
 }
@@ -30,10 +34,10 @@ $digit-h: 3.6rem;
 .flip-clock-stand {
   position: absolute;
   left: 50%;
-  bottom: -2rem;
+  bottom: calc(var(--digit-h) * -0.16);
   transform: translateX(-50%);
   width: 80%;
-  padding: 0.4rem 0.6rem;
+  padding: calc(var(--digit-h) * 0.03) calc(var(--digit-h) * 0.05);
   background: var(--color-gray-100, #ebebeb);
   border-radius: 0 0 4px 4px;
   text-align: center;
@@ -41,7 +45,7 @@ $digit-h: 3.6rem;
 
 /* Date display */
 .flip-clock-date {
-  font-size: 0.75rem;
+  font-size: clamp(0.65rem, calc(var(--digit-h) * 0.12), 1.2rem);
   font-weight: 600;
   color: var(--color-gray-600, #555);
   text-transform: capitalize;
@@ -51,12 +55,24 @@ $digit-h: 3.6rem;
 /* Colon separator */
 .flip-colon {
   font-family: var(--font-mono, 'Roboto Mono', monospace);
-  font-size: $digit-h * 0.75;
+  font-size: calc(var(--digit-h) * 0.75);
   font-weight: 800;
   color: var(--color-white, #fff);
   line-height: 1;
   padding: 0 2px;
   text-shadow: 0 2px 4px var(--shadow-30, rgba(0, 0, 0, 0.3));
+}
+
+/* AM/PM indicator */
+.flip-ampm {
+  font-family: var(--font-label, 'Roboto', sans-serif);
+  font-size: calc(var(--digit-h) * 0.35);
+  font-weight: 700;
+  color: var(--color-white, #fff);
+  letter-spacing: 0.05em;
+  align-self: flex-end;
+  padding: calc(var(--digit-h) * 0.06) calc(var(--digit-h) * 0.08);
+  text-shadow: 0 1px 3px var(--shadow-30, rgba(0, 0, 0, 0.3));
 }
 
 /* ── Digit panel (two digits side by side) ──────────────────────────────── */
@@ -68,13 +84,13 @@ $digit-h: 3.6rem;
 /* ── Single flip digit ──────────────────────────────────────────────────── */
 .flip-digit {
   position: relative;
-  width: $digit-w;
-  height: $digit-h;
+  width: var(--digit-w);
+  height: var(--digit-h);
   font-family: var(--font-mono, 'Roboto Mono', monospace);
-  font-size: $digit-h * 0.75;
+  font-size: calc(var(--digit-h) * 0.75);
   font-weight: 800;
   color: var(--color-white, #fff);
-  perspective: $digit-h * 3;
+  perspective: calc(var(--digit-h) * 3);
 }
 
 /* ── Static top half ─────── */
@@ -86,7 +102,7 @@ $digit-h: 3.6rem;
   height: 50%;
   overflow: hidden;
   text-align: center;
-  line-height: $digit-h; // = full digit height → text centers; clip at 50% shows top
+  line-height: var(--digit-h); // = full digit height → text centers; clip at 50% shows top
   background: var(--color-gray-900, #111);
   border-radius: 5px 5px 0 0;
   box-shadow: inset 0 8px 30px var(--shadow-50, rgba(0, 0, 0, 0.5));
@@ -147,7 +163,7 @@ $digit-h: 3.6rem;
   height: 50%;
   overflow: hidden;
   text-align: center;
-  line-height: $digit-h;
+  line-height: var(--digit-h);
   background: var(--color-gray-900, #111);
   border-radius: 5px 5px 0 0;
   box-shadow: inset 0 8px 30px var(--shadow-50, rgba(0, 0, 0, 0.5));
@@ -185,68 +201,4 @@ $digit-h: 3.6rem;
   }
 }
 
-/* ── Responsive sizing ──────────────────────────────────────────────────── */
-
-@media (min-width: 576px) {
-  $d-w: 3.2rem;
-  $d-h: 4.6rem;
-
-  .flip-digit {
-    width: $d-w;
-    height: $d-h;
-    font-size: $d-h * 0.75;
-    perspective: $d-h * 3;
-  }
-  .flip-digit-top {
-    line-height: $d-h;
-  }
-  .flip-card-front {
-    line-height: $d-h;
-  }
-
-  .flip-colon {
-    font-size: $d-h * 0.75;
-  }
-
-  .flip-clock-body {
-    border-width: 8px;
-  }
-
-  .flip-clock-stand {
-    bottom: -2.2rem;
-  }
-
-  .flip-clock-date {
-    font-size: 0.8rem;
-  }
-}
-
-@media (min-width: 992px) {
-  .flip-clock {
-    max-width: 50%;
-  }
-
-  $d-w: 4rem;
-  $d-h: 5.6rem;
-
-  .flip-digit {
-    width: $d-w;
-    height: $d-h;
-    font-size: $d-h * 0.75;
-    perspective: $d-h * 3;
-  }
-  .flip-digit-top {
-    line-height: $d-h;
-  }
-  .flip-card-front {
-    line-height: $d-h;
-  }
-
-  .flip-colon {
-    font-size: $d-h * 0.75;
-  }
-
-  .flip-clock-date {
-    font-size: 0.85rem;
-  }
-}
+/* No breakpoints needed — sizing is container-query-driven via --digit-h / --digit-w */

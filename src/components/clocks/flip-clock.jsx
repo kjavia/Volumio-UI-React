@@ -73,9 +73,12 @@ const FlipClock = ({ showSeconds = true }) => {
     };
   }, []);
 
-  const hours = time.getHours();
+  const hours24 = time.getHours();
+  const isPM = hours24 >= 12;
+  const hours = hours24 % 12 || 12;
   const minutes = time.getMinutes();
   const seconds = time.getSeconds();
+  const ampm = isPM ? 'PM' : 'AM';
 
   const dateString = time.toLocaleDateString(undefined, {
     weekday: 'long',
@@ -97,6 +100,7 @@ const FlipClock = ({ showSeconds = true }) => {
             <FlipPanel value={seconds} />
           </>
         )}
+        <span className="flip-ampm">{ampm}</span>
 
         {/* Stand / Footer */}
         <div className="flip-clock-stand">
