@@ -7,7 +7,7 @@ const App = () => {
   return (
     <SocketProvider>
       <Router>
-        <div className="d-flex flex-column vh-100 bg-dark">
+        <div className="d-flex flex-column h-100 bg-dark">
           <main className="flex-grow-1 d-flex flex-column overflow-hidden">
             <Routes>
               <Route path="/" element={<Home />} />

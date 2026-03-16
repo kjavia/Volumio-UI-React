@@ -10,7 +10,8 @@
 
 /* ── Page-level overflow kill ── */
 html,
-body {
+body,
+#root {
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -21,8 +22,8 @@ body {
 .home-grid {
   display: grid;
   width: 100%;
-  height: 100vh;
-  height: 100dvh; /* dynamic viewport height — handles mobile browser chrome */
+  height: 100%; /* fill parent completely */
+  justify-content: center;
   overflow: hidden;
 
   /* MOBILE (default): two equal rows, one column */
