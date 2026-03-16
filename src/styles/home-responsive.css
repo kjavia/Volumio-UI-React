@@ -71,8 +71,10 @@ body {
    min(90cqw, 90cqh) adapts to whichever axis is tighter.
 */
 .player-responsive {
-  width: min(90cqw, 90cqh);
-  height: min(90cqw, 90cqh);
+  /* scalable size variable, default 90% */
+  --p-size: 90;
+  width: min(calc(var(--p-size) * 1cqw), calc(var(--p-size) * 1cqh));
+  height: min(calc(var(--p-size) * 1cqw), calc(var(--p-size) * 1cqh));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -104,5 +106,10 @@ body {
 
   .spectrum-panel {
     display: flex;
+  }
+
+  /* On ultrawide (often short height), use less space (65%) to ensure whitespace */
+  .player-responsive {
+    --p-size: 65;
   }
 }

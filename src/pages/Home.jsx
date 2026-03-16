@@ -43,7 +43,6 @@ const RANDOM_PLAYERS = [
 
 const Home = () => {
   const { data: pluginConfig } = usePluginConfig();
-  console.log('Plugin config:', pluginConfig);
   const playerType = pluginConfig?.playerType || 'radio';
 
   const {
@@ -154,6 +153,18 @@ const Home = () => {
         />
       )}
 
+      {/* Manual Refresh Button */}
+      <div className="position-absolute top-0 end-0 p-3" style={{ zIndex: 100 }}>
+        <button
+          className="btn btn-outline-light rounded-circle p-2 d-flex align-items-center justify-content-center"
+          onClick={() => window.location.reload()}
+          title="Reload Page"
+          style={{ width: 40, height: 40 }}
+        >
+          <span className="material-icons">refresh</span>
+        </button>
+      </div>
+
       {/* Main Grid Layout */}
       <div className="home-grid position-relative" style={{ zIndex: 1 }}>
         {/* PLAYER SECTION */}
@@ -179,7 +190,7 @@ const Home = () => {
         {/* CONTROLS SECTION */}
         <div className="home-panel area-controls text-white">
           <div
-            className="d-flex flex-column align-items-center justify-content-center w-100"
+            className="d-flex flex-column align-items-center justify-content-center w-100 h-100"
             style={{ maxWidth: '450px' }}
           >
             <TrackInfo title={title} artist={artist} album={album} />
