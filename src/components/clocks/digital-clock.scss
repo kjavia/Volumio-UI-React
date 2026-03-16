@@ -34,15 +34,41 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   user-select: none;
 }
 
-/* Date below the LCD panel, inside the frame */
-.lcd-date {
+/* Date and weather below the LCD panel, inside the frame */
+.lcd-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
   margin-top: 5rem;
+}
+
+.lcd-date {
   font-family: var(--font-label, 'Roboto', sans-serif);
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--color-gray-500, #888);
   text-align: center;
+}
+
+.lcd-weather {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.lcd-weather-icon {
+  font-size: 1.6rem;
+  color: $seg-color;
+}
+
+.lcd-weather-temp {
+  font-family: var(--font-label, 'Roboto', sans-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $seg-color;
+  letter-spacing: 0.04em;
 }
 
 .digital-clock {

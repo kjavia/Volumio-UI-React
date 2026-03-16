@@ -183,3 +183,30 @@
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────────── */
+
+/* ── Weather on face ────────────────────────────────────────────────────── */
+
+.clock-face-weather {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.clock-face-weather-icon {
+  font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+  color: var(--color-gray-600, #666);
+}
+
+.clock-face-weather-temp {
+  font-family: var(--font-label, 'Roboto', sans-serif);
+  font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+  font-weight: 700;
+  color: var(--color-gray-700, #333);
+  white-space: nowrap;
+}

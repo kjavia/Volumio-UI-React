@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import useWeather from '@/hooks/useWeather';
 import './digital-clock.scss';
 
 const DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -44,7 +46,8 @@ const LcdColon = () => (
   </div>
 );
 
-const DigitalClock = ({ showSeconds = true, use12Hour = true }) => {
+const DigitalClock = ({ showSeconds = true, use12Hour = true, showWeather = false }) => {
+  const { data: weather } = useWeather();
   const [time, setTime] = useState(() => new Date());
 
   useEffect(() => {
@@ -115,10 +118,27 @@ const DigitalClock = ({ showSeconds = true, use12Hour = true }) => {
             {use12Hour && <span className="lcd-ampm">{ampm}</span>}
           </div>
         </div>
-        <div className="lcd-date">{dateString}</div>
+        <div className="lcd-info">
+          <div className="lcd-date">{dateString}</div>
+          {showWeather && weather?.current && (
+            <div className="lcd-weather">
+              <span className="material-icons lcd-weather-icon">{weather.current.icon}</span>
+              <span className="lcd-weather-temp">
+                {Math.round(weather.current.temperature)}
+                {weather.units.tempUnit}
+              </span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
+};
+
+DigitalClock.propTypes = {
+  showSeconds: PropTypes.bool,
+  use12Hour: PropTypes.bool,
+  showWeather: PropTypes.bool,
 };
 
 export default DigitalClock;

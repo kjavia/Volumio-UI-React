@@ -40,7 +40,10 @@
   padding: calc(var(--digit-h) * 0.03) calc(var(--digit-h) * 0.05);
   background: var(--color-gray-100, #ebebeb);
   border-radius: 0 0 4px 4px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--digit-h) * 0.08);
 }
 
 /* Date display */
@@ -202,3 +205,19 @@
 }
 
 /* No breakpoints needed — sizing is container-query-driven via --digit-h / --digit-w */
+
+/* ── Weather badge in stand ─────────────────────────────────────────────── */
+
+.flip-clock-weather {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+  font-size: clamp(0.65rem, calc(var(--digit-h) * 0.12), 1.2rem);
+  font-weight: 600;
+  color: var(--color-gray-600, #555);
+  white-space: nowrap;
+}
+
+.flip-clock-weather-icon {
+  font-size: 1.2em;
+}

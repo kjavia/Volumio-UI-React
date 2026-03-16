@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import useWeather from '@/hooks/useWeather';
 import './flip-clock.scss';
 
 const FlipDigit = ({ digit }) => {
@@ -55,7 +57,8 @@ const FlipPanel = ({ value }) => {
   );
 };
 
-const FlipClock = ({ showSeconds = true }) => {
+const FlipClock = ({ showSeconds = true, showWeather = false }) => {
+  const { data: weather } = useWeather();
   const [time, setTime] = useState(() => new Date());
 
   useEffect(() => {
@@ -105,10 +108,22 @@ const FlipClock = ({ showSeconds = true }) => {
         {/* Stand / Footer */}
         <div className="flip-clock-stand">
           <span className="flip-clock-date">{dateString}</span>
+          {showWeather && weather?.current && (
+            <span className="flip-clock-weather">
+              <span className="material-icons flip-clock-weather-icon">{weather.current.icon}</span>
+              {Math.round(weather.current.temperature)}
+              {weather.units.tempUnit}
+            </span>
+          )}
         </div>
       </div>
     </div>
   );
+};
+
+FlipClock.propTypes = {
+  showSeconds: PropTypes.bool,
+  showWeather: PropTypes.bool,
 };
 
 export default FlipClock;

@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import useWeather from '@/hooks/useWeather';
 import './analog-clock.scss';
 
 const HOURS = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-const AnalogClock = ({ showSeconds = true }) => {
+const AnalogClock = ({ showSeconds = true, showWeather = false }) => {
+  const { data: weather } = useWeather();
   const [time, setTime] = useState(() => new Date());
 
   useEffect(() => {
@@ -63,6 +66,19 @@ const AnalogClock = ({ showSeconds = true }) => {
               );
             })}
 
+            {/* Weather on the face */}
+            {showWeather && weather?.current && (
+              <div className="clock-face-weather">
+                <span className="material-icons clock-face-weather-icon">
+                  {weather.current.icon}
+                </span>
+                <span className="clock-face-weather-temp">
+                  {Math.round(weather.current.temperature)}
+                  {weather.units.tempUnit}
+                </span>
+              </div>
+            )}
+
             {/* Day & date on the face */}
             <div className="clock-face-info">
               <span className="clock-face-day">{dayName}</span>
@@ -92,6 +108,11 @@ const AnalogClock = ({ showSeconds = true }) => {
       </div>
     </div>
   );
+};
+
+AnalogClock.propTypes = {
+  showSeconds: PropTypes.bool,
+  showWeather: PropTypes.bool,
 };
 
 export default AnalogClock;
