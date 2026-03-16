@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "run-p build:themes:watch dev:vite",
     "dev:vite": "vite",
-    "build": "npm run build:themes && vite build",
-    "build:themes": "sass --load-path=node_modules design-system/themes/glass/index.scss:src/styles/themes/glass.css design-system/themes/metallic/index.scss:src/styles/themes/metallic.css design-system/themes/skeuomorphic/index.scss:src/styles/themes/skeuomorphic.css design-system/themes/aqua/index.scss:src/styles/themes/aqua.css",
-    "build:themes:watch": "sass --load-path=node_modules --watch design-system/themes/glass/index.scss:src/styles/themes/glass.css design-system/themes/metallic/index.scss:src/styles/themes/metallic.css design-system/themes/skeuomorphic/index.scss:src/styles/themes/skeuomorphic.css design-system/themes/aqua/index.scss:src/styles/themes/aqua.css",
+    "build": "npm run build:themes && vite build && cp -R public/. dist/",
+    "build:themes": "sass --load-path=node_modules design-system/themes/metallic/index.scss:src/styles/themes/metallic.css design-system/themes/skeuomorphic/index.scss:src/styles/themes/skeuomorphic.css design-system/themes/aqua/index.scss:src/styles/themes/aqua.css",
+    "build:themes:watch": "sass --load-path=node_modules --watch design-system/themes/metallic/index.scss:src/styles/themes/metallic.css design-system/themes/skeuomorphic/index.scss:src/styles/themes/skeuomorphic.css design-system/themes/aqua/index.scss:src/styles/themes/aqua.css",
     "lint": "eslint .",
     "preview": "vite preview"
   },
