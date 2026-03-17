@@ -47,8 +47,17 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
       'weather_code',
       'wind_speed_10m',
       'is_day',
+      'surface_pressure',
+      'wind_direction_10m',
     ].join(','),
-    hourly: ['temperature_2m', 'weather_code', 'wind_speed_10m', 'relative_humidity_2m'].join(','),
+    hourly: [
+      'temperature_2m',
+      'weather_code',
+      'wind_speed_10m',
+      'relative_humidity_2m',
+      'visibility',
+      'uv_index',
+    ].join(','),
     daily: [
       'weather_code',
       'temperature_2m_max',
@@ -57,6 +66,7 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
       'sunset',
       'wind_speed_10m_max',
       'precipitation_sum',
+      'uv_index_max',
     ].join(','),
     temperature_unit: isImperial ? 'fahrenheit' : 'celsius',
     wind_speed_unit: isImperial ? 'mph' : 'kmh',
@@ -83,6 +93,8 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
     apparentTemperature: c.apparent_temperature,
     humidity: c.relative_humidity_2m,
     windSpeed: c.wind_speed_10m,
+    windDirection: c.wind_direction_10m,
+    pressure: c.surface_pressure,
     weatherCode: c.weather_code,
     description: wmo.description,
     icon: wmo.icon,
@@ -105,6 +117,8 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
       icon: hw.icon,
       windSpeed: h.wind_speed_10m[idx],
       humidity: h.relative_humidity_2m[idx],
+      visibility: h.visibility ? h.visibility[idx] : 0,
+      uvIndex: h.uv_index ? h.uv_index[idx] : 0,
     };
   });
 
@@ -114,10 +128,16 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
     const dw = resolveWmo(d.weather_code[i]);
     return {
       date: t,
+      tempMax: d.temperature_2m_max[i],
+      tempMin: d.temperature_2m_min[i],
       weatherCode: d.weather_code[i],
       description: dw.description,
       icon: dw.icon,
-      tempMax: d.temperature_2m_max[i],
+      sunrise: d.sunrise[i],
+      sunset: d.sunset[i],
+      windSpeedMax: d.wind_speed_10m_max[i],
+      precipitation: d.precipitation_sum[i],
+      uvIndexMax: d.uv_index_max ? d.uv_index_max[i] : 0,
       tempMin: d.temperature_2m_min[i],
       sunrise: d.sunrise[i],
       sunset: d.sunset[i],

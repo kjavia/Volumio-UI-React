@@ -272,3 +272,248 @@
   font-size: 0.8rem;
   color: var(--text-dim, #888);
 }
+
+/* ── Full Dashboard (macOS-style) ───────────────────────────────────── */
+
+.weather-full {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-body, 'SF Pro Display', 'Roboto', sans-serif);
+  color: #fff;
+}
+
+/* ── TOP ROW: Hero + 10-Day ── */
+
+.weather-full-top {
+  display: flex;
+  flex: 0 0 42%;
+  min-height: 0;
+}
+
+/* ── Hero (left column) ── */
+
+.weather-full-hero {
+  flex: 0 0 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.weather-full-hero-location {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.75;
+  margin-bottom: 0.5rem;
+}
+
+.weather-full-hero-temp {
+  font-size: clamp(4rem, 10vw, 7rem);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.weather-full-hero-unit {
+  font-size: 0.35em;
+  vertical-align: super;
+  opacity: 0.65;
+  font-weight: 300;
+}
+
+.weather-full-hero-desc {
+  font-size: 1.3rem;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 0.4rem;
+}
+
+.weather-full-hero-hilow {
+  font-size: 1rem;
+  opacity: 0.6;
+  margin-top: 0.3rem;
+}
+
+.weather-full-hero-icon {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-size: clamp(6rem, 15vw, 10rem) !important;
+  opacity: 0.25;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* ── 10-Day (right column) ── */
+
+.weather-full-tenday {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.75rem;
+  gap: 0.35rem;
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.weather-full-tenday-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  opacity: 0.55;
+  margin-bottom: 0.6rem;
+}
+
+.weather-full-tenday-row {
+  display: grid;
+  grid-template-columns: 3.5rem 1.8rem 2.2rem 1fr 2.2rem;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+}
+
+.weather-full-tenday-day {
+  font-weight: 500;
+}
+
+.weather-full-tenday-icon {
+  font-size: 1.3rem !important;
+}
+
+.weather-full-tenday-lo {
+  opacity: 0.45;
+  text-align: right;
+  font-size: 0.88rem;
+}
+
+.weather-full-tenday-bar {
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  position: relative;
+}
+
+.weather-full-tenday-bar-fill {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(to right, #4fc3f7, #ffb74d);
+  min-width: 8px;
+}
+
+.weather-full-tenday-hi {
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ── Hourly Strip ── */
+
+.weather-full-hourly {
+  flex: 0 0 auto;
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.9rem 1.5rem;
+}
+
+.weather-full-hourly-scroll {
+  display: flex;
+  gap: 1.4rem;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.weather-full-hourly-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 3.2rem;
+}
+
+.weather-full-hourly-time {
+  font-size: 0.78rem;
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+.weather-full-hourly-icon {
+  font-size: 1.7rem !important;
+}
+
+.weather-full-hourly-temp {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ── Metric Tiles Grid ── */
+
+.weather-full-metrics {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  min-height: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.weather-full-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem 1.25rem;
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.weather-full-tile-top {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  opacity: 0.55;
+  margin-bottom: 0.2rem;
+}
+
+.weather-full-tile-hdr-icon {
+  font-size: 0.95rem !important;
+}
+
+.weather-full-tile-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.weather-full-tile-value {
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+
+.weather-full-tile-unit {
+  font-size: 0.48em;
+  opacity: 0.65;
+  font-weight: 400;
+}
+
+.weather-full-tile-sub {
+  font-size: 0.82rem;
+  opacity: 0.6;
+}

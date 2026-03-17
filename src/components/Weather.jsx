@@ -213,6 +213,224 @@ DailyCard.propTypes = {
   isToday: PropTypes.bool,
 };
 
+/* ── Full Dashboard ───────────────────────────────────────────────────── */
+
+const BG_GRADIENT = {
+  wb_sunny: 'linear-gradient(170deg, #1a3a6e 0%, #2960a8 40%, #4a90d9 100%)',
+  cloud: 'linear-gradient(170deg, #2c3e50 0%, #3d5166 40%, #546e7a 100%)',
+  foggy: 'linear-gradient(170deg, #37474f 0%, #546e7a 50%, #78909c 100%)',
+  grain: 'linear-gradient(170deg, #1a2a4a 0%, #263960 40%, #2e5090 100%)',
+  water_drop: 'linear-gradient(170deg, #0d2137 0%, #1a3a5c 40%, #1e5080 100%)',
+  ac_unit: 'linear-gradient(170deg, #1a2f4a 0%, #2a4a6e 40%, #3d7098 100%)',
+  thunderstorm: 'linear-gradient(170deg, #1a0a2e 0%, #2e1a50 40%, #3d2060 100%)',
+};
+
+const WeatherFull = ({ current, hourly, daily, units }) => {
+  const today = daily[0];
+  const precipitation = today.precipitation || 0;
+  const visKm = hourly[0]?.visibility ? round(hourly[0].visibility / 1000) : null;
+  const feelsLike = round(current.apparentTemperature);
+  const uvVal = today.uvIndexMax ?? '—';
+  const uvLabel =
+    uvVal === '—'
+      ? ''
+      : uvVal < 3
+        ? 'Low'
+        : uvVal < 6
+          ? 'Moderate'
+          : uvVal < 8
+            ? 'High'
+            : 'Very High';
+
+  // For temp range bars: compute span across all days
+  const allMin = Math.min(...daily.map((d) => d.tempMin));
+  const allMax = Math.max(...daily.map((d) => d.tempMax));
+  const span = allMax - allMin || 1;
+
+  const bg = BG_GRADIENT[current.icon] || BG_GRADIENT.cloud;
+
+  return (
+    <div className="weather-full" style={{ background: bg }}>
+      {/* ══ TOP: Hero + 10-Day ══ */}
+      <div className="weather-full-top">
+        {/* Hero */}
+        <div className="weather-full-hero">
+          <div className="weather-full-hero-temp">
+            {round(current.temperature)}
+            <span className="weather-full-hero-unit">{units.tempUnit}</span>
+          </div>
+          <div className="weather-full-hero-desc">{current.description}</div>
+          <div className="weather-full-hero-hilow">
+            H:{round(today.tempMax)}
+            {units.tempUnit}&nbsp;&nbsp;L:{round(today.tempMin)}
+            {units.tempUnit}
+          </div>
+          <WeatherIcon name={current.icon} className="weather-full-hero-icon" />
+        </div>
+
+        {/* 10-Day */}
+        <div className="weather-full-tenday">
+          <div className="weather-full-tenday-title">10-DAY FORECAST</div>
+          {daily.map((d, i) => {
+            const lo = ((d.tempMin - allMin) / span) * 100;
+            const width = ((d.tempMax - d.tempMin) / span) * 100;
+            return (
+              <div key={d.date} className="weather-full-tenday-row">
+                <span className="weather-full-tenday-day">
+                  {i === 0 ? 'Today' : formatDay(d.date)}
+                </span>
+                <WeatherIcon name={d.icon} className="weather-full-tenday-icon" />
+                <span className="weather-full-tenday-lo">{round(d.tempMin)}°</span>
+                <div className="weather-full-tenday-bar">
+                  <div
+                    className="weather-full-tenday-bar-fill"
+                    style={{ left: `${lo}%`, width: `${width}%` }}
+                  />
+                </div>
+                <span className="weather-full-tenday-hi">{round(d.tempMax)}°</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ══ HOURLY STRIP ══ */}
+      <div className="weather-full-hourly">
+        <div className="weather-full-hourly-scroll">
+          {hourly.slice(0, 24).map((h, i) => (
+            <div key={h.time} className="weather-full-hourly-item">
+              <span className="weather-full-hourly-time">
+                {i === 0 ? 'Now' : formatHour(h.time)}
+              </span>
+              <WeatherIcon name={h.icon} className="weather-full-hourly-icon" />
+              <span className="weather-full-hourly-temp">
+                {round(h.temperature)}
+                {units.tempUnit}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ══ METRIC TILES ══ */}
+      <div className="weather-full-metrics">
+        <div className="weather-full-tile">
+          <div className="weather-full-tile-top">
+            <span className="material-icons weather-full-tile-hdr-icon">wb_sunny</span>
+            <span className="weather-full-tile-label">UV INDEX</span>
+          </div>
+          <div className="weather-full-tile-value">{uvVal}</div>
+          {uvLabel && <div className="weather-full-tile-sub">{uvLabel}</div>}
+        </div>
+
+        <div className="weather-full-tile">
+          <div className="weather-full-tile-top">
+            <span
+              className="material-icons weather-full-tile-hdr-icon"
+              style={{ color: '#FF8F00' }}
+            >
+              wb_twilight
+            </span>
+            <span className="weather-full-tile-label">SUNRISE</span>
+          </div>
+          <div className="weather-full-tile-value">{formatTime(today.sunrise)}</div>
+          <div className="weather-full-tile-sub">Sunset {formatTime(today.sunset)}</div>
+        </div>
+
+        <div className="weather-full-tile">
+          <div className="weather-full-tile-top">
+            <span className="material-icons weather-full-tile-hdr-icon">air</span>
+            <span className="weather-full-tile-label">WIND</span>
+          </div>
+          <div className="weather-full-tile-value">
+            {round(current.windSpeed)}
+            <span className="weather-full-tile-unit"> {units.windUnit}</span>
+          </div>
+          {current.windDirection != null && (
+            <div className="weather-full-tile-sub">{current.windDirection}° bearing</div>
+          )}
+        </div>
+
+        <div className="weather-full-tile">
+          <div className="weather-full-tile-top">
+            <span className="material-icons weather-full-tile-hdr-icon">water_drop</span>
+            <span className="weather-full-tile-label">PRECIPITATION</span>
+          </div>
+          <div className="weather-full-tile-value">
+            {precipitation}
+            <span className="weather-full-tile-unit"> {units.precipUnit}</span>
+          </div>
+          <div className="weather-full-tile-sub">Today</div>
+        </div>
+
+        <div className="weather-full-tile">
+          <div className="weather-full-tile-top">
+            <span
+              className="material-icons weather-full-tile-hdr-icon"
+              style={{ color: '#EF5350' }}
+            >
+              thermostat
+            </span>
+            <span className="weather-full-tile-label">FEELS LIKE</span>
+          </div>
+          <div className="weather-full-tile-value">
+            {feelsLike}
+            <span className="weather-full-tile-unit">{units.tempUnit}</span>
+          </div>
+          <div className="weather-full-tile-sub">
+            {feelsLike < round(current.temperature) ? 'Feels colder' : 'Feels warmer'}
+          </div>
+        </div>
+
+        <div className="weather-full-tile">
+          <div className="weather-full-tile-top">
+            <span className="material-icons weather-full-tile-hdr-icon">water</span>
+            <span className="weather-full-tile-label">HUMIDITY</span>
+          </div>
+          <div className="weather-full-tile-value">
+            {current.humidity}
+            <span className="weather-full-tile-unit">%</span>
+          </div>
+        </div>
+
+        {visKm !== null && (
+          <div className="weather-full-tile">
+            <div className="weather-full-tile-top">
+              <span className="material-icons weather-full-tile-hdr-icon">visibility</span>
+              <span className="weather-full-tile-label">VISIBILITY</span>
+            </div>
+            <div className="weather-full-tile-value">
+              {visKm}
+              <span className="weather-full-tile-unit"> km</span>
+            </div>
+            <div className="weather-full-tile-sub">
+              {visKm > 10 ? 'Clear' : visKm > 5 ? 'Average' : 'Poor'}
+            </div>
+          </div>
+        )}
+
+        <div className="weather-full-tile">
+          <div className="weather-full-tile-top">
+            <span className="material-icons weather-full-tile-hdr-icon">speed</span>
+            <span className="weather-full-tile-label">PRESSURE</span>
+          </div>
+          <div className="weather-full-tile-value">
+            {round(current.pressure)}
+            <span className="weather-full-tile-unit"> hPa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+WeatherFull.propTypes = {
+  current: PropTypes.object.isRequired,
+  hourly: PropTypes.array.isRequired,
+  daily: PropTypes.array.isRequired,
+  units: PropTypes.object.isRequired,
+};
+
 /* ── Main Weather Component ───────────────────────────────────────────── */
 
 const Weather = ({
@@ -227,7 +445,6 @@ const Weather = ({
   hours = 24,
 }) => {
   const { data, isLoading, isError } = useWeather();
-
   if (isLoading) {
     return (
       <div className="weather-container weather-container--loading">
@@ -235,18 +452,20 @@ const Weather = ({
       </div>
     );
   }
-
   if (isError || !data) {
     return (
       <div className="weather-container weather-container--error">
-        <span className="material-icons weather-error-icon">cloud_off</span>
-        <span className="weather-error-text">Weather unavailable</span>
+        <span className="weather-error-text">Failed to fetch weather</span>
       </div>
     );
   }
 
   const { current, hourly, daily, units } = data;
   const today = daily[0];
+
+  if (mode === 'full') {
+    return <WeatherFull current={current} hourly={hourly} daily={daily} units={units} />;
+  }
 
   return (
     <div className="weather-container">
@@ -270,8 +489,8 @@ const Weather = ({
         <HourlyForecast hourly={hourly.slice(0, hours)} units={units} showWind={showWind} />
       )}
 
-      {/* Daily (also used by 'full' mode) */}
-      {(mode === 'daily' || mode === 'full') && (
+      {/* Daily */}
+      {mode === 'daily' && (
         <div className="weather-daily">
           {daily.slice(0, days).map((d, i) => (
             <DailyCard
