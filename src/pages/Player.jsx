@@ -44,6 +44,30 @@ const RANDOM_PLAYERS = [
   AlbumArtPlayer,
 ];
 
+const getPlayerTypeForSource = (service, trackType) => {
+  const s = (service || '').toLowerCase();
+  const t = (trackType || '').toLowerCase();
+
+  if (s === 'radio' || s.includes('webradio') || s.includes('internet')) {
+    return 'radio';
+  }
+
+  if (s.includes('qobuz') || s.includes('tidal') || s.includes('deezer') || s.includes('spotify')) {
+    return 'globe';
+  }
+
+  if (['mp3', 'flac', 'dsd'].includes(t)) {
+    return 'cdCover';
+  }
+
+  // Service might also identify formats directly
+  if (s.includes('mp3') || s.includes('flac') || s.includes('dsd')) {
+    return 'cdCover';
+  }
+
+  return 'vinylCover';
+};
+
 const Player = () => {
   const { data: pluginConfig } = usePluginConfig();
   const playerType = pluginConfig?.playerType || 'radio';
@@ -121,12 +145,15 @@ const Player = () => {
     }
   };
 
+  const effectivePlayerType =
+    playerType === 'matchSource' ? getPlayerTypeForSource(service, trackType) : playerType;
+
   const CurrentPlayerComponent =
     cycleIndex !== null
       ? RANDOM_PLAYERS[cycleIndex]
-      : playerType === 'random'
+      : effectivePlayerType === 'random'
         ? RANDOM_PLAYERS[randomIndex]
-        : PLAYER_MAP[playerType] || AlbumArtPlayer;
+        : PLAYER_MAP[effectivePlayerType] || AlbumArtPlayer;
 
   // Construct full album art URL
   const fullAlbumArt = useMemo(() => {
