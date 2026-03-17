@@ -216,13 +216,13 @@ DailyCard.propTypes = {
 /* ── Full Dashboard ───────────────────────────────────────────────────── */
 
 const BG_GRADIENT = {
-  wb_sunny: 'linear-gradient(170deg, #1a3a6e 0%, #2960a8 40%, #4a90d9 100%)',
-  cloud: 'linear-gradient(170deg, #2c3e50 0%, #3d5166 40%, #546e7a 100%)',
-  foggy: 'linear-gradient(170deg, #37474f 0%, #546e7a 50%, #78909c 100%)',
-  grain: 'linear-gradient(170deg, #1a2a4a 0%, #263960 40%, #2e5090 100%)',
-  water_drop: 'linear-gradient(170deg, #0d2137 0%, #1a3a5c 40%, #1e5080 100%)',
-  ac_unit: 'linear-gradient(170deg, #1a2f4a 0%, #2a4a6e 40%, #3d7098 100%)',
-  thunderstorm: 'linear-gradient(170deg, #1a0a2e 0%, #2e1a50 40%, #3d2060 100%)',
+  wb_sunny: 'linear-gradient(170deg, #0d2b4e 0%, #1a5276 40%, #2874a6 100%)',
+  cloud: 'linear-gradient(170deg, #1a2a3a 0%, #1f3a52 40%, #2a5070 100%)',
+  foggy: 'linear-gradient(170deg, #1e2d3a 0%, #2a3d50 40%, #3a5268 100%)',
+  grain: 'linear-gradient(170deg, #0e1f30 0%, #1a3448 40%, #234b69 100%)',
+  water_drop: 'linear-gradient(170deg, #0a1929 0%, #0d2b45 40%, #1a4060 100%)',
+  ac_unit: 'linear-gradient(170deg, #0e2030 0%, #1a3550 40%, #204a6e 100%)',
+  thunderstorm: 'linear-gradient(170deg, #0a0f1e 0%, #141e33 40%, #1e2d4a 100%)',
 };
 
 const WeatherFull = ({ current, hourly, daily, units }) => {
