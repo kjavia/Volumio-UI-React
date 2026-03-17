@@ -54,3 +54,17 @@ To stream the audio output from Volumio via HTTP, you must edit the`mpd.conf`fil
     ```
 
 4.  Restart MPD:`sudo service mpd restart`.
+
+# Credits
+
+## 3D Globe
+
+The globe visualization uses [cobe](https://github.com/shuding/cobe), a lightweight WebGL globe renderer by Shuding. It is integrated in `src/components/animated-players/GlobePlayer.jsx`.
+
+## Wallpapers
+
+[https://unsplash.com](UnSplash)
+
+## Weather API
+
+[https://open-meteo.com](Open Meteo)

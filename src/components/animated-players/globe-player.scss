@@ -1,70 +1,25 @@
 .globe-player {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 100%;
   position: relative;
-  transform: translateZ(0);
 }
 
 .globe-wrap {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  position: relative;
-  transform-style: preserve-3d;
-  animation: globe-spin 12s linear infinite;
-  animation-play-state: paused;
-  transform: rotateX(10deg) rotateY(0deg);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.45);
-}
-
-.globe-wrap.playing {
-  animation-play-state: running;
-}
-
-.globe {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-image: url('https://web.archive.org/web/20150807125159if_/http://www.noirextreme.com/digital/Earth-Color4096.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  box-shadow:
-    inset 0 0 30px rgba(0, 0, 0, 0.45),
-    0 8px 22px rgba(0, 0, 0, 0.4);
-  position: relative;
+  overflow: hidden;
 }
 
-.globe::before {
-  content: '';
-  position: absolute;
-  inset: 0;
+.globe-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
   border-radius: 50%;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-.globe-halo {
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 2px solid rgba(204, 225, 255, 0.35);
-  box-shadow: 0 0 40px rgba(161, 210, 255, 0.45);
-  pointer-events: none;
+/* glow/overlay removed per request */
+.globe-halo,
+.globe-wrap {
+  box-shadow: none;
 }
-
-@keyframes globe-spin {
-  0% {
-    transform: rotateX(15deg) rotateY(0deg);
-  }
-  100% {
-    transform: rotateX(15deg) rotateY(360deg);
-  }
-}
-
