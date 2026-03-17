@@ -29,6 +29,7 @@ const Home = () => {
     wallpaperShowSeconds,
     wallpaperShowWeather,
     slideshowInterval,
+    analogClockShowDate,
   } = useIdleScreen();
 
   if (!idle) {
@@ -66,6 +67,13 @@ const Home = () => {
 
   // Clock screens
   const ClockComponent = CLOCK_SCREENS[idleScreen] || AnalogClock;
+
+  if (idleScreen === 'analogClock') {
+    return (
+      <ClockComponent showWeather={showWeatherInClock} showSeconds showDate={analogClockShowDate} />
+    );
+  }
+
   return <ClockComponent showWeather={showWeatherInClock} showSeconds />;
 };
 

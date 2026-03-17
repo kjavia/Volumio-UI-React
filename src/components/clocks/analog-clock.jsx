@@ -5,7 +5,7 @@ import './analog-clock.scss';
 
 const HOURS = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-const AnalogClock = ({ showSeconds = true, showWeather = false }) => {
+const AnalogClock = ({ showSeconds = true, showWeather = false, showDate = true }) => {
   const { data: weather } = useWeather();
   const [time, setTime] = useState(() => new Date());
 
@@ -80,10 +80,12 @@ const AnalogClock = ({ showSeconds = true, showWeather = false }) => {
             )}
 
             {/* Day & date on the face */}
-            <div className="clock-face-info">
-              <span className="clock-face-day">{dayName}</span>
-              <span className="clock-face-date">{dateStr}</span>
-            </div>
+            {showDate && (
+              <div className="clock-face-info">
+                <span className="clock-face-day">{dayName}</span>
+                <span className="clock-face-date">{dateStr}</span>
+              </div>
+            )}
 
             {/* Hands */}
             <div
@@ -113,6 +115,7 @@ const AnalogClock = ({ showSeconds = true, showWeather = false }) => {
 AnalogClock.propTypes = {
   showSeconds: PropTypes.bool,
   showWeather: PropTypes.bool,
+  showDate: PropTypes.bool,
 };
 
 export default AnalogClock;

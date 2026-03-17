@@ -21,6 +21,7 @@ const useIdleScreen = () => {
   const wallpaperShowSeconds = config?.wallpaperShowSeconds ?? false;
   const wallpaperShowWeather = config?.wallpaperShowWeather ?? true;
   const slideshowInterval = config?.slideshowInterval ?? 30;
+  const analogClockShowDate = config?.analogClockShowDate ?? true;
 
   const [idle, setIdle] = useState(false);
   const timerRef = useRef(null);
@@ -69,6 +70,7 @@ const useIdleScreen = () => {
     wallpaperShowSeconds,
     wallpaperShowWeather,
     slideshowInterval,
+    analogClockShowDate,
   };
 };
 
