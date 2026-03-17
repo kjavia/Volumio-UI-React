@@ -1,0 +1,90 @@
+/* ── Wallpaper Idle Screen ─────────────────────────────────────────────── */
+
+.wallpaper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Background image layers — stacked for crossfade */
+.wallpaper-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.wallpaper-bg--active {
+  opacity: 1;
+}
+
+.wallpaper-bg--empty {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+/* Semi-transparent overlay with time & weather */
+.wallpaper-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 2;
+  // Subtle dark vignette for readability
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* Time display */
+.wallpaper-time {
+  font-family: var(--font-display, var(--font-tech, 'Michroma'), sans-serif);
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Weather badge */
+.wallpaper-weather {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.2rem;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  border-radius: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wallpaper-weather-icon {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+}
+
+.wallpaper-weather-temp {
+  font-family: var(--font-display, var(--font-tech, 'Michroma'), sans-serif);
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.wallpaper-weather-desc {
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  text-transform: capitalize;
+}
+

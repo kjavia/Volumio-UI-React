@@ -13,8 +13,7 @@ https://developers.volumio.com/plugins/plugins-overview
 
 - React 19 with JSX (no TypeScript)
 - Vite 6 build tool
-- TanStack Query v5 for server state
-- Axios for HTTP requests
+- TanStack Query + Axios for data fetching and caching
 - React Hook Form + Yup for forms and validation
 - Luxon for date/time handling
 - Bootstrap 5 for styling

@@ -28,8 +28,28 @@ const round = (n) => Math.round(n);
 
 /* ── Sub-components ───────────────────────────────────────────────────── */
 
+const ICON_COLORS = {
+  wb_sunny: '#FFB300', // amber/gold for sun
+  cloud: '#90A4AE', // blue-gray for clouds
+  foggy: '#B0BEC5', // silver for fog
+  grain: '#64B5F6', // light blue for drizzle
+  water_drop: '#42A5F5', // blue for rain
+  ac_unit: '#81D4FA', // ice blue for snow/freezing
+  thunderstorm: '#AB47BC', // purple for storms
+  wb_twilight: '#FF8F00', // amber for sunrise
+  nights_stay: '#5C6BC0', // indigo for sunset
+  air: '#78909C', // gray-blue for wind
+  thermostat: '#EF5350', // red for temperature
+  help_outline: '#BDBDBD', // gray fallback
+};
+
 const WeatherIcon = ({ name, className = '' }) => (
-  <span className={`material-icons weather-icon ${className}`}>{name}</span>
+  <span
+    className={`material-icons weather-icon ${className}`}
+    style={{ color: ICON_COLORS[name] || ICON_COLORS.help_outline }}
+  >
+    {name}
+  </span>
 );
 WeatherIcon.propTypes = { name: PropTypes.string.isRequired, className: PropTypes.string };
 
@@ -120,7 +140,12 @@ const HourlyForecast = ({ hourly, units, showWind }) => (
             {round(h.temperature)}
             {units.tempUnit}
           </span>
-          {showWind && <span className="weather-hourly-wind">{round(h.windSpeed)}</span>}
+          {showWind && (
+            <span className="weather-hourly-wind">
+              <WeatherIcon name="air" className="weather-hourly-wind-icon" />
+              {round(h.windSpeed)} {units.windUnit}
+            </span>
+          )}
         </div>
       ))}
     </div>
@@ -226,7 +251,7 @@ const Weather = ({
   return (
     <div className="weather-container">
       {/* Current */}
-      {(mode === 'current' || mode === 'full') && (
+      {mode === 'current' && (
         <CurrentWeather
           current={current}
           units={units}
@@ -241,11 +266,11 @@ const Weather = ({
       )}
 
       {/* Hourly */}
-      {(mode === 'hourly' || mode === 'full') && (
+      {mode === 'hourly' && (
         <HourlyForecast hourly={hourly.slice(0, hours)} units={units} showWind={showWind} />
       )}
 
-      {/* Daily */}
+      {/* Daily (also used by 'full' mode) */}
       {(mode === 'daily' || mode === 'full') && (
         <div className="weather-daily">
           {daily.slice(0, days).map((d, i) => (

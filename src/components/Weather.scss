@@ -1,12 +1,17 @@
 /* ── Weather Component ─────────────────────────────────────────────────── */
 
 .weather-container {
-  width: 100%;
+  width: 90%;
+  height: 90%;
+  margin: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
   font-family: var(--font-body, 'Roboto', sans-serif);
   color: var(--text-light, #fff);
+  overflow: hidden;
 }
 
 .weather-container--loading,
@@ -53,7 +58,6 @@
 
 .weather-current-icon {
   font-size: clamp(2rem, 6cqi, 4rem);
-  color: var(--text-accent, var(--color-orange-vivid, #ff4500));
 }
 
 .weather-current-temp {
@@ -113,112 +117,124 @@
 
 .weather-hourly {
   width: 100%;
-  overflow: hidden;
+  height: 100%;
 }
 
 .weather-hourly-scroll {
   display: flex;
-  gap: 2px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-gray-600, #555) transparent;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 0.8rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
 }
 
 .weather-hourly-item {
-  flex: 0 0 auto;
+  // 12 per row: 100% / 12 minus gap allowance
+  flex: 1 1 calc(100% / 12 - 0.8rem);
+  max-width: calc(100% / 12 - 0.8rem);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.2rem;
-  padding: 0.4rem 0.5rem;
-  min-width: 3.5rem;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.8rem 0.5rem;
   background: var(--color-gray-900, rgba(255, 255, 255, 0.05));
-  border-radius: 6px;
+  border-radius: 10px;
   border: 1px solid var(--border-dark, rgba(255, 255, 255, 0.08));
 }
 
 .weather-hourly-time {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-muted, #aaa);
   white-space: nowrap;
 }
 
 .weather-hourly-icon {
-  font-size: 1.2rem;
-  color: var(--text-accent, var(--color-orange-vivid, #ff4500));
+  font-size: 1.8rem;
 }
 
 .weather-hourly-temp {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 700;
 }
 
 .weather-hourly-wind {
-  font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  font-size: 0.75rem;
   color: var(--text-dim, #888);
+}
+
+.weather-hourly-wind-icon {
+  font-size: 0.9rem !important;
 }
 
 /* ── Daily Forecast ─────────────────────────────────────────────────── */
 
 .weather-daily {
   display: flex;
-  gap: 0.4rem;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-gray-600, #555) transparent;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
 }
 
 .weather-daily-card {
-  flex: 0 0 auto;
+  flex: 1 1 8rem;
+  max-width: 14rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.2rem;
-  padding: 0.6rem 0.6rem;
-  min-width: 5.5rem;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.2rem 1rem;
   background: var(--color-gray-900, rgba(255, 255, 255, 0.05));
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid var(--border-dark, rgba(255, 255, 255, 0.08));
   transition: border-color 0.2s;
 }
 
 .weather-daily-card--today {
-  border-color: var(--border-accent, var(--color-orange-vivid, #ff4500));
+  border-color: #ffb300;
 }
 
 .weather-daily-day {
-  font-size: 0.75rem;
+  font-size: 1.1rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .weather-daily-date {
-  font-size: 0.6rem;
+  font-size: 0.9rem;
   color: var(--text-dim, #888);
 }
 
 .weather-daily-icon {
-  font-size: 1.6rem;
-  color: var(--text-accent, var(--color-orange-vivid, #ff4500));
-  margin: 0.15rem 0;
+  font-size: 2.5rem;
+  margin: 0.25rem 0;
 }
 
 .weather-daily-desc {
-  font-size: 0.6rem;
+  font-size: 0.85rem;
   color: var(--text-muted, #aaa);
   text-align: center;
-  line-height: 1.2;
-  max-width: 5rem;
+  line-height: 1.3;
+  max-width: 10rem;
 }
 
 .weather-daily-temps {
   display: flex;
-  gap: 0.4rem;
-  font-size: 0.85rem;
+  gap: 0.6rem;
+  font-size: 1.2rem;
   font-weight: 700;
 }
 
@@ -233,27 +249,26 @@
 .weather-daily-meta {
   display: flex;
   align-items: center;
-  gap: 0.2rem;
-  font-size: 0.6rem;
+  gap: 0.3rem;
+  font-size: 0.85rem;
   color: var(--text-muted, #aaa);
 }
 
 .weather-daily-meta-icon {
-  font-size: 0.85rem !important;
+  font-size: 1.1rem !important;
 }
 
 .weather-daily-sun {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
-  margin-top: 0.15rem;
+  gap: 0.2rem;
+  margin-top: 0.25rem;
 }
 
 .weather-daily-sun-item {
   display: flex;
   align-items: center;
-  gap: 0.15rem;
-  font-size: 0.55rem;
+  gap: 0.25rem;
+  font-size: 0.8rem;
   color: var(--text-dim, #888);
 }
-
