@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
@@ -8,7 +7,7 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
       className={`volume-manager d-flex align-items-center gap-2 gap-md-3 ${isOnFooter ? 'text-white' : 'text-white'}`}
     >
       <Button
-        classNames={`btn-square ${mute ? 'active' : ''}`}
+        classNames={`btn-icon ${mute ? 'active' : ''}`}
         onClick={onMute}
         label={mute ? 'Unmute' : 'Mute'}
       >

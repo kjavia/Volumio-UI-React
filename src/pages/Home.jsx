@@ -19,6 +19,19 @@ const WEATHER_MODE_MAP = {
   weatherFull: 'full',
 };
 
+const RefreshButton = () => (
+  <div className="position-absolute top-0 end-0 p-3" style={{ zIndex: 100 }}>
+    <button
+      className="btn btn-outline-light rounded-circle p-2 d-flex align-items-center justify-content-center"
+      onClick={() => window.location.reload()}
+      title="Reload Page"
+      style={{ width: 40, height: 40 }}
+    >
+      <span className="material-icons">refresh</span>
+    </button>
+  </div>
+);
+
 const Home = () => {
   const {
     idle,
@@ -32,13 +45,12 @@ const Home = () => {
     analogClockShowDate,
   } = useIdleScreen();
 
-  if (!idle) {
-    return <Player />;
-  }
+  let content;
 
-  // Wallpaper screen
-  if (idleScreen === 'wallpaper') {
-    return (
+  if (!idle) {
+    content = <Player />;
+  } else if (idleScreen === 'wallpaper') {
+    content = (
       <Wallpaper
         url={wallpaperUrl}
         showTime={wallpaperShowTime}
@@ -47,34 +59,41 @@ const Home = () => {
         slideshowInterval={slideshowInterval}
       />
     );
+  } else {
+    const weatherMode = WEATHER_MODE_MAP[idleScreen];
+    if (weatherMode) {
+      content = (
+        <Weather
+          mode={weatherMode}
+          showWind
+          showHumidity
+          showFeelsLike
+          showSunrise
+          showSunset
+          showPrecip
+        />
+      );
+    } else {
+      const ClockComponent = CLOCK_SCREENS[idleScreen] || AnalogClock;
+      content =
+        idleScreen === 'analogClock' ? (
+          <ClockComponent
+            showWeather={showWeatherInClock}
+            showSeconds
+            showDate={analogClockShowDate}
+          />
+        ) : (
+          <ClockComponent showWeather={showWeatherInClock} showSeconds />
+        );
+    }
   }
 
-  // Weather screens
-  const weatherMode = WEATHER_MODE_MAP[idleScreen];
-  if (weatherMode) {
-    return (
-      <Weather
-        mode={weatherMode}
-        showWind
-        showHumidity
-        showFeelsLike
-        showSunrise
-        showSunset
-        showPrecip
-      />
-    );
-  }
-
-  // Clock screens
-  const ClockComponent = CLOCK_SCREENS[idleScreen] || AnalogClock;
-
-  if (idleScreen === 'analogClock') {
-    return (
-      <ClockComponent showWeather={showWeatherInClock} showSeconds showDate={analogClockShowDate} />
-    );
-  }
-
-  return <ClockComponent showWeather={showWeatherInClock} showSeconds />;
+  return (
+    <div className="position-relative h-100">
+      <RefreshButton />
+      {content}
+    </div>
+  );
 };
 
 export default Home;

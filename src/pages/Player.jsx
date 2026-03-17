@@ -10,6 +10,7 @@ import CdCoverPlayer from '@/components/animated-players/CdCoverPlayer';
 import CassettePlayer from '@/components/animated-players/CassettePlayer';
 import ReelToReelPlayer from '@/components/animated-players/ReelToReelPlayer';
 import RadioPlayer from '@/components/animated-players/RadioPlayer';
+import GlobePlayer from '@/components/animated-players/GlobePlayer';
 import PlayerControls from '@/components/PlayerControls';
 import TrackInfo from '@/components/TrackInfo';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
@@ -28,6 +29,7 @@ const PLAYER_MAP = {
   cassette: CassettePlayer,
   reelToReel: ReelToReelPlayer,
   radio: RadioPlayer,
+  globe: GlobePlayer,
 };
 
 const RANDOM_PLAYERS = [
@@ -38,6 +40,7 @@ const RANDOM_PLAYERS = [
   CassettePlayer,
   ReelToReelPlayer,
   RadioPlayer,
+  GlobePlayer,
   AlbumArtPlayer,
 ];
 
@@ -163,18 +166,6 @@ const Player = () => {
         />
       )}
 
-      {/* Refresh Button */}
-      <div className="position-absolute top-0 end-0 p-3" style={{ zIndex: 100 }}>
-        <button
-          className="btn btn-outline-light rounded-circle p-2 d-flex align-items-center justify-content-center"
-          onClick={() => window.location.reload()}
-          title="Reload Page"
-          style={{ width: 40, height: 40 }}
-        >
-          <span className="material-icons">refresh</span>
-        </button>
-      </div>
-
       {/* Main Grid Layout */}
       <div className="home-grid position-relative" style={{ zIndex: 1 }}>
         {/* PLAYER SECTION */}
@@ -269,4 +260,3 @@ const Player = () => {
 };
 
 export default Player;
-
