@@ -47,6 +47,7 @@ const useWallpaperImages = (url) => {
     enabled: !!url,
     staleTime: 10 * 60 * 1000,
     placeholderData: [],
+    refetchInterval: 15 * 60 * 1000,
   });
 };
 
