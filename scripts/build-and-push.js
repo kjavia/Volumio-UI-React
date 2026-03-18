@@ -66,14 +66,26 @@ function copyRecursive(src, dest) {
 
 copyRecursive(uiDist, targetApp);
 
+function gitAddCommitPush(repoPath) {
+  run('git add .', repoPath);
+
+  try {
+    run(`git commit -m "${commitMessage}"`, repoPath);
+    run('git push origin HEAD', repoPath);
+  } catch (err) {
+    const msg = err.message || '';
+    if (msg.includes('nothing to commit') || msg.includes('no changes added to commit')) {
+      console.log(`No changes to commit in ${path.basename(repoPath)}; skipping commit/push.`);
+      return;
+    }
+    throw err;
+  }
+}
+
 // Git commit + push in UI repo
-run('git add .', uiRepo);
-run(`git commit -m "${commitMessage}"`, uiRepo);
-run('git push origin HEAD', uiRepo);
+gitAddCommitPush(uiRepo);
 
 // Git commit + push in plugin repo
-run('git add .', pluginRepo);
-run(`git commit -m "${commitMessage}"`, pluginRepo);
-run('git push origin HEAD', pluginRepo);
+gitAddCommitPush(pluginRepo);
 
 console.log('\nAll done!');

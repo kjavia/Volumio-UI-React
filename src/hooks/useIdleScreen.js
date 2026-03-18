@@ -12,7 +12,6 @@ import usePluginConfig from './usePluginConfig';
 const useIdleScreen = () => {
   const { status } = useVolumioStatus();
   const { data: config } = usePluginConfig();
-  console.log(config);
   const idleTimeout = config?.idleTimeout ?? 5; // minutes
   const idleScreen = config?.idleScreen ?? 'analogClock';
   const showWeatherInClock = config?.showWeatherInClock ?? true;
