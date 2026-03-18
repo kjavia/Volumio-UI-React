@@ -71,11 +71,21 @@ function gitAddCommitPush(repoPath) {
 
   try {
     run(`git commit -m "${commitMessage}"`, repoPath);
-    run('git push origin HEAD', repoPath);
   } catch (err) {
     const msg = err.message || '';
     if (msg.includes('nothing to commit') || msg.includes('no changes added to commit')) {
       console.log(`No changes to commit in ${path.basename(repoPath)}; skipping commit/push.`);
+      return;
+    }
+    throw err;
+  }
+
+  try {
+    run('git push origin HEAD', repoPath);
+  } catch (err) {
+    const msg = err.message || '';
+    if (msg.includes('Everything up-to-date') || msg.includes('already up to date')) {
+      console.log(`Repository ${path.basename(repoPath)} is already up-to-date; no push needed.`);
       return;
     }
     throw err;
