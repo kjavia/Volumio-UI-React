@@ -44,7 +44,13 @@
 
 /* Time display */
 .wallpaper-time {
-  font-family: var(--font-display, var(--font-tech, 'Michroma'), sans-serif);
+  font-family: var(
+    --font-display,
+    var(--font-tech, 'Michroma'),
+    'Roboto Mono',
+    'Courier New',
+    monospace
+  );
   font-size: clamp(3rem, 10vw, 8rem);
   font-weight: 700;
   color: rgba(255, 255, 255, 0.85);
@@ -54,6 +60,10 @@
   letter-spacing: 0.02em;
   line-height: 1;
   user-select: none;
+  font-variant-numeric: tabular-nums;
+  -moz-font-feature-settings: 'tnum';
+  -webkit-font-feature-settings: 'tnum';
+  font-feature-settings: 'tnum';
 }
 
 /* Weather badge */
@@ -87,4 +97,3 @@
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   text-transform: capitalize;
 }
-

@@ -10,8 +10,6 @@ const useVolumioStatus = () => {
   const [artist, setArtist] = useState('');
   const [album, setAlbum] = useState('');
   const [albumart, setAlbumart] = useState('');
-  const [seek, setSeek] = useState(0);
-  const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0);
   const [mute, setMute] = useState(false);
   const [random, setRandom] = useState(false);
@@ -36,8 +34,6 @@ const useVolumioStatus = () => {
       setArtist(data.artist);
       setAlbum(data.album);
       setAlbumart(data.albumart);
-      setSeek(data.seek); // Seek is in milliseconds usually
-      setDuration(data.duration);
       setVolume(data.volume);
       setMute(data.mute);
       setRandom(data.random);
@@ -69,17 +65,6 @@ const useVolumioStatus = () => {
     };
   }, [socket]);
 
-  // Update seek periodically when playing to make UI fluid
-  useEffect(() => {
-    let interval;
-    if (status === 'play') {
-      interval = setInterval(() => {
-        setSeek((prev) => prev + 1000); // Add 1 second every second
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [status]);
-
   // Action handlers
   const togglePlay = () => {
     if (status === 'play') {
@@ -93,7 +78,6 @@ const useVolumioStatus = () => {
   const prev = () => socket.emit('prev');
   const toggleRandom = () => socket.emit('setRandom', { value: !random });
   const toggleRepeat = () => socket.emit('setRepeat', { value: !repeat });
-  const stop = () => socket.emit('stop');
 
   const setVol = (val) => {
     setVolume(val);
@@ -104,13 +88,6 @@ const useVolumioStatus = () => {
     const newMute = !mute;
     setMute(newMute);
     socket.emit(newMute ? 'mute' : 'unmute');
-  };
-
-  // Seek expects seconds usually for Volumio but UI might use ms.
-  // Volumio `seek` command expects seconds
-  const seekTo = (val) => {
-    socket.emit('seek', val);
-    setSeek(val * 1000); // Optimistic update
   };
 
   const removeFromQueue = (index) => {
@@ -143,8 +120,6 @@ const useVolumioStatus = () => {
     artist,
     album,
     albumart,
-    seek,
-    duration,
     volume,
     mute,
     random,
@@ -161,12 +136,10 @@ const useVolumioStatus = () => {
     togglePlay,
     next,
     prev,
-    stop,
     setVolume: setVol,
     toggleMute,
     toggleRandom,
     toggleRepeat,
-    seekTo,
     removeFromQueue,
     playFromQueue,
     isFavourite,

@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
+import { useSeek } from '@/contexts/SeekContext';
 import './cassette-player.scss';
 
 // Reel sizing: supply reel (left) shrinks, take-up reel (right) grows as tape plays
 const MIN_REEL = 20; // % at end
 const MAX_REEL = 38; // % at start
 
-const CassettePlayer = ({ isPlaying, seek = 0, duration = 0 }) => {
+const CassettePlayer = ({ isPlaying, albumArt }) => {
+  const { seek, duration } = useSeek();
   const progress = duration > 0 ? Math.min(seek / (duration * 1000), 1) : 0;
   const supplySize = MAX_REEL - (MAX_REEL - MIN_REEL) * progress; // L: shrinks
   const takeupSize = MIN_REEL + (MAX_REEL - MIN_REEL) * progress; // R: grows
@@ -88,8 +90,7 @@ const CassettePlayer = ({ isPlaying, seek = 0, duration = 0 }) => {
 
 CassettePlayer.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  seek: PropTypes.number,
-  duration: PropTypes.number,
+  albumArt: PropTypes.string,
 };
 
 export default CassettePlayer;

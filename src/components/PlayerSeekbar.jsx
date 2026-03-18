@@ -1,12 +1,13 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
-import { DateTime, Duration } from 'luxon';
+import { Duration } from 'luxon';
+import { useSeek } from '@/contexts/SeekContext';
 
-const PlayerSeekbar = ({ seek, duration, onSeek }) => {
+const PlayerSeekbar = () => {
   const seekRef = useRef(null);
+  const { seek, duration, seekTo } = useSeek();
 
   const handleSeek = (e) => {
-    onSeek(Number(e.target.value));
+    seekTo(Number(e.target.value));
   };
 
   const formatTime = (seconds) => {
@@ -48,12 +49,6 @@ const PlayerSeekbar = ({ seek, duration, onSeek }) => {
       </span>
     </div>
   );
-};
-
-PlayerSeekbar.propTypes = {
-  seek: PropTypes.number.isRequired,
-  duration: PropTypes.number.isRequired,
-  onSeek: PropTypes.func.isRequired,
 };
 
 export default PlayerSeekbar;

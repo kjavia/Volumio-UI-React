@@ -2,6 +2,7 @@ import { useMemo, useState, useRef, useEffect } from 'react';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
+import { SeekProvider } from '@/contexts/SeekContext';
 import AlbumArtPlayer from '@/components/animated-players/AlbumArtPlayer';
 import VinylPlayer from '@/components/animated-players/VinylPlayer';
 import VinylCoverPlayer from '@/components/animated-players/VinylCoverPlayer';
@@ -79,14 +80,11 @@ const Player = () => {
     artist,
     album,
     albumart,
-    seek,
-    duration,
     volume,
     mute,
     togglePlay,
     next,
     prev,
-    seekTo,
     setVolume,
     toggleMute,
     random,
@@ -178,111 +176,108 @@ const Player = () => {
   }
 
   return (
-    <div className="container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100">
-      {/* Background Blur */}
-      {fullAlbumArt && (
-        <div
-          className="position-absolute top-0 start-0 w-100 h-100"
-          style={{
-            backgroundImage: `url(${fullAlbumArt})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'blur(80px) brightness(0.3)',
-            zIndex: 0,
-          }}
-        />
-      )}
-
-      {/* Main Grid Layout */}
-      <div className="home-grid position-relative" style={{ zIndex: 1 }}>
-        {/* PLAYER SECTION */}
-        <div className="home-panel area-player">
+    <SeekProvider>
+      <div className="container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100">
+        {/* Background Blur */}
+        {fullAlbumArt && (
           <div
-            className="player-responsive"
-            onDoubleClick={cyclePlayer}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-            onMouseDown={handleTouchStart}
-            onMouseUp={handleTouchEnd}
-            onMouseLeave={handleTouchEnd}
-          >
-            <CurrentPlayerComponent
-              isPlaying={isPlaying}
-              albumArt={fullAlbumArt}
-              seek={seek}
-              duration={duration}
-            />
-          </div>
-        </div>
+            className="position-absolute top-0 start-0 w-100 h-100"
+            style={{
+              backgroundImage: `url(${fullAlbumArt})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              filter: 'blur(80px) brightness(0.3)',
+              zIndex: 0,
+            }}
+          />
+        )}
 
-        {/* CONTROLS SECTION */}
-        <div className="home-panel area-controls text-white">
-          <div
-            className="d-flex flex-column align-items-center justify-content-center w-100 h-100"
-            style={{ maxWidth: '450px' }}
-          >
-            <TrackInfo title={title} artist={artist} album={album} />
-
-            <StreamInfo
-              trackType={trackType}
-              samplerate={samplerate}
-              bitdepth={bitdepth}
-              bitrate={bitrate}
-              service={service}
-            />
-
-            <div className="w-100 my-1 my-md-3 my-lg-4">
-              <PlayerSeekbar seek={seek} duration={duration} onSeek={seekTo} />
+        {/* Main Grid Layout */}
+        <div className="home-grid position-relative" style={{ zIndex: 1 }}>
+          {/* PLAYER SECTION */}
+          <div className="home-panel area-player">
+            <div
+              className="player-responsive"
+              onDoubleClick={cyclePlayer}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onMouseDown={handleTouchStart}
+              onMouseUp={handleTouchEnd}
+              onMouseLeave={handleTouchEnd}
+            >
+              <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
             </div>
+          </div>
 
-            <PlayerControls
-              isPlaying={isPlaying}
-              onPlayPause={togglePlay}
-              onNext={next}
-              onPrev={prev}
-              shuffle={random}
-              repeat={repeat}
-              onShuffle={toggleRandom}
-              onRepeat={toggleRepeat}
-              onAddToPlaylist={() => {
-                /* TODO: implement add to playlist */
-              }}
-              onShowPlaylist={() => setShowPlaylist(true)}
-              isFavourite={isFavourite}
-              onToggleFavourite={toggleFavourite}
-            />
+          {/* CONTROLS SECTION */}
+          <div className="home-panel area-controls text-white">
+            <div
+              className="d-flex flex-column align-items-center justify-content-center w-100 h-100"
+              style={{ maxWidth: '450px' }}
+            >
+              <TrackInfo title={title} artist={artist} album={album} />
 
-            {!disableVolumeControl && (
-              <div className="mt-1 mt-md-3 mt-lg-5 w-100 px-2 px-lg-4">
-                <VolumeManager
-                  volume={volume}
-                  mute={mute}
-                  onVolumeChange={setVolume}
-                  onMute={toggleMute}
-                />
+              <StreamInfo
+                trackType={trackType}
+                samplerate={samplerate}
+                bitdepth={bitdepth}
+                bitrate={bitrate}
+                service={service}
+              />
+
+              <div className="w-100 my-1 my-md-3 my-lg-4">
+                <PlayerSeekbar />
               </div>
-            )}
+
+              <PlayerControls
+                isPlaying={isPlaying}
+                onPlayPause={togglePlay}
+                onNext={next}
+                onPrev={prev}
+                shuffle={random}
+                repeat={repeat}
+                onShuffle={toggleRandom}
+                onRepeat={toggleRepeat}
+                onAddToPlaylist={() => {
+                  /* TODO: implement add to playlist */
+                }}
+                onShowPlaylist={() => setShowPlaylist(true)}
+                isFavourite={isFavourite}
+                onToggleFavourite={toggleFavourite}
+              />
+
+              {!disableVolumeControl && (
+                <div className="mt-1 mt-md-3 mt-lg-5 w-100 px-2 px-lg-4">
+                  <VolumeManager
+                    volume={volume}
+                    mute={mute}
+                    onVolumeChange={setVolume}
+                    onMute={toggleMute}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* VISUALIZATION SECTION */}
+          <div className="spectrum-panel area-spectrum">
+            <SpectrumAnalyzer streamUrl={SPECTRUM_STREAM_URL} />
           </div>
         </div>
 
-        {/* VISUALIZATION SECTION */}
-        <div className="spectrum-panel area-spectrum">
-          <SpectrumAnalyzer streamUrl={SPECTRUM_STREAM_URL} />
-        </div>
+        {/* Playlist Slide Panel */}
+        <Playlist
+          open={showPlaylist}
+          onClose={() => setShowPlaylist(false)}
+          queue={queue}
+          currentPosition={position}
+          isPlaying={isPlaying}
+          onPlay={playFromQueue}
+          onRemove={removeFromQueue}
+          host={VOLUMIO_BASE_URL}
+        />
       </div>
-
-      {/* Playlist Slide Panel */}
-      <Playlist
-        open={showPlaylist}
-        onClose={() => setShowPlaylist(false)}
-        queue={queue}
-        currentPosition={position}
-        isPlaying={isPlaying}
-        onPlay={playFromQueue}
-        onRemove={removeFromQueue}
-        host={VOLUMIO_BASE_URL}
-      />
-    </div>
+    </SeekProvider>
   );
 };
 
