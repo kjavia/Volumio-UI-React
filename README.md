@@ -129,3 +129,7 @@ The globe visualization uses [cobe](https://github.com/shuding/cobe), a lightwei
 ## Weather API
 
 [https://open-meteo.com](Open Mateo)
+
+## Spectrum Analyzer
+
+[https://audiomotion.dev/](Audio Motion)

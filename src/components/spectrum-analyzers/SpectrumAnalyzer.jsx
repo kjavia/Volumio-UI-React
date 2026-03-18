@@ -14,6 +14,7 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2 }) =>
   const analyzerRef = useRef(null);
   const touchTimer = useRef(null);
   const [enabled, setEnabled] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   // Initialize mode from prop (renamed to initialMode to clarify it's internal state now)
   const [currentMode, setCurrentMode] = useState(initialMode);
 
@@ -89,7 +90,10 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2 }) =>
           gradient,
           mode: currentMode, // use state value
           frequencyScale: 'log',
-          showScaleX: false,
+          outlineBars: true,
+          ledBars: true,
+          ansiBands: true,
+          showScaleX: true,
           showBgColor: true,
           bgAlpha: 1,
           smoothing: 0.8,
@@ -106,6 +110,35 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2 }) =>
     audio.play().catch(() => {});
     setEnabled(true);
   };
+
+  const toggleFullscreen = async () => {
+    const container = containerRef.current?.parentElement;
+    if (!container) return;
+
+    try {
+      if (!document.fullscreenElement) {
+        await container.requestFullscreen();
+        setIsFullscreen(true);
+      } else {
+        await document.exitFullscreen();
+        setIsFullscreen(false);
+      }
+    } catch (err) {
+      console.warn('Fullscreen toggle failed:', err);
+    }
+  };
+
+  // Listen for fullscreen changes (e.g., user presses ESC)
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
 
   return (
     <div
@@ -137,6 +170,46 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2 }) =>
       onMouseLeave={handleTouchEnd}
     >
       <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
+
+      {enabled && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleFullscreen();
+          }}
+          style={{
+            position: 'absolute',
+            top: '12px',
+            right: '12px',
+            width: '40px',
+            height: '40px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(0, 0, 0, 0.6)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: '8px',
+            color: 'rgba(255, 255, 255, 0.8)',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            backdropFilter: 'blur(4px)',
+            zIndex: 10,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(0, 0, 0, 0.8)';
+            e.currentTarget.style.color = 'rgba(255, 255, 255, 1)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(0, 0, 0, 0.6)';
+            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
+          }}
+          aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+        >
+          <span className="material-icons" style={{ fontSize: '20px' }}>
+            {isFullscreen ? 'fullscreen_exit' : 'fullscreen'}
+          </span>
+        </button>
+      )}
 
       {!enabled && (
         <div
