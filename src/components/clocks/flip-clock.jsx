@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 import PropTypes from 'prop-types';
 import useWeather from '@/hooks/useWeather';
 import './flip-clock.scss';
@@ -47,15 +47,27 @@ const FlipDigit = ({ digit }) => {
   );
 };
 
+FlipDigit.propTypes = {
+  digit: PropTypes.string.isRequired,
+};
+
+const MemoizedFlipDigit = memo(FlipDigit);
+
 const FlipPanel = ({ value }) => {
   const str = String(value).padStart(2, '0');
   return (
     <div className="flip-panel">
-      <FlipDigit digit={str[0]} />
-      <FlipDigit digit={str[1]} />
+      <MemoizedFlipDigit digit={str[0]} />
+      <MemoizedFlipDigit digit={str[1]} />
     </div>
   );
 };
+
+FlipPanel.propTypes = {
+  value: PropTypes.number.isRequired,
+};
+
+const MemoizedFlipPanel = memo(FlipPanel);
 
 const FlipClock = ({ showSeconds = true, showWeather = false }) => {
   const { data: weather } = useWeather();
@@ -94,13 +106,13 @@ const FlipClock = ({ showSeconds = true, showWeather = false }) => {
     <div className="flip-clock">
       {/* Clock body */}
       <div className="flip-clock-body">
-        <FlipPanel value={hours} />
+        <MemoizedFlipPanel value={hours} />
         <span className="flip-colon">:</span>
-        <FlipPanel value={minutes} />
+        <MemoizedFlipPanel value={minutes} />
         {showSeconds && (
           <>
             <span className="flip-colon">:</span>
-            <FlipPanel value={seconds} />
+            <MemoizedFlipPanel value={seconds} />
           </>
         )}
         <span className="flip-ampm">{ampm}</span>
