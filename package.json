@@ -10,7 +10,8 @@
     "build:themes": "sass --load-path=node_modules design-system/themes/metallic/index.scss:src/styles/themes/metallic.css design-system/themes/skeuomorphic/index.scss:src/styles/themes/skeuomorphic.css design-system/themes/aqua/index.scss:src/styles/themes/aqua.css",
     "build:themes:watch": "sass --load-path=node_modules --watch design-system/themes/metallic/index.scss:src/styles/themes/metallic.css design-system/themes/skeuomorphic/index.scss:src/styles/themes/skeuomorphic.css design-system/themes/aqua/index.scss:src/styles/themes/aqua.css",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build-and-push": "node scripts/build-and-push.js"
   },
   "engines": {
     "node": "=24",
