@@ -26,7 +26,7 @@ if (!fs.existsSync(pluginRepo)) {
 }
 
 const lastCommit = execSync('git log -1 --pretty=%B', { cwd: uiRepo }).toString().trim();
-const commitMessage = `${lastCommit} build`;
+const commitMessage = `Building Pluging for - ${lastCommit}`;
 
 console.log(`\nCommit message: ${commitMessage}`);
 
@@ -73,7 +73,7 @@ function gitAddCommitPush(repoPath) {
     run(`git commit -m "${commitMessage}"`, repoPath);
   } catch (err) {
     const msg = err.message || '';
-    console.log(msg);
+    console.log("XXXXXXXX", msg);
     if (msg.includes('nothing to commit') || msg.includes('no changes added to commit')) {
       console.log(`No changes to commit in ${path.basename(repoPath)}; skipping commit/push.`);
       return;
@@ -85,7 +85,7 @@ function gitAddCommitPush(repoPath) {
     run('git push origin HEAD', repoPath);
   } catch (err) {
     const msg = err.message || '';
-    console.log(msg);
+    console.log("YYYYYYYYY", msg);
     if (msg.includes('Everything up-to-date') || msg.includes('already up to date')) {
       console.log(`Repository ${path.basename(repoPath)} is already up-to-date; no push needed.`);
       return;
