@@ -73,6 +73,7 @@ function gitAddCommitPush(repoPath) {
     run(`git commit -m "${commitMessage}"`, repoPath);
   } catch (err) {
     const msg = err.message || '';
+    console.log(msg);
     if (msg.includes('nothing to commit') || msg.includes('no changes added to commit')) {
       console.log(`No changes to commit in ${path.basename(repoPath)}; skipping commit/push.`);
       return;
@@ -84,6 +85,7 @@ function gitAddCommitPush(repoPath) {
     run('git push origin HEAD', repoPath);
   } catch (err) {
     const msg = err.message || '';
+    console.log(msg);
     if (msg.includes('Everything up-to-date') || msg.includes('already up to date')) {
       console.log(`Repository ${path.basename(repoPath)} is already up-to-date; no push needed.`);
       return;
@@ -92,10 +94,10 @@ function gitAddCommitPush(repoPath) {
   }
 }
 
-// Git commit + push in UI repo
-gitAddCommitPush(uiRepo);
-
 // Git commit + push in plugin repo
 gitAddCommitPush(pluginRepo);
+
+// Git commit + push in UI repo
+gitAddCommitPush(uiRepo, true);
 
 console.log('\nAll done!');
