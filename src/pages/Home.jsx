@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import FlipClock from '@/components/clocks/flip-clock';
 import DigitalClock from '@/components/clocks/digital-clock';
 import AnalogClock from '@/components/clocks/analog-clock';
@@ -5,6 +6,7 @@ import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
 import Player from './Player';
 import useIdleScreen from '@/hooks/useIdleScreen';
+import usePluginConfig from '@/hooks/usePluginConfig';
 
 const CLOCK_SCREENS = {
   analogClock: AnalogClock,
@@ -33,6 +35,8 @@ const RefreshButton = () => (
 );
 
 const Home = () => {
+  const containerRef = useRef(null);
+  const { data: pluginConfig } = usePluginConfig();
   const {
     idle,
     idleScreen,
@@ -44,6 +48,25 @@ const Home = () => {
     slideshowInterval,
     analogClockShowDate,
   } = useIdleScreen();
+
+  // Handle auto-fullscreen on mount if enabled
+  useEffect(() => {
+    if (pluginConfig?.startInFullscreen && containerRef.current) {
+      const enterFullscreen = async () => {
+        try {
+          if (!document.fullscreenElement) {
+            await containerRef.current.requestFullscreen();
+          }
+        } catch (err) {
+          console.warn('Auto-fullscreen failed:', err);
+        }
+      };
+
+      // Small delay to ensure DOM is ready
+      const timeoutId = setTimeout(enterFullscreen, 100);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [pluginConfig?.startInFullscreen]);
 
   let content;
 
@@ -89,7 +112,7 @@ const Home = () => {
   }
 
   return (
-    <div className="position-relative h-100">
+    <div ref={containerRef} className="position-relative h-100">
       {/* <RefreshButton /> */}
       {content}
     </div>
