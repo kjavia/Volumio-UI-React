@@ -3145,6 +3145,266 @@ h2 {
   font-size: 0.9rem;
 }
 
+:root {
+  /* --- Base Palette --- */
+  /* Neutrals */
+  --color-black: #000000;
+  --color-gray-950: #050505;
+  --color-gray-900: #111111;
+  --color-gray-850: #1a1a1a;
+  --color-gray-800: #222222;
+  --color-gray-750: #2a2a2a;
+  --color-gray-700: #333333;
+  --color-gray-600: #444444;
+  --color-gray-550: #4d4d4d;
+  --color-gray-500: #555555;
+  --color-gray-400: #666666;
+  --color-gray-300: #888888;
+  --color-gray-250: #999999;
+  --color-gray-200: #aaaaaa;
+  --color-gray-150: #bbbbbb;
+  --color-gray-100: #cccccc;
+  --color-gray-075: #d0d0d0;
+  --color-gray-050: #e0e0e0;
+  --color-gray-025: #f0f0f0;
+  --color-gray-010: #f5f5f5;
+  --color-white: #ffffff;
+  /* Accents (Orange/Red) */
+  --color-orange-vivid: #ff4500;
+  /* Main Accent */
+  --color-orange-light: #ff7043;
+  --color-orange-dark: #d84315;
+  --color-orange-deep: #bf360c;
+  --color-red-vivid: #ff3333;
+  --color-red-deep: #b71c1c;
+  --color-red-dark: #552222;
+  /* --- Semantic Variables (Mapping to Palette) --- */
+  /* Global */
+  --bg-color: var(--color-gray-050);
+  /* #e0e0e0 */
+  --device-surface: #bcbcbc;
+  /* Keeping original hex to match exactly */
+  /* Text */
+  --text-dark: var(--color-gray-800);
+  --text-light: var(--color-gray-025);
+  --text-muted: var(--color-gray-400);
+  /* #666 */
+  --text-dim: var(--color-gray-500);
+  /* #555 */
+  --text-orange: var(--color-orange-vivid);
+  /* Buttons */
+  --btn-bg-dark: #202020;
+  --btn-bg-light: #e6e6e6;
+  --btn-bg-orange: var(--color-orange-vivid);
+  /* UI Components */
+  --panel-bg-dark: var(--color-gray-850);
+  /* #1a1a1a */
+  --list-item-bg: #252525;
+  --list-item-bg-hover: var(--color-gray-750);
+  /* Functional */
+  --led-red-on: var(--color-red-vivid);
+  --led-red-off: var(--color-red-dark);
+  --border-dark: var(--color-gray-900);
+  --border-light: var(--color-gray-300);
+  /* Gradients */
+  --grad-orange-vivid: linear-gradient(
+      90deg,
+      var(--color-orange-light),
+      var(--color-orange-dark)
+  );
+  --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
+  /* Button Specific Gradients & Colors */
+  --btn-black-top: var(--color-gray-700);
+  --btn-black-btm: var(--color-gray-800);
+  --btn-white-top: #eaeaea;
+  --btn-white-btm: #cdcdcd;
+  --btn-orange-top: #ff6622;
+  --btn-orange-btm: #e64a19;
+  /* Shadow Overlays (black with alpha) */
+  --shadow-02: rgba(0, 0, 0, 0.02);
+  --shadow-03: rgba(0, 0, 0, 0.03);
+  --shadow-05: rgba(0, 0, 0, 0.05);
+  --shadow-10: rgba(0, 0, 0, 0.1);
+  --shadow-15: rgba(0, 0, 0, 0.15);
+  --shadow-20: rgba(0, 0, 0, 0.2);
+  --shadow-30: rgba(0, 0, 0, 0.3);
+  --shadow-40: rgba(0, 0, 0, 0.4);
+  --shadow-50: rgba(0, 0, 0, 0.5);
+  --shadow-60: rgba(0, 0, 0, 0.6);
+  --shadow-80: rgba(0, 0, 0, 0.8);
+  --shadow-90: rgba(0, 0, 0, 0.9);
+  /* Highlight Overlays (white with alpha) */
+  --highlight-03: rgba(255, 255, 255, 0.03);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
+  --highlight-60: rgba(255, 255, 255, 0.6);
+  /* Glow Colors */
+  --glow-orange-40: rgba(255, 69, 0, 0.4);
+  /* Fonts */
+  --font-body: 'Roboto', sans-serif;
+  --font-label: 'Roboto', sans-serif;
+  --font-tech: 'Michroma', sans-serif;
+  --font-display: 'Michroma', sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
+  /* Type Scale */
+  --text-xs: 0.625rem;
+  /* 10px */
+  --text-sm: 0.75rem;
+  /* 12px */
+  --text-base: 0.875rem;
+  /* 14px */
+  --text-md: 1rem;
+  /* 16px */
+  --text-lg: 1.125rem;
+  /* 18px */
+  --text-xl: 1.25rem;
+  /* 20px */
+  --text-2xl: 1.5rem;
+  /* 24px */
+  --text-3xl: 2rem;
+  /* 32px */
+  --text-4xl: 2.5rem;
+  /* 40px */
+  /* Line Heights */
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  /* Letter Spacing */
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.15em;
+}
+
+.context-menu-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.context-menu-toggle {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-gray-500);
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 3px 3px 8px var(--shadow-30), -1px -1px 6px var(--highlight-30), inset 1px 1px 0 var(--highlight-20);
+  background-image: linear-gradient(var(--highlight-05), var(--shadow-05));
+}
+.context-menu-toggle .material-icons {
+  color: var(--text-light);
+  font-size: 20px;
+  filter: drop-shadow(0 1px 1px var(--shadow-30));
+}
+.context-menu-toggle:hover {
+  background-color: var(--color-gray-400);
+  box-shadow: 4px 4px 10px var(--shadow-40), -2px -2px 8px var(--highlight-40), inset 1px 1px 0 var(--highlight-30);
+  transform: translateY(-1px);
+}
+.context-menu-toggle:active {
+  transform: translateY(0);
+  box-shadow: 2px 2px 6px var(--shadow-30), -1px -1px 4px var(--highlight-20), inset 2px 2px 4px var(--shadow-20);
+}
+
+.context-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background-color: transparent;
+}
+
+.context-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background-color: var(--color-gray-500);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 101;
+  box-shadow: 6px 6px 16px var(--shadow-40), -2px -2px 10px var(--highlight-15), inset 1px 1px 0 var(--highlight-10);
+  background-image: linear-gradient(var(--highlight-03), var(--shadow-03)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.03' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'/%3E%3C/svg%3E");
+  animation: contextMenuSlideIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top right;
+}
+
+@keyframes contextMenuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.context-menu-item {
+  padding: 12px 20px;
+  color: var(--text-light);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-label);
+}
+.context-menu-item .material-icons {
+  font-size: 18px;
+  color: var(--text-muted);
+  width: 20px;
+  text-align: center;
+  transition: all 0.15s ease;
+}
+.context-menu-item:hover {
+  background-color: var(--highlight-10);
+  color: var(--color-white);
+  border-left-color: var(--text-orange);
+}
+.context-menu-item:hover .material-icons {
+  color: var(--text-orange);
+}
+.context-menu-item:active {
+  background-color: var(--shadow-15);
+  box-shadow: inset 1px 1px 3px var(--shadow-20);
+}
+.context-menu-item:not(:last-child) {
+  border-bottom: 1px solid var(--highlight-05);
+  box-shadow: 0 1px 0 var(--shadow-10);
+}
+
+.context-menu-separator {
+  height: 1px;
+  background-color: var(--highlight-10);
+  margin: 4px 0;
+  border-bottom: 1px solid var(--shadow-20);
+}
+
 body {
   background-color: var(--bg-color);
 }

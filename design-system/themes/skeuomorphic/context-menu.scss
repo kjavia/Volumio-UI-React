@@ -1,0 +1,162 @@
+@use './variables.scss';
+
+// ─── Context Menu Component ───────────────────────────────────────────────────
+// Industrial/Metallic design for dropdown menu controls
+
+.context-menu-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.context-menu-toggle {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-gray-500);
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  // Metallic embossed effect
+  box-shadow:
+    3px 3px 8px var(--shadow-30),
+    -1px -1px 6px var(--highlight-30),
+    inset 1px 1px 0 var(--highlight-20);
+
+  // Subtle texture
+  background-image:
+    linear-gradient(var(--highlight-05), var(--shadow-05));
+
+  .material-icons {
+    color: var(--text-light);
+    font-size: 20px;
+    filter: drop-shadow(0 1px 1px var(--shadow-30));
+  }
+
+  &:hover {
+    background-color: var(--color-gray-400);
+    box-shadow:
+      4px 4px 10px var(--shadow-40),
+      -2px -2px 8px var(--highlight-40),
+      inset 1px 1px 0 var(--highlight-30);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow:
+      2px 2px 6px var(--shadow-30),
+      -1px -1px 4px var(--highlight-20),
+      inset 2px 2px 4px var(--shadow-20);
+  }
+}
+
+.context-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background-color: transparent;
+}
+
+.context-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background-color: var(--color-gray-500);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 101;
+
+  // Industrial shadow effect
+  box-shadow:
+    6px 6px 16px var(--shadow-40),
+    -2px -2px 10px var(--highlight-15),
+    inset 1px 1px 0 var(--highlight-10);
+
+  // Subtle texture
+  background-image:
+    linear-gradient(var(--highlight-03), var(--shadow-03)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.03' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'/%3E%3C/svg%3E");
+
+  // Slide down animation
+  animation: contextMenuSlideIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top right;
+}
+
+@keyframes contextMenuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.context-menu-item {
+  padding: 12px 20px;
+  color: var(--text-light);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-label);
+
+  .material-icons {
+    font-size: 18px;
+    color: var(--text-muted);
+    width: 20px;
+    text-align: center;
+    transition: all 0.15s ease;
+  }
+
+  &:hover {
+    background-color: var(--highlight-10);
+    color: var(--color-white);
+    border-left-color: var(--text-orange);
+
+    .material-icons {
+      color: var(--text-orange);
+    }
+  }
+
+  &:active {
+    background-color: var(--shadow-15);
+    box-shadow: inset 1px 1px 3px var(--shadow-20);
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--highlight-05);
+    box-shadow: 0 1px 0 var(--shadow-10);
+  }
+}
+
+// Separator between menu items (if needed)
+.context-menu-separator {
+  height: 1px;
+  background-color: var(--highlight-10);
+  margin: 4px 0;
+  border-bottom: 1px solid var(--shadow-20);
+}

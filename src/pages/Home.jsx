@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import FlipClock from '@/components/clocks/flip-clock';
 import DigitalClock from '@/components/clocks/digital-clock';
 import AnalogClock from '@/components/clocks/analog-clock';
@@ -6,7 +6,6 @@ import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
 import Player from './Player';
 import useIdleScreen from '@/hooks/useIdleScreen';
-import usePluginConfig from '@/hooks/usePluginConfig';
 
 const CLOCK_SCREENS = {
   analogClock: AnalogClock,
@@ -21,22 +20,74 @@ const WEATHER_MODE_MAP = {
   weatherFull: 'full',
 };
 
-const RefreshButton = () => (
-  <div className="position-absolute top-0 end-0 p-3" style={{ zIndex: 100 }}>
-    <button
-      className="btn btn-outline-light rounded-circle p-2 d-flex align-items-center justify-content-center"
-      onClick={() => window.location.reload()}
-      title="Reload Page"
-      style={{ width: 40, height: 40 }}
-    >
-      <span className="material-icons">refresh</span>
-    </button>
-  </div>
-);
+const ContextMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await document.body.requestFullscreen();
+        setIsFullscreen(true);
+      } else {
+        await document.exitFullscreen();
+        setIsFullscreen(false);
+      }
+    } catch (err) {
+      console.warn('Fullscreen toggle failed:', err);
+    }
+    setIsOpen(false);
+  };
+
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
+  // Listen for fullscreen changes (e.g., user presses ESC)
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+
+  return (
+    <div className="context-menu-container">
+      <button
+        className="context-menu-toggle"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-label="Menu"
+      >
+        <span className="material-icons">more_vert</span>
+      </button>
+
+      {isOpen && (
+        <>
+          <div className="context-menu-backdrop" onClick={() => setIsOpen(false)} />
+          <div className="context-menu">
+            <button className="context-menu-item" onClick={handleRefresh}>
+              <span className="material-icons">refresh</span>
+              Refresh
+            </button>
+            <button className="context-menu-item" onClick={toggleFullscreen}>
+              <span className="material-icons">
+                {isFullscreen ? 'fullscreen_exit' : 'fullscreen'}
+              </span>
+              {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
 const Home = () => {
-  const containerRef = useRef(null);
-  const { data: pluginConfig } = usePluginConfig();
   const {
     idle,
     idleScreen,
@@ -48,25 +99,6 @@ const Home = () => {
     slideshowInterval,
     analogClockShowDate,
   } = useIdleScreen();
-
-  // Handle auto-fullscreen on mount if enabled
-  useEffect(() => {
-    if (pluginConfig?.startInFullscreen && containerRef.current) {
-      const enterFullscreen = async () => {
-        try {
-          if (!document.fullscreenElement) {
-            await containerRef.current.requestFullscreen();
-          }
-        } catch (err) {
-          console.warn('Auto-fullscreen failed:', err);
-        }
-      };
-
-      // Small delay to ensure DOM is ready
-      const timeoutId = setTimeout(enterFullscreen, 100);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [pluginConfig?.startInFullscreen]);
 
   let content;
 
@@ -112,8 +144,8 @@ const Home = () => {
   }
 
   return (
-    <div ref={containerRef} className="position-relative h-100">
-      {/* <RefreshButton /> */}
+    <div className="position-relative h-100">
+      <ContextMenu />
       {content}
     </div>
   );
