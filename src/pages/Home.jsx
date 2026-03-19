@@ -90,7 +90,7 @@ const Home = () => {
 
   return (
     <div className="position-relative h-100">
-      <RefreshButton />
+      {/* <RefreshButton /> */}
       {content}
     </div>
   );
