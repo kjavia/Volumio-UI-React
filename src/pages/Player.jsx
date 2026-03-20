@@ -215,7 +215,7 @@ const Player = () => {
           {/* CONTROLS SECTION */}
           <div className="home-panel area-controls text-white">
             <div
-              className="d-flex flex-column align-items-center justify-content-center w-100 h-100"
+              className="d-flex flex-column align-items-center justify-content-center w-100 h-100 player-controls-container"
               style={{ maxWidth: '450px' }}
             >
               <TrackInfo title={title} artist={artist} album={album} />

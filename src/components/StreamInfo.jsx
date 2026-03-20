@@ -41,15 +41,16 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate, service }) => {
 
   return (
     <div
-      className="stream-info d-flex align-items-center justify-content-center gap-2 w-100 mt-1"
-      style={{ fontSize: '0.75rem', opacity: 0.6, userSelect: 'none' }}
+      className="stream-info d-flex align-items-center justify-content-center gap-2 w-100 mt-1 responsive-stream-info"
+      style={{ opacity: 0.6, userSelect: 'none' }}
     >
       {/* Format logo or text fallback */}
       {logoSrc ? (
         <img
           src={logoSrc}
           alt={trackType}
-          style={{ height: '1rem', width: 'auto', filter: 'brightness(0) invert(1)', opacity: 0.8 }}
+          className="format-logo-responsive"
+          style={{ width: 'auto', filter: 'brightness(0) invert(1)', opacity: 0.8 }}
         />
       ) : (
         trackType && (

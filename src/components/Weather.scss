@@ -1,8 +1,8 @@
 /* ── Weather Component ─────────────────────────────────────────────────── */
 
 .weather-container {
-  width: 90%;
-  height: 90%;
+  width: 90vw;
+  height: 90dvh;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -12,6 +12,7 @@
   font-family: var(--font-body, 'Roboto', sans-serif);
   color: var(--text-light, #fff);
   overflow: hidden;
+  container-type: size;
 }
 
 .weather-container--loading,
@@ -57,12 +58,12 @@
 }
 
 .weather-current-icon {
-  font-size: clamp(2rem, 6cqi, 4rem);
+  font-size: clamp(3rem, 18cqh, 12rem);
 }
 
 .weather-current-temp {
   font-family: var(--font-display, var(--font-tech, 'Michroma'), sans-serif);
-  font-size: clamp(2.5rem, 8cqi, 5rem);
+  font-size: clamp(4rem, 28cqh, 20rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -77,9 +78,10 @@
 }
 
 .weather-current-desc {
-  font-size: clamp(0.75rem, 2.5cqi, 1.1rem);
+  font-size: clamp(1.5rem, 8cqh, 7rem);
   color: var(--text-muted, #aaa);
   text-transform: capitalize;
+  white-space: nowrap;
 }
 
 /* ── Detail rows ────────────────────────────────────────────────────── */
@@ -96,7 +98,7 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  font-size: clamp(0.65rem, 2cqi, 0.85rem);
+  font-size: clamp(0.75rem, 3cqh, 2.5rem);
 }
 
 .weather-detail-icon {
@@ -147,18 +149,18 @@
 }
 
 .weather-hourly-time {
-  font-size: 0.85rem;
+  font-size: clamp(0.7rem, 1.8cqw, 3rem);
   font-weight: 600;
   color: var(--text-muted, #aaa);
   white-space: nowrap;
 }
 
 .weather-hourly-icon {
-  font-size: 1.8rem;
+  font-size: clamp(1.5rem, 4cqw, 6rem);
 }
 
 .weather-hourly-temp {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2.2cqw, 3.5rem);
   font-weight: 700;
 }
 
@@ -166,7 +168,7 @@
   display: flex;
   align-items: center;
   gap: 0.15rem;
-  font-size: 0.75rem;
+  font-size: clamp(0.62rem, 1.4cqw, 2rem);
   color: var(--text-dim, #888);
 }
 
@@ -177,25 +179,26 @@
 /* ── Daily Forecast ─────────────────────────────────────────────────── */
 
 .weather-daily {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(6rem, 10vw, 16rem), 1fr));
+  grid-auto-rows: minmax(0, 40dvh);
   align-content: center;
-  gap: 1rem;
+  gap: clamp(0.4rem, 1vw, 1.2rem);
   width: 100%;
   height: 100%;
-  padding: 0.5rem;
+  padding: 2dvh 2vw;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .weather-daily-card {
-  flex: 1 1 8rem;
-  max-width: 14rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 1.2rem 1rem;
+  gap: 0.3dvh;
+  padding: 1dvh 0.8vw;
+  overflow: hidden;
   background: var(--color-gray-900, rgba(255, 255, 255, 0.05));
   border-radius: 10px;
   border: 1px solid var(--border-dark, rgba(255, 255, 255, 0.08));
@@ -207,34 +210,38 @@
 }
 
 .weather-daily-day {
-  font-size: 1.1rem;
+  font-size: clamp(0.7rem, 2.5dvh, 2rem);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .weather-daily-date {
-  font-size: 0.9rem;
+  font-size: clamp(0.6rem, 1.8dvh, 1.4rem);
   color: var(--text-dim, #888);
 }
 
 .weather-daily-icon {
-  font-size: 2.5rem;
-  margin: 0.25rem 0;
+  font-size: clamp(1.5rem, 8dvh, 5.5rem);
+  margin: 0.1dvh 0;
 }
 
 .weather-daily-desc {
-  font-size: 0.85rem;
+  font-size: clamp(0.6rem, 1.6dvh, 1.3rem);
   color: var(--text-muted, #aaa);
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.2;
   max-width: 10rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .weather-daily-temps {
   display: flex;
-  gap: 0.6rem;
-  font-size: 1.2rem;
+  gap: 0.4rem;
+  font-size: clamp(0.8rem, 3dvh, 2.5rem);
   font-weight: 700;
 }
 
@@ -250,7 +257,7 @@
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  font-size: 0.85rem;
+  font-size: clamp(0.6rem, 1.6dvh, 1.3rem);
   color: var(--text-muted, #aaa);
 }
 
@@ -269,7 +276,7 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  font-size: 0.8rem;
+  font-size: clamp(0.55rem, 1.4dvh, 1.1rem);
   color: var(--text-dim, #888);
 }
 
@@ -283,6 +290,7 @@
   overflow: hidden;
   font-family: var(--font-body);
   color: var(--text-light);
+  container-type: size;
 }
 
 /* ── TOP ROW: Hero + 10-Day ── */
@@ -306,14 +314,14 @@
 }
 
 .weather-full-hero-location {
-  font-size: 1.1rem;
+  font-size: clamp(0.85rem, 2.2cqw, 2rem);
   font-weight: 500;
   opacity: 0.75;
   margin-bottom: 0.5rem;
 }
 
 .weather-full-hero-temp {
-  font-size: clamp(4rem, 10vw, 7rem);
+  font-size: clamp(4rem, 12cqw, 12rem);
   font-weight: 200;
   line-height: 1;
   letter-spacing: -0.03em;
@@ -327,14 +335,14 @@
 }
 
 .weather-full-hero-desc {
-  font-size: 1.3rem;
+  font-size: clamp(0.95rem, 2.5cqw, 3rem);
   font-weight: 400;
   opacity: 0.85;
   margin-top: 0.4rem;
 }
 
 .weather-full-hero-hilow {
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 1.8cqw, 2rem);
   opacity: 0.6;
   margin-top: 0.3rem;
 }
@@ -343,7 +351,7 @@
   position: absolute;
   top: 1.5rem;
   right: 2rem;
-  font-size: clamp(6rem, 15vw, 10rem) !important;
+  font-size: clamp(6rem, 18cqw, 18rem) !important;
   opacity: 0.25;
   pointer-events: none;
   line-height: 1;
@@ -368,7 +376,7 @@
 }
 
 .weather-full-tenday-title {
-  font-size: 0.72rem;
+  font-size: clamp(0.6rem, 1.2cqw, 1.2rem);
   font-weight: 600;
   font-family: var(--font-tech);
   letter-spacing: var(--tracking-wider);
@@ -381,7 +389,7 @@
   grid-template-columns: 3.5rem 1.8rem 2.2rem 1fr 2.2rem;
   align-items: center;
   gap: 0.6rem;
-  font-size: 0.92rem;
+  font-size: clamp(0.75rem, 1.2cqw, 1.3rem);
 }
 
 .weather-full-tenday-day {
@@ -389,13 +397,13 @@
 }
 
 .weather-full-tenday-icon {
-  font-size: 1.3rem !important;
+  font-size: clamp(1rem, 1.6cqw, 2rem) !important;
 }
 
 .weather-full-tenday-lo {
   opacity: 0.45;
   text-align: right;
-  font-size: 0.88rem;
+  font-size: clamp(0.72rem, 1.6cqw, 1.5rem);
 }
 
 .weather-full-tenday-bar {
@@ -443,22 +451,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
-  min-width: 3.2rem;
+  gap: 0.25rem;
+  min-width: 2.4rem;
 }
 
 .weather-full-hourly-time {
-  font-size: 0.78rem;
+  font-size: clamp(0.6rem, 0.9cqw, 1rem);
   opacity: 0.6;
   white-space: nowrap;
 }
 
 .weather-full-hourly-icon {
-  font-size: 1.7rem !important;
+  font-size: clamp(1rem, 1.8cqw, 2.5rem) !important;
 }
 
 .weather-full-hourly-temp {
-  font-size: 0.95rem;
+  font-size: clamp(0.7rem, 1.1cqw, 1.3rem);
   font-weight: 600;
 }
 
@@ -496,7 +504,7 @@
 }
 
 .weather-full-tile-label {
-  font-size: 0.7rem;
+  font-size: clamp(0.6rem, 1.2cqw, 1.2rem);
   font-family: var(--font-tech);
   letter-spacing: var(--tracking-wider);
   font-weight: 600;
@@ -504,7 +512,7 @@
 }
 
 .weather-full-tile-value {
-  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  font-size: clamp(1.5rem, 3.5cqw, 4rem);
   font-weight: 300;
   line-height: 1.15;
 }
@@ -516,6 +524,6 @@
 }
 
 .weather-full-tile-sub {
-  font-size: 0.82rem;
+  font-size: clamp(0.7rem, 1.6cqw, 1.5rem);
   opacity: 0.6;
 }

@@ -15,9 +15,11 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100dvh;
-  max-width: 100%;
+  width: 90vw;
+  height: 90dvh;
+  max-width: none;
   margin: 0 auto;
+  container-type: size;
 }
 
 /* Outer frame — thick, sharp corners, with whitespace padding inside */
@@ -26,9 +28,9 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   flex-direction: column;
   align-items: center;
   width: fit-content;
-  padding: 1.2rem 1.6rem;
+  padding: 1.5cqw 2cqw;
   background: var(--color-gray-025, #f0f0f0);
-  border: 6px solid $frame-color;
+  border: 0.4cqw solid $frame-color;
   border-radius: 0;
   box-shadow: 0 4px 16px var(--shadow-20, rgba(0, 0, 0, 0.2));
   user-select: none;
@@ -39,13 +41,13 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.2rem;
-  margin-top: 5rem;
+  gap: 1.2cqw;
+  margin-top: 2cqw;
 }
 
 .lcd-date {
   font-family: var(--font-label, 'Roboto', sans-serif);
-  font-size: 1.5rem;
+  font-size: clamp(0.8rem, 2cqw, 3rem);
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--color-gray-500, #888);
@@ -55,17 +57,17 @@ $frame-color: var(--color-gray-150, #bbbbbb);
 .lcd-weather {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4cqw;
 }
 
 .lcd-weather-icon {
-  font-size: 1.6rem;
+  font-size: clamp(1rem, 2.2cqw, 3.5rem);
   color: $seg-color;
 }
 
 .lcd-weather-temp {
   font-family: var(--font-label, 'Roboto', sans-serif);
-  font-size: 1.5rem;
+  font-size: clamp(0.8rem, 2cqw, 3rem);
   font-weight: 700;
   color: $seg-color;
   letter-spacing: 0.04em;
@@ -75,7 +77,7 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 1.2rem 1.6rem;
+  padding: 1cqw 1.5cqw;
   border-radius: 10px;
   background: $panel-bg;
   border: 1px solid $panel-border;
@@ -89,10 +91,10 @@ $frame-color: var(--color-gray-150, #bbbbbb);
 .lcd-days {
   display: flex;
   justify-content: space-between;
-  gap: 0.4rem;
-  margin-bottom: 0.6rem;
+  gap: 0.8cqw;
+  margin-bottom: 0.8cqw;
   font-family: var(--font-label, 'Roboto', sans-serif);
-  font-size: 0.8rem;
+  font-size: clamp(0.6rem, 1.2cqw, 2rem);
   font-weight: 600;
   letter-spacing: 0.05em;
   color: var(--color-gray-300, #c4c4c4);
@@ -113,23 +115,23 @@ $frame-color: var(--color-gray-150, #bbbbbb);
 .lcd-time {
   display: flex;
   align-items: flex-end;
-  gap: 0.4rem;
+  gap: 0.6cqw;
 }
 
 .lcd-digits {
   display: flex;
   align-items: center;
-  gap: 0.15rem;
+  gap: 0.2cqw;
 }
 
 .lcd-ampm {
   font-family: var(--font-label, 'Roboto', sans-serif);
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 2.5cqw, 4rem);
   font-weight: 700;
   color: $seg-color;
   letter-spacing: 0.05em;
-  padding-bottom: 0.15rem;
-  margin-left: 0.3rem;
+  padding-bottom: 0.2cqw;
+  margin-left: 0.4cqw;
 }
 
 /* ── Colon ──────────────────────────────────────────────────────────────── */
@@ -140,14 +142,14 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   align-items: center;
   justify-content: center;
   gap: 28%;
-  width: 0.5rem;
+  width: 1.5cqw;
   height: 100%;
   padding: 15% 0;
 }
 
 .lcd-colon-dot {
-  width: 0.3rem;
-  height: 0.3rem;
+  width: 0.8cqw;
+  height: 0.8cqw;
   background: $seg-color;
   border-radius: 1px;
 }
@@ -156,8 +158,8 @@ $frame-color: var(--color-gray-150, #bbbbbb);
 
 .lcd-digit {
   position: relative;
-  width: 2rem;
-  height: 3.4rem;
+  width: 11cqw;
+  height: calc(11cqw * 1.7);
 }
 
 // All segments share these basics
@@ -229,69 +231,5 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   left: 0;
 }
 
-/* ── Responsive sizing ──────────────────────────────────────────────────── */
+/* ── Responsive sizing — handled via container-query units (cqw) above ── */
 
-@media (min-width: 576px) {
-  .digital-clock {
-    padding: 1.5rem 2rem;
-  }
-
-  .lcd-days {
-    font-size: 0.9rem;
-    gap: 0.8rem;
-    margin-bottom: 0.8rem;
-  }
-
-  .lcd-digit {
-    width: 2.8rem;
-    height: 4.8rem;
-  }
-
-  .lcd-colon {
-    width: 0.7rem;
-  }
-
-  .lcd-colon-dot {
-    width: 0.3rem;
-    height: 0.3rem;
-  }
-
-  .lcd-ampm {
-    font-size: 1.15rem;
-  }
-}
-
-@media (min-width: 992px) {
-  .digital-clock-wrapper {
-    max-width: 50%;
-  }
-
-  .digital-clock {
-    padding: 1.8rem 2.5rem;
-    border-radius: 12px;
-  }
-
-  .lcd-days {
-    font-size: 1rem;
-    gap: 1.2rem;
-    margin-bottom: 1rem;
-  }
-
-  .lcd-digit {
-    width: 3.5rem;
-    height: 6rem;
-  }
-
-  .lcd-colon {
-    width: 0.9rem;
-  }
-
-  .lcd-colon-dot {
-    width: 0.35rem;
-    height: 0.35rem;
-  }
-
-  .lcd-ampm {
-    font-size: 1.3rem;
-  }
-}

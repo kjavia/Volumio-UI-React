@@ -3033,7 +3033,7 @@ h2 {
 }
 
 .track-title {
-  font-size: 32px;
+  font-size: clamp(1.25rem, 4.5vw, 2.25rem);
   font-weight: 700;
   margin-bottom: 5px;
   letter-spacing: 0.5px;
@@ -3045,7 +3045,7 @@ h2 {
 
 .artist-name,
 .album-name {
-  font-size: 14px;
+  font-size: clamp(0.8rem, 2.2vw, 1.2rem);
   color: var(--color-gray-300, #888);
   white-space: nowrap;
   overflow: hidden;
@@ -3056,6 +3056,27 @@ h2 {
 .album-name {
   font-style: italic;
   color: var(--color-gray-400, #666);
+}
+
+.responsive-title {
+  font-size: clamp(1.25rem, 4.5vw, 2.25rem);
+}
+
+.responsive-artist {
+  font-size: clamp(0.8rem, 2.2vw, 1.2rem);
+}
+
+.responsive-album {
+  font-size: clamp(0.7rem, 1.8vw, 1rem);
+}
+
+.responsive-stream-info {
+  font-size: clamp(0.62rem, 1.3vw, 0.82rem);
+}
+
+.format-logo-responsive {
+  height: clamp(0.85rem, 1.6vw, 1.4rem);
+  display: block;
 }
 
 /* Audio Format & Bitrate Info */
@@ -3069,17 +3090,15 @@ h2 {
 }
 
 .format-logo-icon {
-  height: 24px;
+  height: clamp(0.85rem, 1.6vw, 1.4rem);
   width: auto;
   display: block;
-  /* Invert colors to match theme (SVGs are black) - this makes them light gray */
-  /* filter: invert(0.6) sepia(0) saturate(0) hue-rotate(0deg) brightness(1.2); */
   opacity: 0.9;
 }
 
 .bitrate-info {
   font-family: var(--font-tech, "Michroma", sans-serif);
-  font-size: 10px;
+  font-size: clamp(0.55rem, 1vw, 0.75rem);
   color: var(--color-gray-500, #555);
   letter-spacing: 0.5px;
 }
@@ -3110,7 +3129,7 @@ h2 {
 
 .slider-track {
   flex-grow: 1;
-  height: 10px;
+  height: clamp(8px, 1.2vw, 16px);
   background-color: var(--color-gray-850, #1a1a1a);
   border-radius: 5px;
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.7), 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -3127,12 +3146,12 @@ h2 {
 }
 
 .slider-cap {
-  width: 14px;
-  height: 22px;
+  width: clamp(12px, 1.4vw, 20px);
+  height: clamp(18px, 2.2vw, 30px);
   background: var(--grad-metallic, linear-gradient(180deg, #e0e0e0, #bdbdbd));
   border-radius: 2px;
   position: absolute;
-  right: -7px;
+  right: calc(clamp(12px, 1.4vw, 20px) / -2);
   top: 50%;
   transform: translateY(-50%);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), inset 1px 1px 0 rgba(255, 255, 255, 0.8);
@@ -3141,19 +3160,19 @@ h2 {
 .slider-cap::after {
   content: "";
   position: absolute;
-  top: 6px;
+  top: 25%;
   left: 3px;
   right: 3px;
-  bottom: 6px;
+  bottom: 25%;
   border-top: 2px solid var(--color-gray-300, #888);
   border-bottom: 2px solid var(--color-gray-300, #888);
 }
 
 .time-label {
   font-family: var(--font-tech);
-  font-size: 11px;
+  font-size: clamp(0.6rem, 1.1vw, 0.85rem);
   color: var(--color-gray-500, #555);
-  min-width: 35px;
+  min-width: clamp(28px, 3.5vw, 44px);
 }
 
 /* Utiltiy Controls */
