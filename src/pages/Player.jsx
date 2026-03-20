@@ -249,7 +249,7 @@ const Player = () => {
                 />
               )}
 
-              {!disableVolumeControl && (
+              {!disableVolumeControl && showPlayerControls && (
                 <div className="mt-1 mt-md-3 mt-lg-5 w-100 px-2 px-lg-4">
                   <VolumeManager
                     volume={volume}
