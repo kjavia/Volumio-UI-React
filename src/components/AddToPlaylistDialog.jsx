@@ -11,6 +11,7 @@ const AddToPlaylistDialog = ({ open, onClose, track }) => {
   const [isCreatingNew, setIsCreatingNew] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [addingToFavorites, setAddingToFavorites] = useState(false);
 
   const { playlists, isLoading, createPlaylist, addToPlaylist, isAdding, isCreating } =
     usePlaylists();
@@ -28,6 +29,7 @@ const AddToPlaylistDialog = ({ open, onClose, track }) => {
     try {
       setError('');
       setSuccess('');
+      setAddingToFavorites(true);
 
       if (isInFavourites) {
         socket.emit('removeFromFavourites', { uri: track.uri, service: track.service });
@@ -46,11 +48,13 @@ const AddToPlaylistDialog = ({ open, onClose, track }) => {
 
       setTimeout(() => {
         refetchFavourites();
+        setAddingToFavorites(false);
         onClose();
         setSuccess('');
       }, 1500);
     } catch (err) {
       setError('Failed to update favourites');
+      setAddingToFavorites(false);
       console.error('Add to favourites error:', err);
     }
   };
@@ -104,6 +108,7 @@ const AddToPlaylistDialog = ({ open, onClose, track }) => {
     setIsCreatingNew(false);
     setError('');
     setSuccess('');
+    setAddingToFavorites(false);
     onClose();
   };
 
@@ -169,13 +174,17 @@ const AddToPlaylistDialog = ({ open, onClose, track }) => {
                   type="button"
                   className={`dialog-list-item ${isInFavourites ? 'active' : ''}`}
                   onClick={handleAddToFavorites}
-                  disabled={isAdding}
+                  disabled={addingToFavorites}
                 >
                   <span className="material-icons">
                     {isInFavourites ? 'favorite' : 'favorite_border'}
                   </span>
                   <span>
-                    {isInFavourites ? 'Remove from Favourites' : 'Add to Favourites'}
+                    {addingToFavorites
+                      ? 'Updating...'
+                      : isInFavourites
+                        ? 'Remove from Favourites'
+                        : 'Add to Favourites'}
                   </span>
                 </button>
               </div>
