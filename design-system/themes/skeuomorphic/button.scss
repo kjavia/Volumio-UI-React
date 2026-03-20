@@ -67,20 +67,104 @@
   color: var(--color-gray-600, #444);
 }
 
-.btn-orange {
+.btn-primary {
   background: linear-gradient(
     180deg,
-    var(--btn-orange-top, #ff6622) 0%,
-    var(--btn-orange-btm, #e64a19) 100%
+    var(--btn-primary-top, #ff6622) 0%,
+    var(--btn-primary-btm, #e64a19) 100%
   );
   color: var(--color-white, #fff);
-  /* or dark text? */
-  border-bottom: 2px solid var(--color-red-deep, #b71c1c);
+  border-bottom: 2px solid var(--color-danger-dark, #b71c1c);
   text-shadow: 0 1px 2px var(--shadow-30);
 }
 
-.btn-orange:active {
-  background: var(--btn-orange-btm, #e64a19);
+.btn-primary:active {
+  background: var(--btn-primary-btm, #e64a19);
+  box-shadow: inset 0 2px 5px var(--shadow-30);
+}
+
+/* Backward compatibility alias */
+.btn-orange {
+  @extend .btn-primary;
+}
+
+.btn-secondary {
+  background: linear-gradient(
+    180deg,
+    var(--btn-secondary-top, #888) 0%,
+    var(--btn-secondary-btm, #444) 100%
+  );
+  color: var(--color-white, #fff);
+  border-bottom: 2px solid var(--color-gray-900, #111);
+  text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.btn-secondary:active {
+  background: var(--btn-secondary-btm, #444);
+  box-shadow: inset 0 2px 5px var(--shadow-30);
+}
+
+.btn-success {
+  background: linear-gradient(
+    180deg,
+    var(--btn-success-top, #33b833) 0%,
+    var(--btn-success-btm, #006d00) 100%
+  );
+  color: var(--color-white, #fff);
+  border-bottom: 2px solid var(--color-success-dark, #006d00);
+  text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.btn-success:active {
+  background: var(--btn-success-btm, #006d00);
+  box-shadow: inset 0 2px 5px var(--shadow-30);
+}
+
+.btn-warning {
+  background: linear-gradient(
+    180deg,
+    var(--btn-warning-top, #ffb74d) 0%,
+    var(--btn-warning-btm, #f57c00) 100%
+  );
+  color: var(--color-white, #fff);
+  border-bottom: 2px solid var(--color-warning-dark, #f57c00);
+  text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.btn-warning:active {
+  background: var(--btn-warning-btm, #f57c00);
+  box-shadow: inset 0 2px 5px var(--shadow-30);
+}
+
+.btn-danger {
+  background: linear-gradient(
+    180deg,
+    var(--btn-danger-top, #ff6666) 0%,
+    var(--btn-danger-btm, #b71c1c) 100%
+  );
+  color: var(--color-white, #fff);
+  border-bottom: 2px solid var(--color-danger-dark, #b71c1c);
+  text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.btn-danger:active {
+  background: var(--btn-danger-btm, #b71c1c);
+  box-shadow: inset 0 2px 5px var(--shadow-30);
+}
+
+.btn-info {
+  background: linear-gradient(
+    180deg,
+    var(--btn-info-top, #64b5f6) 0%,
+    var(--btn-info-btm, #1976d2) 100%
+  );
+  color: var(--color-white, #fff);
+  border-bottom: 2px solid var(--color-info-dark, #1976d2);
+  text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.btn-info:active {
+  background: var(--btn-info-btm, #1976d2);
   box-shadow: inset 0 2px 5px var(--shadow-30);
 }
 
@@ -207,7 +291,7 @@
 
 /* Active/toggled state — highlighted accent */
 .btn-icon.active {
-  color: var(--btn-orange-top, #ff6622);
+  color: var(--btn-primary-top, #ff6622);
   transform: none;
   box-shadow: none;
 }

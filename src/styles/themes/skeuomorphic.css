@@ -1,8 +1,15 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Michroma&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap");
 :root {
-  /* --- Base Palette --- */
-  /* Neutrals */
+  /* ═══════════════════════════════════════════════════════════════════════
+     COLOR PALETTE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Orange) ────────────────────────────────────────────── */
+  --color-primary: #ff4500;
+  --color-primary-light: #ff7043;
+  --color-primary-dark: #d84315;
+  --color-primary-deep: #bf360c;
+  /* ─── Neutrals (Grays) ────────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #050505;
   --color-gray-900: #111111;
@@ -24,58 +31,117 @@
   --color-gray-025: #f0f0f0;
   --color-gray-010: #f5f5f5;
   --color-white: #ffffff;
-  /* Accents (Orange/Red) */
-  --color-orange-vivid: #ff4500;
-  /* Main Accent */
-  --color-orange-light: #ff7043;
-  --color-orange-dark: #d84315;
-  --color-orange-deep: #bf360c;
-  --color-red-vivid: #ff3333;
-  --color-red-deep: #b71c1c;
-  --color-red-dark: #552222;
-  /* --- Semantic Variables (Mapping to Palette) --- */
-  /* Global */
-  --bg-color: var(--color-gray-050);
-  /* #e0e0e0 */
-  --device-surface: #bcbcbc;
-  /* Keeping original hex to match exactly */
-  /* Text */
-  --text-dark: var(--color-gray-800);
-  --text-light: var(--color-gray-025);
-  --text-muted: var(--color-gray-400);
-  /* #666 */
-  --text-dim: var(--color-gray-500);
-  /* #555 */
-  --text-orange: var(--color-orange-vivid);
-  /* Buttons */
+  /* ─── Warm Neutrals (Browns/Taupes) ───────────────────────────────── */
+  --color-taupe-dark: #55433c;
+  --color-taupe-light: #bda69e;
+  --color-taupe-medium: #8a7166;
+  /* ─── Secondary (Neutral/Gray) ────────────────────────────────────── */
+  --color-secondary: #666666;
+  --color-secondary-light: #888888;
+  --color-secondary-dark: #444444;
+  /* ─── Success/Green ────────────────────────────────────────────────── */
+  --color-success: #00a300;
+  --color-success-dark: #006d00;
+  --color-success-light: #33b833;
+  /* ─── Warning/Amber ────────────────────────────────────────────────── */
+  --color-warning: #ff9800;
+  --color-warning-dark: #f57c00;
+  --color-warning-light: #ffb74d;
+  /* ─── Danger/Alert (Red) ──────────────────────────────────────────── */
+  --color-danger: #ff3333;
+  --color-danger-dark: #b71c1c;
+  --color-danger-light: #ff6666;
+  --color-danger-muted: #552222;
+  /* ─── Info/Blue ────────────────────────────────────────────────────── */
+  --color-info: #2196f3;
+  --color-info-dark: #1976d2;
+  --color-info-light: #64b5f6;
+  /* ═══════════════════════════════════════════════════════════════════════
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: var(--color-gray-050);
+  --text-secondary: var(--color-gray-300);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success-dark);
+  --text-warning: var(--color-warning-dark);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info-dark);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: var(--color-gray-900);
+  --panel-bg-dark: var(--color-gray-950);
+  --device-surface: var(--color-gray-100);
+  /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: #202020;
   --btn-bg-light: #e6e6e6;
-  --btn-bg-orange: var(--color-orange-vivid);
-  /* UI Components */
-  --panel-bg-dark: var(--color-gray-850);
-  /* #1a1a1a */
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(0, 163, 0, 0.12);
+  --alert-bg-warning: rgba(255, 152, 0, 0.12);
+  --alert-bg-danger: rgba(255, 51, 51, 0.12);
+  --alert-bg-info: rgba(33, 150, 243, 0.12);
+  --alert-border-success: var(--color-success);
+  --alert-border-warning: var(--color-warning);
+  --alert-border-danger: var(--color-danger);
+  --alert-border-info: var(--color-info);
+  /* ─── UI Components ────────────────────────────────────────────────── */
   --list-item-bg: #252525;
   --list-item-bg-hover: var(--color-gray-750);
-  /* Functional */
-  --led-red-on: var(--color-red-vivid);
-  --led-red-off: var(--color-red-dark);
   --border-dark: var(--color-gray-900);
   --border-light: var(--color-gray-300);
-  /* Gradients */
-  --grad-orange-vivid: linear-gradient(
+  --border-warm: var(--color-taupe-medium);
+  --border-primary: var(--color-primary);
+  --border-secondary: var(--color-secondary);
+  --border-success: var(--color-success);
+  --border-warning: var(--color-warning);
+  --border-danger: var(--color-danger);
+  --border-info: var(--color-info);
+  /* ─── Status & Indicators ──────────────────────────────────────────── */
+  --led-on: var(--color-danger);
+  --led-off: var(--color-danger-muted);
+  --indicator-success: var(--color-success);
+  --indicator-warning: var(--color-warning);
+  --indicator-danger: var(--color-danger);
+  --indicator-info: var(--color-info);
+  --indicator-error: var(--color-danger);
+  /* ─── Gradients ────────────────────────────────────────────────────── */
+  --grad-primary: linear-gradient(
       90deg,
-      var(--color-orange-light),
-      var(--color-orange-dark)
+      var(--color-primary-light),
+      var(--color-primary-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  /* Button Specific Gradients & Colors */
+  --grad-warm: linear-gradient(
+      135deg,
+      var(--color-taupe-light),
+      var(--color-taupe-dark)
+  );
+  /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
   --btn-white-top: #eaeaea;
   --btn-white-btm: #cdcdcd;
-  --btn-orange-top: #ff6622;
-  --btn-orange-btm: #e64a19;
-  /* Shadow Overlays (black with alpha) */
+  --btn-primary-top: #ff6622;
+  --btn-primary-btm: #e64a19;
+  --btn-secondary-top: var(--color-secondary-light);
+  --btn-secondary-btm: var(--color-secondary-dark);
+  --btn-success-top: var(--color-success-light);
+  --btn-success-btm: var(--color-success-dark);
+  --btn-warning-top: var(--color-warning-light);
+  --btn-warning-btm: var(--color-warning-dark);
+  --btn-danger-top: var(--color-danger-light);
+  --btn-danger-btm: var(--color-danger-dark);
+  --btn-info-top: var(--color-info-light);
+  --btn-info-btm: var(--color-info-dark);
+  /* ═══════════════════════════════════════════════════════════════════════
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -88,7 +154,7 @@
   --shadow-60: rgba(0, 0, 0, 0.6);
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
-  /* Highlight Overlays (white with alpha) */
+  /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
   --highlight-03: rgba(255, 255, 255, 0.03);
   --highlight-05: rgba(255, 255, 255, 0.05);
   --highlight-10: rgba(255, 255, 255, 0.1);
@@ -98,48 +164,83 @@
   --highlight-40: rgba(255, 255, 255, 0.4);
   --highlight-50: rgba(255, 255, 255, 0.5);
   --highlight-60: rgba(255, 255, 255, 0.6);
-  /* Glow Colors */
-  --glow-orange-40: rgba(255, 69, 0, 0.4);
-  /* Fonts */
+  /* ─── Glow Effects ─────────────────────────────────────────────────── */
+  --glow-primary: rgba(255, 69, 0, 0.4);
+  --glow-success: rgba(0, 163, 0, 0.4);
+  --glow-warning: rgba(255, 152, 0, 0.4);
+  --glow-danger: rgba(255, 51, 51, 0.4);
+  --glow-info: rgba(33, 150, 243, 0.4);
+  /* ═══════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
   --font-tech: 'Michroma', sans-serif;
   --font-display: 'Michroma', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
-  /* Type Scale */
-  --text-xs: 0.625rem;
-  /* 10px */
-  --text-sm: 0.75rem;
-  /* 12px */
-  --text-base: 0.875rem;
-  /* 14px */
-  --text-md: 1rem;
-  /* 16px */
-  --text-lg: 1.125rem;
-  /* 18px */
-  --text-xl: 1.25rem;
-  /* 20px */
-  --text-2xl: 1.5rem;
-  /* 24px */
-  --text-3xl: 2rem;
-  /* 32px */
-  --text-4xl: 2.5rem;
-  /* 40px */
-  /* Line Heights */
+  /* ─── Type Scale ───────────────────────────────────────────────────── */
+  --text-xs: 0.625rem; /* 10px */
+  --text-sm: 0.75rem; /* 12px */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+  /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
-  /* Letter Spacing */
+  /* ─── Letter Spacing ───────────────────────────────────────────────── */
   --tracking-tight: -0.025em;
   --tracking-normal: 0em;
-  --tracking-wide: 0.05em;
-  --tracking-wider: 0.1em;
-  --tracking-widest: 0.15em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Legacy Orange ────────────────────────────────────────────────── */
+  --color-orange-vivid: var(--color-primary);
+  --color-orange-light: var(--color-primary-light);
+  --color-orange-dark: var(--color-primary-dark);
+  --color-orange-deep: var(--color-primary-deep);
+  /* ─── Legacy Red/Alert ─────────────────────────────────────────────── */
+  --color-red-vivid: var(--color-danger);
+  --color-red-deep: var(--color-danger-dark);
+  --color-red-dark: var(--color-danger-muted);
+  --color-alert: var(--color-danger);
+  --color-alert-dark: var(--color-danger-dark);
+  --color-alert-muted: var(--color-danger-muted);
+  /* ─── Legacy Text ──────────────────────────────────────────────────── */
+  --text-dark: var(--text-primary);
+  --text-dim: var(--text-secondary);
+  --text-orange: var(--text-accent);
+  /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+  --btn-bg-orange: var(--btn-bg-primary);
+  --btn-orange-top: var(--btn-primary-top);
+  --btn-orange-btm: var(--btn-primary-btm);
+  /* ─── Legacy Indicators ────────────────────────────────────────────── */
+  --led-red-on: var(--led-on);
+  --led-red-off: var(--led-off);
+  /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+  --grad-orange-vivid: var(--grad-primary);
+  --glow-orange-40: var(--glow-primary);
 }
 
 :root {
-  /* --- Base Palette --- */
-  /* Neutrals */
+  /* ═══════════════════════════════════════════════════════════════════════
+     COLOR PALETTE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Orange) ────────────────────────────────────────────── */
+  --color-primary: #ff4500;
+  --color-primary-light: #ff7043;
+  --color-primary-dark: #d84315;
+  --color-primary-deep: #bf360c;
+  /* ─── Neutrals (Grays) ────────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #050505;
   --color-gray-900: #111111;
@@ -161,58 +262,117 @@
   --color-gray-025: #f0f0f0;
   --color-gray-010: #f5f5f5;
   --color-white: #ffffff;
-  /* Accents (Orange/Red) */
-  --color-orange-vivid: #ff4500;
-  /* Main Accent */
-  --color-orange-light: #ff7043;
-  --color-orange-dark: #d84315;
-  --color-orange-deep: #bf360c;
-  --color-red-vivid: #ff3333;
-  --color-red-deep: #b71c1c;
-  --color-red-dark: #552222;
-  /* --- Semantic Variables (Mapping to Palette) --- */
-  /* Global */
-  --bg-color: var(--color-gray-050);
-  /* #e0e0e0 */
-  --device-surface: #bcbcbc;
-  /* Keeping original hex to match exactly */
-  /* Text */
-  --text-dark: var(--color-gray-800);
-  --text-light: var(--color-gray-025);
-  --text-muted: var(--color-gray-400);
-  /* #666 */
-  --text-dim: var(--color-gray-500);
-  /* #555 */
-  --text-orange: var(--color-orange-vivid);
-  /* Buttons */
+  /* ─── Warm Neutrals (Browns/Taupes) ───────────────────────────────── */
+  --color-taupe-dark: #55433c;
+  --color-taupe-light: #bda69e;
+  --color-taupe-medium: #8a7166;
+  /* ─── Secondary (Neutral/Gray) ────────────────────────────────────── */
+  --color-secondary: #666666;
+  --color-secondary-light: #888888;
+  --color-secondary-dark: #444444;
+  /* ─── Success/Green ────────────────────────────────────────────────── */
+  --color-success: #00a300;
+  --color-success-dark: #006d00;
+  --color-success-light: #33b833;
+  /* ─── Warning/Amber ────────────────────────────────────────────────── */
+  --color-warning: #ff9800;
+  --color-warning-dark: #f57c00;
+  --color-warning-light: #ffb74d;
+  /* ─── Danger/Alert (Red) ──────────────────────────────────────────── */
+  --color-danger: #ff3333;
+  --color-danger-dark: #b71c1c;
+  --color-danger-light: #ff6666;
+  --color-danger-muted: #552222;
+  /* ─── Info/Blue ────────────────────────────────────────────────────── */
+  --color-info: #2196f3;
+  --color-info-dark: #1976d2;
+  --color-info-light: #64b5f6;
+  /* ═══════════════════════════════════════════════════════════════════════
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: var(--color-gray-050);
+  --text-secondary: var(--color-gray-300);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success-dark);
+  --text-warning: var(--color-warning-dark);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info-dark);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: var(--color-gray-900);
+  --panel-bg-dark: var(--color-gray-950);
+  --device-surface: var(--color-gray-100);
+  /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: #202020;
   --btn-bg-light: #e6e6e6;
-  --btn-bg-orange: var(--color-orange-vivid);
-  /* UI Components */
-  --panel-bg-dark: var(--color-gray-850);
-  /* #1a1a1a */
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(0, 163, 0, 0.12);
+  --alert-bg-warning: rgba(255, 152, 0, 0.12);
+  --alert-bg-danger: rgba(255, 51, 51, 0.12);
+  --alert-bg-info: rgba(33, 150, 243, 0.12);
+  --alert-border-success: var(--color-success);
+  --alert-border-warning: var(--color-warning);
+  --alert-border-danger: var(--color-danger);
+  --alert-border-info: var(--color-info);
+  /* ─── UI Components ────────────────────────────────────────────────── */
   --list-item-bg: #252525;
   --list-item-bg-hover: var(--color-gray-750);
-  /* Functional */
-  --led-red-on: var(--color-red-vivid);
-  --led-red-off: var(--color-red-dark);
   --border-dark: var(--color-gray-900);
   --border-light: var(--color-gray-300);
-  /* Gradients */
-  --grad-orange-vivid: linear-gradient(
+  --border-warm: var(--color-taupe-medium);
+  --border-primary: var(--color-primary);
+  --border-secondary: var(--color-secondary);
+  --border-success: var(--color-success);
+  --border-warning: var(--color-warning);
+  --border-danger: var(--color-danger);
+  --border-info: var(--color-info);
+  /* ─── Status & Indicators ──────────────────────────────────────────── */
+  --led-on: var(--color-danger);
+  --led-off: var(--color-danger-muted);
+  --indicator-success: var(--color-success);
+  --indicator-warning: var(--color-warning);
+  --indicator-danger: var(--color-danger);
+  --indicator-info: var(--color-info);
+  --indicator-error: var(--color-danger);
+  /* ─── Gradients ────────────────────────────────────────────────────── */
+  --grad-primary: linear-gradient(
       90deg,
-      var(--color-orange-light),
-      var(--color-orange-dark)
+      var(--color-primary-light),
+      var(--color-primary-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  /* Button Specific Gradients & Colors */
+  --grad-warm: linear-gradient(
+      135deg,
+      var(--color-taupe-light),
+      var(--color-taupe-dark)
+  );
+  /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
   --btn-white-top: #eaeaea;
   --btn-white-btm: #cdcdcd;
-  --btn-orange-top: #ff6622;
-  --btn-orange-btm: #e64a19;
-  /* Shadow Overlays (black with alpha) */
+  --btn-primary-top: #ff6622;
+  --btn-primary-btm: #e64a19;
+  --btn-secondary-top: var(--color-secondary-light);
+  --btn-secondary-btm: var(--color-secondary-dark);
+  --btn-success-top: var(--color-success-light);
+  --btn-success-btm: var(--color-success-dark);
+  --btn-warning-top: var(--color-warning-light);
+  --btn-warning-btm: var(--color-warning-dark);
+  --btn-danger-top: var(--color-danger-light);
+  --btn-danger-btm: var(--color-danger-dark);
+  --btn-info-top: var(--color-info-light);
+  --btn-info-btm: var(--color-info-dark);
+  /* ═══════════════════════════════════════════════════════════════════════
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -225,7 +385,7 @@
   --shadow-60: rgba(0, 0, 0, 0.6);
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
-  /* Highlight Overlays (white with alpha) */
+  /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
   --highlight-03: rgba(255, 255, 255, 0.03);
   --highlight-05: rgba(255, 255, 255, 0.05);
   --highlight-10: rgba(255, 255, 255, 0.1);
@@ -235,43 +395,71 @@
   --highlight-40: rgba(255, 255, 255, 0.4);
   --highlight-50: rgba(255, 255, 255, 0.5);
   --highlight-60: rgba(255, 255, 255, 0.6);
-  /* Glow Colors */
-  --glow-orange-40: rgba(255, 69, 0, 0.4);
-  /* Fonts */
+  /* ─── Glow Effects ─────────────────────────────────────────────────── */
+  --glow-primary: rgba(255, 69, 0, 0.4);
+  --glow-success: rgba(0, 163, 0, 0.4);
+  --glow-warning: rgba(255, 152, 0, 0.4);
+  --glow-danger: rgba(255, 51, 51, 0.4);
+  --glow-info: rgba(33, 150, 243, 0.4);
+  /* ═══════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
   --font-tech: 'Michroma', sans-serif;
   --font-display: 'Michroma', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
-  /* Type Scale */
-  --text-xs: 0.625rem;
-  /* 10px */
-  --text-sm: 0.75rem;
-  /* 12px */
-  --text-base: 0.875rem;
-  /* 14px */
-  --text-md: 1rem;
-  /* 16px */
-  --text-lg: 1.125rem;
-  /* 18px */
-  --text-xl: 1.25rem;
-  /* 20px */
-  --text-2xl: 1.5rem;
-  /* 24px */
-  --text-3xl: 2rem;
-  /* 32px */
-  --text-4xl: 2.5rem;
-  /* 40px */
-  /* Line Heights */
+  /* ─── Type Scale ───────────────────────────────────────────────────── */
+  --text-xs: 0.625rem; /* 10px */
+  --text-sm: 0.75rem; /* 12px */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+  /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
-  /* Letter Spacing */
+  /* ─── Letter Spacing ───────────────────────────────────────────────── */
   --tracking-tight: -0.025em;
   --tracking-normal: 0em;
-  --tracking-wide: 0.05em;
-  --tracking-wider: 0.1em;
-  --tracking-widest: 0.15em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Legacy Orange ────────────────────────────────────────────────── */
+  --color-orange-vivid: var(--color-primary);
+  --color-orange-light: var(--color-primary-light);
+  --color-orange-dark: var(--color-primary-dark);
+  --color-orange-deep: var(--color-primary-deep);
+  /* ─── Legacy Red/Alert ─────────────────────────────────────────────── */
+  --color-red-vivid: var(--color-danger);
+  --color-red-deep: var(--color-danger-dark);
+  --color-red-dark: var(--color-danger-muted);
+  --color-alert: var(--color-danger);
+  --color-alert-dark: var(--color-danger-dark);
+  --color-alert-muted: var(--color-danger-muted);
+  /* ─── Legacy Text ──────────────────────────────────────────────────── */
+  --text-dark: var(--text-primary);
+  --text-dim: var(--text-secondary);
+  --text-orange: var(--text-accent);
+  /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+  --btn-bg-orange: var(--btn-bg-primary);
+  --btn-orange-top: var(--btn-primary-top);
+  --btn-orange-btm: var(--btn-primary-btm);
+  /* ─── Legacy Indicators ────────────────────────────────────────────── */
+  --led-red-on: var(--led-on);
+  --led-red-off: var(--led-off);
+  /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+  --grad-orange-vivid: var(--grad-primary);
+  --glow-orange-40: var(--glow-primary);
 }
 
 body {
@@ -498,8 +686,15 @@ ol li {
 }
 
 :root {
-  /* --- Base Palette --- */
-  /* Neutrals */
+  /* ═══════════════════════════════════════════════════════════════════════
+     COLOR PALETTE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Orange) ────────────────────────────────────────────── */
+  --color-primary: #ff4500;
+  --color-primary-light: #ff7043;
+  --color-primary-dark: #d84315;
+  --color-primary-deep: #bf360c;
+  /* ─── Neutrals (Grays) ────────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #050505;
   --color-gray-900: #111111;
@@ -521,58 +716,117 @@ ol li {
   --color-gray-025: #f0f0f0;
   --color-gray-010: #f5f5f5;
   --color-white: #ffffff;
-  /* Accents (Orange/Red) */
-  --color-orange-vivid: #ff4500;
-  /* Main Accent */
-  --color-orange-light: #ff7043;
-  --color-orange-dark: #d84315;
-  --color-orange-deep: #bf360c;
-  --color-red-vivid: #ff3333;
-  --color-red-deep: #b71c1c;
-  --color-red-dark: #552222;
-  /* --- Semantic Variables (Mapping to Palette) --- */
-  /* Global */
-  --bg-color: var(--color-gray-050);
-  /* #e0e0e0 */
-  --device-surface: #bcbcbc;
-  /* Keeping original hex to match exactly */
-  /* Text */
-  --text-dark: var(--color-gray-800);
-  --text-light: var(--color-gray-025);
-  --text-muted: var(--color-gray-400);
-  /* #666 */
-  --text-dim: var(--color-gray-500);
-  /* #555 */
-  --text-orange: var(--color-orange-vivid);
-  /* Buttons */
+  /* ─── Warm Neutrals (Browns/Taupes) ───────────────────────────────── */
+  --color-taupe-dark: #55433c;
+  --color-taupe-light: #bda69e;
+  --color-taupe-medium: #8a7166;
+  /* ─── Secondary (Neutral/Gray) ────────────────────────────────────── */
+  --color-secondary: #666666;
+  --color-secondary-light: #888888;
+  --color-secondary-dark: #444444;
+  /* ─── Success/Green ────────────────────────────────────────────────── */
+  --color-success: #00a300;
+  --color-success-dark: #006d00;
+  --color-success-light: #33b833;
+  /* ─── Warning/Amber ────────────────────────────────────────────────── */
+  --color-warning: #ff9800;
+  --color-warning-dark: #f57c00;
+  --color-warning-light: #ffb74d;
+  /* ─── Danger/Alert (Red) ──────────────────────────────────────────── */
+  --color-danger: #ff3333;
+  --color-danger-dark: #b71c1c;
+  --color-danger-light: #ff6666;
+  --color-danger-muted: #552222;
+  /* ─── Info/Blue ────────────────────────────────────────────────────── */
+  --color-info: #2196f3;
+  --color-info-dark: #1976d2;
+  --color-info-light: #64b5f6;
+  /* ═══════════════════════════════════════════════════════════════════════
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: var(--color-gray-050);
+  --text-secondary: var(--color-gray-300);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success-dark);
+  --text-warning: var(--color-warning-dark);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info-dark);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: var(--color-gray-900);
+  --panel-bg-dark: var(--color-gray-950);
+  --device-surface: var(--color-gray-100);
+  /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: #202020;
   --btn-bg-light: #e6e6e6;
-  --btn-bg-orange: var(--color-orange-vivid);
-  /* UI Components */
-  --panel-bg-dark: var(--color-gray-850);
-  /* #1a1a1a */
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(0, 163, 0, 0.12);
+  --alert-bg-warning: rgba(255, 152, 0, 0.12);
+  --alert-bg-danger: rgba(255, 51, 51, 0.12);
+  --alert-bg-info: rgba(33, 150, 243, 0.12);
+  --alert-border-success: var(--color-success);
+  --alert-border-warning: var(--color-warning);
+  --alert-border-danger: var(--color-danger);
+  --alert-border-info: var(--color-info);
+  /* ─── UI Components ────────────────────────────────────────────────── */
   --list-item-bg: #252525;
   --list-item-bg-hover: var(--color-gray-750);
-  /* Functional */
-  --led-red-on: var(--color-red-vivid);
-  --led-red-off: var(--color-red-dark);
   --border-dark: var(--color-gray-900);
   --border-light: var(--color-gray-300);
-  /* Gradients */
-  --grad-orange-vivid: linear-gradient(
+  --border-warm: var(--color-taupe-medium);
+  --border-primary: var(--color-primary);
+  --border-secondary: var(--color-secondary);
+  --border-success: var(--color-success);
+  --border-warning: var(--color-warning);
+  --border-danger: var(--color-danger);
+  --border-info: var(--color-info);
+  /* ─── Status & Indicators ──────────────────────────────────────────── */
+  --led-on: var(--color-danger);
+  --led-off: var(--color-danger-muted);
+  --indicator-success: var(--color-success);
+  --indicator-warning: var(--color-warning);
+  --indicator-danger: var(--color-danger);
+  --indicator-info: var(--color-info);
+  --indicator-error: var(--color-danger);
+  /* ─── Gradients ────────────────────────────────────────────────────── */
+  --grad-primary: linear-gradient(
       90deg,
-      var(--color-orange-light),
-      var(--color-orange-dark)
+      var(--color-primary-light),
+      var(--color-primary-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  /* Button Specific Gradients & Colors */
+  --grad-warm: linear-gradient(
+      135deg,
+      var(--color-taupe-light),
+      var(--color-taupe-dark)
+  );
+  /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
   --btn-white-top: #eaeaea;
   --btn-white-btm: #cdcdcd;
-  --btn-orange-top: #ff6622;
-  --btn-orange-btm: #e64a19;
-  /* Shadow Overlays (black with alpha) */
+  --btn-primary-top: #ff6622;
+  --btn-primary-btm: #e64a19;
+  --btn-secondary-top: var(--color-secondary-light);
+  --btn-secondary-btm: var(--color-secondary-dark);
+  --btn-success-top: var(--color-success-light);
+  --btn-success-btm: var(--color-success-dark);
+  --btn-warning-top: var(--color-warning-light);
+  --btn-warning-btm: var(--color-warning-dark);
+  --btn-danger-top: var(--color-danger-light);
+  --btn-danger-btm: var(--color-danger-dark);
+  --btn-info-top: var(--color-info-light);
+  --btn-info-btm: var(--color-info-dark);
+  /* ═══════════════════════════════════════════════════════════════════════
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -585,7 +839,7 @@ ol li {
   --shadow-60: rgba(0, 0, 0, 0.6);
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
-  /* Highlight Overlays (white with alpha) */
+  /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
   --highlight-03: rgba(255, 255, 255, 0.03);
   --highlight-05: rgba(255, 255, 255, 0.05);
   --highlight-10: rgba(255, 255, 255, 0.1);
@@ -595,43 +849,71 @@ ol li {
   --highlight-40: rgba(255, 255, 255, 0.4);
   --highlight-50: rgba(255, 255, 255, 0.5);
   --highlight-60: rgba(255, 255, 255, 0.6);
-  /* Glow Colors */
-  --glow-orange-40: rgba(255, 69, 0, 0.4);
-  /* Fonts */
+  /* ─── Glow Effects ─────────────────────────────────────────────────── */
+  --glow-primary: rgba(255, 69, 0, 0.4);
+  --glow-success: rgba(0, 163, 0, 0.4);
+  --glow-warning: rgba(255, 152, 0, 0.4);
+  --glow-danger: rgba(255, 51, 51, 0.4);
+  --glow-info: rgba(33, 150, 243, 0.4);
+  /* ═══════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
   --font-tech: 'Michroma', sans-serif;
   --font-display: 'Michroma', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
-  /* Type Scale */
-  --text-xs: 0.625rem;
-  /* 10px */
-  --text-sm: 0.75rem;
-  /* 12px */
-  --text-base: 0.875rem;
-  /* 14px */
-  --text-md: 1rem;
-  /* 16px */
-  --text-lg: 1.125rem;
-  /* 18px */
-  --text-xl: 1.25rem;
-  /* 20px */
-  --text-2xl: 1.5rem;
-  /* 24px */
-  --text-3xl: 2rem;
-  /* 32px */
-  --text-4xl: 2.5rem;
-  /* 40px */
-  /* Line Heights */
+  /* ─── Type Scale ───────────────────────────────────────────────────── */
+  --text-xs: 0.625rem; /* 10px */
+  --text-sm: 0.75rem; /* 12px */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+  /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
-  /* Letter Spacing */
+  /* ─── Letter Spacing ───────────────────────────────────────────────── */
   --tracking-tight: -0.025em;
   --tracking-normal: 0em;
-  --tracking-wide: 0.05em;
-  --tracking-wider: 0.1em;
-  --tracking-widest: 0.15em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Legacy Orange ────────────────────────────────────────────────── */
+  --color-orange-vivid: var(--color-primary);
+  --color-orange-light: var(--color-primary-light);
+  --color-orange-dark: var(--color-primary-dark);
+  --color-orange-deep: var(--color-primary-deep);
+  /* ─── Legacy Red/Alert ─────────────────────────────────────────────── */
+  --color-red-vivid: var(--color-danger);
+  --color-red-deep: var(--color-danger-dark);
+  --color-red-dark: var(--color-danger-muted);
+  --color-alert: var(--color-danger);
+  --color-alert-dark: var(--color-danger-dark);
+  --color-alert-muted: var(--color-danger-muted);
+  /* ─── Legacy Text ──────────────────────────────────────────────────── */
+  --text-dark: var(--text-primary);
+  --text-dim: var(--text-secondary);
+  --text-orange: var(--text-accent);
+  /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+  --btn-bg-orange: var(--btn-bg-primary);
+  --btn-orange-top: var(--btn-primary-top);
+  --btn-orange-btm: var(--btn-primary-btm);
+  /* ─── Legacy Indicators ────────────────────────────────────────────── */
+  --led-red-on: var(--led-on);
+  --led-red-off: var(--led-off);
+  /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+  --grad-orange-vivid: var(--grad-primary);
+  --glow-orange-40: var(--glow-primary);
 }
 
 .bg-dark {
@@ -712,8 +994,15 @@ ol li {
 }
 
 :root {
-  /* --- Base Palette --- */
-  /* Neutrals */
+  /* ═══════════════════════════════════════════════════════════════════════
+     COLOR PALETTE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Orange) ────────────────────────────────────────────── */
+  --color-primary: #ff4500;
+  --color-primary-light: #ff7043;
+  --color-primary-dark: #d84315;
+  --color-primary-deep: #bf360c;
+  /* ─── Neutrals (Grays) ────────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #050505;
   --color-gray-900: #111111;
@@ -735,58 +1024,117 @@ ol li {
   --color-gray-025: #f0f0f0;
   --color-gray-010: #f5f5f5;
   --color-white: #ffffff;
-  /* Accents (Orange/Red) */
-  --color-orange-vivid: #ff4500;
-  /* Main Accent */
-  --color-orange-light: #ff7043;
-  --color-orange-dark: #d84315;
-  --color-orange-deep: #bf360c;
-  --color-red-vivid: #ff3333;
-  --color-red-deep: #b71c1c;
-  --color-red-dark: #552222;
-  /* --- Semantic Variables (Mapping to Palette) --- */
-  /* Global */
-  --bg-color: var(--color-gray-050);
-  /* #e0e0e0 */
-  --device-surface: #bcbcbc;
-  /* Keeping original hex to match exactly */
-  /* Text */
-  --text-dark: var(--color-gray-800);
-  --text-light: var(--color-gray-025);
-  --text-muted: var(--color-gray-400);
-  /* #666 */
-  --text-dim: var(--color-gray-500);
-  /* #555 */
-  --text-orange: var(--color-orange-vivid);
-  /* Buttons */
+  /* ─── Warm Neutrals (Browns/Taupes) ───────────────────────────────── */
+  --color-taupe-dark: #55433c;
+  --color-taupe-light: #bda69e;
+  --color-taupe-medium: #8a7166;
+  /* ─── Secondary (Neutral/Gray) ────────────────────────────────────── */
+  --color-secondary: #666666;
+  --color-secondary-light: #888888;
+  --color-secondary-dark: #444444;
+  /* ─── Success/Green ────────────────────────────────────────────────── */
+  --color-success: #00a300;
+  --color-success-dark: #006d00;
+  --color-success-light: #33b833;
+  /* ─── Warning/Amber ────────────────────────────────────────────────── */
+  --color-warning: #ff9800;
+  --color-warning-dark: #f57c00;
+  --color-warning-light: #ffb74d;
+  /* ─── Danger/Alert (Red) ──────────────────────────────────────────── */
+  --color-danger: #ff3333;
+  --color-danger-dark: #b71c1c;
+  --color-danger-light: #ff6666;
+  --color-danger-muted: #552222;
+  /* ─── Info/Blue ────────────────────────────────────────────────────── */
+  --color-info: #2196f3;
+  --color-info-dark: #1976d2;
+  --color-info-light: #64b5f6;
+  /* ═══════════════════════════════════════════════════════════════════════
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: var(--color-gray-050);
+  --text-secondary: var(--color-gray-300);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success-dark);
+  --text-warning: var(--color-warning-dark);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info-dark);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: var(--color-gray-900);
+  --panel-bg-dark: var(--color-gray-950);
+  --device-surface: var(--color-gray-100);
+  /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: #202020;
   --btn-bg-light: #e6e6e6;
-  --btn-bg-orange: var(--color-orange-vivid);
-  /* UI Components */
-  --panel-bg-dark: var(--color-gray-850);
-  /* #1a1a1a */
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(0, 163, 0, 0.12);
+  --alert-bg-warning: rgba(255, 152, 0, 0.12);
+  --alert-bg-danger: rgba(255, 51, 51, 0.12);
+  --alert-bg-info: rgba(33, 150, 243, 0.12);
+  --alert-border-success: var(--color-success);
+  --alert-border-warning: var(--color-warning);
+  --alert-border-danger: var(--color-danger);
+  --alert-border-info: var(--color-info);
+  /* ─── UI Components ────────────────────────────────────────────────── */
   --list-item-bg: #252525;
   --list-item-bg-hover: var(--color-gray-750);
-  /* Functional */
-  --led-red-on: var(--color-red-vivid);
-  --led-red-off: var(--color-red-dark);
   --border-dark: var(--color-gray-900);
   --border-light: var(--color-gray-300);
-  /* Gradients */
-  --grad-orange-vivid: linear-gradient(
+  --border-warm: var(--color-taupe-medium);
+  --border-primary: var(--color-primary);
+  --border-secondary: var(--color-secondary);
+  --border-success: var(--color-success);
+  --border-warning: var(--color-warning);
+  --border-danger: var(--color-danger);
+  --border-info: var(--color-info);
+  /* ─── Status & Indicators ──────────────────────────────────────────── */
+  --led-on: var(--color-danger);
+  --led-off: var(--color-danger-muted);
+  --indicator-success: var(--color-success);
+  --indicator-warning: var(--color-warning);
+  --indicator-danger: var(--color-danger);
+  --indicator-info: var(--color-info);
+  --indicator-error: var(--color-danger);
+  /* ─── Gradients ────────────────────────────────────────────────────── */
+  --grad-primary: linear-gradient(
       90deg,
-      var(--color-orange-light),
-      var(--color-orange-dark)
+      var(--color-primary-light),
+      var(--color-primary-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  /* Button Specific Gradients & Colors */
+  --grad-warm: linear-gradient(
+      135deg,
+      var(--color-taupe-light),
+      var(--color-taupe-dark)
+  );
+  /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
   --btn-white-top: #eaeaea;
   --btn-white-btm: #cdcdcd;
-  --btn-orange-top: #ff6622;
-  --btn-orange-btm: #e64a19;
-  /* Shadow Overlays (black with alpha) */
+  --btn-primary-top: #ff6622;
+  --btn-primary-btm: #e64a19;
+  --btn-secondary-top: var(--color-secondary-light);
+  --btn-secondary-btm: var(--color-secondary-dark);
+  --btn-success-top: var(--color-success-light);
+  --btn-success-btm: var(--color-success-dark);
+  --btn-warning-top: var(--color-warning-light);
+  --btn-warning-btm: var(--color-warning-dark);
+  --btn-danger-top: var(--color-danger-light);
+  --btn-danger-btm: var(--color-danger-dark);
+  --btn-info-top: var(--color-info-light);
+  --btn-info-btm: var(--color-info-dark);
+  /* ═══════════════════════════════════════════════════════════════════════
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -799,7 +1147,7 @@ ol li {
   --shadow-60: rgba(0, 0, 0, 0.6);
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
-  /* Highlight Overlays (white with alpha) */
+  /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
   --highlight-03: rgba(255, 255, 255, 0.03);
   --highlight-05: rgba(255, 255, 255, 0.05);
   --highlight-10: rgba(255, 255, 255, 0.1);
@@ -809,43 +1157,71 @@ ol li {
   --highlight-40: rgba(255, 255, 255, 0.4);
   --highlight-50: rgba(255, 255, 255, 0.5);
   --highlight-60: rgba(255, 255, 255, 0.6);
-  /* Glow Colors */
-  --glow-orange-40: rgba(255, 69, 0, 0.4);
-  /* Fonts */
+  /* ─── Glow Effects ─────────────────────────────────────────────────── */
+  --glow-primary: rgba(255, 69, 0, 0.4);
+  --glow-success: rgba(0, 163, 0, 0.4);
+  --glow-warning: rgba(255, 152, 0, 0.4);
+  --glow-danger: rgba(255, 51, 51, 0.4);
+  --glow-info: rgba(33, 150, 243, 0.4);
+  /* ═══════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
   --font-tech: 'Michroma', sans-serif;
   --font-display: 'Michroma', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
-  /* Type Scale */
-  --text-xs: 0.625rem;
-  /* 10px */
-  --text-sm: 0.75rem;
-  /* 12px */
-  --text-base: 0.875rem;
-  /* 14px */
-  --text-md: 1rem;
-  /* 16px */
-  --text-lg: 1.125rem;
-  /* 18px */
-  --text-xl: 1.25rem;
-  /* 20px */
-  --text-2xl: 1.5rem;
-  /* 24px */
-  --text-3xl: 2rem;
-  /* 32px */
-  --text-4xl: 2.5rem;
-  /* 40px */
-  /* Line Heights */
+  /* ─── Type Scale ───────────────────────────────────────────────────── */
+  --text-xs: 0.625rem; /* 10px */
+  --text-sm: 0.75rem; /* 12px */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+  /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
-  /* Letter Spacing */
+  /* ─── Letter Spacing ───────────────────────────────────────────────── */
   --tracking-tight: -0.025em;
   --tracking-normal: 0em;
-  --tracking-wide: 0.05em;
-  --tracking-wider: 0.1em;
-  --tracking-widest: 0.15em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Legacy Orange ────────────────────────────────────────────────── */
+  --color-orange-vivid: var(--color-primary);
+  --color-orange-light: var(--color-primary-light);
+  --color-orange-dark: var(--color-primary-dark);
+  --color-orange-deep: var(--color-primary-deep);
+  /* ─── Legacy Red/Alert ─────────────────────────────────────────────── */
+  --color-red-vivid: var(--color-danger);
+  --color-red-deep: var(--color-danger-dark);
+  --color-red-dark: var(--color-danger-muted);
+  --color-alert: var(--color-danger);
+  --color-alert-dark: var(--color-danger-dark);
+  --color-alert-muted: var(--color-danger-muted);
+  /* ─── Legacy Text ──────────────────────────────────────────────────── */
+  --text-dark: var(--text-primary);
+  --text-dim: var(--text-secondary);
+  --text-orange: var(--text-accent);
+  /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+  --btn-bg-orange: var(--btn-bg-primary);
+  --btn-orange-top: var(--btn-primary-top);
+  --btn-orange-btm: var(--btn-primary-btm);
+  /* ─── Legacy Indicators ────────────────────────────────────────────── */
+  --led-red-on: var(--led-on);
+  --led-red-off: var(--led-off);
+  /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+  --grad-orange-vivid: var(--grad-primary);
+  --glow-orange-40: var(--glow-primary);
 }
 
 /* Base Button Style */
@@ -898,16 +1274,76 @@ ol li {
   color: var(--color-gray-600, #444);
 }
 
-.btn-orange {
-  background: linear-gradient(180deg, var(--btn-orange-top, #ff6622) 0%, var(--btn-orange-btm, #e64a19) 100%);
+.btn-primary, .btn-orange {
+  background: linear-gradient(180deg, var(--btn-primary-top, #ff6622) 0%, var(--btn-primary-btm, #e64a19) 100%);
   color: var(--color-white, #fff);
-  /* or dark text? */
-  border-bottom: 2px solid var(--color-red-deep, #b71c1c);
+  border-bottom: 2px solid var(--color-danger-dark, #b71c1c);
   text-shadow: 0 1px 2px var(--shadow-30);
 }
 
-.btn-orange:active {
-  background: var(--btn-orange-btm, #e64a19);
+.btn-primary:active, .btn-orange:active {
+  background: var(--btn-primary-btm, #e64a19);
+  box-shadow: inset 0 2px 5px var(--shadow-30);
+}
+
+/* Backward compatibility alias */
+.btn-secondary {
+  background: linear-gradient(180deg, var(--btn-secondary-top, #888) 0%, var(--btn-secondary-btm, #444) 100%);
+  color: var(--color-white, #fff);
+  border-bottom: 2px solid var(--color-gray-900, #111);
+  text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.btn-secondary:active {
+  background: var(--btn-secondary-btm, #444);
+  box-shadow: inset 0 2px 5px var(--shadow-30);
+}
+
+.btn-success {
+  background: linear-gradient(180deg, var(--btn-success-top, #33b833) 0%, var(--btn-success-btm, #006d00) 100%);
+  color: var(--color-white, #fff);
+  border-bottom: 2px solid var(--color-success-dark, #006d00);
+  text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.btn-success:active {
+  background: var(--btn-success-btm, #006d00);
+  box-shadow: inset 0 2px 5px var(--shadow-30);
+}
+
+.btn-warning {
+  background: linear-gradient(180deg, var(--btn-warning-top, #ffb74d) 0%, var(--btn-warning-btm, #f57c00) 100%);
+  color: var(--color-white, #fff);
+  border-bottom: 2px solid var(--color-warning-dark, #f57c00);
+  text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.btn-warning:active {
+  background: var(--btn-warning-btm, #f57c00);
+  box-shadow: inset 0 2px 5px var(--shadow-30);
+}
+
+.btn-danger {
+  background: linear-gradient(180deg, var(--btn-danger-top, #ff6666) 0%, var(--btn-danger-btm, #b71c1c) 100%);
+  color: var(--color-white, #fff);
+  border-bottom: 2px solid var(--color-danger-dark, #b71c1c);
+  text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.btn-danger:active {
+  background: var(--btn-danger-btm, #b71c1c);
+  box-shadow: inset 0 2px 5px var(--shadow-30);
+}
+
+.btn-info {
+  background: linear-gradient(180deg, var(--btn-info-top, #64b5f6) 0%, var(--btn-info-btm, #1976d2) 100%);
+  color: var(--color-white, #fff);
+  border-bottom: 2px solid var(--color-info-dark, #1976d2);
+  text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.btn-info:active {
+  background: var(--btn-info-btm, #1976d2);
   box-shadow: inset 0 2px 5px var(--shadow-30);
 }
 
@@ -1024,7 +1460,7 @@ ol li {
 
 /* Active/toggled state — highlighted accent */
 .btn-icon.active {
-  color: var(--btn-orange-top, #ff6622);
+  color: var(--btn-primary-top, #ff6622);
   transform: none;
   box-shadow: none;
 }
@@ -1068,8 +1504,15 @@ ol li {
 }
 
 :root {
-  /* --- Base Palette --- */
-  /* Neutrals */
+  /* ═══════════════════════════════════════════════════════════════════════
+     COLOR PALETTE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Orange) ────────────────────────────────────────────── */
+  --color-primary: #ff4500;
+  --color-primary-light: #ff7043;
+  --color-primary-dark: #d84315;
+  --color-primary-deep: #bf360c;
+  /* ─── Neutrals (Grays) ────────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #050505;
   --color-gray-900: #111111;
@@ -1091,58 +1534,117 @@ ol li {
   --color-gray-025: #f0f0f0;
   --color-gray-010: #f5f5f5;
   --color-white: #ffffff;
-  /* Accents (Orange/Red) */
-  --color-orange-vivid: #ff4500;
-  /* Main Accent */
-  --color-orange-light: #ff7043;
-  --color-orange-dark: #d84315;
-  --color-orange-deep: #bf360c;
-  --color-red-vivid: #ff3333;
-  --color-red-deep: #b71c1c;
-  --color-red-dark: #552222;
-  /* --- Semantic Variables (Mapping to Palette) --- */
-  /* Global */
-  --bg-color: var(--color-gray-050);
-  /* #e0e0e0 */
-  --device-surface: #bcbcbc;
-  /* Keeping original hex to match exactly */
-  /* Text */
-  --text-dark: var(--color-gray-800);
-  --text-light: var(--color-gray-025);
-  --text-muted: var(--color-gray-400);
-  /* #666 */
-  --text-dim: var(--color-gray-500);
-  /* #555 */
-  --text-orange: var(--color-orange-vivid);
-  /* Buttons */
+  /* ─── Warm Neutrals (Browns/Taupes) ───────────────────────────────── */
+  --color-taupe-dark: #55433c;
+  --color-taupe-light: #bda69e;
+  --color-taupe-medium: #8a7166;
+  /* ─── Secondary (Neutral/Gray) ────────────────────────────────────── */
+  --color-secondary: #666666;
+  --color-secondary-light: #888888;
+  --color-secondary-dark: #444444;
+  /* ─── Success/Green ────────────────────────────────────────────────── */
+  --color-success: #00a300;
+  --color-success-dark: #006d00;
+  --color-success-light: #33b833;
+  /* ─── Warning/Amber ────────────────────────────────────────────────── */
+  --color-warning: #ff9800;
+  --color-warning-dark: #f57c00;
+  --color-warning-light: #ffb74d;
+  /* ─── Danger/Alert (Red) ──────────────────────────────────────────── */
+  --color-danger: #ff3333;
+  --color-danger-dark: #b71c1c;
+  --color-danger-light: #ff6666;
+  --color-danger-muted: #552222;
+  /* ─── Info/Blue ────────────────────────────────────────────────────── */
+  --color-info: #2196f3;
+  --color-info-dark: #1976d2;
+  --color-info-light: #64b5f6;
+  /* ═══════════════════════════════════════════════════════════════════════
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: var(--color-gray-050);
+  --text-secondary: var(--color-gray-300);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success-dark);
+  --text-warning: var(--color-warning-dark);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info-dark);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: var(--color-gray-900);
+  --panel-bg-dark: var(--color-gray-950);
+  --device-surface: var(--color-gray-100);
+  /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: #202020;
   --btn-bg-light: #e6e6e6;
-  --btn-bg-orange: var(--color-orange-vivid);
-  /* UI Components */
-  --panel-bg-dark: var(--color-gray-850);
-  /* #1a1a1a */
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(0, 163, 0, 0.12);
+  --alert-bg-warning: rgba(255, 152, 0, 0.12);
+  --alert-bg-danger: rgba(255, 51, 51, 0.12);
+  --alert-bg-info: rgba(33, 150, 243, 0.12);
+  --alert-border-success: var(--color-success);
+  --alert-border-warning: var(--color-warning);
+  --alert-border-danger: var(--color-danger);
+  --alert-border-info: var(--color-info);
+  /* ─── UI Components ────────────────────────────────────────────────── */
   --list-item-bg: #252525;
   --list-item-bg-hover: var(--color-gray-750);
-  /* Functional */
-  --led-red-on: var(--color-red-vivid);
-  --led-red-off: var(--color-red-dark);
   --border-dark: var(--color-gray-900);
   --border-light: var(--color-gray-300);
-  /* Gradients */
-  --grad-orange-vivid: linear-gradient(
+  --border-warm: var(--color-taupe-medium);
+  --border-primary: var(--color-primary);
+  --border-secondary: var(--color-secondary);
+  --border-success: var(--color-success);
+  --border-warning: var(--color-warning);
+  --border-danger: var(--color-danger);
+  --border-info: var(--color-info);
+  /* ─── Status & Indicators ──────────────────────────────────────────── */
+  --led-on: var(--color-danger);
+  --led-off: var(--color-danger-muted);
+  --indicator-success: var(--color-success);
+  --indicator-warning: var(--color-warning);
+  --indicator-danger: var(--color-danger);
+  --indicator-info: var(--color-info);
+  --indicator-error: var(--color-danger);
+  /* ─── Gradients ────────────────────────────────────────────────────── */
+  --grad-primary: linear-gradient(
       90deg,
-      var(--color-orange-light),
-      var(--color-orange-dark)
+      var(--color-primary-light),
+      var(--color-primary-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  /* Button Specific Gradients & Colors */
+  --grad-warm: linear-gradient(
+      135deg,
+      var(--color-taupe-light),
+      var(--color-taupe-dark)
+  );
+  /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
   --btn-white-top: #eaeaea;
   --btn-white-btm: #cdcdcd;
-  --btn-orange-top: #ff6622;
-  --btn-orange-btm: #e64a19;
-  /* Shadow Overlays (black with alpha) */
+  --btn-primary-top: #ff6622;
+  --btn-primary-btm: #e64a19;
+  --btn-secondary-top: var(--color-secondary-light);
+  --btn-secondary-btm: var(--color-secondary-dark);
+  --btn-success-top: var(--color-success-light);
+  --btn-success-btm: var(--color-success-dark);
+  --btn-warning-top: var(--color-warning-light);
+  --btn-warning-btm: var(--color-warning-dark);
+  --btn-danger-top: var(--color-danger-light);
+  --btn-danger-btm: var(--color-danger-dark);
+  --btn-info-top: var(--color-info-light);
+  --btn-info-btm: var(--color-info-dark);
+  /* ═══════════════════════════════════════════════════════════════════════
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -1155,7 +1657,7 @@ ol li {
   --shadow-60: rgba(0, 0, 0, 0.6);
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
-  /* Highlight Overlays (white with alpha) */
+  /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
   --highlight-03: rgba(255, 255, 255, 0.03);
   --highlight-05: rgba(255, 255, 255, 0.05);
   --highlight-10: rgba(255, 255, 255, 0.1);
@@ -1165,43 +1667,71 @@ ol li {
   --highlight-40: rgba(255, 255, 255, 0.4);
   --highlight-50: rgba(255, 255, 255, 0.5);
   --highlight-60: rgba(255, 255, 255, 0.6);
-  /* Glow Colors */
-  --glow-orange-40: rgba(255, 69, 0, 0.4);
-  /* Fonts */
+  /* ─── Glow Effects ─────────────────────────────────────────────────── */
+  --glow-primary: rgba(255, 69, 0, 0.4);
+  --glow-success: rgba(0, 163, 0, 0.4);
+  --glow-warning: rgba(255, 152, 0, 0.4);
+  --glow-danger: rgba(255, 51, 51, 0.4);
+  --glow-info: rgba(33, 150, 243, 0.4);
+  /* ═══════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
   --font-tech: 'Michroma', sans-serif;
   --font-display: 'Michroma', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
-  /* Type Scale */
-  --text-xs: 0.625rem;
-  /* 10px */
-  --text-sm: 0.75rem;
-  /* 12px */
-  --text-base: 0.875rem;
-  /* 14px */
-  --text-md: 1rem;
-  /* 16px */
-  --text-lg: 1.125rem;
-  /* 18px */
-  --text-xl: 1.25rem;
-  /* 20px */
-  --text-2xl: 1.5rem;
-  /* 24px */
-  --text-3xl: 2rem;
-  /* 32px */
-  --text-4xl: 2.5rem;
-  /* 40px */
-  /* Line Heights */
+  /* ─── Type Scale ───────────────────────────────────────────────────── */
+  --text-xs: 0.625rem; /* 10px */
+  --text-sm: 0.75rem; /* 12px */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+  /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
-  /* Letter Spacing */
+  /* ─── Letter Spacing ───────────────────────────────────────────────── */
   --tracking-tight: -0.025em;
   --tracking-normal: 0em;
-  --tracking-wide: 0.05em;
-  --tracking-wider: 0.1em;
-  --tracking-widest: 0.15em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Legacy Orange ────────────────────────────────────────────────── */
+  --color-orange-vivid: var(--color-primary);
+  --color-orange-light: var(--color-primary-light);
+  --color-orange-dark: var(--color-primary-dark);
+  --color-orange-deep: var(--color-primary-deep);
+  /* ─── Legacy Red/Alert ─────────────────────────────────────────────── */
+  --color-red-vivid: var(--color-danger);
+  --color-red-deep: var(--color-danger-dark);
+  --color-red-dark: var(--color-danger-muted);
+  --color-alert: var(--color-danger);
+  --color-alert-dark: var(--color-danger-dark);
+  --color-alert-muted: var(--color-danger-muted);
+  /* ─── Legacy Text ──────────────────────────────────────────────────── */
+  --text-dark: var(--text-primary);
+  --text-dim: var(--text-secondary);
+  --text-orange: var(--text-accent);
+  /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+  --btn-bg-orange: var(--btn-bg-primary);
+  --btn-orange-top: var(--btn-primary-top);
+  --btn-orange-btm: var(--btn-primary-btm);
+  /* ─── Legacy Indicators ────────────────────────────────────────────── */
+  --led-red-on: var(--led-on);
+  --led-red-off: var(--led-off);
+  /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+  --grad-orange-vivid: var(--grad-primary);
+  --glow-orange-40: var(--glow-primary);
 }
 
 .settings-panel {
@@ -1296,7 +1826,7 @@ label {
 
 .input-field:focus {
   outline: none;
-  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.9), 0 0 0 2px var(--btn-orange);
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.9), 0 0 0 2px var(--btn-bg-primary);
   background-color: #1a1a1a;
 }
 
@@ -1551,8 +2081,15 @@ input:checked + .slider:after {
   }
 }
 :root {
-  /* --- Base Palette --- */
-  /* Neutrals */
+  /* ═══════════════════════════════════════════════════════════════════════
+     COLOR PALETTE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Orange) ────────────────────────────────────────────── */
+  --color-primary: #ff4500;
+  --color-primary-light: #ff7043;
+  --color-primary-dark: #d84315;
+  --color-primary-deep: #bf360c;
+  /* ─── Neutrals (Grays) ────────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #050505;
   --color-gray-900: #111111;
@@ -1574,58 +2111,117 @@ input:checked + .slider:after {
   --color-gray-025: #f0f0f0;
   --color-gray-010: #f5f5f5;
   --color-white: #ffffff;
-  /* Accents (Orange/Red) */
-  --color-orange-vivid: #ff4500;
-  /* Main Accent */
-  --color-orange-light: #ff7043;
-  --color-orange-dark: #d84315;
-  --color-orange-deep: #bf360c;
-  --color-red-vivid: #ff3333;
-  --color-red-deep: #b71c1c;
-  --color-red-dark: #552222;
-  /* --- Semantic Variables (Mapping to Palette) --- */
-  /* Global */
-  --bg-color: var(--color-gray-050);
-  /* #e0e0e0 */
-  --device-surface: #bcbcbc;
-  /* Keeping original hex to match exactly */
-  /* Text */
-  --text-dark: var(--color-gray-800);
-  --text-light: var(--color-gray-025);
-  --text-muted: var(--color-gray-400);
-  /* #666 */
-  --text-dim: var(--color-gray-500);
-  /* #555 */
-  --text-orange: var(--color-orange-vivid);
-  /* Buttons */
+  /* ─── Warm Neutrals (Browns/Taupes) ───────────────────────────────── */
+  --color-taupe-dark: #55433c;
+  --color-taupe-light: #bda69e;
+  --color-taupe-medium: #8a7166;
+  /* ─── Secondary (Neutral/Gray) ────────────────────────────────────── */
+  --color-secondary: #666666;
+  --color-secondary-light: #888888;
+  --color-secondary-dark: #444444;
+  /* ─── Success/Green ────────────────────────────────────────────────── */
+  --color-success: #00a300;
+  --color-success-dark: #006d00;
+  --color-success-light: #33b833;
+  /* ─── Warning/Amber ────────────────────────────────────────────────── */
+  --color-warning: #ff9800;
+  --color-warning-dark: #f57c00;
+  --color-warning-light: #ffb74d;
+  /* ─── Danger/Alert (Red) ──────────────────────────────────────────── */
+  --color-danger: #ff3333;
+  --color-danger-dark: #b71c1c;
+  --color-danger-light: #ff6666;
+  --color-danger-muted: #552222;
+  /* ─── Info/Blue ────────────────────────────────────────────────────── */
+  --color-info: #2196f3;
+  --color-info-dark: #1976d2;
+  --color-info-light: #64b5f6;
+  /* ═══════════════════════════════════════════════════════════════════════
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: var(--color-gray-050);
+  --text-secondary: var(--color-gray-300);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success-dark);
+  --text-warning: var(--color-warning-dark);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info-dark);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: var(--color-gray-900);
+  --panel-bg-dark: var(--color-gray-950);
+  --device-surface: var(--color-gray-100);
+  /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: #202020;
   --btn-bg-light: #e6e6e6;
-  --btn-bg-orange: var(--color-orange-vivid);
-  /* UI Components */
-  --panel-bg-dark: var(--color-gray-850);
-  /* #1a1a1a */
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(0, 163, 0, 0.12);
+  --alert-bg-warning: rgba(255, 152, 0, 0.12);
+  --alert-bg-danger: rgba(255, 51, 51, 0.12);
+  --alert-bg-info: rgba(33, 150, 243, 0.12);
+  --alert-border-success: var(--color-success);
+  --alert-border-warning: var(--color-warning);
+  --alert-border-danger: var(--color-danger);
+  --alert-border-info: var(--color-info);
+  /* ─── UI Components ────────────────────────────────────────────────── */
   --list-item-bg: #252525;
   --list-item-bg-hover: var(--color-gray-750);
-  /* Functional */
-  --led-red-on: var(--color-red-vivid);
-  --led-red-off: var(--color-red-dark);
   --border-dark: var(--color-gray-900);
   --border-light: var(--color-gray-300);
-  /* Gradients */
-  --grad-orange-vivid: linear-gradient(
+  --border-warm: var(--color-taupe-medium);
+  --border-primary: var(--color-primary);
+  --border-secondary: var(--color-secondary);
+  --border-success: var(--color-success);
+  --border-warning: var(--color-warning);
+  --border-danger: var(--color-danger);
+  --border-info: var(--color-info);
+  /* ─── Status & Indicators ──────────────────────────────────────────── */
+  --led-on: var(--color-danger);
+  --led-off: var(--color-danger-muted);
+  --indicator-success: var(--color-success);
+  --indicator-warning: var(--color-warning);
+  --indicator-danger: var(--color-danger);
+  --indicator-info: var(--color-info);
+  --indicator-error: var(--color-danger);
+  /* ─── Gradients ────────────────────────────────────────────────────── */
+  --grad-primary: linear-gradient(
       90deg,
-      var(--color-orange-light),
-      var(--color-orange-dark)
+      var(--color-primary-light),
+      var(--color-primary-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  /* Button Specific Gradients & Colors */
+  --grad-warm: linear-gradient(
+      135deg,
+      var(--color-taupe-light),
+      var(--color-taupe-dark)
+  );
+  /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
   --btn-white-top: #eaeaea;
   --btn-white-btm: #cdcdcd;
-  --btn-orange-top: #ff6622;
-  --btn-orange-btm: #e64a19;
-  /* Shadow Overlays (black with alpha) */
+  --btn-primary-top: #ff6622;
+  --btn-primary-btm: #e64a19;
+  --btn-secondary-top: var(--color-secondary-light);
+  --btn-secondary-btm: var(--color-secondary-dark);
+  --btn-success-top: var(--color-success-light);
+  --btn-success-btm: var(--color-success-dark);
+  --btn-warning-top: var(--color-warning-light);
+  --btn-warning-btm: var(--color-warning-dark);
+  --btn-danger-top: var(--color-danger-light);
+  --btn-danger-btm: var(--color-danger-dark);
+  --btn-info-top: var(--color-info-light);
+  --btn-info-btm: var(--color-info-dark);
+  /* ═══════════════════════════════════════════════════════════════════════
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -1638,7 +2234,7 @@ input:checked + .slider:after {
   --shadow-60: rgba(0, 0, 0, 0.6);
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
-  /* Highlight Overlays (white with alpha) */
+  /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
   --highlight-03: rgba(255, 255, 255, 0.03);
   --highlight-05: rgba(255, 255, 255, 0.05);
   --highlight-10: rgba(255, 255, 255, 0.1);
@@ -1648,43 +2244,71 @@ input:checked + .slider:after {
   --highlight-40: rgba(255, 255, 255, 0.4);
   --highlight-50: rgba(255, 255, 255, 0.5);
   --highlight-60: rgba(255, 255, 255, 0.6);
-  /* Glow Colors */
-  --glow-orange-40: rgba(255, 69, 0, 0.4);
-  /* Fonts */
+  /* ─── Glow Effects ─────────────────────────────────────────────────── */
+  --glow-primary: rgba(255, 69, 0, 0.4);
+  --glow-success: rgba(0, 163, 0, 0.4);
+  --glow-warning: rgba(255, 152, 0, 0.4);
+  --glow-danger: rgba(255, 51, 51, 0.4);
+  --glow-info: rgba(33, 150, 243, 0.4);
+  /* ═══════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
   --font-tech: 'Michroma', sans-serif;
   --font-display: 'Michroma', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
-  /* Type Scale */
-  --text-xs: 0.625rem;
-  /* 10px */
-  --text-sm: 0.75rem;
-  /* 12px */
-  --text-base: 0.875rem;
-  /* 14px */
-  --text-md: 1rem;
-  /* 16px */
-  --text-lg: 1.125rem;
-  /* 18px */
-  --text-xl: 1.25rem;
-  /* 20px */
-  --text-2xl: 1.5rem;
-  /* 24px */
-  --text-3xl: 2rem;
-  /* 32px */
-  --text-4xl: 2.5rem;
-  /* 40px */
-  /* Line Heights */
+  /* ─── Type Scale ───────────────────────────────────────────────────── */
+  --text-xs: 0.625rem; /* 10px */
+  --text-sm: 0.75rem; /* 12px */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+  /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
-  /* Letter Spacing */
+  /* ─── Letter Spacing ───────────────────────────────────────────────── */
   --tracking-tight: -0.025em;
   --tracking-normal: 0em;
-  --tracking-wide: 0.05em;
-  --tracking-wider: 0.1em;
-  --tracking-widest: 0.15em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Legacy Orange ────────────────────────────────────────────────── */
+  --color-orange-vivid: var(--color-primary);
+  --color-orange-light: var(--color-primary-light);
+  --color-orange-dark: var(--color-primary-dark);
+  --color-orange-deep: var(--color-primary-deep);
+  /* ─── Legacy Red/Alert ─────────────────────────────────────────────── */
+  --color-red-vivid: var(--color-danger);
+  --color-red-deep: var(--color-danger-dark);
+  --color-red-dark: var(--color-danger-muted);
+  --color-alert: var(--color-danger);
+  --color-alert-dark: var(--color-danger-dark);
+  --color-alert-muted: var(--color-danger-muted);
+  /* ─── Legacy Text ──────────────────────────────────────────────────── */
+  --text-dark: var(--text-primary);
+  --text-dim: var(--text-secondary);
+  --text-orange: var(--text-accent);
+  /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+  --btn-bg-orange: var(--btn-bg-primary);
+  --btn-orange-top: var(--btn-primary-top);
+  --btn-orange-btm: var(--btn-primary-btm);
+  /* ─── Legacy Indicators ────────────────────────────────────────────── */
+  --led-red-on: var(--led-on);
+  --led-red-off: var(--led-off);
+  /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+  --grad-orange-vivid: var(--grad-primary);
+  --glow-orange-40: var(--glow-primary);
 }
 
 .progress-group {
@@ -1937,8 +2561,15 @@ input:checked + .slider:after {
 }
 
 :root {
-  /* --- Base Palette --- */
-  /* Neutrals */
+  /* ═══════════════════════════════════════════════════════════════════════
+     COLOR PALETTE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Orange) ────────────────────────────────────────────── */
+  --color-primary: #ff4500;
+  --color-primary-light: #ff7043;
+  --color-primary-dark: #d84315;
+  --color-primary-deep: #bf360c;
+  /* ─── Neutrals (Grays) ────────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #050505;
   --color-gray-900: #111111;
@@ -1960,58 +2591,117 @@ input:checked + .slider:after {
   --color-gray-025: #f0f0f0;
   --color-gray-010: #f5f5f5;
   --color-white: #ffffff;
-  /* Accents (Orange/Red) */
-  --color-orange-vivid: #ff4500;
-  /* Main Accent */
-  --color-orange-light: #ff7043;
-  --color-orange-dark: #d84315;
-  --color-orange-deep: #bf360c;
-  --color-red-vivid: #ff3333;
-  --color-red-deep: #b71c1c;
-  --color-red-dark: #552222;
-  /* --- Semantic Variables (Mapping to Palette) --- */
-  /* Global */
-  --bg-color: var(--color-gray-050);
-  /* #e0e0e0 */
-  --device-surface: #bcbcbc;
-  /* Keeping original hex to match exactly */
-  /* Text */
-  --text-dark: var(--color-gray-800);
-  --text-light: var(--color-gray-025);
-  --text-muted: var(--color-gray-400);
-  /* #666 */
-  --text-dim: var(--color-gray-500);
-  /* #555 */
-  --text-orange: var(--color-orange-vivid);
-  /* Buttons */
+  /* ─── Warm Neutrals (Browns/Taupes) ───────────────────────────────── */
+  --color-taupe-dark: #55433c;
+  --color-taupe-light: #bda69e;
+  --color-taupe-medium: #8a7166;
+  /* ─── Secondary (Neutral/Gray) ────────────────────────────────────── */
+  --color-secondary: #666666;
+  --color-secondary-light: #888888;
+  --color-secondary-dark: #444444;
+  /* ─── Success/Green ────────────────────────────────────────────────── */
+  --color-success: #00a300;
+  --color-success-dark: #006d00;
+  --color-success-light: #33b833;
+  /* ─── Warning/Amber ────────────────────────────────────────────────── */
+  --color-warning: #ff9800;
+  --color-warning-dark: #f57c00;
+  --color-warning-light: #ffb74d;
+  /* ─── Danger/Alert (Red) ──────────────────────────────────────────── */
+  --color-danger: #ff3333;
+  --color-danger-dark: #b71c1c;
+  --color-danger-light: #ff6666;
+  --color-danger-muted: #552222;
+  /* ─── Info/Blue ────────────────────────────────────────────────────── */
+  --color-info: #2196f3;
+  --color-info-dark: #1976d2;
+  --color-info-light: #64b5f6;
+  /* ═══════════════════════════════════════════════════════════════════════
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: var(--color-gray-050);
+  --text-secondary: var(--color-gray-300);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success-dark);
+  --text-warning: var(--color-warning-dark);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info-dark);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: var(--color-gray-900);
+  --panel-bg-dark: var(--color-gray-950);
+  --device-surface: var(--color-gray-100);
+  /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: #202020;
   --btn-bg-light: #e6e6e6;
-  --btn-bg-orange: var(--color-orange-vivid);
-  /* UI Components */
-  --panel-bg-dark: var(--color-gray-850);
-  /* #1a1a1a */
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(0, 163, 0, 0.12);
+  --alert-bg-warning: rgba(255, 152, 0, 0.12);
+  --alert-bg-danger: rgba(255, 51, 51, 0.12);
+  --alert-bg-info: rgba(33, 150, 243, 0.12);
+  --alert-border-success: var(--color-success);
+  --alert-border-warning: var(--color-warning);
+  --alert-border-danger: var(--color-danger);
+  --alert-border-info: var(--color-info);
+  /* ─── UI Components ────────────────────────────────────────────────── */
   --list-item-bg: #252525;
   --list-item-bg-hover: var(--color-gray-750);
-  /* Functional */
-  --led-red-on: var(--color-red-vivid);
-  --led-red-off: var(--color-red-dark);
   --border-dark: var(--color-gray-900);
   --border-light: var(--color-gray-300);
-  /* Gradients */
-  --grad-orange-vivid: linear-gradient(
+  --border-warm: var(--color-taupe-medium);
+  --border-primary: var(--color-primary);
+  --border-secondary: var(--color-secondary);
+  --border-success: var(--color-success);
+  --border-warning: var(--color-warning);
+  --border-danger: var(--color-danger);
+  --border-info: var(--color-info);
+  /* ─── Status & Indicators ──────────────────────────────────────────── */
+  --led-on: var(--color-danger);
+  --led-off: var(--color-danger-muted);
+  --indicator-success: var(--color-success);
+  --indicator-warning: var(--color-warning);
+  --indicator-danger: var(--color-danger);
+  --indicator-info: var(--color-info);
+  --indicator-error: var(--color-danger);
+  /* ─── Gradients ────────────────────────────────────────────────────── */
+  --grad-primary: linear-gradient(
       90deg,
-      var(--color-orange-light),
-      var(--color-orange-dark)
+      var(--color-primary-light),
+      var(--color-primary-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  /* Button Specific Gradients & Colors */
+  --grad-warm: linear-gradient(
+      135deg,
+      var(--color-taupe-light),
+      var(--color-taupe-dark)
+  );
+  /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
   --btn-white-top: #eaeaea;
   --btn-white-btm: #cdcdcd;
-  --btn-orange-top: #ff6622;
-  --btn-orange-btm: #e64a19;
-  /* Shadow Overlays (black with alpha) */
+  --btn-primary-top: #ff6622;
+  --btn-primary-btm: #e64a19;
+  --btn-secondary-top: var(--color-secondary-light);
+  --btn-secondary-btm: var(--color-secondary-dark);
+  --btn-success-top: var(--color-success-light);
+  --btn-success-btm: var(--color-success-dark);
+  --btn-warning-top: var(--color-warning-light);
+  --btn-warning-btm: var(--color-warning-dark);
+  --btn-danger-top: var(--color-danger-light);
+  --btn-danger-btm: var(--color-danger-dark);
+  --btn-info-top: var(--color-info-light);
+  --btn-info-btm: var(--color-info-dark);
+  /* ═══════════════════════════════════════════════════════════════════════
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -2024,7 +2714,7 @@ input:checked + .slider:after {
   --shadow-60: rgba(0, 0, 0, 0.6);
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
-  /* Highlight Overlays (white with alpha) */
+  /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
   --highlight-03: rgba(255, 255, 255, 0.03);
   --highlight-05: rgba(255, 255, 255, 0.05);
   --highlight-10: rgba(255, 255, 255, 0.1);
@@ -2034,43 +2724,71 @@ input:checked + .slider:after {
   --highlight-40: rgba(255, 255, 255, 0.4);
   --highlight-50: rgba(255, 255, 255, 0.5);
   --highlight-60: rgba(255, 255, 255, 0.6);
-  /* Glow Colors */
-  --glow-orange-40: rgba(255, 69, 0, 0.4);
-  /* Fonts */
+  /* ─── Glow Effects ─────────────────────────────────────────────────── */
+  --glow-primary: rgba(255, 69, 0, 0.4);
+  --glow-success: rgba(0, 163, 0, 0.4);
+  --glow-warning: rgba(255, 152, 0, 0.4);
+  --glow-danger: rgba(255, 51, 51, 0.4);
+  --glow-info: rgba(33, 150, 243, 0.4);
+  /* ═══════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
   --font-tech: 'Michroma', sans-serif;
   --font-display: 'Michroma', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
-  /* Type Scale */
-  --text-xs: 0.625rem;
-  /* 10px */
-  --text-sm: 0.75rem;
-  /* 12px */
-  --text-base: 0.875rem;
-  /* 14px */
-  --text-md: 1rem;
-  /* 16px */
-  --text-lg: 1.125rem;
-  /* 18px */
-  --text-xl: 1.25rem;
-  /* 20px */
-  --text-2xl: 1.5rem;
-  /* 24px */
-  --text-3xl: 2rem;
-  /* 32px */
-  --text-4xl: 2.5rem;
-  /* 40px */
-  /* Line Heights */
+  /* ─── Type Scale ───────────────────────────────────────────────────── */
+  --text-xs: 0.625rem; /* 10px */
+  --text-sm: 0.75rem; /* 12px */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+  /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
-  /* Letter Spacing */
+  /* ─── Letter Spacing ───────────────────────────────────────────────── */
   --tracking-tight: -0.025em;
   --tracking-normal: 0em;
-  --tracking-wide: 0.05em;
-  --tracking-wider: 0.1em;
-  --tracking-widest: 0.15em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Legacy Orange ────────────────────────────────────────────────── */
+  --color-orange-vivid: var(--color-primary);
+  --color-orange-light: var(--color-primary-light);
+  --color-orange-dark: var(--color-primary-dark);
+  --color-orange-deep: var(--color-primary-deep);
+  /* ─── Legacy Red/Alert ─────────────────────────────────────────────── */
+  --color-red-vivid: var(--color-danger);
+  --color-red-deep: var(--color-danger-dark);
+  --color-red-dark: var(--color-danger-muted);
+  --color-alert: var(--color-danger);
+  --color-alert-dark: var(--color-danger-dark);
+  --color-alert-muted: var(--color-danger-muted);
+  /* ─── Legacy Text ──────────────────────────────────────────────────── */
+  --text-dark: var(--text-primary);
+  --text-dim: var(--text-secondary);
+  --text-orange: var(--text-accent);
+  /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+  --btn-bg-orange: var(--btn-bg-primary);
+  --btn-orange-top: var(--btn-primary-top);
+  --btn-orange-btm: var(--btn-primary-btm);
+  /* ─── Legacy Indicators ────────────────────────────────────────────── */
+  --led-red-on: var(--led-on);
+  --led-red-off: var(--led-off);
+  /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+  --grad-orange-vivid: var(--grad-primary);
+  --glow-orange-40: var(--glow-primary);
 }
 
 /* --- Main Content Area --- */
@@ -2377,7 +3095,7 @@ h2 {
   gap: 20px;
 }
 
-.btn-orange .material-icons {
+.btn-primary .material-icons, .btn-orange .material-icons {
   font-size: 32px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -2518,7 +3236,7 @@ h2 {
   .transport-controls .btn-round {
     transform: scale(1.1);
   }
-  .transport-controls .btn-orange {
+  .transport-controls .btn-primary, .transport-controls .btn-orange {
     transform: scale(1.1);
   }
 }
@@ -2726,8 +3444,15 @@ h2 {
 }
 
 :root {
-  /* --- Base Palette --- */
-  /* Neutrals */
+  /* ═══════════════════════════════════════════════════════════════════════
+     COLOR PALETTE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Orange) ────────────────────────────────────────────── */
+  --color-primary: #ff4500;
+  --color-primary-light: #ff7043;
+  --color-primary-dark: #d84315;
+  --color-primary-deep: #bf360c;
+  /* ─── Neutrals (Grays) ────────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #050505;
   --color-gray-900: #111111;
@@ -2749,58 +3474,117 @@ h2 {
   --color-gray-025: #f0f0f0;
   --color-gray-010: #f5f5f5;
   --color-white: #ffffff;
-  /* Accents (Orange/Red) */
-  --color-orange-vivid: #ff4500;
-  /* Main Accent */
-  --color-orange-light: #ff7043;
-  --color-orange-dark: #d84315;
-  --color-orange-deep: #bf360c;
-  --color-red-vivid: #ff3333;
-  --color-red-deep: #b71c1c;
-  --color-red-dark: #552222;
-  /* --- Semantic Variables (Mapping to Palette) --- */
-  /* Global */
-  --bg-color: var(--color-gray-050);
-  /* #e0e0e0 */
-  --device-surface: #bcbcbc;
-  /* Keeping original hex to match exactly */
-  /* Text */
-  --text-dark: var(--color-gray-800);
-  --text-light: var(--color-gray-025);
-  --text-muted: var(--color-gray-400);
-  /* #666 */
-  --text-dim: var(--color-gray-500);
-  /* #555 */
-  --text-orange: var(--color-orange-vivid);
-  /* Buttons */
+  /* ─── Warm Neutrals (Browns/Taupes) ───────────────────────────────── */
+  --color-taupe-dark: #55433c;
+  --color-taupe-light: #bda69e;
+  --color-taupe-medium: #8a7166;
+  /* ─── Secondary (Neutral/Gray) ────────────────────────────────────── */
+  --color-secondary: #666666;
+  --color-secondary-light: #888888;
+  --color-secondary-dark: #444444;
+  /* ─── Success/Green ────────────────────────────────────────────────── */
+  --color-success: #00a300;
+  --color-success-dark: #006d00;
+  --color-success-light: #33b833;
+  /* ─── Warning/Amber ────────────────────────────────────────────────── */
+  --color-warning: #ff9800;
+  --color-warning-dark: #f57c00;
+  --color-warning-light: #ffb74d;
+  /* ─── Danger/Alert (Red) ──────────────────────────────────────────── */
+  --color-danger: #ff3333;
+  --color-danger-dark: #b71c1c;
+  --color-danger-light: #ff6666;
+  --color-danger-muted: #552222;
+  /* ─── Info/Blue ────────────────────────────────────────────────────── */
+  --color-info: #2196f3;
+  --color-info-dark: #1976d2;
+  --color-info-light: #64b5f6;
+  /* ═══════════════════════════════════════════════════════════════════════
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: var(--color-gray-050);
+  --text-secondary: var(--color-gray-300);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success-dark);
+  --text-warning: var(--color-warning-dark);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info-dark);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: var(--color-gray-900);
+  --panel-bg-dark: var(--color-gray-950);
+  --device-surface: var(--color-gray-100);
+  /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: #202020;
   --btn-bg-light: #e6e6e6;
-  --btn-bg-orange: var(--color-orange-vivid);
-  /* UI Components */
-  --panel-bg-dark: var(--color-gray-850);
-  /* #1a1a1a */
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(0, 163, 0, 0.12);
+  --alert-bg-warning: rgba(255, 152, 0, 0.12);
+  --alert-bg-danger: rgba(255, 51, 51, 0.12);
+  --alert-bg-info: rgba(33, 150, 243, 0.12);
+  --alert-border-success: var(--color-success);
+  --alert-border-warning: var(--color-warning);
+  --alert-border-danger: var(--color-danger);
+  --alert-border-info: var(--color-info);
+  /* ─── UI Components ────────────────────────────────────────────────── */
   --list-item-bg: #252525;
   --list-item-bg-hover: var(--color-gray-750);
-  /* Functional */
-  --led-red-on: var(--color-red-vivid);
-  --led-red-off: var(--color-red-dark);
   --border-dark: var(--color-gray-900);
   --border-light: var(--color-gray-300);
-  /* Gradients */
-  --grad-orange-vivid: linear-gradient(
+  --border-warm: var(--color-taupe-medium);
+  --border-primary: var(--color-primary);
+  --border-secondary: var(--color-secondary);
+  --border-success: var(--color-success);
+  --border-warning: var(--color-warning);
+  --border-danger: var(--color-danger);
+  --border-info: var(--color-info);
+  /* ─── Status & Indicators ──────────────────────────────────────────── */
+  --led-on: var(--color-danger);
+  --led-off: var(--color-danger-muted);
+  --indicator-success: var(--color-success);
+  --indicator-warning: var(--color-warning);
+  --indicator-danger: var(--color-danger);
+  --indicator-info: var(--color-info);
+  --indicator-error: var(--color-danger);
+  /* ─── Gradients ────────────────────────────────────────────────────── */
+  --grad-primary: linear-gradient(
       90deg,
-      var(--color-orange-light),
-      var(--color-orange-dark)
+      var(--color-primary-light),
+      var(--color-primary-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  /* Button Specific Gradients & Colors */
+  --grad-warm: linear-gradient(
+      135deg,
+      var(--color-taupe-light),
+      var(--color-taupe-dark)
+  );
+  /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
   --btn-white-top: #eaeaea;
   --btn-white-btm: #cdcdcd;
-  --btn-orange-top: #ff6622;
-  --btn-orange-btm: #e64a19;
-  /* Shadow Overlays (black with alpha) */
+  --btn-primary-top: #ff6622;
+  --btn-primary-btm: #e64a19;
+  --btn-secondary-top: var(--color-secondary-light);
+  --btn-secondary-btm: var(--color-secondary-dark);
+  --btn-success-top: var(--color-success-light);
+  --btn-success-btm: var(--color-success-dark);
+  --btn-warning-top: var(--color-warning-light);
+  --btn-warning-btm: var(--color-warning-dark);
+  --btn-danger-top: var(--color-danger-light);
+  --btn-danger-btm: var(--color-danger-dark);
+  --btn-info-top: var(--color-info-light);
+  --btn-info-btm: var(--color-info-dark);
+  /* ═══════════════════════════════════════════════════════════════════════
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -2813,7 +3597,7 @@ h2 {
   --shadow-60: rgba(0, 0, 0, 0.6);
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
-  /* Highlight Overlays (white with alpha) */
+  /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
   --highlight-03: rgba(255, 255, 255, 0.03);
   --highlight-05: rgba(255, 255, 255, 0.05);
   --highlight-10: rgba(255, 255, 255, 0.1);
@@ -2823,43 +3607,71 @@ h2 {
   --highlight-40: rgba(255, 255, 255, 0.4);
   --highlight-50: rgba(255, 255, 255, 0.5);
   --highlight-60: rgba(255, 255, 255, 0.6);
-  /* Glow Colors */
-  --glow-orange-40: rgba(255, 69, 0, 0.4);
-  /* Fonts */
+  /* ─── Glow Effects ─────────────────────────────────────────────────── */
+  --glow-primary: rgba(255, 69, 0, 0.4);
+  --glow-success: rgba(0, 163, 0, 0.4);
+  --glow-warning: rgba(255, 152, 0, 0.4);
+  --glow-danger: rgba(255, 51, 51, 0.4);
+  --glow-info: rgba(33, 150, 243, 0.4);
+  /* ═══════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
   --font-tech: 'Michroma', sans-serif;
   --font-display: 'Michroma', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
-  /* Type Scale */
-  --text-xs: 0.625rem;
-  /* 10px */
-  --text-sm: 0.75rem;
-  /* 12px */
-  --text-base: 0.875rem;
-  /* 14px */
-  --text-md: 1rem;
-  /* 16px */
-  --text-lg: 1.125rem;
-  /* 18px */
-  --text-xl: 1.25rem;
-  /* 20px */
-  --text-2xl: 1.5rem;
-  /* 24px */
-  --text-3xl: 2rem;
-  /* 32px */
-  --text-4xl: 2.5rem;
-  /* 40px */
-  /* Line Heights */
+  /* ─── Type Scale ───────────────────────────────────────────────────── */
+  --text-xs: 0.625rem; /* 10px */
+  --text-sm: 0.75rem; /* 12px */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+  /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
-  /* Letter Spacing */
+  /* ─── Letter Spacing ───────────────────────────────────────────────── */
   --tracking-tight: -0.025em;
   --tracking-normal: 0em;
-  --tracking-wide: 0.05em;
-  --tracking-wider: 0.1em;
-  --tracking-widest: 0.15em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Legacy Orange ────────────────────────────────────────────────── */
+  --color-orange-vivid: var(--color-primary);
+  --color-orange-light: var(--color-primary-light);
+  --color-orange-dark: var(--color-primary-dark);
+  --color-orange-deep: var(--color-primary-deep);
+  /* ─── Legacy Red/Alert ─────────────────────────────────────────────── */
+  --color-red-vivid: var(--color-danger);
+  --color-red-deep: var(--color-danger-dark);
+  --color-red-dark: var(--color-danger-muted);
+  --color-alert: var(--color-danger);
+  --color-alert-dark: var(--color-danger-dark);
+  --color-alert-muted: var(--color-danger-muted);
+  /* ─── Legacy Text ──────────────────────────────────────────────────── */
+  --text-dark: var(--text-primary);
+  --text-dim: var(--text-secondary);
+  --text-orange: var(--text-accent);
+  /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+  --btn-bg-orange: var(--btn-bg-primary);
+  --btn-orange-top: var(--btn-primary-top);
+  --btn-orange-btm: var(--btn-primary-btm);
+  /* ─── Legacy Indicators ────────────────────────────────────────────── */
+  --led-red-on: var(--led-on);
+  --led-red-off: var(--led-off);
+  /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+  --grad-orange-vivid: var(--grad-primary);
+  --glow-orange-40: var(--glow-primary);
 }
 
 /* ── Playlist Items ── */
@@ -2884,7 +3696,7 @@ h2 {
 }
 
 .playlist-item--active .playlist-track-title {
-  color: var(--btn-orange-top);
+  color: var(--btn-primary-top);
 }
 
 /* ── Album Art ── */
@@ -2951,8 +3763,15 @@ h2 {
 }
 
 :root {
-  /* --- Base Palette --- */
-  /* Neutrals */
+  /* ═══════════════════════════════════════════════════════════════════════
+     COLOR PALETTE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Orange) ────────────────────────────────────────────── */
+  --color-primary: #ff4500;
+  --color-primary-light: #ff7043;
+  --color-primary-dark: #d84315;
+  --color-primary-deep: #bf360c;
+  /* ─── Neutrals (Grays) ────────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #050505;
   --color-gray-900: #111111;
@@ -2974,58 +3793,117 @@ h2 {
   --color-gray-025: #f0f0f0;
   --color-gray-010: #f5f5f5;
   --color-white: #ffffff;
-  /* Accents (Orange/Red) */
-  --color-orange-vivid: #ff4500;
-  /* Main Accent */
-  --color-orange-light: #ff7043;
-  --color-orange-dark: #d84315;
-  --color-orange-deep: #bf360c;
-  --color-red-vivid: #ff3333;
-  --color-red-deep: #b71c1c;
-  --color-red-dark: #552222;
-  /* --- Semantic Variables (Mapping to Palette) --- */
-  /* Global */
-  --bg-color: var(--color-gray-050);
-  /* #e0e0e0 */
-  --device-surface: #bcbcbc;
-  /* Keeping original hex to match exactly */
-  /* Text */
-  --text-dark: var(--color-gray-800);
-  --text-light: var(--color-gray-025);
-  --text-muted: var(--color-gray-400);
-  /* #666 */
-  --text-dim: var(--color-gray-500);
-  /* #555 */
-  --text-orange: var(--color-orange-vivid);
-  /* Buttons */
+  /* ─── Warm Neutrals (Browns/Taupes) ───────────────────────────────── */
+  --color-taupe-dark: #55433c;
+  --color-taupe-light: #bda69e;
+  --color-taupe-medium: #8a7166;
+  /* ─── Secondary (Neutral/Gray) ────────────────────────────────────── */
+  --color-secondary: #666666;
+  --color-secondary-light: #888888;
+  --color-secondary-dark: #444444;
+  /* ─── Success/Green ────────────────────────────────────────────────── */
+  --color-success: #00a300;
+  --color-success-dark: #006d00;
+  --color-success-light: #33b833;
+  /* ─── Warning/Amber ────────────────────────────────────────────────── */
+  --color-warning: #ff9800;
+  --color-warning-dark: #f57c00;
+  --color-warning-light: #ffb74d;
+  /* ─── Danger/Alert (Red) ──────────────────────────────────────────── */
+  --color-danger: #ff3333;
+  --color-danger-dark: #b71c1c;
+  --color-danger-light: #ff6666;
+  --color-danger-muted: #552222;
+  /* ─── Info/Blue ────────────────────────────────────────────────────── */
+  --color-info: #2196f3;
+  --color-info-dark: #1976d2;
+  --color-info-light: #64b5f6;
+  /* ═══════════════════════════════════════════════════════════════════════
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: var(--color-gray-050);
+  --text-secondary: var(--color-gray-300);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success-dark);
+  --text-warning: var(--color-warning-dark);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info-dark);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: var(--color-gray-900);
+  --panel-bg-dark: var(--color-gray-950);
+  --device-surface: var(--color-gray-100);
+  /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: #202020;
   --btn-bg-light: #e6e6e6;
-  --btn-bg-orange: var(--color-orange-vivid);
-  /* UI Components */
-  --panel-bg-dark: var(--color-gray-850);
-  /* #1a1a1a */
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(0, 163, 0, 0.12);
+  --alert-bg-warning: rgba(255, 152, 0, 0.12);
+  --alert-bg-danger: rgba(255, 51, 51, 0.12);
+  --alert-bg-info: rgba(33, 150, 243, 0.12);
+  --alert-border-success: var(--color-success);
+  --alert-border-warning: var(--color-warning);
+  --alert-border-danger: var(--color-danger);
+  --alert-border-info: var(--color-info);
+  /* ─── UI Components ────────────────────────────────────────────────── */
   --list-item-bg: #252525;
   --list-item-bg-hover: var(--color-gray-750);
-  /* Functional */
-  --led-red-on: var(--color-red-vivid);
-  --led-red-off: var(--color-red-dark);
   --border-dark: var(--color-gray-900);
   --border-light: var(--color-gray-300);
-  /* Gradients */
-  --grad-orange-vivid: linear-gradient(
+  --border-warm: var(--color-taupe-medium);
+  --border-primary: var(--color-primary);
+  --border-secondary: var(--color-secondary);
+  --border-success: var(--color-success);
+  --border-warning: var(--color-warning);
+  --border-danger: var(--color-danger);
+  --border-info: var(--color-info);
+  /* ─── Status & Indicators ──────────────────────────────────────────── */
+  --led-on: var(--color-danger);
+  --led-off: var(--color-danger-muted);
+  --indicator-success: var(--color-success);
+  --indicator-warning: var(--color-warning);
+  --indicator-danger: var(--color-danger);
+  --indicator-info: var(--color-info);
+  --indicator-error: var(--color-danger);
+  /* ─── Gradients ────────────────────────────────────────────────────── */
+  --grad-primary: linear-gradient(
       90deg,
-      var(--color-orange-light),
-      var(--color-orange-dark)
+      var(--color-primary-light),
+      var(--color-primary-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  /* Button Specific Gradients & Colors */
+  --grad-warm: linear-gradient(
+      135deg,
+      var(--color-taupe-light),
+      var(--color-taupe-dark)
+  );
+  /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
   --btn-white-top: #eaeaea;
   --btn-white-btm: #cdcdcd;
-  --btn-orange-top: #ff6622;
-  --btn-orange-btm: #e64a19;
-  /* Shadow Overlays (black with alpha) */
+  --btn-primary-top: #ff6622;
+  --btn-primary-btm: #e64a19;
+  --btn-secondary-top: var(--color-secondary-light);
+  --btn-secondary-btm: var(--color-secondary-dark);
+  --btn-success-top: var(--color-success-light);
+  --btn-success-btm: var(--color-success-dark);
+  --btn-warning-top: var(--color-warning-light);
+  --btn-warning-btm: var(--color-warning-dark);
+  --btn-danger-top: var(--color-danger-light);
+  --btn-danger-btm: var(--color-danger-dark);
+  --btn-info-top: var(--color-info-light);
+  --btn-info-btm: var(--color-info-dark);
+  /* ═══════════════════════════════════════════════════════════════════════
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -3038,7 +3916,7 @@ h2 {
   --shadow-60: rgba(0, 0, 0, 0.6);
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
-  /* Highlight Overlays (white with alpha) */
+  /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
   --highlight-03: rgba(255, 255, 255, 0.03);
   --highlight-05: rgba(255, 255, 255, 0.05);
   --highlight-10: rgba(255, 255, 255, 0.1);
@@ -3048,43 +3926,71 @@ h2 {
   --highlight-40: rgba(255, 255, 255, 0.4);
   --highlight-50: rgba(255, 255, 255, 0.5);
   --highlight-60: rgba(255, 255, 255, 0.6);
-  /* Glow Colors */
-  --glow-orange-40: rgba(255, 69, 0, 0.4);
-  /* Fonts */
+  /* ─── Glow Effects ─────────────────────────────────────────────────── */
+  --glow-primary: rgba(255, 69, 0, 0.4);
+  --glow-success: rgba(0, 163, 0, 0.4);
+  --glow-warning: rgba(255, 152, 0, 0.4);
+  --glow-danger: rgba(255, 51, 51, 0.4);
+  --glow-info: rgba(33, 150, 243, 0.4);
+  /* ═══════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
   --font-tech: 'Michroma', sans-serif;
   --font-display: 'Michroma', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
-  /* Type Scale */
-  --text-xs: 0.625rem;
-  /* 10px */
-  --text-sm: 0.75rem;
-  /* 12px */
-  --text-base: 0.875rem;
-  /* 14px */
-  --text-md: 1rem;
-  /* 16px */
-  --text-lg: 1.125rem;
-  /* 18px */
-  --text-xl: 1.25rem;
-  /* 20px */
-  --text-2xl: 1.5rem;
-  /* 24px */
-  --text-3xl: 2rem;
-  /* 32px */
-  --text-4xl: 2.5rem;
-  /* 40px */
-  /* Line Heights */
+  /* ─── Type Scale ───────────────────────────────────────────────────── */
+  --text-xs: 0.625rem; /* 10px */
+  --text-sm: 0.75rem; /* 12px */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+  /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
-  /* Letter Spacing */
+  /* ─── Letter Spacing ───────────────────────────────────────────────── */
   --tracking-tight: -0.025em;
   --tracking-normal: 0em;
-  --tracking-wide: 0.05em;
-  --tracking-wider: 0.1em;
-  --tracking-widest: 0.15em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Legacy Orange ────────────────────────────────────────────────── */
+  --color-orange-vivid: var(--color-primary);
+  --color-orange-light: var(--color-primary-light);
+  --color-orange-dark: var(--color-primary-dark);
+  --color-orange-deep: var(--color-primary-deep);
+  /* ─── Legacy Red/Alert ─────────────────────────────────────────────── */
+  --color-red-vivid: var(--color-danger);
+  --color-red-deep: var(--color-danger-dark);
+  --color-red-dark: var(--color-danger-muted);
+  --color-alert: var(--color-danger);
+  --color-alert-dark: var(--color-danger-dark);
+  --color-alert-muted: var(--color-danger-muted);
+  /* ─── Legacy Text ──────────────────────────────────────────────────── */
+  --text-dark: var(--text-primary);
+  --text-dim: var(--text-secondary);
+  --text-orange: var(--text-accent);
+  /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+  --btn-bg-orange: var(--btn-bg-primary);
+  --btn-orange-top: var(--btn-primary-top);
+  --btn-orange-btm: var(--btn-primary-btm);
+  /* ─── Legacy Indicators ────────────────────────────────────────────── */
+  --led-red-on: var(--led-on);
+  --led-red-off: var(--led-off);
+  /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+  --grad-orange-vivid: var(--grad-primary);
+  --glow-orange-40: var(--glow-primary);
 }
 
 /* ── Backdrop ── */
@@ -3146,8 +4052,15 @@ h2 {
 }
 
 :root {
-  /* --- Base Palette --- */
-  /* Neutrals */
+  /* ═══════════════════════════════════════════════════════════════════════
+     COLOR PALETTE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Orange) ────────────────────────────────────────────── */
+  --color-primary: #ff4500;
+  --color-primary-light: #ff7043;
+  --color-primary-dark: #d84315;
+  --color-primary-deep: #bf360c;
+  /* ─── Neutrals (Grays) ────────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #050505;
   --color-gray-900: #111111;
@@ -3169,58 +4082,117 @@ h2 {
   --color-gray-025: #f0f0f0;
   --color-gray-010: #f5f5f5;
   --color-white: #ffffff;
-  /* Accents (Orange/Red) */
-  --color-orange-vivid: #ff4500;
-  /* Main Accent */
-  --color-orange-light: #ff7043;
-  --color-orange-dark: #d84315;
-  --color-orange-deep: #bf360c;
-  --color-red-vivid: #ff3333;
-  --color-red-deep: #b71c1c;
-  --color-red-dark: #552222;
-  /* --- Semantic Variables (Mapping to Palette) --- */
-  /* Global */
-  --bg-color: var(--color-gray-050);
-  /* #e0e0e0 */
-  --device-surface: #bcbcbc;
-  /* Keeping original hex to match exactly */
-  /* Text */
-  --text-dark: var(--color-gray-800);
-  --text-light: var(--color-gray-025);
-  --text-muted: var(--color-gray-400);
-  /* #666 */
-  --text-dim: var(--color-gray-500);
-  /* #555 */
-  --text-orange: var(--color-orange-vivid);
-  /* Buttons */
+  /* ─── Warm Neutrals (Browns/Taupes) ───────────────────────────────── */
+  --color-taupe-dark: #55433c;
+  --color-taupe-light: #bda69e;
+  --color-taupe-medium: #8a7166;
+  /* ─── Secondary (Neutral/Gray) ────────────────────────────────────── */
+  --color-secondary: #666666;
+  --color-secondary-light: #888888;
+  --color-secondary-dark: #444444;
+  /* ─── Success/Green ────────────────────────────────────────────────── */
+  --color-success: #00a300;
+  --color-success-dark: #006d00;
+  --color-success-light: #33b833;
+  /* ─── Warning/Amber ────────────────────────────────────────────────── */
+  --color-warning: #ff9800;
+  --color-warning-dark: #f57c00;
+  --color-warning-light: #ffb74d;
+  /* ─── Danger/Alert (Red) ──────────────────────────────────────────── */
+  --color-danger: #ff3333;
+  --color-danger-dark: #b71c1c;
+  --color-danger-light: #ff6666;
+  --color-danger-muted: #552222;
+  /* ─── Info/Blue ────────────────────────────────────────────────────── */
+  --color-info: #2196f3;
+  --color-info-dark: #1976d2;
+  --color-info-light: #64b5f6;
+  /* ═══════════════════════════════════════════════════════════════════════
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: var(--color-gray-050);
+  --text-secondary: var(--color-gray-300);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success-dark);
+  --text-warning: var(--color-warning-dark);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info-dark);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: var(--color-gray-900);
+  --panel-bg-dark: var(--color-gray-950);
+  --device-surface: var(--color-gray-100);
+  /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: #202020;
   --btn-bg-light: #e6e6e6;
-  --btn-bg-orange: var(--color-orange-vivid);
-  /* UI Components */
-  --panel-bg-dark: var(--color-gray-850);
-  /* #1a1a1a */
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(0, 163, 0, 0.12);
+  --alert-bg-warning: rgba(255, 152, 0, 0.12);
+  --alert-bg-danger: rgba(255, 51, 51, 0.12);
+  --alert-bg-info: rgba(33, 150, 243, 0.12);
+  --alert-border-success: var(--color-success);
+  --alert-border-warning: var(--color-warning);
+  --alert-border-danger: var(--color-danger);
+  --alert-border-info: var(--color-info);
+  /* ─── UI Components ────────────────────────────────────────────────── */
   --list-item-bg: #252525;
   --list-item-bg-hover: var(--color-gray-750);
-  /* Functional */
-  --led-red-on: var(--color-red-vivid);
-  --led-red-off: var(--color-red-dark);
   --border-dark: var(--color-gray-900);
   --border-light: var(--color-gray-300);
-  /* Gradients */
-  --grad-orange-vivid: linear-gradient(
+  --border-warm: var(--color-taupe-medium);
+  --border-primary: var(--color-primary);
+  --border-secondary: var(--color-secondary);
+  --border-success: var(--color-success);
+  --border-warning: var(--color-warning);
+  --border-danger: var(--color-danger);
+  --border-info: var(--color-info);
+  /* ─── Status & Indicators ──────────────────────────────────────────── */
+  --led-on: var(--color-danger);
+  --led-off: var(--color-danger-muted);
+  --indicator-success: var(--color-success);
+  --indicator-warning: var(--color-warning);
+  --indicator-danger: var(--color-danger);
+  --indicator-info: var(--color-info);
+  --indicator-error: var(--color-danger);
+  /* ─── Gradients ────────────────────────────────────────────────────── */
+  --grad-primary: linear-gradient(
       90deg,
-      var(--color-orange-light),
-      var(--color-orange-dark)
+      var(--color-primary-light),
+      var(--color-primary-dark)
   );
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  /* Button Specific Gradients & Colors */
+  --grad-warm: linear-gradient(
+      135deg,
+      var(--color-taupe-light),
+      var(--color-taupe-dark)
+  );
+  /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
   --btn-white-top: #eaeaea;
   --btn-white-btm: #cdcdcd;
-  --btn-orange-top: #ff6622;
-  --btn-orange-btm: #e64a19;
-  /* Shadow Overlays (black with alpha) */
+  --btn-primary-top: #ff6622;
+  --btn-primary-btm: #e64a19;
+  --btn-secondary-top: var(--color-secondary-light);
+  --btn-secondary-btm: var(--color-secondary-dark);
+  --btn-success-top: var(--color-success-light);
+  --btn-success-btm: var(--color-success-dark);
+  --btn-warning-top: var(--color-warning-light);
+  --btn-warning-btm: var(--color-warning-dark);
+  --btn-danger-top: var(--color-danger-light);
+  --btn-danger-btm: var(--color-danger-dark);
+  --btn-info-top: var(--color-info-light);
+  --btn-info-btm: var(--color-info-dark);
+  /* ═══════════════════════════════════════════════════════════════════════
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -3233,7 +4205,7 @@ h2 {
   --shadow-60: rgba(0, 0, 0, 0.6);
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
-  /* Highlight Overlays (white with alpha) */
+  /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
   --highlight-03: rgba(255, 255, 255, 0.03);
   --highlight-05: rgba(255, 255, 255, 0.05);
   --highlight-10: rgba(255, 255, 255, 0.1);
@@ -3243,43 +4215,71 @@ h2 {
   --highlight-40: rgba(255, 255, 255, 0.4);
   --highlight-50: rgba(255, 255, 255, 0.5);
   --highlight-60: rgba(255, 255, 255, 0.6);
-  /* Glow Colors */
-  --glow-orange-40: rgba(255, 69, 0, 0.4);
-  /* Fonts */
+  /* ─── Glow Effects ─────────────────────────────────────────────────── */
+  --glow-primary: rgba(255, 69, 0, 0.4);
+  --glow-success: rgba(0, 163, 0, 0.4);
+  --glow-warning: rgba(255, 152, 0, 0.4);
+  --glow-danger: rgba(255, 51, 51, 0.4);
+  --glow-info: rgba(33, 150, 243, 0.4);
+  /* ═══════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
   --font-tech: 'Michroma', sans-serif;
   --font-display: 'Michroma', sans-serif;
   --font-mono: 'Roboto Mono', monospace;
-  /* Type Scale */
-  --text-xs: 0.625rem;
-  /* 10px */
-  --text-sm: 0.75rem;
-  /* 12px */
-  --text-base: 0.875rem;
-  /* 14px */
-  --text-md: 1rem;
-  /* 16px */
-  --text-lg: 1.125rem;
-  /* 18px */
-  --text-xl: 1.25rem;
-  /* 20px */
-  --text-2xl: 1.5rem;
-  /* 24px */
-  --text-3xl: 2rem;
-  /* 32px */
-  --text-4xl: 2.5rem;
-  /* 40px */
-  /* Line Heights */
+  /* ─── Type Scale ───────────────────────────────────────────────────── */
+  --text-xs: 0.625rem; /* 10px */
+  --text-sm: 0.75rem; /* 12px */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+  /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
   --leading-relaxed: 1.75;
-  /* Letter Spacing */
+  /* ─── Letter Spacing ───────────────────────────────────────────────── */
   --tracking-tight: -0.025em;
   --tracking-normal: 0em;
-  --tracking-wide: 0.05em;
-  --tracking-wider: 0.1em;
-  --tracking-widest: 0.15em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Legacy Orange ────────────────────────────────────────────────── */
+  --color-orange-vivid: var(--color-primary);
+  --color-orange-light: var(--color-primary-light);
+  --color-orange-dark: var(--color-primary-dark);
+  --color-orange-deep: var(--color-primary-deep);
+  /* ─── Legacy Red/Alert ─────────────────────────────────────────────── */
+  --color-red-vivid: var(--color-danger);
+  --color-red-deep: var(--color-danger-dark);
+  --color-red-dark: var(--color-danger-muted);
+  --color-alert: var(--color-danger);
+  --color-alert-dark: var(--color-danger-dark);
+  --color-alert-muted: var(--color-danger-muted);
+  /* ─── Legacy Text ──────────────────────────────────────────────────── */
+  --text-dark: var(--text-primary);
+  --text-dim: var(--text-secondary);
+  --text-orange: var(--text-accent);
+  /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+  --btn-bg-orange: var(--btn-bg-primary);
+  --btn-orange-top: var(--btn-primary-top);
+  --btn-orange-btm: var(--btn-primary-btm);
+  /* ─── Legacy Indicators ────────────────────────────────────────────── */
+  --led-red-on: var(--led-on);
+  --led-red-off: var(--led-off);
+  /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+  --grad-orange-vivid: var(--grad-primary);
+  --glow-orange-40: var(--glow-primary);
 }
 
 .context-menu-container {
