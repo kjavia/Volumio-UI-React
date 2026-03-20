@@ -1,10 +1,23 @@
 // Central configuration for the Stylish Player app.
-// Since the app is served by the Volumio plugin on the device itself,
-// we derive the device host from window.location.hostname.
+//
+// In development, host and plugin port come from environment variables
+// (set VITE_DEV_HOST and VITE_DEV_PLUGIN_PORT in .env or .env.local).
+//
+// In production, the app is served by the plugin's own HTTP server so:
+//   VOLUMIO_HOST  = window.location.hostname  (the device's IP / hostname)
+//   PLUGIN_PORT   = window.location.port      (the port the plugin is running on)
 
-const VOLUMIO_HOST = '192.168.0.132';
+const isDev = import.meta.env.DEV;
+
+const VOLUMIO_HOST = isDev
+  ? import.meta.env.VITE_DEV_HOST
+  : window.location.hostname;
+
+const PLUGIN_PORT = isDev
+  ? Number(import.meta.env.VITE_DEV_PLUGIN_PORT)
+  : Number(window.location.port);
+
 const VOLUMIO_API_PORT = 3000;
-const PLUGIN_PORT = 3339;
 const SPECTRUM_STREAM_PORT = 8000;
 
 const VOLUMIO_BASE_URL = `http://${VOLUMIO_HOST}:${VOLUMIO_API_PORT}`;
@@ -20,3 +33,4 @@ export {
   PLUGIN_BASE_URL,
   SPECTRUM_STREAM_URL,
 };
+
