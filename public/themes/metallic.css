@@ -2127,6 +2127,20 @@ h2 {
   border: 1px solid #000;
 }
 
+/* ─── Media Containers ────────────────────────────────────────────────── */
+.album-art-container,
+.vinyl-container,
+.cd-container {
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
+}
+
 .volume-control {
   width: 100%;
   max-width: 440px;
@@ -3082,6 +3096,33 @@ h2 {
 .context-menu-item .material-icons {
   font-size: 18px;
   color: var(--text-secondary);
+}
+
+.cd-disc {
+  background: conic-gradient(from 180deg, #cfcfcf 0%, #ffffff 15%, #bdc3c7 30%, #95a5a6 45%, #bdc3c7 60%, #ffffff 75%, #bdc3c7 90%, #cfcfcf 100%);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2), 0 10px 30px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cd-disc::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: conic-gradient(transparent 0%, rgba(255, 0, 0, 0.1) 10%, rgba(255, 255, 0, 0.1) 20%, transparent 30%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 0, 255, 0.1) 65%, transparent 80%, rgba(255, 0, 255, 0.1) 90%, transparent 100%);
+  pointer-events: none;
+}
+
+.cd-inner-ring {
+  background: radial-gradient(circle, #e0e0e0 30%, #b0b0b0 100%);
+  border: 1px solid #777;
+}
+
+.cd-hole {
+  background: #111;
+  box-shadow: inset 0 2px 4px rgb(0, 0, 0);
 }
 
 :root {

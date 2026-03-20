@@ -42,7 +42,19 @@
         0 1px 0 rgba(255,255,255,0.1);
     border: 1px solid #000;
 }
-
+/* ─── Media Containers ────────────────────────────────────────────────── */
+.album-art-container,
+.vinyl-container,
+.cd-container {
+    width: 100%;
+    max-width: 440px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+}
 .volume-control {
     width: 100%;
     max-width: 440px;
