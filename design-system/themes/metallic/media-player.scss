@@ -169,3 +169,5 @@
     box-shadow: 0 0 5px #fff;
     opacity: 0.8;
 }
+.read-only .slider-fill::after { display: none; }
+.read-only .slider-track { cursor: default; }

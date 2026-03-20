@@ -2240,6 +2240,14 @@ h2 {
   opacity: 0.8;
 }
 
+.read-only .slider-fill::after {
+  display: none;
+}
+
+.read-only .slider-track {
+  cursor: default;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Dark Metallic / Black Chrome Theme

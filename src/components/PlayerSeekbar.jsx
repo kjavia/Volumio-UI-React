@@ -2,11 +2,12 @@ import React, { useRef } from 'react';
 import { Duration } from 'luxon';
 import { useSeek } from '@/contexts/SeekContext';
 
-const PlayerSeekbar = () => {
+const PlayerSeekbar = ({ readOnly }) => {
   const seekRef = useRef(null);
   const { seek, duration, seekTo } = useSeek();
 
   const handleSeek = (e) => {
+    if (readOnly) return;
     seekTo(Number(e.target.value));
   };
 
@@ -20,7 +21,7 @@ const PlayerSeekbar = () => {
   const progressPercent = durationSeconds > 0 ? (currentSeconds / durationSeconds) * 100 : 0;
 
   return (
-    <div className="slider-container px-2 px-md-3">
+    <div className={`slider-container px-2 px-md-3 ${readOnly ? 'read-only' : ''}`}>
       <span
         className="time-label text-end text-white-50"
         style={{ fontSize: '0.75rem', width: '35px' }}
@@ -28,17 +29,19 @@ const PlayerSeekbar = () => {
         {formatTime(currentSeconds)}
       </span>
       <div className="slider-track position-relative flex-grow-1 mx-2">
-        <input
-          type="range"
-          className="form-range position-absolute w-100 h-100 top-0 start-0 opacity-0 z-2"
-          min="0"
-          max={durationSeconds}
-          value={currentSeconds}
-          onChange={handleSeek}
-          style={{ cursor: 'pointer', margin: 0 }}
-        />
+        {!readOnly && (
+          <input
+            type="range"
+            className="form-range position-absolute w-100 h-100 top-0 start-0 opacity-0 z-2"
+            min="0"
+            max={durationSeconds}
+            value={currentSeconds}
+            onChange={handleSeek}
+            style={{ cursor: 'pointer', margin: 0 }}
+          />
+        )}
         <div className="slider-fill position-relative" style={{ width: `${progressPercent}%` }}>
-          <div className="slider-cap"></div>
+          {!readOnly && <div className="slider-cap"></div>}
         </div>
       </div>
       <span

@@ -4030,6 +4030,10 @@ input[type=range]::-moz-range-thumb:active {
   margin-top: 5px;
 }
 
+.read-only .slider-track {
+  cursor: default;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Aqua Theme (macOS Classic)

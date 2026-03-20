@@ -73,6 +73,7 @@ const getPlayerTypeForSource = (service, trackType) => {
 const Player = () => {
   const { data: pluginConfig } = usePluginConfig();
   const playerType = pluginConfig?.playerType || 'radio';
+  const showPlayerControls = pluginConfig?.showPlayerControls !== false;
 
   const {
     isConnected,
@@ -228,23 +229,25 @@ const Player = () => {
               />
 
               <div className="w-100 my-1 my-md-3 my-lg-4">
-                <PlayerSeekbar />
+                <PlayerSeekbar readOnly={!showPlayerControls} />
               </div>
 
-              <PlayerControls
-                isPlaying={isPlaying}
-                onPlayPause={togglePlay}
-                onNext={next}
-                onPrev={prev}
-                shuffle={random}
-                repeat={repeat}
-                onShuffle={toggleRandom}
-                onRepeat={toggleRepeat}
-                onAddToPlaylist={() => setShowAddToPlaylist(true)}
-                onShowPlaylist={() => setShowPlaylist(true)}
-                isFavourite={isFavourite}
-                onToggleFavourite={toggleFavourite}
-              />
+              {showPlayerControls && (
+                <PlayerControls
+                  isPlaying={isPlaying}
+                  onPlayPause={togglePlay}
+                  onNext={next}
+                  onPrev={prev}
+                  shuffle={random}
+                  repeat={repeat}
+                  onShuffle={toggleRandom}
+                  onRepeat={toggleRepeat}
+                  onAddToPlaylist={() => setShowAddToPlaylist(true)}
+                  onShowPlaylist={() => setShowPlaylist(true)}
+                  isFavourite={isFavourite}
+                  onToggleFavourite={toggleFavourite}
+                />
+              )}
 
               {!disableVolumeControl && (
                 <div className="mt-1 mt-md-3 mt-lg-5 w-100 px-2 px-lg-4">
