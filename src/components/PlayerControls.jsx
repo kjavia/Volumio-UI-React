@@ -66,7 +66,7 @@ const PlayerControls = ({
           <span className="material-icons">{isFavourite ? 'favorite' : 'favorite_border'}</span>
         </Button>
 
-        <Button classNames="btn-icon" onClick={onShowPlaylist} label="Show Playlist">
+        <Button classNames="btn-icon btn-text" onClick={onShowPlaylist} label="Show Playlist">
           <span className="material-icons">queue_music</span>
         </Button>
       </div>

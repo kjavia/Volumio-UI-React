@@ -1,139 +1,177 @@
 @use './variables.scss';
 
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDERS - Aqua Theme (macOS Classic Style)
+   ═══════════════════════════════════════════════════════════════════════ */
+
 .slider-group {
-  display: flex;
-  gap: 60px;
-  align-items: center;
+    display: flex;
+    gap: 60px;
+    align-items: center;
 }
 
-// ─── Vertical fader track ─────────────────────────────────────────────────────
+/* ─── Vertical Fader Track ─────────────────────────────────────────────── */
 .fader-track {
-  width: 10px;
-  height: 200px;
-  background: linear-gradient(180deg, #b8b8b8, #d8d8d8);
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow:
-    inset 0 1px 3px var(--shadow-15),
-    0 1px 0 var(--highlight-60);
-  position: relative;
-  margin: 0 20px;
+    width: 10px;
+    height: 200px;
+    background: linear-gradient(
+        180deg,
+        var(--color-gray-300, #c4c4c4),
+        var(--color-gray-200, #d6d6d6)
+    );
+    border-radius: 5px;
+    border: 1px solid var(--border-dark, rgba(0, 0, 0, 0.2));
+    box-shadow:
+        inset 0 1px 3px var(--shadow-15),
+        0 1px 0 var(--highlight-60);
+    position: relative;
+    margin: 0 20px;
 }
 
-// ─── Fader cap / knob ────────────────────────────────────────────────────────
-// Aqua: a bright white rounded thumbscrew
+/* ─── Fader Cap/Knob (Glossy White Aqua Style) ────────────────────────── */
 .fader-cap {
-  width: 46px;
-  height: 28px;
-  background: linear-gradient(180deg, #f8f8f8 0%, #d4d4d4 100%);
-  border-radius: 8px;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow:
-    0 3px 6px var(--shadow-20),
-    inset 0 1px 0 var(--highlight-80);
-  cursor: ns-resize;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 46px;
+    height: 28px;
+    background: linear-gradient(
+        180deg,
+        var(--btn-white-top, #ffffff) 0%,
+        var(--btn-white-btm, #dcdcdc) 100%
+    );
+    border-radius: 8px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--border-dark, rgba(0, 0, 0, 0.2));
+    box-shadow:
+        0 3px 6px var(--shadow-20),
+        inset 0 1px 0 var(--highlight-80);
+    cursor: ns-resize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-  // Center groove
-  &::after {
+.fader-cap::after {
     content: '';
     width: 60%;
     height: 2px;
-    background: rgba(0, 0, 0, 0.12);
+    background: var(--border-dark, rgba(0, 0, 0, 0.12));
     border-radius: 1px;
     box-shadow: 0 1px 0 var(--highlight-60);
-  }
-
-  &:hover {
-    background: linear-gradient(180deg, #ffffff, #dcdcdc);
-  }
-
-  &:active {
-    box-shadow:
-      0 1px 3px var(--shadow-15),
-      inset 0 1px 2px var(--shadow-10);
-  }
 }
 
-// ─── Scale / tick marks ───────────────────────────────────────────────────────
+.fader-cap:hover {
+    background: linear-gradient(
+        180deg,
+        var(--color-white, #ffffff),
+        var(--color-gray-150, #e0e0e0)
+    );
+}
+
+.fader-cap:active {
+    box-shadow:
+        0 1px 3px var(--shadow-15),
+        inset 0 1px 2px var(--shadow-10);
+}
+
+/* ─── Scale/Tick Marks ─────────────────────────────────────────────────── */
 .scale {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -22px;
-  width: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: var(--text-muted);
-  font-size: 10px;
-  font-family: var(--font-mono);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -22px;
+    width: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--text-secondary, #6e6e6e);
+    font-size: 10px;
+    font-family: var(--font-mono);
 }
 
 .scale-mark {
-  width: 6px;
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.25);
+    width: 6px;
+    height: 1px;
+    background-color: var(--border-dark, rgba(0, 0, 0, 0.25));
 }
 
 .scale-mark.long {
-  width: 12px;
-  background-color: rgba(0, 0, 0, 0.4);
+    width: 12px;
+    background-color: var(--color-gray-600, #6e6e6e);
 }
 
-// ─── Horizontal range input (native, styled) ─────────────────────────────────
+/* ─── Horizontal Range Input (Native, Styled) ─────────────────────────── */
 input[type='range'] {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 6px;
-  border-radius: 3px;
-  background: linear-gradient(180deg, #b8b8b8, #d0d0d0);
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  outline: none;
-  width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(
+        180deg,
+        var(--color-gray-300, #c4c4c4),
+        var(--color-gray-200, #d6d6d6)
+    );
+    border: 1px solid var(--border-dark, rgba(0, 0, 0, 0.15));
+    outline: none;
+    width: 100%;
+}
 
-  &::-webkit-slider-thumb {
+input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 22px;
     height: 22px;
     border-radius: 50%;
 
-    // Classic Aqua Blue Gel Thumb
-    background: radial-gradient(circle at 50% 30%, #a4d7ff 0%, #1e69de 60%, #1254c0 100%);
+    /* Classic Aqua Blue Gel Thumb */
+    background: radial-gradient(
+        circle at 50% 30%,
+        var(--color-primary-light, #6cabff) 0%,
+        var(--btn-primary-btm, #1e69de) 60%,
+        var(--color-primary-dark, #1060e8) 100%
+    );
     box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.4),
-      inset 0 1px 2px rgba(255, 255, 255, 0.6);
+        0 1px 3px var(--shadow-40),
+        inset 0 1px 2px var(--highlight-60);
 
-    border: 1px solid #104191;
+    border: 1px solid var(--color-primary-deep, #0036ab);
     cursor: pointer;
-    margin-top: -8px; // Align to track
+    margin-top: -8px; /* Align to track */
     position: relative;
     z-index: 2;
+}
 
-    &:active {
-      background: radial-gradient(circle at 50% 30%, #7dbefc 0%, #10428d 60%, #0c3372 100%);
-    }
-  }
+input[type='range']::-webkit-slider-thumb:active {
+    background: radial-gradient(
+        circle at 50% 30%,
+        var(--btn-primary-top, #6db3f2) 0%,
+        var(--color-primary-dark, #1060e8) 60%,
+        var(--color-primary-deep, #0036ab) 100%
+    );
+}
 
-  &::-moz-range-thumb {
+input[type='range']::-moz-range-thumb {
     width: 22px;
     height: 22px;
-    border: 1px solid #104191;
+    border: 1px solid var(--color-primary-deep, #0036ab);
     border-radius: 50%;
-    background: radial-gradient(circle at 50% 30%, #a4d7ff 0%, #1e69de 60%, #1254c0 100%);
+    background: radial-gradient(
+        circle at 50% 30%,
+        var(--color-primary-light, #6cabff) 0%,
+        var(--btn-primary-btm, #1e69de) 60%,
+        var(--color-primary-dark, #1060e8) 100%
+    );
     box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.4),
-      inset 0 1px 2px rgba(255, 255, 255, 0.6);
+        0 1px 3px var(--shadow-40),
+        inset 0 1px 2px var(--highlight-60);
     cursor: pointer;
+}
 
-    &:active {
-      background: radial-gradient(circle at 50% 30%, #7dbefc 0%, #10428d 60%, #0c3372 100%);
-    }
-  }
+input[type='range']::-moz-range-thumb:active {
+    background: radial-gradient(
+        circle at 50% 30%,
+        var(--btn-primary-top, #6db3f2) 0%,
+        var(--color-primary-dark, #1060e8) 60%,
+        var(--color-primary-deep, #0036ab) 100%
+    );
 }

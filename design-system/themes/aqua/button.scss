@@ -95,20 +95,144 @@
   }
 }
 
-// Compatibility with existing classes
-.btn-primary {
-  // Inherits default blue styles
-}
+// ─── Semantic Button Variants (Matching Skeuomorphic Theme) ──────────────────
 
-// ─── Orange / destructive mapped to Aqua red ─────────────────────────────────
-.btn-orange {
-  // Use a red gel gradient
-  background: linear-gradient(to bottom, #ff9e9e 0%, #e85555 50%, #d62d2d 51%, #ff6b6b 100%);
-  border: 1px solid #b02020;
+.btn-primary {
+  // Explicit Aqua blue (same as default .btn)
+  background: linear-gradient(to bottom, #74b0e6 0%, #1e69de 50%, #1254c0 51%, #539fe1 100%);
+  border: 1px solid #104191;
+  color: #ffffff;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
 
   &:active {
-    background: linear-gradient(to bottom, #b02020 0%, #c03030 50%, #d62d2d 51%, #e85555 100%);
+    background: linear-gradient(to bottom, #10428d 0%, #195ac9 50%, #2972e6 51%, #5ba7ef 100%);
+    border-color: #0c3372;
   }
+}
+
+.btn-success {
+  // Green traffic light gel
+  background: linear-gradient(
+    to bottom,
+    var(--btn-success-top) 0%,
+    var(--btn-success-btm) 50%,
+    var(--color-success-dark) 51%,
+    var(--btn-success-top) 100%
+  );
+  border: 1px solid var(--color-success-dark);
+  color: #ffffff;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
+
+  &:active {
+    background: linear-gradient(
+      to bottom,
+      var(--color-success-dark) 0%,
+      var(--color-success) 50%,
+      var(--btn-success-top) 51%,
+      var(--color-success-light) 100%
+    );
+  }
+}
+
+.btn-warning {
+  // Yellow traffic light gel
+  background: linear-gradient(
+    to bottom,
+    var(--btn-warning-top) 0%,
+    var(--btn-warning-btm) 50%,
+    var(--color-warning-dark) 51%,
+    var(--btn-warning-top) 100%
+  );
+  border: 1px solid var(--color-warning-dark);
+  color: #000000;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  &:active {
+    background: linear-gradient(
+      to bottom,
+      var(--color-warning-dark) 0%,
+      var(--color-warning) 50%,
+      var(--btn-warning-top) 51%,
+      var(--color-warning-light) 100%
+    );
+  }
+}
+
+.btn-danger {
+  // Red traffic light gel
+  background: linear-gradient(
+    to bottom,
+    var(--btn-danger-top) 0%,
+    var(--btn-danger-btm) 50%,
+    var(--color-danger-dark) 51%,
+    var(--btn-danger-top) 100%
+  );
+  border: 1px solid var(--color-danger-dark);
+  color: #ffffff;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
+
+  &:active {
+    background: linear-gradient(
+      to bottom,
+      var(--color-danger-dark) 0%,
+      var(--color-danger) 50%,
+      var(--btn-danger-top) 51%,
+      var(--color-danger-light) 100%
+    );
+  }
+}
+
+.btn-info {
+  // Teal/cyan gel
+  background: linear-gradient(
+    to bottom,
+    var(--btn-info-top) 0%,
+    var(--btn-info-btm) 50%,
+    var(--color-info-dark) 51%,
+    var(--btn-info-top) 100%
+  );
+  border: 1px solid var(--color-info-dark);
+  color: #ffffff;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
+
+  &:active {
+    background: linear-gradient(
+      to bottom,
+      var(--color-info-dark) 0%,
+      var(--color-info) 50%,
+      var(--btn-info-top) 51%,
+      var(--color-info-light) 100%
+    );
+  }
+}
+
+.btn-black {
+  // Dark graphite gel
+  background: linear-gradient(
+    to bottom,
+    var(--btn-black-top) 0%,
+    var(--btn-black-btm) 50%,
+    #1a1a1a 51%,
+    var(--btn-black-top) 100%
+  );
+  border: 1px solid #000000;
+  color: #ffffff;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
+
+  &:active {
+    background: linear-gradient(
+      to bottom,
+      #1a1a1a 0%,
+      var(--btn-black-btm) 50%,
+      var(--btn-black-top) 51%,
+      var(--color-gray-600) 100%
+    );
+  }
+}
+
+// ─── Backward Compatibility Alias ─────────────────────────────────────────────
+.btn-orange {
+  @extend .btn-primary;
 }
 
 // ─── Square-style button (hardware-style) ────────────────────────────────────
@@ -130,6 +254,51 @@
   &:active {
     transform: translateY(1px);
     box-shadow: inset 0 2px 4px var(--shadow-15);
+  }
+}
+
+// ─── Icon Button (ghost style) ──────────────────────────────────────────────
+// Transparent background with subtle hover feedback, for secondary actions
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-gray-400, #888);
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  box-shadow: none;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--color-gray-600, #555);
+  }
+
+  &:active {
+    background: rgba(0, 0, 0, 0.12);
+    color: var(--color-gray-700, #444);
+    transform: none;
+    box-shadow: none;
+  }
+
+  // Active/toggled state — blue accent
+  &.active {
+    color: var(--btn-primary-btm, #1e69de);
+    transform: none;
+    box-shadow: none;
+  }
+
+  &.active:hover {
+    background: rgba(30, 105, 222, 0.1);
   }
 }
 

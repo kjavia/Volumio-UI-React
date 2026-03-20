@@ -1,0 +1,103 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PLAYLIST - Aqua Theme (macOS Classic Style)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Playlist Items ── */
+.playlist-list {
+  padding-bottom: 1rem;
+}
+
+.playlist-item {
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: var(--list-item-bg-hover);
+  }
+}
+
+/* Active / current track */
+.playlist-item--active {
+  background: var(--list-item-bg-hover);
+
+  .playlist-track-title {
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+}
+
+/* ── Album Art ── */
+.playlist-art-wrap {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border-dark);
+  box-shadow: 0 1px 2px var(--shadow-10);
+}
+
+.playlist-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.playlist-art--empty {
+  background: var(--color-gray-200);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-gray-500);
+}
+
+/* Play icon overlay on current track's art */
+.playlist-art-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--shadow-60);
+  color: var(--color-white);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ── Track Text ── */
+.playlist-track-title {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+  font-family: var(--font-label);
+  transition: color 0.15s ease;
+}
+
+.playlist-track-meta {
+  font-size: 0.72rem;
+  color: var(--color-gray-600);
+  line-height: 1.3;
+  font-family: var(--font-label);
+}
+
+/* ── Remove Button ── */
+.playlist-remove {
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+  text-decoration: none !important;
+  color: var(--color-gray-500);
+
+  &:hover {
+    color: var(--color-danger) !important;
+  }
+
+  .material-icons {
+    font-size: 1.1rem;
+  }
+}

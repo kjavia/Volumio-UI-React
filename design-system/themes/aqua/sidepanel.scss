@@ -1,0 +1,70 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDE PANEL - Aqua Theme (macOS Classic Style)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Backdrop ── */
+.slide-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1040;
+  background: transparent;
+  pointer-events: none;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.show {
+    background: var(--shadow-40);
+    pointer-events: auto;
+  }
+}
+
+/* ── Panel ── */
+.slide-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  max-width: 80vw;
+
+  /* Frosted glass effect */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+
+  border-right: 1px solid var(--border-light);
+  box-shadow: 4px 0 32px var(--shadow-30);
+
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+/* ── Header ── */
+.slide-panel-header {
+  border-bottom: 1px solid var(--border-light);
+  flex-shrink: 0;
+  background: var(--highlight-10);
+}
+
+.slide-panel-title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+/* ── Body ── */
+.slide-panel-body {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+}

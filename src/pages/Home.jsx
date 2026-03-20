@@ -69,7 +69,7 @@ const ContextMenu = () => {
       {isOpen && (
         <>
           <div className="context-menu-backdrop" onClick={() => setIsOpen(false)} />
-          <div className="context-menu">
+          <div className="context-menu open">
             <button className="context-menu-item" onClick={handleRefresh}>
               <span className="material-icons">refresh</span>
               Refresh
