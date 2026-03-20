@@ -3652,6 +3652,428 @@ h2 {
     font-size: 1rem;
   }
 }
+/* ── Digital LCD Clock — Metallic Chrome Variant ───────────────────────────
+ * Reference: retro LCD weather-station / radio clock aesthetic
+ * Dark gunmetal bezel + pale cool-gray LCD glass + classic dark segments
+ * ──────────────────────────────────────────────────────────────────────── */
+/* ── Centering wrapper ──────────────────────────────────────────────────── */
+.digital-clock-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  height: 90dvh;
+  max-width: none;
+  margin: 0 auto;
+  container-type: size;
+}
+
+/* ── Outer frame — thick dark-metal bezel ──────────────────────────────── */
+.digital-clock-frame {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  padding: 2cqw 2.5cqw;
+  background: linear-gradient(180deg, #2e2e2e 0%, #0e0e0e 100%);
+  border: 0.5cqw solid #111111;
+  border-radius: 6px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.07), inset 0 -2px 4px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+/* ── Date + weather row below the LCD panel ─────────────────────────────── */
+.lcd-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5cqw;
+  margin-top: 1.5cqw;
+}
+
+.lcd-date {
+  font-family: "Roboto Condensed", "Roboto", sans-serif;
+  font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gray-300, #aaa);
+  text-align: center;
+}
+
+.lcd-weather {
+  display: flex;
+  align-items: center;
+  gap: 0.5cqw;
+}
+
+.lcd-weather-icon {
+  font-size: clamp(0.9rem, 2cqw, 3rem);
+  color: var(--color-primary, #00e1ff);
+  filter: drop-shadow(0 0 0.3cqw rgba(0, 225, 255, 0.5));
+}
+
+.lcd-weather-temp {
+  font-family: "Roboto Condensed", "Roboto", sans-serif;
+  font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-primary, #00e1ff);
+}
+
+/* ── LCD Panel (the glassy screen area) ─────────────────────────────────── */
+.digital-clock {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.2cqw 1.8cqw;
+  border-radius: 2px;
+  background: #c4d0d4;
+  border: 0.2cqw solid #8fa0a6;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35), inset 0 0 0 0.1cqw rgba(255, 255, 255, 0.25), 0 1px 0 rgba(255, 255, 255, 0.04);
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.02) 2px, rgba(0, 0, 0, 0.02) 3px), linear-gradient(180deg, #cdd9dd 0%, #c4d0d4 60%, #b8c6cb 100%);
+}
+
+/* ── Day-of-week bar ────────────────────────────────────────────────────── */
+.lcd-days {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8cqw;
+  margin-bottom: 0.8cqw;
+  font-family: "Roboto Condensed", "Roboto", sans-serif;
+  font-size: clamp(0.55rem, 1.1cqw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.lcd-days span {
+  opacity: 0.25;
+  color: #1c3038;
+}
+.lcd-days .active {
+  color: #1c3038;
+  opacity: 1;
+  border-bottom: 0.2cqw solid #1c3038;
+}
+
+/* ── Time row ───────────────────────────────────────────────────────────── */
+.lcd-time {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6cqw;
+}
+
+.lcd-digits {
+  display: flex;
+  align-items: center;
+  gap: 0.2cqw;
+}
+
+.lcd-ampm {
+  font-family: "Roboto Condensed", "Roboto", sans-serif;
+  font-size: clamp(0.75rem, 2.2cqw, 3.5rem);
+  font-weight: 800;
+  color: #1c3038;
+  letter-spacing: 0.08em;
+  padding-bottom: 0.2cqw;
+  margin-left: 0.4cqw;
+  text-transform: uppercase;
+}
+
+/* ── Colon separator ────────────────────────────────────────────────────── */
+.lcd-colon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28%;
+  width: 1.5cqw;
+  height: 100%;
+  padding: 15% 0;
+}
+
+.lcd-colon-dot {
+  width: 0.8cqw;
+  height: 0.8cqw;
+  background: #1c3038;
+  border-radius: 1px;
+}
+
+/* ── 7-Segment Digit ────────────────────────────────────────────────────── */
+.lcd-digit {
+  position: relative;
+  width: 11cqw;
+  height: 18.7cqw;
+}
+
+.seg {
+  position: absolute;
+  background: #1c3038;
+  transition: opacity 0.1s ease;
+}
+.seg.on {
+  opacity: 1;
+}
+.seg.off {
+  opacity: 0.07;
+}
+
+.seg-a,
+.seg-d,
+.seg-g {
+  left: 10%;
+  width: 80%;
+  height: 7%;
+  clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
+}
+
+.seg-a {
+  top: 0;
+}
+
+.seg-g {
+  top: 46.5%;
+}
+
+.seg-d {
+  bottom: 0;
+}
+
+.seg-b,
+.seg-c,
+.seg-e,
+.seg-f {
+  width: 13%;
+  height: 42%;
+  clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
+}
+
+.seg-b {
+  top: 4%;
+  right: 0;
+}
+
+.seg-c {
+  bottom: 4%;
+  right: 0;
+}
+
+.seg-f {
+  top: 4%;
+  left: 0;
+}
+
+.seg-e {
+  bottom: 4%;
+  left: 0;
+}
+
+/* ── Analog Clock — Metallic Chrome Variant ────────────────────────────────
+ * Dark gunmetal bezel, near-black recessed face, chrome hands,
+ * electric-cyan second hand + accents
+ * ──────────────────────────────────────────────────────────────────────── */
+/* Centering wrapper */
+.analog-clock-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  container-type: size;
+}
+
+/* Outer container — square aspect ratio */
+.analog-clock {
+  --clock-size: min(80cqw, 80cqh);
+  width: var(--clock-size);
+  height: var(--clock-size);
+}
+
+/* Bezel — thick dark-gunmetal ring with chrome edge highlight */
+.clock-bezel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 5%;
+  background: linear-gradient(145deg, #3a3a3a 0%, #111111 50%, #2a2a2a 100%);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.75), inset 0 2px 4px rgba(255, 255, 255, 0.08), inset 0 -2px 6px rgba(0, 0, 0, 0.5);
+  border: 2px solid #0a0a0a;
+}
+
+/* Face — deep dark recessed dial */
+.clock-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 35%, #1e1e1e 0%, #0a0a0a 100%);
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.7), inset 0 0 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid #000000;
+}
+
+/* ── Tick marks ─────────────────────────────────────────────────────────── */
+.clock-tick {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 50%;
+  transform-origin: bottom center;
+  pointer-events: none;
+}
+
+.clock-tick::before {
+  content: "";
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 4%;
+  border-radius: 1px;
+}
+
+/* Hour ticks — chrome bright */
+.clock-tick--hour::before {
+  height: 10%;
+  background: var(--color-gray-200, #cccccc);
+  width: 3px;
+  margin-left: -0.5px;
+}
+
+/* Minute ticks — dim chrome */
+.clock-tick--minute::before {
+  height: 5%;
+  background: var(--color-gray-600, #444444);
+  width: 1px;
+}
+
+/* ── Hour digits ────────────────────────────────────────────────────────── */
+.clock-hour-digit {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-family: "Roboto Condensed", "Roboto", sans-serif;
+  font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+  font-weight: 700;
+  color: var(--color-gray-150, #dddddd);
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+  line-height: 1;
+}
+
+/* ── Hands ──────────────────────────────────────────────────────────────── */
+.clock-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 2px;
+}
+
+/* Hour hand — short, brushed chrome */
+.clock-hand--hour {
+  width: 7px;
+  height: 25%;
+  margin-left: -3.5px;
+  background: linear-gradient(180deg, #e0e0e0 0%, #888888 100%);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  border-radius: 3px 3px 1px 1px;
+  z-index: 3;
+}
+
+/* Minute hand — longer, polished chrome */
+.clock-hand--minute {
+  width: 3px;
+  height: 35%;
+  margin-left: -1.5px;
+  background: linear-gradient(180deg, #ffffff 0%, #aaaaaa 100%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 1.5px 1.5px 1px 1px;
+  z-index: 4;
+}
+
+/* Second hand — electric cyan accent */
+.clock-hand--second {
+  width: 1.5px;
+  height: 38%;
+  margin-left: -0.75px;
+  background: var(--color-primary, #00e1ff);
+  box-shadow: 0 0 6px rgba(0, 225, 255, 0.6);
+  border-radius: 1px;
+  z-index: 5;
+  transition: none;
+}
+
+/* Center cap — cyan-lit pivot */
+.clock-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5%;
+  height: 5%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--color-primary, #00e1ff);
+  box-shadow: 0 0 0 2px rgba(0, 225, 255, 0.3), 0 0 10px rgba(0, 225, 255, 0.5), 0 2px 6px rgba(0, 0, 0, 0.6);
+  z-index: 6;
+}
+
+/* Day & date */
+.clock-face-info {
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.clock-face-day {
+  font-family: "Roboto Condensed", "Roboto", sans-serif;
+  font-size: clamp(0.8rem, 4cqi, 1.5rem);
+  font-weight: 600;
+  color: var(--color-gray-600, #444444);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.clock-face-date {
+  font-family: "Roboto Condensed", "Roboto", sans-serif;
+  font-size: clamp(0.8rem, 4cqi, 1.5rem);
+  font-weight: 700;
+  color: var(--color-gray-200, #cccccc);
+}
+
+/* ── Weather on face ────────────────────────────────────────────────────── */
+.clock-face-weather {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.clock-face-weather-icon {
+  font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+  color: var(--color-primary, #00e1ff);
+  filter: drop-shadow(0 0 3px rgba(0, 225, 255, 0.5));
+}
+
+.clock-face-weather-temp {
+  font-family: "Roboto Condensed", "Roboto", sans-serif;
+  font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+  font-weight: 700;
+  color: var(--color-gray-150, #dddddd);
+  white-space: nowrap;
+}
+
 body {
   background-color: var(--bg-color);
 }

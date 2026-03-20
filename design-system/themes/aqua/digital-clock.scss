@@ -1,0 +1,222 @@
+/* ── Digital LCD Clock — Aqua / Brushed Aluminum Variant ───────────────────
+ * Reference: retro LCD weather-station / radio clock aesthetic
+ * Brushed-aluminum bezel + clean white LCD glass + navy segments + Aqua blue
+ * ──────────────────────────────────────────────────────────────────────── */
+
+// LCD glass & segment palette
+$seg-color:        #003366;   // deep navy — classic LCD segment ink on a light panel
+$seg-off-opacity:  0.06;
+$lcd-bg:           #e8eff5;   // cool white — backlit LCD glass
+$lcd-border:       #b0bec5;
+$lcd-shadow-inset: rgba(0, 0, 0, 0.18);
+
+// Outer frame — brushed aluminum (light macOS chrome)
+$frame-bg-top:     #e2e2e2;
+$frame-bg-bottom:  #c8c8c8;
+$frame-border:     #aaaaaa;
+$frame-highlight:  rgba(255, 255, 255, 0.75);
+
+/* ── Centering wrapper ──────────────────────────────────────────────────── */
+.digital-clock-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  height: 90dvh;
+  max-width: none;
+  margin: 0 auto;
+  container-type: size;
+}
+
+/* ── Outer frame — brushed aluminum bezel ───────────────────────────────── */
+.digital-clock-frame {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  padding: 2cqw 2.5cqw;
+  background: linear-gradient(180deg, $frame-bg-top 0%, $frame-bg-bottom 100%);
+  border: 0.4cqw solid $frame-border;
+  border-radius: 10px;
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 $frame-highlight,
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
+  user-select: none;
+}
+
+/* ── Date + weather row below the LCD panel ─────────────────────────────── */
+.lcd-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5cqw;
+  margin-top: 1.5cqw;
+}
+
+.lcd-date {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-gray-550, #7a7a7a);
+  text-align: center;
+}
+
+.lcd-weather {
+  display: flex;
+  align-items: center;
+  gap: 0.5cqw;
+}
+
+.lcd-weather-icon {
+  font-size: clamp(0.9rem, 2cqw, 3rem);
+  color: var(--color-primary, #147aff);
+}
+
+.lcd-weather-temp {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-primary, #147aff);
+}
+
+/* ── LCD Panel (clean bright-white screen area) ─────────────────────────── */
+.digital-clock {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.2cqw 1.8cqw;
+  border-radius: 4px;
+  border: 0.2cqw solid $lcd-border;
+  box-shadow:
+    inset 0 2px 5px $lcd-shadow-inset,
+    inset 0 0 0 0.1cqw rgba(255, 255, 255, 0.6),
+    0 1px 0 rgba(255, 255, 255, 0.8);
+
+  // Subtle horizontal scanlines + top-to-bottom depth gradient
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.015) 2px,
+      rgba(0, 0, 0, 0.015) 3px
+    ),
+    linear-gradient(180deg, #f0f5f9 0%, $lcd-bg 55%, #d8e5ee 100%);
+}
+
+/* ── Day-of-week bar ────────────────────────────────────────────────────── */
+.lcd-days {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8cqw;
+  margin-bottom: 0.8cqw;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.55rem, 1.1cqw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+
+  span {
+    opacity: 0.22;
+    color: $seg-color;
+  }
+
+  .active {
+    // Aqua blue highlight for the current day
+    color: var(--color-primary, #147aff);
+    opacity: 1;
+    border-bottom: 0.2cqw solid var(--color-primary, #147aff);
+  }
+}
+
+/* ── Time row ───────────────────────────────────────────────────────────── */
+.lcd-time {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6cqw;
+}
+
+.lcd-digits {
+  display: flex;
+  align-items: center;
+  gap: 0.2cqw;
+}
+
+.lcd-ampm {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.75rem, 2.2cqw, 3.5rem);
+  font-weight: 800;
+  color: $seg-color;
+  letter-spacing: 0.08em;
+  padding-bottom: 0.2cqw;
+  margin-left: 0.4cqw;
+  text-transform: uppercase;
+}
+
+/* ── Colon separator ────────────────────────────────────────────────────── */
+.lcd-colon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28%;
+  width: 1.5cqw;
+  height: 100%;
+  padding: 15% 0;
+}
+
+.lcd-colon-dot {
+  width: 0.8cqw;
+  height: 0.8cqw;
+  background: $seg-color;
+  border-radius: 1px;
+}
+
+/* ── 7-Segment Digit ────────────────────────────────────────────────────── */
+.lcd-digit {
+  position: relative;
+  width: 11cqw;
+  height: calc(11cqw * 1.7);
+}
+
+.seg {
+  position: absolute;
+  background: $seg-color;
+  transition: opacity 0.1s ease;
+
+  &.on  { opacity: 1; }
+  &.off { opacity: $seg-off-opacity; }
+}
+
+// Horizontal segments (a, d, g) — diamond/hex clip shape
+.seg-a,
+.seg-d,
+.seg-g {
+  left: 10%;
+  width: 80%;
+  height: 7%;
+  clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
+}
+
+.seg-a { top: 0; }
+.seg-g { top: 46.5%; }
+.seg-d { bottom: 0; }
+
+// Vertical segments (b, c, e, f) — diamond/hex clip shape
+.seg-b,
+.seg-c,
+.seg-e,
+.seg-f {
+  width: 13%;
+  height: 42%;
+  clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
+}
+
+.seg-b { top: 4%;    right: 0; }
+.seg-c { bottom: 4%; right: 0; }
+.seg-f { top: 4%;    left: 0; }
+.seg-e { bottom: 4%; left: 0; }

@@ -1,0 +1,212 @@
+/* ── Analog Clock — Aqua / Brushed Aluminum Variant ────────────────────────
+ * Brushed-aluminum bezel, bright white face, dark navy hands,
+ * Aqua-blue second hand + accents (macOS classic aesthetic)
+ * ──────────────────────────────────────────────────────────────────────── */
+
+/* Centering wrapper */
+.analog-clock-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  container-type: size;
+}
+
+/* Outer container — square aspect ratio */
+.analog-clock {
+  --clock-size: min(80cqw, 80cqh);
+  width: var(--clock-size);
+  height: var(--clock-size);
+}
+
+/* Bezel — brushed aluminum ring */
+.clock-bezel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 5%;
+  background: linear-gradient(145deg, #e8e8e8 0%, #c0c0c0 50%, #d8d8d8 100%);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.12);
+  border: 2px solid #aaaaaa;
+}
+
+/* Face — clean white macOS-style dial */
+.clock-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 30%, #ffffff 0%, #f0f0f0 70%, #e4e4e4 100%);
+  box-shadow:
+    inset 0 2px 10px rgba(0, 0, 0, 0.12),
+    inset 0 -1px 4px rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--color-gray-300, #c4c4c4);
+}
+
+/* ── Tick marks ─────────────────────────────────────────────────────────── */
+.clock-tick {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 50%;
+  transform-origin: bottom center;
+  pointer-events: none;
+}
+
+.clock-tick::before {
+  content: '';
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 4%;
+  border-radius: 1px;
+}
+
+/* Hour ticks — dark navy, prominent */
+.clock-tick--hour::before {
+  height: 10%;
+  background: #1d1d1f;
+  width: 3px;
+  margin-left: -0.5px;
+}
+
+/* Minute ticks — mid-gray */
+.clock-tick--minute::before {
+  height: 5%;
+  background: var(--color-gray-300, #c4c4c4);
+  width: 1px;
+}
+
+/* ── Hour digits ────────────────────────────────────────────────────────── */
+.clock-hour-digit {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+  font-weight: 700;
+  color: #1d1d1f;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  line-height: 1;
+}
+
+/* ── Hands ──────────────────────────────────────────────────────────────── */
+.clock-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 2px;
+}
+
+/* Hour hand — short, dark */
+.clock-hand--hour {
+  width: 7px;
+  height: 25%;
+  margin-left: -3.5px;
+  background: #1d1d1f;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  border-radius: 3px 3px 1px 1px;
+  z-index: 3;
+}
+
+/* Minute hand — longer, slightly lighter */
+.clock-hand--minute {
+  width: 3px;
+  height: 35%;
+  margin-left: -1.5px;
+  background: #333333;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  border-radius: 1.5px 1.5px 1px 1px;
+  z-index: 4;
+}
+
+/* Second hand — Aqua blue */
+.clock-hand--second {
+  width: 1.5px;
+  height: 38%;
+  margin-left: -0.75px;
+  background: var(--color-primary, #147aff);
+  box-shadow: 0 0 4px rgba(20, 122, 255, 0.4);
+  border-radius: 1px;
+  z-index: 5;
+  transition: none;
+}
+
+/* Center cap — Aqua blue pivot dot */
+.clock-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5%;
+  height: 5%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--color-primary, #147aff);
+  box-shadow:
+    0 0 0 2px rgba(20, 122, 255, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.25);
+  z-index: 6;
+}
+
+/* Day & date */
+.clock-face-info {
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.clock-face-day {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.8rem, 4cqi, 1.5rem);
+  font-weight: 600;
+  color: var(--color-gray-400, #ababab);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.clock-face-date {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.8rem, 4cqi, 1.5rem);
+  font-weight: 700;
+  color: #1d1d1f;
+}
+
+/* ── Weather on face ────────────────────────────────────────────────────── */
+.clock-face-weather {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.clock-face-weather-icon {
+  font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+  color: var(--color-primary, #147aff);
+}
+
+.clock-face-weather-temp {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+  font-weight: 700;
+  color: #1d1d1f;
+  white-space: nowrap;
+}
