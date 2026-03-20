@@ -11,8 +11,4 @@
   @include meta.load-css('bootstrap-bundle');
 }
 
-// Design-system theme — outside any layer, so it wins over @layer bootstrap
-// regardless of specificity or source order.
-@import './styles/themes/metallic.css';
-
 @import './styles/home-responsive.css';
