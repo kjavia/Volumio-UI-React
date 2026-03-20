@@ -4679,6 +4679,7 @@ h2 {
   width: 100%;
   pointer-events: auto;
   outline: none;
+  overflow: hidden; /* Prevents border clipping on corners */
   /* Industrial metallic surface */
   background: var(--device-surface);
   border-radius: 8px;
@@ -4904,11 +4905,12 @@ h2 {
   display: block;
   font-family: var(--font-label);
   font-size: 13px;
-  font-weight: 600;
-  color: var(--text-light);
+  font-weight: 700;
+  color: var(--text-orange);
   margin-bottom: 8px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  text-shadow: 0 1px 2px var(--shadow-40);
 }
 
 .dialog-section-title {
@@ -4919,6 +4921,31 @@ h2 {
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 12px;
+}
+
+/* ── Track Info Display ── */
+.dialog-track-info {
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  background: var(--color-gray-800);
+  border: 1px solid var(--border-dark);
+  box-shadow: inset 2px 2px 4px var(--shadow-30);
+}
+
+.dialog-track-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin: 0 0 6px 0;
+  line-height: 1.4;
+}
+
+.dialog-track-meta {
+  font-size: 14px;
+  color: var(--color-gray-300);
+  margin: 0;
+  line-height: 1.4;
 }
 
 /* ── Responsive ── */

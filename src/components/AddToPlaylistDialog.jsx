@@ -158,9 +158,9 @@ const AddToPlaylistDialog = ({ open, onClose, track }) => {
             <>
               {/* Track info */}
               {track && (
-                <div className="mb-3 pb-3 border-bottom">
-                  <p className="mb-1 fw-semibold">{track.title || 'Unknown Track'}</p>
-                  <p className="mb-0 text-muted small">
+                <div className="dialog-track-info">
+                  <p className="dialog-track-title">{track.title || 'Unknown Track'}</p>
+                  <p className="dialog-track-meta">
                     {track.artist || 'Unknown Artist'}
                     {track.album && ` • ${track.album}`}
                   </p>
