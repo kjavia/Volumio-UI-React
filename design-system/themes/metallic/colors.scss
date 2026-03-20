@@ -1,0 +1,78 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   COLOR UTILITIES - Metallic Chrome Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Background Utilities ───────────────────────────────────────────── */
+.bg-dark {
+    background-color: var(--panel-bg-dark) !important;
+}
+.bg-surface {
+    background: var(--device-surface) !important;
+}
+.bg-app {
+    background-color: var(--bg-color) !important;
+}
+.bg-list-item {
+    background-color: var(--list-item-bg) !important;
+}
+.bg-blue {
+    background: var(--grad-blue-vivid) !important;
+}
+.bg-primary {
+    background: var(--grad-primary) !important;
+}
+.bg-metallic {
+    background: var(--grad-metallic) !important;
+}
+.bg-chrome {
+    background: var(--grad-chrome) !important;
+}
+
+/* ─── Border Utilities ────────────────────────────────────────────────────── */
+.border-dark {
+    border-color: var(--border-dark) !important;
+}
+.border-light {
+    border-color: var(--border-light) !important;
+}
+.border-blue {
+    border-color: var(--color-blue-vivid) !important;
+}
+.border-primary {
+    border-color: var(--color-primary) !important;
+}
+.border-chrome {
+    border-color: var(--border-chrome) !important;
+}
+
+/* ─── Surface Patterns ─────────────────────────────────────────────────────── */
+/* Recessed dark panel (inset shadow — appears sunken into the device) */
+.panel {
+    background-color: var(--panel-bg-dark);
+    border-radius: 4px;
+    box-shadow:
+        inset 2px 2px 5px var(--shadow-70),
+        0 1px 0 var(--highlight-10);
+}
+
+/* Raised light surface (metallic chrome look) */
+.surface {
+    background: var(--grad-metallic);
+    border-radius: 4px;
+    box-shadow:
+        0 2px 5px var(--shadow-20),
+        inset 0 1px 0 var(--highlight-60);
+}
+
+/* Brushed metal effect */
+.brushed-metal {
+    background: var(--grad-chrome);
+    background-size: 100% 200%;
+    background-position: center;
+    box-shadow:
+        0 2px 4px var(--shadow-15),
+        inset 0 1px 0 var(--highlight-40),
+        inset 0 -1px 0 var(--shadow-10);
+}

@@ -1,0 +1,117 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TABS - Metallic Chrome Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Main Content Area */
+.content-display {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.tab-pane {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 100%;
+    max-width: 800px;
+}
+
+.tab-pane.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Placeholder Content */
+.placeholder-icon {
+    font-size: 80px;
+    color: var(--color-gray-600);
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 0 var(--highlight-20);
+}
+
+h2 {
+    font-family: var(--font-tech);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* Bottom Tab Bar */
+.tab-bar {
+    height: 90px;
+    background: linear-gradient(
+        135deg,
+        var(--color-gray-100) 0%,
+        var(--color-gray-200) 50%,
+        var(--color-gray-150) 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+    gap: 10px;
+    box-sizing: border-box;
+
+    border-top: 1px solid var(--highlight-30);
+    box-shadow:
+        0 -4px 12px var(--shadow-15),
+        inset 0 1px 0 var(--highlight-40);
+
+    z-index: 100;
+}
+
+/* Tab Buttons */
+.tab-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    height: 70px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-gray-600);
+    font-family: var(--font-label);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.tab-btn:hover {
+    background: var(--highlight-10);
+    color: var(--color-gray-700);
+}
+
+.tab-btn.active {
+    background: linear-gradient(
+        135deg,
+        var(--color-gray-300) 0%,
+        var(--color-gray-250) 100%
+    );
+    color: var(--color-primary);
+    box-shadow:
+        inset 2px 2px 6px var(--shadow-20),
+        0 0 8px var(--glow-primary);
+}
+
+.tab-btn .material-icons {
+    font-size: 28px;
+    margin-bottom: 4px;
+}

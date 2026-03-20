@@ -1,3 +1,23 @@
-@import './variables';
-@import './buttons';
-@import './forms';
+/* ═══════════════════════════════════════════════════════════════════════
+   METALLIC CHROME THEME - Main Index
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@import './variables.scss';
+@import './typography.scss';
+@import './colors.scss';
+@import './button.scss';
+@import './forms.scss';
+@import './progressbar.scss';
+@import './sliders.scss';
+@import './knobs.scss';
+@import './tabs.scss';
+@import './media-player.scss';
+@import './album-browser.scss';
+@import './playlist.scss';
+@import './sidepanel.scss';
+@import './context-menu.scss';
+@import './dialog.scss';
+
+body {
+  background-color: var(--bg-color);
+}

@@ -1,0 +1,148 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY - Metallic Chrome Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Google Fonts ──────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    font-weight: 400;
+    line-height: var(--leading-normal);
+    color: var(--text-dark);
+    background-color: var(--bg-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Headings ───────────────────────────────────────────────────────────── */
+/* Orbitron gives the modern metallic/tech aesthetic; chrome-like text-shadow */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-dark);
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    /* Chrome engraved look: subtle highlight and shadow */
+    text-shadow:
+        0 1px 0 var(--highlight-40),
+        0 -1px 0 var(--shadow-15);
+}
+
+h1 {
+    font-size: var(--text-4xl);
+    letter-spacing: var(--tracking-widest);
+}
+h2 {
+    font-size: var(--text-3xl);
+    letter-spacing: var(--tracking-wider);
+}
+h3 {
+    font-size: var(--text-2xl);
+    letter-spacing: var(--tracking-wider);
+}
+h4 {
+    font-size: var(--text-xl);
+}
+h5 {
+    font-size: var(--text-lg);
+}
+h6 {
+    font-size: var(--text-base);
+    letter-spacing: var(--tracking-normal);
+    text-transform: none;
+}
+
+/* ─── Display Heading (dark panel, glowing blue) ───────────────────────── */
+.display-heading {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    color: var(--text-light);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    text-shadow:
+        0 0 20px var(--glow-blue-40),
+        0 2px 4px var(--shadow-80);
+}
+
+/* ─── Paragraphs ─────────────────────────────────────────────────────────── */
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* ─── Text Utilities ─────────────────────────────────────────────────────── */
+.text-primary {
+    color: var(--text-primary) !important;
+}
+.text-secondary {
+    color: var(--text-secondary) !important;
+}
+.text-accent {
+    color: var(--text-accent) !important;
+}
+.text-blue {
+    color: var(--color-blue-vivid) !important;
+}
+.text-muted {
+    color: var(--text-muted) !important;
+}
+.text-light {
+    color: var(--text-light) !important;
+}
+.text-dark {
+    color: var(--text-dark) !important;
+}
+.text-success {
+    color: var(--text-success) !important;
+}
+.text-warning {
+    color: var(--text-warning) !important;
+}
+.text-danger {
+    color: var(--text-danger) !important;
+}
+.text-info {
+    color: var(--text-info) !important;
+}
+
+/* ─── Label/Badge Text ───────────────────────────────────────────────────── */
+.label-text {
+    font-family: var(display);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--text-secondary);
+}
+
+/* ─── Technical Display Text ─────────────────────────────────────────────── */
+.tech-display {
+    font-family: var(--font-tech);
+    font-size: var(--text-md);
+    font-weight: 400;
+    color: var(--color-primary);
+    letter-spacing: var(--tracking-wide);
+    text-shadow: 0 0 10px var(--glow-blue-40);
+}
+
+/* ─── Monospace/Code ─────────────────────────────────────────────────────── */
+code,
+kbd,
+samp,
+pre {
+    font-family: var(--font-mono);
+}

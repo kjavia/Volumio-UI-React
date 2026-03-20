@@ -1,43 +1,32 @@
-@import './variables';
+@use './variables.scss';
 
-/* =============================================================
-   Metallic Theme — Forms (Based on Skeuomorphic Structure)
-   ============================================================= */
+/* ═══════════════════════════════════════════════════════════════════════
+   FORMS - Metallic Chrome Theme
+   ═══════════════════════════════════════════════════════════════════════ */
 
-/* ── Container Styles ──────────────────────────────────────── */
 .settings-panel {
     width: 100%;
     max-width: 800px;
-    background-color: var(--metal-silver-light);
-    border-radius: 8px; /* Sharper corners for metal look */
+    background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-gray-200) 50%, var(--color-gray-150) 100%);
+    border-radius: 12px;
     padding: 40px;
-    
-    /* Panel Texture: Brushed Aluminum */
-    background-image: var(--bg-aluminum-linear);
-    
-    /* Strong Metallic Bevel */
-    box-shadow: 
-        inset 1px 1px 0 rgba(255, 255, 255, 0.8),
-        inset -1px -1px 0 rgba(0, 0, 0, 0.4),
-        0 4px 12px rgba(0, 0, 0, 0.3);
-    
+    box-shadow: 0 12px 32px var(--shadow-30), 0 4px 12px var(--shadow-20), inset 0 1px 0 var(--highlight-40);
     display: flex;
     flex-direction: column;
     gap: 30px;
-    border: 1px solid #999;
+    border: 1px solid var(--color-gray-300);
 }
 
 .panel-header {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid var(--color-gray-300);
     padding-bottom: 15px;
     margin-bottom: 10px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+    box-shadow: 0 1px 0 var(--highlight-20);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-/* ── Form Layout ───────────────────────────────────────────── */
 .form-section {
     display: flex;
     flex-direction: column;
@@ -45,19 +34,15 @@
 }
 
 .section-title {
-    font-family: var(--font-primary, sans-serif);
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--metal-grey-dark);
+    font-family: var(--font-tech);
+    font-size: 12px;
+    color: var(--color-primary);
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
-    
-    /* Indented line look */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid var(--color-gray-300);
     padding-bottom: 5px;
     margin-bottom: 10px;
+    text-shadow: 0 0 8px var(--glow-primary);
 }
 
 .form-group {
@@ -74,271 +59,110 @@
 }
 
 label {
-    font-family: var(--font-primary, sans-serif);
-    font-weight: 600;
+    font-family: var(--font-label);
+    font-weight: 500;
     font-size: 14px;
-    color: var(--metal-grey-deep);
-    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    color: var(--color-gray-700);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .input-desc {
     font-size: 11px;
-    color: #666;
+    color: var(--color-gray-600);
     margin-top: 4px;
     display: block;
+    text-transform: none;
     font-weight: 400;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
 }
 
-/* ── Input Fields ──────────────────────────────────────────── */
 .input-field {
     width: 100%;
-    /* Recessed dark screen look */
-    background-color: var(--bg-track-inset, #1a1c20);
-    border: none;
-    border-radius: 4px;
+    background-color: var(--color-gray-900);
+    border: 1px solid var(--color-gray-700);
+    border-radius: 6px;
     padding: 12px 15px;
-    
-    /* LCD style text */
-    color: var(--led-blue-on);
-    font-family: 'Courier New', monospace; 
-    font-weight: 600;
+    color: var(--color-primary);
+    font-family: var(--font-mono);
     font-size: 14px;
-    
-    /* Deep Inset Shadow */
-    box-shadow:
-        inset 2px 2px 6px rgba(0, 0, 0, 0.6),
-        inset -1px -1px 1px rgba(255, 255, 255, 0.05),
-        0 1px 0 rgba(255, 255, 255, 0.4); /* Bottom reflective lip */
-        
+    box-shadow: inset 2px 2px 6px var(--shadow-50), 0 1px 0 var(--highlight-10);
     transition: all 0.2s;
     box-sizing: border-box;
 }
 
 .input-field:focus {
     outline: none;
-    background-color: #101215;
-    box-shadow:
-        inset 2px 2px 6px rgba(0, 0, 0, 0.8),
-        0 0 0 1px rgba(51, 136, 255, 0.3); /* Subtle blue glow focus */
+    border-color: var(--color-primary);
+    box-shadow: inset 2px 2px 6px var(--shadow-50), 0 0 0 2px var(--glow-primary);
 }
 
-/* ── Select Dropdown ───────────────────────────────────────── */
-.select-wrapper {
-    position: relative;
-    width: 100%;
+.input-field::placeholder {
+    color: var(--color-gray-600);
+}
+
+textarea.input-field {
+    min-height: 100px;
+    resize: vertical;
 }
 
 .select-field {
-    appearance: none;
-    -webkit-appearance: none;
     width: 100%;
-    background-color: var(--metal-silver-mid);
-    background-image: var(--bg-aluminum-linear);
-    
-    border: none;
-    border-radius: 4px;
+    background-color: var(--color-gray-850);
+    border: 1px solid var(--color-gray-700);
+    border-radius: 6px;
     padding: 12px 15px;
-    color: var(--metal-grey-deep);
-    font-family: var(--font-primary, sans-serif);
-    font-weight: 600;
+    color: var(--text-light);
+    font-family: var(--font-body);
     font-size: 14px;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
-    
-    /* Convex Button feel */
-    box-shadow:
-        inset 1px 1px 0 rgba(255, 255, 255, 0.8),
-        inset -1px -1px 0 rgba(0, 0, 0, 0.2),
-        0 2px 4px rgba(0, 0, 0, 0.15);
-        
     cursor: pointer;
-    transition: transform 0.1s;
+    box-shadow: inset 1px 1px 3px var(--shadow-30), 0 1px 0 var(--highlight-10);
+    transition: all 0.2s;
 }
 
-.select-field:active {
-    background-color: var(--metal-silver-dark);
-    box-shadow:
-        inset 2px 2px 4px rgba(0, 0, 0, 0.3),
-        0 1px 0 rgba(255, 255, 255, 0.5);
-    transform: translateY(1px);
+.select-field:hover {
+    border-color: var(--color-gray-600);
 }
 
-.select-arrow {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: #666;
-    font-size: 12px;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+.select-field:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: inset 1px 1px 3px var(--shadow-30), 0 0 0 2px var(--glow-primary);
 }
 
-/* ── Toggle Switch ─────────────────────────────────────────── */
-.toggle-switch {
-    display: inline-block;
-    position: relative;
-    width: 50px;
-    height: 26px;
-    margin-right: 10px;
-}
-
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-/* The Track */
-.toggle-switch .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #222; /* Dark recessed track */
-    border-radius: 26px;
-    border: 1px solid rgba(0,0,0,0.3);
-    
-    /* Deep shadow */
-    box-shadow: 
-        inset 0 2px 6px rgba(0,0,0,0.6), 
-        0 1px 0 rgba(255,255,255,0.3);
-    transition: 0.3s;
-}
-
-/* The Thumb (Chrome) */
-.toggle-switch .slider:before {
-    position: absolute;
-    content: '';
-    height: 20px;
-    width: 20px;
-    left: 2px;
-    bottom: 2px;
-    background: radial-gradient(circle at 30% 30%, #fff, #d0d0d0 60%, #999 100%);
-    border-radius: 50%;
-    
-    /* Chrome shine */
-    box-shadow: 
-        0 2px 4px rgba(0,0,0,0.4),
-        inset 0 1px 0 rgba(255,255,255,0.9);
-        
-    transition: 0.3s;
-}
-
-/* Checked Actions */
-.toggle-switch input:checked + .slider {
-    /* Optional: Glow inside the track */
-    background-color: #1a1c20;
-    box-shadow: 
-        inset 0 2px 6px rgba(0,0,0,0.6), 
-        inset 0 0 8px var(--led-blue-on);
-}
-
-.toggle-switch input:checked + .slider:before {
-    transform: translateX(24px);
-    /* Reflecting the blue light on the chrome knob */
-    background: radial-gradient(circle at 30% 30%, #eef, #cce 60%, #99b 100%);
-}
-
-/* ── Radio & Checkbox Items ────────────────────────────────── */
-.radio-group, .checkbox-group {
+.toggle-wrapper {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 12px;
 }
 
-.radio-option, .checkbox-option {
+.toggle-switch {
+    width: 50px;
+    height: 26px;
+    background-color: var(--color-gray-700);
+    border-radius: 13px;
     position: relative;
-    display: flex;
-    align-items: center;
     cursor: pointer;
-    font-family: var(--font-primary, sans-serif);
-    font-size: 14px;
-    color: var(--metal-grey-dark);
-    user-select: none;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    box-shadow: inset 2px 2px 4px var(--shadow-40);
+    transition: all 0.3s;
 }
 
-.radio-option input, .checkbox-option input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
+.toggle-switch.active {
+    background: var(--grad-primary);
+    box-shadow: 0 0 8px var(--glow-primary);
 }
 
-/* ── Radio Mark (Round) ────────────────────────────────────── */
-.radio-option .checkmark {
-    position: relative;
-    height: 22px;
+.toggle-knob {
     width: 22px;
-    margin-right: 12px;
-    background-color: var(--metal-silver-mid);
-    border-radius: 50%;
-    
-    /* Spun metal look */
-    background-image: conic-gradient(from 45deg, #ccc 0%, #f0f0f0 25%, #bbb 50%, #f0f0f0 75%, #ccc 100%);
-    
-    /* Inset well */
-    box-shadow:
-        inset 0 1px 3px rgba(0, 0, 0, 0.4),
-        0 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-/* LED Indicator center */
-.radio-option .checkmark:after {
-    content: '';
-    position: absolute;
-    display: none;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--led-blue-on);
-    /* Soft glow */
-    box-shadow: 0 0 6px var(--led-blue-on), inset 0 1px 2px rgba(255,255,255,0.4);
-}
-
-.radio-option input:checked ~ .checkmark:after {
-    display: block;
-}
-
-/* ── Checkbox Mark (Square) ────────────────────────────────── */
-.checkbox-option .checkmark {
-    position: relative;
     height: 22px;
-    width: 22px;
-    margin-right: 12px;
-    background-color: var(--metal-silver-mid);
-    border-radius: 4px;
-    
-    /* Brushed Linear */
-    background-image: var(--bg-aluminum-linear);
-    
-    /* Pressed/Inset Look */
-    box-shadow:
-        inset 0 1px 3px rgba(0, 0, 0, 0.4),
-        0 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-/* LED Indicator (Square or Dot) */
-.checkbox-option .checkmark:after {
-    content: '';
+    background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-200));
+    border-radius: 50%;
     position: absolute;
-    display: none;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    background: var(--led-red-on); /* Red for variety, or stick to blue */
-    box-shadow: 0 0 6px var(--led-red-on), inset 0 1px 2px rgba(255,255,255,0.4);
+    top: 2px;
+    left: 2px;
+    box-shadow: 0 2px 6px var(--shadow-30), inset 0 1px 0 var(--highlight-40);
+    transition: all 0.3s;
 }
 
-.checkbox-option input:checked ~ .checkmark:after {
-    display: block;
+.toggle-switch.active .toggle-knob {
+    left: 26px;
 }
-

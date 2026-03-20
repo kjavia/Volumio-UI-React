@@ -1,0 +1,69 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   KNOBS - Metallic Chrome Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.knob-container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.knob {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+
+    /* Chrome metallic gradient */
+    background: radial-gradient(
+        circle at 30% 30%,
+        var(--color-gray-100),
+        var(--color-gray-300)
+    );
+
+    box-shadow:
+        0 4px 12px var(--shadow-30),
+        inset 0 2px 4px var(--highlight-40),
+        inset 0 -2px 4px var(--shadow-20);
+
+    transition: transform 0.1s ease;
+}
+
+.knob:active {
+    transform: scale(0.98);
+}
+
+/* Indicator line on knob */
+.knob::before {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 20px;
+    background: var(--color-primary);
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    box-shadow: 0 0 6px var(--glow-primary);
+}
+
+.knob-label {
+    font-family: var(--font-label);
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.knob-value {
+    font-family: var(--font-tech);
+    font-size: 14px;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-shadow: 0 0 8px var(--glow-primary);
+}

@@ -1,0 +1,151 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDERS - Metallic Chrome Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.slider-group {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+/* Vertical Fader Track */
+.fader-track {
+    width: 12px;
+    height: 200px;
+    background-color: var(--color-gray-900);
+    border-radius: 6px;
+    box-shadow:
+        inset 2px 2px 6px var(--shadow-60),
+        inset -1px -1px 2px var(--highlight-10),
+        0 0 0 1px var(--color-gray-750);
+    position: relative;
+    margin: 0 20px;
+}
+
+/* Fader Knob/Cap */
+.fader-cap {
+    width: 50px;
+    height: 30px;
+    background: linear-gradient(
+        135deg,
+        var(--color-gray-200),
+        var(--color-gray-300)
+    );
+    border-radius: 6px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow:
+        0 4px 10px var(--shadow-30),
+        inset 0 1px 0 var(--highlight-40),
+        inset 0 -1px 0 var(--shadow-15);
+    cursor: ns-resize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.15s ease;
+}
+
+.fader-cap::after {
+    content: '';
+    width: 80%;
+    height: 2px;
+    background-color: var(--color-gray-700);
+    box-shadow: 0 1px 0 var(--highlight-20);
+    border-radius: 1px;
+}
+
+.fader-cap:hover {
+    background: linear-gradient(
+        135deg,
+        var(--color-gray-150),
+        var(--color-gray-250)
+    );
+    box-shadow:
+        0 6px 14px var(--shadow-35),
+        inset 0 1px 0 var(--highlight-50);
+}
+
+.fader-cap:active {
+    transform: translate(-50%, -50%) scale(0.98);
+}
+
+/* Scale Marks */
+.scale {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -20px;
+    width: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--color-gray-400);
+    font-size: 10px;
+    font-family: var(--font-tech);
+}
+
+.scale-mark {
+    width: 8px;
+    height: 1px;
+    background-color: var(--color-gray-400);
+}
+
+.scale-mark.long {
+    width: 14px;
+    background-color: var(--color-gray-300);
+}
+
+/* Horizontal Slider */
+.slider-horizontal {
+    width: 100%;
+    height: 6px;
+    background: var(--color-gray-850);
+    border-radius: 3px;
+    position: relative;
+    box-shadow:
+        inset 2px 2px 4px var(--shadow-40),
+        0 1px 0 var(--highlight-05);
+    cursor: pointer;
+}
+
+.slider-thumb {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(
+        135deg,
+        var(--color-gray-100),
+        var(--color-gray-250)
+    );
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow:
+        0 3px 8px var(--shadow-30),
+        inset 0 1px 0 var(--highlight-40);
+    cursor: grab;
+    transition: all 0.15s ease;
+}
+
+.slider-thumb:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow:
+        0 4px 12px var(--shadow-35),
+        inset 0 1px 0 var(--highlight-50);
+}
+
+.slider-thumb:active {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.slider-fill {
+    height: 100%;
+    background: var(--grad-primary);
+    border-radius: 3px 0 0 3px;
+    box-shadow: 1px 0 6px var(--glow-primary);
+    transition: width 0.15s ease;
+}

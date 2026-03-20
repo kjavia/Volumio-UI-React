@@ -1,0 +1,76 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PROGRESS BAR - Metallic Chrome Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.progress-group {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 250px;
+}
+
+/* LED Segment Style */
+.led-bar-container {
+    display: flex;
+    gap: 4px;
+    background-color: var(--panel-bg-dark);
+    padding: 4px;
+    border-radius: 6px;
+    box-shadow:
+        inset 2px 2px 5px var(--shadow-50),
+        0 1px 0 var(--highlight-10);
+}
+
+.led-segment {
+    flex: 1;
+    height: 10px;
+    background-color: var(--led-off);
+    border-radius: 2px;
+    box-shadow: inset 0 0 3px var(--shadow-70);
+    transition: all 0.2s;
+}
+
+.led-segment.on {
+    background-color: var(--led-on);
+    box-shadow: 0 0 6px var(--glow-primary);
+}
+
+/* Smooth recessed bar */
+.smooth-bar-track {
+    height: 8px;
+    width: 100%;
+    background-color: var(--color-gray-850);
+    border-radius: 6px;
+    box-shadow:
+        inset 2px 2px 4px var(--shadow-50),
+        0 1px 0 var(--highlight-10);
+    overflow: hidden;
+    position: relative;
+}
+
+.smooth-bar-fill {
+    height: 100%;
+    width: 60%;
+    background: linear-gradient(
+        90deg,
+        var(--color-primary-light),
+        var(--color-primary)
+    );
+    box-shadow: 2px 0 8px var(--glow-primary);
+    border-radius: 6px;
+    position: relative;
+    transition: width 0.3s ease;
+}
+
+.smooth-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, var(--highlight-40), transparent);
+    border-radius: 6px 6px 0 0;
+}

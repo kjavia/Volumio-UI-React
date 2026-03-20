@@ -1,0 +1,131 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MEDIA PLAYER - Metallic Chrome Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.player-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--bg-color);
+}
+
+.player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 16px;
+}
+
+.transport-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.volume-control {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--panel-bg-dark);
+    border-radius: 8px;
+    box-shadow: inset 2px 2px 6px var(--shadow-40);
+}
+
+.track-info {
+    text-align: center;
+    padding: 20px;
+}
+
+.track-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    color: var(--text-light);
+    margin: 0 0 8px 0;
+    text-shadow: 0 1px 2px var(--shadow-30);
+}
+
+.track-artist {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.album-art {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    box-shadow:
+        0 8px 24px var(--shadow-40),
+        inset 0 0 0 1px var(--highlight-10);
+    object-fit: cover;
+}
+
+/* ─── Progress Sliders ────────────────────────────────────────────────── */
+.slider-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.slider-track {
+    flex-grow: 1;
+    height: 10px;
+    background-color: var(--color-gray-900);
+    border-radius: 6px;
+    box-shadow:
+        inset 2px 2px 5px var(--shadow-50),
+        0 1px 0 var(--highlight-05);
+    position: relative;
+    cursor: pointer;
+}
+
+.slider-fill {
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        var(--color-primary-light),
+        var(--color-primary)
+    );
+    border-radius: 6px 0 0 6px;
+    width: 30%;
+    position: relative;
+    box-shadow: 1px 0 8px var(--glow-primary);
+}
+
+.slider-cap {
+    width: 14px;
+    height: 22px;
+    background: linear-gradient(
+        135deg,
+        var(--color-gray-100),
+        var(--color-gray-200)
+    );
+    border-radius: 3px;
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow:
+        0 3px 8px var(--shadow-30),
+        inset 0 1px 0 var(--highlight-40);
+}
+
+.slider-cap::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    background-color: var(--color-gray-700);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1px;
+}
