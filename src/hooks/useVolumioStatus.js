@@ -2,9 +2,65 @@ import { useState, useEffect } from 'react';
 import { useSocket } from '../contexts/SocketContext';
 import useFavourites from './useFavourites';
 
+/**
+ * Normalize URI for comparison between queue and favorites
+ * Queue URIs often have different prefixes than favorites
+ * e.g., "music-library/NAS/..." vs "mnt/NAS/..."
+ */
+const normalizeUri = (uri) => {
+  if (!uri) return '';
+  // Remove common prefixes to get the comparable part
+  return uri
+    .replace(/^music-library\//, '')
+    .replace(/^mnt\//, '')
+    .replace(/^\/mnt\//, '');
+};
+
+/**
+ * Check if a URI is in the favorites set, accounting for different prefixes
+ */
+const isUriInFavourites = (uri, favouritesSet) => {
+  if (!uri || !favouritesSet) return false;
+
+  // First try exact match
+  if (favouritesSet.has(uri)) return true;
+
+  // Try normalized comparison
+  const normalizedUri = normalizeUri(uri);
+  for (const favUri of favouritesSet) {
+    if (normalizeUri(favUri) === normalizedUri) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+/**
+ * Find the actual favorite URI that matches the given URI
+ * Returns null if not found
+ */
+const findMatchingFavouriteUri = (uri, favouritesSet) => {
+  if (!uri || !favouritesSet) return null;
+
+  // First try exact match
+  if (favouritesSet.has(uri)) return uri;
+
+  // Try normalized comparison to find the matching favorite
+  const normalizedUri = normalizeUri(uri);
+  for (const favUri of favouritesSet) {
+    if (normalizeUri(favUri) === normalizedUri) {
+      return favUri;
+    }
+  }
+
+  return null;
+};
+
 const useVolumioStatus = () => {
   const { socket, isConnected } = useSocket();
-  const { favouritesUris, refetchFavourites } = useFavourites();
+  const { favouritesUris, refetchFavourites, addFavouriteOptimistic, removeFavouriteOptimistic } =
+    useFavourites();
   const [status, setStatus] = useState('stop');
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
@@ -100,17 +156,43 @@ const useVolumioStatus = () => {
 
   const toggleFavourite = () => {
     const uri = queue[position]?.uri;
+    const isFav = isUriInFavourites(uri, favouritesUris);
+
     if (!uri) return;
-    if (favouritesUris.has(uri)) {
-      socket.emit('removeFromFavourites', { uri, service });
+
+    // Optimistically update the UI immediately
+    if (isFav) {
+      // When removing, we need to find and use the actual favorite URI
+      // (not the queue URI) because they may have different prefixes
+      const actualFavouriteUri = findMatchingFavouriteUri(uri, favouritesUris);
+
+      console.log('[Favourites] Removing from favourites:', {
+        queueUri: uri,
+        actualFavouriteUri,
+        service,
+      });
+
+      if (actualFavouriteUri) {
+        removeFavouriteOptimistic(actualFavouriteUri);
+        socket.emit('removeFromFavourites', { uri: actualFavouriteUri, service });
+      } else {
+        console.error('[Favourites] Could not find matching favourite URI to remove');
+      }
     } else {
+      console.log('[Favourites] Adding to favourites:', {
+        uri,
+        service,
+      });
+
+      addFavouriteOptimistic(uri);
       socket.emit('addToFavourites', { uri, title, artist, album, albumart, service });
     }
-    // Wait briefly for Volumio to process, then re-fetch authoritative list
+
+    // Re-fetch authoritative list after a delay to ensure server has processed
     setTimeout(refetchFavourites, 500);
   };
 
-  const isFavourite = Boolean(queue[position]?.uri && favouritesUris.has(queue[position].uri));
+  const isFavourite = isUriInFavourites(queue[position]?.uri, favouritesUris);
 
   return {
     isConnected,
