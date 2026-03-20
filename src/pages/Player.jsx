@@ -20,6 +20,7 @@ import SpectrumAnalyzer from '@/components/spectrum-analyzers/SpectrumAnalyzer';
 import StreamInfo from '@/components/StreamInfo';
 import Playlist from '@/components/Playlist';
 import DisconnectedScreen from '@/components/DisconnectedScreen';
+import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 
 const PLAYER_MAP = {
   albumArt: AlbumArtPlayer,
@@ -107,6 +108,7 @@ const Player = () => {
 
   const [cycleIndex, setCycleIndex] = useState(null);
   const [showPlaylist, setShowPlaylist] = useState(false);
+  const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
   const touchTimer = useRef(null);
 
   // Pick a random player index on mount or when a new track starts
@@ -238,9 +240,7 @@ const Player = () => {
                 repeat={repeat}
                 onShuffle={toggleRandom}
                 onRepeat={toggleRepeat}
-                onAddToPlaylist={() => {
-                  /* TODO: implement add to playlist */
-                }}
+                onAddToPlaylist={() => setShowAddToPlaylist(true)}
                 onShowPlaylist={() => setShowPlaylist(true)}
                 isFavourite={isFavourite}
                 onToggleFavourite={toggleFavourite}
@@ -275,6 +275,20 @@ const Player = () => {
           onPlay={playFromQueue}
           onRemove={removeFromQueue}
           host={VOLUMIO_BASE_URL}
+        />
+
+        {/* Add to Playlist Dialog */}
+        <AddToPlaylistDialog
+          open={showAddToPlaylist}
+          onClose={() => setShowAddToPlaylist(false)}
+          track={{
+            title,
+            artist,
+            album,
+            albumart,
+            uri: queue[position]?.uri,
+            service,
+          }}
         />
       </div>
     </SeekProvider>

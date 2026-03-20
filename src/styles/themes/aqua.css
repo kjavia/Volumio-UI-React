@@ -5588,6 +5588,577 @@ input[type=range]::-moz-range-thumb:active {
   outline-offset: -2px;
 }
 
+:root {
+  /* ═══════════════════════════════════════════════════════════════════════
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
+  --color-primary: #147aff; /* Classic macOS Aqua blue */
+  --color-primary-light: #6cabff;
+  --color-primary-dark: #1060e8;
+  --color-primary-deep: #0036ab;
+  /* ─── Neutrals (Silver/Grays) ─────────────────────────────────────── */
+  --color-black: #000000;
+  --color-gray-950: #1a1a1a;
+  --color-gray-900: #2c2c2c;
+  --color-gray-850: #323232;
+  --color-gray-800: #3a3a3a;
+  --color-gray-750: #4a4a4a;
+  --color-gray-700: #555555;
+  --color-gray-600: #6e6e6e;
+  --color-gray-550: #7a7a7a;
+  --color-gray-500: #888888;
+  --color-gray-400: #ababab;
+  --color-gray-300: #c4c4c4;
+  --color-gray-250: #d0d0d0;
+  --color-gray-200: #d6d6d6;
+  --color-gray-150: #e0e0e0;
+  --color-gray-100: #ebebeb; /* Classic macOS window background */
+  --color-gray-075: #efefef;
+  --color-gray-050: #f2f2f2;
+  --color-gray-025: #f7f7f7;
+  --color-gray-010: #fafafa;
+  --color-white: #ffffff;
+  /* ─── Warm Neutrals (Brushed Aluminum) ────────────────────────────── */
+  --color-aluminum-dark: #8a8a8a;
+  --color-aluminum-light: #e8e8e8;
+  --color-aluminum-medium: #c0c0c0;
+  /* ─── Secondary (Silver) ──────────────────────────────────────────── */
+  --color-secondary: #a0a0a0;
+  --color-secondary-light: #c0c0c0;
+  --color-secondary-dark: #808080;
+  /* ─── Success/Green (Traffic Light) ───────────────────────────────── */
+  --color-success: #28c840;
+  --color-success-dark: #1ea832;
+  --color-success-light: #5dd773;
+  /* ─── Warning/Yellow (Traffic Light) ──────────────────────────────── */
+  --color-warning: #ffbd2e;
+  --color-warning-dark: #e6a320;
+  --color-warning-light: #ffd76f;
+  /* ─── Danger/Red (Traffic Light) ──────────────────────────────────── */
+  --color-danger: #ff5f57;
+  --color-danger-dark: #d93832;
+  --color-danger-light: #ff8f88;
+  --color-danger-muted: #4a2020;
+  /* ─── Info/Teal (Aqua Accent) ─────────────────────────────────────── */
+  --color-info: #00b4d8;
+  --color-info-dark: #0077b6;
+  --color-info-light: #48cae4;
+  /* ═══════════════════════════════════════════════════════════════════════
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: #1d1d1f; /* Apple's near-black for text */
+  --text-secondary: var(--color-gray-600);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success-dark);
+  --text-warning: var(--color-warning-dark);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info-dark);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: var(--color-gray-100); /* Classic macOS window gray */
+  --panel-bg-dark: #1c1c1e;
+  --device-surface: #dcdcdc; /* Brushed aluminum panel */
+  /* ─── Button Colors ────────────────────────────────────────────────── */
+  --btn-bg-dark: #3a3a3c;
+  --btn-bg-light: var(--color-white);
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(40, 200, 64, 0.12);
+  --alert-bg-warning: rgba(255, 189, 46, 0.12);
+  --alert-bg-danger: rgba(255, 95, 87, 0.12);
+  --alert-bg-info: rgba(0, 180, 216, 0.12);
+  --alert-border-success: var(--color-success);
+  --alert-border-warning: var(--color-warning);
+  --alert-border-danger: var(--color-danger);
+  --alert-border-info: var(--color-info);
+  /* ─── UI Components ────────────────────────────────────────────────── */
+  --list-item-bg: rgba(255, 255, 255, 0.6);
+  --list-item-bg-hover: rgba(20, 122, 255, 0.12);
+  --border-dark: rgba(0, 0, 0, 0.12);
+  --border-light: rgba(255, 255, 255, 0.8);
+  --border-warm: var(--color-aluminum-medium);
+  --border-primary: var(--color-primary);
+  --border-secondary: var(--color-secondary);
+  --border-success: var(--color-success);
+  --border-warning: var(--color-warning);
+  --border-danger: var(--color-danger);
+  --border-info: var(--color-info);
+  /* ─── Status & Indicators ──────────────────────────────────────────── */
+  --led-on: var(--color-success);
+  --led-off: #1a5c24;
+  --indicator-success: var(--color-success);
+  --indicator-warning: var(--color-warning);
+  --indicator-danger: var(--color-danger);
+  --indicator-info: var(--color-info);
+  --indicator-error: var(--color-danger);
+  /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
+  --grad-primary: linear-gradient(
+      180deg,
+      var(--color-primary-light),
+      var(--color-primary-dark)
+  );
+  --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
+  --grad-warm: linear-gradient(
+      135deg,
+      var(--color-aluminum-light),
+      var(--color-aluminum-dark)
+  );
+  /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
+  --btn-black-top: var(--color-gray-700);
+  --btn-black-btm: var(--color-gray-800);
+  --btn-white-top: #ffffff;
+  --btn-white-btm: #dcdcdc;
+  --btn-primary-top: #6db3f2;
+  --btn-primary-btm: #1e69de;
+  --btn-secondary-top: var(--color-secondary-light);
+  --btn-secondary-btm: var(--color-secondary-dark);
+  --btn-success-top: var(--color-success-light);
+  --btn-success-btm: var(--color-success-dark);
+  --btn-warning-top: var(--color-warning-light);
+  --btn-warning-btm: var(--color-warning-dark);
+  --btn-danger-top: var(--color-danger-light);
+  --btn-danger-btm: var(--color-danger-dark);
+  --btn-info-top: var(--color-info-light);
+  --btn-info-btm: var(--color-info-dark);
+  /* ═══════════════════════════════════════════════════════════════════════
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
+  --shadow-02: rgba(0, 0, 0, 0.02);
+  --shadow-03: rgba(0, 0, 0, 0.03);
+  --shadow-05: rgba(0, 0, 0, 0.05);
+  --shadow-08: rgba(0, 0, 0, 0.08);
+  --shadow-10: rgba(0, 0, 0, 0.1);
+  --shadow-15: rgba(0, 0, 0, 0.15);
+  --shadow-20: rgba(0, 0, 0, 0.2);
+  --shadow-30: rgba(0, 0, 0, 0.3);
+  --shadow-40: rgba(0, 0, 0, 0.4);
+  --shadow-50: rgba(0, 0, 0, 0.5);
+  --shadow-60: rgba(0, 0, 0, 0.6);
+  --shadow-80: rgba(0, 0, 0, 0.8);
+  --shadow-90: rgba(0, 0, 0, 0.9);
+  /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
+  --highlight-03: rgba(255, 255, 255, 0.03);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
+  --highlight-60: rgba(255, 255, 255, 0.6);
+  --highlight-80: rgba(255, 255, 255, 0.8);
+  /* ─── Glow Effects ─────────────────────────────────────────────────── */
+  --glow-primary: rgba(20, 122, 255, 0.4);
+  --glow-success: rgba(40, 200, 64, 0.4);
+  --glow-warning: rgba(255, 189, 46, 0.4);
+  --glow-danger: rgba(255, 95, 87, 0.4);
+  --glow-info: rgba(0, 180, 216, 0.4);
+  /* ═══════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Font Families ────────────────────────────────────────────────── */
+  --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  --font-tech: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
+  /* ─── Type Scale ───────────────────────────────────────────────────── */
+  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
+  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
+  --text-base: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+  /* ─── Line Heights ─────────────────────────────────────────────────── */
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  /* ─── Letter Spacing ───────────────────────────────────────────────── */
+  --tracking-tight: -0.025em;
+  --tracking-normal: -0.01em; /* Apple uses tighter tracking */
+  --tracking-wide: 0.01em;
+  --tracking-wider: 0.03em;
+  --tracking-widest: 0.06em;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
+  --color-aqua-vivid: var(--color-primary);
+  --color-aqua-bright: var(--color-primary-light);
+  --color-aqua-mid: var(--color-primary-dark);
+  --color-aqua-deep: var(--color-primary-deep);
+  /* ─── Legacy Orange (Maps to Aqua blue for consistency) ───────────── */
+  --color-orange-vivid: var(--color-primary);
+  --color-orange-light: var(--color-primary-light);
+  --color-orange-dark: var(--color-primary-dark);
+  --color-orange-deep: var(--color-primary-deep);
+  /* ─── Legacy Colors ────────────────────────────────────────────────── */
+  --color-green-vivid: var(--color-success);
+  --color-green-dark: var(--color-success-dark);
+  --color-yellow-vivid: var(--color-warning);
+  --color-red-vivid: var(--color-danger);
+  --color-red-deep: var(--color-danger-dark);
+  /* ─── Legacy Teal ──────────────────────────────────────────────────── */
+  --color-teal-vivid: var(--color-info);
+  --color-teal-light: var(--color-info-light);
+  --color-teal-dark: var(--color-info-dark);
+  /* ─── Legacy Text ──────────────────────────────────────────────────── */
+  --text-dark: var(--text-primary);
+  --text-light: var(--color-white);
+  --text-muted: var(--color-gray-600);
+  --text-dim: var(--color-gray-500);
+  --text-aqua: var(--text-accent);
+  --text-orange: var(--text-accent);
+  /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+  --btn-bg-accent: var(--btn-bg-primary);
+  --btn-bg-orange: var(--btn-bg-primary);
+  --btn-accent-top: var(--btn-primary-top);
+  --btn-accent-btm: var(--btn-primary-btm);
+  --btn-orange-top: var(--btn-primary-top);
+  --btn-orange-btm: var(--btn-primary-btm);
+  --btn-default-top: var(--btn-white-top);
+  --btn-default-btm: var(--btn-white-btm);
+  /* ─── Legacy Indicators ────────────────────────────────────────────── */
+  --led-green-on: var(--led-on);
+  --led-green-off: var(--led-off);
+  /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+  --grad-accent: var(--grad-primary);
+  --grad-orange-vivid: var(--grad-primary);
+  --grad-surface: var(--grad-metallic);
+  --grad-window: linear-gradient(180deg, #e8e8e8 0%, #d4d4d4 100%);
+  --glow-aqua-40: var(--glow-primary);
+  --glow-orange-40: var(--glow-primary);
+  --glow-aqua-60: rgba(20, 122, 255, 0.6);
+  --glow-aqua-20: rgba(20, 122, 255, 0.2);
+  /* ─── Legacy Aqua Gradients (Classic Gel) ─────────────────────────── */
+  --aqua-blue-top: var(--btn-primary-top);
+  --aqua-blue-btm: var(--btn-primary-btm);
+  --aqua-blue-border: #134db3;
+  --aqua-silver-top: var(--btn-white-top);
+  --aqua-silver-btm: var(--btn-white-btm);
+  --aqua-silver-border: var(--color-secondary);
+  /* ─── Legacy Borders ───────────────────────────────────────────────── */
+  --border-accent: var(--border-primary);
+  /* ─── Legacy Panel ─────────────────────────────────────────────────── */
+  --panel-bg-light: rgba(255, 255, 255, 0.72);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DIALOG - Aqua Theme (macOS Classic Style)
+   ═══════════════════════════════════════════════════════════════════════ */
+/* ── Backdrop ── */
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: dialogBackdropFadeIn 0.25s ease-out;
+}
+
+@keyframes dialogBackdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* ── Dialog Container (Centered) ── */
+.dialog-container {
+  position: fixed;
+  inset: 0;
+  z-index: 2010;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+/* ── Dialog Box ── */
+.dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  width: 100%;
+  pointer-events: auto;
+  outline: none;
+  /* Classic macOS Aqua frosted glass */
+  background: rgba(245, 245, 250, 0.96);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 60px var(--shadow-30), 0 8px 24px var(--shadow-20), 0 0 0 0.5px var(--highlight-40);
+  /* Animation */
+  animation: dialogSlideIn 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transform-origin: center;
+}
+
+@keyframes dialogSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+/* ── Header ── */
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  /* Pinstripe pattern (classic Aqua) */
+  background-color: #f2f2f2;
+  background-image: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 0px, rgba(255, 255, 255, 0.7) 1px, transparent 1px, transparent 2px);
+  border-radius: 12px 12px 0 0;
+}
+
+.dialog-title {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.dialog-close {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--color-gray-600);
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+.dialog-close .material-icons {
+  font-size: 20px;
+}
+.dialog-close:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--color-gray-800);
+}
+.dialog-close:active {
+  background: rgba(0, 0, 0, 0.12);
+  transform: scale(0.96);
+}
+
+/* ── Body ── */
+.dialog-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 1.25rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  /* Custom scrollbar */
+}
+.dialog-body::-webkit-scrollbar {
+  width: 15px;
+  background-color: #f8f8f8;
+}
+.dialog-body::-webkit-scrollbar-track {
+  border-left: 1px solid #e0e0e0;
+}
+.dialog-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #e8e8e8 0%, #d0d0d0 50%, #c0c0c0 100%);
+  border-radius: 8px;
+  border: 3px solid #f8f8f8;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.dialog-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #e0e0e0 0%, #c8c8c8 50%, #b8b8b8 100%);
+}
+.dialog-body::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #c0c0c0 0%, #a8a8a8 50%, #989898 100%);
+}
+
+/* ── Footer ── */
+.dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  /* Light gray with subtle gradient */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 248, 248, 0.9) 100%);
+  border-radius: 0 0 12px 12px;
+}
+
+/* ── Dialog List Items ── */
+.dialog-list-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-primary);
+  font-family: var(--font-label);
+  font-size: 14px;
+  text-align: left;
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+.dialog-list-item:hover:not(:disabled) {
+  background: linear-gradient(to bottom, var(--color-primary-light), var(--color-primary));
+  color: var(--color-white);
+  border-color: var(--color-primary-dark);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.dialog-list-item:active:not(:disabled) {
+  background: var(--color-primary-dark);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.dialog-list-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.dialog-list-item.active {
+  background: linear-gradient(to bottom, var(--color-warning-light), var(--color-warning));
+  color: var(--text-primary);
+  border-color: var(--color-warning-dark);
+  font-weight: 500;
+}
+
+/* ── Dialog Alerts ── */
+.dialog-alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  border: 1px solid;
+}
+.dialog-alert.error {
+  background: rgba(255, 59, 48, 0.1);
+  color: var(--color-danger-dark);
+  border-color: rgba(255, 59, 48, 0.3);
+}
+.dialog-alert.success {
+  background: rgba(52, 199, 89, 0.1);
+  color: var(--color-success-dark);
+  border-color: rgba(52, 199, 89, 0.3);
+}
+
+/* ── Dialog Form Elements ── */
+.dialog-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+.dialog-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(20, 122, 255, 0.2);
+}
+.dialog-input::placeholder {
+  color: var(--color-gray-500);
+  opacity: 0.6;
+}
+
+.dialog-label {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.dialog-section-title {
+  font-family: var(--font-label);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-gray-600);
+  margin-bottom: 10px;
+}
+
+/* ── Size Variants ── */
+.dialog-sm {
+  max-width: 400px;
+}
+
+.dialog-md {
+  max-width: 600px;
+}
+
+.dialog-lg {
+  max-width: 800px;
+}
+
+.dialog-xl {
+  max-width: 1200px;
+}
+
+.dialog-full {
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vh - 2rem);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .dialog {
+    max-width: calc(100vw - 1rem);
+    margin: 0.5rem;
+    border-radius: 10px;
+  }
+  .dialog-header {
+    padding: 0.875rem 1rem;
+    border-radius: 10px 10px 0 0;
+  }
+  .dialog-body {
+    padding: 1rem;
+  }
+  .dialog-footer {
+    padding: 0.875rem 1rem;
+    border-radius: 0 0 10px 10px;
+  }
+  .dialog-title {
+    font-size: 1rem;
+  }
+}
 body {
   background-color: var(--bg-color);
   font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
