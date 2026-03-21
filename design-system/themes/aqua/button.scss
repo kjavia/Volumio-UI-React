@@ -290,15 +290,17 @@
     box-shadow: none;
   }
 
-  // Active/toggled state — blue accent
+  // Active/toggled state — keep transparent background, bright readable color
   &.active {
-    color: var(--btn-primary-btm, #1e69de);
-    transform: none;
+    background: transparent;
+    border-color: transparent;
     box-shadow: none;
+    transform: none;
+    color: var(--btn-primary-top, #6db3f2);
   }
 
   &.active:hover {
-    background: rgba(30, 105, 222, 0.1);
+    background: rgba(109, 179, 242, 0.15);
   }
 }
 

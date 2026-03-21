@@ -1431,12 +1431,14 @@ pre {
   box-shadow: none;
 }
 .btn-icon.active {
-  color: var(--btn-primary-btm, #1e69de);
-  transform: none;
+  background: transparent;
+  border-color: transparent;
   box-shadow: none;
+  transform: none;
+  color: var(--btn-primary-top, #6db3f2);
 }
 .btn-icon.active:hover {
-  background: rgba(30, 105, 222, 0.1);
+  background: rgba(109, 179, 242, 0.15);
 }
 
 .led {

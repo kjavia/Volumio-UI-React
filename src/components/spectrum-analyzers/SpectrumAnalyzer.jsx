@@ -92,6 +92,7 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
           mode: currentMode, // use state value
           frequencyScale: 'log',
           outlineBars: true,
+          barSpace: 0.2,
           ledBars: true,
           ansiBands: true,
           showScaleX: true,
