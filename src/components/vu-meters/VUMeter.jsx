@@ -51,7 +51,7 @@ const rmsToDb = (rms) => (rms < 0.00001 ? -100 : 20 * Math.log10(rms));
 /** Default needle colour per variant: black for 1 & 2, white for 3+. */
 const defaultNeedleColor = (v) => (v >= 3 ? '#f0f0f0' : '#0d0d0d');
 
-const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor }) => {
+const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped = false, onResumed }) => {
   const resolvedNeedleColor = needleColor ?? defaultNeedleColor(variant);
   const audioRef = useRef(null);
   const displayRef = useRef(null);
@@ -120,6 +120,8 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor }) => {
       analyserRRef.current = analyserR;
     }
 
+    // Reload to drop buffered data and reconnect to the live stream
+    audio.load();
     audio.play().catch(() => {});
   }, []);
 
@@ -219,8 +221,29 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor }) => {
     if (enabled) return;
     setupAudio();
     startAnimation();
+    onResumed?.();
     setEnabled(true);
-  }, [enabled, setupAudio, startAnimation]);
+  }, [enabled, setupAudio, startAnimation, onResumed]);
+
+  // Stop animation when the stopped prop goes true
+  useEffect(() => {
+    if (stopped && enabled) {
+      if (animFrameRef.current) {
+        cancelAnimationFrame(animFrameRef.current);
+        animFrameRef.current = null;
+      }
+      audioRef.current?.pause();
+      // Reset smoothed ballistics so stale values don't leak into the next session
+      smoothedRef.current = { left: MIN_DB, right: MIN_DB };
+      const initAngle = dbToAngle(MIN_DB);
+      if (needleLRef.current)
+        needleLRef.current.style.transform = `rotate(${initAngle}deg)`;
+      if (needleRRef.current)
+        needleRRef.current.style.transform = `rotate(${initAngle}deg)`;
+      setEnabled(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stopped]);
 
   // Initialise needles to full-left on mount; cancel rAF on unmount
   useEffect(() => {

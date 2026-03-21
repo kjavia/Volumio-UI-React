@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FlipClock from '@/components/clocks/flip-clock';
 import DigitalClock from '@/components/clocks/digital-clock';
 import AnalogClock from '@/components/clocks/analog-clock';
@@ -6,6 +7,7 @@ import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
 import Player from './Player';
 import useIdleScreen from '@/hooks/useIdleScreen';
+import { VOLUMIO_BASE_URL } from '@/config';
 
 const CLOCK_SCREENS = {
   analogClock: AnalogClock,
@@ -20,9 +22,12 @@ const WEATHER_MODE_MAP = {
   weatherFull: 'full',
 };
 
-const ContextMenu = () => {
+const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer }) => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const close = (fn) => () => { setIsOpen(false); fn?.(); };
 
   const toggleFullscreen = async () => {
     try {
@@ -70,6 +75,15 @@ const ContextMenu = () => {
         <>
           <div className="context-menu-backdrop" onClick={() => setIsOpen(false)} />
           <div className="context-menu open">
+            {onBackToPlayer && (
+              <>
+                <button className="context-menu-item" onClick={close(onBackToPlayer)}>
+                  <span className="material-icons">queue_music</span>
+                  Back to Player
+                </button>
+                <div className="context-menu-separator" />
+              </>
+            )}
             <button className="context-menu-item" onClick={handleRefresh}>
               <span className="material-icons">refresh</span>
               Refresh
@@ -80,6 +94,24 @@ const ContextMenu = () => {
               </span>
               {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
             </button>
+            {!vizStopped && onStopViz && (
+              <>
+                <div className="context-menu-separator" />
+                <button className="context-menu-item" onClick={close(onStopViz)}>
+                  <span className="material-icons">equalizer</span>
+                  Stop Visualization
+                </button>
+              </>
+            )}
+            <div className="context-menu-separator" />
+            <button className="context-menu-item" onClick={close(() => navigate(-1))}>
+              <span className="material-icons">arrow_back</span>
+              Back
+            </button>
+            <button className="context-menu-item danger" onClick={close(() => { window.location.href = VOLUMIO_BASE_URL; })}>
+              <span className="material-icons">power_settings_new</span>
+              Exit
+            </button>
           </div>
         </>
       )}
@@ -88,6 +120,8 @@ const ContextMenu = () => {
 };
 
 const Home = () => {
+  const [vizStopped, setVizStopped] = useState(false);
+  const [forcePlayer, setForcePlayer] = useState(false);
   const {
     idle,
     idleScreen,
@@ -100,10 +134,17 @@ const Home = () => {
     analogClockShowDate,
   } = useIdleScreen();
 
+  // When the hook naturally clears idle (e.g. playback resumed), reset forcePlayer too
+  useEffect(() => {
+    if (!idle) setForcePlayer(false);
+  }, [idle]);
+
+  const showPlayer = !idle || forcePlayer;
+
   let content;
 
-  if (!idle) {
-    content = <Player />;
+  if (showPlayer) {
+    content = <Player vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} />;
   } else if (idleScreen === 'wallpaper') {
     content = (
       <Wallpaper
@@ -145,7 +186,11 @@ const Home = () => {
 
   return (
     <div className="position-relative h-100">
-      <ContextMenu />
+      <ContextMenu
+        vizStopped={vizStopped}
+        onStopViz={() => setVizStopped(true)}
+        onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
+      />
       {content}
     </div>
   );

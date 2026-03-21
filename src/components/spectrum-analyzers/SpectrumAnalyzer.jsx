@@ -8,7 +8,7 @@ const mediaSourceCache = new WeakMap();
 
 const MODES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 10]; // Discrete to Octaves to Line
 
-const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2 }) => {
+const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stopped = false, onResumed }) => {
   const containerRef = useRef(null);
   const audioRef = useRef(null);
   const analyzerRef = useRef(null);
@@ -107,9 +107,33 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2 }) =>
       }
     }
 
+    // If the analyzer already exists (was previously stopped), just restart it
+    if (analyzerRef.current) {
+      const entry = mediaSourceCache.get(audio);
+      if (entry?.ctx.state === 'suspended') entry.ctx.resume();
+      analyzerRef.current.start?.();
+      // Reload to drop buffered data and reconnect to the live stream
+      audio.load();
+      audio.play().catch(() => {});
+      onResumed?.();
+      setEnabled(true);
+      return;
+    }
+
     audio.play().catch(() => {});
+    onResumed?.();
     setEnabled(true);
   };
+
+  // Stop animation when the stopped prop goes true
+  useEffect(() => {
+    if (stopped && enabled) {
+      analyzerRef.current?.stop?.();
+      audioRef.current?.pause();
+      setEnabled(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stopped]);
 
   const toggleFullscreen = async () => {
     const container = containerRef.current?.parentElement;

@@ -5624,6 +5624,28 @@ input[type=range]::-moz-range-thumb:active {
   display: block;
 }
 
+/* ─── Separator ──────────────────────────────────────────────────────── */
+.context-menu-separator {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  margin: 4px 0;
+}
+
+/* ─── Danger Variant ─────────────────────────────────────────────────── */
+.context-menu-item.danger {
+  color: var(--color-danger, #ff3b30);
+}
+.context-menu-item.danger .material-icons {
+  color: var(--color-danger, #ff3b30);
+}
+.context-menu-item.danger:hover {
+  background: linear-gradient(to bottom, rgba(255, 59, 48, 0.85), rgba(220, 30, 20, 0.85));
+  color: var(--color-white);
+}
+.context-menu-item.danger:hover .material-icons {
+  color: var(--color-white);
+}
+
 /* ─── Accessibility ───────────────────────────────────────────────────── */
 .context-menu-toggle:focus-visible {
   outline: none;

@@ -4448,6 +4448,20 @@ h2 {
   border-bottom: 1px solid var(--shadow-20);
 }
 
+.context-menu-item.danger {
+  color: #ff6b6b;
+}
+.context-menu-item.danger .material-icons {
+  color: #ff6b6b;
+}
+.context-menu-item.danger:hover {
+  background-color: rgba(255, 71, 87, 0.15);
+  border-left-color: #ff6b6b;
+}
+.context-menu-item.danger:hover .material-icons {
+  color: #ff6b6b;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE

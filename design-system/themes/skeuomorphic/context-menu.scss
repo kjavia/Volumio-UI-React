@@ -187,3 +187,22 @@
   margin: 4px 0;
   border-bottom: 1px solid var(--shadow-20);
 }
+
+.context-menu-item {
+  &.danger {
+    color: #ff6b6b;
+
+    .material-icons {
+      color: #ff6b6b;
+    }
+
+    &:hover {
+      background-color: rgba(255, 71, 87, 0.15);
+      border-left-color: #ff6b6b;
+
+      .material-icons {
+        color: #ff6b6b;
+      }
+    }
+  }
+}
