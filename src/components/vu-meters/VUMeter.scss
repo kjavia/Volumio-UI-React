@@ -1,0 +1,140 @@
+// ── VUMeter ──────────────────────────────────────────────────────────────────
+//
+// Shared styles for all VU meter variants.
+//
+// Needle positioning guide (all values are percentages of the background image).
+// Override these per variant in the .vu-meter--variant-N blocks below.
+//
+//  --left-pivot-x   Horizontal position of the left needle pivot (% of image width)
+//  --right-pivot-x  Horizontal position of the right needle pivot (% of image width)
+//  --pivot-bottom   Distance from image bottom to the pivot (% of image height)
+//  --needle-height  Needle length (% of image height)
+//  --needle-width   Physical needle thickness (px)
+// ─────────────────────────────────────────────────────────────────────────────
+
+.vu-meter {
+  // ── Default tuning knobs (variant 1) ──────────────────────────────────
+  --left-pivot-x:  25%;
+  --right-pivot-x: 75%;
+  --pivot-bottom:  30%;
+  --needle-height: 33%;
+  --needle-width:  2px;
+  // Needle colour: black by default (variants 1 & 2).
+  // Override per variant below, or via the needleColor JS prop (inline style).
+  --needle-color: #0d0d0d;
+  // ──────────────────────────────────────────────────────────────────────
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+
+  &__display {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  // ── Background image ──────────────────────────────────────────────────
+  // object-fit: contain scales the image without clipping or distortion.
+  // JavaScript (recalcNeedles) converts the % tuning knobs to real px values
+  // so needles track the visible image regardless of letterboxing.
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    pointer-events: none;
+  }
+
+  // ── Needle ────────────────────────────────────────────────────────────
+  // Thin rectangle; transform-origin: bottom center so rotations pivot at
+  // the base (the "screw" on a real VU meter).
+  &__needle {
+    position: absolute;
+    width: var(--needle-width);
+    height: var(--needle-h, var(--needle-height));
+    background: var(--needle-color);
+    border-radius: 1px 1px 0 0;
+    transform-origin: bottom center;
+    pointer-events: none;
+    box-shadow: 1px 0 2px rgba(0, 0, 0, 0.3);
+
+    // Circular cap at the pivot gives the classic "screw" look
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--needle-color);
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+      transform: translateX(-50%);
+    }
+
+    &--left {
+      bottom: var(--needle-bottom, var(--pivot-bottom));
+      left: calc(var(--needle-L-left, var(--left-pivot-x)) - var(--needle-width) / 2);
+    }
+
+    &--right {
+      bottom: var(--needle-bottom, var(--pivot-bottom));
+      left: calc(var(--needle-R-left, var(--right-pivot-x)) - var(--needle-width) / 2);
+    }
+  }
+
+  // ── "Click to enable" overlay ─────────────────────────────────────────
+  &__prompt {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.52);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    pointer-events: none;
+    cursor: pointer;
+
+    .material-icons {
+      font-size: 2rem;
+      opacity: 0.75;
+    }
+  }
+
+  &--enabled {
+    cursor: default;
+  }
+
+  // ── Per-variant tuning knob overrides ─────────────────────────────────
+  // variant 1 (default) — values already set above, no overrides needed
+
+  // variant 2 — adjust these to match your second background image
+  &--variant-2 {
+    --left-pivot-x:  25%;
+    --right-pivot-x: 75%;
+    --pivot-bottom:  30%;
+    --needle-height: 33%;
+  }
+
+  // variant 3 — adjust to match your third background image
+  &--variant-3 {
+    --left-pivot-x:  25%;
+    --right-pivot-x: 75%;
+    --pivot-bottom:  30%;
+    --needle-height: 33%;
+    --needle-color:  #f0f0f0; // white needle for dark backgrounds
+  }
+}

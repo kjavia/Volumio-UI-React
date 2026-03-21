@@ -21,6 +21,7 @@ import StreamInfo from '@/components/StreamInfo';
 import Playlist from '@/components/Playlist';
 import DisconnectedScreen from '@/components/DisconnectedScreen';
 import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
+import VUMeter from '@/components/vu-meters/VUMeter';
 
 const PLAYER_MAP = {
   albumArt: AlbumArtPlayer,
@@ -74,6 +75,7 @@ const Player = () => {
   const { data: pluginConfig } = usePluginConfig();
   const playerType = pluginConfig?.playerType || 'radio';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
+  const vizType = pluginConfig?.vizType || 'spectrum';
 
   const {
     isConnected,
@@ -264,7 +266,10 @@ const Player = () => {
 
           {/* VISUALIZATION SECTION */}
           <div className="spectrum-panel area-spectrum">
-            <SpectrumAnalyzer streamUrl={SPECTRUM_STREAM_URL} />
+            {vizType === 'spectrum' && <SpectrumAnalyzer streamUrl={SPECTRUM_STREAM_URL} />}
+            {vizType === 'vuMeter1' && <VUMeter variant={1} streamUrl={SPECTRUM_STREAM_URL} />}
+            {vizType === 'vuMeter2' && <VUMeter variant={2} streamUrl={SPECTRUM_STREAM_URL} />}
+            {vizType === 'vuMeter3' && <VUMeter variant={3} streamUrl={SPECTRUM_STREAM_URL} />}
           </div>
         </div>
 
