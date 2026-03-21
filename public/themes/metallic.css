@@ -113,6 +113,7 @@
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -244,6 +245,7 @@
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -530,6 +532,7 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -741,6 +744,7 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -972,6 +976,7 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -1222,6 +1227,7 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -1419,6 +1425,7 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -1633,6 +1640,7 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -1843,6 +1851,7 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -2074,6 +2083,7 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -2404,6 +2414,7 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -2592,6 +2603,7 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -2807,6 +2819,7 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -3018,6 +3031,7 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;
@@ -3289,6 +3303,7 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   --text-sm: 13px;
   --text-base: 15px;

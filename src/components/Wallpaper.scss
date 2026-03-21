@@ -33,9 +33,10 @@
   inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 2rem 2.5rem;
   z-index: 2;
   // Subtle dark vignette for readability
   background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
@@ -44,19 +45,13 @@
 
 /* Time display */
 .wallpaper-time {
-  font-family: var(
-    --font-display,
-    var(--font-tech, 'Michroma'),
-    'Roboto Mono',
-    'Courier New',
-    monospace
-  );
-  font-size: clamp(3rem, 10vw, 8rem);
+  font-family: var(--font-mono, var(--font-tech, 'Roboto Mono', monospace));
+  font-size: clamp(1.2rem, 4vw, 3.5rem);
   font-weight: 700;
   color: rgba(255, 255, 255, 0.85);
   text-shadow:
-    0 2px 20px rgba(0, 0, 0, 0.6),
-    0 0 60px rgba(0, 0, 0, 0.3);
+    0 2px 12px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.02em;
   line-height: 1;
   user-select: none;
@@ -70,8 +65,8 @@
 .wallpaper-weather {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 1.2rem;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem;
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(8px);
   border-radius: 2rem;
@@ -79,20 +74,20 @@
 }
 
 .wallpaper-weather-icon {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(0.9rem, 2vw, 1.5rem);
   filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
 }
 
 .wallpaper-weather-temp {
-  font-family: var(--font-display, var(--font-tech, 'Michroma'), sans-serif);
-  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-family: var(--font-mono, var(--font-tech, 'Roboto Mono', monospace));
+  font-size: clamp(0.8rem, 1.8vw, 1.3rem);
   font-weight: 700;
   color: rgba(255, 255, 255, 0.9);
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 
 .wallpaper-weather-desc {
-  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  font-size: clamp(0.7rem, 1.4vw, 1rem);
   color: rgba(255, 255, 255, 0.7);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   text-transform: capitalize;
