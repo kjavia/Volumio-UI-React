@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import usePluginConfig from './usePluginConfig';
+import useGeoLocation from '@bigdatacloudapi/react-reverse-geocode-client';
 
 const WMO_CODES = {
   0: { description: 'Clear sky', icon: 'wb_sunny' },
@@ -157,14 +158,20 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
 
 const useWeather = () => {
   const { data: config, isLoading: configLoading } = usePluginConfig();
-
-  const latitude = config?.latitude;
-  const longitude = config?.longitude;
+  const { data: geoData } = useGeoLocation();
+  const latitude = config?.latitude || geoData?.latitude;
+  const longitude = config?.longitude || geoData?.longitude;
   const unitSystem = config?.unitSystem || 'metric';
   const weatherApiKey = config?.weatherApiKey || '';
   const hasLocation = Boolean(latitude) && Boolean(longitude);
+  const locationName =
+    geoData?.city ||
+    geoData?.locality ||
+    geoData?.principalSubdivision ||
+    geoData?.countryName ||
+    null;
 
-  return useQuery({
+  const query = useQuery({
     queryKey: ['weather', latitude, longitude, unitSystem],
     queryFn: () => fetchWeather({ latitude, longitude, unitSystem, weatherApiKey }),
     enabled: !configLoading && hasLocation,
@@ -172,6 +179,8 @@ const useWeather = () => {
     refetchInterval: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
+
+  return { ...query, locationName };
 };
 
 export { WMO_CODES };

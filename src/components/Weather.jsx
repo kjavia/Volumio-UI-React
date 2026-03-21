@@ -225,7 +225,16 @@ const BG_GRADIENT = {
   thunderstorm: 'linear-gradient(170deg, #0a0f1e 0%, #141e33 40%, #1e2d4a 100%)',
 };
 
-const WeatherFull = ({ current, hourly, daily, units }) => {
+const LocationBadge = ({ name }) =>
+  name ? (
+    <div className="weather-location-badge">
+      <span className="material-icons weather-location-icon">location_on</span>
+      <span className="weather-location-name">{name}</span>
+    </div>
+  ) : null;
+LocationBadge.propTypes = { name: PropTypes.string };
+
+const WeatherFull = ({ current, hourly, daily, units, locationName }) => {
   const today = daily[0];
   const precipitation = today.precipitation || 0;
   const visKm = hourly[0]?.visibility ? round(hourly[0].visibility / 1000) : null;
@@ -260,6 +269,12 @@ const WeatherFull = ({ current, hourly, daily, units }) => {
             <span className="weather-full-hero-unit">{units.tempUnit}</span>
           </div>
           <div className="weather-full-hero-desc">{current.description}</div>
+          {locationName && (
+            <div className="weather-full-hero-location">
+              <span className="material-icons weather-full-hero-location-icon">location_on</span>
+              {locationName}
+            </div>
+          )}
           <div className="weather-full-hero-hilow">
             H:{round(today.tempMax)}
             {units.tempUnit}&nbsp;&nbsp;L:{round(today.tempMin)}
@@ -429,6 +444,7 @@ WeatherFull.propTypes = {
   hourly: PropTypes.array.isRequired,
   daily: PropTypes.array.isRequired,
   units: PropTypes.object.isRequired,
+  locationName: PropTypes.string,
 };
 
 /* ── Main Weather Component ───────────────────────────────────────────── */
@@ -444,7 +460,7 @@ const Weather = ({
   days = 10,
   hours = 24,
 }) => {
-  const { data, isLoading, isError } = useWeather();
+  const { data, isLoading, isError, locationName } = useWeather();
   if (isLoading) {
     return (
       <div className="weather-container weather-container--loading">
@@ -464,11 +480,12 @@ const Weather = ({
   const today = daily[0];
 
   if (mode === 'full') {
-    return <WeatherFull current={current} hourly={hourly} daily={daily} units={units} />;
+    return <WeatherFull current={current} hourly={hourly} daily={daily} units={units} locationName={locationName} />;
   }
 
   return (
     <div className="weather-container">
+      <LocationBadge name={locationName} />
       {/* Current */}
       {mode === 'current' && (
         <CurrentWeather
