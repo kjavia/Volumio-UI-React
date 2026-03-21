@@ -4,13 +4,7 @@
       "path": "../volumio-plugins-sources-bookworm/stylish_player"
     },
     {
-      "path": "../volumio-plugins-sources-bookworm/now_playing"
-    },
-    {
       "path": "."
-    },
-    {
-      "path": "../volumio-plugins-sources-bookworm/fusion"
     }
   ],
   "settings": {},

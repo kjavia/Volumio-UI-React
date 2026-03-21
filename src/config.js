@@ -7,21 +7,24 @@
 //   VOLUMIO_HOST  = window.location.hostname  (the device's IP / hostname)
 //   PLUGIN_PORT   = window.location.port      (the port the plugin is running on)
 
-const isDev = import.meta.env.DEV;
+// Use a runtime check for the dev server to avoid issues with
+// Vite statically replacing import.meta.env.DEV during build if misconfigured
+const isDev = import.meta.env.DEV || window.location.port === '5173';
 
 const VOLUMIO_HOST = isDev
-  ? import.meta.env.VITE_DEV_HOST
+  ? (import.meta.env.VITE_DEV_HOST || window.location.hostname)
   : window.location.hostname;
-
+const defaultPluginPort = 3339;
 const PLUGIN_PORT = isDev
-  ? Number(import.meta.env.VITE_DEV_PLUGIN_PORT)
-  : Number(window.location.port);
+  ? (Number(import.meta.env.VITE_DEV_PLUGIN_PORT) || defaultPluginPort)
+  : (Number(window.location.port) || defaultPluginPort);
 
 const VOLUMIO_API_PORT = 3000;
 const SPECTRUM_STREAM_PORT = 8000;
 
 const VOLUMIO_BASE_URL = `http://${VOLUMIO_HOST}:${VOLUMIO_API_PORT}`;
-const PLUGIN_BASE_URL = `http://${VOLUMIO_HOST}:${PLUGIN_PORT}`;
+// Use relative path in production to handle dynamic ports automatically
+const PLUGIN_BASE_URL = isDev ? `http://${VOLUMIO_HOST}:${PLUGIN_PORT}` : '';
 const SPECTRUM_STREAM_URL = `http://${VOLUMIO_HOST}:${SPECTRUM_STREAM_PORT}`;
 
 export {
