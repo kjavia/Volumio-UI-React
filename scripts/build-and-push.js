@@ -30,6 +30,14 @@ const commitMessage = `Building Plugin for - ${lastCommit}`;
 
 console.log(`\nCommit message: ${commitMessage}`);
 
+// Increment patch version in stylish_player/package.json
+const pluginPkgPath = path.resolve(pluginRepo, 'stylish_player', 'package.json');
+const pluginPkg = JSON.parse(fs.readFileSync(pluginPkgPath, 'utf8'));
+const [major, minor, patch] = pluginPkg.version.split('.').map(Number);
+pluginPkg.version = `${major}.${minor}.${patch + 1}`;
+fs.writeFileSync(pluginPkgPath, JSON.stringify(pluginPkg, null, 2) + '\n');
+console.log(`\nBumped stylish_player version to ${pluginPkg.version}`);
+
 // Build UI repo
 run('npm install', uiRepo);
 run('npm run build', uiRepo);
