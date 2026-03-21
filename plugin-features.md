@@ -15,7 +15,7 @@ Provides a feature rich alternative "Now Playing" screen with controls, animatio
    8. Random
    9. Match source (Flac -> CD, Qobuz to Globe, Internet Radio to Radio etc.)
 2. Player controls on the right, along with track and source information, and playlist management controls
-3. Spectrum analyzer on the right (or bottom depending on screen size). Provides a slightly delayed visualization based on the audio stream exposed by the device.
+3. Spectrum analyzer / VU Meters on bottom (or right depending on screen size). Provides a slightly delayed visualization based on the audio stream exposed by the device.
 
 ### Idle Screen:
 
@@ -35,5 +35,12 @@ API Reference
 
 <https://unsplash.com/documentation#photos>
 
-Example Query
-<https://api.unsplash.com/photos/random?query=wallpaper&orientation=landscape&count=30>
+Example Query <https://api.unsplash.com/photos/random?query=wallpaper&orientation=landscape&count=30>
+
+### Theming Support
+
+Currently has 3 themes to choose from
+
+1. Skeuomorphic
+2. Metallic
+3. Aqua
