@@ -17,7 +17,7 @@
   --left-pivot-x:  25%;
   --right-pivot-x: 75%;
   --pivot-bottom:  30%;
-  --needle-height: 33%;
+  --needle-height: 45%;
   --needle-width:  2px;
   // Needle colour: black by default (variants 1 & 2).
   // Override per variant below, or via the needleColor JS prop (inline style).
@@ -126,7 +126,7 @@
     --left-pivot-x:  25%;
     --right-pivot-x: 75%;
     --pivot-bottom:  30%;
-    --needle-height: 33%;
+    --needle-height: 45%;
   }
 
   // variant 3 — adjust to match your third background image
@@ -134,7 +134,7 @@
     --left-pivot-x:  25%;
     --right-pivot-x: 75%;
     --pivot-bottom:  30%;
-    --needle-height: 33%;
+    --needle-height: 45%;
     --needle-color:  #f0f0f0; // white needle for dark backgrounds
   }
 }

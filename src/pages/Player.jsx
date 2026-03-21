@@ -267,9 +267,10 @@ const Player = ({ vizStopped = false, onVizResumed }) => {
           {/* VISUALIZATION SECTION */}
           <div className="spectrum-panel area-spectrum">
             {vizType === 'spectrum' && <SpectrumAnalyzer stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-            {vizType === 'vuMeter1' && <VUMeter variant={1} stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-            {vizType === 'vuMeter2' && <VUMeter variant={2} stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-            {vizType === 'vuMeter3' && <VUMeter variant={3} stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+            {vizType === 'vuMeter1' && <VUMeter variant={1} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+            {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+            {vizType === 'vuMeter3' && <VUMeter variant={3} needleColor="0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+            {vizType === 'vuMeter4' && <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
           </div>
         </div>
 
