@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FlipClock from '@/components/clocks/flip-clock';
 import DigitalClock from '@/components/clocks/digital-clock';
@@ -22,10 +22,11 @@ const WEATHER_MODE_MAP = {
   weatherFull: 'full',
 };
 
-const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer }) => {
+const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz }) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isVizFullscreen, setIsVizFullscreen] = useState(false);
 
   const close = (fn) => () => { setIsOpen(false); fn?.(); };
 
@@ -51,7 +52,9 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer }) => {
   // Listen for fullscreen changes (e.g., user presses ESC)
   useEffect(() => {
     const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
+      const el = document.fullscreenElement;
+      setIsFullscreen(!!el);
+      setIsVizFullscreen(!!el && el.classList.contains('area-spectrum'));
     };
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
@@ -97,6 +100,12 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer }) => {
             {!vizStopped && onStopViz && (
               <>
                 <div className="context-menu-separator" />
+                <button className="context-menu-item" onClick={close(onFullscreenViz)}>
+                  <span className="material-icons">
+                    {isVizFullscreen ? 'fullscreen_exit' : 'fullscreen'}
+                  </span>
+                  {isVizFullscreen ? 'Exit Viz Fullscreen' : 'Visualization Fullscreen'}
+                </button>
                 <button className="context-menu-item" onClick={close(onStopViz)}>
                   <span className="material-icons">equalizer</span>
                   Stop Visualization
@@ -122,6 +131,21 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer }) => {
 const Home = () => {
   const [vizStopped, setVizStopped] = useState(false);
   const [forcePlayer, setForcePlayer] = useState(false);
+  const vizContainerRef = useRef(null);
+
+  const handleFullscreenViz = async () => {
+    const el = vizContainerRef.current;
+    if (!el) return;
+    try {
+      if (!document.fullscreenElement) {
+        await el.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (err) {
+      console.warn('Viz fullscreen failed:', err);
+    }
+  };
   const {
     idle,
     idleScreen,
@@ -144,7 +168,7 @@ const Home = () => {
   let content;
 
   if (showPlayer) {
-    content = <Player vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} />;
+    content = <Player vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
   } else if (idleScreen === 'wallpaper') {
     content = (
       <Wallpaper
@@ -190,6 +214,7 @@ const Home = () => {
         vizStopped={vizStopped}
         onStopViz={() => setVizStopped(true)}
         onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
+        onFullscreenViz={handleFullscreenViz}
       />
       {content}
     </div>

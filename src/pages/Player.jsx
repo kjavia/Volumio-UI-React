@@ -71,7 +71,7 @@ const getPlayerTypeForSource = (service, trackType) => {
   return 'vinylCover';
 };
 
-const Player = ({ vizStopped = false, onVizResumed }) => {
+const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const { data: pluginConfig } = usePluginConfig();
   const playerType = pluginConfig?.playerType || 'radio';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
@@ -264,7 +264,7 @@ const Player = ({ vizStopped = false, onVizResumed }) => {
           </div>
 
           {/* VISUALIZATION SECTION */}
-          <div className="spectrum-panel area-spectrum">
+          <div className="spectrum-panel area-spectrum" ref={vizContainerRef}>
             {vizType === 'spectrum' && <SpectrumAnalyzer stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
             {vizType === 'vuMeter1' && <VUMeter variant={1} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
             {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
