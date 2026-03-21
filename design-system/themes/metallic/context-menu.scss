@@ -51,6 +51,30 @@
         0 2px 8px var(--shadow-20);
 }
 
+/* ── No-shadow variant ────────────────────────────────────────────────── */
+.context-menu-toggle--no-shadow {
+    background: rgba(0, 0, 0, 0.35);
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--color-primary);
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.50);
+        box-shadow: none !important;
+        transform: none;
+    }
+
+    &:active {
+        box-shadow: none !important;
+        transform: none;
+    }
+
+    .material-icons {
+        color: var(--color-primary);
+        filter: none;
+    }
+}
+
 .context-menu-toggle .material-icons {
     font-size: 24px;
 }

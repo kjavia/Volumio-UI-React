@@ -56,6 +56,33 @@
       -1px -1px 4px var(--highlight-20),
       inset 2px 2px 4px var(--shadow-20);
   }
+
+  // ── No-shadow variant ─────────────────────────────────────────────────
+  // Use on surfaces that already have visual depth (e.g. the player home
+  // screen) so the button doesn't compete with background content.
+  &--no-shadow {
+    box-shadow: none !important;
+    background-color: rgba(0, 0, 0, 0.35);
+    background-image: none;
+    border: none !important;
+    color: var(--color-primary);
+
+    .material-icons {
+      color: var(--color-primary);
+      filter: none;
+    }
+
+    &:hover {
+      box-shadow: none !important;
+      background-color: rgba(0, 0, 0, 0.50);
+      transform: none;
+    }
+
+    &:active {
+      box-shadow: none !important;
+      transform: none;
+    }
+  }
 }
 
 .context-menu-backdrop {
