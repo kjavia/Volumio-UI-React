@@ -58,7 +58,7 @@ const ContextMenu = () => {
   return (
     <div className="context-menu-container">
       <button
-        className="context-menu-toggle"
+        className="context-menu-toggle context-menu-toggle--no-shadow"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-label="Menu"

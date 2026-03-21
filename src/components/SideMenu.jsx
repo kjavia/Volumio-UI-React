@@ -1,8 +1,14 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import SlidePanel from './SlidePanel';
 
-const SideMenu = () => {
+const SideMenu = ({ onStopViz, onBack, onExit }) => {
   const [open, setOpen] = useState(false);
+
+  const handle = (fn) => () => {
+    setOpen(false);
+    fn?.();
+  };
 
   return (
     <>
@@ -41,7 +47,7 @@ const SideMenu = () => {
                 Queue
               </button>
             </li>
-            <li className="py-2">
+            <li className="py-2 border-bottom border-secondary">
               <button className="btn btn-link text-white text-decoration-none w-100 text-start d-flex align-items-center gap-2 px-0">
                 <span className="material-icons" style={{ fontSize: '1.2rem' }}>
                   settings
@@ -49,11 +55,60 @@ const SideMenu = () => {
                 Settings
               </button>
             </li>
+
+            {/* ── Actions ─────────────────────────────────────────── */}
+            {onStopViz && (
+              <li className="py-2 border-bottom border-secondary">
+                <button
+                  className="btn btn-link text-warning text-decoration-none w-100 text-start d-flex align-items-center gap-2 px-0"
+                  onClick={handle(onStopViz)}
+                >
+                  <span className="material-icons" style={{ fontSize: '1.2rem' }}>
+                    equalizer
+                  </span>
+                  Stop Visualization
+                </button>
+              </li>
+            )}
+
+            {onBack && (
+              <li className="py-2 border-bottom border-secondary">
+                <button
+                  className="btn btn-link text-white text-decoration-none w-100 text-start d-flex align-items-center gap-2 px-0"
+                  onClick={handle(onBack)}
+                >
+                  <span className="material-icons" style={{ fontSize: '1.2rem' }}>
+                    arrow_back
+                  </span>
+                  Back
+                </button>
+              </li>
+            )}
+
+            {onExit && (
+              <li className="py-2">
+                <button
+                  className="btn btn-link text-danger text-decoration-none w-100 text-start d-flex align-items-center gap-2 px-0"
+                  onClick={handle(onExit)}
+                >
+                  <span className="material-icons" style={{ fontSize: '1.2rem' }}>
+                    power_settings_new
+                  </span>
+                  Exit
+                </button>
+              </li>
+            )}
           </ul>
         </nav>
       </SlidePanel>
     </>
   );
+};
+
+SideMenu.propTypes = {
+  onStopViz: PropTypes.func,
+  onBack: PropTypes.func,
+  onExit: PropTypes.func,
 };
 
 export default SideMenu;

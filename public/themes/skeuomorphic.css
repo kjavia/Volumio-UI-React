@@ -4342,6 +4342,26 @@ h2 {
   transform: translateY(0);
   box-shadow: 2px 2px 6px var(--shadow-30), -1px -1px 4px var(--highlight-20), inset 2px 2px 4px var(--shadow-20);
 }
+.context-menu-toggle--no-shadow {
+  box-shadow: none !important;
+  background-color: rgba(0, 0, 0, 0.35);
+  background-image: none;
+  border: none !important;
+  color: var(--color-primary);
+}
+.context-menu-toggle--no-shadow .material-icons {
+  color: var(--color-primary);
+  filter: none;
+}
+.context-menu-toggle--no-shadow:hover {
+  box-shadow: none !important;
+  background-color: rgba(0, 0, 0, 0.5);
+  transform: none;
+}
+.context-menu-toggle--no-shadow:active {
+  box-shadow: none !important;
+  transform: none;
+}
 
 .context-menu-backdrop {
   position: fixed;

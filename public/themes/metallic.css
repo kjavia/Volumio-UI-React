@@ -3089,6 +3089,27 @@ h2 {
   box-shadow: inset 0 2px 6px var(--shadow-30), 0 2px 8px var(--shadow-20);
 }
 
+/* ── No-shadow variant ────────────────────────────────────────────────── */
+.context-menu-toggle--no-shadow {
+  background: rgba(0, 0, 0, 0.35);
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--color-primary);
+}
+.context-menu-toggle--no-shadow:hover {
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: none !important;
+  transform: none;
+}
+.context-menu-toggle--no-shadow:active {
+  box-shadow: none !important;
+  transform: none;
+}
+.context-menu-toggle--no-shadow .material-icons {
+  color: var(--color-primary);
+  filter: none;
+}
+
 .context-menu-toggle .material-icons {
   font-size: 24px;
 }
