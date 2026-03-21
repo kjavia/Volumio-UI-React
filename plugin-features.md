@@ -34,3 +34,6 @@ For providing photos for the Wallpaper, use Unsplash API (requires registration 
 API Reference
 
 <https://unsplash.com/documentation#photos>
+
+Example Query
+<https://api.unsplash.com/photos/random?query=wallpaper&orientation=landscape&count=30>
