@@ -82,7 +82,11 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
       const sourceNode = ctx.createMediaElementSource(audio);
       entry = { ctx, sourceNode };
       mediaSourceCache.set(audio, entry);
-    } else if (entry.ctx.state === 'suspended') {
+    }
+
+    // iOS requires AudioContext.resume() synchronously within the user gesture.
+    // A newly created AudioContext starts suspended on iOS/Safari.
+    if (entry.ctx.state === 'suspended') {
       entry.ctx.resume();
     }
 
@@ -120,15 +124,7 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
       analyserRRef.current = analyserR;
     }
 
-    // On iOS, calling audio.load() after createMediaElementSource invalidates
-    // the Web Audio node connection. Since we use preload="none" and pause (not
-    // reset) on stop, we just call play() directly.
-    // Resume the AudioContext inside the play() promise so iOS audio sessions
-    // that get interrupted (e.g. screen lock) recover automatically.
-    const entry2 = mediaSourceCache.get(audio);
-    audio.play().then(() => {
-      if (entry2?.ctx.state === 'suspended') entry2.ctx.resume();
-    }).catch(() => {});
+    audio.play().catch(() => {});
   }, []);
 
   // --------------------------------------------------------------------------

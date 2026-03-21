@@ -5,8 +5,8 @@
   justify-content: center;
   position: relative;
   width: 100%;
-  max-width: 450px; /* Cap for large screens */
-  aspect-ratio: 1.5; /* Widescreen ratio for sleeve + stick-out disc */
+  max-width: 400px;
+  aspect-ratio: 1.6;
   margin: 0 auto;
 }
 
@@ -126,26 +126,30 @@
   box-shadow: 0 10px 30px var(--shadow-50);
 }
 
-/* @media (min-width: 768px) { */
-/*   .vinyl-sleeve-container { */
-/*     width: 40vw; */
-/*     height: auto; */
-/*     aspect-ratio: 1.4; */
-/*     max-width: 600px; */
-/*     display: block; */
-/*   } */
+@media (min-width: 768px) {
+  .vinyl-sleeve-container {
+    width: 40vw;
+    max-width: 600px;
+    aspect-ratio: 1.4;
+    height: auto;
+    margin: 0 auto;
+  }
 
-/*   .vinyl-disc { */
-/*     /\* Scale relative to container *\/ */
-/*     width: auto; */
-/*     height: 96%; */
-/*     /\* 290/300 approx *\/ */
-/*     aspect-ratio: 1/1; */
-/*     /\* Reset fixed *\/ */
-/*     top: 2%; */
-/*     left: 1%; */
-/*   } */
-/* } */
+  .vinyl-sleeve-container .album-sleeve {
+    width: auto;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    left: 0;
+  }
+
+  .vinyl-sleeve-container .vinyl-disc {
+    width: auto;
+    height: 94%;
+    aspect-ratio: 1 / 1;
+    top: 3%;
+    left: 1%;
+  }
+}
 
 .sleeve-art {
   width: 100%;
@@ -163,11 +167,3 @@
 }
 
 /* Responsive adjustments */
-@media (min-width: 768px) {
-  .vinyl-sleeve-container {
-    /* Scale up for desktop */
-    transform: scale(1.1);
-    /* Shift left to center the composition visually since disc sticks out right */
-    margin-left: 0;
-  }
-}

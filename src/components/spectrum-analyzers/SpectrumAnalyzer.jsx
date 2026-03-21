@@ -73,10 +73,12 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
       const sourceNode = ctx.createMediaElementSource(audio);
       entry = { ctx, sourceNode };
       mediaSourceCache.set(audio, entry);
-    } else {
-      if (entry.ctx.state === 'suspended') {
-        entry.ctx.resume();
-      }
+    }
+
+    // iOS requires AudioContext.resume() synchronously within the user gesture.
+    // A newly created AudioContext starts suspended on iOS/Safari.
+    if (entry.ctx.state === 'suspended') {
+      entry.ctx.resume();
     }
 
     const { ctx, sourceNode } = entry;
@@ -110,21 +112,16 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
     // If the analyzer already exists (was previously stopped), just restart it
     if (analyzerRef.current) {
       const entry = mediaSourceCache.get(audio);
+      // Resume synchronously — iOS won't allow it in a .then() callback
+      if (entry?.ctx.state === 'suspended') entry.ctx.resume();
       analyzerRef.current.start?.();
-      // Do NOT call audio.load() — it invalidates the MediaElementSourceNode on iOS.
-      // Just play; resume AudioContext in the promise so iOS sessions recover.
-      audio.play().then(() => {
-        if (entry?.ctx.state === 'suspended') entry.ctx.resume();
-      }).catch(() => {});
+      audio.play().catch(() => {});
       onResumed?.();
       setEnabled(true);
       return;
     }
 
-    audio.play().then(() => {
-      const entry = mediaSourceCache.get(audio);
-      if (entry?.ctx.state === 'suspended') entry.ctx.resume();
-    }).catch(() => {});
+    audio.play().catch(() => {});
     onResumed?.();
     setEnabled(true);
   };
