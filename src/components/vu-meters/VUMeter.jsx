@@ -120,9 +120,15 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
       analyserRRef.current = analyserR;
     }
 
-    // Reload to drop buffered data and reconnect to the live stream
-    audio.load();
-    audio.play().catch(() => {});
+    // On iOS, calling audio.load() after createMediaElementSource invalidates
+    // the Web Audio node connection. Since we use preload="none" and pause (not
+    // reset) on stop, we just call play() directly.
+    // Resume the AudioContext inside the play() promise so iOS audio sessions
+    // that get interrupted (e.g. screen lock) recover automatically.
+    const entry2 = mediaSourceCache.get(audio);
+    audio.play().then(() => {
+      if (entry2?.ctx.state === 'suspended') entry2.ctx.resume();
+    }).catch(() => {});
   }, []);
 
   // --------------------------------------------------------------------------

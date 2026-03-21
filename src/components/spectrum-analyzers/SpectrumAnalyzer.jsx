@@ -110,17 +110,21 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
     // If the analyzer already exists (was previously stopped), just restart it
     if (analyzerRef.current) {
       const entry = mediaSourceCache.get(audio);
-      if (entry?.ctx.state === 'suspended') entry.ctx.resume();
       analyzerRef.current.start?.();
-      // Reload to drop buffered data and reconnect to the live stream
-      audio.load();
-      audio.play().catch(() => {});
+      // Do NOT call audio.load() — it invalidates the MediaElementSourceNode on iOS.
+      // Just play; resume AudioContext in the promise so iOS sessions recover.
+      audio.play().then(() => {
+        if (entry?.ctx.state === 'suspended') entry.ctx.resume();
+      }).catch(() => {});
       onResumed?.();
       setEnabled(true);
       return;
     }
 
-    audio.play().catch(() => {});
+    audio.play().then(() => {
+      const entry = mediaSourceCache.get(audio);
+      if (entry?.ctx.state === 'suspended') entry.ctx.resume();
+    }).catch(() => {});
     onResumed?.();
     setEnabled(true);
   };
