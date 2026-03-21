@@ -227,7 +227,6 @@ const Player = ({ vizStopped = false, onVizResumed }) => {
                 samplerate={samplerate}
                 bitdepth={bitdepth}
                 bitrate={bitrate}
-                service={service}
               />
 
               <div className="w-100 my-1 my-md-3 my-lg-4">

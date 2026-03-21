@@ -11,27 +11,13 @@ const LOGO_MAP = {
   dff: '/assets/logos/dsd.svg',
 };
 
-// Friendly labels for known services
-const SERVICE_LABELS = {
-  mpd: 'Local',
-  spop: 'Spotify',
-  webradio: 'Web Radio',
-  tidal: 'Tidal',
-  qobuz: 'Qobuz',
-  youtube: 'YouTube',
-  airplay: 'AirPlay',
-  upnp: 'UPnP',
-  bluetooth: 'Bluetooth',
-};
-
-const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate, service }) => {
+const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate }) => {
   // Don't render if we have nothing to show
-  if (!trackType && !samplerate && !bitdepth && !bitrate && !service) {
+  if (!trackType && !samplerate && !bitdepth && !bitrate) {
     return null;
   }
 
   const logoSrc = trackType ? LOGO_MAP[trackType.toLowerCase()] : null;
-  const serviceLabel = service ? SERVICE_LABELS[service.toLowerCase()] || service : null;
 
   // Build quality string: e.g. "44.1 kHz / 16 bit" or "320 kbps"
   const qualityParts = [];
@@ -75,14 +61,6 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate, service }) => {
           <span>{bitrate}</span>
         </>
       )}
-
-      {/* Source / service */}
-      {serviceLabel && (
-        <>
-          <span className="text-white-50">·</span>
-          <span>{serviceLabel}</span>
-        </>
-      )}
     </div>
   );
 };
@@ -92,7 +70,6 @@ StreamInfo.propTypes = {
   samplerate: PropTypes.string,
   bitdepth: PropTypes.string,
   bitrate: PropTypes.string,
-  service: PropTypes.string,
 };
 
 export default StreamInfo;

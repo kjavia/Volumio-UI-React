@@ -28,15 +28,19 @@ export const SeekProvider = ({ children }) => {
   }, [socket]);
 
   // Update seek periodically when playing to make UI fluid
+  // Skip for web radio (duration === 0) and stop when seek reaches duration
   useEffect(() => {
     let interval;
-    if (status === 'play') {
+    if (status === 'play' && duration > 0) {
       interval = setInterval(() => {
-        setSeek((prev) => prev + 1000); // Add 1 second every second
+        setSeek((prev) => {
+          const next = prev + 1000;
+          return next <= duration * 1000 ? next : prev;
+        });
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [status]);
+  }, [status, duration]);
 
   const seekTo = (val) => {
     if (!socket) return;

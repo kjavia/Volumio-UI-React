@@ -84,7 +84,6 @@ const useVolumioStatus = () => {
     if (!socket) return;
 
     const handlePushState = (data) => {
-      console.log('[VolumioStatus] Received pushState:', data);
       if (!data) return;
       setStatus(data.status);
       setTitle(data.title);
