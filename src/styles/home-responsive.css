@@ -162,6 +162,11 @@ body,
   flex-shrink: 0;
 }
 
+/* Extra breathing room above/below the transport controls row */
+.player-controls {
+  margin-block: clamp(4px, 1.5cqh, 14px);
+}
+
 /* Seekbar and volume wrapper: no extra margins — container gap handles spacing */
 .seekbar-container-wrap {
   margin-block: 0;
