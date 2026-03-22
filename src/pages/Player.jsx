@@ -220,8 +220,15 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               className="d-flex flex-column align-items-center justify-content-center w-100 h-100 player-controls-container"
               style={{ maxWidth: '450px' }}
             >
-              <TrackInfo title={title} artist={artist} album={album} />
+              {/* Track info — sized to content only */}
+              <div className="track-info-group w-100">
+                <TrackInfo title={title} artist={artist} album={album} />
+              </div>
 
+              {/* Top half of spacer — pushes stream info toward center */}
+              <div className="controls-spacer" />
+
+              {/* Stream info — floats centered between track info and seekbar */}
               <StreamInfo
                 trackType={trackType}
                 samplerate={samplerate}
@@ -229,7 +236,10 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
                 bitrate={bitrate}
               />
 
-              <div className="w-100 my-1 my-md-3 my-lg-4">
+              {/* Bottom half of spacer */}
+              <div className="controls-spacer" />
+
+              <div className="w-100 seekbar-container-wrap">
                 <PlayerSeekbar readOnly={!showPlayerControls} />
               </div>
 
@@ -251,7 +261,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               )}
 
               {!disableVolumeControl && showPlayerControls && (
-                <div className="mt-1 mt-md-3 mt-lg-5 w-100 px-2 px-lg-4">
+                <div className="volume-manager-wrap w-100 px-2 px-lg-4">
                   <VolumeManager
                     volume={volume}
                     mute={mute}

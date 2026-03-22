@@ -182,15 +182,19 @@
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -448,15 +452,19 @@
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -815,15 +823,19 @@ pre {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -1178,15 +1190,19 @@ pre {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -1687,15 +1703,19 @@ pre {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -2302,15 +2322,19 @@ input:checked + .slider:before {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -2650,15 +2674,19 @@ input:checked + .slider:before {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -3043,15 +3071,19 @@ input[type=range]::-moz-range-thumb:active {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -3379,15 +3411,19 @@ input[type=range]::-moz-range-thumb:active {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -3745,15 +3781,19 @@ input[type=range]::-moz-range-thumb:active {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -3920,19 +3960,19 @@ input[type=range]::-moz-range-thumb:active {
 }
 
 .responsive-title {
-  font-size: clamp(1.1rem, 4vw, 2rem);
+  font-size: clamp(1rem, 3.5cqw, 1.75rem);
 }
 
 .responsive-artist {
-  font-size: clamp(0.8rem, 2.2vw, 1.15rem);
+  font-size: clamp(0.75rem, 2.2cqw, 1.1rem);
 }
 
 .responsive-album {
-  font-size: clamp(0.7rem, 1.8vw, 1rem);
+  font-size: clamp(0.7rem, 1.8cqw, 0.95rem);
 }
 
 .responsive-stream-info {
-  font-size: clamp(0.62rem, 1.3vw, 0.82rem);
+  font-size: clamp(0.6rem, 1.2cqw, 0.8rem);
 }
 
 .format-logo-responsive {
@@ -4239,15 +4279,19 @@ input[type=range]::-moz-range-thumb:active {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -4697,15 +4741,19 @@ input[type=range]::-moz-range-thumb:active {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -5060,15 +5108,19 @@ input[type=range]::-moz-range-thumb:active {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -5404,15 +5456,19 @@ input[type=range]::-moz-range-thumb:active {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -5856,15 +5912,19 @@ input[type=range]::-moz-range-thumb:active {
   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
-  --text-xs: 0.6875rem; /* 11px - macOS menu/label size */
-  --text-sm: 0.8125rem; /* 13px - macOS default UI size */
-  --text-base: 0.875rem; /* 14px */
-  --text-md: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 2rem; /* 32px */
-  --text-4xl: 2.5rem; /* 40px */
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;

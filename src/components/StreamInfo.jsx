@@ -27,7 +27,7 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate }) => {
 
   return (
     <div
-      className="stream-info d-flex align-items-center justify-content-center gap-2 w-100 mt-1 responsive-stream-info"
+      className="stream-info d-flex align-items-center justify-content-center gap-2 w-100 responsive-stream-info overflow-hidden"
       style={{ opacity: 0.6, userSelect: 'none' }}
     >
       {/* Format logo or text fallback */}

@@ -109,19 +109,19 @@
 }
 
 .responsive-title {
-  font-size: clamp(1.25rem, 4.5vw, 2.25rem);
+  font-size: clamp(1rem, 3.5cqw, 1.875rem);
 }
 
 .responsive-artist {
-  font-size: clamp(0.8rem, 2.2vw, 1.2rem);
+  font-size: clamp(0.75rem, 2.2cqw, 1.15rem);
 }
 
 .responsive-album {
-  font-size: clamp(0.7rem, 1.8vw, 1rem);
+  font-size: clamp(0.7rem, 1.8cqw, 0.95rem);
 }
 
 .responsive-stream-info {
-  font-size: clamp(0.62rem, 1.3vw, 0.82rem);
+  font-size: clamp(0.6rem, 1.2cqw, 0.8rem);
 }
 
 .format-logo-responsive {

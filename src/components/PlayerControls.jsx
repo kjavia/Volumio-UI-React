@@ -18,7 +18,7 @@ const PlayerControls = ({
   return (
     <div className="player-controls d-flex flex-column align-items-center w-100">
       {/* Main transport controls */}
-      <div className="d-flex gap-3 gap-md-4 align-items-center justify-content-center my-2 my-md-4">
+      <div className="controls-transport-row d-flex gap-3 align-items-center justify-content-center">
         <Button classNames="btn-round btn-white" onClick={onPrev} label="Previous">
           <span className="material-icons fs-5 fs-md-4">skip_previous</span>
         </Button>

@@ -6,12 +6,12 @@ const TrackInfo = ({ title, artist, album, isInFooter }) => {
       className={`track-info d-flex flex-column ${
         isInFooter
           ? 'align-items-start ms-3'
-          : 'align-items-center text-center mb-1 mb-md-3 mb-lg-4 w-100 overflow-hidden cq-track-info'
+          : 'align-items-center text-center w-100 overflow-hidden cq-track-info'
       }`}
     >
       <div
         className={`track-title user-select-none text-truncate w-100 ${
-          isInFooter ? 'h6 text-start mb-0' : 'responsive-title fw-bold mb-1'
+          isInFooter ? 'h6 text-start mb-0' : 'responsive-title fw-bold'
         }`}
       >
         {title || 'Unknown Title'}

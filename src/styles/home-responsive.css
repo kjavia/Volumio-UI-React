@@ -114,3 +114,114 @@ body,
     --p-size: 65;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CONTROLS AREA — FLUID / COMPACT via CSS Container Queries
+   .home-panel has container-type:size so @container queries here target
+   elements inside the controls panel at various heights.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Track info: sized to content only, does not stretch ── */
+.cq-track-info {
+  flex: 0 0 auto;
+  min-height: 0;
+}
+
+/* ── Track info group (title + stream info together) ── */
+.track-info-group {
+  flex: 0 0 auto;
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* ── Flexible spacer: grows to fill leftover space above controls.
+   max-height caps it so on large screens track info stays near controls. ── */
+.controls-spacer {
+  flex: 1 1 0;
+  max-height: clamp(8px, 4cqh, 40px);
+}
+
+/* ── Controls container: safe centering prevents top-clipping on overflow ── */
+.player-controls-container {
+  justify-content: safe center;
+  /* Single fluid gap drives ALL vertical spacing between every child.
+     cqh = % of the controls panel's own height, so spacing auto-scales. */
+  gap: clamp(4px, 1.8cqh, 22px) !important;
+}
+
+/* ── Transport row: zero out its own margins so only the container gap applies ── */
+.controls-transport-row {
+  margin-block: 0;
+}
+
+/* ── Controls/volume stay compact (don't grow) ── */
+.player-controls,
+.seekbar-container-wrap,
+.volume-manager-wrap {
+  flex-shrink: 0;
+}
+
+/* Seekbar and volume wrapper: no extra margins — container gap handles spacing */
+.seekbar-container-wrap {
+  margin-block: 0;
+}
+
+.volume-manager-wrap {
+  margin-top: 0;
+}
+
+/* ── Medium-compact: transport + icon buttons shrink at ≤560px panel height ── */
+@container (max-height: 560px) {
+  /* Transport buttons: 56px → 44px */
+  .btn-round {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  /* Icon buttons: 36px → 28px */
+  .btn-icon {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .btn-icon .material-icons {
+    font-size: 1.05rem !important;
+  }
+}
+
+/* ── Fully compact: ≤380px panel height (landscape mobile, very small screens) ── */
+@container (max-height: 380px) {
+  /* Transport buttons: → 36px */
+  .btn-round {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .btn-round .material-icons {
+    font-size: 1.1rem !important;
+  }
+
+  /* Icon buttons: → 24px */
+  .btn-icon {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .btn-icon .material-icons {
+    font-size: 0.95rem !important;
+  }
+
+  .volume-manager .material-icons {
+    font-size: 1rem !important;
+  }
+
+  .volume-manager .small {
+    font-size: 0.7rem !important;
+  }
+
+  /* Hide album name to reclaim space */
+  .album-name {
+    display: none !important;
+  }
+}
