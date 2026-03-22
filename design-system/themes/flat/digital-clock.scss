@@ -1,83 +1,201 @@
-@use './variables.scss';
+/* ── Digital LCD Clock — Flat Dark Theme ───────────────────────────────────
+ * Deep navy LCD panel, indigo segments, minimal flat bezels, Inter / JetBrains Mono
+ * ──────────────────────────────────────────────────────────────────────── */
 
-/* ═══════════════════════════════════════════════════════════════════════
-   DIGITAL CLOCK - Flat Dark Theme
-   ═══════════════════════════════════════════════════════════════════════ */
+// Segment palette — indigo on near-black
+$seg-color:       #6366f1;
+$seg-off-opacity: 0.08;
+$lcd-bg:          #0d0d14;
 
+/* ── Centering wrapper ──────────────────────────────────────────────────── */
+.digital-clock-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  height: 90dvh;
+  max-width: none;
+  margin: 0 auto;
+  container-type: size;
+}
+
+/* ── Outer frame — thin flat border ────────────────────────────────────── */
+.digital-clock-frame {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  padding: 2cqw 2.5cqw;
+  background: #11111a;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  user-select: none;
+}
+
+/* ── LCD Panel ──────────────────────────────────────────────────────────── */
 .digital-clock {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding: 24px;
-    gap: 12px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.2cqw 1.8cqw;
+  border-radius: 4px;
+  background: $lcd-bg;
+  border: 1px solid rgba(99, 102, 241, 0.15);
 }
 
-.digital-clock__time {
-    font-family: var(--font-mono);
-    font-size: clamp(3.5rem, 18vw, 18rem);
-    font-weight: 300;
-    color: var(--text-primary);
-    letter-spacing: 0.06em;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-    user-select: none;
+/* ── Day-of-week bar ────────────────────────────────────────────────────── */
+.lcd-days {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8cqw;
+  margin-bottom: 0.8cqw;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.55rem, 1.1cqw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+
+  span {
+    opacity: 0.15;
+    color: $seg-color;
+  }
+
+  .active {
+    color: $seg-color;
+    opacity: 1;
+    border-bottom: 0.2cqw solid $seg-color;
+  }
 }
 
-.digital-clock__date {
-    font-family: var(--font-body);
-    font-size: clamp(1rem, 3.5vw, 2.5rem);
-    font-weight: 400;
-    color: var(--text-secondary);
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-    user-select: none;
+/* ── Time row ───────────────────────────────────────────────────────────── */
+.lcd-time {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6cqw;
 }
 
-.digital-clock__ampm {
-    font-family: var(--font-mono);
-    font-size: clamp(0.8rem, 2.5vw, 2rem);
-    font-weight: 500;
-    color: var(--color-primary-light);
-    letter-spacing: var(--tracking-widest);
-    text-transform: uppercase;
-    user-select: none;
+.lcd-digits {
+  display: flex;
+  align-items: center;
+  gap: 0.2cqw;
 }
 
-/* ─── Weather row ─────────────────────────────────────────────────────── */
-.digital-clock__weather {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: clamp(0.8rem, 2vw, 1.4rem);
-    color: var(--text-secondary);
+.lcd-ampm {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.75rem, 2.2cqw, 3.5rem);
+  font-weight: 700;
+  color: $seg-color;
+  letter-spacing: 0.08em;
+  padding-bottom: 0.2cqw;
+  margin-left: 0.4cqw;
+  text-transform: uppercase;
 }
 
-/* ─── Segments (7-segment retro style) ────────────────────────────────── */
-.clock-segment {
-    color: var(--color-primary-light);
-    font-weight: 300;
+/* ── Colon separator ────────────────────────────────────────────────────── */
+.lcd-colon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28%;
+  width: 1.5cqw;
+  height: 100%;
+  padding: 15% 0;
 }
 
-.clock-separator {
-    color: var(--color-primary);
-    opacity: 0.6;
-    animation: blink 1s step-start infinite;
+.lcd-colon-dot {
+  width: 0.8cqw;
+  height: 0.8cqw;
+  background: $seg-color;
+  border-radius: 1px;
+  animation: lcd-blink 1s step-start infinite;
 }
 
-@keyframes blink {
-    0%, 100% { opacity: 0.6; }
-    50%       { opacity: 0.15; }
+@keyframes lcd-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.15; }
 }
 
-/* ─── Flip rows inside digital clock digits ──────────────────────────── */
-.flip-card {
-    background: var(--color-gray-800);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border-dark);
+/* ── Date + weather row ─────────────────────────────────────────────────── */
+.lcd-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5cqw;
+  margin-top: 1.5cqw;
 }
 
-.active {
-    color: var(--color-primary-light);
+.lcd-date {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  text-align: center;
 }
+
+.lcd-weather {
+  display: flex;
+  align-items: center;
+  gap: 0.5cqw;
+}
+
+.lcd-weather-icon {
+  font-size: clamp(0.9rem, 2cqw, 3rem);
+  color: $seg-color;
+}
+
+.lcd-weather-temp {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: $seg-color;
+}
+
+/* ── 7-Segment Digit ────────────────────────────────────────────────────── */
+.lcd-digit {
+  position: relative;
+  width: 11cqw;
+  height: calc(11cqw * 1.7);
+}
+
+.seg {
+  position: absolute;
+  background: $seg-color;
+  transition: opacity 0.1s ease;
+
+  &.on  { opacity: 1; }
+  &.off { opacity: $seg-off-opacity; }
+}
+
+// Horizontal segments (a, d, g)
+.seg-a,
+.seg-d,
+.seg-g {
+  left: 10%;
+  width: 80%;
+  height: 7%;
+  clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
+}
+
+.seg-a { top: 0; }
+.seg-g { top: 46.5%; }
+.seg-d { bottom: 0; }
+
+// Vertical segments (b, c, e, f)
+.seg-b,
+.seg-c,
+.seg-e,
+.seg-f {
+  width: 13%;
+  height: 42%;
+  clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
+}
+
+.seg-b { top: 4%;    right: 0; }
+.seg-c { bottom: 4%; right: 0; }
+.seg-f { top: 4%;    left: 0; }
+.seg-e { bottom: 4%; left: 0; }

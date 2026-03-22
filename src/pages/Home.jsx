@@ -7,6 +7,7 @@ import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
 import Player from './Player';
 import useIdleScreen from '@/hooks/useIdleScreen';
+import usePluginConfig from '@/hooks/usePluginConfig';
 import { VOLUMIO_BASE_URL } from '@/config';
 
 const CLOCK_SCREENS = {
@@ -163,6 +164,10 @@ const Home = () => {
     if (!idle) setForcePlayer(false);
   }, [idle]);
 
+  const { data: pluginConfig } = usePluginConfig();
+  const vizType = pluginConfig?.vizType || 'spectrum';
+  const isSpectrumViz = vizType === 'spectrum';
+
   const showPlayer = !idle || forcePlayer;
 
   let content;
@@ -212,9 +217,9 @@ const Home = () => {
     <div className="position-relative h-100">
       <ContextMenu
         vizStopped={vizStopped}
-        onStopViz={() => setVizStopped(true)}
+        onStopViz={showPlayer && isSpectrumViz ? () => setVizStopped(true) : undefined}
         onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
-        onFullscreenViz={handleFullscreenViz}
+        onFullscreenViz={showPlayer && isSpectrumViz ? handleFullscreenViz : undefined}
       />
       {content}
     </div>
