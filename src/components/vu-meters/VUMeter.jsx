@@ -269,7 +269,7 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
   }, [recalcNeedles]);
 
   const variantClass = `vu-meter--variant-${variant}`;
-  const imgSrc = backgroundSrc || `/assets/images/vu-meters/vu-meter-${variant}.jpg`;
+  const imgSrc = backgroundSrc || `/assets/images/vu-meters/vu-meter-${variant}.png`;
 
   return (
     <div
@@ -319,7 +319,7 @@ VUMeter.propTypes = {
   streamUrl: PropTypes.string.isRequired,
   /** Which background variant to use (1, 2, …). Defaults to 1. */
   variant: PropTypes.number,
-  /** Override the background image URL. Falls back to /assets/images/vu-meters/vu-meter-{variant}.jpg */
+  /** Override the background image URL. Falls back to /assets/images/vu-meters/vu-meter-{variant}.png */
   backgroundSrc: PropTypes.string,
   /**
    * Needle colour (any CSS colour string, e.g. '#fff', 'black', 'rgba(…)').
