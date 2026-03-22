@@ -5192,6 +5192,21 @@ input[type=range]::-moz-range-thumb:active {
   background: var(--highlight-10);
 }
 
+/* ── Title Group ── */
+.slide-panel-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.slide-panel-subtitle {
+  font-size: 0.7rem;
+  color: var(--color-gray-600);
+  font-family: var(--font-body);
+  opacity: 0.85;
+}
+
 .slide-panel-title {
   font-size: 1rem;
   font-weight: 600;

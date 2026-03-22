@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-const SlidePanel = ({ open, onClose, title, children, width = '300px' }) => {
+const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px' }) => {
   const panelRef = useRef(null);
 
   // Close on Escape key
@@ -43,7 +43,10 @@ const SlidePanel = ({ open, onClose, title, children, width = '300px' }) => {
       >
         {/* Header */}
         <div className="slide-panel-header d-flex align-items-center justify-content-between px-3 py-2">
-          {title && <h5 className="slide-panel-title m-0">{title}</h5>}
+          <div className="slide-panel-title-group">
+            {title && <h5 className="slide-panel-title m-0">{title}</h5>}
+            {subtitle && <span className="slide-panel-subtitle">{subtitle}</span>}
+          </div>
           <button
             type="button"
             className="btn btn-link p-0 ms-auto"
@@ -65,6 +68,7 @@ SlidePanel.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   title: PropTypes.string,
+  subtitle: PropTypes.string,
   children: PropTypes.node,
   width: PropTypes.string,
 };

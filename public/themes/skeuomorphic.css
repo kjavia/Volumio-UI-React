@@ -4061,6 +4061,21 @@ h2 {
   flex-shrink: 0;
 }
 
+/* ── Title Group ── */
+.slide-panel-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.slide-panel-subtitle {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  font-family: var(--font-label);
+  opacity: 0.8;
+}
+
 .slide-panel-title {
   font-size: 1rem;
   font-weight: 600;

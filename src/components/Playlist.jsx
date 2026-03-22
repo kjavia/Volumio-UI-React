@@ -18,8 +18,14 @@ const Playlist = ({ open, onClose, queue, currentPosition, isPlaying, onPlay, on
     return `${host}${art}`;
   };
 
+  const subtitle = queue.length === 0
+    ? null
+    : currentPosition != null && currentPosition >= 0
+      ? `${queue.length} ${queue.length === 1 ? 'track' : 'tracks'} · Playing ${currentPosition + 1} of ${queue.length}`
+      : `${queue.length} ${queue.length === 1 ? 'track' : 'tracks'}`;
+
   return (
-    <SlidePanel open={open} onClose={onClose} title="Queue" width="380px">
+    <SlidePanel open={open} onClose={onClose} title="Queue" subtitle={subtitle} width="380px">
       {queue.length === 0 ? (
         <div className="d-flex flex-column align-items-center justify-content-center text-white-50 py-5">
           <span className="material-icons mb-2" style={{ fontSize: '2rem', opacity: 0.4 }}>

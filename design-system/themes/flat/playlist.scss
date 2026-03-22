@@ -4,6 +4,130 @@
    PLAYLIST - Flat Dark Theme
    ═══════════════════════════════════════════════════════════════════════ */
 
+/* ── Queue Info Bar ── */
+.playlist-info {
+  font-size: 0.72rem;
+  border-bottom: 1px solid var(--border-dark);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.playlist-info-count {
+  color: var(--color-gray-500);
+  font-family: var(--font-label);
+}
+
+.playlist-info-position {
+  color: var(--color-primary);
+  font-family: var(--font-label);
+  font-weight: 500;
+}
+
+/* ── Playlist Items ── */
+.playlist-list {
+  padding-bottom: 1rem;
+}
+
+.playlist-item {
+  border-bottom: 1px solid var(--border-dark);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.12s;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--list-item-bg-hover);
+  }
+}
+
+/* Active / current track */
+.playlist-item--active {
+  background: var(--list-item-bg-hover);
+  border-left: 3px solid var(--color-primary);
+
+  .playlist-track-title {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+}
+
+/* ── Album Art ── */
+.playlist-art-wrap {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-dark);
+}
+
+.playlist-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.playlist-art--empty {
+  background: var(--color-gray-800);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-gray-500);
+}
+
+/* Play icon overlay on current track's art */
+.playlist-art-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--shadow-60);
+  color: var(--color-white);
+}
+
+/* ── Track Text ── */
+.playlist-track-title {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+  font-family: var(--font-label);
+  transition: color 0.15s ease;
+}
+
+.playlist-track-meta {
+  font-size: 0.72rem;
+  color: var(--color-gray-500);
+  line-height: 1.3;
+  font-family: var(--font-label);
+}
+
+/* ── Remove Button ── */
+.playlist-remove {
+  flex-shrink: 0;
+  text-decoration: none !important;
+  color: var(--color-gray-600);
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+
+  .material-icons {
+    font-size: 1.1rem;
+  }
+}
+
+.playlist-item:hover .playlist-remove {
+  opacity: 1;
+
+  &:hover {
+    color: var(--color-danger) !important;
+  }
+}
+
 .playlist-container {
     display: flex;
     flex-direction: column;
