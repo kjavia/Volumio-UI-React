@@ -150,9 +150,10 @@ body,
   gap: clamp(4px, 1.8cqh, 22px) !important;
 }
 
-/* ── Transport row: zero out its own margins so only the container gap applies ── */
+/* ── Transport row: spacing below to separate from secondary controls ── */
 .controls-transport-row {
   margin-block: 0;
+  margin-bottom: clamp(6px, 2cqh, 18px);
 }
 
 /* ── Controls/volume stay compact (don't grow) ── */
