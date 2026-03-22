@@ -1,0 +1,52 @@
+/* ── Flip Clock – Metallic Chrome Theme ──────────────────────────────────── */
+
+// ─── Panel base colour / text ─────────────────────────────────────────────
+.tick-flip-panel {
+  color:            #c8d8e8;       // steel-tinted near-white text
+  background-color: #1a1a1a;
+}
+
+// ─── Front panel (top half) – brushed chrome highlight ───────────────────
+.tick-flip-panel-front {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.13) 0%,    // specular top sheen
+      rgba(255, 255, 255, 0.04) 45%,
+      transparent 60%
+    ),
+    linear-gradient(180deg, #3c3c3c 0%, #1c1c1c 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+// ─── Back panel (bottom half) – darker chrome slab ───────────────────────
+.tick-flip-panel-back {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.03) 0%,
+      transparent 40%
+    ),
+    linear-gradient(180deg, #121212 0%, #1c1c1c 100%);
+}
+
+// ─── Outer bezel – electric-cyan accent glow ─────────────────────────────
+.flip-clock-body {
+  border-color: var(--color-primary, #00e1ff);
+  box-shadow:
+    0 0 0 1px  rgba(0, 225, 255, 0.20),
+    0 0 18px   rgba(0, 225, 255, 0.12),
+    0 10px 40px rgba(0, 0, 0, 0.95);
+}
+
+// ─── Stand – dark chrome shelf ────────────────────────────────────────────
+.flip-clock-stand {
+  background: linear-gradient(180deg, #2e2e2e 0%, #141414 100%);
+  border-top: 1px solid #444;
+}
+
+.flip-clock-date,
+.flip-clock-weather {
+  color: var(--color-primary, #00e1ff);
+  text-shadow: 0 0 6px rgba(0, 225, 255, 0.40);
+}
