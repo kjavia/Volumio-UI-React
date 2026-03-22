@@ -3972,11 +3972,11 @@ input[type=range]::-moz-range-thumb:active {
 }
 
 .responsive-stream-info {
-  font-size: clamp(0.6rem, 1.2cqw, 0.8rem);
+  font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
 }
 
 .format-logo-responsive {
-  height: clamp(0.85rem, 1.6vw, 1.4rem);
+  height: clamp(1.3rem, 3.8cqw, 4.2rem);
   display: block;
 }
 

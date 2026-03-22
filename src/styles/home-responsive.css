@@ -153,7 +153,7 @@ body,
 /* ── Transport row: spacing below to separate from secondary controls ── */
 .controls-transport-row {
   margin-block: 0;
-  margin-bottom: clamp(6px, 2cqh, 18px);
+  margin-bottom: clamp(10px, 3.5cqh, 32px);
 }
 
 /* ── Controls/volume stay compact (don't grow) ── */
