@@ -3733,15 +3733,27 @@ h2 {
 
 /* ── LCD Panel (the glassy screen area) ─────────────────────────────────── */
 .digital-clock {
+  position: relative;
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
   padding: 1.2cqw 1.8cqw;
   border-radius: 2px;
-  background: #c4d0d4;
-  border: 0.2cqw solid #8fa0a6;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35), inset 0 0 0 0.1cqw rgba(255, 255, 255, 0.25), 0 1px 0 rgba(255, 255, 255, 0.04);
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.02) 2px, rgba(0, 0, 0, 0.02) 3px), linear-gradient(180deg, #cdd9dd 0%, #c4d0d4 60%, #b8c6cb 100%);
+  background: #bfcfe8;
+  border: 0.2cqw solid #7a9ab8;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35), inset 0 0 0 0.1cqw rgba(255, 255, 255, 0.2), 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.02) 2px, rgba(0, 0, 0, 0.02) 3px), linear-gradient(180deg, #ccd8e8 0%, #bfcfe8 55%, #aec4e0 100%);
+}
+.digital-clock::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(0, 100, 255, 0.38) 0%, rgba(0, 70, 220, 0.2) 40%, transparent 75%);
+  pointer-events: none;
 }
 
 /* ── Day-of-week bar ────────────────────────────────────────────────────── */
@@ -4099,7 +4111,7 @@ h2 {
 }
 
 .flip-clock-body {
-  border-color: var(--color-primary, #00e1ff);
+  border-color: var(--color-white, #00e1ff);
   box-shadow: 0 0 0 1px rgba(0, 225, 255, 0.2), 0 0 18px rgba(0, 225, 255, 0.12), 0 10px 40px rgba(0, 0, 0, 0.95);
 }
 
