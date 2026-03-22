@@ -30,7 +30,7 @@
   padding: 3%;
   background: #16161e;
   border: 2px solid rgba(99, 102, 241, 0.25);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  box-shadow: none;
 }
 
 /* Face — flat dark dial */
@@ -124,7 +124,7 @@
   height: 38%;
   margin-left: -0.75px;
   background: #6366f1;
-  box-shadow: 0 0 6px rgba(99, 102, 241, 0.5);
+  box-shadow: none;
   border-radius: 1px;
   z-index: 5;
   transition: none;
@@ -140,7 +140,7 @@
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: #6366f1;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+  box-shadow: none;
   z-index: 6;
 }
 

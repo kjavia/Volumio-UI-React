@@ -75,9 +75,7 @@
 
     background: var(--color-gray-800);
     border: 1px solid var(--border-dark);
-    box-shadow:
-        0 8px 32px var(--shadow-50),
-        0 2px 8px var(--shadow-30);
+    box-shadow: none;
 
     opacity: 0;
     transform: translateY(-8px) scale(0.96);

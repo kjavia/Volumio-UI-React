@@ -3,7 +3,7 @@
  * ──────────────────────────────────────────────────────────────────────── */
 
 // Segment palette — indigo on near-black
-$seg-color:       #6366f1;
+$seg-color:       var(--color-primary);
 $seg-off-opacity: 0.08;
 $lcd-bg:          #0d0d14;
 
@@ -30,7 +30,7 @@ $lcd-bg:          #0d0d14;
   background: #11111a;
   border: 1px solid rgba(99, 102, 241, 0.2);
   border-radius: 8px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: none;
   user-select: none;
 }
 

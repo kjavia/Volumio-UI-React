@@ -16,7 +16,7 @@ select {
     border-radius: var(--radius-md);
     padding: 8px 12px;
     outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s;
+    transition: border-color 0.15s;
     width: 100%;
 
     &::placeholder {
@@ -25,7 +25,7 @@ select {
 
     &:focus {
         border-color: var(--color-primary);
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        box-shadow: none;
     }
 
     &:disabled {
@@ -122,7 +122,7 @@ label {
 
     &:focus {
         border-color: var(--color-primary);
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        box-shadow: none;
         outline: none;
     }
 }
@@ -138,7 +138,7 @@ label {
         background-color: var(--color-gray-800);
         color: var(--text-primary);
         border-color: var(--color-primary);
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        box-shadow: none;
         outline: none;
     }
 

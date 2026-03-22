@@ -11,10 +11,10 @@
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -250,10 +250,10 @@
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -596,10 +596,10 @@ code, pre {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -874,7 +874,6 @@ code, pre {
   background: var(--color-gray-850);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-dark);
-  box-shadow: 0 1px 3px var(--shadow-20);
 }
 
 .surface {
@@ -893,7 +892,6 @@ code, pre {
   background-color: var(--color-gray-900);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-dark);
-  box-shadow: inset 0 1px 3px var(--shadow-20);
 }
 
 :root {
@@ -902,10 +900,10 @@ code, pre {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -1348,7 +1346,7 @@ code, pre {
 }
 .led.on {
   background: var(--color-success);
-  box-shadow: 0 0 8px var(--color-success);
+  box-shadow: none;
 }
 
 /* ─── Text inside button ───────────────────────────────────────────────── */
@@ -1380,10 +1378,10 @@ code, pre {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -1628,7 +1626,7 @@ select {
   border-radius: var(--radius-md);
   padding: 8px 12px;
   outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color 0.15s;
   width: 100%;
 }
 input::placeholder,
@@ -1640,7 +1638,7 @@ input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  box-shadow: none;
 }
 input:disabled,
 textarea:disabled,
@@ -1732,7 +1730,7 @@ label {
 }
 .form-select:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  box-shadow: none;
   outline: none;
 }
 
@@ -1747,7 +1745,7 @@ label {
   background-color: var(--color-gray-800);
   color: var(--text-primary);
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  box-shadow: none;
   outline: none;
 }
 .form-control::placeholder {
@@ -1760,10 +1758,10 @@ label {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -2056,10 +2054,10 @@ label {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -2465,10 +2463,10 @@ input[type=range]::-moz-range-thumb:active {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -2766,10 +2764,10 @@ input[type=range]::-moz-range-thumb:active {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -3074,10 +3072,10 @@ input[type=range]::-moz-range-thumb:active {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -3536,10 +3534,10 @@ input[type=range]::-moz-range-thumb:active {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -3881,10 +3879,10 @@ input[type=range]::-moz-range-thumb:active {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -4235,10 +4233,10 @@ input[type=range]::-moz-range-thumb:active {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -4554,10 +4552,10 @@ input[type=range]::-moz-range-thumb:active {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -4853,7 +4851,7 @@ input[type=range]::-moz-range-thumb:active {
   z-index: 101;
   background: var(--color-gray-800);
   border: 1px solid var(--border-dark);
-  box-shadow: 0 8px 32px var(--shadow-50), 0 2px 8px var(--shadow-30);
+  box-shadow: none;
   opacity: 0;
   transform: translateY(-8px) scale(0.96);
   pointer-events: none;
@@ -4946,10 +4944,10 @@ input[type=range]::-moz-range-thumb:active {
      Modern, minimal dark UI with indigo accent
      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Indigo) ─────────────────────────────────────────────── */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-deep: #3730a3;
+  --color-primary: #457b9d;
+  --color-primary-light: #6a9fbf;
+  --color-primary-dark: #2d627f;
+  --color-primary-deep: #1a4a60;
   /* ─── Neutrals (Cool Dark) ────────────────────────────────────────── */
   --color-black: #000000;
   --color-gray-950: #0d0d14;
@@ -5203,7 +5201,7 @@ input[type=range]::-moz-range-thumb:active {
   padding: 28px;
   width: 100%;
   max-width: 480px;
-  box-shadow: 0 24px 64px var(--shadow-80);
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -5309,7 +5307,7 @@ input[type=range]::-moz-range-thumb:active {
   background: #11111a;
   border: 1px solid rgba(99, 102, 241, 0.2);
   border-radius: 8px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: none;
   user-select: none;
 }
 
@@ -5337,12 +5335,12 @@ input[type=range]::-moz-range-thumb:active {
 }
 .lcd-days span {
   opacity: 0.15;
-  color: #6366f1;
+  color: var(--color-primary);
 }
 .lcd-days .active {
-  color: #6366f1;
+  color: var(--color-primary);
   opacity: 1;
-  border-bottom: 0.2cqw solid #6366f1;
+  border-bottom: 0.2cqw solid var(--color-primary);
 }
 
 /* ── Time row ───────────────────────────────────────────────────────────── */
@@ -5362,7 +5360,7 @@ input[type=range]::-moz-range-thumb:active {
   font-family: "Inter", sans-serif;
   font-size: clamp(0.75rem, 2.2cqw, 3.5rem);
   font-weight: 700;
-  color: #6366f1;
+  color: var(--color-primary);
   letter-spacing: 0.08em;
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
@@ -5384,7 +5382,7 @@ input[type=range]::-moz-range-thumb:active {
 .lcd-colon-dot {
   width: 0.8cqw;
   height: 0.8cqw;
-  background: #6366f1;
+  background: var(--color-primary);
   border-radius: 1px;
   animation: lcd-blink 1s step-start infinite;
 }
@@ -5424,7 +5422,7 @@ input[type=range]::-moz-range-thumb:active {
 
 .lcd-weather-icon {
   font-size: clamp(0.9rem, 2cqw, 3rem);
-  color: #6366f1;
+  color: var(--color-primary);
 }
 
 .lcd-weather-temp {
@@ -5432,7 +5430,7 @@ input[type=range]::-moz-range-thumb:active {
   font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
   font-weight: 600;
   letter-spacing: 0.06em;
-  color: #6366f1;
+  color: var(--color-primary);
 }
 
 /* ── 7-Segment Digit ────────────────────────────────────────────────────── */
@@ -5444,7 +5442,7 @@ input[type=range]::-moz-range-thumb:active {
 
 .seg {
   position: absolute;
-  background: #6366f1;
+  background: var(--color-primary);
   transition: opacity 0.1s ease;
 }
 .seg.on {
@@ -5535,7 +5533,7 @@ input[type=range]::-moz-range-thumb:active {
   padding: 3%;
   background: #16161e;
   border: 2px solid rgba(99, 102, 241, 0.25);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  box-shadow: none;
 }
 
 /* Face — flat dark dial */
@@ -5629,7 +5627,7 @@ input[type=range]::-moz-range-thumb:active {
   height: 38%;
   margin-left: -0.75px;
   background: #6366f1;
-  box-shadow: 0 0 6px rgba(99, 102, 241, 0.5);
+  box-shadow: none;
   border-radius: 1px;
   z-index: 5;
   transition: none;
@@ -5645,7 +5643,7 @@ input[type=range]::-moz-range-thumb:active {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: #6366f1;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+  box-shadow: none;
   z-index: 6;
 }
 
