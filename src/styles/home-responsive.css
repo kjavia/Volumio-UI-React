@@ -164,7 +164,7 @@ body,
 
 /* Extra breathing room above/below the transport controls row */
 .player-controls {
-  margin-block: clamp(4px, 1.5cqh, 14px);
+  margin-block: clamp(8px, 3cqh, 28px);
 }
 
 /* Seekbar and volume wrapper: no extra margins — container gap handles spacing */
