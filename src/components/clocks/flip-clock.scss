@@ -6,14 +6,16 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
   user-select: none;
   container-type: size;
 
   // font-size drives ALL Tick flip panel sizing via em inheritance.
-  // 14.5cqw: 6 digit-pairs + 2 colons + ampm ≈ fills the width at normal aspect ratios.
-  // 55cqh: never taller than ~55% of container height.
-  --digit-h: min(55cqh, 14.5cqw);
+  // Total body content ≈ 9em wide (6 tiles × 1.25em + colons + AM/PM).
+  // 10.5cqw → font-size that fills ~95% of container width.
+  // 19cqh cap → just above 10.5cqw equivalent on 16:9, so cqw wins on landscape.
+  // .tick-flip line-height override below reduces tile height from 1.4× to 1.0×.
+  --digit-h: min(19cqh, 10.5cqw);
 }
 
 /* Clock body — outer decorative bezel frame */
@@ -99,6 +101,12 @@
 /* ── @pqina/flip panel theming ───────────────────────────────────────────── */
 // Override the library's hardcoded #333232 / #edebeb with theme-aware vars.
 // Themes can define --flip-panel-bg / --flip-panel-color for full control.
+
+// Tick's default line-height is ~1.4, making each tile 40% taller than font-size.
+// Setting it to 1 makes tiles square-ish and prevents them overflowing the screen.
+.tick-flip {
+  line-height: 1;
+}
 
 .tick-flip-panel {
   font-family: var(--font-mono, 'Roboto Mono', monospace);
