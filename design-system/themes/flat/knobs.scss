@@ -1,0 +1,64 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   KNOBS - Flat Dark Theme
+   Clean rotary knob — flat disc aesthetic
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.knob-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.knob {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--color-gray-750);
+    border: 2px solid var(--border-dark);
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+    transition: border-color 0.15s;
+
+    &:hover {
+        border-color: var(--color-primary);
+    }
+
+    /* Indicator dot */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--color-primary-light);
+    }
+}
+
+.knob-track {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+}
+
+.knob-label {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    font-weight: 500;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+}
+
+.knob-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-primary-light);
+    font-variant-numeric: tabular-nums;
+}

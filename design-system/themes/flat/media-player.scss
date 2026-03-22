@@ -1,0 +1,230 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MEDIA PLAYER - Flat Dark Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.player-casing {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    background-color: transparent;
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    transition: max-width 0.3s ease;
+}
+
+/* ─── Layout wrappers ─────────────────────────────────────────────────── */
+.media-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.controls-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ─── Screen Area ─────────────────────────────────────────────────────── */
+.screen-frame {
+    background: var(--color-gray-900);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    border: 1px solid var(--border-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+    justify-content: center;
+}
+
+/* ─── Album Art ────────────────────────────────────────────────────────── */
+.album-art-container,
+.vinyl-container,
+.cd-container {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* ─── Track Info ───────────────────────────────────────────────────────── */
+.track-info {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.track-title {
+    font-size: clamp(1.1rem, 4vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: var(--tracking-tight);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-primary);
+}
+
+.artist-name,
+.album-name {
+    font-size: clamp(0.8rem, 2.2vw, 1.1rem);
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+}
+
+.responsive-title {
+    font-size: clamp(1.1rem, 4vw, 2rem);
+}
+
+.responsive-artist {
+    font-size: clamp(0.8rem, 2.2vw, 1.15rem);
+}
+
+.responsive-album {
+    font-size: clamp(0.7rem, 1.8vw, 1rem);
+}
+
+.responsive-stream-info {
+    font-size: clamp(0.62rem, 1.3vw, 0.82rem);
+}
+
+.format-logo-responsive {
+    height: clamp(0.85rem, 1.6vw, 1.4rem);
+    display: block;
+}
+
+/* ─── Seekbar ──────────────────────────────────────────────────────────── */
+.seekbar-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.time-display {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    min-width: 38px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ─── Playback Control Buttons ─────────────────────────────────────────── */
+.controls-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.control-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-gray-700);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 20px;
+    transition: background 0.15s;
+
+    &.play-btn {
+        width: 54px;
+        height: 54px;
+        background: var(--color-primary);
+        color: #ffffff;
+    }
+
+    &:hover {
+        background: var(--color-gray-600);
+    }
+
+    &.play-btn:hover {
+        background: var(--color-primary-light);
+    }
+
+    &:active {
+        background: var(--color-gray-750);
+        transform: scale(0.95);
+    }
+}
+
+/* ─── Progress Sliders ──────────────────────────────────────────────────── */
+.slider-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.slider-track {
+    position: relative;
+    flex-grow: 1;
+    height: 4px;
+    background: var(--color-gray-700);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.slider-fill {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 2px;
+    position: relative;
+}
+
+.slider-cap {
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+}
+
+/* ─── Volume Slider ────────────────────────────────────────────────────── */
+.volume-slider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .material-icons {
+        color: var(--text-secondary);
+        font-size: 20px;
+    }
+}
+
+/* ─── Player Controls Container ────────────────────────────────────────── */
+.player-controls-container {
+    gap: 12px;
+}

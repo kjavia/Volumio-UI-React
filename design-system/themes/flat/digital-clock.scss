@@ -1,0 +1,83 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DIGITAL CLOCK - Flat Dark Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.digital-clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 24px;
+    gap: 12px;
+}
+
+.digital-clock__time {
+    font-family: var(--font-mono);
+    font-size: clamp(3.5rem, 18vw, 18rem);
+    font-weight: 300;
+    color: var(--text-primary);
+    letter-spacing: 0.06em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    user-select: none;
+}
+
+.digital-clock__date {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 3.5vw, 2.5rem);
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.digital-clock__ampm {
+    font-family: var(--font-mono);
+    font-size: clamp(0.8rem, 2.5vw, 2rem);
+    font-weight: 500;
+    color: var(--color-primary-light);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    user-select: none;
+}
+
+/* ─── Weather row ─────────────────────────────────────────────────────── */
+.digital-clock__weather {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: clamp(0.8rem, 2vw, 1.4rem);
+    color: var(--text-secondary);
+}
+
+/* ─── Segments (7-segment retro style) ────────────────────────────────── */
+.clock-segment {
+    color: var(--color-primary-light);
+    font-weight: 300;
+}
+
+.clock-separator {
+    color: var(--color-primary);
+    opacity: 0.6;
+    animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.6; }
+    50%       { opacity: 0.15; }
+}
+
+/* ─── Flip rows inside digital clock digits ──────────────────────────── */
+.flip-card {
+    background: var(--color-gray-800);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-dark);
+}
+
+.active {
+    color: var(--color-primary-light);
+}

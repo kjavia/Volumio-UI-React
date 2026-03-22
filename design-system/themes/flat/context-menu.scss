@@ -1,0 +1,175 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CONTEXT MENU - Flat Dark Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.context-menu-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    z-index: 100;
+}
+
+/* ─── Toggle Button ────────────────────────────────────────────────────── */
+.context-menu-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--border-dark);
+    transition: background 0.15s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.11);
+    }
+
+    &:active,
+    &.active {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* No-shadow variant (rendered on player) */
+    &--no-shadow {
+        background: rgba(0, 0, 0, 0.4);
+        border: none !important;
+        box-shadow: none !important;
+        color: var(--color-primary-light);
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        &:active,
+        &.active {
+            background: rgba(0, 0, 0, 0.65);
+        }
+
+        .material-icons {
+            color: var(--color-primary-light);
+        }
+    }
+
+    .material-icons {
+        font-size: 22px;
+        color: var(--text-secondary);
+    }
+}
+
+/* ─── Dropdown Menu ────────────────────────────────────────────────────── */
+.context-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    min-width: 200px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    z-index: 101;
+
+    background: var(--color-gray-800);
+    border: 1px solid var(--border-dark);
+    box-shadow:
+        0 8px 32px var(--shadow-50),
+        0 2px 8px var(--shadow-30);
+
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+    pointer-events: none;
+    transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: all;
+    }
+}
+
+/* ─── Menu Items ───────────────────────────────────────────────────────── */
+.context-menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background 0.1s;
+
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-dark);
+    width: 100%;
+    text-align: left;
+
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--text-primary);
+    user-select: none;
+
+    .material-icons {
+        font-size: 18px;
+        color: var(--text-secondary);
+    }
+
+    &:hover {
+        background: rgba(99, 102, 241, 0.15);
+        color: var(--color-primary-light);
+
+        .material-icons {
+            color: var(--color-primary-light);
+        }
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    /* Danger item */
+    &.danger {
+        color: var(--color-danger);
+
+        .material-icons {
+            color: var(--color-danger);
+        }
+
+        &:hover {
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--color-danger-light);
+
+            .material-icons {
+                color: var(--color-danger-light);
+            }
+        }
+    }
+}
+
+/* ─── Separator ────────────────────────────────────────────────────────── */
+.context-menu-separator {
+    height: 1px;
+    background: var(--border-dark);
+    margin: 2px 0;
+}
+
+/* ─── Backdrop ─────────────────────────────────────────────────────────── */
+.context-menu-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background: transparent;
+}
+
+/* ─── Focus ────────────────────────────────────────────────────────────── */
+.context-menu-toggle:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}

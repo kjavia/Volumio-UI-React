@@ -1,0 +1,237 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BUTTONS - Flat Dark Theme
+   Clean, no-gradient, no-shadow buttons
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.btn {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 20px;
+    min-height: 32px;
+
+    background: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-md);
+
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: var(--tracking-wide);
+
+    cursor: pointer;
+    user-select: none;
+    transition:
+        background 0.15s ease,
+        opacity 0.15s ease;
+
+    &:hover {
+        background: var(--color-primary-light);
+    }
+
+    &:active,
+    &.active {
+        background: var(--color-primary-dark);
+        opacity: 0.9;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
+}
+
+/* No gel shine overlay in flat theme */
+.btn::after {
+    display: none;
+}
+
+/* ─── Secondary / White button ─────────────────────────────────────────── */
+.btn-secondary,
+.btn-white {
+    background: var(--color-gray-700);
+    color: var(--text-primary);
+
+    &:hover {
+        background: var(--color-gray-600);
+    }
+
+    &:active {
+        background: var(--color-gray-750);
+    }
+}
+
+/* ─── Primary ──────────────────────────────────────────────────────────── */
+.btn-primary {
+    background: var(--color-primary);
+    color: #ffffff;
+
+    &:hover { background: var(--color-primary-light); }
+    &:active { background: var(--color-primary-dark); }
+}
+
+/* ─── Success ──────────────────────────────────────────────────────────── */
+.btn-success {
+    background: var(--color-success);
+    color: #ffffff;
+
+    &:hover { background: var(--color-success-light); }
+    &:active { background: var(--color-success-dark); }
+}
+
+/* ─── Danger ───────────────────────────────────────────────────────────── */
+.btn-danger {
+    background: var(--color-danger);
+    color: #ffffff;
+
+    &:hover { background: var(--color-danger-light); }
+    &:active { background: var(--color-danger-dark); }
+}
+
+/* ─── Warning ──────────────────────────────────────────────────────────── */
+.btn-warning {
+    background: var(--color-warning);
+    color: #000;
+
+    &:hover { background: var(--color-warning-light); }
+    &:active { background: var(--color-warning-dark); }
+}
+
+/* ─── Info ─────────────────────────────────────────────────────────────── */
+.btn-info {
+    background: var(--color-info);
+    color: #ffffff;
+
+    &:hover { background: var(--color-info-light); }
+    &:active { background: var(--color-info-dark); }
+}
+
+/* ─── Black / Dark ─────────────────────────────────────────────────────── */
+.btn-black {
+    background: var(--color-gray-800);
+    border: 1px solid var(--border-dark);
+    color: var(--text-primary);
+
+    &:hover { background: var(--color-gray-750); }
+    &:active { background: var(--color-gray-850); }
+}
+
+/* ─── Orange alias ─────────────────────────────────────────────────────── */
+.btn-orange {
+    @extend .btn-primary;
+}
+
+/* ─── Square button ────────────────────────────────────────────────────── */
+.btn-square {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-md);
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ─── Round button ─────────────────────────────────────────────────────── */
+.btn-round {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.btn-white {
+        background: var(--color-gray-750);
+        color: var(--text-primary);
+        border: 1px solid var(--border-dark);
+
+        &:hover { background: var(--color-gray-700); }
+        &:active { background: var(--color-gray-800); }
+    }
+}
+
+/* ─── Icon Button ──────────────────────────────────────────────────────── */
+.btn-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-gray-400);
+    border: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    user-select: none;
+    transition:
+        background 0.15s,
+        color 0.15s;
+    box-shadow: none;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.07);
+        color: var(--text-primary);
+    }
+
+    &:active {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text-secondary);
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Active/toggled state */
+    &.active {
+        background: transparent;
+        border-color: transparent;
+        box-shadow: none;
+        transform: none;
+        color: var(--color-primary-light);
+    }
+
+    &.active:hover {
+        background: rgba(99, 102, 241, 0.12);
+    }
+}
+
+/* ─── LED ──────────────────────────────────────────────────────────────── */
+.led {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--led-green-off);
+
+    &.on {
+        background: var(--color-success);
+        box-shadow: 0 0 8px var(--color-success);
+    }
+}
+
+/* ─── Text inside button ───────────────────────────────────────────────── */
+.btn .primary-text {
+    font-size: 16px;
+    font-weight: 600;
+}
+.btn .secondary-text {
+    font-size: 10px;
+    opacity: 0.7;
+    align-self: flex-start;
+}
+
+/* ─── Sizes ────────────────────────────────────────────────────────────── */
+.btn-rect-small {
+    width: 70px;
+    height: 35px;
+}
+.btn-rect-medium {
+    width: 100px;
+    height: 50px;
+}

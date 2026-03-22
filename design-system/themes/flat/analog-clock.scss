@@ -1,0 +1,116 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ANALOG CLOCK - Flat Dark Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.analog-clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 16px;
+}
+
+.analog-clock__face {
+    position: relative;
+    width: clamp(180px, 40vmin, 400px);
+    height: clamp(180px, 40vmin, 400px);
+    border-radius: 50%;
+
+    /* Flat minimalist clock face */
+    background: var(--color-gray-850);
+    border: 2px solid var(--border-dark);
+}
+
+/* Hour markers */
+.analog-clock__marker {
+    position: absolute;
+    background: var(--color-gray-600);
+    transform-origin: bottom center;
+
+    &--major {
+        width: 2px;
+        height: 10%;
+        background: var(--color-gray-400);
+    }
+
+    &--minor {
+        width: 1px;
+        height: 5%;
+        background: var(--color-gray-700);
+    }
+}
+
+/* Hands */
+.analog-clock__hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 2px;
+
+    &--hour {
+        width: 4px;
+        height: 28%;
+        margin-left: -2px;
+        background: var(--text-primary);
+        border-radius: 2px;
+    }
+
+    &--minute {
+        width: 3px;
+        height: 38%;
+        margin-left: -1.5px;
+        background: var(--text-secondary);
+        border-radius: 2px;
+    }
+
+    &--second {
+        width: 1px;
+        height: 42%;
+        margin-left: -0.5px;
+        background: var(--color-primary);
+        border-radius: 1px;
+    }
+}
+
+/* Center dot */
+.analog-clock__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    z-index: 10;
+}
+
+/* Date / weather below the clock */
+.analog-clock__info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.analog-clock__date {
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.analog-clock__weather {
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}

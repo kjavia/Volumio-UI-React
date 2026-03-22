@@ -1,0 +1,50 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PROGRESSBAR - Flat Dark Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.progress {
+    height: 4px;
+    background: var(--color-gray-700);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+
+    &.progress-bar-success { background: var(--color-success); }
+    &.progress-bar-warning { background: var(--color-warning); }
+    &.progress-bar-danger  { background: var(--color-danger); }
+    &.progress-bar-info    { background: var(--color-info); }
+}
+
+/* ─── Loading bar ─────────────────────────────────────────────────────── */
+.progress-indeterminate {
+    height: 3px;
+    background: var(--color-gray-800);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: -40%;
+        top: 0;
+        bottom: 0;
+        width: 40%;
+        background: var(--color-primary);
+        border-radius: 2px;
+        animation: progress-slide 1.4s ease-in-out infinite;
+    }
+}
+
+@keyframes progress-slide {
+    0%   { left: -40%; }
+    100% { left: 100%; }
+}

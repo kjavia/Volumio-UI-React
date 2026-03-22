@@ -1,0 +1,92 @@
+@use './variables.scss';
+
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: var(--leading-normal);
+    color: var(--text-primary);
+    background-color: var(--bg-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'; // Inter alternates
+}
+
+/* ─── Headings ──────────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: 0.4em;
+}
+
+h1 { font-size: var(--text-4xl); font-weight: 700; }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-base); font-weight: 500; }
+
+/* ─── Display Heading ────────────────────────────────────────────────────────── */
+.display-heading {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: var(--tracking-tight);
+}
+
+/* ─── Paragraphs ─────────────────────────────────────────────────────────────── */
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    line-height: var(--leading-relaxed);
+}
+
+/* ─── Lead Text ──────────────────────────────────────────────────────────────── */
+.lead {
+    font-size: var(--text-lg);
+    font-weight: 300;
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+}
+
+/* ─── Links ──────────────────────────────────────────────────────────────────── */
+a {
+    color: var(--text-accent);
+    text-decoration: none;
+    transition: color 0.15s;
+
+    &:hover {
+        color: var(--color-primary-light);
+        text-decoration: underline;
+    }
+}
+
+/* ─── Labels/Captions ────────────────────────────────────────────────────────── */
+.label-sm {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* ─── Code/Mono ──────────────────────────────────────────────────────────────── */
+code, pre {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────────── */
+::selection {
+    background-color: rgba(99, 102, 241, 0.35);
+    color: var(--color-white);
+}

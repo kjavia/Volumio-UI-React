@@ -1,0 +1,113 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ALBUM BROWSER - Flat Dark Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.album-browser {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+    padding: 16px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--color-gray-700);
+        border-radius: 2px;
+    }
+}
+
+.album-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    padding: 4px;
+    transition: background 0.12s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+
+        .album-card__art {
+            transform: scale(1.02);
+        }
+    }
+}
+
+.album-card__art {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    background: var(--color-gray-800);
+    transition: transform 0.2s ease;
+}
+
+.album-card__title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.album-card__artist {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ─── List-view rows ──────────────────────────────────────────────────── */
+.album-list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-dark);
+    transition: background 0.12s;
+
+    &:hover {
+        background: var(--list-item-bg-hover);
+    }
+}
+
+.album-list-item__art {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    background: var(--color-gray-800);
+    flex-shrink: 0;
+}
+
+.album-list-item__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.album-list-item__title {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.album-list-item__meta {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

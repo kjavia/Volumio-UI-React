@@ -1,0 +1,69 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   COLOR UTILITIES - Flat Dark Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.bg-dark {
+    background-color: var(--panel-bg-dark) !important;
+}
+
+.bg-surface {
+    background-color: var(--device-surface) !important;
+}
+
+.bg-app {
+    background-color: var(--bg-color) !important;
+}
+
+.bg-list-item {
+    background-color: var(--list-item-bg) !important;
+}
+
+.bg-orange {
+    background: var(--color-primary) !important;
+}
+
+.bg-metallic {
+    background: var(--color-gray-800) !important;
+}
+
+/* ─── Border Utilities ────────────────────────────────────────────────── */
+.border-dark {
+    border-color: var(--border-dark) !important;
+}
+
+.border-light {
+    border-color: var(--border-light) !important;
+}
+
+.border-orange {
+    border-color: var(--color-primary) !important;
+}
+
+/* ─── Surface Patterns ────────────────────────────────────────────────── */
+.panel {
+    background: var(--color-gray-850);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-dark);
+    box-shadow: 0 1px 3px var(--shadow-20);
+}
+
+.surface {
+    background: var(--color-gray-800);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-dark);
+}
+
+.device-chrome {
+    background: var(--color-gray-850);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-xl);
+}
+
+.inset-well {
+    background-color: var(--color-gray-900);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-dark);
+    box-shadow: inset 0 1px 3px var(--shadow-20);
+}

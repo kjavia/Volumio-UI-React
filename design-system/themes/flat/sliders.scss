@@ -1,0 +1,176 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDERS - Flat Dark Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.slider-group {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+/* ─── Vertical Fader Track ─────────────────────────────────────────────── */
+.fader-track {
+    width: 6px;
+    height: 200px;
+    background: var(--color-gray-700);
+    border-radius: 3px;
+    border: none;
+    position: relative;
+    margin: 0 20px;
+}
+
+/* ─── Fader Cap ─────────────────────────────────────────────────────────── */
+.fader-cap {
+    width: 40px;
+    height: 24px;
+    background: var(--color-gray-600);
+    border-radius: var(--radius-sm);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    cursor: ns-resize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.15s;
+
+    &::after {
+        content: '';
+        width: 50%;
+        height: 2px;
+        background: var(--border-light);
+        border-radius: 1px;
+    }
+
+    &:hover {
+        background: var(--color-gray-550);
+    }
+
+    &:active {
+        background: var(--color-primary);
+    }
+}
+
+/* ─── Scale/Tick Marks ─────────────────────────────────────────────────── */
+.scale {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -22px;
+    width: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-family: var(--font-mono);
+}
+
+.scale-mark {
+    width: 4px;
+    height: 1px;
+    background-color: var(--color-gray-600);
+}
+
+.scale-mark.long {
+    width: 8px;
+    background-color: var(--color-gray-500);
+}
+
+/* ─── Horizontal Range Input ────────────────────────────────────────────── */
+input[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--color-gray-700);
+    border: none;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    border: none;
+    cursor: pointer;
+    margin-top: -7px;
+    position: relative;
+    z-index: 2;
+    transition: background 0.15s, transform 0.1s;
+
+    &:hover {
+        background: var(--color-primary-light);
+        transform: scale(1.1);
+    }
+}
+
+input[type='range']::-webkit-slider-thumb:active {
+    background: var(--color-primary-dark);
+    transform: scale(0.95);
+}
+
+input[type='range']::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-primary);
+    cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb:active {
+    background: var(--color-primary-dark);
+}
+
+/* ─── Seekbar/Progress Slider ────────────────────────────────────────── */
+.slider-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.slider-track {
+    flex: 1;
+    position: relative;
+    height: 4px;
+    background: var(--color-gray-700);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.slider-fill {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 2px;
+    position: relative;
+    transition: width 0.1s linear;
+}
+
+.slider-cap {
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+}
+
+.time-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    min-width: 35px;
+    font-variant-numeric: tabular-nums;
+}

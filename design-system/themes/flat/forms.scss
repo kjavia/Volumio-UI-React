@@ -1,0 +1,148 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FORMS - Flat Dark Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Input Fields ─────────────────────────────────────────────────────── */
+input,
+textarea,
+select {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+    background: var(--color-gray-800);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-md);
+    padding: 8px 12px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    width: 100%;
+
+    &::placeholder {
+        color: var(--color-gray-500);
+    }
+
+    &:focus {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 32px;
+
+    option {
+        background: var(--color-gray-800);
+        color: var(--text-primary);
+    }
+}
+
+/* ─── Form Labels ──────────────────────────────────────────────────────── */
+label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* ─── Form Group ───────────────────────────────────────────────────────── */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+/* ─── Toggle / Checkbox ─────────────────────────────────────────────────── */
+.toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-dark);
+}
+
+.form-check-input[type='checkbox'] {
+    width: 40px;
+    height: 22px;
+    border-radius: 11px;
+    background-color: var(--color-gray-700);
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    position: relative;
+    transition: background 0.2s;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--text-secondary);
+        transition: transform 0.2s, background 0.2s;
+    }
+
+    &:checked {
+        background-color: var(--color-primary);
+
+        &::after {
+            transform: translateX(18px);
+            background: #ffffff;
+        }
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
+}
+
+/* ─── Select / Dropdown ─────────────────────────────────────────────────── */
+.form-select {
+    background-color: var(--color-gray-800);
+    color: var(--text-primary);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+
+    &:focus {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        outline: none;
+    }
+}
+
+/* ─── Form Control (Bootstrap compat) ─────────────────────────────────── */
+.form-control {
+    background-color: var(--color-gray-800);
+    color: var(--text-primary);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-md);
+
+    &:focus {
+        background-color: var(--color-gray-800);
+        color: var(--text-primary);
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: var(--color-gray-500);
+    }
+}

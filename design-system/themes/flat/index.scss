@@ -1,0 +1,48 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   FLAT DARK THEME - Main Index
+   Modern minimal dark UI with indigo accent
+   Typography: Inter + JetBrains Mono
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@import './variables.scss';
+@import './typography.scss';
+@import './colors.scss';
+@import './button.scss';
+@import './forms.scss';
+@import './progressbar.scss';
+@import './sliders.scss';
+@import './knobs.scss';
+@import './tabs.scss';
+@import './media-player.scss';
+@import './album-browser.scss';
+@import './playlist.scss';
+@import './sidepanel.scss';
+@import './context-menu.scss';
+@import './dialog.scss';
+@import './digital-clock.scss';
+@import './analog-clock.scss';
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+// ─── Global Scrollbar ──────────────────────────────────────────────────────
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-gray-700);
+    border-radius: 3px;
+
+    &:hover {
+        background: var(--color-gray-600);
+    }
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
