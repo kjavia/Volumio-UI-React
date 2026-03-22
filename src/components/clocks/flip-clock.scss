@@ -1,10 +1,5 @@
 /* ── Flip Clock ───────────────────────────────────────────────────────────── */
 
-// Digit sizing — scales with container via CSS custom properties.
-// --digit-h picks the smaller of 70% container height or ~17% container width
-// so the clock fills vertically while never overflowing horizontally
-// (6 digits + 2 colons + ampm ≈ 5.5× digit-h wide).
-
 .flip-clock {
   display: flex;
   align-items: center;
@@ -15,204 +10,83 @@
   user-select: none;
   container-type: size;
 
-  --digit-h: min(70cqh, 14.5cqw);
-  --digit-w: calc(var(--digit-h) * 0.7);
+  // font-size drives ALL Tick flip panel sizing via em inheritance.
+  // 14.5cqw: 6 digit-pairs + 2 colons + ampm ≈ fills the width at normal aspect ratios.
+  // 55cqh: never taller than ~55% of container height.
+  --digit-h: min(55cqh, 14.5cqw);
 }
 
-/* Clock body — border frame with stand */
+/* Clock body — outer decorative bezel frame */
 .flip-clock-body {
   position: relative;
   display: flex;
   align-items: center;
   gap: 1px;
-  border: max(4px, calc(var(--digit-h) * 0.04)) solid var(--color-gray-100, #ebebeb);
+  font-size: var(--digit-h);
+  border: max(4px, 0.04em) solid var(--color-gray-100, #ebebeb);
   border-radius: 6px;
   box-shadow: 0 8px 32px var(--shadow-40, rgba(0, 0, 0, 0.4));
 }
 
-/* Stand / Footer — date sits inside */
+/* Two-digit panel (HH / MM / SS) */
+.flip-panel {
+  display: flex;
+}
+
+/* Stand / Footer */
 .flip-clock-stand {
   position: absolute;
   left: 50%;
-  bottom: calc(var(--digit-h) * -0.16);
+  bottom: -0.16em;
   transform: translateX(-50%);
   width: 80%;
-  padding: calc(var(--digit-h) * 0.03) calc(var(--digit-h) * 0.05);
+  padding: 0.03em 0.05em;
   background: var(--color-gray-100, #ebebeb);
   border-radius: 0 0 4px 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: calc(var(--digit-h) * 0.08);
+  gap: 0.08em;
 }
 
-/* Date display */
 .flip-clock-date {
-  font-size: clamp(0.65rem, calc(var(--digit-h) * 0.12), 1.2rem);
+  font-size: clamp(0.6rem, 0.12em, 1.2rem);
   font-weight: 600;
   color: var(--color-gray-600, #555);
   text-transform: capitalize;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 /* Colon separator */
 .flip-colon {
   font-family: var(--font-mono, 'Roboto Mono', monospace);
-  font-size: calc(var(--digit-h) * 0.75);
+  font-size: 0.75em;
   font-weight: 800;
   color: var(--color-white, #fff);
   line-height: 1;
-  padding: 0 2px;
+  padding: 0 0.04em;
   text-shadow: 0 2px 4px var(--shadow-30, rgba(0, 0, 0, 0.3));
 }
 
 /* AM/PM indicator */
 .flip-ampm {
   font-family: var(--font-label, 'Roboto', sans-serif);
-  font-size: calc(var(--digit-h) * 0.35);
+  font-size: 0.35em;
   font-weight: 700;
   color: var(--color-white, #fff);
   letter-spacing: 0.05em;
   align-self: flex-end;
-  padding: calc(var(--digit-h) * 0.06) calc(var(--digit-h) * 0.08);
+  padding: 0.06em 0.08em;
   text-shadow: 0 1px 3px var(--shadow-30, rgba(0, 0, 0, 0.3));
 }
 
-/* ── Digit panel (two digits side by side) ──────────────────────────────── */
-.flip-panel {
-  display: flex;
-  gap: 3px;
-}
-
-/* ── Single flip digit ──────────────────────────────────────────────────── */
-.flip-digit {
-  position: relative;
-  width: var(--digit-w);
-  height: var(--digit-h);
-  font-family: var(--font-mono, 'Roboto Mono', monospace);
-  font-size: calc(var(--digit-h) * 0.75);
-  font-weight: 800;
-  color: var(--color-white, #fff);
-  perspective: calc(var(--digit-h) * 3);
-}
-
-/* ── Static top half ─────── */
-.flip-digit-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  overflow: hidden;
-  text-align: center;
-  line-height: var(--digit-h); // = full digit height → text centers; clip at 50% shows top
-  background: var(--color-gray-900, #111);
-  border-radius: 5px 5px 0 0;
-  box-shadow: inset 0 8px 30px var(--shadow-50, rgba(0, 0, 0, 0.5));
-  text-shadow: 0 1px 2px var(--shadow-30, rgba(0, 0, 0, 0.3));
-  z-index: 0;
-}
-
-/* ── Static bottom half ──── */
-.flip-digit-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: calc(50% - 1px);
-  overflow: hidden;
-  text-align: center;
-  line-height: 0; // baseline at top of element → only bottom of glyph visible
-  background: var(--color-gray-850, #1a1a1a);
-  border-radius: 0 0 5px 5px;
-  border-bottom: 1px solid var(--color-gray-700, #444);
-  box-shadow: inset 0 8px 30px var(--shadow-30, rgba(0, 0, 0, 0.3));
-  text-shadow: 0 1px 2px var(--shadow-30, rgba(0, 0, 0, 0.3));
-  z-index: 0;
-}
-
-/* ── Center divider line ─── */
-.flip-digit-line {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  border-bottom: 2px solid var(--color-black, #000);
-  transform: translate3d(0, -1px, 0);
-  z-index: 100;
-}
-
-/* ── 3D flipping card ────────────────────────────────────────────────────── */
-// Single element that rotates -180deg with preserve-3d.
-// Front face = top half (old digit), Back face = bottom half (new digit).
-
-.flip-card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  z-index: 50;
-  animation: flip-card-rotate 0.6s ease-in forwards;
-}
-
-// Front face — top half, shows old digit, flips away
-.flip-card-front {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  overflow: hidden;
-  text-align: center;
-  line-height: var(--digit-h);
-  background: var(--color-gray-900, #111);
-  border-radius: 5px 5px 0 0;
-  box-shadow: inset 0 8px 30px var(--shadow-50, rgba(0, 0, 0, 0.5));
-  text-shadow: 0 1px 2px var(--shadow-30, rgba(0, 0, 0, 0.3));
-  backface-visibility: hidden;
-}
-
-// Back face — bottom half, shows new digit, pre-rotated 180deg behind front
-.flip-card-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: calc(50% - 1px);
-  overflow: hidden;
-  text-align: center;
-  line-height: 0;
-  background: var(--color-gray-850, #1a1a1a);
-  border-radius: 0 0 5px 5px;
-  border-bottom: 1px solid var(--color-gray-700, #444);
-  box-shadow: inset 0 8px 30px var(--shadow-30, rgba(0, 0, 0, 0.3));
-  text-shadow: 0 1px 2px var(--shadow-30, rgba(0, 0, 0, 0.3));
-  backface-visibility: hidden;
-  transform: rotateX(180deg);
-}
-
-@keyframes flip-card-rotate {
-  0% {
-    transform: rotateX(0);
-    z-index: 50;
-  }
-  100% {
-    transform: rotateX(-180deg);
-    z-index: 50;
-  }
-}
-
-/* No breakpoints needed — sizing is container-query-driven via --digit-h / --digit-w */
-
-/* ── Weather badge in stand ─────────────────────────────────────────────── */
-
+/* Weather badge in stand */
 .flip-clock-weather {
   display: inline-flex;
   align-items: center;
   gap: 0.15em;
-  font-size: clamp(0.65rem, calc(var(--digit-h) * 0.12), 1.2rem);
+  font-size: clamp(0.6rem, 0.12em, 1.2rem);
   font-weight: 600;
   color: var(--color-gray-600, #555);
   white-space: nowrap;
@@ -220,4 +94,21 @@
 
 .flip-clock-weather-icon {
   font-size: 1.2em;
+}
+
+/* ── @pqina/flip panel theming ───────────────────────────────────────────── */
+// Override the library's hardcoded #333232 / #edebeb with theme-aware vars.
+// Themes can define --flip-panel-bg / --flip-panel-color for full control.
+
+.tick-flip-panel {
+  font-family: var(--font-mono, 'Roboto Mono', monospace);
+  font-weight: 800;
+  color:            var(--flip-panel-color, var(--color-white,    #edebeb));
+  background-color: var(--flip-panel-bg,    var(--color-gray-850, #1a1a1a));
+}
+
+.tick-flip-shadow {
+  box-shadow:
+    0 .125em .3125em    var(--shadow-25, rgba(0, 0, 0, 0.25)),
+    0 .02125em .06125em var(--shadow-25, rgba(0, 0, 0, 0.25));
 }

@@ -1,73 +1,72 @@
 import { useState, useEffect, useRef, memo } from 'react';
 import PropTypes from 'prop-types';
+// @pqina/flip is loaded as a global UMD script in index.html.
+// It sets window.Tick (with the Flip view already registered).
+// This sidesteps Vite/esbuild's typeof-window evaluation issue in the module build.
 import useWeather from '@/hooks/useWeather';
 import './flip-clock.scss';
 
-const FlipDigit = ({ digit }) => {
-  const [flipping, setFlipping] = useState(false);
-  const [prevDigit, setPrevDigit] = useState(digit);
-  const [bottomDigit, setBottomDigit] = useState(digit);
-  const currentRef = useRef(digit);
+/**
+ * FlipDigit — one character backed by a single window.Tick instance.
+ *
+ * The Tick container and span are created via document.createElement so they
+ * are NOT part of React's VDOM.  This prevents React 18 StrictMode from
+ * detaching the elements when it runs cleanup+remount (which would make Tick
+ * render into an invisible detached node).
+ */
+const FlipDigit = memo(({ digit }) => {
+  const wrapperRef = useRef(null);
+  const tickRef = useRef(null);
 
   useEffect(() => {
-    if (digit !== currentRef.current) {
-      setPrevDigit(currentRef.current);
-      currentRef.current = digit;
-      setFlipping(true);
+    const wrapper = wrapperRef.current;
+    const Tick = window.Tick;
+    if (!wrapper || !Tick || !Tick.DOM) return;
 
-      const timer = setTimeout(() => {
-        setBottomDigit(digit);
-        setFlipping(false);
-      }, 600);
-      return () => clearTimeout(timer);
-    }
+    // Build the Tick DOM tree outside React's control.
+    const container = document.createElement('div');
+    const span = document.createElement('span');
+    span.setAttribute('data-view', 'flip');
+    container.appendChild(span);
+    wrapper.appendChild(container);
+
+    const instance = Tick.DOM.create(container);
+    instance.value = digit;
+    tickRef.current = instance;
+
+    return () => {
+      tickRef.current = null;
+      // Manually detach before calling destroy so that Tick's internal
+      // removeChild is a no-op (parentNode will already be null).
+      if (container.parentNode) container.parentNode.removeChild(container);
+      Tick.DOM.destroy(container);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (tickRef.current) tickRef.current.value = digit;
   }, [digit]);
 
-  return (
-    <div className="flip-digit">
-      {/* Static top — shows new value (revealed when front flips away) */}
-      <div className="flip-digit-top">{digit}</div>
+  return <div ref={wrapperRef} />;
+});
 
-      {/* Static bottom — shows old value, updates after flip completes */}
-      <div className="flip-digit-bottom">{bottomDigit}</div>
+FlipDigit.displayName = 'FlipDigit';
+FlipDigit.propTypes = { digit: PropTypes.string.isRequired };
 
-      {/* Center divider line */}
-      <div className="flip-digit-line" />
-
-      {/* 3D flipping card: single element rotating -180deg */}
-      {flipping && (
-        <div className="flip-card" key={digit}>
-          {/* Front face: top half showing old digit */}
-          <div className="flip-card-front">{prevDigit}</div>
-          {/* Back face: bottom half showing new digit (pre-rotated 180deg) */}
-          <div className="flip-card-back">{digit}</div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-FlipDigit.propTypes = {
-  digit: PropTypes.string.isRequired,
-};
-
-const MemoizedFlipDigit = memo(FlipDigit);
-
-const FlipPanel = ({ value }) => {
+/** Two-digit panel (hours / minutes / seconds). */
+const FlipPanel = memo(({ value }) => {
   const str = String(value).padStart(2, '0');
   return (
     <div className="flip-panel">
-      <MemoizedFlipDigit digit={str[0]} />
-      <MemoizedFlipDigit digit={str[1]} />
+      <FlipDigit digit={str[0]} />
+      <FlipDigit digit={str[1]} />
     </div>
   );
-};
+});
 
-FlipPanel.propTypes = {
-  value: PropTypes.number.isRequired,
-};
-
-const MemoizedFlipPanel = memo(FlipPanel);
+FlipPanel.displayName = 'FlipPanel';
+FlipPanel.propTypes = { value: PropTypes.number.isRequired };
 
 const FlipClock = ({ showSeconds = true, showWeather = false }) => {
   const { data: weather } = useWeather();
@@ -81,7 +80,6 @@ const FlipClock = ({ showSeconds = true, showWeather = false }) => {
       tick();
       intervalId = setInterval(tick, 1000);
     }, msToNextSecond);
-
     return () => {
       clearTimeout(syncTimeout);
       if (intervalId) clearInterval(intervalId);
@@ -89,11 +87,10 @@ const FlipClock = ({ showSeconds = true, showWeather = false }) => {
   }, []);
 
   const hours24 = time.getHours();
-  const isPM = hours24 >= 12;
   const hours = hours24 % 12 || 12;
   const minutes = time.getMinutes();
   const seconds = time.getSeconds();
-  const ampm = isPM ? 'PM' : 'AM';
+  const ampm = hours24 >= 12 ? 'PM' : 'AM';
 
   const dateString = time.toLocaleDateString(undefined, {
     weekday: 'long',
@@ -104,25 +101,25 @@ const FlipClock = ({ showSeconds = true, showWeather = false }) => {
 
   return (
     <div className="flip-clock">
-      {/* Clock body */}
       <div className="flip-clock-body">
-        <MemoizedFlipPanel value={hours} />
+        <FlipPanel value={hours} />
         <span className="flip-colon">:</span>
-        <MemoizedFlipPanel value={minutes} />
+        <FlipPanel value={minutes} />
         {showSeconds && (
           <>
             <span className="flip-colon">:</span>
-            <MemoizedFlipPanel value={seconds} />
+            <FlipPanel value={seconds} />
           </>
         )}
         <span className="flip-ampm">{ampm}</span>
 
-        {/* Stand / Footer */}
         <div className="flip-clock-stand">
           <span className="flip-clock-date">{dateString}</span>
           {showWeather && weather?.current && (
             <span className="flip-clock-weather">
-              <span className="material-icons flip-clock-weather-icon">{weather.current.icon}</span>
+              <span className="material-icons flip-clock-weather-icon">
+                {weather.current.icon}
+              </span>
               {Math.round(weather.current.temperature)}
               {weather.units.tempUnit}
             </span>

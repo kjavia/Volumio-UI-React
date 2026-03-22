@@ -8,7 +8,7 @@ This repository has the source code for the actual app for the Volumio Stylish P
 
 ## Official Docs
 
-https://developers.volumio.com/plugins/plugins-overview
+<https://developers.volumio.com/plugins/plugins-overview>
 
 ## Development
 
@@ -16,9 +16,7 @@ https://developers.volumio.com/plugins/plugins-overview
 
 As of now, node version 24.x should be able to build both repos locally.
 
-2. Once you have 2 repos, run `npm i` to install all the dependencies, on both repos. Run
-   `npm run build-and-push` step to build, and copy the dist folder contents from this repo to the other one for deployment to the device. Normally you would be doing this on a different branch than `main`. Once you have the branch pushed to origin for the other repo (having the latest build artifcats from this repo).
-
+2. Once you have 2 repos, run `npm i` to install all the dependencies, on both repos. Run `npm run build-and-push` step to build, and copy the dist folder contents from this repo to the other one for deployment to the device. Normally you would be doing this on a different branch than `main`. Once you have the branch pushed to origin for the other repo (having the latest build artifcats from this repo).
 3. SSH into volumio (username: volumio and pwd: volumio). Clone the other repo there in your user's home folder, switch to the WIP branch there, and run these commands
 
 ```
@@ -30,8 +28,7 @@ As of now, node version 24.x should be able to build both repos locally.
 
 This should install the plugin at the 1st folder above, on the device. It has the content of the plugin repository linked on top, along with the build artifacts of this repo in the `app` folder. You can manually do `npm i` in that folder.
 
-If something goes wrong, delete `node_modules` and `package-lock.json` and rerun `npm i`
-in case volumio hasn't done that.
+If something goes wrong, delete `node_modules` and `package-lock.json` and rerun `npm i` in case volumio hasn't done that.
 
 ```
   volumio vrestart
@@ -40,7 +37,7 @@ in case volumio hasn't done that.
 Common issues:
 
 - Not being in the current branch (not main) on the device
-- Not being in the correct folder to run the volumio commands (should be the stylish_player folder in the repo on the device)
+- Not being in the correct folder to run the volumio commands (should be the stylish\_player folder in the repo on the device)
 - NPM packages not installed for the platrom on the device
 - Some other code or config error
 
@@ -50,7 +47,7 @@ To view logs on the device
   sudo journalctl -u volumio -n 50
 ```
 
-After installing the plugin the first time, it's available for installation like any other plugin at http://volumio.local, the plugin provides a list of settings (check UIConfig.json) to see a list of settings.
+After installing the plugin the first time, it's available for installation like any other plugin at <http://volumio.local>, the plugin provides a list of settings (check UIConfig.json) to see a list of settings.
 
 - Wallpaper feature requires API key from Unsplash.com
 - Weather feature doesn't require an API key for the free tier.
@@ -98,7 +95,6 @@ To stream the audio output from Volumio via HTTP, you must edit the`mpd.conf`fil
 3. Add the following`audio_output`block:
 
    conf
-
    ```
      audio_output {
      type "httpd"
@@ -107,7 +103,6 @@ To stream the audio output from Volumio via HTTP, you must edit the`mpd.conf`fil
      format "44100:16:1"
    }
    ```
-
 4. Restart MPD:`sudo service mpd restart`.
 
 ## Plugin installation on Volumio device for testing
@@ -133,3 +128,7 @@ The globe visualization uses [cobe](https://github.com/shuding/cobe), a lightwei
 ## Spectrum Analyzer
 
 [https://audiomotion.dev/](Audio+Motion)
+
+### Flip Clock
+
+<https://github.com/pqina/flip/>
