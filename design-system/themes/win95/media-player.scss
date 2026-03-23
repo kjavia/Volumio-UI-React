@@ -126,6 +126,7 @@
     user-select: none;
     text-align: left;
     letter-spacing: 0.03em;
+    width: 100%;
 }
 
 /* Inner content area */
@@ -309,4 +310,115 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   WEATHER - Windows 95 Overrides
+   Replace dark-theme glass panels with Win95 silver bevel panels
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Main weather container — Win95 subtle gradient, overrides inline BG_GRADIENT */
+.weather-container,
+.weather-full {
+    color: var(--text-primary);
+    background: linear-gradient(160deg, #e8f0f8 0%, #c8d4e0 35%, #9ab0c8 100%) !important;
+}
+
+/* Replace glass panels with Win95 bevel cards — transparent so gradient shows */
+.weather-hourly-item,
+.weather-daily-card {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 0;
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+}
+
+.weather-daily-card--today {
+    border-top:    2px solid var(--win95-titlebar);
+    border-left:   2px solid var(--win95-titlebar);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+}
+
+/* Full-screen weather panels — transparent so gradient shows through */
+.weather-full-hero {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.weather-full-tenday {
+    background: rgba(255, 255, 255, 0.25);
+    border-left: 2px solid rgba(0, 0, 0, 0.15);
+    backdrop-filter: none;
+}
+
+.weather-full-hourly {
+    background: rgba(255, 255, 255, 0.25);
+    border-top: 2px solid rgba(0, 0, 0, 0.15);
+    backdrop-filter: none;
+}
+
+.weather-full-tile {
+    background: rgba(255, 255, 255, 0.25);
+    border-right:  1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    backdrop-filter: none;
+}
+
+/* Text colors */
+.weather-current-desc,
+.weather-detail-label,
+.weather-detail-icon,
+.weather-hourly-time,
+.weather-hourly-wind,
+.weather-full-tenday-title,
+.weather-full-tenday-lo,
+.weather-full-tile-top,
+.weather-daily-date,
+.weather-daily-desc,
+.weather-daily-meta,
+.weather-daily-sun-item,
+.weather-full-hourly-time,
+.weather-full-tile-sub {
+    color: var(--text-secondary);
+    opacity: 1;
+}
+
+.weather-detail-value,
+.weather-daily-hi,
+.weather-full-tenday-day,
+.weather-full-tile-value,
+.weather-full-hero-temp,
+.weather-full-hero-desc,
+.weather-full-hero-location {
+    color: var(--text-primary);
+    opacity: 1;
+}
+
+/* Hero elements that use opacity in base scss — pin to solid colors */
+.weather-full-hero-hilow,
+.weather-full-hero-unit,
+.weather-full-hero-location {
+    color: var(--text-secondary);
+    opacity: 1;
+}
+
+.weather-full-hero-icon {
+    opacity: 0.35;
+}
+
+.weather-daily-lo,
+.weather-full-hourly-wind {
+    color: var(--text-secondary);
+    opacity: 1;
+}
+
+/* Temp bar — navy gradient */
+.weather-full-tenday-bar {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.weather-full-tenday-bar-fill {
+    background: linear-gradient(to right, var(--color-primary), var(--color-info));
 }

@@ -157,24 +157,29 @@
     --shadow-08: rgba(0, 0, 0, 0.08);
     --shadow-10: rgba(0, 0, 0, 0.1);
     --shadow-15: rgba(0, 0, 0, 0.15);
-    --shadow-20: rgba(0, 0, 0, 0.2);
-    --shadow-30: rgba(0, 0, 0, 0.3);
+    --shadow-20: rgba(0, 0, 0, 0.08);  /* lighter — silver bg */
+    --shadow-30: rgba(0, 0, 0, 0.12);
     --shadow-40: rgba(0, 0, 0, 0.4);
     --shadow-50: rgba(0, 0, 0, 0.5);
     --shadow-60: rgba(0, 0, 0, 0.6);
     --shadow-80: rgba(0, 0, 0, 0.8);
     --shadow-90: rgba(0, 0, 0, 0.9);
 
-    --highlight-03: rgba(255, 255, 255, 0.03);
-    --highlight-05: rgba(255, 255, 255, 0.05);
-    --highlight-10: rgba(255, 255, 255, 0.1);
-    --highlight-15: rgba(255, 255, 255, 0.15);
-    --highlight-20: rgba(255, 255, 255, 0.2);
-    --highlight-30: rgba(255, 255, 255, 0.3);
-    --highlight-40: rgba(255, 255, 255, 0.4);
-    --highlight-50: rgba(255, 255, 255, 0.5);
-    --highlight-60: rgba(255, 255, 255, 0.6);
-    --highlight-80: rgba(255, 255, 255, 0.8);
+    --highlight-03: rgba(0, 0, 0, 0.03);
+    --highlight-05: rgba(0, 0, 0, 0.08);  /* dark borders on light bg */
+    --highlight-10: rgba(0, 0, 0, 0.15);
+    --highlight-15: rgba(0, 0, 0, 0.2);
+    --highlight-20: rgba(0, 0, 0, 0.25);
+    --highlight-30: rgba(0, 0, 0, 0.3);
+    --highlight-40: rgba(0, 0, 0, 0.4);
+    --highlight-50: rgba(0, 0, 0, 0.5);
+    --highlight-60: rgba(0, 0, 0, 0.6);
+    --highlight-80: rgba(0, 0, 0, 0.8);
+
+    /* ─── Weather / text-light semantic aliases for light theme ──────── */
+    --text-light:  #000000;       /* primary text on silver bg */
+    --text-muted:  #404040;       /* secondary/muted text */
+    --text-dim:    #606060;       /* dimmed text */
 
     /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
     --glow-primary: rgba(0, 0, 128, 0.3);
