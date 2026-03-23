@@ -1,0 +1,112 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DIALOG - Windows 95 Theme
+   Classic Win95 message box / dialog window
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.dialog-container {
+  position: fixed;
+  inset: 0;
+  z-index: 2010;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  width: 100%;
+  pointer-events: auto;
+  outline: none;
+  background: var(--win95-face);
+  border-radius: 0;
+  border-top:    2px solid var(--win95-highlight);
+  border-left:   2px solid var(--win95-highlight);
+  border-bottom: 2px solid var(--win95-dark);
+  border-right:  2px solid var(--win95-dark);
+  overflow: hidden;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 4px 3px 6px;
+  background: linear-gradient(90deg, var(--win95-titlebar), #1084d0);
+  flex-shrink: 0;
+  gap: 8px;
+  height: 22px;
+}
+
+.dialog-title {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-label);
+}
+
+.dialog-close {
+  width: 16px;
+  height: 14px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--win95-face);
+  border-radius: 0;
+  border-top:    1px solid var(--win95-highlight);
+  border-left:   1px solid var(--win95-highlight);
+  border-bottom: 1px solid var(--win95-dark);
+  border-right:  1px solid var(--win95-dark);
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+
+  &:active {
+    border-top:    1px solid var(--win95-dark);
+    border-left:   1px solid var(--win95-dark);
+    border-bottom: 1px solid var(--win95-highlight);
+    border-right:  1px solid var(--win95-highlight);
+  }
+
+  .material-icons {
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+
+.dialog-body {
+  padding: 12px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  background: var(--win95-face);
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--win95-shadow);
+  background: var(--win95-face);
+  flex-shrink: 0;
+}

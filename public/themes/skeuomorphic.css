@@ -3739,6 +3739,7 @@ h2 {
   cursor: pointer;
   border-radius: 4px;
   transition: background 0.15s;
+  padding: 8px 4px;
 }
 
 .playlist-item:hover {
@@ -4123,6 +4124,7 @@ h2 {
 .slide-panel-body {
   color: var(--text-light);
   font-size: 0.9rem;
+  padding: 12px 16px;
 }
 
 :root {

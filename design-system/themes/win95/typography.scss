@@ -1,0 +1,89 @@
+@use './variables.scss';
+
+/* ─── Google Fonts — Pixelify Sans for pixel/retro feel ─────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap');
+
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: var(--leading-normal);
+    color: var(--text-primary);
+    background-color: var(--bg-color);
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+    image-rendering: pixelated;
+}
+
+/* ─── Headings ──────────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-normal);
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: 0.4em;
+}
+
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-base); font-weight: 700; }
+
+/* ─── Display Heading ────────────────────────────────────────────────────────── */
+.display-heading {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* ─── Paragraphs ─────────────────────────────────────────────────────────────── */
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    line-height: var(--leading-relaxed);
+}
+
+/* ─── Lead Text ──────────────────────────────────────────────────────────────── */
+.lead {
+    font-size: var(--text-lg);
+    font-weight: 400;
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+}
+
+/* ─── Links ──────────────────────────────────────────────────────────────────── */
+a {
+    color: var(--color-primary);
+    text-decoration: underline;
+
+    &:hover {
+        color: var(--color-primary-light);
+    }
+}
+
+/* ─── Labels/Captions ────────────────────────────────────────────────────────── */
+.label-sm {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    letter-spacing: var(--tracking-normal);
+    text-transform: none;
+    font-weight: 400;
+}
+
+/* ─── Code/Mono ──────────────────────────────────────────────────────────────── */
+code, pre {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────────── */
+::selection {
+    background-color: var(--win95-titlebar);
+    color: #ffffff;
+}

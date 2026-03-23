@@ -58,7 +58,7 @@ const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px' 
         </div>
 
         {/* Body — scrollable if content overflows */}
-        <div className="slide-panel-body flex-grow-1 overflow-auto px-3 py-2">{children}</div>
+        <div className="slide-panel-body flex-grow-1 overflow-auto">{children}</div>
       </div>
     </>
   );

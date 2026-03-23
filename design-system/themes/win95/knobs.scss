@@ -1,0 +1,51 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   KNOBS - Windows 95 Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.knob-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.knob {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--win95-face);
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--text-primary);
+    }
+}
+
+.knob-track {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+}
+
+.knob-label {
+    font-size: var(--text-xs);
+    color: var(--text-primary);
+    font-family: var(--font-label);
+}

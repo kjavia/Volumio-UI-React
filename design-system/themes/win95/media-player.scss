@@ -1,0 +1,312 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MEDIA PLAYER - Windows 95 Theme
+   Classic window chrome with title bar and raised/sunken panels
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Main window casing ──────────────────────────────────────────────── */
+.player-casing {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    background-color: var(--win95-face);
+    border-radius: 0;
+    padding: 2px;
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+}
+
+/* ─── Layout wrappers ─────────────────────────────────────────────────── */
+.media-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.controls-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ─── Screen Area — sunken inset panel ────────────────────────────────── */
+.screen-frame {
+    background: #ffffff;
+    border-radius: 0;
+    padding: 12px;
+    border-top:    2px solid var(--win95-dark);
+    border-left:   2px solid var(--win95-dark);
+    border-bottom: 2px solid var(--win95-highlight);
+    border-right:  2px solid var(--win95-highlight);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    justify-content: center;
+}
+
+/* ─── Title bar strip ─────────────────────────────────────────────────── */
+.win95-title-bar {
+    background: linear-gradient(90deg, var(--win95-titlebar), #1084d0);
+    color: var(--win95-titletext);
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    padding: 3px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    height: 22px;
+}
+
+/* ─── Album Art ────────────────────────────────────────────────────────── */
+.album-art-container,
+.vinyl-container,
+.cd-container {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+    /* Sunken frame */
+    border-top:    2px solid var(--win95-dark);
+    border-left:   2px solid var(--win95-dark);
+    border-bottom: 2px solid var(--win95-highlight);
+    border-right:  2px solid var(--win95-highlight);
+}
+
+/* ─── Track Info ───────────────────────────────────────────────────────── */
+.track-info {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 6px;
+    width: 100%;
+
+    /* Win95 window panel */
+    background: var(--win95-face);
+    padding: 0;
+    /* Raised outer bevel */
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+}
+
+/* Navy title-bar header inside the panel */
+.track-info::before {
+    content: '♪ Now Playing';
+    display: block;
+    background: linear-gradient(90deg, var(--win95-titlebar), #1084d0);
+    color: var(--win95-titletext);
+    font-family: var(--font-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    user-select: none;
+    text-align: left;
+    letter-spacing: 0.03em;
+}
+
+/* Inner content area */
+.track-info > * {
+    padding: 0 10px;
+}
+
+.track-info > *:first-child {
+    padding-top: 8px;
+}
+
+.track-info > *:last-child {
+    padding-bottom: 8px;
+}
+
+.track-title {
+    font-size: clamp(1.1rem, 4vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 2px;
+    letter-spacing: var(--tracking-normal);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-primary);
+}
+
+.artist-name,
+.album-name {
+    font-size: clamp(0.8rem, 2.2vw, 1.1rem);
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 700;
+}
+
+.responsive-title {
+    font-size: clamp(1rem, 3.5cqw, 1.75rem);
+}
+
+.responsive-artist {
+    font-size: clamp(0.75rem, 2.2cqw, 1.1rem);
+}
+
+.responsive-album {
+    font-size: clamp(0.7rem, 1.8cqw, 0.95rem);
+}
+
+.responsive-stream-info {
+    font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
+}
+
+.format-logo-responsive {
+    height: clamp(1.3rem, 3.8cqw, 4.2rem);
+    display: block;
+}
+
+/* ─── Seekbar ──────────────────────────────────────────────────────────── */
+.seekbar-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.time-display {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    min-width: 38px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ─── Playback Control Buttons ─────────────────────────────────────────── */
+.controls-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.control-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 0;
+    background: var(--win95-face);
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: 18px;
+
+    &.play-btn {
+        width: 54px;
+        height: 54px;
+        background: var(--win95-face);
+        color: var(--text-primary);
+    }
+
+    &:hover {
+        background: var(--win95-light);
+    }
+
+    &:active {
+        border-top:    2px solid var(--win95-dark);
+        border-left:   2px solid var(--win95-dark);
+        border-bottom: 2px solid var(--win95-highlight);
+        border-right:  2px solid var(--win95-highlight);
+    }
+}
+
+/* ─── Progress Sliders ──────────────────────────────────────────────────── */
+.slider-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.slider-track {
+    position: relative;
+    flex-grow: 1;
+    height: 12px;
+    background: #ffffff;
+    border-top:    2px solid var(--win95-dark);
+    border-left:   2px solid var(--win95-dark);
+    border-bottom: 2px solid var(--win95-highlight);
+    border-right:  2px solid var(--win95-highlight);
+    cursor: pointer;
+}
+
+.slider-fill {
+    height: 100%;
+    background: var(--win95-titlebar);
+    position: relative;
+}
+
+.slider-cap {
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 20px;
+    background: var(--win95-face);
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+    border-radius: 0;
+    cursor: pointer;
+}
+
+/* ─── Volume Slider ─────────────────────────────────────────────────────── */
+.volume-slider {
+    flex: 1;
+    accent-color: var(--win95-titlebar);
+}
+
+/* ─── Audio info ────────────────────────────────────────────────────────── */
+.audio-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    height: 20px;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+}
+
+/* ─── Player controls container ─────────────────────────────────────────── */
+.player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}

@@ -18,13 +18,13 @@ const TrackInfo = ({ title, artist, album, isInFooter }) => {
       </div>
       <div
         className={`artist-name user-select-none text-truncate w-100 ${
-          isInFooter ? 'small text-start' : 'responsive-artist text-white-50'
+          isInFooter ? 'small text-start' : 'responsive-artist'
         }`}
       >
         {artist || 'Unknown Artist'}
       </div>
       {!isInFooter && album && (
-        <div className="album-name user-select-none mt-1 opacity-75 small text-truncate w-100 responsive-album">
+        <div className="album-name user-select-none mt-1 small text-truncate w-100 responsive-album">
           {album}
         </div>
       )}

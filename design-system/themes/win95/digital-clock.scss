@@ -1,0 +1,199 @@
+/* ── Digital Clock — Windows 95 Theme ──────────────────────────────────────
+ * Retro Win95 LCD-style clock with pixel font aesthetic
+ * ──────────────────────────────────────────────────────────────────────── */
+
+$seg-color:       #000080;
+$seg-off-opacity: 0.1;
+$lcd-bg:          #c0c0c0;
+
+.digital-clock-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  height: 90dvh;
+  max-width: none;
+  margin: 0 auto;
+  container-type: size;
+}
+
+/* Win95 raised window frame */
+.digital-clock-frame {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  padding: 2cqw 2.5cqw;
+  background: var(--win95-face);
+  border-top:    3px solid var(--win95-highlight);
+  border-left:   3px solid var(--win95-highlight);
+  border-bottom: 3px solid var(--win95-dark);
+  border-right:  3px solid var(--win95-dark);
+  user-select: none;
+}
+
+/* Clock display — sunken inset LCD panel */
+.digital-clock {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.2cqw 1.8cqw;
+  background: #c8d0b8;  /* Win95 LCD greenish tint */
+  border-top:    2px solid var(--win95-dark);
+  border-left:   2px solid var(--win95-dark);
+  border-bottom: 2px solid var(--win95-highlight);
+  border-right:  2px solid var(--win95-highlight);
+}
+
+/* Day-of-week bar */
+.lcd-days {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8cqw;
+  margin-bottom: 0.8cqw;
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
+  font-size: clamp(0.55rem, 1.1cqw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+
+  span {
+    opacity: 0.2;
+    color: $seg-color;
+  }
+
+  .active {
+    color: $seg-color;
+    opacity: 1;
+    border-bottom: 0.2cqw solid $seg-color;
+  }
+}
+
+/* Time row */
+.lcd-time {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6cqw;
+}
+
+.lcd-digits {
+  display: flex;
+  align-items: center;
+  gap: 0.2cqw;
+}
+
+.lcd-ampm {
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
+  font-size: clamp(0.75rem, 2.2cqw, 3.5rem);
+  font-weight: 700;
+  color: $seg-color;
+  letter-spacing: 0.08em;
+  padding-bottom: 0.2cqw;
+  margin-left: 0.4cqw;
+  text-transform: uppercase;
+}
+
+/* Colon */
+.lcd-colon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28%;
+  width: 1.5cqw;
+  height: 100%;
+  padding: 15% 0;
+}
+
+.lcd-colon-dot {
+  width: 0.8cqw;
+  height: 0.8cqw;
+  background: $seg-color;
+  border-radius: 0;
+  animation: lcd-blink 1s step-start infinite;
+}
+
+@keyframes lcd-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+/* Date + weather row */
+.lcd-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5cqw;
+  margin-top: 1.5cqw;
+}
+
+.lcd-date {
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
+  font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: $seg-color;
+  text-align: center;
+}
+
+.lcd-weather {
+  display: flex;
+  align-items: center;
+  gap: 0.5cqw;
+}
+
+.lcd-weather-icon {
+  font-size: clamp(0.9rem, 2cqw, 3rem);
+  color: $seg-color;
+}
+
+.lcd-weather-temp {
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
+  font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+  font-weight: 700;
+  color: $seg-color;
+}
+
+/* 7-Segment Digit */
+.lcd-digit {
+  position: relative;
+  width: 11cqw;
+  height: calc(11cqw * 1.7);
+}
+
+.seg {
+  position: absolute;
+  background: $seg-color;
+  transition: opacity 0.1s ease;
+
+  &.on  { opacity: 1; }
+  &.off { opacity: $seg-off-opacity; }
+}
+
+.seg-a,
+.seg-d,
+.seg-g {
+  left: 10%;
+  width: 80%;
+  height: 7%;
+  clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
+}
+
+.seg-a { top: 0; }
+.seg-g { top: 46.5%; }
+.seg-d { bottom: 0; }
+
+.seg-b,
+.seg-c,
+.seg-e,
+.seg-f {
+  width: 13%;
+  height: 42%;
+  clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
+}
+
+.seg-b { top: 4%;    right: 0; }
+.seg-c { bottom: 4%; right: 0; }
+.seg-f { top: 4%;    left: 0; }
+.seg-e { bottom: 4%; left: 0; }
