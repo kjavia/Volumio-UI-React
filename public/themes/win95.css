@@ -5093,7 +5093,7 @@ input[type=range]::-webkit-slider-runnable-track {
   opacity: 1;
 }
 .seg.off {
-  opacity: 0.1;
+  opacity: 0.03;
 }
 
 .seg-a,

@@ -5883,7 +5883,7 @@ input[type=range]::-moz-range-thumb:active {
   opacity: 1;
 }
 .seg.off {
-  opacity: 0.08;
+  opacity: 0.03;
 }
 
 .seg-a,
