@@ -6466,15 +6466,15 @@ input[type=range]::-moz-range-thumb:active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.5cqw;
-  width: 1.5cqw;
+  gap: 3cqw;
+  width: 2.5cqw;
   height: 100%;
   padding: 2cqh 0;
 }
 
 .lcd-colon-dot {
-  width: 0.8cqw;
-  height: 0.8cqw;
+  width: 1.4cqw;
+  height: 1.4cqw;
   background: #003366;
   border-radius: 1px;
 }
