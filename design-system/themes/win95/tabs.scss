@@ -1,0 +1,88 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TABS - Windows 95 Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.nav-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--win95-dark);
+    padding: 0;
+    background: var(--win95-face);
+}
+
+.nav-item {
+    list-style: none;
+}
+
+.nav-link {
+    display: block;
+    padding: 4px 12px;
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--text-primary);
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-right:  2px solid var(--win95-dark);
+    border-bottom: none;
+    border-radius: 0;
+    background: var(--win95-face);
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: -2px;
+    position: relative;
+
+    &:hover {
+        background: var(--win95-light);
+    }
+
+    &.active {
+        background: var(--win95-face);
+        border-bottom: 2px solid var(--win95-face);
+        z-index: 1;
+        padding-top: 3px;
+    }
+}
+
+.tab-pane {
+    display: none;
+    padding: 12px;
+    background: var(--win95-face);
+    border-top:    none;
+    border-left:   2px solid var(--win95-highlight);
+    border-right:  2px solid var(--win95-dark);
+    border-bottom: 2px solid var(--win95-dark);
+
+    &.active {
+        display: block;
+    }
+}
+
+.nav-pills {
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+    background: var(--win95-face);
+    border-radius: 0;
+
+    .nav-link {
+        padding: 4px 12px;
+        border-radius: 0;
+        margin-bottom: 0;
+        border: 2px solid var(--win95-face);
+
+        &.active {
+            background: var(--win95-titlebar);
+            color: #ffffff;
+            border-top:    2px solid var(--win95-dark);
+            border-left:   2px solid var(--win95-dark);
+            border-bottom: 2px solid var(--win95-highlight);
+            border-right:  2px solid var(--win95-highlight);
+        }
+
+        &:hover:not(.active) {
+            background: var(--win95-light);
+        }
+    }
+}

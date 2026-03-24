@@ -1,13 +1,11 @@
-/* ── Digital LCD Clock — Flat Dark Theme ───────────────────────────────────
- * Deep navy LCD panel, indigo segments, minimal flat bezels, Inter / JetBrains Mono
+/* ── Digital Clock — Windows 95 Theme ──────────────────────────────────────
+ * Retro Win95 LCD-style clock with pixel font aesthetic
  * ──────────────────────────────────────────────────────────────────────── */
 
-// Segment palette — indigo on near-black
-$seg-color:       var(--color-primary);
+$seg-color:       #000080;
 $seg-off-opacity: 0.03;
-$lcd-bg:          #0d0d14;
+$lcd-bg:          #c0c0c0;
 
-/* ── Centering wrapper ──────────────────────────────────────────────────── */
 .digital-clock-wrapper {
   display: flex;
   flex-direction: column;
@@ -20,44 +18,47 @@ $lcd-bg:          #0d0d14;
   container-type: size;
 }
 
-/* ── Outer frame — thin flat border ────────────────────────────────────── */
+/* Win95 raised window frame */
 .digital-clock-frame {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   width: fit-content;
   padding: 2cqw 2.5cqw;
-  background: #11111a;
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  border-radius: 8px;
-  box-shadow: none;
+  background: var(--win95-face);
+  border-top:    3px solid var(--win95-highlight);
+  border-left:   3px solid var(--win95-highlight);
+  border-bottom: 3px solid var(--win95-dark);
+  border-right:  3px solid var(--win95-dark);
   user-select: none;
 }
 
-/* ── LCD Panel ──────────────────────────────────────────────────────────── */
+/* Clock display — sunken inset LCD panel */
 .digital-clock {
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
   padding: 1.2cqw 1.8cqw;
-  border-radius: 4px;
-  background: $lcd-bg;
-  border: 1px solid rgba(99, 102, 241, 0.15);
+  background: #c8d0b8;  /* Win95 LCD greenish tint */
+  border-top:    2px solid var(--win95-dark);
+  border-left:   2px solid var(--win95-dark);
+  border-bottom: 2px solid var(--win95-highlight);
+  border-right:  2px solid var(--win95-highlight);
 }
 
-/* ── Day-of-week bar ────────────────────────────────────────────────────── */
+/* Day-of-week bar */
 .lcd-days {
   display: flex;
   justify-content: space-between;
   gap: 0.8cqw;
   margin-bottom: 0.8cqw;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
   font-size: clamp(0.55rem, 1.1cqw, 1.8rem);
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
 
   span {
-    opacity: 0.15;
+    opacity: 0.2;
     color: $seg-color;
   }
 
@@ -65,11 +66,11 @@ $lcd-bg:          #0d0d14;
     color: $seg-color;
     opacity: 1;
     border-bottom: 0.2cqw solid $seg-color;
-    filter: drop-shadow(2px 2px 0 rgba(var(--color-primary-rgb, 0, 180, 255), 0.5));
+    filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.3));
   }
 }
 
-/* ── Time row ───────────────────────────────────────────────────────────── */
+/* Time row */
 .lcd-time {
   display: flex;
   align-items: flex-end;
@@ -83,7 +84,7 @@ $lcd-bg:          #0d0d14;
 }
 
 .lcd-ampm {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
   font-size: clamp(0.75rem, 2.2cqw, 3.5rem);
   font-weight: 700;
   color: $seg-color;
@@ -91,10 +92,10 @@ $lcd-bg:          #0d0d14;
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
   text-transform: uppercase;
-  filter: drop-shadow(2px 2px 0 rgba(var(--color-primary-rgb, 0, 180, 255), 0.5));
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.3));
 }
 
-/* ── Colon separator ────────────────────────────────────────────────────── */
+/* Colon */
 .lcd-colon {
   display: flex;
   flex-direction: column;
@@ -110,8 +111,8 @@ $lcd-bg:          #0d0d14;
   width: 1.4cqw;
   height: 1.4cqw;
   background: $seg-color;
-  border-radius: 1px;
-  filter: drop-shadow(2px 2px 0 rgba(var(--color-primary-rgb, 0, 180, 255), 0.5));
+  border-radius: 0;
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.3));
 }
 
 .lcd-colon--blink .lcd-colon-dot {
@@ -120,10 +121,10 @@ $lcd-bg:          #0d0d14;
 
 @keyframes lcd-blink {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.15; }
+  50%       { opacity: 0.2; }
 }
 
-/* ── Date + weather row ─────────────────────────────────────────────────── */
+/* Date + weather row */
 .lcd-info {
   display: flex;
   align-items: center;
@@ -133,12 +134,12 @@ $lcd-bg:          #0d0d14;
 }
 
 .lcd-date {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
   font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: $seg-color;
   text-align: center;
 }
 
@@ -154,19 +155,18 @@ $lcd-bg:          #0d0d14;
 }
 
 .lcd-weather-temp {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
   font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 700;
   color: $seg-color;
 }
 
-/* ── 7-Segment Digit ────────────────────────────────────────────────────── */
+/* 7-Segment Digit */
 .lcd-digit {
   position: relative;
   width: 11cqw;
   height: calc(11cqw * 1.7);
-  filter: drop-shadow(2px 2px 0 rgba(var(--color-primary-rgb, 0, 180, 255), 0.5));
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.3));
 }
 
 .seg {
@@ -178,7 +178,6 @@ $lcd-bg:          #0d0d14;
   &.off { opacity: $seg-off-opacity; }
 }
 
-// Horizontal segments (a, d, g)
 .seg-a,
 .seg-d,
 .seg-g {
@@ -192,7 +191,6 @@ $lcd-bg:          #0d0d14;
 .seg-g { top: 46.5%; }
 .seg-d { bottom: 0; }
 
-// Vertical segments (b, c, e, f)
 .seg-b,
 .seg-c,
 .seg-e,

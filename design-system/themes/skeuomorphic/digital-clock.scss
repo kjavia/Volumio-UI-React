@@ -2,7 +2,7 @@
 
 // Segment color — dark blue-gray matching the reference image
 $seg-color: #2c3e50;
-$seg-off-opacity: 0.06;
+$seg-off-opacity: 0.03;
 
 // Panel background — light warm gray, recessed look
 $panel-bg: var(--color-gray-075, #d0d0d0);
@@ -107,6 +107,7 @@ $frame-color: var(--color-gray-150, #bbbbbb);
     color: $seg-color;
     font-weight: 800;
     opacity: 1;
+    filter: drop-shadow(2px 2px 0 rgba(255, 140, 30, 0.4));
   }
 }
 
@@ -121,7 +122,7 @@ $frame-color: var(--color-gray-150, #bbbbbb);
 .lcd-digits {
   display: flex;
   align-items: center;
-  gap: 0.2cqw;
+  gap: 2cqw;
 }
 
 .lcd-ampm {
@@ -132,6 +133,7 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   letter-spacing: 0.05em;
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
+  filter: drop-shadow(2px 2px 0 rgba(255, 140, 30, 0.4));
 }
 
 /* ── Colon ──────────────────────────────────────────────────────────────── */
@@ -141,25 +143,34 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 28%;
-  width: 1.5cqw;
+  gap: 3cqw;
+  width: 2.5cqw;
   height: 100%;
-  padding: 15% 0;
+  padding: 2cqh 0;
 }
 
 .lcd-colon-dot {
-  width: 0.8cqw;
-  height: 0.8cqw;
+  width: 1.4cqw;
+  height: 1.4cqw;
   background: $seg-color;
   border-radius: 1px;
+  filter: drop-shadow(2px 2px 0 rgba(255, 140, 30, 0.4));
 }
 
-/* ── 7-Segment Digit ────────────────────────────────────────────────────── */
+.lcd-colon--blink .lcd-colon-dot {
+  animation: lcd-blink 1s step-start infinite;
+}
+
+@keyframes lcd-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.15; }
+}
 
 .lcd-digit {
   position: relative;
   width: 11cqw;
   height: calc(11cqw * 1.7);
+  filter: drop-shadow(2px 2px 0 rgba(255, 140, 30, 0.4));
 }
 
 // All segments share these basics

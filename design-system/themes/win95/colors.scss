@@ -1,0 +1,79 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   COLOR UTILITIES - Windows 95 Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.bg-dark {
+    background-color: var(--win95-face) !important;
+}
+
+.bg-surface {
+    background-color: var(--win95-face) !important;
+}
+
+.bg-app {
+    background-color: var(--bg-color) !important;
+}
+
+.bg-list-item {
+    background-color: var(--list-item-bg) !important;
+}
+
+.bg-orange {
+    background: var(--win95-titlebar) !important;
+}
+
+.bg-metallic {
+    background: var(--win95-face) !important;
+}
+
+/* ─── Border Utilities ────────────────────────────────────────────────── */
+.border-dark {
+    border-color: var(--win95-dark) !important;
+}
+
+.border-light {
+    border-color: var(--win95-highlight) !important;
+}
+
+.border-orange {
+    border-color: var(--win95-titlebar) !important;
+}
+
+/* ─── Surface Patterns — Win95 window chrome ──────────────────────────── */
+.panel {
+    background: var(--win95-face);
+    border-radius: 0;
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+}
+
+.surface {
+    background: var(--win95-face);
+    border-radius: 0;
+    border-top:    1px solid var(--win95-shadow);
+    border-left:   1px solid var(--win95-shadow);
+    border-bottom: 1px solid var(--win95-light);
+    border-right:  1px solid var(--win95-light);
+}
+
+.device-chrome {
+    background: var(--win95-face);
+    border-radius: 0;
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+}
+
+.inset-well {
+    background-color: #ffffff;
+    border-radius: 0;
+    border-top:    2px solid var(--win95-dark);
+    border-left:   2px solid var(--win95-dark);
+    border-bottom: 2px solid var(--win95-highlight);
+    border-right:  2px solid var(--win95-highlight);
+}

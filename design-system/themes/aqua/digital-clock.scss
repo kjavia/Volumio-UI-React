@@ -5,7 +5,7 @@
 
 // LCD glass & segment palette
 $seg-color:        #003366;   // deep navy — classic LCD segment ink on a light panel
-$seg-off-opacity:  0.06;
+$seg-off-opacity:  0.03;
 $lcd-bg:           #e8eff5;   // cool white — backlit LCD glass
 $lcd-border:       #b0bec5;
 $lcd-shadow-inset: rgba(0, 0, 0, 0.18);
@@ -130,6 +130,7 @@ $frame-highlight:  rgba(255, 255, 255, 0.75);
     color: var(--color-primary, #147aff);
     opacity: 1;
     border-bottom: 0.2cqw solid var(--color-primary, #147aff);
+    filter: drop-shadow(2px 2px 0 rgba(0, 120, 220, 0.45));
   }
 }
 
@@ -143,7 +144,7 @@ $frame-highlight:  rgba(255, 255, 255, 0.75);
 .lcd-digits {
   display: flex;
   align-items: center;
-  gap: 0.2cqw;
+  gap: 2cqw;
 }
 
 .lcd-ampm {
@@ -155,6 +156,7 @@ $frame-highlight:  rgba(255, 255, 255, 0.75);
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
   text-transform: uppercase;
+  filter: drop-shadow(2px 2px 0 rgba(0, 120, 220, 0.45));
 }
 
 /* ── Colon separator ────────────────────────────────────────────────────── */
@@ -163,24 +165,33 @@ $frame-highlight:  rgba(255, 255, 255, 0.75);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 28%;
-  width: 1.5cqw;
+  gap: 3cqw;
+  width: 2.5cqw;
   height: 100%;
-  padding: 15% 0;
+  padding: 2cqh 0;
 }
 
 .lcd-colon-dot {
-  width: 0.8cqw;
-  height: 0.8cqw;
+  width: 1.4cqw;
+  height: 1.4cqw;
   background: $seg-color;
   border-radius: 1px;
+  filter: drop-shadow(2px 2px 0 rgba(0, 120, 220, 0.45));
 }
 
-/* ── 7-Segment Digit ────────────────────────────────────────────────────── */
+.lcd-colon--blink .lcd-colon-dot {
+  animation: lcd-blink 1s step-start infinite;
+}
+
+@keyframes lcd-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.15; }
+}
 .lcd-digit {
   position: relative;
   width: 11cqw;
   height: calc(11cqw * 1.7);
+  filter: drop-shadow(2px 2px 0 rgba(0, 120, 220, 0.45));
 }
 
 .seg {
@@ -191,8 +202,6 @@ $frame-highlight:  rgba(255, 255, 255, 0.75);
   &.on  { opacity: 1; }
   &.off { opacity: $seg-off-opacity; }
 }
-
-// Horizontal segments (a, d, g) — diamond/hex clip shape
 .seg-a,
 .seg-d,
 .seg-g {

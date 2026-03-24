@@ -71,3 +71,13 @@
 .flip-ampm {
   color: #d8b880;
 }
+
+// ─── Text wrapper alignment ───────────────────────────────────────────────
+// The base stylesheet shifts text down 10%/5% to center most fonts on the
+// fold line. This font's metrics are already centered — cancel the offset.
+.tick-flip-panel-front-text .tick-flip-panel-text-wrapper {
+  transform: translateY(-10%);
+}
+.tick-flip-panel-back-text .tick-flip-panel-text-wrapper {
+  transform: translateY(-5%);
+}

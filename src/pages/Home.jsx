@@ -204,11 +204,11 @@ const Home = () => {
         idleScreen === 'analogClock' ? (
           <ClockComponent
             showWeather={showWeatherInClock}
-            showSeconds
+            showSeconds={wallpaperShowSeconds}
             showDate={analogClockShowDate}
           />
         ) : (
-          <ClockComponent showWeather={showWeatherInClock} showSeconds />
+          <ClockComponent showWeather={showWeatherInClock} showSeconds={wallpaperShowSeconds} />
         );
     }
   }

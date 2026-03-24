@@ -108,6 +108,17 @@
   line-height: 1;
 }
 
+// Shift digit text so the fold cuts through the visual centre of the character
+// (most fonts sit above the em-box midpoint). The back wrapper has height:200%
+// while the front has height:100%, so the same translateY% produces twice the
+// pixel shift on the back. Use 5% on back to match the 10% front offset.
+.tick-flip-panel-front-text .tick-flip-panel-text-wrapper {
+  transform: translateY(10%);
+}
+.tick-flip-panel-back-text .tick-flip-panel-text-wrapper {
+  transform: translateY(5%);
+}
+
 .tick-flip-panel {
   font-family: var(--font-mono, 'Roboto Mono', monospace);
   font-weight: 800;

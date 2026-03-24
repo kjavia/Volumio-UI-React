@@ -1,0 +1,127 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDERS - Windows 95 Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.slider-group {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.fader-track {
+    width: 10px;
+    height: 200px;
+    background: var(--win95-face);
+    border-top:    2px solid var(--win95-dark);
+    border-left:   2px solid var(--win95-dark);
+    border-bottom: 2px solid var(--win95-highlight);
+    border-right:  2px solid var(--win95-highlight);
+    border-radius: 0;
+    position: relative;
+    margin: 0 20px;
+}
+
+.fader-cap {
+    width: 18px;
+    height: 28px;
+    background: var(--win95-face);
+    border-radius: 0;
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: ns-resize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::after {
+        content: '';
+        width: 60%;
+        height: 2px;
+        background: var(--win95-dark);
+    }
+
+    &:active {
+        border-top:    2px solid var(--win95-dark);
+        border-left:   2px solid var(--win95-dark);
+        border-bottom: 2px solid var(--win95-highlight);
+        border-right:  2px solid var(--win95-highlight);
+    }
+}
+
+.scale {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -22px;
+    width: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-family: var(--font-mono);
+}
+
+.scale-mark {
+    width: 4px;
+    height: 1px;
+    background-color: var(--win95-dark);
+}
+
+.scale-mark.long {
+    width: 8px;
+    background-color: var(--win95-shadow);
+}
+
+/* ─── Horizontal Range Input ────────────────────────────────────────────── */
+input[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: var(--win95-face);
+    border-top:    1px solid var(--win95-dark);
+    border-left:   1px solid var(--win95-dark);
+    border-bottom: 1px solid var(--win95-highlight);
+    border-right:  1px solid var(--win95-highlight);
+    border-radius: 0;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 26px;
+    background: var(--win95-face);
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+    border-radius: 0;
+    cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+    width: 14px;
+    height: 26px;
+    background: var(--win95-face);
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+    border-radius: 0;
+    cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+    background: transparent;
+}

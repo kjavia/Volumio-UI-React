@@ -1,0 +1,56 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PROGRESSBAR - Windows 95 Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.progress {
+    height: 22px;
+    background: #ffffff;
+    border-top:    2px solid var(--win95-dark);
+    border-left:   2px solid var(--win95-dark);
+    border-bottom: 2px solid var(--win95-highlight);
+    border-right:  2px solid var(--win95-highlight);
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--win95-titlebar);
+    border-radius: 0;
+    transition: width 0.3s ease;
+
+    &.progress-bar-success { background: var(--color-success); }
+    &.progress-bar-warning { background: var(--color-warning); }
+    &.progress-bar-danger  { background: var(--color-danger); }
+    &.progress-bar-info    { background: var(--color-info); }
+}
+
+/* ─── Loading bar ─────────────────────────────────────────────────────── */
+.progress-indeterminate {
+    height: 22px;
+    background: #ffffff;
+    border-top:    2px solid var(--win95-dark);
+    border-left:   2px solid var(--win95-dark);
+    border-bottom: 2px solid var(--win95-highlight);
+    border-right:  2px solid var(--win95-highlight);
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: -40%;
+        top: 0;
+        bottom: 0;
+        width: 40%;
+        background: var(--win95-titlebar);
+        animation: progress-slide 1.4s ease-in-out infinite;
+    }
+}
+
+@keyframes progress-slide {
+    0%   { left: -40%; }
+    100% { left: 100%; }
+}

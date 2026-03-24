@@ -1,0 +1,196 @@
+/* ── Analog Clock — Windows 95 Theme ───────────────────────────────────────
+ * Classic silver face, navy accent hands, pixel font digits
+ * ──────────────────────────────────────────────────────────────────────── */
+
+.analog-clock-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  container-type: size;
+}
+
+.analog-clock {
+  --clock-size: min(80cqw, 80cqh);
+  width: var(--clock-size);
+  height: var(--clock-size);
+}
+
+/* Raised bezel — Win95 3D bevel on a circle */
+.clock-bezel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 3%;
+  background: radial-gradient(circle at 30% 30%, #dfdfdf, #808080);
+  border-top:    3px solid #ffffff;
+  border-left:   3px solid #ffffff;
+  border-bottom: 3px solid #404040;
+  border-right:  3px solid #404040;
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* Face — light silver dial */
+.clock-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #f0f0f0;
+  border-top:    2px solid #808080;
+  border-left:   2px solid #808080;
+  border-bottom: 2px solid #dfdfdf;
+  border-right:  2px solid #dfdfdf;
+}
+
+/* Tick marks */
+.clock-tick {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 50%;
+  transform-origin: bottom center;
+  pointer-events: none;
+}
+
+.clock-tick::before {
+  content: '';
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 4%;
+}
+
+.clock-tick--hour::before {
+  height: 10%;
+  background: #000000;
+  width: 3px;
+  margin-left: -0.5px;
+}
+
+.clock-tick--minute::before {
+  height: 5%;
+  background: #808080;
+  width: 1px;
+}
+
+/* Hour digit labels */
+.clock-hour-digit {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
+  font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+  font-weight: 700;
+  color: #000000;
+  line-height: 1;
+}
+
+/* Hands */
+.clock-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 0;
+}
+
+.clock-hand--hour {
+  width: 5px;
+  height: 25%;
+  margin-left: -2.5px;
+  background: #000000;
+  border-radius: 0;
+  z-index: 3;
+}
+
+.clock-hand--minute {
+  width: 3px;
+  height: 35%;
+  margin-left: -1.5px;
+  background: #000000;
+  border-radius: 0;
+  z-index: 4;
+}
+
+.clock-hand--second {
+  width: 1.5px;
+  height: 38%;
+  margin-left: -0.75px;
+  background: #ff0000;
+  border-radius: 0;
+  z-index: 5;
+  transition: none;
+}
+
+/* Center pivot */
+.clock-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5%;
+  height: 5%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #000000;
+  z-index: 6;
+}
+
+/* Day and date */
+.clock-face-info {
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.clock-face-day {
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
+  font-size: clamp(0.8rem, 4cqi, 1.5rem);
+  font-weight: 700;
+  color: #404040;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.clock-face-date {
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
+  font-size: clamp(0.8rem, 4cqi, 1.5rem);
+  font-weight: 400;
+  color: #000000;
+  white-space: nowrap;
+}
+
+/* Weather on face */
+.clock-face-weather {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.clock-face-weather-icon {
+  font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+  color: #000080;
+}
+
+.clock-face-weather-temp {
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
+  font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+  font-weight: 700;
+  color: #000080;
+}

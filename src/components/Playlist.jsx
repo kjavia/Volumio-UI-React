@@ -43,7 +43,7 @@ const Playlist = ({ open, onClose, queue, currentPosition, isPlaying, onPlay, on
               <li
                 key={`${track.uri}-${index}`}
                 ref={isCurrent ? activeRef : null}
-                className={`playlist-item d-flex align-items-center gap-2 py-2 px-1 ${
+                className={`playlist-item d-flex align-items-center gap-2 ${
                   isCurrent ? 'playlist-item--active' : ''
                 }`}
                 onClick={() => onPlay(index)}
