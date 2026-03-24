@@ -4994,7 +4994,7 @@ input[type=range]::-webkit-slider-runnable-track {
 .lcd-digits {
   display: flex;
   align-items: center;
-  gap: 0.2cqw;
+  gap: 2cqw;
 }
 
 .lcd-ampm {

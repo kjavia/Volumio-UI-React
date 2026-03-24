@@ -6446,7 +6446,7 @@ input[type=range]::-moz-range-thumb:active {
 .lcd-digits {
   display: flex;
   align-items: center;
-  gap: 1cqw;
+  gap: 2cqw;
 }
 
 .lcd-ampm {
