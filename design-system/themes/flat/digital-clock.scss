@@ -65,6 +65,7 @@ $lcd-bg:          #0d0d14;
     color: $seg-color;
     opacity: 1;
     border-bottom: 0.2cqw solid $seg-color;
+    filter: drop-shadow(2px 2px 0 rgba(var(--color-primary-rgb, 0, 180, 255), 0.5));
   }
 }
 
@@ -90,6 +91,7 @@ $lcd-bg:          #0d0d14;
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
   text-transform: uppercase;
+  filter: drop-shadow(2px 2px 0 rgba(var(--color-primary-rgb, 0, 180, 255), 0.5));
 }
 
 /* ── Colon separator ────────────────────────────────────────────────────── */
@@ -109,6 +111,7 @@ $lcd-bg:          #0d0d14;
   height: 1.4cqw;
   background: $seg-color;
   border-radius: 1px;
+  filter: drop-shadow(2px 2px 0 rgba(var(--color-primary-rgb, 0, 180, 255), 0.5));
 }
 
 .lcd-colon--blink .lcd-colon-dot {

@@ -3964,6 +3964,7 @@ h2 {
   color: #1c3038;
   opacity: 1;
   border-bottom: 0.2cqw solid #1c3038;
+  filter: drop-shadow(2px 2px 0 rgba(28, 48, 56, 0.6));
 }
 
 /* ── Time row ───────────────────────────────────────────────────────────── */
@@ -3988,6 +3989,7 @@ h2 {
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
   text-transform: uppercase;
+  filter: drop-shadow(2px 2px 0 rgba(28, 48, 56, 0.6));
 }
 
 /* ── Colon separator ────────────────────────────────────────────────────── */
@@ -4007,6 +4009,7 @@ h2 {
   height: 1.4cqw;
   background: #1c3038;
   border-radius: 1px;
+  filter: drop-shadow(2px 2px 0 rgba(28, 48, 56, 0.6));
 }
 
 .lcd-colon--blink .lcd-colon-dot {

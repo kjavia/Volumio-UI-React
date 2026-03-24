@@ -107,6 +107,7 @@ $frame-color: var(--color-gray-150, #bbbbbb);
     color: $seg-color;
     font-weight: 800;
     opacity: 1;
+    filter: drop-shadow(2px 2px 0 rgba(255, 140, 30, 0.4));
   }
 }
 
@@ -132,6 +133,7 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   letter-spacing: 0.05em;
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
+  filter: drop-shadow(2px 2px 0 rgba(255, 140, 30, 0.4));
 }
 
 /* ── Colon ──────────────────────────────────────────────────────────────── */
@@ -152,6 +154,7 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   height: 1.4cqw;
   background: $seg-color;
   border-radius: 1px;
+  filter: drop-shadow(2px 2px 0 rgba(255, 140, 30, 0.4));
 }
 
 .lcd-colon--blink .lcd-colon-dot {

@@ -66,6 +66,7 @@ $lcd-bg:          #c0c0c0;
     color: $seg-color;
     opacity: 1;
     border-bottom: 0.2cqw solid $seg-color;
+    filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.3));
   }
 }
 
@@ -91,6 +92,7 @@ $lcd-bg:          #c0c0c0;
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
   text-transform: uppercase;
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.3));
 }
 
 /* Colon */
@@ -110,6 +112,7 @@ $lcd-bg:          #c0c0c0;
   height: 1.4cqw;
   background: $seg-color;
   border-radius: 0;
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.3));
 }
 
 .lcd-colon--blink .lcd-colon-dot {

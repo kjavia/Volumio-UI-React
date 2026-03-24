@@ -5771,6 +5771,7 @@ input[type=range]::-moz-range-thumb:active {
   color: var(--color-primary);
   opacity: 1;
   border-bottom: 0.2cqw solid var(--color-primary);
+  filter: drop-shadow(2px 2px 0 rgba(var(--color-primary-rgb, 0, 180, 255), 0.5));
 }
 
 /* ── Time row ───────────────────────────────────────────────────────────── */
@@ -5795,6 +5796,7 @@ input[type=range]::-moz-range-thumb:active {
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
   text-transform: uppercase;
+  filter: drop-shadow(2px 2px 0 rgba(var(--color-primary-rgb, 0, 180, 255), 0.5));
 }
 
 /* ── Colon separator ────────────────────────────────────────────────────── */
@@ -5814,6 +5816,7 @@ input[type=range]::-moz-range-thumb:active {
   height: 1.4cqw;
   background: var(--color-primary);
   border-radius: 1px;
+  filter: drop-shadow(2px 2px 0 rgba(var(--color-primary-rgb, 0, 180, 255), 0.5));
 }
 
 .lcd-colon--blink .lcd-colon-dot {

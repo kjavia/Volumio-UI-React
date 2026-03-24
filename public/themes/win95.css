@@ -4982,6 +4982,7 @@ input[type=range]::-webkit-slider-runnable-track {
   color: #000080;
   opacity: 1;
   border-bottom: 0.2cqw solid #000080;
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.3));
 }
 
 /* Time row */
@@ -5006,6 +5007,7 @@ input[type=range]::-webkit-slider-runnable-track {
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
   text-transform: uppercase;
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.3));
 }
 
 /* Colon */
@@ -5025,6 +5027,7 @@ input[type=range]::-webkit-slider-runnable-track {
   height: 1.4cqw;
   background: #000080;
   border-radius: 0;
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.3));
 }
 
 .lcd-colon--blink .lcd-colon-dot {

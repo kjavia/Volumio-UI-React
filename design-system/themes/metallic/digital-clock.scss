@@ -154,6 +154,7 @@ $frame-highlight:  rgba(255, 255, 255, 0.07);
     opacity: 1;
     // Subtle underline tick matching the reference image's day marker
     border-bottom: 0.2cqw solid $seg-color;
+    filter: drop-shadow(2px 2px 0 rgba(28, 48, 56, 0.6));
   }
 }
 
@@ -179,6 +180,7 @@ $frame-highlight:  rgba(255, 255, 255, 0.07);
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
   text-transform: uppercase;
+  filter: drop-shadow(2px 2px 0 rgba(28, 48, 56, 0.6));
 }
 
 /* ── Colon separator ────────────────────────────────────────────────────── */
@@ -198,6 +200,7 @@ $frame-highlight:  rgba(255, 255, 255, 0.07);
   height: 1.4cqw;
   background: $seg-color;
   border-radius: 1px;
+  filter: drop-shadow(2px 2px 0 rgba(28, 48, 56, 0.6));
 }
 
 .lcd-colon--blink .lcd-colon-dot {
