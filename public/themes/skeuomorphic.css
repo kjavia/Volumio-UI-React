@@ -5533,6 +5533,14 @@ h2 {
   color: #d8b880;
 }
 
+.tick-flip-panel-front-text .tick-flip-panel-text-wrapper {
+  transform: translateY(-10%);
+}
+
+.tick-flip-panel-back-text .tick-flip-panel-text-wrapper {
+  transform: translateY(-5%);
+}
+
 body {
   background-color: var(--bg-color);
 }
