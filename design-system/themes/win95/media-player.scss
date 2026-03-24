@@ -63,7 +63,7 @@
     background: linear-gradient(90deg, var(--win95-titlebar), #1084d0);
     color: var(--win95-titletext);
     font-family: var(--font-label);
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     font-weight: 700;
     padding: 3px 6px;
     display: flex;
@@ -120,7 +120,7 @@
     background: linear-gradient(90deg, var(--win95-titlebar), #1084d0);
     color: var(--win95-titletext);
     font-family: var(--font-label);
-    font-size: 0.75rem;
+    font-size: var(--text-base);
     font-weight: 700;
     padding: 2px 6px;
     user-select: none;

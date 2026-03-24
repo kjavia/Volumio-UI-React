@@ -4,7 +4,7 @@
    Classic silver desktop OS aesthetic
    Typography: Pixelify Sans (pixel-style) with MS Sans Serif fallback
    ═══════════════════════════════════════════════════════════════════════ */
-@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.cdnfonts.com/css/w95fa");
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Windows 95 Theme
@@ -175,10 +175,10 @@
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -386,10 +386,10 @@
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -700,10 +700,10 @@ code, pre {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -988,10 +988,10 @@ code, pre {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -1413,10 +1413,10 @@ code, pre {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -1740,10 +1740,10 @@ label {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -2014,10 +2014,10 @@ label {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -2348,10 +2348,10 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -2607,10 +2607,10 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -2898,10 +2898,10 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -3001,7 +3001,7 @@ input[type=range]::-webkit-slider-runnable-track {
   background: linear-gradient(90deg, var(--win95-titlebar), #1084d0);
   color: var(--win95-titletext);
   font-family: var(--font-label);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: 700;
   padding: 3px 6px;
   display: flex;
@@ -3057,7 +3057,7 @@ input[type=range]::-webkit-slider-runnable-track {
   background: linear-gradient(90deg, var(--win95-titlebar), #1084d0);
   color: var(--win95-titletext);
   font-family: var(--font-label);
-  font-size: 0.75rem;
+  font-size: var(--text-base);
   font-weight: 700;
   padding: 2px 6px;
   user-select: none;
@@ -3526,10 +3526,10 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -3826,10 +3826,10 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -4179,10 +4179,10 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -4279,7 +4279,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .slide-panel-title {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: 700;
   color: #ffffff;
   font-family: var(--font-label);
@@ -4464,10 +4464,10 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -4769,10 +4769,10 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ═══════════════════════════════════════════════════════════════════════
      TYPOGRAPHY
      ═══════════════════════════════════════════════════════════════════════ */
-  --font-body: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-label: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-tech: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-  --font-display: 'Pixelify Sans', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+  --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-mono: 'Courier New', 'Courier', monospace;
   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -4864,7 +4864,7 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .dialog-title {
   margin: 0;
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: 700;
   color: #ffffff;
   font-family: var(--font-label);
