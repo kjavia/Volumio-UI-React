@@ -1,0 +1,18 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FLIP CLOCK - Windows 95 Theme
+   Use the theme's main font (W95FA / MS Sans Serif) instead of monospace
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.tick-flip-panel {
+  font-family: var(--font-display);
+}
+
+.flip-colon {
+  font-family: var(--font-display);
+}
+
+.flip-ampm {
+  font-family: var(--font-display);
+}
