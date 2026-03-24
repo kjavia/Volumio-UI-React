@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import useWeather from '@/hooks/useWeather';
 
@@ -27,7 +27,7 @@ const SEGMENT_MAP = [
 
 const SEG_NAMES = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
-const SegmentDigit = ({ digit }) => {
+const SegmentDigit = memo(({ digit }) => {
   const segs = SEGMENT_MAP[digit] || SEGMENT_MAP[0];
   return (
     <div className="lcd-digit">
@@ -36,14 +36,16 @@ const SegmentDigit = ({ digit }) => {
       ))}
     </div>
   );
-};
+});
+SegmentDigit.displayName = 'SegmentDigit';
 
-const LcdColon = ({ blink = false }) => (
+const LcdColon = memo(({ blink = false }) => (
   <div className={`lcd-colon${blink ? ' lcd-colon--blink' : ''}`}>
     <div className="lcd-colon-dot" />
     <div className="lcd-colon-dot" />
   </div>
-);
+));
+LcdColon.displayName = 'LcdColon';
 
 const DigitalClock = ({ showSeconds = true, use12Hour = true, showWeather = false }) => {
   const { data: weather } = useWeather();
@@ -52,16 +54,32 @@ const DigitalClock = ({ showSeconds = true, use12Hour = true, showWeather = fals
   useEffect(() => {
     let intervalId;
     const tick = () => setTime(new Date());
-    const msToNextSecond = 1000 - new Date().getMilliseconds();
-    const syncTimeout = setTimeout(() => {
-      tick();
-      intervalId = setInterval(tick, 1000);
-    }, msToNextSecond);
-    return () => {
-      clearTimeout(syncTimeout);
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, []);
+
+    if (showSeconds) {
+      // Sync to the next second boundary
+      const msToNextSecond = 1000 - new Date().getMilliseconds();
+      const syncTimeout = setTimeout(() => {
+        tick();
+        intervalId = setInterval(tick, 1000);
+      }, msToNextSecond);
+      return () => {
+        clearTimeout(syncTimeout);
+        if (intervalId) clearInterval(intervalId);
+      };
+    } else {
+      // Colon blink is CSS-only — only tick when minutes change
+      const now = new Date();
+      const msToNextMinute = (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
+      const syncTimeout = setTimeout(() => {
+        tick();
+        intervalId = setInterval(tick, 60000);
+      }, msToNextMinute);
+      return () => {
+        clearTimeout(syncTimeout);
+        if (intervalId) clearInterval(intervalId);
+      };
+    }
+  }, [showSeconds]);
 
   let hours = time.getHours();
   const minutes = time.getMinutes();
