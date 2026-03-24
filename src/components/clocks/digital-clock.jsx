@@ -38,8 +38,8 @@ const SegmentDigit = ({ digit }) => {
   );
 };
 
-const LcdColon = () => (
-  <div className="lcd-colon">
+const LcdColon = ({ blink = false }) => (
+  <div className={`lcd-colon${blink ? ' lcd-colon--blink' : ''}`}>
     <div className="lcd-colon-dot" />
     <div className="lcd-colon-dot" />
   </div>
@@ -102,7 +102,7 @@ const DigitalClock = ({ showSeconds = true, use12Hour = true, showWeather = fals
             <div className="lcd-digits">
               <SegmentDigit digit={h[0]} />
               <SegmentDigit digit={h[1]} />
-              <LcdColon />
+              <LcdColon blink={!showSeconds} />
               <SegmentDigit digit={m[0]} />
               <SegmentDigit digit={m[1]} />
               {showSeconds && (

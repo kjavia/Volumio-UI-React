@@ -5803,10 +5803,10 @@ input[type=range]::-moz-range-thumb:active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 28%;
+  gap: 1.5cqw;
   width: 1.5cqw;
   height: 100%;
-  padding: 15% 0;
+  padding: 2cqh 0;
 }
 
 .lcd-colon-dot {
@@ -5814,6 +5814,9 @@ input[type=range]::-moz-range-thumb:active {
   height: 0.8cqw;
   background: var(--color-primary);
   border-radius: 1px;
+}
+
+.lcd-colon--blink .lcd-colon-dot {
   animation: lcd-blink 1s step-start infinite;
 }
 
@@ -5868,6 +5871,7 @@ input[type=range]::-moz-range-thumb:active {
   position: relative;
   width: 11cqw;
   height: 18.7cqw;
+  filter: drop-shadow(2px 2px 0 rgba(var(--color-primary-rgb, 0, 180, 255), 0.5));
 }
 
 .seg {
