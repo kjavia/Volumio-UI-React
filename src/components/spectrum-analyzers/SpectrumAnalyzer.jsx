@@ -119,6 +119,7 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
           showScaleX: true,
           showBgColor: true,
           bgAlpha: 1,
+          showFPS: true,
           smoothing: 0.8,
           reflexRatio: 0.3,
           reflexAlpha: 0.4,
