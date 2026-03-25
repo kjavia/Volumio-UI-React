@@ -111,3 +111,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* ── Track menu button ───────────────────────────────────────────────── */
+.track-menu-btn {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+    opacity: 1;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.16);
+        color: var(--text-primary);
+        opacity: 1;
+    }
+}

@@ -1189,6 +1189,22 @@ code, pre {
   display: none;
 }
 
+/* ─── Link / Transparent Button ────────────────────────────────────────── */
+.btn-link {
+  background: transparent;
+  border-radius: 0;
+  color: var(--text-secondary);
+  min-height: unset;
+  padding: 0;
+}
+.btn-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+.btn-link:active {
+  background: rgba(255, 255, 255, 0.04);
+}
+
 /* ─── Secondary / White button ─────────────────────────────────────────── */
 .btn-secondary,
 .btn-white {
@@ -3528,26 +3544,27 @@ input[type=range]::-moz-range-thumb:active {
 .slider-track {
   position: relative;
   flex-grow: 1;
-  height: 4px;
+  height: 8px;
   background: var(--color-gray-700);
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
+  overflow: visible;
 }
 
 .slider-fill {
   height: 100%;
   background: var(--color-primary);
-  border-radius: 2px;
+  border-radius: 4px;
   position: relative;
 }
 
 .slider-cap {
   position: absolute;
-  right: -6px;
+  right: -10px;
   top: 50%;
   transform: translateY(-50%);
-  width: 12px;
-  height: 12px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--color-primary-light);
 }
@@ -3917,6 +3934,18 @@ input[type=range]::-moz-range-thumb:active {
   text-overflow: ellipsis;
 }
 
+/* ── Track menu button ───────────────────────────────────────────────── */
+.track-menu-btn {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 1;
+}
+.track-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--text-primary);
+  opacity: 1;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Flat Dark Theme
@@ -4268,18 +4297,17 @@ input[type=range]::-moz-range-thumb:active {
 .playlist-remove {
   flex-shrink: 0;
   text-decoration: none !important;
-  color: var(--color-gray-600);
-  opacity: 0;
-  transition: opacity 0.15s, color 0.15s;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
 }
 .playlist-remove .material-icons {
   font-size: 1.1rem;
 }
 
-.playlist-item:hover .playlist-remove {
-  opacity: 1;
-}
 .playlist-item:hover .playlist-remove:hover {
+  background: rgba(239, 68, 68, 0.18);
   color: var(--color-danger) !important;
 }
 
@@ -5442,12 +5470,28 @@ input[type=range]::-moz-range-thumb:active {
   color: var(--text-primary);
 }
 
+/* ── Toolbar ── */
+.dialog-toolbar {
+  border-bottom: 1px solid var(--border-light);
+  padding: 0.5rem 1rem;
+  flex-shrink: 0;
+}
+.dialog-toolbar .browse-search__input {
+  color: var(--text-secondary);
+  border-color: var(--border-light);
+  background: var(--list-item-bg);
+}
+.dialog-toolbar .browse-search__input:focus {
+  border-color: var(--color-primary);
+}
+.dialog-toolbar .browse-search__icon {
+  color: var(--text-secondary);
+}
+
 /* ── Body ── */
 .dialog-body {
   flex: 1 1 auto;
   overflow-y: auto;
-  padding: 1.25rem;
-  color: var(--text-secondary);
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: var(--leading-relaxed);
@@ -5709,6 +5753,26 @@ input[type=range]::-moz-range-thumb:active {
 }
 .modal-list-item:hover .material-icons {
   color: var(--color-primary-light);
+}
+
+/* ── Browse Tiles ── */
+.browse-tile {
+  color: var(--text-secondary);
+  background: transparent;
+}
+.browse-tile:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--color-primary);
+}
+.browse-tile:hover .browse-tile__icon,
+.browse-tile:hover .browse-tile__label {
+  color: var(--color-primary);
+}
+.browse-tile .browse-tile__icon {
+  color: var(--color-primary);
+}
+.browse-tile .browse-tile__label {
+  color: var(--text-secondary);
 }
 
 /* ── Digital LCD Clock — Flat Dark Theme ───────────────────────────────────

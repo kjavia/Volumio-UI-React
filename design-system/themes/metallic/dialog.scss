@@ -136,6 +136,37 @@
   }
 }
 
+/* ── Toolbar ─────────────────────────────────────────────────────────── */
+.dialog-toolbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 1rem;
+  flex-shrink: 0;
+
+  // Toolbar icon buttons should use bright text, not the dim base btn color
+  .btn-icon {
+    color: var(--text-light);
+
+    &.active {
+      color: var(--color-primary);
+    }
+  }
+
+  .browse-search__input {
+    color: var(--text-light);
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.20);
+
+    &:focus {
+      border-color: var(--color-primary);
+    }
+  }
+
+  .browse-search__icon {
+    color: var(--text-light);
+  }
+}
+
 /* ── Body ─────────────────────────────────────────────────────────────── */
 .dialog-body {
   flex: 1 1 auto;
@@ -402,4 +433,23 @@
   .dialog-title {
     font-size: 1rem;
   }
+}
+
+/* ── Browse Tiles ── */
+.browse-tile {
+    color: var(--text-secondary);
+    background: transparent;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--color-primary);
+    }
+
+    .browse-tile__icon {
+        color: var(--color-primary);
+    }
+
+    .browse-tile__label {
+        color: var(--text-secondary);
+    }
 }

@@ -31,8 +31,8 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
         </div>
       </div>
       <span
-        className="small text-white-50 ms-1 fw-bold text-center"
-        style={{ width: '30px', fontSize: '0.8rem' }}
+        className="ms-1 fw-bold text-end text-white pe-1"
+        style={{ width: '50px', fontSize: '1.25rem', lineHeight: 1 }}
       >
         {volume}
       </span>

@@ -3023,11 +3023,6 @@ input[type=range]::-webkit-slider-runnable-track {
   align-items: center;
   position: relative;
   margin: 0 auto;
-  /* Sunken frame */
-  border-top: 2px solid var(--win95-dark);
-  border-left: 2px solid var(--win95-dark);
-  border-bottom: 2px solid var(--win95-highlight);
-  border-right: 2px solid var(--win95-highlight);
 }
 
 /* ─── Track Info ───────────────────────────────────────────────────────── */
@@ -4855,24 +4850,24 @@ input[type=range]::-webkit-slider-runnable-track {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 3px 4px 3px 6px;
+  padding: 5px 6px 5px 10px;
   background: linear-gradient(90deg, var(--win95-titlebar), #1084d0);
   flex-shrink: 0;
   gap: 8px;
-  height: 22px;
+  height: 36px;
 }
 
 .dialog-title {
   margin: 0;
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   font-weight: 700;
   color: #ffffff;
   font-family: var(--font-label);
 }
 
 .dialog-close {
-  width: 16px;
-  height: 14px;
+  width: 24px;
+  height: 22px;
   padding: 0;
   display: flex;
   align-items: center;
@@ -4896,28 +4891,99 @@ input[type=range]::-webkit-slider-runnable-track {
   border-right: 1px solid var(--win95-highlight);
 }
 .dialog-close .material-icons {
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1;
 }
 
-.dialog-body {
-  padding: 12px;
-  overflow-y: auto;
-  flex: 1 1 auto;
+.dialog-toolbar {
+  border-bottom: 2px solid var(--win95-shadow);
+  padding: 4px 8px;
+  flex-shrink: 0;
+  background: var(--win95-face);
+}
+.dialog-toolbar .browse-search__input {
   color: var(--text-primary);
+  border: 2px inset var(--win95-shadow);
+  border-radius: 0;
+  background: white;
+}
+.dialog-toolbar .browse-search__input:focus {
+  border-color: var(--win95-titlebar);
+}
+.dialog-toolbar .browse-search__icon {
+  color: var(--text-primary);
+}
+
+.dialog-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
   font-family: var(--font-body);
   font-size: var(--text-sm);
   background: var(--win95-face);
 }
+.dialog-body::-webkit-scrollbar-track {
+  background-color: var(--win95-face);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Crect width='1' height='1' fill='%23ffffff'/%3E%3Crect width='1' height='1' x='1' y='1' fill='%23ffffff'/%3E%3C/svg%3E");
+  background-size: 2px 2px;
+}
 
 .dialog-footer {
   display: flex;
-  justify-content: flex-end;
-  gap: 6px;
-  padding: 8px 12px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  padding: 3px 4px;
   border-top: 1px solid var(--win95-shadow);
   background: var(--win95-face);
   flex-shrink: 0;
+}
+
+/* ── Album footer as Win95 status bar ── */
+.album-footer {
+  flex-wrap: nowrap;
+  gap: 4px;
+}
+
+.album-footer__chip {
+  padding: 2px 8px;
+  border-radius: 0;
+  font-size: var(--text-sm);
+  font-weight: normal;
+  white-space: nowrap;
+  background: transparent;
+  opacity: 1;
+  border-top: 1px solid var(--win95-shadow);
+  border-left: 1px solid var(--win95-shadow);
+  border-bottom: 1px solid var(--win95-highlight);
+  border-right: 1px solid var(--win95-highlight);
+}
+.album-footer__chip .material-icons {
+  display: none;
+}
+
+.album-footer__chip--format {
+  padding: 2px 6px;
+}
+
+.album-footer__format-logo {
+  filter: brightness(0);
+}
+
+/* ── Browse Tiles ── */
+.browse-tile {
+  color: var(--text-primary);
+  background: var(--win95-face);
+  border: 2px solid transparent;
+}
+.browse-tile:hover {
+  border-color: var(--win95-titlebar);
+  background: var(--win95-light);
+}
+.browse-tile .browse-tile__icon {
+  color: var(--win95-titlebar);
+}
+.browse-tile .browse-tile__label {
+  color: var(--text-primary);
 }
 
 /* ── Digital Clock — Windows 95 Theme ──────────────────────────────────────

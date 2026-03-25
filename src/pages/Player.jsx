@@ -21,6 +21,7 @@ import StreamInfo from '@/components/StreamInfo';
 import Playlist from '@/components/Playlist';
 import DisconnectedScreen from '@/components/DisconnectedScreen';
 import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
+import BrowseDialog from '@/components/BrowseDialog';
 import VUMeter from '@/components/vu-meters/VUMeter';
 
 const PLAYER_MAP = {
@@ -112,6 +113,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const [cycleIndex, setCycleIndex] = useState(null);
   const [showPlaylist, setShowPlaylist] = useState(false);
   const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
+  const [showBrowse, setShowBrowse] = useState(false);
   const touchTimer = useRef(null);
 
   // Pick a random player index on mount or when a new track starts
@@ -255,6 +257,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
                   onRepeat={toggleRepeat}
                   onAddToPlaylist={() => setShowAddToPlaylist(true)}
                   onShowPlaylist={() => setShowPlaylist(true)}
+                  onBrowse={() => setShowBrowse(true)}
                   isFavourite={isFavourite}
                   onToggleFavourite={toggleFavourite}
                 />
@@ -293,6 +296,12 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
           onPlay={playFromQueue}
           onRemove={removeFromQueue}
           host={VOLUMIO_BASE_URL}
+        />
+
+        {/* Browse Dialog */}
+        <BrowseDialog
+          open={showBrowse}
+          onClose={() => setShowBrowse(false)}
         />
 
         {/* Add to Playlist Dialog */}

@@ -12,6 +12,7 @@ const PlayerControls = ({
   onRepeat,
   onAddToPlaylist,
   onShowPlaylist,
+  onBrowse,
   isFavourite,
   onToggleFavourite,
 }) => {
@@ -69,6 +70,10 @@ const PlayerControls = ({
         <Button classNames="btn-icon btn-text" onClick={onShowPlaylist} label="Show Playlist">
           <span className="material-icons">queue_music</span>
         </Button>
+
+        <Button classNames="btn-icon btn-text" onClick={onBrowse} label="Browse">
+          <span className="material-icons">library_music</span>
+        </Button>
       </div>
     </div>
   );
@@ -85,6 +90,7 @@ PlayerControls.propTypes = {
   onRepeat: PropTypes.func,
   onAddToPlaylist: PropTypes.func,
   onShowPlaylist: PropTypes.func,
+  onBrowse: PropTypes.func,
   isFavourite: PropTypes.bool,
   onToggleFavourite: PropTypes.func,
 };

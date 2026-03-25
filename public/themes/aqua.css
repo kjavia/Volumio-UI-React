@@ -6119,6 +6119,61 @@ input[type=range]::-moz-range-thumb:active {
   transform: scale(0.96);
 }
 
+/* ── Toolbar ── */
+.dialog-toolbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: none;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
+  flex-shrink: 0;
+  background-color: #f0f0f0;
+  background-image: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0px, rgba(255, 255, 255, 0.6) 1px, transparent 1px, transparent 2px);
+  /* Round bottom corners when toolbar is the last visible element (no footer) */
+}
+.dialog-toolbar:last-child {
+  border-radius: 0 0 12px 12px;
+}
+.dialog-toolbar {
+  /* Dark pill icon-buttons on the light toolbar background */
+}
+.dialog-toolbar .btn-icon {
+  background: rgba(0, 0, 0, 0.75);
+  border-color: transparent;
+  box-shadow: none;
+  color: #ffffff;
+}
+.dialog-toolbar .btn-icon::after {
+  display: none;
+}
+.dialog-toolbar .btn-icon { /* remove Aqua gel-shine */ }
+.dialog-toolbar .btn-icon:hover {
+  background: rgba(0, 0, 0, 0.88);
+  border-color: transparent;
+  box-shadow: none;
+}
+.dialog-toolbar .btn-icon.active {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: none;
+}
+.dialog-toolbar {
+  /* White inset search field on light background */
+}
+.dialog-toolbar .browse-search__input {
+  color: var(--text-primary);
+  border-color: rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+.dialog-toolbar .browse-search__input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 100, 200, 0.2);
+}
+.dialog-toolbar .browse-search__icon {
+  color: var(--color-gray-500);
+}
+
 /* ── Body ── */
 .dialog-body {
   flex: 1 1 auto;
@@ -6162,6 +6217,20 @@ input[type=range]::-moz-range-thumb:active {
   /* Light gray with subtle gradient */
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 248, 248, 0.9) 100%);
   border-radius: 0 0 12px 12px;
+}
+
+/* Album footer chips — dark pill with white text to stand out on light footer */
+.album-footer__chip {
+  background: rgba(0, 0, 0, 0.72);
+  border-color: transparent;
+  color: #ffffff;
+}
+.album-footer__chip .material-icons {
+  opacity: 0.8;
+}
+
+.album-footer__format-logo {
+  filter: brightness(0) invert(1);
 }
 
 /* ── Dialog List Items ── */
@@ -6334,6 +6403,22 @@ input[type=range]::-moz-range-thumb:active {
     font-size: 1rem;
   }
 }
+/* ── Browse Tiles ── */
+.browse-tile {
+  color: var(--text-secondary);
+  background: transparent;
+}
+.browse-tile:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-primary);
+}
+.browse-tile .browse-tile__icon {
+  color: var(--color-primary);
+}
+.browse-tile .browse-tile__label {
+  color: var(--text-secondary);
+}
+
 /* ── Digital LCD Clock — Aqua / Brushed Aluminum Variant ───────────────────
  * Reference: retro LCD weather-station / radio clock aesthetic
  * Brushed-aluminum bezel + clean white LCD glass + navy segments + Aqua blue

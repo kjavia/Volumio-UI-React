@@ -112,9 +112,10 @@
 .playlist-remove {
   flex-shrink: 0;
   text-decoration: none !important;
-  color: var(--color-gray-600);
-  opacity: 0;
-  transition: opacity 0.15s, color 0.15s;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
 
   .material-icons {
     font-size: 1.1rem;
@@ -122,9 +123,8 @@
 }
 
 .playlist-item:hover .playlist-remove {
-  opacity: 1;
-
   &:hover {
+    background: rgba(239, 68, 68, 0.18);
     color: var(--color-danger) !important;
   }
 }
