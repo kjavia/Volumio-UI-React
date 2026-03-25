@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import AudioMotionAnalyzer from 'audiomotion-analyzer';
 
@@ -13,6 +13,7 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
   const audioRef = useRef(null);
   const analyzerRef = useRef(null);
   const touchTimer = useRef(null);
+  const retryTimer = useRef(null);
   const [enabled, setEnabled] = useState(false);
   // Initialize mode from prop (renamed to initialMode to clarify it's internal state now)
   const [currentMode, setCurrentMode] = useState(initialMode);
@@ -55,7 +56,27 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
     }
   };
 
-  const handleEnable = () => {
+  const handleStreamError = () => {
+    if (!enabled) return;
+
+    if (retryTimer.current) clearTimeout(retryTimer.current);
+
+    console.log('Stream disconnected, retrying in 1s...');
+    retryTimer.current = setTimeout(() => {
+      if (!enabled) return;
+
+      const audio = audioRef.current;
+      if (audio) {
+        // Append timestamp to force reload
+        const separator = streamUrl.includes('?') ? '&' : '?';
+        audio.src = `${streamUrl}${separator}t=${Date.now()}`;
+        audio.load();
+        audio.play().catch((e) => console.warn('Retry failed', e));
+      }
+    }, 1000);
+  };
+
+  const handleEnable = useCallback(() => {
     if (enabled) return;
 
     const audio = audioRef.current;
@@ -109,25 +130,41 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
       }
     }
 
+    const startPlayback = () => {
+      audio.play()
+        .then(() => {
+          onResumed?.();
+          setEnabled(true);
+        })
+        .catch((e) => {
+          console.warn('Autoplay prevented:', e);
+          // Don't setEnabled(true) so the overlay remains clickable
+        });
+    };
+
     // If the analyzer already exists (was previously stopped), just restart it
     if (analyzerRef.current) {
-      const entry = mediaSourceCache.get(audio);
-      // Resume synchronously — iOS won't allow it in a .then() callback
       if (entry?.ctx.state === 'suspended') entry.ctx.resume();
       analyzerRef.current.start?.();
-      audio.play().catch(() => {});
-      onResumed?.();
-      setEnabled(true);
+      startPlayback();
       return;
     }
 
-    audio.play().catch(() => {});
-    onResumed?.();
-    setEnabled(true);
-  };
+    startPlayback();
+  }, [enabled, gradient, currentMode, onResumed]);
+
+  // Attempt to auto-start on mount
+  useEffect(() => {
+    if (!stopped && !enabled) {
+      handleEnable();
+    }
+  }, [handleEnable, stopped, enabled]);
 
   // Stop animation when the stopped prop goes true
   useEffect(() => {
+    if (stopped) {
+      if (retryTimer.current) clearTimeout(retryTimer.current);
+    }
     if (stopped && enabled) {
       analyzerRef.current?.stop?.();
       audioRef.current?.pause();
@@ -167,37 +204,14 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
     >
       <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
 
-      {!enabled && (
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '6px',
-            background: 'rgba(0,0,0,0.55)',
-            color: 'rgba(255,255,255,0.6)',
-            fontSize: '0.78rem',
-            letterSpacing: '0.05em',
-            userSelect: 'none',
-            pointerEvents: 'none',
-          }}
-        >
-          <span className="material-icons" style={{ fontSize: '1.4rem', opacity: 0.7 }}>
-            graphic_eq
-          </span>
-          Click to enable visualization
-        </div>
-      )}
-
       <audio
         ref={audioRef}
         src={streamUrl}
         crossOrigin="anonymous"
         preload="none"
         style={{ display: 'none' }}
+        onEnded={handleStreamError}
+        onError={handleStreamError}
       />
     </div>
   );
