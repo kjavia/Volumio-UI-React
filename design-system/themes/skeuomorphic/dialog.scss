@@ -148,6 +148,11 @@
     border-color: rgba(255, 255, 255, 0.15);
     background: rgba(0, 0, 0, 0.25);
 
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+      opacity: 1;
+    }
+
     &:focus {
       border-color: var(--color-primary);
     }

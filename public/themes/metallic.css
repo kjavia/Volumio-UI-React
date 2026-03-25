@@ -2569,27 +2569,6 @@ h2 {
   color: var(--color-white);
 }
 
-.search-bar {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  padding: 6px 16px;
-  color: var(--text-light);
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 360px;
-  transition: background 0.15s, border-color 0.15s;
-}
-.search-bar:focus-within {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--glow-primary);
-  color: var(--color-white);
-}
-
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Dark Metallic / Black Chrome Theme
@@ -3671,6 +3650,12 @@ h2 {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
   padding: 0.5rem 1rem;
   flex-shrink: 0;
+}
+.dialog-toolbar .btn-icon {
+  color: var(--text-light);
+}
+.dialog-toolbar .btn-icon.active {
+  color: var(--color-primary);
 }
 .dialog-toolbar .browse-search__input {
   color: var(--text-light);

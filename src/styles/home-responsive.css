@@ -307,13 +307,14 @@ body,
   background: transparent;
   font-size: 1rem;
   width: 160px;
+  max-width: 300px;
   outline: none;
   transition: width 0.2s, border-color 0.15s;
   color: inherit;
 }
 
 .browse-search__input:focus {
-  width: 220px;
+  width: 300px;
   border-color: rgba(128, 128, 128, 0.7);
 }
 
@@ -386,6 +387,10 @@ body,
   padding: 0.25rem;
 }
 
+.browse-results-grid--large {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
 .browse-result-card {
   display: flex;
   flex-direction: column;
@@ -415,6 +420,40 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.browse-result-card__play {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s, transform 0.15s;
+  flex-shrink: 0;
+}
+
+.browse-result-card__play .material-icons {
+  font-size: 1.25rem !important;
+}
+
+.browse-result-card:hover .browse-result-card__play {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.browse-result-card__play:hover {
+  background: rgba(0, 0, 0, 0.85) !important;
 }
 
 .browse-result-card__art img {
@@ -436,19 +475,21 @@ body,
 }
 
 .browse-result-card__title {
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.3;
 }
 
 .browse-result-card__sub {
-  font-size: 0.75rem;
-  opacity: 0.6;
+  font-size: 0.72rem;
+  opacity: 0.55;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.3;
 }
 
 /* ── Browse Results — List ── */
@@ -609,6 +650,14 @@ body,
   margin: 4px 8px;
 }
 
+.track-menu__item--danger {
+  color: #f47174;
+}
+
+.track-menu__item--danger .material-icons {
+  opacity: 1;
+}
+
 /* Show menu button only on hover for card grid */
 .browse-result-card__menu {
   position: absolute;
@@ -692,4 +741,54 @@ body,
   text-transform: uppercase;
   letter-spacing: 0.05em;
   line-height: 1.2;
+}
+
+/* ── Album view footer ── */
+.album-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.album-footer__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.65rem 0.2rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--text-primary);
+  background: rgba(128, 128, 128, 0.12);
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  opacity: 0.85;
+}
+
+.album-footer__chip .material-icons {
+  font-size: 0.9rem !important;
+  opacity: 0.7;
+}
+
+/* Format chip — slightly taller to accommodate the SVG logo */
+.album-footer__chip--format {
+  padding: 0.15rem 0.55rem;
+}
+
+.album-footer__format-logo {
+  height: 16px;
+  width: auto;
+  display: block;
+  /* Inherit text colour so logo renders on any theme background */
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+}
+
+.album-footer__format-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }

@@ -18,10 +18,48 @@ const BROWSE_TILES = [
   { id: 'web-radio',     label: 'Web Radio',    icon: 'radio',         uri: 'radio' },
 ];
 
+// Formats total seconds into a human-readable duration string, e.g. "1h 23m" or "45m 12s"
+const formatTotalDuration = (totalSecs) => {
+  if (!totalSecs) return null;
+  const h = Math.floor(totalSecs / 3600);
+  const m = Math.floor((totalSecs % 3600) / 60);
+  const s = totalSecs % 60;
+  if (h > 0) return `${h}h ${m}m`;
+  if (m > 0) return `${m}m ${s}s`;
+  return `${s}s`;
+};
+
+// Maps a (lowercase) format name to its logo path
+const FORMAT_LOGO_MAP = {
+  flac: '/assets/logos/flac.svg',
+  mp3: '/assets/logos/mp3.svg',
+  wav: '/assets/logos/wav.svg',
+  aiff: '/assets/logos/aiff.svg',
+  aif: '/assets/logos/aiff.svg',
+  dsd: '/assets/logos/dsd.svg',
+  dsf: '/assets/logos/dsd.svg',
+  dff: '/assets/logos/dsd.svg',
+};
+
+// Known extensions we can recognise for the chip label
+const FORMAT_EXTS = new Set([
+  'flac', 'mp3', 'aac', 'wav', 'ogg', 'aiff', 'aif', 'alac', 'm4a',
+  'opus', 'wma', 'dsf', 'dff', 'ape', 'mpc',
+]);
+
+// Derives a lowercase format key from an item — prefers trackType, falls back to URI extension
+const itemFormat = (item) => {
+  const tt = item.trackType?.toLowerCase();
+  if (tt) return tt;
+  const ext = item.uri?.split('?')[0].split('.').pop().toLowerCase();
+  return (ext && FORMAT_EXTS.has(ext)) ? ext : null;
+};
+
 const BrowseDialog = ({ open, onClose }) => {
   const [viewMode, setViewMode] = useState('grid');
   const [search, setSearch] = useState('');
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [largeGrid, setLargeGrid] = useState(false);
   const [history, setHistory] = useState([]);
   const [currentNav, setCurrentNav] = useState(null);
 
@@ -30,6 +68,7 @@ const BrowseDialog = ({ open, onClose }) => {
   const { socket } = useSocket();
 
   const isFavouritesView = currentNav?.uri === 'favourites';
+  const isPlaylistsView = currentNav?.uri === 'playlists';
 
   const queueUris = useMemo(() => new Set((queue ?? []).map((q) => q.uri)), [queue]);
 
@@ -81,6 +120,70 @@ const BrowseDialog = ({ open, onClose }) => {
       )
     : browseItems;
 
+  // Album view: all items are songs (no search applied — use raw list)
+  const isAlbumView = !isLoading && !isError && browseItems.length > 0
+    && browseItems.every((i) => i.type === 'song');
+
+  // Album metadata derived from API info + items
+  const albumInfo = browseData?.info ?? null;
+  const albumArtist = albumInfo?.artist
+    || browseItems.find((i) => i.artist)?.artist
+    || null;
+  const albumYear = albumInfo?.year ?? null;
+  const trackCount = browseItems.length;
+  const totalDuration = browseItems.reduce((sum, i) => sum + (i.duration || 0), 0);
+
+  // Audio format: prefer trackType on items, fall back to URI extension.
+  // Collect unique formats and build one chip per format.
+  const uniqueFormats = [...new Set(browseItems.map(itemFormat).filter(Boolean))];
+
+  // Best quality sample (first item that has samplerate/bitdepth/bitrate data)
+  const qualitySample = browseItems.find((i) => i.samplerate || i.bitdepth || i.bitrate) ?? null;
+
+  const albumFooter = isAlbumView ? (
+    <div className="album-footer">
+      {albumArtist && (
+        <span className="album-footer__chip">
+          <span className="material-icons">person</span>
+          {albumArtist}
+        </span>
+      )}
+      <span className="album-footer__chip">
+        <span className="material-icons">music_note</span>
+        {trackCount} {trackCount === 1 ? 'track' : 'tracks'}
+      </span>
+      {totalDuration > 0 && (
+        <span className="album-footer__chip">
+          <span className="material-icons">schedule</span>
+          {formatTotalDuration(totalDuration)}
+        </span>
+      )}
+      {albumYear && (
+        <span className="album-footer__chip">
+          <span className="material-icons">calendar_today</span>
+          {albumYear}
+        </span>
+      )}
+      {uniqueFormats.map((fmt) => {
+        const logoSrc = FORMAT_LOGO_MAP[fmt];
+        return (
+          <span key={fmt} className="album-footer__chip album-footer__chip--format">
+            {logoSrc
+              ? <img src={logoSrc} alt={fmt} className="album-footer__format-logo" />
+              : <span className="album-footer__format-text">{fmt.toUpperCase()}</span>
+            }
+          </span>
+        );
+      })}
+      {qualitySample && (
+        <span className="album-footer__chip">
+          {[qualitySample.samplerate, qualitySample.bitdepth].filter(Boolean).join(' / ')
+            || qualitySample.bitrate}
+        </span>
+      )}
+    </div>
+  ) : null;
+
   const headerActions = (
     <button
       type="button"
@@ -122,6 +225,15 @@ const BrowseDialog = ({ open, onClose }) => {
         >
           <span className="material-icons">view_list</span>
         </Button>
+        {viewMode === 'grid' && (
+          <Button
+            classNames={`btn-icon${largeGrid ? ' active' : ''}`}
+            label={largeGrid ? 'Normal size' : 'Large tiles'}
+            onClick={() => setLargeGrid((v) => !v)}
+          >
+            <span className="material-icons">{largeGrid ? 'zoom_out' : 'zoom_in'}</span>
+          </Button>
+        )}
       </div>
       <div className="browse-toolbar__right">
         <div className="browse-search">
@@ -176,7 +288,9 @@ const BrowseDialog = ({ open, onClose }) => {
       );
     }
 
-    const containerClass = viewMode === 'grid' ? 'browse-results-grid' : 'browse-results-list';
+    const containerClass = viewMode === 'grid'
+      ? `browse-results-grid${largeGrid ? ' browse-results-grid--large' : ''}`
+      : 'browse-results-list';
     return (
       <div className={containerClass}>
         {isFavouritesView && (
@@ -193,6 +307,8 @@ const BrowseDialog = ({ open, onClose }) => {
             onNavigate={navigate}
             queueUris={queueUris}
             onFavouriteToggled={isFavouritesView ? refetchBrowse : undefined}
+            isPlaylistItem={isPlaylistsView}
+            onPlaylistDeleted={isPlaylistsView ? refetchBrowse : undefined}
           />
         ))}
       </div>
@@ -208,6 +324,7 @@ const BrowseDialog = ({ open, onClose }) => {
       className={isFullscreen ? 'browse-dialog--fullscreen' : undefined}
       headerActions={headerActions}
       toolbar={toolbar}
+      footer={albumFooter}
     >
       {currentNav ? renderBrowseResults() : renderHome()}
     </Dialog>

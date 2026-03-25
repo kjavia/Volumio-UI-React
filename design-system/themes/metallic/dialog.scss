@@ -143,6 +143,15 @@
   padding: 0.5rem 1rem;
   flex-shrink: 0;
 
+  // Toolbar icon buttons should use bright text, not the dim base btn color
+  .btn-icon {
+    color: var(--text-light);
+
+    &.active {
+      color: var(--color-primary);
+    }
+  }
+
   .browse-search__input {
     color: var(--text-light);
     border-color: rgba(255, 255, 255, 0.15);

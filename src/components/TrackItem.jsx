@@ -7,6 +7,7 @@ import useFavourites from '@/hooks/useFavourites';
 import { VOLUMIO_BASE_URL } from '@/config';
 
 const PLAYABLE_TYPES = new Set(['song', 'webradio', 'mywebradio', 'cuesong', 'remdisk']);
+const ALBUM_TYPES = new Set(['folder', 'album', 'artist', 'genre']);
 
 const albumartUrl = (url) => {
   if (!url) return null;
@@ -27,7 +28,7 @@ const albumartUrl = (url) => {
  * @param {Set}     queueUris    - Optional set of URIs currently in the queue,
  *                                 used to disable "Add to Queue" when already queued
  */
-const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavouriteToggled }) => {
+const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavouriteToggled, isPlaylistItem = false, onPlaylistDeleted }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPos, setMenuPos] = useState({ top: 0, left: 0 });
   const [addToPlaylistOpen, setAddToPlaylistOpen] = useState(false);
@@ -38,6 +39,8 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
   const { favouritesUris, addFavouriteOptimistic, removeFavouriteOptimistic } = useFavourites();
 
   const isPlayable = PLAYABLE_TYPES.has(item.type);
+  const isAlbumItem = ALBUM_TYPES.has(item.type);
+  const showMenu = isPlayable || isPlaylistItem || isAlbumItem;
   const isFavourite = item.uri ? favouritesUris.has(item.uri) : false;
   const isInQueue = queueUris ? queueUris.has(item.uri) : false;
 
@@ -126,6 +129,38 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
     setAddToPlaylistOpen(true);
   }, [closeMenu]);
 
+  const handlePlayPlaylist = useCallback((e) => {
+    e.stopPropagation();
+    socket?.emit('replaceAndPlay', trackPayload);
+    closeMenu();
+  }, [socket, trackPayload, closeMenu]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleAddPlaylistToQueue = useCallback((e) => {
+    e.stopPropagation();
+    socket?.emit('addPlaylistToQueue', { name: item.title });
+    closeMenu();
+  }, [socket, item.title, closeMenu]);
+
+  const handleClearAndPlayPlaylist = useCallback((e) => {
+    e.stopPropagation();
+    socket?.emit('clearQueue');
+    socket?.emit('replaceAndPlay', trackPayload);
+    closeMenu();
+  }, [socket, trackPayload, closeMenu]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleDeletePlaylist = useCallback((e) => {
+    e.stopPropagation();
+    socket?.emit('deletePlaylist', { name: item.title });
+    closeMenu();
+    onPlaylistDeleted?.();
+  }, [socket, item.title, closeMenu, onPlaylistDeleted]);
+
+  const handleUpdateFolder = useCallback((e) => {
+    e.stopPropagation();
+    socket?.emit('updateDb', item.uri);
+    closeMenu();
+  }, [socket, item.uri, closeMenu]);
+
   const handleItemClick = useCallback(() => {
     if (isPlayable) {
       socket?.emit('replaceAndPlay', trackPayload);
@@ -136,7 +171,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
 
   const artUrl = albumartUrl(item.albumart);
 
-  const menuPortal = menuOpen && createPortal(
+  const menuPortal = menuOpen && !isPlaylistItem && !isAlbumItem && createPortal(
     <div
       ref={menuRef}
       className="track-menu"
@@ -174,6 +209,66 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
     document.body
   );
 
+  const playlistMenuPortal = menuOpen && isPlaylistItem && createPortal(
+    <div
+      ref={menuRef}
+      className="track-menu"
+      style={{ position: 'fixed', top: menuPos.top, left: menuPos.left }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button className="track-menu__item" onClick={handlePlayPlaylist}>
+        <span className="material-icons">play_arrow</span>
+        Play
+      </button>
+      <button className="track-menu__item" onClick={handleAddPlaylistToQueue}>
+        <span className="material-icons">queue_music</span>
+        Add Playlist to Queue
+      </button>
+      <button className="track-menu__item" onClick={handleClearAndPlayPlaylist}>
+        <span className="material-icons">playlist_play</span>
+        Clear &amp; Play
+      </button>
+      <div className="track-menu__separator" />
+      <button className="track-menu__item track-menu__item--danger" onClick={handleDeletePlaylist}>
+        <span className="material-icons">delete</span>
+        Delete Playlist
+      </button>
+    </div>,
+    document.body
+  );
+
+  const albumMenuPortal = menuOpen && isAlbumItem && createPortal(
+    <div
+      ref={menuRef}
+      className="track-menu"
+      style={{ position: 'fixed', top: menuPos.top, left: menuPos.left }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button className="track-menu__item" onClick={handlePlay}>
+        <span className="material-icons">play_arrow</span>
+        Play
+      </button>
+      <button className="track-menu__item" onClick={handleAddToQueue}>
+        <span className="material-icons">queue_music</span>
+        Add to Queue
+      </button>
+      <button className="track-menu__item" onClick={handleClearAndPlay}>
+        <span className="material-icons">playlist_play</span>
+        Clear &amp; Play
+      </button>
+      <div className="track-menu__separator" />
+      <button className="track-menu__item" onClick={handleOpenAddToPlaylist}>
+        <span className="material-icons">playlist_add</span>
+        Add to Playlist
+      </button>
+      <button className="track-menu__item" onClick={handleUpdateFolder}>
+        <span className="material-icons">refresh</span>
+        Update Folder
+      </button>
+    </div>,
+    document.body
+  );
+
   const menuBtn = (
     <button
       ref={btnRef}
@@ -198,8 +293,16 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
               ? <img src={artUrl} alt="" loading="lazy" />
               : <span className="material-icons">music_note</span>
             }
+            <button
+              className="browse-result-card__play"
+              type="button"
+              aria-label="Play"
+              onClick={(e) => { e.stopPropagation(); socket?.emit('replaceAndPlay', trackPayload); }}
+            >
+              <span className="material-icons">play_arrow</span>
+            </button>
           </div>
-          {isPlayable && (
+          {showMenu && (
             <div
               className="browse-result-card__menu"
               onClick={(e) => e.stopPropagation()}
@@ -209,10 +312,12 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
           )}
           <div className="browse-result-card__info">
             <span className="browse-result-card__title">{item.title}</span>
-            {item.artist && <span className="browse-result-card__sub">{item.artist}</span>}
+            <span className="browse-result-card__sub">{item.artist || '\u00a0'}</span>
           </div>
         </div>
         {menuPortal}
+        {playlistMenuPortal}
+        {albumMenuPortal}
         {addToPlaylistOpen && (
           <AddToPlaylistDialog
             open={addToPlaylistOpen}
@@ -248,7 +353,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
             </span>
           )}
         </div>
-        {isPlayable ? (
+        {showMenu ? (
           <div onClick={(e) => e.stopPropagation()}>
             {menuBtn}
           </div>
@@ -257,6 +362,8 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
         )}
       </div>
       {menuPortal}
+      {playlistMenuPortal}
+      {albumMenuPortal}
       {addToPlaylistOpen && (
         <AddToPlaylistDialog
           open={addToPlaylistOpen}
@@ -282,6 +389,8 @@ TrackItem.propTypes = {
   onNavigate: PropTypes.func,
   queueUris: PropTypes.instanceOf(Set),
   onFavouriteToggled: PropTypes.func,
+  isPlaylistItem: PropTypes.bool,
+  onPlaylistDeleted: PropTypes.func,
 };
 
 export default TrackItem;
