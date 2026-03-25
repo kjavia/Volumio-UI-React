@@ -27,7 +27,7 @@ const albumartUrl = (url) => {
  * @param {Set}     queueUris    - Optional set of URIs currently in the queue,
  *                                 used to disable "Add to Queue" when already queued
  */
-const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris }) => {
+const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavouriteToggled }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPos, setMenuPos] = useState({ top: 0, left: 0 });
   const [addToPlaylistOpen, setAddToPlaylistOpen] = useState(false);
@@ -116,8 +116,9 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris }) => {
       addFavouriteOptimistic(item.uri);
       socket?.emit('addToFavourites', trackPayload);
     }
+    onFavouriteToggled?.();
     closeMenu();
-  }, [socket, item.uri, item.service, trackPayload, isFavourite, addFavouriteOptimistic, removeFavouriteOptimistic, closeMenu]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [socket, item.uri, item.service, trackPayload, isFavourite, addFavouriteOptimistic, removeFavouriteOptimistic, onFavouriteToggled, closeMenu]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleOpenAddToPlaylist = useCallback((e) => {
     e.stopPropagation();
@@ -280,6 +281,7 @@ TrackItem.propTypes = {
   viewMode: PropTypes.oneOf(['grid', 'list']),
   onNavigate: PropTypes.func,
   queueUris: PropTypes.instanceOf(Set),
+  onFavouriteToggled: PropTypes.func,
 };
 
 export default TrackItem;

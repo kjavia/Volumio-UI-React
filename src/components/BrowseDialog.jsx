@@ -25,7 +25,7 @@ const BrowseDialog = ({ open, onClose }) => {
   const [history, setHistory] = useState([]);
   const [currentNav, setCurrentNav] = useState(null);
 
-  const { data: browseData, isLoading, isError } = useBrowse(currentNav?.uri ?? null);
+  const { data: browseData, isLoading, isError, refetch: refetchBrowse } = useBrowse(currentNav?.uri ?? null);
   const { queue } = useVolumioStatus();
   const { socket } = useSocket();
 
@@ -192,6 +192,7 @@ const BrowseDialog = ({ open, onClose }) => {
             viewMode={viewMode}
             onNavigate={navigate}
             queueUris={queueUris}
+            onFavouriteToggled={isFavouritesView ? refetchBrowse : undefined}
           />
         ))}
       </div>
