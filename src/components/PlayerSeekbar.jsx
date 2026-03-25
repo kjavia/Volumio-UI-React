@@ -23,12 +23,12 @@ const PlayerSeekbar = ({ readOnly }) => {
   return (
     <div className={`slider-container px-2 px-md-3 ${readOnly ? 'read-only' : ''}`}>
       <span
-        className="time-label text-end text-white-50"
-        style={{ fontSize: '0.75rem', width: '35px' }}
+        className="time-label text-end text-white fw-bold"
+        style={{ fontSize: '1.2rem', width: '75px', lineHeight: 1 }}
       >
         {formatTime(currentSeconds)}
       </span>
-      <div className="slider-track position-relative flex-grow-1 mx-2">
+      <div className="slider-track position-relative flex-grow-1 mx-3">
         {!readOnly && (
           <input
             type="range"
@@ -45,8 +45,8 @@ const PlayerSeekbar = ({ readOnly }) => {
         </div>
       </div>
       <span
-        className="time-label text-start text-white-50"
-        style={{ fontSize: '0.75rem', width: '35px' }}
+        className="time-label text-start text-white fw-bold"
+        style={{ fontSize: '1.2rem', width: '75px', lineHeight: 1 }}
       >
         {formatTime(durationSeconds)}
       </span>

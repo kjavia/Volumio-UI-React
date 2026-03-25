@@ -6127,16 +6127,14 @@ input[type=range]::-moz-range-thumb:active {
   padding: 0.5rem 1rem;
   flex-shrink: 0;
   background-color: #f0f0f0;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.6) 0px,
-    rgba(255, 255, 255, 0.6) 1px,
-    transparent 1px,
-    transparent 2px
-  );
+  background-image: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0px, rgba(255, 255, 255, 0.6) 1px, transparent 1px, transparent 2px);
+  /* Round bottom corners when toolbar is the last visible element (no footer) */
 }
 .dialog-toolbar:last-child {
   border-radius: 0 0 12px 12px;
+}
+.dialog-toolbar {
+  /* Dark pill icon-buttons on the light toolbar background */
 }
 .dialog-toolbar .btn-icon {
   background: rgba(0, 0, 0, 0.75);
@@ -6147,6 +6145,7 @@ input[type=range]::-moz-range-thumb:active {
 .dialog-toolbar .btn-icon::after {
   display: none;
 }
+.dialog-toolbar .btn-icon { /* remove Aqua gel-shine */ }
 .dialog-toolbar .btn-icon:hover {
   background: rgba(0, 0, 0, 0.88);
   border-color: transparent;
@@ -6157,6 +6156,9 @@ input[type=range]::-moz-range-thumb:active {
   color: #ffffff;
   border-color: transparent;
   box-shadow: none;
+}
+.dialog-toolbar {
+  /* White inset search field on light background */
 }
 .dialog-toolbar .browse-search__input {
   color: var(--text-primary);
@@ -6216,6 +6218,7 @@ input[type=range]::-moz-range-thumb:active {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 248, 248, 0.9) 100%);
   border-radius: 0 0 12px 12px;
 }
+
 /* Album footer chips — dark pill with white text to stand out on light footer */
 .album-footer__chip {
   background: rgba(0, 0, 0, 0.72);
@@ -6225,9 +6228,12 @@ input[type=range]::-moz-range-thumb:active {
 .album-footer__chip .material-icons {
   opacity: 0.8;
 }
+
 .album-footer__format-logo {
   filter: brightness(0) invert(1);
 }
+
+/* ── Dialog List Items ── */
 .dialog-list-item {
   position: relative;
   display: flex;

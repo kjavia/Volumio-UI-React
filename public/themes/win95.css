@@ -4937,11 +4937,13 @@ input[type=range]::-webkit-slider-runnable-track {
   background: var(--win95-face);
   flex-shrink: 0;
 }
+
 /* ── Album footer as Win95 status bar ── */
 .album-footer {
   flex-wrap: nowrap;
   gap: 4px;
 }
+
 .album-footer__chip {
   padding: 2px 8px;
   border-radius: 0;
@@ -4950,17 +4952,19 @@ input[type=range]::-webkit-slider-runnable-track {
   white-space: nowrap;
   background: transparent;
   opacity: 1;
-  border-top:    1px solid var(--win95-shadow);
-  border-left:   1px solid var(--win95-shadow);
+  border-top: 1px solid var(--win95-shadow);
+  border-left: 1px solid var(--win95-shadow);
   border-bottom: 1px solid var(--win95-highlight);
-  border-right:  1px solid var(--win95-highlight);
+  border-right: 1px solid var(--win95-highlight);
 }
 .album-footer__chip .material-icons {
   display: none;
 }
+
 .album-footer__chip--format {
   padding: 2px 6px;
 }
+
 .album-footer__format-logo {
   filter: brightness(0);
 }
