@@ -756,7 +756,8 @@ body,
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 0.2rem 0.65rem 0.2rem 0.45rem;
+  height: 24px;
+  padding: 0 0.65rem 0 0.45rem;
   border-radius: 999px;
   font-size: 0.78rem;
   font-weight: 500;
@@ -772,16 +773,14 @@ body,
   opacity: 0.7;
 }
 
-/* Format chip — slightly taller to accommodate the SVG logo */
 .album-footer__chip--format {
-  padding: 0.15rem 0.55rem;
+  padding: 0 0.55rem;
 }
 
 .album-footer__format-logo {
-  height: 16px;
+  height: 14px;
   width: auto;
   display: block;
-  /* Inherit text colour so logo renders on any theme background */
   filter: brightness(0) invert(1);
   opacity: 0.75;
 }
