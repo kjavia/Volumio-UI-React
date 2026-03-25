@@ -50,6 +50,24 @@
     display: none;
 }
 
+/* ─── Link / Transparent Button ────────────────────────────────────────── */
+.btn-link {
+    background: transparent;
+    border-radius: 0;
+    color: var(--text-secondary);
+    min-height: unset;
+    padding: 0;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text-primary);
+    }
+
+    &:active {
+        background: rgba(255, 255, 255, 0.04);
+    }
+}
+
 /* ─── Secondary / White button ─────────────────────────────────────────── */
 .btn-secondary,
 .btn-white {

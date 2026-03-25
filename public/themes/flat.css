@@ -1189,6 +1189,22 @@ code, pre {
   display: none;
 }
 
+/* ─── Link / Transparent Button ────────────────────────────────────────── */
+.btn-link {
+  background: transparent;
+  border-radius: 0;
+  color: var(--text-secondary);
+  min-height: unset;
+  padding: 0;
+}
+.btn-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+.btn-link:active {
+  background: rgba(255, 255, 255, 0.04);
+}
+
 /* ─── Secondary / White button ─────────────────────────────────────────── */
 .btn-secondary,
 .btn-white {
@@ -3917,6 +3933,18 @@ input[type=range]::-moz-range-thumb:active {
   text-overflow: ellipsis;
 }
 
+/* ── Track menu button ───────────────────────────────────────────────── */
+.track-menu-btn {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 1;
+}
+.track-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--text-primary);
+  opacity: 1;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Flat Dark Theme
@@ -4268,18 +4296,17 @@ input[type=range]::-moz-range-thumb:active {
 .playlist-remove {
   flex-shrink: 0;
   text-decoration: none !important;
-  color: var(--color-gray-600);
-  opacity: 0;
-  transition: opacity 0.15s, color 0.15s;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
 }
 .playlist-remove .material-icons {
   font-size: 1.1rem;
 }
 
-.playlist-item:hover .playlist-remove {
-  opacity: 1;
-}
 .playlist-item:hover .playlist-remove:hover {
+  background: rgba(239, 68, 68, 0.18);
   color: var(--color-danger) !important;
 }
 
@@ -5462,6 +5489,8 @@ input[type=range]::-moz-range-thumb:active {
 
 /* ── Body ── */
 .dialog-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: var(--leading-relaxed);
