@@ -5442,12 +5442,26 @@ input[type=range]::-moz-range-thumb:active {
   color: var(--text-primary);
 }
 
+/* ── Toolbar ── */
+.dialog-toolbar {
+  border-bottom: 1px solid var(--border-light);
+  padding: 0.5rem 1rem;
+  flex-shrink: 0;
+}
+.dialog-toolbar .browse-search__input {
+  color: var(--text-secondary);
+  border-color: var(--border-light);
+  background: var(--list-item-bg);
+}
+.dialog-toolbar .browse-search__input:focus {
+  border-color: var(--color-primary);
+}
+.dialog-toolbar .browse-search__icon {
+  color: var(--text-secondary);
+}
+
 /* ── Body ── */
 .dialog-body {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  padding: 1.25rem;
-  color: var(--text-secondary);
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: var(--leading-relaxed);

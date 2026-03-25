@@ -45,6 +45,8 @@ const Dialog = ({
   title,
   children,
   footer,
+  toolbar,
+  headerActions,
   size = 'md',
   closeOnBackdrop = true,
   closeOnEscape = true,
@@ -126,6 +128,9 @@ const Dialog = ({
                   {title}
                 </h5>
               )}
+              {headerActions && (
+                <div className="dialog-header__actions">{headerActions}</div>
+              )}
               {showCloseButton && (
                 <button
                   type="button"
@@ -138,6 +143,9 @@ const Dialog = ({
               )}
             </div>
           )}
+
+          {/* Toolbar */}
+          {toolbar && <div className="dialog-toolbar">{toolbar}</div>}
 
           {/* Body */}
           <div className="dialog-body">{children}</div>
@@ -156,6 +164,8 @@ Dialog.propTypes = {
   title: PropTypes.node,
   children: PropTypes.node,
   footer: PropTypes.node,
+  toolbar: PropTypes.node,
+  headerActions: PropTypes.node,
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', 'full']),
   closeOnBackdrop: PropTypes.bool,
   closeOnEscape: PropTypes.bool,

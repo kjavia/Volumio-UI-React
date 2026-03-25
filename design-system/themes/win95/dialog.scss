@@ -46,24 +46,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 3px 4px 3px 6px;
+  padding: 5px 6px 5px 10px;
   background: linear-gradient(90deg, var(--win95-titlebar), #1084d0);
   flex-shrink: 0;
   gap: 8px;
-  height: 22px;
+  height: 36px;
 }
 
 .dialog-title {
   margin: 0;
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   font-weight: 700;
   color: #ffffff;
   font-family: var(--font-label);
 }
 
 .dialog-close {
-  width: 16px;
-  height: 14px;
+  width: 24px;
+  height: 22px;
   padding: 0;
   display: flex;
   align-items: center;
@@ -88,16 +88,33 @@
   }
 
   .material-icons {
-    font-size: 12px;
+    font-size: 16px;
     line-height: 1;
+  }
+}
+.dialog-toolbar {
+  border-bottom: 2px solid var(--win95-shadow);
+  padding: 4px 8px;
+  flex-shrink: 0;
+  background: var(--win95-face);
+
+  .browse-search__input {
+    color: var(--text-primary);
+    border: 2px inset var(--win95-shadow);
+    border-radius: 0;
+    background: white;
+
+    &:focus {
+      border-color: var(--win95-titlebar);
+    }
+  }
+
+  .browse-search__icon {
+    color: var(--text-primary);
   }
 }
 
 .dialog-body {
-  padding: 12px;
-  overflow-y: auto;
-  flex: 1 1 auto;
-  color: var(--text-primary);
   font-family: var(--font-body);
   font-size: var(--text-sm);
   background: var(--win95-face);

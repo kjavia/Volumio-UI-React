@@ -232,6 +232,103 @@ body,
   }
 }
 
+/* ── Browse Fullscreen override ── */
+.browse-dialog--fullscreen {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+/* Remove container padding so the dialog truly fills the viewport */
+.dialog-container:has(.browse-dialog--fullscreen) {
+  padding: 0 !important;
+}
+
+.browse-dialog--fullscreen .browse-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.browse-dialog--fullscreen .browse-tile {
+  padding: 2.5rem 1rem;
+}
+
+.browse-dialog--fullscreen .browse-tile__icon {
+  font-size: 4rem !important;
+}
+
+.browse-dialog--fullscreen .browse-tile__label {
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .browse-dialog--fullscreen .browse-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Browse Toolbar ── */
+.browse-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  flex-wrap: wrap;
+}
+
+.browse-toolbar__left,
+.browse-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.browse-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.browse-search__icon {
+  position: absolute;
+  left: 0.5rem;
+  font-size: 1.1rem !important;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.browse-search__input {
+  padding: 0.3rem 0.75rem 0.3rem 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(128, 128, 128, 0.35);
+  background: transparent;
+  font-size: 1rem;
+  width: 160px;
+  outline: none;
+  transition: width 0.2s, border-color 0.15s;
+  color: inherit;
+}
+
+.browse-search__input:focus {
+  width: 220px;
+  border-color: rgba(128, 128, 128, 0.7);
+}
+
+.browse-search__input::placeholder {
+  opacity: 0.5;
+}
+
+.dialog-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+
 /* ── Browse Dialog Grid ── */
 .browse-grid {
   display: grid;

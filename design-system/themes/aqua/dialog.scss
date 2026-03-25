@@ -135,12 +135,30 @@
   }
 }
 
+/* ── Toolbar ── */
+.dialog-toolbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 1rem;
+  flex-shrink: 0;
+
+  .browse-search__input {
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.20);
+    background: rgba(0, 0, 0, 0.20);
+
+    &:focus {
+      border-color: var(--color-primary);
+    }
+  }
+
+  .browse-search__icon {
+    color: var(--text-primary);
+  }
+}
+
 /* ── Body ── */
 .dialog-body {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  padding: 1.25rem;
-  color: var(--text-primary);
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: 1.6;
