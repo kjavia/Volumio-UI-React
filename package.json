@@ -7,8 +7,8 @@
     "dev": "run-p build:themes:watch dev:vite",
     "dev:vite": "vite",
     "build": "npm run build:themes && vite build",
-    "build:themes": "sass --load-path=node_modules design-system/themes/metallic/index.scss:public/themes/metallic.css design-system/themes/skeuomorphic/index.scss:public/themes/skeuomorphic.css design-system/themes/aqua/index.scss:public/themes/aqua.css design-system/themes/flat/index.scss:public/themes/flat.css design-system/themes/win95/index.scss:public/themes/win95.css",
-    "build:themes:watch": "sass --load-path=node_modules --watch design-system/themes/metallic/index.scss:public/themes/metallic.css design-system/themes/skeuomorphic/index.scss:public/themes/skeuomorphic.css design-system/themes/aqua/index.scss:public/themes/aqua.css design-system/themes/flat/index.scss:public/themes/flat.css design-system/themes/win95/index.scss:public/themes/win95.css",
+    "build:themes": "node scripts/build-themes.js",
+    "build:themes:watch": "node scripts/build-themes.js --watch",
     "lint": "eslint .",
     "preview": "vite preview",
     "build-and-push": "node scripts/build-and-push.js"

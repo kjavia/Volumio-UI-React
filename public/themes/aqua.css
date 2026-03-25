@@ -6334,6 +6334,22 @@ input[type=range]::-moz-range-thumb:active {
     font-size: 1rem;
   }
 }
+/* ── Browse Tiles ── */
+.browse-tile {
+  color: var(--text-secondary);
+  background: transparent;
+}
+.browse-tile:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-primary);
+}
+.browse-tile .browse-tile__icon {
+  color: var(--color-primary);
+}
+.browse-tile .browse-tile__label {
+  color: var(--text-secondary);
+}
+
 /* ── Digital LCD Clock — Aqua / Brushed Aluminum Variant ───────────────────
  * Reference: retro LCD weather-station / radio clock aesthetic
  * Brushed-aluminum bezel + clean white LCD glass + navy segments + Aqua blue

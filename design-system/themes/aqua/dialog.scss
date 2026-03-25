@@ -405,3 +405,22 @@
     font-size: 1rem;
   }
 }
+
+/* ── Browse Tiles ── */
+.browse-tile {
+    color: var(--text-secondary);
+    background: transparent;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--color-primary);
+    }
+
+    .browse-tile__icon {
+        color: var(--color-primary);
+    }
+
+    .browse-tile__label {
+        color: var(--text-secondary);
+    }
+}

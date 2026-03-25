@@ -112,3 +112,23 @@
   background: var(--win95-face);
   flex-shrink: 0;
 }
+
+/* ── Browse Tiles ── */
+.browse-tile {
+    color: var(--text-primary);
+    background: var(--win95-face);
+    border: 2px solid transparent;
+
+    &:hover {
+        border-color: var(--win95-titlebar);
+        background: var(--win95-light);
+    }
+
+    .browse-tile__icon {
+        color: var(--win95-titlebar);
+    }
+
+    .browse-tile__label {
+        color: var(--text-primary);
+    }
+}

@@ -3023,11 +3023,6 @@ input[type=range]::-webkit-slider-runnable-track {
   align-items: center;
   position: relative;
   margin: 0 auto;
-  /* Sunken frame */
-  border-top: 2px solid var(--win95-dark);
-  border-left: 2px solid var(--win95-dark);
-  border-bottom: 2px solid var(--win95-highlight);
-  border-right: 2px solid var(--win95-highlight);
 }
 
 /* ─── Track Info ───────────────────────────────────────────────────────── */
@@ -4918,6 +4913,23 @@ input[type=range]::-webkit-slider-runnable-track {
   border-top: 1px solid var(--win95-shadow);
   background: var(--win95-face);
   flex-shrink: 0;
+}
+
+/* ── Browse Tiles ── */
+.browse-tile {
+  color: var(--text-primary);
+  background: var(--win95-face);
+  border: 2px solid transparent;
+}
+.browse-tile:hover {
+  border-color: var(--win95-titlebar);
+  background: var(--win95-light);
+}
+.browse-tile .browse-tile__icon {
+  color: var(--win95-titlebar);
+}
+.browse-tile .browse-tile__label {
+  color: var(--text-primary);
 }
 
 /* ── Digital Clock — Windows 95 Theme ──────────────────────────────────────

@@ -5711,6 +5711,26 @@ input[type=range]::-moz-range-thumb:active {
   color: var(--color-primary-light);
 }
 
+/* ── Browse Tiles ── */
+.browse-tile {
+  color: var(--text-secondary);
+  background: transparent;
+}
+.browse-tile:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--color-primary);
+}
+.browse-tile:hover .browse-tile__icon,
+.browse-tile:hover .browse-tile__label {
+  color: var(--color-primary);
+}
+.browse-tile .browse-tile__icon {
+  color: var(--color-primary);
+}
+.browse-tile .browse-tile__label {
+  color: var(--text-secondary);
+}
+
 /* ── Digital LCD Clock — Flat Dark Theme ───────────────────────────────────
  * Deep navy LCD panel, indigo segments, minimal flat bezels, Inter / JetBrains Mono
  * ──────────────────────────────────────────────────────────────────────── */
