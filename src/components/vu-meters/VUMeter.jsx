@@ -62,6 +62,7 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
   const analyserRRef = useRef(null);
   const animFrameRef = useRef(null);
   const smoothedRef = useRef({ left: MIN_DB, right: MIN_DB });
+  const retryTimer = useRef(null);
   const [enabled, setEnabled] = useState(false);
 
   // --------------------------------------------------------------------------
@@ -124,8 +125,29 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
       analyserRRef.current = analyserR;
     }
 
-    audio.play().catch(() => {});
+    audio.play().catch((e) => console.warn('Play failed', e));
   }, []);
+
+  const handleStreamError = useCallback(() => {
+    if (!enabled) return;
+
+    if (retryTimer.current) clearTimeout(retryTimer.current);
+
+    console.log('Stream disconnected, retrying in 1s...');
+    retryTimer.current = setTimeout(() => {
+      // If we got disabled in the meantime, abort
+      if (!enabled) return;
+
+      const audio = audioRef.current;
+      if (audio) {
+        // Append timestamp to force reload
+        const separator = streamUrl.includes('?') ? '&' : '?';
+        audio.src = `${streamUrl}${separator}t=${Date.now()}`;
+        audio.load();
+        audio.play().catch((e) => console.warn('Retry failed', e));
+      }
+    }, 1000);
+  }, [enabled, streamUrl]);
 
   // --------------------------------------------------------------------------
   // Animation loop — runs every rAF, updates needle DOM directly (no setState)
@@ -229,6 +251,9 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
 
   // Stop animation when the stopped prop goes true
   useEffect(() => {
+    if (stopped) {
+      if (retryTimer.current) clearTimeout(retryTimer.current);
+    }
     if (stopped && enabled) {
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
@@ -309,6 +334,8 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
         crossOrigin="anonymous"
         preload="none"
         style={{ display: 'none' }}
+        onEnded={handleStreamError}
+        onError={handleStreamError}
       />
     </div>
   );

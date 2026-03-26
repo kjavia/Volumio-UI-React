@@ -13,6 +13,7 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
   const audioRef = useRef(null);
   const analyzerRef = useRef(null);
   const touchTimer = useRef(null);
+  const retryTimer = useRef(null);
   const [enabled, setEnabled] = useState(false);
   // Initialize mode from prop (renamed to initialMode to clarify it's internal state now)
   const [currentMode, setCurrentMode] = useState(initialMode);
@@ -53,6 +54,26 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
       clearTimeout(touchTimer.current);
       touchTimer.current = null;
     }
+  };
+
+  const handleStreamError = () => {
+    if (!enabled) return;
+
+    if (retryTimer.current) clearTimeout(retryTimer.current);
+
+    console.log('Stream disconnected, retrying in 1s...');
+    retryTimer.current = setTimeout(() => {
+      if (!enabled) return;
+
+      const audio = audioRef.current;
+      if (audio) {
+        // Append timestamp to force reload
+        const separator = streamUrl.includes('?') ? '&' : '?';
+        audio.src = `${streamUrl}${separator}t=${Date.now()}`;
+        audio.load();
+        audio.play().catch((e) => console.warn('Retry failed', e));
+      }
+    }, 1000);
   };
 
   const handleEnable = () => {
@@ -128,6 +149,9 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
 
   // Stop animation when the stopped prop goes true
   useEffect(() => {
+    if (stopped) {
+      if (retryTimer.current) clearTimeout(retryTimer.current);
+    }
     if (stopped && enabled) {
       analyzerRef.current?.stop?.();
       audioRef.current?.pause();
@@ -198,6 +222,8 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
         crossOrigin="anonymous"
         preload="none"
         style={{ display: 'none' }}
+        onEnded={handleStreamError}
+        onError={handleStreamError}
       />
     </div>
   );
