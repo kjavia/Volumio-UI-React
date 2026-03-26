@@ -61,7 +61,6 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
   const analyserLRef = useRef(null);
   const analyserRRef = useRef(null);
   const animFrameRef = useRef(null);
-  const retryTimer = useRef(null);
   const smoothedRef = useRef({ left: MIN_DB, right: MIN_DB });
   const [enabled, setEnabled] = useState(false);
 
@@ -125,7 +124,7 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
       analyserRRef.current = analyserR;
     }
 
-    return audio.play();
+    audio.play().catch(() => {});
   }, []);
 
   // --------------------------------------------------------------------------
@@ -220,62 +219,16 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
     display.style.setProperty('--needle-h',       `${heightPx}px`);
   }, []);
 
-  const handleStreamError = useCallback(() => {
-    if (!enabled) return;
-
-    if (retryTimer.current) clearTimeout(retryTimer.current);
-
-    console.log('Stream disconnected, retrying in 1s...');
-    retryTimer.current = setTimeout(() => {
-      if (!enabled) return;
-      const audio = audioRef.current;
-      if (audio) {
-        const separator = streamUrl.includes('?') ? '&' : '?';
-        audio.src = `${streamUrl}${separator}t=${Date.now()}`;
-        audio.load();
-        audio.play().catch((e) => console.warn('Retry failed', e));
-      }
-    }, 1000);
-  }, [enabled, streamUrl]);
-
   const handleEnable = useCallback(() => {
     if (enabled) return;
-
-    // setupAudio returns the play() promise as of my last edit
-    const playPromise = setupAudio();
-
-    if (playPromise) {
-      playPromise
-        .then(() => {
-          startAnimation();
-          onResumed?.();
-          setEnabled(true);
-        })
-        .catch((e) => {
-          console.warn('VUMeter autoplay prevented:', e);
-          // Do not set enabled=true so subsequent clicks can retry
-        });
-    } else {
-      // Fallback if setupAudio returns nothing (e.g. no audio ref)
-      startAnimation();
-      onResumed?.();
-      setEnabled(true);
-    }
+    setupAudio();
+    startAnimation();
+    onResumed?.();
+    setEnabled(true);
   }, [enabled, setupAudio, startAnimation, onResumed]);
-
-  // Attempt to auto-start on mount
-  useEffect(() => {
-    if (!stopped && !enabled) {
-      handleEnable();
-    }
-  }, [handleEnable, stopped, enabled]);
 
   // Stop animation when the stopped prop goes true
   useEffect(() => {
-    if (stopped) {
-      if (retryTimer.current) clearTimeout(retryTimer.current);
-    }
-
     if (stopped && enabled) {
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
@@ -343,14 +296,19 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
         <div ref={needleRRef} className="vu-meter__needle vu-meter__needle--right" />
       </div>
 
+      {!enabled && (
+        <div className="vu-meter__prompt">
+          <span className="material-icons">graphic_eq</span>
+          <span>Click to enable</span>
+        </div>
+      )}
+
       <audio
         ref={audioRef}
         src={streamUrl}
         crossOrigin="anonymous"
         preload="none"
         style={{ display: 'none' }}
-        onEnded={handleStreamError}
-        onError={handleStreamError}
       />
     </div>
   );
