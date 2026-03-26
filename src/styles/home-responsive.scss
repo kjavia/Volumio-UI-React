@@ -90,6 +90,12 @@ body,
     grid-template-areas:
       'player  controls'
       'spectrum spectrum';
+
+    &.no-viz {
+      grid-template-rows: 1fr;
+      grid-template-areas: 'player controls';
+      align-items: center;
+    }
   }
 
   .spectrum-panel {
@@ -103,11 +109,22 @@ body,
     grid-template-columns: 1fr 1fr 1fr; /* three equal columns */
     grid-template-rows: 1fr; /* single full-height row */
     grid-template-areas: 'player controls spectrum';
+
+    &.no-viz {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: 'player controls';
+
+      /* Let player be slightly bigger if we have more room */
+      .player-responsive {
+        --p-size: 80;
+      }
+    }
   }
 
   .spectrum-panel {
     display: flex;
   }
+
 
   /* On ultrawide (often short height), use less space (65%) to ensure whitespace */
   .player-responsive {

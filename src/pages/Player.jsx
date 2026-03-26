@@ -77,6 +77,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const playerType = pluginConfig?.playerType || 'radio';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
   const vizType = pluginConfig?.vizType || 'spectrum';
+  const showViz = vizType !== 'none';
 
   const {
     isConnected,
@@ -200,7 +201,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
         )}
 
         {/* Main Grid Layout */}
-        <div className="home-grid position-relative" style={{ zIndex: 1 }}>
+        <div className={`home-grid position-relative ${!showViz ? 'no-viz' : ''}`} style={{ zIndex: 1 }}>
           {/* PLAYER SECTION */}
           <div className="home-panel area-player">
             <div
@@ -277,13 +278,53 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
           </div>
 
           {/* VISUALIZATION SECTION */}
-          <div className="spectrum-panel area-spectrum" ref={vizContainerRef}>
-            {vizType === 'spectrum' && <SpectrumAnalyzer stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-            {vizType === 'vuMeter1' && <VUMeter variant={1} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-            {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-            {vizType === 'vuMeter3' && <VUMeter variant={3} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-            {vizType === 'vuMeter4' && <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-          </div>
+          {showViz && (
+            <div className="spectrum-panel area-spectrum" ref={vizContainerRef}>
+              {vizType === 'spectrum' && (
+                <SpectrumAnalyzer
+                  stopped={vizStopped}
+                  onResumed={onVizResumed}
+                  streamUrl={SPECTRUM_STREAM_URL}
+                />
+              )}
+              {vizType === 'vuMeter1' && (
+                <VUMeter
+                  variant={1}
+                  needleColor="#0d0d0d"
+                  stopped={vizStopped}
+                  onResumed={onVizResumed}
+                  streamUrl={SPECTRUM_STREAM_URL}
+                />
+              )}
+              {vizType === 'vuMeter2' && (
+                <VUMeter
+                  variant={2}
+                  needleColor="lightblue"
+                  stopped={vizStopped}
+                  onResumed={onVizResumed}
+                  streamUrl={SPECTRUM_STREAM_URL}
+                />
+              )}
+              {vizType === 'vuMeter3' && (
+                <VUMeter
+                  variant={3}
+                  needleColor="#0d0d0d"
+                  stopped={vizStopped}
+                  onResumed={onVizResumed}
+                  streamUrl={SPECTRUM_STREAM_URL}
+                />
+              )}
+              {vizType === 'vuMeter4' && (
+                <VUMeter
+                  variant={4}
+                  needleColor="silver"
+                  stopped={vizStopped}
+                  onResumed={onVizResumed}
+                  streamUrl={SPECTRUM_STREAM_URL}
+                />
+              )}
+            </div>
+          )}
         </div>
 
         {/* Playlist Slide Panel */}
