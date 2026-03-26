@@ -139,7 +139,7 @@ body,
    max-height caps it so on large screens track info stays near controls. ── */
 .controls-spacer {
   flex: 1 1 0;
-  max-height: clamp(8px, 4cqh, 40px);
+  max-height: clamp(8px, 1cqh, 40px);
 }
 
 /* ── Controls container: safe centering prevents top-clipping on overflow ── */
@@ -229,6 +229,33 @@ body,
   /* Hide album name to reclaim space */
   .album-name {
     display: none !important;
+  }
+}
+
+/* ── Mobile-Specific Tweaks (Portrait) ── */
+@media (max-width: 768px) {
+  /* Reduce track info padding/margins */
+  .cq-track-info {
+    margin-bottom: 2px !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Also tighten the gap in the controls container slightly for mobile */
+  .player-controls-container {
+    gap: clamp(2px, 4cqh, 16px) !important;
+  }
+}
+
+/* ── Typography Overrides for Mobile ── */
+.time-label {
+  font-size: 0.8rem !important; /* Default (desktop/tablet) */
+  width: 75px;
+}
+
+@media (max-width: 768px) {
+  .time-label {
+    font-size: 0.65rem !important;
+    width: 45px;
   }
 }
 

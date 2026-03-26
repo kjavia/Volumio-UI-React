@@ -264,7 +264,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               )}
 
               {!disableVolumeControl && showPlayerControls && (
-                <div className="volume-manager-wrap w-100 px-2 px-lg-4">
+                <div className="volume-manager-wrap w-100 px-5 px-lg-4">
                   <VolumeManager
                     volume={volume}
                     mute={mute}

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 
 const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => {
+  const getVolume = () => (mute ? 0 : volume || 0);
   return (
     <div
       className={`volume-manager d-flex align-items-center gap-2 gap-md-3 ${isOnFooter ? 'text-white' : 'text-white'}`}
@@ -12,30 +13,29 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
         label={mute ? 'Unmute' : 'Mute'}
       >
         <span className={`material-icons fs-5 fs-md-4 ${mute ? 'text-orange' : ''}`}>
-          {mute || volume === 0 ? 'volume_off' : volume < 50 ? 'volume_down' : 'volume_up'}
+          {getVolume() === 0 ? 'volume_off' : getVolume() < 50 ? 'volume_down' : 'volume_up'}
         </span>
       </Button>
 
-      <div className="slider-track position-relative flex-grow-1">
-        <input
-          type="range"
-          className="form-range position-absolute w-100 h-100 top-0 start-0 opacity-0 z-2"
-          min="0"
-          max="100"
-          value={volume || 0}
-          onChange={(e) => onVolumeChange(Number(e.target.value))}
-          style={{ cursor: 'pointer', margin: 0 }}
-        />
-        <div className="slider-fill position-relative" style={{ width: `${volume || 0}%` }}>
-          <div className="slider-cap"></div>
+      <div className="d-flex flex-column flex-grow-1">
+        <div className="slider-track position-relative w-100 mb-1">
+          <input
+            type="range"
+            className="form-range position-absolute w-100 h-100 top-0 start-0 opacity-0 z-2"
+            min="0"
+            max="100"
+            value={getVolume() || 0}
+            onChange={(e) => onVolumeChange(Number(e.target.value))}
+            style={{ cursor: 'pointer', margin: 0 }}
+          />
+          <div className="slider-fill position-relative" style={{ width: `${getVolume()}%` }}>
+            <div className="slider-cap"></div>
+          </div>
         </div>
       </div>
-      <span
-        className="ms-1 fw-bold text-end text-white pe-1"
-        style={{ width: '50px', fontSize: '1.25rem', lineHeight: 1 }}
-      >
-        {volume}
-      </span>
+        <div className="text-center text-white small opacity-75" style={{ fontSize: '0.75em' }}>
+          {getVolume()} / 100
+        </div>
     </div>
   );
 };

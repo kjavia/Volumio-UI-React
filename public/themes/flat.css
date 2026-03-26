@@ -2471,7 +2471,6 @@ input[type=range]::-moz-range-thumb:active {
   height: 4px;
   background: var(--color-gray-700);
   border-radius: 2px;
-  overflow: hidden;
 }
 
 .slider-fill {
@@ -3458,11 +3457,11 @@ input[type=range]::-moz-range-thumb:active {
 }
 
 .responsive-title {
-  font-size: clamp(1rem, 3.5cqw, 1.75rem);
+  font-size: clamp(1rem, 4.5cqw, 3rem);
 }
 
 .responsive-artist {
-  font-size: clamp(0.75rem, 2.2cqw, 1.1rem);
+  font-size: clamp(0.75rem, 3.5cqw, 2.5rem);
 }
 
 .responsive-album {
@@ -3570,14 +3569,8 @@ input[type=range]::-moz-range-thumb:active {
 }
 
 /* ─── Volume Slider ────────────────────────────────────────────────────── */
-.volume-slider {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.volume-slider .material-icons {
-  color: var(--text-secondary);
-  font-size: 20px;
+.volume-manager .slider-fill {
+  height: 8px;
 }
 
 /* ─── Player Controls Container ────────────────────────────────────────── */

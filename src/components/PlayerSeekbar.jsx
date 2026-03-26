@@ -24,7 +24,7 @@ const PlayerSeekbar = ({ readOnly }) => {
     <div className={`slider-container px-2 px-md-3 ${readOnly ? 'read-only' : ''}`}>
       <span
         className="time-label text-end text-white fw-bold"
-        style={{ fontSize: '1.2rem', width: '75px', lineHeight: 1 }}
+        style={{ lineHeight: 1 }}
       >
         {formatTime(currentSeconds)}
       </span>
@@ -46,7 +46,7 @@ const PlayerSeekbar = ({ readOnly }) => {
       </div>
       <span
         className="time-label text-start text-white fw-bold"
-        style={{ fontSize: '1.2rem', width: '75px', lineHeight: 1 }}
+        style={{ lineHeight: 1 }}
       >
         {formatTime(durationSeconds)}
       </span>

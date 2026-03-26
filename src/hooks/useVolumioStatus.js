@@ -143,7 +143,7 @@ const useVolumioStatus = () => {
   const toggleMute = () => {
     const newMute = !mute;
     setMute(newMute);
-    socket.emit(newMute ? 'mute' : 'unmute');
+    socket.emit(newMute ? 'mute' : 'unmute', '');
   };
 
   const removeFromQueue = (index) => {
