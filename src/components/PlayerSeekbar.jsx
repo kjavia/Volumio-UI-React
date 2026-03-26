@@ -21,14 +21,14 @@ const PlayerSeekbar = ({ readOnly }) => {
   const progressPercent = durationSeconds > 0 ? (currentSeconds / durationSeconds) * 100 : 0;
 
   return (
-    <div className={`slider-container px-2 px-md-3 ${readOnly ? 'read-only' : ''}`}>
+    <div className={`slider-container ${readOnly ? 'read-only' : ''}`}>
       <span
         className="time-label text-end text-white fw-bold"
         style={{ lineHeight: 1 }}
       >
         {formatTime(currentSeconds)}
       </span>
-      <div className="slider-track position-relative flex-grow-1 mx-3">
+      <div className="slider-track position-relative flex-grow-1">
         {!readOnly && (
           <input
             type="range"

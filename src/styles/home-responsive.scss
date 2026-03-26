@@ -94,7 +94,6 @@ body,
     &.no-viz {
       grid-template-rows: 1fr;
       grid-template-areas: 'player controls';
-      align-items: center;
     }
   }
 
@@ -115,7 +114,7 @@ body,
       grid-template-areas: 'player controls';
 
       /* Let player be slightly bigger if we have more room */
-      .player-responsive {
+       .player-responsive {
         --p-size: 80;
       }
     }
@@ -266,7 +265,9 @@ body,
 /* ── Typography Overrides for Mobile ── */
 .time-label {
   font-size: 0.8rem !important; /* Default (desktop/tablet) */
-  width: 75px;
+  width: auto;
+  white-space: nowrap;
+  padding: 0 0.5rem; /* Add some breathing room since we lost fixed width centering */
 }
 
 @media (max-width: 768px) {
