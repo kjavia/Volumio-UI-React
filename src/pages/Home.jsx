@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import FlipClock from '@/components/clocks/flip-clock';
 import DigitalClock from '@/components/clocks/digital-clock';
 import AnalogClock from '@/components/clocks/analog-clock';
+import IframeScreen from '@/components/IframeScreen';
 import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
 import Player from './Player';
@@ -157,6 +158,7 @@ const Home = () => {
     wallpaperShowWeather,
     slideshowInterval,
     analogClockShowDate,
+    externalUrl,
   } = useIdleScreen();
 
   // When the hook naturally clears idle (e.g. playback resumed), reset forcePlayer too
@@ -184,6 +186,8 @@ const Home = () => {
         slideshowInterval={slideshowInterval}
       />
     );
+  } else if (idleScreen === 'externalUrl') {
+    content = <IframeScreen url={externalUrl} />;
   } else {
     const weatherMode = WEATHER_MODE_MAP[idleScreen];
     if (weatherMode) {
