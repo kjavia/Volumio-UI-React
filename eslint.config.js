@@ -9,6 +9,7 @@ import reactQuery from '@tanstack/eslint-plugin-query';
 
 export default [
     { ignores: ['dist'] },
+    ...reactQuery.configs['flat/recommended'],
     {
         files: ['**/*.{js,jsx}'],
         languageOptions: {
@@ -25,7 +26,6 @@ export default [
             react,
             'react-hooks': reactHooks,
             'react-refresh': reactRefresh,
-            ...reactQuery.configs['flat/recommended'],
         },
         rules: {
             ...js.configs.recommended.rules,

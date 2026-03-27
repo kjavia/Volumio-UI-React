@@ -5,30 +5,40 @@ import AddToPlaylistDialog from './AddToPlaylistDialog';
 import { useSocket } from '@/contexts/SocketContext';
 import useFavourites from '@/hooks/useFavourites';
 import { VOLUMIO_BASE_URL } from '@/config';
+import { CgPiano } from "react-icons/cg";
+import { FaGlobeAmericas, FaCross } from "react-icons/fa";
+import { MdChildCare, MdTheaterComedy } from "react-icons/md";
+import { BiSolidCameraMovie } from "react-icons/bi";
+import { LuPodcast } from "react-icons/lu";
+import { TbChristmasTree } from "react-icons/tb";
+import { PiDiscoBall } from "react-icons/pi";
+import { GiGuitar, GiSaxophone, GiMusicalNotes, GiMicrophone, GiBanjo, GiGrandPiano, GiBeachBall } from "react-icons/gi";
+import { PiGuitar } from "react-icons/pi";
+import { FaRegGrinStars } from "react-icons/fa";
 
 const PLAYABLE_TYPES = new Set(['song', 'webradio', 'mywebradio', 'cuesong', 'remdisk']);
 const ALBUM_TYPES = new Set(['folder', 'album', 'artist', 'genre']);
 
 // Maps genre title keywords to a Material Icon name.
 const GENRE_ICON_MAP = [
-  [/rock|metal|punk|grunge|hardcore|heavy/i, 'bolt'],
-  [/pop|chart|hit/i, 'star'],
-  [/jazz/i, 'piano'],
-  [/classical|orchestra|symphony|chamber|opera|baroque/i, 'music_note'],
-  [/electronic|techno|edm|trance|house|dubstep|drum.?n.?bass|dnb|synthwave|ambient|chill/i, 'graphic_eq'],
-  [/hip.?hop|rap|r&b|rnb|soul|funk/i, 'mic'],
-  [/country|folk|bluegrass|americana/i, 'nature_people'],
-  [/blues/i, 'piano'],
-  [/reggae|ska/i, 'beach_access'],
-  [/latin|salsa|bossa|samba|flamenco/i, 'public'],
-  [/world|afro|celtic|indian|asian/i, 'public'],
-  [/gospel|spiritual|christian|worship/i, 'church'],
-  [/children|kids|nursery/i, 'child_care'],
-  [/comedy|humor/i, 'sentiment_very_satisfied'],
-  [/soundtrack|film|movie|score|cinema/i, 'movie'],
-  [/podcast|talk|spoken/i, 'podcasts'],
-  [/christmas|holiday/i, 'celebration'],
-  [/dance/i, 'nightlife'],
+  [/rock|metal|punk|grunge|hardcore|heavy/i, <GiGuitar />],
+  [/jazz/i, <GiSaxophone />],
+  [/classical|orchestra|symphony|chamber|opera|baroque/i, <GiMusicalNotes />],
+  [/electronic|techno|new age|edm|trance|house|dubstep|drum.?n.?bass|dnb|synthwave|ambient|chill/i, <CgPiano />],
+  [/hip.?hop|rap|r&b|rnb|soul|funk/i, <GiMicrophone />],
+  [/country|folk|bluegrass|americana/i, <GiBanjo />],
+  [/blues/i, <GiGrandPiano />],
+  [/reggae|ska/i, <GiBeachBall />],
+  [/latin|salsa|bossa|samba|flamenco/i, <PiGuitar />],
+  [/world|afro|celtic|indian|asian/i, <FaGlobeAmericas />],
+  [/gospel|spiritual|christian|worship/i, <FaCross />],
+  [/children|kids|nursery/i, <MdChildCare />],
+  [/comedy|humor/i, <MdTheaterComedy />],
+  [/soundtrack|film|movie|score|cinema/i, <BiSolidCameraMovie />],
+  [/podcast|talk|spoken/i, <LuPodcast />],
+  [/christmas|holiday/i, <TbChristmasTree />],
+  [/dance/i, <PiDiscoBall />],
+  [/pop|chart|hit/i, <FaRegGrinStars />],
 ];
 
 const genreIcon = (title) => {
