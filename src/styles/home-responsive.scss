@@ -512,6 +512,11 @@ body,
   opacity: 0.4;
 }
 
+.browse-result-card__genre-icon.material-icons {
+  font-size: 2.5rem !important;
+  opacity: 0.85 !important;
+}
+
 .browse-result-card__info {
   display: flex;
   flex-direction: column;
@@ -584,6 +589,11 @@ body,
 .browse-result-row__art .material-icons {
   font-size: 1.25rem !important;
   opacity: 0.4;
+}
+
+.browse-result-row__genre-icon.material-icons {
+  font-size: 1.5rem !important;
+  opacity: 0.85 !important;
 }
 
 .browse-result-row__info {

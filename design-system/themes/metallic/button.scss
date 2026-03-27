@@ -119,3 +119,65 @@
   pointer-events: none;
   filter: grayscale(100%);
 }
+
+/* ─── Icon Button ─────────────────────────────────────────────────────── */
+/* Flat, transparent button for toolbar icon actions — no metallic chrome */
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+
+  /* Reset metallic .btn chrome */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+
+  color: var(--text-muted);
+  transition: background 0.15s ease, color 0.15s ease;
+
+  .material-icons {
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-light);
+    box-shadow: none;
+    transform: none;
+  }
+
+  &:active {
+    background: rgba(0, 0, 0, 0.25);
+    color: var(--text-light);
+    transform: none;
+    box-shadow: none;
+  }
+
+  &.active {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    transform: none;
+    color: var(--color-primary);
+  }
+
+  &.active:hover {
+    background: rgba(0, 225, 255, 0.08);
+  }
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    filter: none;
+  }
+}
+

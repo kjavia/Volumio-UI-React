@@ -9,6 +9,36 @@ import { VOLUMIO_BASE_URL } from '@/config';
 const PLAYABLE_TYPES = new Set(['song', 'webradio', 'mywebradio', 'cuesong', 'remdisk']);
 const ALBUM_TYPES = new Set(['folder', 'album', 'artist', 'genre']);
 
+// Maps genre title keywords to a Material Icon name.
+const GENRE_ICON_MAP = [
+  [/rock|metal|punk|grunge|hardcore|heavy/i, 'bolt'],
+  [/pop|chart|hit/i, 'star'],
+  [/jazz/i, 'piano'],
+  [/classical|orchestra|symphony|chamber|opera|baroque/i, 'music_note'],
+  [/electronic|techno|edm|trance|house|dubstep|drum.?n.?bass|dnb|synthwave|ambient|chill/i, 'graphic_eq'],
+  [/hip.?hop|rap|r&b|rnb|soul|funk/i, 'mic'],
+  [/country|folk|bluegrass|americana/i, 'nature_people'],
+  [/blues/i, 'piano'],
+  [/reggae|ska/i, 'beach_access'],
+  [/latin|salsa|bossa|samba|flamenco/i, 'public'],
+  [/world|afro|celtic|indian|asian/i, 'public'],
+  [/gospel|spiritual|christian|worship/i, 'church'],
+  [/children|kids|nursery/i, 'child_care'],
+  [/comedy|humor/i, 'sentiment_very_satisfied'],
+  [/soundtrack|film|movie|score|cinema/i, 'movie'],
+  [/podcast|talk|spoken/i, 'podcasts'],
+  [/christmas|holiday/i, 'celebration'],
+  [/dance/i, 'nightlife'],
+];
+
+const genreIcon = (title) => {
+  if (!title) return 'category';
+  for (const [pattern, icon] of GENRE_ICON_MAP) {
+    if (pattern.test(title)) return icon;
+  }
+  return 'category';
+};
+
 const albumartUrl = (url) => {
   if (!url) return null;
   if (url.startsWith('http')) return url;
@@ -169,7 +199,8 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
     }
   }, [isPlayable, socket, trackPayload, onNavigate, item.uri, item.title]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const artUrl = albumartUrl(item.albumart);
+  const isGenre = item.uri.startsWith('genre');
+  const artUrl = isGenre ? null : albumartUrl(item.albumart);
 
   const menuPortal = menuOpen && !isPlaylistItem && !isAlbumItem && createPortal(
     <div
@@ -289,9 +320,11 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
           onKeyDown={(e) => e.key === 'Enter' && handleItemClick()}
         >
           <div className="browse-result-card__art">
-            {artUrl
-              ? <img src={artUrl} alt="" loading="lazy" />
-              : <span className="material-icons">music_note</span>
+            {isGenre
+              ? <span className="material-icons browse-result-card__genre-icon">{genreIcon(item.title)}</span>
+              : artUrl
+                ? <img src={artUrl} alt="" loading="lazy" />
+                : <span className="material-icons">music_note</span>
             }
             <button
               className="browse-result-card__play"
@@ -340,9 +373,11 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
         onKeyDown={(e) => e.key === 'Enter' && handleItemClick()}
       >
         <div className="browse-result-row__art">
-          {artUrl
-            ? <img src={artUrl} alt="" loading="lazy" />
-            : <span className="material-icons">music_note</span>
+          {isGenre
+            ? <span className="material-icons browse-result-row__genre-icon">{genreIcon(item.title)}</span>
+            : artUrl
+              ? <img src={artUrl} alt="" loading="lazy" />
+              : <span className="material-icons">music_note</span>
           }
         </div>
         <div className="browse-result-row__info">
