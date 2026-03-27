@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px' }) => {
+const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px', headerActions }) => {
   const panelRef = useRef(null);
 
   // Close on Escape key
@@ -47,14 +47,17 @@ const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px' 
             {title && <h5 className="slide-panel-title m-0">{title}</h5>}
             {subtitle && <span className="slide-panel-subtitle">{subtitle}</span>}
           </div>
-          <button
-            type="button"
-            className="btn btn-link p-0 ms-auto"
-            onClick={onClose}
-            aria-label="Close"
-          >
-            <span className="material-icons">close</span>
-          </button>
+          <div className="d-flex align-items-center ms-auto gap-1">
+            {headerActions}
+            <button
+              type="button"
+              className="btn btn-link p-0"
+              onClick={onClose}
+              aria-label="Close"
+            >
+              <span className="material-icons">close</span>
+            </button>
+          </div>
         </div>
 
         {/* Body — scrollable if content overflows */}
@@ -71,6 +74,7 @@ SlidePanel.propTypes = {
   subtitle: PropTypes.string,
   children: PropTypes.node,
   width: PropTypes.string,
+  headerActions: PropTypes.node,
 };
 
 export default SlidePanel;

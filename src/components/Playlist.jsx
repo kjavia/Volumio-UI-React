@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import SlidePanel from './SlidePanel';
 
-const Playlist = ({ open, onClose, queue, currentPosition, isPlaying, onPlay, onRemove, host }) => {
+const Playlist = ({ open, onClose, queue, currentPosition, isPlaying, onPlay, onRemove, onClear, host }) => {
   const activeRef = useRef(null);
 
   // Scroll the current track into view when the panel opens
@@ -24,8 +24,20 @@ const Playlist = ({ open, onClose, queue, currentPosition, isPlaying, onPlay, on
       ? `${queue.length} ${queue.length === 1 ? 'track' : 'tracks'} · Playing ${currentPosition + 1} of ${queue.length}`
       : `${queue.length} ${queue.length === 1 ? 'track' : 'tracks'}`;
 
+  const headerActions = queue.length > 0 ? (
+    <button
+      type="button"
+      className="btn btn-link p-0 me-1"
+      onClick={onClear}
+      aria-label="Clear queue"
+      title="Clear queue"
+    >
+      <span className="material-icons">playlist_remove</span>
+    </button>
+  ) : null;
+
   return (
-    <SlidePanel open={open} onClose={onClose} title="Queue" subtitle={subtitle} width="380px">
+    <SlidePanel open={open} onClose={onClose} title="Queue" subtitle={subtitle} width="380px" headerActions={headerActions}>
       {queue.length === 0 ? (
         <div className="d-flex flex-column align-items-center justify-content-center text-white-50 py-5">
           <span className="material-icons mb-2" style={{ fontSize: '2rem', opacity: 0.4 }}>
@@ -107,6 +119,7 @@ Playlist.propTypes = {
   isPlaying: PropTypes.bool,
   onPlay: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+  onClear: PropTypes.func,
   host: PropTypes.string,
 };
 

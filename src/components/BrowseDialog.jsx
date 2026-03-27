@@ -1,8 +1,10 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import Dialog from './Dialog';
 import Button from './Button';
 import TrackItem from './TrackItem';
+import AddToPlaylistDialog from './AddToPlaylistDialog';
 import useBrowse from '@/hooks/useBrowse';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import { useSocket } from '@/contexts/SocketContext';
@@ -62,6 +64,11 @@ const BrowseDialog = ({ open, onClose }) => {
   const [largeGrid, setLargeGrid] = useState(false);
   const [history, setHistory] = useState([]);
   const [currentNav, setCurrentNav] = useState(null);
+  const [albumMenuOpen, setAlbumMenuOpen] = useState(false);
+  const [albumMenuPos, setAlbumMenuPos] = useState({ top: 0, left: 0 });
+  const [albumAddToPlaylistOpen, setAlbumAddToPlaylistOpen] = useState(false);
+  const albumMenuBtnRef = useRef(null);
+  const albumMenuRef = useRef(null);
 
   const { data: browseData, isLoading, isError, refetch: refetchBrowse } = useBrowse(currentNav?.uri ?? null);
   const { queue } = useVolumioStatus();
@@ -71,6 +78,75 @@ const BrowseDialog = ({ open, onClose }) => {
   const isPlaylistsView = currentNav?.uri === 'playlists';
 
   const queueUris = useMemo(() => new Set((queue ?? []).map((q) => q.uri)), [queue]);
+
+  const browseItems = browseData?.lists?.flatMap((l) => l.items) ?? [];
+  const albumInfo = browseData?.info ?? null;
+  const albumArtist = albumInfo?.artist
+    || browseItems.find((i) => i.artist)?.artist
+    || null;
+
+  const albumPayload = useMemo(() => ({
+    uri: currentNav?.uri,
+    service: browseItems[0]?.service,
+    title: currentNav?.title,
+    artist: albumArtist,
+    albumart: browseItems.find((i) => i.albumart)?.albumart,
+    type: 'folder',
+  }), [currentNav, browseItems, albumArtist]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!albumMenuOpen) return;
+    const handleClickOutside = (e) => {
+      if (
+        albumMenuRef.current && !albumMenuRef.current.contains(e.target) &&
+        albumMenuBtnRef.current && !albumMenuBtnRef.current.contains(e.target)
+      ) {
+        setAlbumMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [albumMenuOpen]);
+
+  const openAlbumMenu = useCallback((e) => {
+    e.stopPropagation();
+    const rect = albumMenuBtnRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const menuHeight = 220;
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const top = spaceBelow >= menuHeight ? rect.bottom + 4 : rect.top - menuHeight - 4;
+    const left = Math.min(rect.right - 180, window.innerWidth - 188);
+    setAlbumMenuPos({ top, left });
+    setAlbumMenuOpen((v) => !v);
+  }, []);
+
+  const closeAlbumMenu = useCallback(() => setAlbumMenuOpen(false), []);
+
+  const handleAlbumPlay = useCallback(() => {
+    socket?.emit('replaceAndPlay', albumPayload);
+    closeAlbumMenu();
+  }, [socket, albumPayload, closeAlbumMenu]);
+
+  const handleAlbumAddToQueue = useCallback(() => {
+    socket?.emit('addToQueue', albumPayload);
+    closeAlbumMenu();
+  }, [socket, albumPayload, closeAlbumMenu]);
+
+  const handleAlbumClearAndPlay = useCallback(() => {
+    socket?.emit('clearQueue');
+    socket?.emit('replaceAndPlay', albumPayload);
+    closeAlbumMenu();
+  }, [socket, albumPayload, closeAlbumMenu]);
+
+  const handleAlbumUpdateFolder = useCallback(() => {
+    socket?.emit('updateDb', currentNav?.uri);
+    closeAlbumMenu();
+  }, [socket, currentNav, closeAlbumMenu]);
+
+  const handleAlbumOpenAddToPlaylist = useCallback(() => {
+    closeAlbumMenu();
+    setAlbumAddToPlaylistOpen(true);
+  }, [closeAlbumMenu]);
 
   const handlePlayAllFavourites = useCallback(() => {
     const items = browseData?.lists?.flatMap((l) => l.items) ?? [];
@@ -111,8 +187,6 @@ const BrowseDialog = ({ open, onClose }) => {
     setSearch('');
   }, []);
 
-  const browseItems = browseData?.lists?.flatMap((l) => l.items) ?? [];
-
   const filteredItems = search.trim()
     ? browseItems.filter((item) =>
         item.title?.toLowerCase().includes(search.toLowerCase()) ||
@@ -124,12 +198,8 @@ const BrowseDialog = ({ open, onClose }) => {
   const isAlbumView = !isLoading && !isError && browseItems.length > 0
     && browseItems.every((i) => i.type === 'song');
 
-  // Album metadata derived from API info + items
-  const albumInfo = browseData?.info ?? null;
-  const albumArtist = albumInfo?.artist
-    || browseItems.find((i) => i.artist)?.artist
-    || null;
   const albumYear = albumInfo?.year ?? null;
+
   const trackCount = browseItems.length;
   const totalDuration = browseItems.reduce((sum, i) => sum + (i.duration || 0), 0);
 
@@ -247,6 +317,17 @@ const BrowseDialog = ({ open, onClose }) => {
             aria-label="Search"
           />
         </div>
+        {isAlbumView && (
+          <button
+            ref={albumMenuBtnRef}
+            className="btn-icon"
+            type="button"
+            aria-label="Album options"
+            onClick={openAlbumMenu}
+          >
+            <span className="material-icons">more_vert</span>
+          </button>
+        )}
       </div>
     </div>
   );
@@ -316,18 +397,58 @@ const BrowseDialog = ({ open, onClose }) => {
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      title={currentNav ? currentNav.title : 'Browse'}
-      size={isFullscreen ? 'full' : 'lg'}
-      className={isFullscreen ? 'browse-dialog--fullscreen' : undefined}
-      headerActions={headerActions}
-      toolbar={toolbar}
-      footer={albumFooter}
-    >
-      {currentNav ? renderBrowseResults() : renderHome()}
-    </Dialog>
+    <>
+      <Dialog
+        open={open}
+        onClose={onClose}
+        title={currentNav ? currentNav.title : 'Browse'}
+        size={isFullscreen ? 'full' : 'lg'}
+        className={isFullscreen ? 'browse-dialog--fullscreen' : undefined}
+        headerActions={headerActions}
+        toolbar={toolbar}
+        footer={albumFooter}
+      >
+        {currentNav ? renderBrowseResults() : renderHome()}
+      </Dialog>
+      {albumMenuOpen && createPortal(
+        <div
+          ref={albumMenuRef}
+          className="track-menu"
+          style={{ position: 'fixed', top: albumMenuPos.top, left: albumMenuPos.left }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button className="track-menu__item" onClick={handleAlbumPlay}>
+            <span className="material-icons">play_arrow</span>
+            Play
+          </button>
+          <button className="track-menu__item" onClick={handleAlbumAddToQueue}>
+            <span className="material-icons">queue_music</span>
+            Add to Queue
+          </button>
+          <button className="track-menu__item" onClick={handleAlbumClearAndPlay}>
+            <span className="material-icons">playlist_play</span>
+            Clear &amp; Play
+          </button>
+          <div className="track-menu__separator" />
+          <button className="track-menu__item" onClick={handleAlbumOpenAddToPlaylist}>
+            <span className="material-icons">playlist_add</span>
+            Add to Playlist
+          </button>
+          <button className="track-menu__item" onClick={handleAlbumUpdateFolder}>
+            <span className="material-icons">refresh</span>
+            Update Folder
+          </button>
+        </div>,
+        document.body
+      )}
+      {albumAddToPlaylistOpen && (
+        <AddToPlaylistDialog
+          open={albumAddToPlaylistOpen}
+          onClose={() => setAlbumAddToPlaylistOpen(false)}
+          track={albumPayload}
+        />
+      )}
+    </>
   );
 };
 

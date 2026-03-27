@@ -150,6 +150,10 @@ const useVolumioStatus = () => {
     socket.emit('removeFromQueue', { value: index });
   };
 
+  const clearQueue = () => {
+    socket.emit('clearQueue');
+  };
+
   const playFromQueue = (index) => {
     socket.emit('play', { value: index });
   };
@@ -223,6 +227,7 @@ const useVolumioStatus = () => {
     toggleRandom,
     toggleRepeat,
     removeFromQueue,
+    clearQueue,
     playFromQueue,
     isFavourite,
     toggleFavourite,

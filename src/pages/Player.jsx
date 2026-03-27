@@ -106,6 +106,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     position,
     queue,
     removeFromQueue,
+    clearQueue,
     playFromQueue,
     isFavourite,
     toggleFavourite,
@@ -336,6 +337,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
           isPlaying={isPlaying}
           onPlay={playFromQueue}
           onRemove={removeFromQueue}
+          onClear={clearQueue}
           host={VOLUMIO_BASE_URL}
         />
 

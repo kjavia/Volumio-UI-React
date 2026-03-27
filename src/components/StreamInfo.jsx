@@ -19,6 +19,10 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate }) => {
 
   const logoSrc = trackType ? LOGO_MAP[trackType.toLowerCase()] : null;
 
+  const samplerateKhz = samplerate ? parseFloat(samplerate) : 0;
+  const bitdepthNum = bitdepth ? parseInt(bitdepth, 10) : 0;
+  const isHighRes = bitdepthNum >= 24 && samplerateKhz >= 96;
+
   // Build quality string: e.g. "44.1 kHz / 16 bit" or "320 kbps"
   const qualityParts = [];
   if (samplerate) qualityParts.push(samplerate);
@@ -27,7 +31,7 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate }) => {
 
   return (
     <div
-      className="stream-info d-flex align-items-center justify-content-center gap-2 w-100 responsive-stream-info overflow-hidden"
+      className="stream-info d-flex align-items-center justify-content-center gap-3 w-100 responsive-stream-info overflow-hidden"
       style={{ opacity: 0.6, userSelect: 'none' }}
     >
       {/* Format logo or text fallback */}
@@ -46,10 +50,19 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate }) => {
         )
       )}
 
+      {/* Hi-res logo */}
+      {isHighRes && (
+        <img
+          src="/assets/logos/hires.svg"
+          alt="Hi-Res"
+          className="format-logo-responsive"
+          style={{ width: 'auto' }}
+        />
+      )}
+
       {/* Quality info */}
       {qualityStr && (
         <>
-          {(logoSrc || trackType) && <span className="text-white-50">·</span>}
           <span>{qualityStr}</span>
         </>
       )}
