@@ -1,6 +1,45 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+
+// Scrolls long text continuously (codepen.io/jamesbarnett/pen/kQebQO style).
+// Two copies of the text sit side-by-side; animating -50% loops back to the
+// start of copy 2, creating a seamless ticker.
+function MarqueeTitle({ text, className }) {
+  const outerRef = useRef(null);
+  const [scrolling, setScrolling] = useState(false);
+
+  // Reset whenever the text changes
+  useEffect(() => { setScrolling(false); }, [text]);
+
+  // Measure only while showing a single static copy (no duplicates yet)
+  useEffect(() => {
+    if (scrolling) return;
+    const el = outerRef.current;
+    if (!el) return;
+    const check = () => { if (el.scrollWidth > el.clientWidth) setScrolling(true); };
+    const id = requestAnimationFrame(check);
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    return () => { cancelAnimationFrame(id); ro.disconnect(); };
+  }, [text, scrolling]);
+
+  // Speed: 1 char ≈ 0.18 s, minimum 6 s
+  const dur = `${Math.max(6, (text?.length ?? 0) * 0.18)}s`;
+
+  return (
+    <div ref={outerRef} className={`marquee-outer ${className ?? ''}`}>
+      {scrolling ? (
+        <span className="marquee-content" style={{ animationDuration: dur }}>
+          {text}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{text}
+        </span>
+      ) : (
+        <span>{text}</span>
+      )}
+    </div>
+  );
+}
+MarqueeTitle.propTypes = { text: PropTypes.string, className: PropTypes.string };
 import AddToPlaylistDialog from './AddToPlaylistDialog';
 import { useSocket } from '@/contexts/SocketContext';
 import useFavourites from '@/hooks/useFavourites';
@@ -391,7 +430,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
           }
         </div>
         <div className="browse-result-row__info">
-          <span className="browse-result-row__title">{item.title}</span>
+          <MarqueeTitle text={item.title} className="browse-result-row__title" />
           {(item.artist || item.album) && (
             <span className="browse-result-row__sub">
               {[item.artist, item.album].filter(Boolean).join(' · ')}

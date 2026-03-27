@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import './cd-cover-player.scss';
 
 const CdCoverPlayer = ({ isPlaying, albumArt }) => {
-  const artStyle = albumArt ? { backgroundImage: `url(${albumArt})` } : {};
-
   return (
     <div className="cd-case-container">
       {/* <!-- The CD Disc (Behind) --> */}
@@ -15,7 +13,9 @@ const CdCoverPlayer = ({ isPlaying, albumArt }) => {
 
       {/* <!-- The Jewel Case (Front) --> */}
       <div className="cd-jewel-case">
-        <div className="case-art" style={artStyle}></div>
+        <div className="case-art">
+          {albumArt && <img src={albumArt} alt="Album Art" className="case-art-img" />}
+        </div>
         <div className="case-glare"></div>
       </div>
     </div>

@@ -607,9 +607,26 @@ body,
 .browse-result-row__title {
   font-size: 0.9rem;
   font-weight: 500;
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Marquee: two copies of the text animate from 0 → -50%,
+   which is exactly one copy-width, creating a seamless loop. */
+.marquee-outer {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee-loop linear infinite;
+}
+
+@keyframes marquee-loop {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .browse-result-row__sub {

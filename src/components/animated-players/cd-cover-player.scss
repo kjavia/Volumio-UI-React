@@ -49,6 +49,8 @@
 }
 
 .case-art {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   /* Placeholder art pattern */
@@ -60,12 +62,19 @@
     #1565c0 10px,
     #1565c0 20px
   );
-  background-size: cover;
-  background-position: center;
   /* Inset slightly for case borders */
   margin: 2px 2px 2px 14px;
   /* Left margin for hinge area */
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.case-art-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* Plastic Glare on Case */
