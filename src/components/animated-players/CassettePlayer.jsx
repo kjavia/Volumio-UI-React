@@ -29,7 +29,7 @@ const CassettePlayer = ({ isPlaying, albumArt }) => {
         {/* <!-- Label Sticker --> */}
         <div className="cassette-label">
           <div className="label-art">
-            <span className="label-text">MIXTAPE 94'</span>
+            <span className="label-text">MIXTAPE 94&apos;</span>
           </div>
           <div
             style={{
@@ -59,6 +59,7 @@ const CassettePlayer = ({ isPlaying, albumArt }) => {
 
         {/* <!-- Window Area --> */}
         <div className="cassette-window">
+          {albumArt && <img src={albumArt} alt="Album Art" className="cassette-window-art" />}
           {/* <!-- Tape Reels Shadow/Bulk --> */}
           <div className="reel-L" style={reelLStyle}></div>
           <div className="reel-R" style={reelRStyle}></div>

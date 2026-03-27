@@ -67,6 +67,27 @@
   padding-left: 10px;
 }
 
+.cassette-label-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+}
+
+.cassette-window-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 0;
+  opacity: 0.6;
+}
+
 .label-text {
   font-family: 'Courier New', monospace;
   font-weight: bold;
