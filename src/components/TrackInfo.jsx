@@ -1,27 +1,25 @@
 import PropTypes from 'prop-types';
+import MarqueeText from 'react-marquee-text';
 
 const TrackInfo = ({ title, artist, album, isInFooter }) => {
   return (
     <div
-      className={`track-info d-flex flex-column ${
-        isInFooter
-          ? 'align-items-start ms-3'
-          : 'align-items-center text-center w-100 overflow-hidden cq-track-info'
-      }`}
+      className={`track-info d-flex flex-column ${isInFooter
+        ? 'align-items-start ms-3'
+        : 'align-items-center text-center w-100 overflow-hidden cq-track-info'
+        }`}
     >
       <div
-        className={`track-title user-select-none text-truncate w-100 ${
-          isInFooter ? 'h6 text-start mb-0' : 'responsive-title fw-bold'
-        }`}
+        className={`track-title user-select-none text-truncate w-100 ${isInFooter ? 'h6 text-start mb-0' : 'responsive-title fw-bold'
+          }`}
       >
-        {title || 'Unknown Title'}
+        {title ? <MarqueeText>{title}</MarqueeText> : 'Unknown Title'}
       </div>
       <div
-        className={`artist-name user-select-none text-truncate w-100 ${
-          isInFooter ? 'small text-start' : 'responsive-artist'
-        }`}
+        className={`artist-name user-select-none text-truncate w-100 ${isInFooter ? 'small text-start' : 'responsive-artist'
+          }`}
       >
-        {artist || 'Unknown Artist'}
+        {artist ? <MarqueeText>{artist}</MarqueeText> : 'Unknown Artist'}
       </div>
       {!isInFooter && album && (
         <div className="album-name user-select-none mt-1 small text-truncate w-100 responsive-album">

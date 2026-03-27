@@ -2,15 +2,6 @@ import PropTypes from 'prop-types';
 import './vinyl-player.scss';
 
 const VinylPlayer = ({ isPlaying, albumArt }) => {
-  const labelStyle = albumArt
-    ? {
-        backgroundImage: `url(${albumArt})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }
-    : {};
-
   return (
     <>
       {/* <!-- Vinyl Record Container --> */}
@@ -18,7 +9,10 @@ const VinylPlayer = ({ isPlaying, albumArt }) => {
         <div className={`vinyl-record ${isPlaying ? 'playing' : ''}`}>
           <div className="vinyl-grooves"></div>
           <div className="vinyl-label">
-            <div className="album-art-img" style={labelStyle}></div>
+            {albumArt
+              ? <img src={albumArt} alt="" className="album-art-img" />
+              : <div className="album-art-placeholder"></div>
+            }
           </div>
           <div className="vinyl-shine"></div>
         </div>
