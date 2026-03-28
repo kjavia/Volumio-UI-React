@@ -1,0 +1,123 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CONTEXT MENU - ATV Theme
+   Frosted glass dropdown, Apple macOS/tvOS style
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.context-menu-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    z-index: 100;
+}
+
+/* ─── Toggle Button ────────────────────────────────────────────────────── */
+.context-menu-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-dark);
+    transition: background 0.2s, transform 0.15s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.14);
+        transform: scale(1.08);
+    }
+
+    &:active,
+    &.active {
+        background: rgba(255, 255, 255, 0.05);
+        transform: scale(0.95);
+    }
+
+    &--no-shadow {
+        background: rgba(0, 0, 0, 0.5);
+        border: none !important;
+        box-shadow: none !important;
+        color: var(--color-primary-light);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.65);
+        }
+
+        &:active,
+        &.active {
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        .material-icons {
+            color: var(--color-primary-light);
+        }
+    }
+
+    .material-icons {
+        font-size: 22px;
+        color: var(--text-secondary);
+    }
+}
+
+/* ─── Dropdown Menu ────────────────────────────────────────────────────── */
+.context-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 210px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    z-index: 101;
+
+    background: rgba(44, 44, 46, 0.92);
+    backdrop-filter: blur(40px) saturate(1.8);
+    -webkit-backdrop-filter: blur(40px) saturate(1.8);
+    border: 1px solid var(--border-light);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7), 0 4px 12px rgba(0, 0, 0, 0.4);
+
+    opacity: 0;
+    transform: translateY(-10px) scale(0.94);
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: all;
+    }
+}
+
+/* ─── Menu Items ───────────────────────────────────────────────────────── */
+.context-menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 16px;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    transition: background 0.12s;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid var(--border-dark);
+    }
+
+    &:hover {
+        background: rgba(10, 132, 255, 0.15);
+        color: var(--color-primary-light);
+    }
+
+    .material-icons {
+        font-size: 18px;
+        color: var(--text-secondary);
+    }
+}

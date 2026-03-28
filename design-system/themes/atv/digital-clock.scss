@@ -1,0 +1,209 @@
+/* ── Digital Clock — ATV Theme ─────────────────────────────────────────────
+ * Pure black display, Apple blue segments, clean SF Pro typography
+ * ──────────────────────────────────────────────────────────────────────── */
+
+$seg-color:       var(--color-primary);
+$seg-off-opacity: 0.06;
+$lcd-bg:          #050505;
+
+/* ── Centering wrapper ──────────────────────────────────────────────────── */
+.digital-clock-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90vw;
+    height: 90dvh;
+    max-width: none;
+    margin: 0 auto;
+    container-type: size;
+}
+
+/* ── Outer frame — glass panel ──────────────────────────────────────────── */
+.digital-clock-frame {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    padding: 2cqw 2.5cqw;
+    background: rgba(28, 28, 30, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(10, 132, 255, 0.2);
+    border-radius: 18px;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8), 0 8px 24px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+/* ── LCD Panel ──────────────────────────────────────────────────────────── */
+.digital-clock {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.2cqw 1.8cqw;
+    border-radius: 8px;
+    background: $lcd-bg;
+    border: 1px solid rgba(10, 132, 255, 0.12);
+}
+
+/* ── Day-of-week bar ────────────────────────────────────────────────────── */
+.lcd-days {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8cqw;
+    margin-bottom: 0.8cqw;
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+    font-size: clamp(0.55rem, 1.1cqw, 1.8rem);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+
+    span {
+        opacity: 0.12;
+        color: $seg-color;
+    }
+
+    .active {
+        color: $seg-color;
+        opacity: 1;
+        border-bottom: 0.2cqw solid $seg-color;
+        filter: drop-shadow(0 0 4px rgba(10, 132, 255, 0.6));
+    }
+}
+
+/* ── Time row ───────────────────────────────────────────────────────────── */
+.lcd-time {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.6cqw;
+}
+
+.lcd-digits {
+    display: flex;
+    align-items: center;
+    gap: 2cqw;
+}
+
+.lcd-ampm {
+    font-family: -apple-system, 'SF Pro Display', system-ui, sans-serif;
+    font-size: clamp(0.75rem, 2.2cqw, 3.5rem);
+    font-weight: 700;
+    color: $seg-color;
+    letter-spacing: 0.08em;
+    padding-bottom: 0.2cqw;
+    margin-left: 0.4cqw;
+    text-transform: uppercase;
+    filter: drop-shadow(0 0 4px rgba(10, 132, 255, 0.5));
+}
+
+/* ── Colon separator ────────────────────────────────────────────────────── */
+.lcd-colon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3cqw;
+    width: 2.5cqw;
+    height: 100%;
+    padding: 2cqh 0;
+}
+
+.lcd-colon-dot {
+    width: 1.4cqw;
+    height: 1.4cqw;
+    background: $seg-color;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 3px rgba(10, 132, 255, 0.6));
+}
+
+.lcd-colon--blink .lcd-colon-dot {
+    animation: lcd-blink 1s step-start infinite;
+}
+
+@keyframes lcd-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.1; }
+}
+
+/* ── Date + weather row ─────────────────────────────────────────────────── */
+.lcd-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5cqw;
+    margin-top: 1.5cqw;
+}
+
+.lcd-date {
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+    font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(235, 235, 245, 0.5);
+    text-align: center;
+}
+
+.lcd-weather {
+    display: flex;
+    align-items: center;
+    gap: 0.5cqw;
+}
+
+.lcd-weather-icon {
+    font-size: clamp(0.9rem, 2cqw, 3rem);
+    color: $seg-color;
+}
+
+.lcd-weather-temp {
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+    font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: $seg-color;
+}
+
+/* ── 7-Segment Digit ────────────────────────────────────────────────────── */
+.lcd-digit {
+    position: relative;
+    width: 11cqw;
+    height: calc(11cqw * 1.7);
+    filter: drop-shadow(0 0 4px rgba(10, 132, 255, 0.4));
+}
+
+.seg {
+    position: absolute;
+    background: $seg-color;
+    transition: opacity 0.1s ease;
+
+    &.on  { opacity: 1; }
+    &.off { opacity: $seg-off-opacity; }
+}
+
+// Horizontal segments (a, d, g)
+.seg-a,
+.seg-d,
+.seg-g {
+    left: 10%;
+    width: 80%;
+    height: 7%;
+    clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
+}
+
+.seg-a { top: 0; }
+.seg-g { top: 46.5%; }
+.seg-d { bottom: 0; }
+
+// Vertical segments (b, c, e, f)
+.seg-b,
+.seg-c,
+.seg-e,
+.seg-f {
+    width: 13%;
+    height: 42%;
+    clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
+}
+
+.seg-b { top: 4%;    right: 0; }
+.seg-c { bottom: 4%; right: 0; }
+.seg-f { top: 4%;    left: 0; }
+.seg-e { bottom: 4%; left: 0; }

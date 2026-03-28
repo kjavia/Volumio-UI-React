@@ -1,0 +1,211 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DIALOG - ATV Theme
+   Frosted glass modal, Apple TV / macOS Sequoia style
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Backdrop ── */
+.dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── Dialog Container (Centered) ── */
+.dialog-container {
+    position: fixed;
+    inset: 0;
+    z-index: 2010;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    pointer-events: none;
+}
+
+/* ── Dialog Box ── */
+.dialog {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    width: 50vw;
+    max-width: 50vw;
+    min-width: 320px;
+    pointer-events: auto;
+    outline: none;
+    background: rgba(28, 28, 30, 0.92);
+    backdrop-filter: blur(40px) saturate(1.8);
+    -webkit-backdrop-filter: blur(40px) saturate(1.8);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow:
+        0 32px 80px rgba(0, 0, 0, 0.8),
+        0 8px 24px rgba(0, 0, 0, 0.5),
+        0 1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+/* ── Header ── */
+.dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-dark);
+    background: rgba(0, 0, 0, 0.25);
+    flex-shrink: 0;
+    gap: 12px;
+}
+
+.dialog-title {
+    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: var(--tracking-tight);
+    font-family: var(--font-display);
+}
+
+.dialog-close {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+
+    .material-icons {
+        font-size: 18px;
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.16);
+        color: var(--text-primary);
+        transform: scale(1.08);
+    }
+}
+
+/* ── Toolbar ── */
+.dialog-toolbar {
+    border-bottom: 1px solid var(--border-light);
+    padding: 0.5rem 1rem;
+    flex-shrink: 0;
+
+    .browse-search__input {
+        color: var(--text-secondary);
+        border-color: var(--border-light);
+        background: rgba(255, 255, 255, 0.05);
+
+        &:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
+        }
+    }
+
+    .browse-search__icon {
+        color: var(--text-secondary);
+    }
+}
+
+/* ── Body ── */
+.dialog-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+
+    &::-webkit-scrollbar {
+        width: 4px;
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--color-gray-700);
+        border-radius: 2px;
+    }
+}
+
+/* ── Footer ── */
+.dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid var(--border-dark);
+    background: rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+/* ── Size Variants ── */
+.dialog-sm   { max-width: 400px; }
+.dialog-md   { max-width: 600px; }
+.dialog-lg   { max-width: 800px; }
+.dialog-xl   { max-width: 1200px; }
+.dialog-full {
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 2rem);
+}
+
+/* ── List Items ── */
+.dialog-list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    background: transparent;
+    border: 1px solid transparent;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 4px;
+    font-family: var(--font-label);
+
+    .material-icons {
+        font-size: 18px;
+        color: var(--text-secondary);
+    }
+
+    &:hover:not(:disabled) {
+        background: rgba(10, 132, 255, 0.12);
+        color: var(--color-primary);
+
+        .material-icons {
+            color: var(--color-primary);
+        }
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    &.active {
+        background: rgba(10, 132, 255, 0.18);
+        border-color: rgba(10, 132, 255, 0.4);
+        color: var(--color-primary);
+        font-weight: 600;
+
+        .material-icons {
+            color: var(--color-primary);
+        }
+    }
+}

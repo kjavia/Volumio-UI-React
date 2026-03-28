@@ -1,0 +1,202 @@
+/* ── Analog Clock — ATV Theme ───────────────────────────────────────────────
+ * Pure black face, glass bezel, Apple blue second hand, SF Pro digits
+ * ──────────────────────────────────────────────────────────────────────── */
+
+/* Centering wrapper */
+.analog-clock-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    user-select: none;
+    container-type: size;
+}
+
+/* Outer container — square aspect ratio */
+.analog-clock {
+    --clock-size: min(80cqw, 80cqh);
+    width: var(--clock-size);
+    height: var(--clock-size);
+}
+
+/* Bezel — frosted glass ring */
+.clock-bezel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 3%;
+    background: rgba(28, 28, 30, 0.85);
+    border: 1.5px solid rgba(10, 132, 255, 0.25);
+    box-shadow:
+        0 32px 80px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+
+/* Face — jet black dial */
+.clock-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #000000;
+    border: 1px solid rgba(10, 132, 255, 0.1);
+}
+
+/* ── Tick marks ─────────────────────────────────────────────────────────── */
+.clock-tick {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 50%;
+    transform-origin: bottom center;
+    pointer-events: none;
+}
+
+.clock-tick::before {
+    content: '';
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 4%;
+    border-radius: 1px;
+}
+
+/* Hour ticks — Apple blue-tinted */
+.clock-tick--hour::before {
+    height: 10%;
+    background: rgba(10, 132, 255, 0.7);
+    width: 3px;
+    margin-left: -0.5px;
+}
+
+/* Minute ticks — dim white */
+.clock-tick--minute::before {
+    height: 5%;
+    background: rgba(255, 255, 255, 0.18);
+    width: 1px;
+}
+
+/* ── Hour digits ────────────────────────────────────────────────────────── */
+.clock-hour-digit {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+    font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+    font-weight: 600;
+    color: rgba(235, 235, 245, 0.5);
+    line-height: 1;
+}
+
+/* ── Hands ──────────────────────────────────────────────────────────────── */
+.clock-hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 2px;
+}
+
+/* Hour hand */
+.clock-hand--hour {
+    width: 5px;
+    height: 25%;
+    margin-left: -2.5px;
+    background: #ffffff;
+    border-radius: 3px 3px 1px 1px;
+    z-index: 3;
+}
+
+/* Minute hand */
+.clock-hand--minute {
+    width: 3px;
+    height: 35%;
+    margin-left: -1.5px;
+    background: rgba(235, 235, 245, 0.8);
+    border-radius: 1.5px 1.5px 1px 1px;
+    z-index: 4;
+}
+
+/* Second hand — Apple blue */
+.clock-hand--second {
+    width: 1.5px;
+    height: 38%;
+    margin-left: -0.75px;
+    background: var(--color-primary);
+    box-shadow: 0 0 6px rgba(10, 132, 255, 0.7);
+    border-radius: 1px;
+    z-index: 5;
+    transition: none;
+}
+
+/* Center cap — Apple blue pivot dot */
+.clock-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5%;
+    height: 5%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 8px rgba(10, 132, 255, 0.8);
+    z-index: 6;
+}
+
+/* Day & date */
+.clock-face-info {
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.clock-face-day {
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+    font-size: clamp(0.8rem, 4cqi, 1.5rem);
+    font-weight: 600;
+    color: rgba(235, 235, 245, 0.45);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.clock-face-date {
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+    font-size: clamp(0.8rem, 4cqi, 1.5rem);
+    font-weight: 500;
+    color: rgba(235, 235, 245, 0.6);
+    white-space: nowrap;
+}
+
+/* ── Weather on face ────────────────────────────────────────────────────── */
+.clock-face-weather {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.clock-face-weather-icon {
+    font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+    color: var(--color-primary);
+}
+
+.clock-face-weather-temp {
+    font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+    font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+    font-weight: 600;
+    color: rgba(235, 235, 245, 0.7);
+}

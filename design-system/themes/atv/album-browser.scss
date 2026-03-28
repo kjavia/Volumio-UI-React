@@ -1,0 +1,133 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ALBUM BROWSER - ATV Theme
+   Glass cards, large rounded corners, hover scale effect
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.album-browser {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+    padding: 16px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--color-gray-700);
+        border-radius: 2px;
+    }
+}
+
+.album-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: var(--radius-lg);
+    padding: 4px;
+    transition: background 0.2s, transform 0.2s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.06);
+        transform: scale(1.03);
+
+        .album-card__art {
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+        }
+    }
+}
+
+.album-card__art {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+    background: var(--color-gray-800);
+    transition: box-shadow 0.2s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.album-card__title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.album-card__artist {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ─── List-view rows ──────────────────────────────────────────────────── */
+.album-list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-dark);
+    transition: background 0.15s;
+    border-radius: var(--radius-md);
+    margin: 1px 4px;
+
+    &:hover {
+        background: rgba(10, 132, 255, 0.1);
+    }
+}
+
+.album-list-item__art {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    background: var(--color-gray-800);
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.album-list-item__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.album-list-item__title {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.album-list-item__meta {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Track menu button ───────────────────────────────────────────────── */
+.track-menu-btn {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+    opacity: 1;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.16);
+        color: var(--text-primary);
+        opacity: 1;
+    }
+}

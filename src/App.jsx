@@ -3,6 +3,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Player from './pages/Player';
+import ThemeTester from './pages/ThemeTester';
 // import './App.scss'; // Assuming you might have app-specific styles or use index.scss
 
 const App = () => {
@@ -15,7 +16,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/player" element={<Player />} />
-                {/* Add more routes as needed */}
+                <Route path="/theme-tester" element={<ThemeTester />} />
               </Routes>
             </main>
           </div>

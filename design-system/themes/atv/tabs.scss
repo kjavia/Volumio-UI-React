@@ -1,0 +1,83 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TABS - ATV Theme
+   Pill-style navigation tabs, Apple-inspired
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.nav-tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border-dark);
+    padding: 0 4px;
+}
+
+.nav-item {
+    list-style: none;
+}
+
+.nav-link {
+    display: block;
+    padding: 9px 18px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+    border: none;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    background: transparent;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+    text-decoration: none;
+    margin-bottom: -1px;
+
+    &:hover {
+        color: var(--text-primary);
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    &.active {
+        color: var(--color-primary);
+        border-bottom: 2px solid var(--color-primary);
+        background: transparent;
+    }
+}
+
+.tab-pane {
+    display: none;
+    padding: 18px 0;
+
+    &.active {
+        display: block;
+    }
+}
+
+/* ─── Pill-style tabs ─────────────────────────────────────────────────── */
+.nav-pills {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: rgba(28, 28, 30, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-dark);
+
+    .nav-link {
+        padding: 7px 16px;
+        border-radius: var(--radius-md);
+        margin-bottom: 0;
+        color: var(--text-secondary);
+
+        &.active {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-bottom: none;
+            box-shadow: 0 3px 10px rgba(10, 132, 255, 0.35);
+        }
+
+        &:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+        }
+    }
+}

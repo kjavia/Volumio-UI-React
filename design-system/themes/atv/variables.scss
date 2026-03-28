@@ -1,0 +1,270 @@
+:root {
+    /* ═══════════════════════════════════════════════════════════════════════
+       COLOR PALETTE - ATV Theme
+       tvOS / Apple TV inspired — pure black, frosted glass, Apple blue
+       ═══════════════════════════════════════════════════════════════════════ */
+
+    /* ─── Primary (Apple Blue) ─────────────────────────────────────────── */
+    --color-primary: #0A84FF;
+    --color-primary-light: #409CFF;
+    --color-primary-dark: #0066CC;
+    --color-primary-deep: #004499;
+
+    /* ─── Neutrals (Apple Dark) ───────────────────────────────────────── */
+    --color-black: #000000;
+    --color-gray-950: #000000;
+    --color-gray-900: #0a0a0a;
+    --color-gray-850: #111111;
+    --color-gray-800: #1c1c1e;
+    --color-gray-750: #2c2c2e;
+    --color-gray-700: #3a3a3c;
+    --color-gray-600: #48484a;
+    --color-gray-550: #636366;
+    --color-gray-500: #8e8e93;
+    --color-gray-400: #aeaeb2;
+    --color-gray-300: #c7c7cc;
+    --color-gray-250: #d1d1d6;
+    --color-gray-200: #e5e5ea;
+    --color-gray-150: #ebebf0;
+    --color-gray-100: #f2f2f7;
+    --color-gray-075: #f5f5f7;
+    --color-gray-050: #f9f9fb;
+    --color-gray-025: #fafafc;
+    --color-gray-010: #fdfdfe;
+    --color-white: #ffffff;
+
+    /* ─── Secondary (Apple Purple) ────────────────────────────────────── */
+    --color-secondary: #5E5CE6;
+    --color-secondary-light: #7D7AFF;
+    --color-secondary-dark: #4845D6;
+
+    /* ─── Success (Apple Green) ───────────────────────────────────────── */
+    --color-success: #30D158;
+    --color-success-dark: #25A244;
+    --color-success-light: #4AD96F;
+
+    /* ─── Warning (Apple Orange/Yellow) ──────────────────────────────── */
+    --color-warning: #FF9F0A;
+    --color-warning-dark: #CC7A00;
+    --color-warning-light: #FFB340;
+
+    /* ─── Danger (Apple Red) ──────────────────────────────────────────── */
+    --color-danger: #FF453A;
+    --color-danger-dark: #D70015;
+    --color-danger-light: #FF6961;
+    --color-danger-muted: #3a0000;
+
+    /* ─── Info (Apple Teal) ───────────────────────────────────────────── */
+    --color-info: #5AC8FA;
+    --color-info-dark: #32ADE6;
+    --color-info-light: #70D7FF;
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       SEMANTIC COLORS - tvOS Dark
+       ═══════════════════════════════════════════════════════════════════════ */
+
+    --text-primary: #ffffff;
+    --text-secondary: rgba(235, 235, 245, 0.6);
+    --text-accent: var(--color-primary);
+    --text-success: var(--color-success);
+    --text-warning: var(--color-warning);
+    --text-danger: var(--color-danger);
+    --text-info: var(--color-info);
+
+    --bg-color: var(--color-gray-950);
+    --panel-bg-dark: rgba(28, 28, 30, 0.85);
+    --device-surface: rgba(44, 44, 46, 0.9);
+
+    --btn-bg-dark: var(--color-gray-750);
+    --btn-bg-light: var(--color-gray-100);
+    --btn-bg-primary: var(--color-primary);
+    --btn-bg-secondary: var(--color-secondary);
+    --btn-bg-success: var(--color-success);
+    --btn-bg-warning: var(--color-warning);
+    --btn-bg-danger: var(--color-danger);
+    --btn-bg-info: var(--color-info);
+
+    /* ─── Alert Backgrounds ───────────────────────────────────────────── */
+    --alert-bg-success: rgba(48, 209, 88, 0.12);
+    --alert-bg-warning: rgba(255, 159, 10, 0.12);
+    --alert-bg-danger: rgba(255, 69, 58, 0.12);
+    --alert-bg-info: rgba(90, 200, 250, 0.12);
+    --alert-border-success: var(--color-success);
+    --alert-border-warning: var(--color-warning);
+    --alert-border-danger: var(--color-danger);
+    --alert-border-info: var(--color-info);
+
+    /* ─── UI Components ───────────────────────────────────────────────── */
+    --list-item-bg: rgba(255, 255, 255, 0.04);
+    --list-item-bg-hover: rgba(10, 132, 255, 0.15);
+    --border-dark: rgba(255, 255, 255, 0.08);
+    --border-light: rgba(255, 255, 255, 0.14);
+    --border-warm: var(--color-gray-750);
+    --border-primary: var(--color-primary);
+    --border-secondary: var(--color-secondary);
+    --border-success: var(--color-success);
+    --border-warning: var(--color-warning);
+    --border-danger: var(--color-danger);
+    --border-info: var(--color-info);
+
+    /* ─── Indicators ──────────────────────────────────────────────────── */
+    --led-on: var(--color-success);
+    --led-off: #0a2e17;
+    --indicator-success: var(--color-success);
+    --indicator-warning: var(--color-warning);
+    --indicator-danger: var(--color-danger);
+    --indicator-info: var(--color-info);
+    --indicator-error: var(--color-danger);
+
+    /* ─── Gradients — ATV uses subtle dark gradients ──────────────────── */
+    --grad-primary: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark));
+    --grad-metallic: linear-gradient(135deg, var(--color-gray-800), var(--color-gray-750));
+    --grad-warm: linear-gradient(135deg, var(--color-gray-750), var(--color-gray-700));
+
+    /* ─── Button Colors ───────────────────────────────────────────────── */
+    --btn-black-top: var(--color-gray-750);
+    --btn-black-btm: var(--color-gray-800);
+    --btn-white-top: var(--color-gray-200);
+    --btn-white-btm: var(--color-gray-300);
+    --btn-primary-top: var(--color-primary-light);
+    --btn-primary-btm: var(--color-primary);
+    --btn-secondary-top: var(--color-secondary-light);
+    --btn-secondary-btm: var(--color-secondary);
+    --btn-success-top: var(--color-success-light);
+    --btn-success-btm: var(--color-success);
+    --btn-warning-top: var(--color-warning-light);
+    --btn-warning-btm: var(--color-warning);
+    --btn-danger-top: var(--color-danger-light);
+    --btn-danger-btm: var(--color-danger);
+    --btn-info-top: var(--color-info-light);
+    --btn-info-btm: var(--color-info);
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       SHADOW & HIGHLIGHT OVERLAYS
+       ═══════════════════════════════════════════════════════════════════════ */
+
+    --shadow-02: rgba(0, 0, 0, 0.02);
+    --shadow-03: rgba(0, 0, 0, 0.03);
+    --shadow-05: rgba(0, 0, 0, 0.05);
+    --shadow-08: rgba(0, 0, 0, 0.08);
+    --shadow-10: rgba(0, 0, 0, 0.1);
+    --shadow-15: rgba(0, 0, 0, 0.15);
+    --shadow-20: rgba(0, 0, 0, 0.2);
+    --shadow-30: rgba(0, 0, 0, 0.3);
+    --shadow-40: rgba(0, 0, 0, 0.4);
+    --shadow-50: rgba(0, 0, 0, 0.5);
+    --shadow-60: rgba(0, 0, 0, 0.6);
+    --shadow-80: rgba(0, 0, 0, 0.8);
+    --shadow-90: rgba(0, 0, 0, 0.9);
+
+    --highlight-03: rgba(255, 255, 255, 0.03);
+    --highlight-05: rgba(255, 255, 255, 0.05);
+    --highlight-10: rgba(255, 255, 255, 0.1);
+    --highlight-15: rgba(255, 255, 255, 0.15);
+    --highlight-20: rgba(255, 255, 255, 0.2);
+    --highlight-30: rgba(255, 255, 255, 0.3);
+    --highlight-40: rgba(255, 255, 255, 0.4);
+    --highlight-50: rgba(255, 255, 255, 0.5);
+    --highlight-60: rgba(255, 255, 255, 0.6);
+    --highlight-80: rgba(255, 255, 255, 0.8);
+
+    /* ─── Glow Effects ─────────────────────────────────────────────────── */
+    --glow-primary: rgba(10, 132, 255, 0.4);
+    --glow-success: rgba(48, 209, 88, 0.4);
+    --glow-warning: rgba(255, 159, 10, 0.4);
+    --glow-danger: rgba(255, 69, 58, 0.4);
+    --glow-info: rgba(90, 200, 250, 0.4);
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       TYPOGRAPHY — SF Pro / Apple System Font
+       ═══════════════════════════════════════════════════════════════════════ */
+
+    --font-body: -apple-system, 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif;
+    --font-label: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+    --font-tech: -apple-system, 'SF Pro Display', system-ui, sans-serif;
+    --font-display: -apple-system, 'SF Pro Display', system-ui, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', monospace;
+
+    /* ── Fluid Type Scale ─────────────────────────────────────────────── */
+    --text-xs:   clamp(0.625rem,  0.589rem + 0.179vw, 0.75rem);
+    --text-sm:   clamp(0.75rem,   0.714rem + 0.179vw, 0.875rem);
+    --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+    --text-md:   clamp(0.875rem,  0.804rem + 0.357vw, 1.125rem);
+    --text-lg:   clamp(1rem,      0.929rem + 0.357vw, 1.25rem);
+    --text-xl:   clamp(1.125rem,  1.018rem + 0.536vw, 1.5rem);
+    --text-2xl:  clamp(1.25rem,   1.071rem + 0.893vw, 1.875rem);
+    --text-3xl:  clamp(1.5rem,    1.214rem + 1.429vw, 2.5rem);
+    --text-4xl:  clamp(1.875rem,  1.482rem + 1.964vw, 3.25rem);
+
+    --leading-tight: 1.2;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.7;
+
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0em;
+    --tracking-wide: 0.01em;
+    --tracking-wider: 0.04em;
+    --tracking-widest: 0.08em;
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       BACKWARD COMPATIBILITY ALIASES
+       ═══════════════════════════════════════════════════════════════════════ */
+
+    --color-aqua-vivid: var(--color-primary);
+    --color-aqua-bright: var(--color-primary-light);
+    --color-aqua-mid: var(--color-primary-dark);
+    --color-aqua-deep: var(--color-primary-deep);
+
+    --color-green-vivid: var(--color-success);
+    --color-green-dark: var(--color-success-dark);
+    --color-yellow-vivid: var(--color-warning);
+    --color-red-vivid: var(--color-danger);
+    --color-red-deep: var(--color-danger-dark);
+    --color-teal-vivid: var(--color-info);
+    --color-teal-light: var(--color-info-light);
+    --color-teal-dark: var(--color-info-dark);
+
+    --text-dark: var(--text-primary);
+    --text-light: var(--color-white);
+    --text-muted: var(--text-secondary);
+    --text-dim: var(--color-gray-500);
+    --text-aqua: var(--text-accent);
+    --text-orange: var(--text-accent);
+
+    --btn-bg-accent: var(--btn-bg-primary);
+    --btn-bg-orange: var(--btn-bg-primary);
+    --btn-accent-top: var(--btn-primary-top);
+    --btn-accent-btm: var(--btn-primary-btm);
+    --btn-orange-top: var(--btn-primary-top);
+    --btn-orange-btm: var(--btn-primary-btm);
+    --btn-default-top: var(--btn-white-top);
+    --btn-default-btm: var(--btn-white-btm);
+
+    --led-green-on: var(--led-on);
+    --led-green-off: var(--led-off);
+
+    --grad-accent: var(--grad-primary);
+    --grad-orange-vivid: var(--grad-primary);
+    --grad-surface: var(--grad-metallic);
+    --grad-window: linear-gradient(180deg, var(--color-gray-800), var(--color-gray-850));
+    --glow-aqua-40: var(--glow-primary);
+    --glow-orange-40: var(--glow-primary);
+    --glow-aqua-60: rgba(10, 132, 255, 0.6);
+    --glow-aqua-20: rgba(10, 132, 255, 0.2);
+
+    --aqua-blue-top: var(--btn-primary-top);
+    --aqua-blue-btm: var(--btn-primary-btm);
+    --aqua-blue-border: var(--color-primary-dark);
+    --aqua-silver-top: var(--btn-white-top);
+    --aqua-silver-btm: var(--btn-white-btm);
+    --aqua-silver-border: var(--color-secondary);
+
+    --border-accent: var(--border-primary);
+
+    /* ─── Layout — Apple TV uses large, generous radii ────────────────── */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 22px;
+    --radius-full: 9999px;
+}
