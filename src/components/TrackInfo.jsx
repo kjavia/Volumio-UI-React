@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import MarqueeText from 'react-marquee-text';
+import Marquee from './Marquee';
 
 const TrackInfo = ({ title, artist, album, isInFooter }) => {
   return (
@@ -10,20 +10,20 @@ const TrackInfo = ({ title, artist, album, isInFooter }) => {
         }`}
     >
       <div
-        className={`track-title user-select-none text-truncate w-100 ${isInFooter ? 'h6 text-start mb-0' : 'responsive-title fw-bold'
+        className={`track-title user-select-none w-100 ${isInFooter ? 'h6 text-start mb-0' : 'responsive-title fw-bold'
           }`}
       >
-        {title ? <MarqueeText>{title}</MarqueeText> : 'Unknown Title'}
+        <Marquee>{title || 'Unknown Title'}</Marquee>
       </div>
       <div
-        className={`artist-name user-select-none text-truncate w-100 ${isInFooter ? 'small text-start' : 'responsive-artist'
+        className={`artist-name user-select-none w-100 ${isInFooter ? 'small text-start' : 'responsive-artist'
           }`}
       >
-        {artist ? <MarqueeText>{artist}</MarqueeText> : 'Unknown Artist'}
+        <Marquee>{artist || 'Unknown Artist'}</Marquee>
       </div>
       {!isInFooter && album && (
-        <div className="album-name user-select-none mt-1 small text-truncate w-100 responsive-album">
-          {album}
+        <div className="album-name user-select-none mt-1 small w-100 responsive-album">
+          <Marquee>{album}</Marquee>
         </div>
       )}
     </div>

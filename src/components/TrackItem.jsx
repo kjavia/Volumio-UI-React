@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import MarqueeText from 'react-marquee-text';
+import Marquee from './Marquee';
 import AddToPlaylistDialog from './AddToPlaylistDialog';
 import { useSocket } from '@/contexts/SocketContext';
 import useFavourites from '@/hooks/useFavourites';
@@ -392,11 +392,11 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
           }
         </div>
         <div className="browse-result-row__info">
-          <span className="browse-result-row__title">{item.title}</span>
+          <Marquee className="browse-result-row__title">{item.title}</Marquee>
           {(item.artist || item.album) && (
-            <span className="browse-result-row__sub">
+            <Marquee className="browse-result-row__sub">
               {[item.artist, item.album].filter(Boolean).join(' · ')}
-            </span>
+            </Marquee>
           )}
         </div>
         {showMenu ? (
