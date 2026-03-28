@@ -18,7 +18,7 @@ const PlayerSeekbar = ({ readOnly }) => {
 
   const currentSeconds = Math.floor(seek / 1000);
   const durationSeconds = duration || 0;
-  const progressPercent = durationSeconds > 0 ? (currentSeconds / durationSeconds) * 100 : 0;
+  const progressPercent = durationSeconds > 0 ? Math.min((currentSeconds / durationSeconds) * 100, 100) : 0;
 
   return (
     <div className={`slider-container ${readOnly ? 'read-only' : ''}`}>

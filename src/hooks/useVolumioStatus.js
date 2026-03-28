@@ -78,6 +78,7 @@ const useVolumioStatus = () => {
   const [bitrate, setBitrate] = useState('');
   const [service, setService] = useState('');
   const [position, setPosition] = useState(0);
+  const [streamUri, setStreamUri] = useState('');
   const [queue, setQueue] = useState([]);
 
   useEffect(() => {
@@ -101,6 +102,7 @@ const useVolumioStatus = () => {
       setTrackType(data.trackType || '');
       setBitrate(data.bitrate || '');
       setService(data.service || '');
+      setStreamUri(data.uri || '');
       if (data.position !== undefined) setPosition(data.position);
     };
 
@@ -231,6 +233,7 @@ const useVolumioStatus = () => {
     playFromQueue,
     isFavourite,
     toggleFavourite,
+    streamUri,
   };
 };
 

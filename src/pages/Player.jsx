@@ -110,6 +110,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     playFromQueue,
     isFavourite,
     toggleFavourite,
+    streamUri,
   } = useVolumioStatus();
 
   const [cycleIndex, setCycleIndex] = useState(null);
