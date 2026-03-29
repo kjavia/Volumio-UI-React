@@ -68,7 +68,7 @@ const FlipPanel = memo(({ value }) => {
 FlipPanel.displayName = 'FlipPanel';
 FlipPanel.propTypes = { value: PropTypes.number.isRequired };
 
-const FlipClock = ({ showSeconds = true, showWeather = false }) => {
+const FlipClock = ({ showSeconds = true, showWeather = false, use12Hour = true }) => {
   const { data: weather } = useWeather();
   const [time, setTime] = useState(() => new Date());
 
@@ -87,7 +87,7 @@ const FlipClock = ({ showSeconds = true, showWeather = false }) => {
   }, []);
 
   const hours24 = time.getHours();
-  const hours = hours24 % 12 || 12;
+  const displayHours = use12Hour ? (hours24 % 12 || 12) : hours24;
   const minutes = time.getMinutes();
   const seconds = time.getSeconds();
   const ampm = hours24 >= 12 ? 'PM' : 'AM';
@@ -102,7 +102,7 @@ const FlipClock = ({ showSeconds = true, showWeather = false }) => {
   return (
     <div className="flip-clock">
       <div className="flip-clock-body">
-        <FlipPanel value={hours} />
+        <FlipPanel value={displayHours} />
         <span className="flip-colon">:</span>
         <FlipPanel value={minutes} />
         {showSeconds && (
@@ -111,7 +111,7 @@ const FlipClock = ({ showSeconds = true, showWeather = false }) => {
             <FlipPanel value={seconds} />
           </>
         )}
-        <span className="flip-ampm">{ampm}</span>
+        {use12Hour && <span className="flip-ampm">{ampm}</span>}
 
         <div className="flip-clock-stand">
           <span className="flip-clock-date">{dateString}</span>
@@ -133,6 +133,7 @@ const FlipClock = ({ showSeconds = true, showWeather = false }) => {
 FlipClock.propTypes = {
   showSeconds: PropTypes.bool,
   showWeather: PropTypes.bool,
+  use12Hour: PropTypes.bool,
 };
 
 export default FlipClock;

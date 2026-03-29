@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
+import { DateTime } from 'luxon';
 import useWeather from '@/hooks/useWeather';
 import './Weather.scss';
 
 /* ── Helpers ──────────────────────────────────────────────────────────── */
 
-const formatTime = (iso) => {
-  const d = new Date(iso);
-  return d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+const formatTime = (iso, use24Hour = false) => {
+  const dt = DateTime.fromISO(iso);
+  return dt.toFormat(use24Hour ? 'HH:mm' : 'h:mm a');
 };
 
-const formatHour = (iso) => {
-  const d = new Date(iso);
-  return d.toLocaleTimeString(undefined, { hour: 'numeric' });
+const formatHour = (iso, use24Hour = false) => {
+  const dt = DateTime.fromISO(iso);
+  return dt.toFormat(use24Hour ? 'HH:mm' : 'h a');
 };
 
 const formatDay = (iso) => {
@@ -78,6 +79,7 @@ const CurrentWeather = ({
   showSunset,
   todaySunrise,
   todaySunset,
+  use24Hour,
 }) => (
   <div className="weather-current">
     <div className="weather-current-main">
@@ -107,10 +109,10 @@ const CurrentWeather = ({
         <DetailRow icon="water_drop" label="Humidity" value={`${current.humidity}%`} />
       )}
       {showSunrise && todaySunrise && (
-        <DetailRow icon="wb_twilight" label="Sunrise" value={formatTime(todaySunrise)} />
+        <DetailRow icon="wb_twilight" label="Sunrise" value={formatTime(todaySunrise, use24Hour)} />
       )}
       {showSunset && todaySunset && (
-        <DetailRow icon="nights_stay" label="Sunset" value={formatTime(todaySunset)} />
+        <DetailRow icon="nights_stay" label="Sunset" value={formatTime(todaySunset, use24Hour)} />
       )}
     </div>
   </div>
@@ -125,16 +127,17 @@ CurrentWeather.propTypes = {
   showSunset: PropTypes.bool,
   todaySunrise: PropTypes.string,
   todaySunset: PropTypes.string,
+  use24Hour: PropTypes.bool,
 };
 
 /* ── Hourly Forecast ──────────────────────────────────────────────────── */
 
-const HourlyForecast = ({ hourly, units, showWind }) => (
+const HourlyForecast = ({ hourly, units, showWind, use24Hour }) => (
   <div className="weather-hourly">
     <div className="weather-hourly-scroll">
       {hourly.map((h) => (
         <div key={h.time} className="weather-hourly-item">
-          <span className="weather-hourly-time">{formatHour(h.time)}</span>
+          <span className="weather-hourly-time">{formatHour(h.time, use24Hour)}</span>
           <WeatherIcon name={h.icon} className="weather-hourly-icon" />
           <span className="weather-hourly-temp">
             {round(h.temperature)}
@@ -155,11 +158,12 @@ HourlyForecast.propTypes = {
   hourly: PropTypes.array.isRequired,
   units: PropTypes.object.isRequired,
   showWind: PropTypes.bool,
+  use24Hour: PropTypes.bool,
 };
 
 /* ── Daily Forecast Card ──────────────────────────────────────────────── */
 
-const DailyCard = ({ day, units, showWind, showSunrise, showSunset, showPrecip, isToday }) => (
+const DailyCard = ({ day, units, showWind, showSunrise, showSunset, showPrecip, isToday, use24Hour }) => (
   <div className={`weather-daily-card ${isToday ? 'weather-daily-card--today' : ''}`}>
     <span className="weather-daily-day">{isToday ? 'Today' : formatDay(day.date)}</span>
     <span className="weather-daily-date">{formatDate(day.date)}</span>
@@ -190,13 +194,13 @@ const DailyCard = ({ day, units, showWind, showSunrise, showSunset, showPrecip, 
         {showSunrise && (
           <span className="weather-daily-sun-item">
             <WeatherIcon name="wb_twilight" className="weather-daily-meta-icon" />
-            {formatTime(day.sunrise)}
+            {formatTime(day.sunrise, use24Hour)}
           </span>
         )}
         {showSunset && (
           <span className="weather-daily-sun-item">
             <WeatherIcon name="nights_stay" className="weather-daily-meta-icon" />
-            {formatTime(day.sunset)}
+            {formatTime(day.sunset, use24Hour)}
           </span>
         )}
       </div>
@@ -211,6 +215,7 @@ DailyCard.propTypes = {
   showSunset: PropTypes.bool,
   showPrecip: PropTypes.bool,
   isToday: PropTypes.bool,
+  use24Hour: PropTypes.bool,
 };
 
 /* ── Full Dashboard ───────────────────────────────────────────────────── */
@@ -234,7 +239,7 @@ const LocationBadge = ({ name }) =>
   ) : null;
 LocationBadge.propTypes = { name: PropTypes.string };
 
-const WeatherFull = ({ current, hourly, daily, units, locationName }) => {
+const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour }) => {
   const today = daily[0];
   const precipitation = today.precipitation || 0;
   const visKm = hourly[0]?.visibility ? round(hourly[0].visibility / 1000) : null;
@@ -315,7 +320,7 @@ const WeatherFull = ({ current, hourly, daily, units, locationName }) => {
           {hourly.slice(0, 24).map((h, i) => (
             <div key={h.time} className="weather-full-hourly-item">
               <span className="weather-full-hourly-time">
-                {i === 0 ? 'Now' : formatHour(h.time)}
+                {i === 0 ? 'Now' : formatHour(h.time, use24Hour)}
               </span>
               <WeatherIcon name={h.icon} className="weather-full-hourly-icon" />
               <span className="weather-full-hourly-temp">
@@ -348,8 +353,8 @@ const WeatherFull = ({ current, hourly, daily, units, locationName }) => {
             </span>
             <span className="weather-full-tile-label">SUNRISE</span>
           </div>
-          <div className="weather-full-tile-value">{formatTime(today.sunrise)}</div>
-          <div className="weather-full-tile-sub">Sunset {formatTime(today.sunset)}</div>
+          <div className="weather-full-tile-value">{formatTime(today.sunrise, use24Hour)}</div>
+          <div className="weather-full-tile-sub">Sunset {formatTime(today.sunset, use24Hour)}</div>
         </div>
 
         <div className="weather-full-tile">
@@ -445,6 +450,7 @@ WeatherFull.propTypes = {
   daily: PropTypes.array.isRequired,
   units: PropTypes.object.isRequired,
   locationName: PropTypes.string,
+  use24Hour: PropTypes.bool,
 };
 
 /* ── Main Weather Component ───────────────────────────────────────────── */
@@ -459,6 +465,7 @@ const Weather = ({
   showPrecip = true,
   days = 10,
   hours = 24,
+  use24Hour = false,
 }) => {
   const { data, isLoading, isError, locationName } = useWeather();
   if (isLoading) {
@@ -480,7 +487,7 @@ const Weather = ({
   const today = daily[0];
 
   if (mode === 'full') {
-    return <WeatherFull current={current} hourly={hourly} daily={daily} units={units} locationName={locationName} />;
+    return <WeatherFull current={current} hourly={hourly} daily={daily} units={units} locationName={locationName} use24Hour={use24Hour} />;
   }
 
   return (
@@ -498,12 +505,13 @@ const Weather = ({
           showSunset={showSunset}
           todaySunrise={today?.sunrise}
           todaySunset={today?.sunset}
+          use24Hour={use24Hour}
         />
       )}
 
       {/* Hourly */}
       {mode === 'hourly' && (
-        <HourlyForecast hourly={hourly.slice(0, hours)} units={units} showWind={showWind} />
+        <HourlyForecast hourly={hourly.slice(0, hours)} units={units} showWind={showWind} use24Hour={use24Hour} />
       )}
 
       {/* Daily */}
@@ -519,6 +527,7 @@ const Weather = ({
               showSunset={showSunset}
               showPrecip={showPrecip}
               isToday={i === 0}
+              use24Hour={use24Hour}
             />
           ))}
         </div>
@@ -537,6 +546,7 @@ Weather.propTypes = {
   showPrecip: PropTypes.bool,
   days: PropTypes.number,
   hours: PropTypes.number,
+  use24Hour: PropTypes.bool,
 };
 
 export default Weather;

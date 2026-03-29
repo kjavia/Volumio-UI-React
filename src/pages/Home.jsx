@@ -159,6 +159,7 @@ const Home = () => {
     slideshowInterval,
     analogClockShowDate,
     externalUrl,
+    use24Hour,
   } = useIdleScreen();
 
   // When the hook naturally clears idle (e.g. playback resumed), reset forcePlayer too
@@ -184,6 +185,7 @@ const Home = () => {
         showSeconds={wallpaperShowSeconds}
         showWeather={wallpaperShowWeather}
         slideshowInterval={slideshowInterval}
+        use24Hour={use24Hour}
       />
     );
   } else if (idleScreen === 'externalUrl') {
@@ -200,6 +202,7 @@ const Home = () => {
           showSunrise
           showSunset
           showPrecip
+          use24Hour={use24Hour}
         />
       );
     } else {
@@ -212,7 +215,7 @@ const Home = () => {
             showDate={analogClockShowDate}
           />
         ) : (
-          <ClockComponent showWeather={showWeatherInClock} showSeconds={wallpaperShowSeconds} />
+          <ClockComponent showWeather={showWeatherInClock} showSeconds={wallpaperShowSeconds} use12Hour={!use24Hour} />
         );
     }
   }

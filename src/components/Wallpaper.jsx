@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { DateTime } from 'luxon';
 import useWeather from '@/hooks/useWeather';
 import useWallpaperImages from '@/hooks/useWallpaperImages';
 import './Wallpaper.scss';
@@ -21,6 +22,7 @@ const Wallpaper = ({
   showSeconds = false,
   showWeather = true,
   slideshowInterval = 30,
+  use24Hour = false,
 }) => {
   const { data: images = [] } = useWallpaperImages(url);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -58,12 +60,12 @@ const Wallpaper = ({
   }, [showTime]);
 
   const formatTime = useCallback(() => {
-    const h = time.getHours() % 12 || 12;
-    const m = String(time.getMinutes()).padStart(2, '0');
-    const s = String(time.getSeconds()).padStart(2, '0');
-    const ampm = time.getHours() >= 12 ? 'PM' : 'AM';
-    return showSeconds ? `${h}:${m}:${s} ${ampm}` : `${h}:${m} ${ampm}`;
-  }, [time, showSeconds]);
+    const dt = DateTime.fromJSDate(time);
+    if (use24Hour) {
+      return showSeconds ? dt.toFormat('HH:mm:ss') : dt.toFormat('HH:mm');
+    }
+    return showSeconds ? dt.toFormat('h:mm:ss a') : dt.toFormat('h:mm a');
+  }, [time, showSeconds, use24Hour]);
 
   const currentImage = images[currentIndex];
 
@@ -112,6 +114,7 @@ Wallpaper.propTypes = {
   showSeconds: PropTypes.bool,
   showWeather: PropTypes.bool,
   slideshowInterval: PropTypes.number,
+  use24Hour: PropTypes.bool,
 };
 
 export default Wallpaper;
