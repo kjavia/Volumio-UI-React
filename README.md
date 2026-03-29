@@ -85,11 +85,7 @@ Open <http://localhost:5173> in your browser.
 | `npm run lint`    | Lint source files                |
 
 ### Visualizations
-
-### Required for spectrum analyzer
-Install the MPD Http & IceCast Output plugin and enable this plugin, 
-and make sure it's set to port 8000
-
+Currently does not work on any Apple devices (webkit based browsers). Requires hardware accelaration on the browser to be enabled for best performance.
 
 ## Plugin installation on Volumio device for testing
 
