@@ -58,12 +58,13 @@
 }
 
 .weather-current-icon {
-  font-size: clamp(3rem, 18cqh, 12rem);
+  font-size: clamp(4.5rem, 27cqh, 18rem) !important;
+  margin-right: 0.25em;
 }
 
 .weather-current-temp {
   font-family: var(--font-display, var(--font-tech, 'Michroma'), sans-serif);
-  font-size: clamp(4rem, 28cqh, 20rem);
+  font-size: clamp(3.2rem, 22cqh, 16rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.02em;

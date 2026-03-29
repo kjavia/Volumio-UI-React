@@ -475,7 +475,15 @@ const Weather = ({
       </div>
     );
   }
-  if (isError || !data) {
+  if (!data) {
+    return (
+      <div className="weather-container weather-container--error">
+        <span className="weather-error-text">Fetching Weather...</span>
+      </div>
+    );
+  }
+  console.log('Weather data:', isError);
+  if (isError) {
     return (
       <div className="weather-container weather-container--error">
         <span className="weather-error-text">Failed to fetch weather</span>
