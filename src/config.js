@@ -21,7 +21,7 @@ const PLUGIN_PORT = import.meta.env.DEV
   : Number(window.location.port);
 
 const VOLUMIO_API_PORT = 3000;
-const SPECTRUM_STREAM_PORT = 9993;
+const SPECTRUM_STREAM_PORT = 8000;
 
 const VOLUMIO_BASE_URL = `http://${VOLUMIO_HOST}:${VOLUMIO_API_PORT}`;
 // Empty string = relative URL in production, so requests use whatever
