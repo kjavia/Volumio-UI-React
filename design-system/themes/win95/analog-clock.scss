@@ -2,23 +2,6 @@
  * Classic silver face, navy accent hands, pixel font digits
  * ──────────────────────────────────────────────────────────────────────── */
 
-.analog-clock-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  user-select: none;
-  container-type: size;
-}
-
-.analog-clock {
-  --clock-size: min(80cqw, 80cqh);
-  width: var(--clock-size);
-  height: var(--clock-size);
-}
-
 /* Raised bezel — Win95 3D bevel on a circle */
 .clock-bezel {
   width: 100%;
@@ -47,15 +30,6 @@
 }
 
 /* Tick marks */
-.clock-tick {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: 50%;
-  transform-origin: bottom center;
-  pointer-events: none;
-}
 
 .clock-tick::before {
   content: '';
@@ -139,20 +113,6 @@
   z-index: 6;
 }
 
-/* Day and date */
-.clock-face-info {
-  position: absolute;
-  top: 62%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  pointer-events: none;
-  z-index: 1;
-}
-
 .clock-face-day {
   font-family: 'Pixelify Sans', 'Courier New', monospace;
   font-size: clamp(0.8rem, 4cqi, 1.5rem);
@@ -171,17 +131,6 @@
 }
 
 /* Weather on face */
-.clock-face-weather {
-  position: absolute;
-  top: 28%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  pointer-events: none;
-  z-index: 1;
-}
 
 .clock-face-weather-icon {
   font-size: clamp(0.7rem, 3.5cqi, 1.4rem);

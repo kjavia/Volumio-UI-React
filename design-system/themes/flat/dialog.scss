@@ -14,18 +14,6 @@
   -webkit-backdrop-filter: blur(4px);
 }
 
-/* ── Dialog Container (Centered) ── */
-.dialog-container {
-  position: fixed;
-  inset: 0;
-  z-index: 2010;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  pointer-events: none;
-}
-
 /* ── Dialog Box ── */
 .dialog {
   position: relative;
@@ -138,16 +126,6 @@
   border-top: 1px solid var(--border-dark);
   background: var(--color-gray-900);
   flex-shrink: 0;
-}
-
-/* ── Size Variants ── */
-.dialog-sm  { max-width: 400px; }
-.dialog-md  { max-width: 600px; }
-.dialog-lg  { max-width: 800px; }
-.dialog-xl  { max-width: 1200px; }
-.dialog-full {
-  max-width: calc(100vw - 2rem);
-  max-height: calc(100vh - 2rem);
 }
 
 /* ── List Items ── */
