@@ -113,15 +113,21 @@
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -244,15 +250,21 @@
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -530,15 +542,21 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -741,15 +759,21 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -862,6 +886,58 @@ pre {
   filter: grayscale(100%);
 }
 
+/* ─── Icon Button ─────────────────────────────────────────────────────── */
+/* Flat, transparent button for toolbar icon actions — no metallic chrome */
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+  /* Reset metallic .btn chrome */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+  color: var(--text-muted);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn-icon .material-icons {
+  font-size: 20px;
+}
+.btn-icon:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
+  box-shadow: none;
+  transform: none;
+}
+.btn-icon:active {
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--text-light);
+  transform: none;
+  box-shadow: none;
+}
+.btn-icon.active {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transform: none;
+  color: var(--color-primary);
+}
+.btn-icon.active:hover {
+  background: rgba(0, 225, 255, 0.08);
+}
+.btn-icon:disabled, .btn-icon.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: none;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Dark Metallic / Black Chrome Theme
@@ -972,15 +1048,21 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -1222,15 +1304,21 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -1419,15 +1507,21 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -1633,15 +1727,21 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -1843,15 +1943,21 @@ pre {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -2074,15 +2180,21 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -2211,23 +2323,23 @@ h2 {
 }
 
 .responsive-title {
-  font-size: clamp(1.1rem, 4vw, 2rem);
+  font-size: clamp(1rem, 4.5cqw, 3rem);
 }
 
 .responsive-artist {
-  font-size: clamp(0.75rem, 2vw, 1.1rem);
+  font-size: clamp(0.75rem, 3.5cqw, 2.5rem);
 }
 
 .responsive-album {
-  font-size: clamp(0.7rem, 1.8vw, 1rem);
+  font-size: clamp(0.7rem, 1.8cqw, 0.95rem);
 }
 
 .responsive-stream-info {
-  font-size: clamp(0.62rem, 1.3vw, 0.82rem);
+  font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
 }
 
 .format-logo-responsive {
-  height: clamp(0.85rem, 1.6vw, 1.4rem);
+  height: clamp(1.3rem, 3.8cqw, 4.2rem);
   display: block;
 }
 
@@ -2404,15 +2516,21 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -2613,15 +2731,21 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -2637,6 +2761,125 @@ h2 {
 /* ═══════════════════════════════════════════════════════════════════════
    PLAYLIST - Metallic Chrome Theme
    ═══════════════════════════════════════════════════════════════════════ */
+/* ── Queue Info Bar ── */
+.playlist-info {
+  font-size: 0.72rem;
+  border-bottom: 1px solid var(--color-gray-700);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.playlist-info-count {
+  color: var(--color-gray-500);
+  font-family: var(--font-label);
+}
+
+.playlist-info-position {
+  color: var(--color-accent);
+  font-family: var(--font-label);
+  font-weight: 500;
+}
+
+/* ── Playlist Items ── */
+.playlist-list {
+  padding-bottom: 1rem;
+}
+
+.playlist-item {
+  border-bottom: 1px solid var(--color-gray-700);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+  padding: 8px 4px;
+}
+.playlist-item:last-child {
+  border-bottom: none;
+}
+.playlist-item:hover {
+  background: var(--list-item-bg-hover);
+}
+
+/* Active / current track */
+.playlist-item--active {
+  background: var(--list-item-bg-hover);
+}
+.playlist-item--active .playlist-track-title {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+/* ── Album Art ── */
+.playlist-art-wrap {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--color-gray-700);
+}
+
+.playlist-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.playlist-art--empty {
+  background: var(--color-gray-750);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-gray-500);
+}
+
+/* Play icon overlay on current track's art */
+.playlist-art-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--shadow-60);
+  color: var(--color-white);
+  backdrop-filter: blur(2px);
+}
+
+/* ── Track Text ── */
+.playlist-track-title {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.3;
+  font-family: var(--font-label);
+  transition: color 0.15s ease;
+}
+
+.playlist-track-meta {
+  font-size: 0.72rem;
+  color: var(--color-gray-500);
+  line-height: 1.3;
+  font-family: var(--font-label);
+}
+
+/* ── Remove Button ── */
+.playlist-remove {
+  flex-shrink: 0;
+  text-decoration: none !important;
+  color: var(--text-primary);
+  background: var(--highlight-10);
+  border-radius: 4px;
+  transition: opacity 0.15s, color 0.15s, background 0.15s;
+}
+.playlist-remove .material-icons {
+  font-size: 1.1rem;
+}
+
+.playlist-item:hover .playlist-remove:hover {
+  background: rgba(255, 68, 68, 0.18);
+  color: var(--color-danger) !important;
+}
+
 .playlist-container {
   display: flex;
   flex-direction: column;
@@ -2828,15 +3071,21 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -2850,83 +3099,77 @@ h2 {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   SIDE PANEL - Metallic Chrome Theme
+   SLIDE PANEL - Metallic Chrome Theme
    ═══════════════════════════════════════════════════════════════════════ */
-.sidepanel {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 400px;
-  max-width: 90vw;
-  height: 100vh;
-  background: linear-gradient(135deg, var(--color-gray-800) 0%, var(--color-gray-850) 100%);
-  box-shadow: -4px 0 20px var(--shadow-50);
-  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 3000;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidepanel.open {
-  right: 0;
-}
-
-.sidepanel-header {
-  padding: 20px;
-  background: linear-gradient(180deg, var(--color-gray-750), var(--color-gray-800));
-  border-bottom: 1px solid var(--color-gray-700);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 2px 8px var(--shadow-20);
-}
-
-.sidepanel-title {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  color: var(--text-light);
-  margin: 0;
-  text-shadow: 0 1px 2px var(--shadow-30);
-}
-
-.sidepanel-close {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.15s ease;
-}
-.sidepanel-close:hover {
-  background: var(--highlight-10);
-  color: var(--text-light);
-}
-
-.sidepanel-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-}
-
-.sidepanel-backdrop {
+/* ── Backdrop ── */
+.slide-panel-backdrop {
   position: fixed;
   inset: 0;
-  background: var(--shadow-60);
-  backdrop-filter: blur(8px);
-  z-index: 2999;
-  opacity: 0;
+  z-index: 1040;
+  background: transparent;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide-panel-backdrop.show {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: auto;
 }
 
-.sidepanel-backdrop.visible {
-  opacity: 1;
-  pointer-events: auto;
+/* ── Panel ── */
+.slide-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  max-width: 80vw;
+  background: linear-gradient(135deg, var(--color-gray-800) 0%, var(--color-gray-850) 100%);
+  border-right: 1px solid var(--color-gray-700);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+.slide-panel.open {
+  transform: translateX(0);
+}
+
+/* ── Header ── */
+.slide-panel-header {
+  background: linear-gradient(180deg, var(--color-gray-750), var(--color-gray-800));
+  border-bottom: 1px solid var(--color-gray-700);
+  flex-shrink: 0;
+}
+
+/* ── Title Group ── */
+.slide-panel-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.slide-panel-subtitle {
+  font-size: 0.7rem;
+  color: var(--color-gray-500);
+  font-family: var(--font-label);
+}
+
+.slide-panel-title {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  color: var(--text-light);
+}
+
+/* ── Body ── */
+.slide-panel-body {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  padding: 12px 16px;
 }
 
 :root {
@@ -3039,15 +3282,21 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -3094,6 +3343,27 @@ h2 {
 .context-menu-toggle:active {
   transform: scale(0.95);
   box-shadow: inset 0 2px 6px var(--shadow-30), 0 2px 8px var(--shadow-20);
+}
+
+/* ── No-shadow variant ────────────────────────────────────────────────── */
+.context-menu-toggle--no-shadow {
+  background: rgba(0, 0, 0, 0.35);
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--color-primary);
+}
+.context-menu-toggle--no-shadow:hover {
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: none !important;
+  transform: none;
+}
+.context-menu-toggle--no-shadow:active {
+  box-shadow: none !important;
+  transform: none;
+}
+.context-menu-toggle--no-shadow .material-icons {
+  color: var(--color-primary);
+  filter: none;
 }
 
 .context-menu-toggle .material-icons {
@@ -3173,33 +3443,6 @@ h2 {
   color: var(--text-secondary);
 }
 
-.cd-disc {
-  background: conic-gradient(from 180deg, #cfcfcf 0%, #ffffff 15%, #bdc3c7 30%, #95a5a6 45%, #bdc3c7 60%, #ffffff 75%, #bdc3c7 90%, #cfcfcf 100%);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2), 0 10px 30px rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.cd-disc::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 50%;
-  background: conic-gradient(transparent 0%, rgba(255, 0, 0, 0.1) 10%, rgba(255, 255, 0, 0.1) 20%, transparent 30%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 0, 255, 0.1) 65%, transparent 80%, rgba(255, 0, 255, 0.1) 90%, transparent 100%);
-  pointer-events: none;
-}
-
-.cd-inner-ring {
-  background: radial-gradient(circle, #e0e0e0 30%, #b0b0b0 100%);
-  border: 1px solid #777;
-}
-
-.cd-hole {
-  background: #111;
-  box-shadow: inset 0 2px 4px rgb(0, 0, 0);
-}
-
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Dark Metallic / Black Chrome Theme
@@ -3310,15 +3553,21 @@ h2 {
   --font-body: 'Titillium Web', sans-serif;
   --font-code: 'Share Tech Mono', monospace;
   --font-tech: 'Share Tech Mono', monospace;
+  --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 42px;
+  /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -3446,11 +3695,36 @@ h2 {
   transform: scale(0.95);
 }
 
+/* ── Toolbar ─────────────────────────────────────────────────────────── */
+.dialog-toolbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 1rem;
+  flex-shrink: 0;
+}
+.dialog-toolbar .btn-icon {
+  color: var(--text-light);
+}
+.dialog-toolbar .btn-icon.active {
+  color: var(--color-primary);
+}
+.dialog-toolbar .browse-search__input {
+  color: var(--text-light);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.2);
+}
+.dialog-toolbar .browse-search__input:focus {
+  border-color: var(--color-primary);
+}
+.dialog-toolbar .browse-search__icon {
+  color: var(--text-light);
+}
+
 /* ── Body ─────────────────────────────────────────────────────────────── */
 .dialog-body {
   flex: 1 1 auto;
   overflow-y: auto;
-  padding: 1.25rem;
+  padding: 1em;
   color: var(--text-light);
   font-family: var(--font-body);
   font-size: var(--text-base);
@@ -3673,6 +3947,22 @@ h2 {
     font-size: 1rem;
   }
 }
+/* ── Browse Tiles ── */
+.browse-tile {
+  color: var(--text-secondary);
+  background: transparent;
+}
+.browse-tile:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-primary);
+}
+.browse-tile .browse-tile__icon {
+  color: var(--color-primary);
+}
+.browse-tile .browse-tile__label {
+  color: var(--text-secondary);
+}
+
 /* ── Digital LCD Clock — Metallic Chrome Variant ───────────────────────────
  * Reference: retro LCD weather-station / radio clock aesthetic
  * Dark gunmetal bezel + pale cool-gray LCD glass + classic dark segments
@@ -3745,15 +4035,27 @@ h2 {
 
 /* ── LCD Panel (the glassy screen area) ─────────────────────────────────── */
 .digital-clock {
+  position: relative;
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
   padding: 1.2cqw 1.8cqw;
   border-radius: 2px;
-  background: #c4d0d4;
-  border: 0.2cqw solid #8fa0a6;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35), inset 0 0 0 0.1cqw rgba(255, 255, 255, 0.25), 0 1px 0 rgba(255, 255, 255, 0.04);
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.02) 2px, rgba(0, 0, 0, 0.02) 3px), linear-gradient(180deg, #cdd9dd 0%, #c4d0d4 60%, #b8c6cb 100%);
+  background: #bfcfe8;
+  border: 0.2cqw solid #7a9ab8;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35), inset 0 0 0 0.1cqw rgba(255, 255, 255, 0.2), 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.02) 2px, rgba(0, 0, 0, 0.02) 3px), linear-gradient(180deg, #ccd8e8 0%, #bfcfe8 55%, #aec4e0 100%);
+}
+.digital-clock::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(0, 100, 255, 0.38) 0%, rgba(0, 70, 220, 0.2) 40%, transparent 75%);
+  pointer-events: none;
 }
 
 /* ── Day-of-week bar ────────────────────────────────────────────────────── */
@@ -3775,6 +4077,7 @@ h2 {
   color: #1c3038;
   opacity: 1;
   border-bottom: 0.2cqw solid #1c3038;
+  filter: drop-shadow(2px 2px 0 rgba(28, 48, 56, 0.6));
 }
 
 /* ── Time row ───────────────────────────────────────────────────────────── */
@@ -3787,7 +4090,7 @@ h2 {
 .lcd-digits {
   display: flex;
   align-items: center;
-  gap: 0.2cqw;
+  gap: 2cqw;
 }
 
 .lcd-ampm {
@@ -3799,6 +4102,7 @@ h2 {
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
   text-transform: uppercase;
+  filter: drop-shadow(2px 2px 0 rgba(28, 48, 56, 0.6));
 }
 
 /* ── Colon separator ────────────────────────────────────────────────────── */
@@ -3807,24 +4111,38 @@ h2 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 28%;
-  width: 1.5cqw;
+  gap: 3cqw;
+  width: 2.5cqw;
   height: 100%;
-  padding: 15% 0;
+  padding: 2cqh 0;
 }
 
 .lcd-colon-dot {
-  width: 0.8cqw;
-  height: 0.8cqw;
+  width: 1.4cqw;
+  height: 1.4cqw;
   background: #1c3038;
   border-radius: 1px;
+  filter: drop-shadow(2px 2px 0 rgba(28, 48, 56, 0.6));
 }
 
+.lcd-colon--blink .lcd-colon-dot {
+  animation: lcd-blink 1s step-start infinite;
+}
+
+@keyframes lcd-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
 /* ── 7-Segment Digit ────────────────────────────────────────────────────── */
 .lcd-digit {
   position: relative;
   width: 11cqw;
   height: 18.7cqw;
+  filter: drop-shadow(2px 2px 0 rgba(28, 48, 56, 0.6));
 }
 
 .seg {
@@ -3836,7 +4154,7 @@ h2 {
   opacity: 1;
 }
 .seg.off {
-  opacity: 0.07;
+  opacity: 0.03;
 }
 
 .seg-a,
@@ -4093,6 +4411,37 @@ h2 {
   font-weight: 700;
   color: var(--color-gray-150, #dddddd);
   white-space: nowrap;
+}
+
+/* ── Flip Clock – Metallic Chrome Theme ──────────────────────────────────── */
+.tick-flip-panel {
+  color: #c8d8e8;
+  background-color: #1a1a1a;
+}
+
+.tick-flip-panel-front {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.04) 45%, transparent 60%), linear-gradient(180deg, #3c3c3c 0%, #1c1c1c 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.tick-flip-panel-back {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 40%), linear-gradient(180deg, #121212 0%, #1c1c1c 100%);
+}
+
+.flip-clock-body {
+  border-color: var(--color-white, #ffffff);
+  box-shadow: 0 0 0 1px rgba(0, 225, 255, 0.2), 0 0 18px rgba(0, 225, 255, 0.12), 0 10px 40px rgba(0, 0, 0, 0.95);
+}
+
+.flip-clock-stand {
+  background: linear-gradient(180deg, #2e2e2e 0%, #141414 100%);
+  border-top: 1px solid #444;
+}
+
+.flip-clock-date,
+.flip-clock-weather {
+  color: var(--color-primary, #00e1ff);
+  text-shadow: 0 0 6px rgba(0, 225, 255, 0.4);
 }
 
 body {

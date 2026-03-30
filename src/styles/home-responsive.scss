@@ -346,7 +346,7 @@ body,
 }
 
 .browse-search__input {
-  padding: 0.3rem 0.75rem 0.3rem 2rem;
+  padding: 0.3rem 2rem 0.3rem 2rem;
   border-radius: 20px;
   border: 1px solid rgba(128, 128, 128, 0.35);
   background: transparent;
@@ -365,6 +365,40 @@ body,
 
 .browse-search__input::placeholder {
   opacity: 0.5;
+}
+
+.browse-search__clear {
+  position: absolute;
+  right: 0.4rem;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.5;
+  line-height: 1;
+
+  &:hover { opacity: 0.9; }
+
+  .material-icons { font-size: 1rem !important; }
+}
+
+/* ── Browse search results (sectioned) ── */
+.browse-search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.browse-search-section__title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+  margin: 0 0 0.5rem 0.25rem;
 }
 
 /* ── Browse Play All button ── */

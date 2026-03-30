@@ -137,6 +137,7 @@ input[type='range']::-moz-range-thumb:active {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 0 1em;
 }
 
 .slider-track {

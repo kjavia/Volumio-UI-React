@@ -6,18 +6,19 @@ import Button from './Button';
 import TrackItem from './TrackItem';
 import AddToPlaylistDialog from './AddToPlaylistDialog';
 import useBrowse from '@/hooks/useBrowse';
+import useSearch from '@/hooks/useSearch';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import { useSocket } from '@/contexts/SocketContext';
 
 const BROWSE_TILES = [
-  { id: 'favourites',    label: 'Favorites',    icon: 'favorite',      uri: 'favourites' },
-  { id: 'playlists',     label: 'Playlists',    icon: 'queue_music',   uri: 'playlists' },
-  { id: 'music-library', label: 'Music Library',icon: 'library_music', uri: 'music-library' },
-  { id: 'artists',       label: 'Artists',      icon: 'person',        uri: 'artists://' },
-  { id: 'albums',        label: 'Albums',       icon: 'album',         uri: 'albums://' },
-  { id: 'genres',        label: 'Genres',       icon: 'category',      uri: 'genres://' },
-  { id: 'last-100',      label: 'Last 100',     icon: 'history',       uri: 'Last_100' },
-  { id: 'web-radio',     label: 'Web Radio',    icon: 'radio',         uri: 'radio' },
+  { id: 'favourites', label: 'Favorites', icon: 'favorite', uri: 'favourites' },
+  { id: 'playlists', label: 'Playlists', icon: 'queue_music', uri: 'playlists' },
+  { id: 'music-library', label: 'Music Library', icon: 'library_music', uri: 'music-library' },
+  { id: 'artists', label: 'Artists', icon: 'person', uri: 'artists://' },
+  { id: 'albums', label: 'Albums', icon: 'album', uri: 'albums://' },
+  { id: 'genres', label: 'Genres', icon: 'category', uri: 'genres://' },
+  { id: 'last-100', label: 'Last 100', icon: 'history', uri: 'Last_100' },
+  { id: 'web-radio', label: 'Web Radio', icon: 'radio', uri: 'radio' },
 ];
 
 // Formats total seconds into a human-readable duration string, e.g. "1h 23m" or "45m 12s"
@@ -60,6 +61,7 @@ const itemFormat = (item) => {
 const BrowseDialog = ({ open, onClose }) => {
   const [viewMode, setViewMode] = useState('grid');
   const [search, setSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [largeGrid, setLargeGrid] = useState(false);
   const [history, setHistory] = useState([]);
@@ -71,15 +73,25 @@ const BrowseDialog = ({ open, onClose }) => {
   const albumMenuRef = useRef(null);
 
   const { data: browseData, isLoading, isError, refetch: refetchBrowse } = useBrowse(currentNav?.uri ?? null);
+  const { data: searchData, isLoading: isSearchLoading } = useSearch(debouncedSearch);
+  const isSearching = debouncedSearch.length >= 2;
   const { queue } = useVolumioStatus();
   const { socket } = useSocket();
+
+  // Debounce search input — fire API call 400ms after user stops typing
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedSearch(search.trim()), 400);
+    return () => clearTimeout(t);
+  }, [search]);
 
   const isFavouritesView = currentNav?.uri === 'favourites';
   const isPlaylistsView = currentNav?.uri === 'playlists';
 
   const queueUris = useMemo(() => new Set((queue ?? []).map((q) => q.uri)), [queue]);
 
-  const browseItems = browseData?.lists?.flatMap((l) => l.items) ?? [];
+  const browseItems = isSearching
+    ? (searchData?.lists?.flatMap((l) => l.items) ?? [])
+    : (browseData?.lists?.flatMap((l) => l.items) ?? []);
   const albumInfo = browseData?.info ?? null;
   const albumArtist = albumInfo?.artist
     || browseItems.find((i) => i.artist)?.artist
@@ -168,6 +180,7 @@ const BrowseDialog = ({ open, onClose }) => {
     setHistory((h) => currentNav ? [...h, currentNav] : h);
     setCurrentNav({ uri, title });
     setSearch('');
+    setDebouncedSearch('');
   }, [currentNav]);
 
   const goBack = useCallback(() => {
@@ -179,24 +192,25 @@ const BrowseDialog = ({ open, onClose }) => {
       setCurrentNav(prev);
     }
     setSearch('');
+    setDebouncedSearch('');
   }, [history]);
 
   const goHome = useCallback(() => {
     setHistory([]);
     setCurrentNav(null);
     setSearch('');
+    setDebouncedSearch('');
   }, []);
 
-  const filteredItems = search.trim()
-    ? browseItems.filter((item) =>
-        item.title?.toLowerCase().includes(search.toLowerCase()) ||
-        item.artist?.toLowerCase().includes(search.toLowerCase())
-      )
-    : browseItems;
+  const filteredItems = browseItems;
 
-  // Album view: all items are songs (no search applied — use raw list)
-  const isAlbumView = !isLoading && !isError && browseItems.length > 0
-    && browseItems.every((i) => i.type === 'song');
+  // Search result sections (each list from the API has a title like "Artists", "Albums", etc.)
+  const searchSections = isSearching ? (searchData?.lists ?? []) : null;
+
+  // Album view: all items are songs (no search applied — use raw browse list)
+  const rawBrowseItems = browseData?.lists?.flatMap((l) => l.items) ?? [];
+  const isAlbumView = !isSearching && !isLoading && !isError && rawBrowseItems.length > 0
+    && rawBrowseItems.every((i) => i.type === 'song');
 
   const albumYear = albumInfo?.year ?? null;
 
@@ -310,12 +324,22 @@ const BrowseDialog = ({ open, onClose }) => {
           <span className="material-icons browse-search__icon">search</span>
           <input
             className="browse-search__input"
-            type="search"
+            type="text"
             placeholder="Search…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             aria-label="Search"
           />
+          {search && (
+            <button
+              type="button"
+              className="browse-search__clear"
+              onClick={() => { setSearch(''); setDebouncedSearch(''); }}
+              aria-label="Clear search"
+            >
+              <span className="material-icons">close</span>
+            </button>
+          )}
         </div>
         {isAlbumView && (
           <button
@@ -344,15 +368,17 @@ const BrowseDialog = ({ open, onClose }) => {
   );
 
   const renderBrowseResults = () => {
-    if (isLoading) {
+    const loading = isSearching ? isSearchLoading : isLoading;
+
+    if (loading) {
       return (
         <div className="browse-status">
           <span className="material-icons browse-status__icon spin">refresh</span>
-          <span>Loading…</span>
+          <span>{isSearching ? 'Searching…' : 'Loading…'}</span>
         </div>
       );
     }
-    if (isError) {
+    if (!isSearching && isError) {
       return (
         <div className="browse-status browse-status--error">
           <span className="material-icons browse-status__icon">error_outline</span>
@@ -364,7 +390,7 @@ const BrowseDialog = ({ open, onClose }) => {
       return (
         <div className="browse-status">
           <span className="material-icons browse-status__icon">inbox</span>
-          <span>No items found.</span>
+          <span>{isSearching ? `No results for "${debouncedSearch}"` : 'No items found.'}</span>
         </div>
       );
     }
@@ -372,6 +398,36 @@ const BrowseDialog = ({ open, onClose }) => {
     const containerClass = viewMode === 'grid'
       ? `browse-results-grid${largeGrid ? ' browse-results-grid--large' : ''}`
       : 'browse-results-list';
+
+    // When searching, render results grouped by section (Artists, Albums, Songs, etc.)
+    if (isSearching && searchSections?.length > 0) {
+      return (
+        <div className="browse-search-results">
+          {searchSections.map((section, si) => {
+            if (!section.items?.length) return null;
+            return (
+              <div key={section.title ?? si} className="browse-search-section">
+                {section.title && (
+                  <h6 className="browse-search-section__title">{section.title}</h6>
+                )}
+                <div className={containerClass}>
+                  {section.items.map((item, i) => (
+                    <TrackItem
+                      key={item.uri ?? `${si}-${i}`}
+                      item={item}
+                      viewMode={viewMode}
+                      onNavigate={navigate}
+                      queueUris={queueUris}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+
     return (
       <div className={containerClass}>
         {isFavouritesView && (
@@ -401,14 +457,14 @@ const BrowseDialog = ({ open, onClose }) => {
       <Dialog
         open={open}
         onClose={onClose}
-        title={currentNav ? currentNav.title : 'Browse'}
+        title={isSearching ? `Search: ${debouncedSearch}` : currentNav ? currentNav.title : 'Browse'}
         size={isFullscreen ? 'full' : 'lg'}
         className={isFullscreen ? 'browse-dialog--fullscreen' : undefined}
         headerActions={headerActions}
         toolbar={toolbar}
         footer={albumFooter}
       >
-        {currentNav ? renderBrowseResults() : renderHome()}
+        {isSearching || currentNav ? renderBrowseResults() : renderHome()}
       </Dialog>
       {albumMenuOpen && createPortal(
         <div

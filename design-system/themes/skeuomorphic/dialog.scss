@@ -167,7 +167,7 @@
 .dialog-body {
   flex: 1 1 auto;
   overflow-y: auto;
-  padding: 1.25rem;
+  padding: 1em;
   color: var(--color-gray-900);
   font-family: var(--font-body);
   font-size: var(--text-base);
@@ -191,6 +191,12 @@
       background: var(--color-gray-500);
     }
   }
+}
+
+/* ── Browse search section titles — boost contrast on light dialog bg ── */
+.browse-search-section__title {
+  opacity: 0.85;
+  color: var(--color-gray-700);
 }
 
 /* ── Footer ── */
