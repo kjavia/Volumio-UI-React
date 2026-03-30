@@ -8,24 +8,16 @@
   display: inline-flex;
   gap: var(--marquee-gap, 4em);
   white-space: nowrap;
-  animation: marquee-scroll var(--marquee-duration, 8s) linear infinite;
+  will-change: transform;
+  max-width: 100%;
 }
 
 .marquee-copy {
   display: inline-block;
   white-space: nowrap;
   flex-shrink: 0;
-}
-
-.marquee-static {
-  display: inline-block;
-  white-space: nowrap;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-}
-
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(calc(-50% - var(--marquee-gap, 4em) / 2)); }
 }
