@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import FlipClock from '@/components/clocks/flip-clock';
 import DigitalClock from '@/components/clocks/digital-clock';
@@ -24,11 +25,10 @@ const WEATHER_MODE_MAP = {
   weatherFull: 'full',
 };
 
-const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz }) => {
+const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz, isVizFullscreen }) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isVizFullscreen, setIsVizFullscreen] = useState(false);
 
   const close = (fn) => () => { setIsOpen(false); fn?.(); };
 
@@ -54,9 +54,7 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz })
   // Listen for fullscreen changes (e.g., user presses ESC)
   useEffect(() => {
     const handleFullscreenChange = () => {
-      const el = document.fullscreenElement;
-      setIsFullscreen(!!el);
-      setIsVizFullscreen(!!el && el.classList.contains('area-spectrum'));
+      setIsFullscreen(!!document.fullscreenElement);
     };
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
@@ -106,7 +104,7 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz })
                   <span className="material-icons">
                     {isVizFullscreen ? 'fullscreen_exit' : 'fullscreen'}
                   </span>
-                  {isVizFullscreen ? 'Exit Viz Fullscreen' : 'Visualization Fullscreen'}
+                  {isVizFullscreen ? 'Exit Visualization Fullscreen' : 'Visualization Fullscreen'}
                 </button>
                 <button className="context-menu-item" onClick={close(onStopViz)}>
                   <span className="material-icons">equalizer</span>
@@ -119,7 +117,7 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz })
               <span className="material-icons">arrow_back</span>
               Back
             </button>
-            <button className="context-menu-item danger" onClick={close(() => { window.location.href = VOLUMIO_BASE_URL; })}>
+            <button className="context-menu-item danger" onClick={close(() => { window.location.assign(VOLUMIO_BASE_URL); })}>
               <span className="material-icons">power_settings_new</span>
               Exit
             </button>
@@ -133,7 +131,21 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz })
 const Home = () => {
   const [vizStopped, setVizStopped] = useState(false);
   const [forcePlayer, setForcePlayer] = useState(false);
+  const [isVizFullscreen, setIsVizFullscreen] = useState(false);
+  const [vizPortalTarget, setVizPortalTarget] = useState(null);
   const vizContainerRef = useRef(null);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const isViz =
+        !!document.fullscreenElement &&
+        document.fullscreenElement === vizContainerRef.current;
+      setIsVizFullscreen(isViz);
+      setVizPortalTarget(isViz ? document.fullscreenElement : null);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
 
   const handleFullscreenViz = async () => {
     const el = vizContainerRef.current;
@@ -162,10 +174,14 @@ const Home = () => {
     use24Hour,
   } = useIdleScreen();
 
-  // When the hook naturally clears idle (e.g. playback resumed), reset forcePlayer too
-  useEffect(() => {
+  // When idle clears naturally (e.g. playback resumed), reset forcePlayer.
+  // Using the render-time previous-state pattern avoids calling setState inside
+  // a useEffect body, which the React compiler flags as a cascading-render risk.
+  const [prevIdle, setPrevIdle] = useState(idle);
+  if (prevIdle !== idle) {
+    setPrevIdle(idle);
     if (!idle) setForcePlayer(false);
-  }, [idle]);
+  }
 
   const { data: pluginConfig } = usePluginConfig();
   const vizType = pluginConfig?.vizType || 'spectrum';
@@ -220,14 +236,23 @@ const Home = () => {
     }
   }
 
+  const vizFullscreen = isVizFullscreen && !!vizPortalTarget;
+
+  const contextMenu = (
+    <ContextMenu
+      vizStopped={vizStopped}
+      onStopViz={showPlayer && isSpectrumViz ? () => setVizStopped(true) : undefined}
+      onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
+      onFullscreenViz={showPlayer && isSpectrumViz ? handleFullscreenViz : undefined}
+      isVizFullscreen={isVizFullscreen}
+    />
+  );
+
   return (
     <div className="position-relative h-100">
-      <ContextMenu
-        vizStopped={vizStopped}
-        onStopViz={showPlayer && isSpectrumViz ? () => setVizStopped(true) : undefined}
-        onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
-        onFullscreenViz={showPlayer && isSpectrumViz ? handleFullscreenViz : undefined}
-      />
+      {vizFullscreen
+        ? createPortal(contextMenu, vizPortalTarget)
+        : contextMenu}
       {content}
     </div>
   );
