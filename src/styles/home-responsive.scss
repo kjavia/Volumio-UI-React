@@ -477,7 +477,7 @@ body,
   background: transparent;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  cursor: default;
   padding: 0.5rem;
   text-align: left;
   transition: opacity 0.15s, transform 0.12s;
@@ -486,8 +486,11 @@ body,
 }
 
 .browse-result-card:hover {
-  opacity: 0.85;
   transform: translateY(-2px);
+}
+
+.browse-result-card__art:hover {
+  opacity: 0.85;
 }
 
 .browse-result-card__art {
@@ -500,6 +503,7 @@ body,
   align-items: center;
   justify-content: center;
   position: relative;
+  cursor: pointer;
 }
 
 .browse-result-card__play {
@@ -526,7 +530,7 @@ body,
   font-size: 1.25rem !important;
 }
 
-.browse-result-card:hover .browse-result-card__play {
+.browse-result-card__art:hover .browse-result-card__play {
   opacity: 1;
   transform: translateY(0);
 }
@@ -755,7 +759,7 @@ body,
   transition: opacity 0.15s, background 0.12s;
 }
 
-.browse-result-card:hover .browse-result-card__menu .track-menu-btn,
+.browse-result-card__art:hover .browse-result-card__menu .track-menu-btn,
 .browse-result-card__menu .track-menu-btn:focus {
   opacity: 1;
 }

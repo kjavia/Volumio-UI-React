@@ -327,10 +327,14 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
   if (viewMode === 'grid') {
     return (
       <>
-        <div className="browse-result-card" onClick={handleItemClick} role="button" tabIndex={0}
-          onKeyDown={(e) => e.key === 'Enter' && handleItemClick()}
-        >
-          <div className="browse-result-card__art">
+        <div className="browse-result-card">
+          <div
+            className="browse-result-card__art"
+            onClick={handleItemClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && handleItemClick()}
+          >
             {isGenre
               ? <span className="material-icons browse-result-card__genre-icon">{genreIcon(item.title)}</span>
               : artUrl
@@ -345,15 +349,15 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
             >
               <span className="material-icons">play_arrow</span>
             </button>
+            {showMenu && (
+              <div
+                className="browse-result-card__menu"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {menuBtn}
+              </div>
+            )}
           </div>
-          {showMenu && (
-            <div
-              className="browse-result-card__menu"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {menuBtn}
-            </div>
-          )}
           <div className="browse-result-card__info">
             <span className="browse-result-card__title">{item.title}</span>
             <span className="browse-result-card__sub">{item.artist || '\u00a0'}</span>
