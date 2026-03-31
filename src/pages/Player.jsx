@@ -110,7 +110,6 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     playFromQueue,
     isFavourite,
     toggleFavourite,
-    streamUri,
   } = useVolumioStatus();
 
   const [cycleIndex, setCycleIndex] = useState(null);
@@ -222,11 +221,9 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
           {/* CONTROLS SECTION */}
           <div className="home-panel area-controls text-white">
             <div
-              className="d-flex flex-column align-items-center justify-content-center w-100 h-100 player-controls-container"
-              style={{ maxWidth: '450px' }}
-            >
+              className="d-flex flex-column align-items-center justify-content-center w-100 player-controls-container">
               {/* Track info — sized to content only */}
-              <div className="track-info-group w-100">
+              <div className="track-info-group" style={{ width: 'clamp(300px, 95%, 99%)' }}>
                 <TrackInfo title={title} artist={artist} album={album} />
               </div>
 
@@ -244,7 +241,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               {/* Bottom half of spacer */}
               <div className="controls-spacer" />
 
-              <div className="w-100 seekbar-container-wrap">
+              <div className="m-auto seekbar-container-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
                 <PlayerSeekbar readOnly={!showPlayerControls} />
               </div>
 
@@ -267,7 +264,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               )}
 
               {!disableVolumeControl && showPlayerControls && (
-                <div className="volume-manager-wrap w-100 px-5 px-lg-4">
+                <div className="volume-manager-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
                   <VolumeManager
                     volume={volume}
                     mute={mute}

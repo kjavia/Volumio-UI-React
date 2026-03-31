@@ -150,6 +150,8 @@ body,
   min-height: 0;
   overflow: hidden;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 /* ── Flexible spacer: grows to fill leftover space above controls.

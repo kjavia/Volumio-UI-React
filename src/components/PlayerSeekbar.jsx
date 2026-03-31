@@ -1,9 +1,7 @@
-import React, { useRef } from 'react';
 import { Duration } from 'luxon';
 import { useSeek } from '@/contexts/SeekContext';
 
 const PlayerSeekbar = ({ readOnly }) => {
-  const seekRef = useRef(null);
   const { seek, duration, seekTo } = useSeek();
 
   const handleSeek = (e) => {
@@ -21,7 +19,7 @@ const PlayerSeekbar = ({ readOnly }) => {
   const progressPercent = durationSeconds > 0 ? Math.min((currentSeconds / durationSeconds) * 100, 100) : 0;
 
   return (
-    <div className={`slider-container ${readOnly ? 'read-only' : ''}`}>
+    <div className={`slider-container ${readOnly ? 'read-only' : ''}`} style={{ maxWidth: '450px' }}>
       <span
         className="time-label text-end text-white opacity-75"
         style={{ lineHeight: 1, fontSize: '0.9em', fontFamily: 'inherit' }}

@@ -7,7 +7,7 @@
 .context-menu-container {
     position: fixed;
     top: 20px;
-    right: 20px;
+    left: 20px;
     z-index: 5000;
 }
 
@@ -89,7 +89,7 @@
 .context-menu {
     position: absolute;
     top: calc(100% + 8px);
-    right: 0;
+    left: 0;
     min-width: 200px;
     background: linear-gradient(
         135deg,

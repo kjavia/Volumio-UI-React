@@ -3,10 +3,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Default small screen size */
   width: 100%;
-  max-width: 400px;
-  aspect-ratio: 1.6;
+  /* Assembly width = jewel-case (1H) + disc protrusion (0.42×0.96H = 0.403H) = 1.363H.
+     Use 1.4 to leave ~1.3% shadow breathing room on each side (see left: 1.3% below). */
+  aspect-ratio: 1.4;
   position: relative;
   margin: 0 auto;
 }
@@ -16,13 +16,13 @@
   height: 100%;
   aspect-ratio: 1/1;
   width: auto;
-  /* When container grows, this stays proportional if we switch to % */
   background: rgba(255,255,255,0.1);
   /* Glassy feel */
   border-radius: 4px;
   z-index: 10;
   position: absolute;
-  left: 0;
+  /* left: 1.3% centres the assembly: dead space = (1.4H - 1.363H) / 2 ≈ 1.3% of container width */
+  left: 1.3%;
   top: 0;
   box-shadow:
     5px 5px 15px rgba(0,0,0,0.3),
@@ -107,13 +107,14 @@
   border-radius: 50%;
   position: absolute;
   top: 2%;
-  left: 0;
+  left: 1.3%; /* matches jewel-case offset — keeps assembly centred */
   z-index: 1;
   /* Behind case */
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
 
   /* The "sticking out" mechanism */
-  /* 240px wide, sticking out ~50% = 120px */
+  /* Disc is shifted right so it peeks from behind the jewel case.
+     left: 1.3% matches the jewel-case offset so both stay centred together. */
   transform-origin: center;
   transform: translateX(42%);
   animation: cd-cover-spin 4s linear infinite;
@@ -221,42 +222,5 @@
   }
 }
 
-/* Responsive adjustments */
-/* Tablet/Desktop Logic:
-           Use 40% of screen width (max-width constrained).
-           Aspect Ratio of the whole assembly (Case 250 + Protrusion 100 = 350 width) / Height 250 = 1.4
-        */
-@media (min-width: 768px) {
-  .cd-case-container {
-    /* Request: 40% of available screen on larger/wider screens */
-    /* We use aspect-ratio to keep proportions correct */
-    width: 40vw;
-    max-width: 600px;
-    /* Sensible max */
-    aspect-ratio: 1.4;
-    /* (250 width case + 100 protusion) / 250 height = 1.4 */
-    height: auto;
-
-    margin: 0 auto;
-    /* On larger screens, center it properly */
-  }
-
-  /* Container children must adapt */
-  .cd-case-container .cd-jewel-case {
-    width: auto;
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    /* Reset fixed pixels */
-    left: 0;
-  }
-
-  .cd-case-container .cd-disc-spinning {
-    width: auto;
-    height: 96%;
-    /* 240/250 = 96% */
-    aspect-ratio: 1 / 1;
-    /* Reset fixed pixels */
-    top: 2%;
-    left: 1%;
-  }
-}
+/* No breakpoint overrides needed — the base styles scale correctly at all sizes.
+   aspect-ratio: 1.4 + left: 1.3% work proportionally from mobile through desktop. */
