@@ -2,6 +2,7 @@
   display: block;
   overflow: hidden;
   white-space: nowrap;
+  text-align: center;
 }
 
 .marquee-track {
@@ -9,7 +10,6 @@
   gap: var(--marquee-gap, 4em);
   white-space: nowrap;
   will-change: transform;
-  max-width: 100%;
 }
 
 .marquee-copy {
@@ -17,7 +17,4 @@
   white-space: nowrap;
   flex-shrink: 0;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
 }

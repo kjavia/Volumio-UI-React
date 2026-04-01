@@ -3541,8 +3541,6 @@ input[type=range]::-moz-range-thumb:active {
   margin-bottom: 4px;
   letter-spacing: var(--tracking-tight);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   color: var(--text-primary);
 }
 
@@ -3551,8 +3549,6 @@ input[type=range]::-moz-range-thumb:active {
   font-size: clamp(0.8rem, 2.2vw, 1.1rem);
   color: var(--text-secondary);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   font-weight: 400;
 }
 
