@@ -8,7 +8,7 @@ const mediaSourceCache = new WeakMap();
 
 const MODES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 10]; // Discrete to Octaves to Line
 
-const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stopped = false, onResumed }) => {
+const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stopped = false, onResumed, options = null }) => {
   const containerRef = useRef(null);
   const audioRef = useRef(null);
   const analyzerRef = useRef(null);
@@ -105,12 +105,9 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
 
     if (!analyzerRef.current) {
       try {
-        analyzerRef.current = new AudioMotionAnalyzer(container, {
-          audioCtx: ctx,
-          source: sourceNode,
-          connectSpeakers: false,
+        const defaultOptions = {
           gradient,
-          mode: currentMode, // use state value
+          mode: currentMode,
           frequencyScale: 'log',
           outlineBars: true,
           barSpace: 0.2,
@@ -123,6 +120,13 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
           reflexRatio: 0.3,
           reflexAlpha: 0.4,
           reflexFit: true,
+        };
+        analyzerRef.current = new AudioMotionAnalyzer(container, {
+          // Internal wiring — not overridable
+          audioCtx: ctx,
+          source: sourceNode,
+          connectSpeakers: false,
+          ...(options || defaultOptions),
         });
       } catch (e) {
         console.warn('SpectrumAnalyzer: failed to initialize', e);
@@ -136,13 +140,13 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
       // Resume synchronously — iOS won't allow it in a .then() callback
       if (entry?.ctx.state === 'suspended') entry.ctx.resume();
       analyzerRef.current.start?.();
-      audio.play().catch(() => {});
+      audio.play().catch(() => { });
       onResumed?.();
       setEnabled(true);
       return;
     }
 
-    audio.play().catch(() => {});
+    audio.play().catch(() => { });
     onResumed?.();
     setEnabled(true);
   };
@@ -157,7 +161,7 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
       audioRef.current?.pause();
       setEnabled(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stopped]);
 
   return (
@@ -233,6 +237,9 @@ SpectrumAnalyzer.propTypes = {
   streamUrl: PropTypes.string.isRequired,
   gradient: PropTypes.string,
   initialMode: PropTypes.number,
+  stopped: PropTypes.bool,
+  onResumed: PropTypes.func,
+  options: PropTypes.object,
 };
 
 export default SpectrumAnalyzer;

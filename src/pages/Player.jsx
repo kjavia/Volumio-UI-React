@@ -79,6 +79,12 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
 
+  const spectrumOptions = useMemo(() => {
+    const raw = pluginConfig?.spectrumOptions;
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch { return null; }
+  }, [pluginConfig?.spectrumOptions]);
+
   const {
     isConnected,
     isPlaying,
@@ -284,6 +290,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
                   stopped={vizStopped}
                   onResumed={onVizResumed}
                   streamUrl={SPECTRUM_STREAM_URL}
+                  options={spectrumOptions}
                 />
               )}
               {vizType === 'vuMeter1' && (
