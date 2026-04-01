@@ -18,7 +18,7 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
       </Button>
 
       <div className="d-flex flex-column flex-grow-1">
-        <div className="slider-track position-relative w-100 mb-1">
+        <div className="slider-track position-relative mb-1" style={{ width: 'clamp(200px, 95%, 99%)' }}>
           <input
             type="range"
             className="form-range position-absolute w-100 h-100 top-0 start-0 opacity-0 z-2"
@@ -33,9 +33,9 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
           </div>
         </div>
       </div>
-        <div className="text-center text-white small opacity-75" style={{ fontSize: '0.75em' }}>
-          {getVolume()} / 100
-        </div>
+      <div className="text-center text-white small opacity-75" style={{ fontSize: '0.75em' }}>
+        {getVolume()} / 100
+      </div>
     </div>
   );
 };
