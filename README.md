@@ -114,3 +114,7 @@ The globe visualization uses [cobe](https://github.com/shuding/cobe), a lightwei
 ### Flip Clock
 
 <https://github.com/pqina/flip/>
+
+### Weather Effects
+
+<https://github.com/rauschermate/react-weather-effects>

@@ -1,0 +1,109 @@
+/* ── WeatherEffects overlay ───────────────────────────────────────────── */
+
+.weather-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.weather-effects-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Fog layers ───────────────────────────────────────────────────────── */
+
+.weather-effects-fog-layer {
+  position: absolute;
+  inset: -25%;
+  background: radial-gradient(
+    ellipse 160% 80% at 50% 50%,
+    rgba(200, 220, 240, 0.18) 0%,
+    transparent 65%
+  );
+  filter: blur(35px);
+  animation: weatherFogDrift 28s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.weather-effects-fog-layer--2 {
+  inset: -35%;
+  background: radial-gradient(
+    ellipse 200% 110% at 25% 65%,
+    rgba(200, 220, 240, 0.13) 0%,
+    transparent 65%
+  );
+  filter: blur(55px);
+  animation-duration: 40s;
+  animation-direction: alternate-reverse;
+}
+
+.weather-effects-fog-layer--3 {
+  inset: -25%;
+  background: radial-gradient(
+    ellipse 130% 65% at 75% 28%,
+    rgba(200, 220, 240, 0.10) 0%,
+    transparent 65%
+  );
+  filter: blur(22px);
+  animation-duration: 20s;
+  animation-delay: -10s;
+}
+
+/* Dense fog: heavier opacity */
+.weather-effects--dense .weather-effects-fog-layer {
+  background: radial-gradient(
+    ellipse 160% 80% at 50% 50%,
+    rgba(200, 220, 240, 0.32) 0%,
+    transparent 65%
+  );
+}
+.weather-effects--dense .weather-effects-fog-layer--2 {
+  background: radial-gradient(
+    ellipse 200% 110% at 25% 65%,
+    rgba(200, 220, 240, 0.24) 0%,
+    transparent 65%
+  );
+}
+.weather-effects--dense .weather-effects-fog-layer--3 {
+  background: radial-gradient(
+    ellipse 130% 65% at 75% 28%,
+    rgba(200, 220, 240, 0.20) 0%,
+    transparent 65%
+  );
+}
+
+@keyframes weatherFogDrift {
+  0%   { transform: translateX(-10%) translateY(-4%) scaleX(1.0); opacity: 0.7; }
+  40%  { opacity: 1.0; }
+  100% { transform: translateX(10%)  translateY(4%)  scaleX(1.15); opacity: 0.85; }
+}
+
+/* ── Lightning flash (thunderstorm) ──────────────────────────────────── */
+
+.weather-effects-lightning {
+  position: absolute;
+  inset: 0;
+  background: rgba(220, 235, 255, 1);
+  opacity: 0;
+  animation: weatherThunderFlash 7s ease-in-out infinite;
+  will-change: opacity;
+}
+
+/* Heavy thunderstorm flashes more frequently */
+.weather-effects--heavy .weather-effects-lightning {
+  animation-duration: 4.5s;
+}
+
+@keyframes weatherThunderFlash {
+  0%,   89%,  100% { opacity: 0;    }
+  90%              { opacity: 0.80; }
+  90.6%            { opacity: 0.04; }
+  91.2%            { opacity: 0.58; }
+  91.8%            { opacity: 0;    }
+}

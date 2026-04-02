@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 import useWeather from '@/hooks/useWeather';
+import WeatherEffects from './weather-effects/WeatherEffects';
 import './Weather.scss';
 
 /* ── Helpers ──────────────────────────────────────────────────────────── */
@@ -269,6 +270,7 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
       <div className="weather-full-top">
         {/* Hero */}
         <div className="weather-full-hero">
+          <WeatherEffects weatherCode={current.weatherCode} />
           <div className="weather-full-hero-temp">
             {round(current.temperature)}
             <span className="weather-full-hero-unit">{units.tempUnit}</span>
@@ -500,6 +502,7 @@ const Weather = ({
 
   return (
     <div className="weather-container">
+      {mode === 'current' && <WeatherEffects weatherCode={current.weatherCode} />}
       <LocationBadge name={locationName} />
       {/* Current */}
       {mode === 'current' && (

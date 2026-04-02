@@ -1,9 +1,8 @@
 /* ── Weather Component ─────────────────────────────────────────────────── */
 
 .weather-container {
-  width: 90vw;
-  height: 90dvh;
-  margin: auto;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,6 +44,7 @@
 /* ── Current Weather ────────────────────────────────────────────────── */
 
 .weather-current {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -284,6 +284,7 @@
 /* ── Full Dashboard (macOS-style) ───────────────────────────────────── */
 
 .weather-full {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
