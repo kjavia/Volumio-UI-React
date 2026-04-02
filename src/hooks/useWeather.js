@@ -1,12 +1,59 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import usePluginConfig from './usePluginConfig';
-import useGeoLocation from '@bigdatacloudapi/react-reverse-geocode-client';
+
+// Fetches a city name from lat/lng via BigDataCloud reverse-geocode (free, no key needed).
+const fetchCityName = async ({ latitude, longitude, language }) => {
+  const { data } = await axios.get(
+    'https://api.bigdatacloud.net/data/reverse-geocode-client',
+    { params: { latitude, longitude, localityLanguage: language || 'en' } }
+  );
+  return (
+    data.city ||
+    data.locality ||
+    data.principalSubdivision ||
+    data.countryName ||
+    null
+  );
+};
+
+// Given lat/lng (and the Volumio system language), resolves to a city name string.
+const useCityNameFromConfigLocation = (latitude, longitude, language) =>
+  useQuery({
+    queryKey: ['geo-detect', latitude, longitude, language],
+    queryFn: () => fetchCityName({ latitude, longitude, language }),
+    enabled: Boolean(latitude) && Boolean(longitude),
+    staleTime: Infinity,
+    retry: false,
+  });
+
+// Asks the browser for the user's current coordinates (only used when the plugin
+// config has no explicit lat/lng saved).
+const fetchBrowserLocation = () =>
+  new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      reject(new Error('Geolocation not supported'));
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => resolve({ latitude: pos.coords.latitude, longitude: pos.coords.longitude }),
+      reject
+    );
+  });
+
+const useBrowserLocation = (enabled) =>
+  useQuery({
+    queryKey: ['browser-location'],
+    queryFn: fetchBrowserLocation,
+    enabled,
+    staleTime: Infinity,
+    retry: false,
+  });
 
 const WMO_CODES = {
-  0: { description: 'Clear sky', icon: 'wb_sunny' },
-  1: { description: 'Mainly clear', icon: 'wb_sunny' },
-  2: { description: 'Partly cloudy', icon: 'cloud' },
+  0: { description: 'Clear sky', icon: 'wb_sunny', nightIcon: 'nights_stay' },
+  1: { description: 'Mainly clear', icon: 'wb_sunny', nightIcon: 'nights_stay' },
+  2: { description: 'Partly cloudy', icon: 'cloud', nightIcon: 'nights_stay' },
   3: { description: 'Overcast', icon: 'cloud' },
   45: { description: 'Fog', icon: 'foggy' },
   48: { description: 'Depositing rime fog', icon: 'foggy' },
@@ -34,7 +81,11 @@ const WMO_CODES = {
   99: { description: 'Thunderstorm with heavy hail', icon: 'thunderstorm' },
 };
 
-const resolveWmo = (code) => WMO_CODES[code] || { description: 'Unknown', icon: 'help_outline' };
+const resolveWmo = (code, isDay = true) => {
+  const entry = WMO_CODES[code] || { description: 'Unknown', icon: 'help_outline' };
+  const icon = (!isDay && entry.nightIcon) ? entry.nightIcon : entry.icon;
+  return { ...entry, icon };
+};
 
 const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) => {
   const isImperial = unitSystem === 'imperial';
@@ -58,6 +109,7 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
       'relative_humidity_2m',
       'visibility',
       'uv_index',
+      'is_day',
     ].join(','),
     daily: [
       'weather_code',
@@ -83,7 +135,8 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
   const { data } = await axios.get('https://api.open-meteo.com/v1/forecast', { params });
 
   const c = data.current;
-  const wmo = resolveWmo(c.weather_code);
+  const isDayCurrent = c.is_day === 1;
+  const wmo = resolveWmo(c.weather_code, isDayCurrent);
   const tempUnit = isImperial ? '°F' : '°C';
   const windUnit = isImperial ? 'mph' : 'km/h';
   const precipUnit = isImperial ? 'in' : 'mm';
@@ -99,7 +152,7 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
     weatherCode: c.weather_code,
     description: wmo.description,
     icon: wmo.icon,
-    isDay: c.is_day === 1,
+    isDay: isDayCurrent,
     timestamp: c.time,
   };
 
@@ -109,13 +162,15 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
   const startIdx = h.time.findIndex((t) => t >= nowIso);
   const hourly = h.time.slice(startIdx, startIdx + 24).map((t, i) => {
     const idx = startIdx + i;
-    const hw = resolveWmo(h.weather_code[idx]);
+    const isDay = h.is_day ? h.is_day[idx] === 1 : true;
+    const hw = resolveWmo(h.weather_code[idx], isDay);
     return {
       time: t,
       temperature: h.temperature_2m[idx],
       weatherCode: h.weather_code[idx],
       description: hw.description,
       icon: hw.icon,
+      isDay,
       windSpeed: h.wind_speed_10m[idx],
       humidity: h.relative_humidity_2m[idx],
       visibility: h.visibility ? h.visibility[idx] : 0,
@@ -139,11 +194,6 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
       windSpeedMax: d.wind_speed_10m_max[i],
       precipitation: d.precipitation_sum[i],
       uvIndexMax: d.uv_index_max ? d.uv_index_max[i] : 0,
-      tempMin: d.temperature_2m_min[i],
-      sunrise: d.sunrise[i],
-      sunset: d.sunset[i],
-      windSpeedMax: d.wind_speed_10m_max[i],
-      precipitation: d.precipitation_sum[i],
     };
   });
 
@@ -158,21 +208,26 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
 
 const useWeather = () => {
   const { data: config, isLoading: configLoading } = usePluginConfig();
-  const { data: geoData } = useGeoLocation();
-  const latitude = config?.latitude || geoData?.latitude;
-  const longitude = config?.longitude || geoData?.longitude;
+
+  const language = config?.language || 'en';
+  const configLat = config?.latitude ? Number(config.latitude) : null;
+  const configLng = config?.longitude ? Number(config.longitude) : null;
+  const hasConfigLocation = Boolean(configLat) && Boolean(configLng);
+
+  // Only request browser location when the plugin config has no saved coordinates.
+  const { data: browserLoc } = useBrowserLocation(!hasConfigLocation);
+
+  const latitude = configLat || browserLoc?.latitude || null;
+  const longitude = configLng || browserLoc?.longitude || null;
+  const hasLocation = Boolean(latitude) && Boolean(longitude);
+
   const unitSystem = config?.unitSystem || 'metric';
   const weatherApiKey = config?.weatherApiKey || '';
-  const hasLocation = Boolean(latitude) && Boolean(longitude);
-  const locationName =
-    geoData?.city ||
-    geoData?.locality ||
-    geoData?.principalSubdivision ||
-    geoData?.countryName ||
-    null;
+
+  const { data: cityName } = useCityNameFromConfigLocation(latitude, longitude, language);
 
   const query = useQuery({
-    queryKey: ['weather', latitude, longitude, unitSystem],
+    queryKey: ['weather', latitude, longitude, unitSystem, weatherApiKey],
     queryFn: () => fetchWeather({ latitude, longitude, unitSystem, weatherApiKey }),
     enabled: !configLoading && hasLocation,
     staleTime: 4 * 60 * 1000,
@@ -180,7 +235,7 @@ const useWeather = () => {
     refetchOnWindowFocus: false,
   });
 
-  return { ...query, locationName };
+  return { ...query, locationName: cityName || null };
 };
 
 export { WMO_CODES };
