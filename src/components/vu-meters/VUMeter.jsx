@@ -79,7 +79,7 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
 
     let entry = mediaSourceCache.get(audio);
     if (!entry) {
-      const ctx = new AudioContext();
+      const ctx = new AudioContext({ sampleRate: 44100 });
       const sourceNode = ctx.createMediaElementSource(audio);
       entry = { ctx, sourceNode };
       mediaSourceCache.set(audio, entry);
@@ -223,22 +223,22 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
     const root = display.closest('.vu-meter') || display;
     const cs = getComputedStyle(root);
     const pct = (v) => parseFloat(v) / 100;
-    const pivotXL  = pct(cs.getPropertyValue('--left-pivot-x'));
-    const pivotXR  = pct(cs.getPropertyValue('--right-pivot-x'));
+    const pivotXL = pct(cs.getPropertyValue('--left-pivot-x'));
+    const pivotXR = pct(cs.getPropertyValue('--right-pivot-x'));
     const pivotBot = pct(cs.getPropertyValue('--pivot-bottom'));
-    const needleH  = pct(cs.getPropertyValue('--needle-height'));
+    const needleH = pct(cs.getPropertyValue('--needle-height'));
 
     // Map image-relative percentages → container-absolute px
-    const lx        = imgLeft + pivotXL * imgW;
-    const rx        = imgLeft + pivotXR * imgW;
+    const lx = imgLeft + pivotXL * imgW;
+    const rx = imgLeft + pivotXR * imgW;
     // `bottom` CSS = distance from container bottom to the pivot point
-    const bottomPx  = cH - imgTop - imgH * (1 - pivotBot);
-    const heightPx  = needleH * imgH;
+    const bottomPx = cH - imgTop - imgH * (1 - pivotBot);
+    const heightPx = needleH * imgH;
 
-    display.style.setProperty('--needle-L-left',  `${lx}px`);
-    display.style.setProperty('--needle-R-left',  `${rx}px`);
-    display.style.setProperty('--needle-bottom',  `${bottomPx}px`);
-    display.style.setProperty('--needle-h',       `${heightPx}px`);
+    display.style.setProperty('--needle-L-left', `${lx}px`);
+    display.style.setProperty('--needle-R-left', `${rx}px`);
+    display.style.setProperty('--needle-bottom', `${bottomPx}px`);
+    display.style.setProperty('--needle-h', `${heightPx}px`);
   }, []);
 
   const handleEnable = useCallback(() => {
@@ -269,7 +269,7 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
         needleRRef.current.style.transform = `rotate(${initAngle}deg)`;
       setEnabled(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stopped]);
 
   // Initialise needles to full-left on mount; cancel rAF on unmount

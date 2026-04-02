@@ -89,7 +89,7 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
 
     let entry = mediaSourceCache.get(audio);
     if (!entry) {
-      const ctx = new AudioContext();
+      const ctx = new AudioContext({ sampleRate: 44100 });
       const sourceNode = ctx.createMediaElementSource(audio);
       entry = { ctx, sourceNode };
       mediaSourceCache.set(audio, entry);
