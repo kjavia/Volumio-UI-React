@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 import useWeather from '@/hooks/useWeather';
@@ -28,6 +29,7 @@ const Wallpaper = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [time, setTime] = useState(() => new Date());
   const { data: weather } = useWeather();
+  const { t } = useTranslation('weather');
 
   // Reset index when images change
   useEffect(() => {
@@ -99,7 +101,7 @@ const Wallpaper = ({
                 {Math.round(weather.current.temperature)}
                 {weather.units.tempUnit}
               </span>
-              <span className="wallpaper-weather-desc">{weather.current.description}</span>
+              <span className="wallpaper-weather-desc">{t(weather.current.description)}</span>
             </div>
           )}
         </div>
