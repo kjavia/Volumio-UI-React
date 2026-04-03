@@ -213,12 +213,23 @@ const useWeather = () => {
   const configLng = config?.longitude ? Number(config.longitude) : null;
   const hasConfigLocation = Boolean(configLat) && Boolean(configLng);
 
-  // Only request browser location when the plugin config has no saved coordinates.
-  const { data: browserLoc } = useBrowserLocation(!hasConfigLocation);
+  // Don't ask the browser for location until config has loaded and confirmed no
+  // saved coordinates — avoids a spurious permission prompt on every load.
+  const {
+    data: browserLoc,
+    isLoading: browserLocLoading,
+  } = useBrowserLocation(!configLoading && !hasConfigLocation);
 
   const latitude = configLat || browserLoc?.latitude || null;
   const longitude = configLng || browserLoc?.longitude || null;
   const hasLocation = Boolean(latitude) && Boolean(longitude);
+
+  // True while we're still determining the location (config fetch or geolocation).
+  const isLocating =
+    configLoading || (!hasConfigLocation && !configLoading && browserLocLoading);
+
+  // True when location is definitively unavailable (not just slow).
+  const noLocation = !isLocating && !hasLocation;
 
   const unitSystem = config?.unitSystem || 'metric';
   const weatherApiKey = config?.weatherApiKey || '';
@@ -234,7 +245,9 @@ const useWeather = () => {
     refetchOnWindowFocus: false,
   });
 
-  return { ...query, locationName: cityName || null };
+  const { data, isLoading, isError } = query;
+
+  return { data, isLoading, isError, locationName: cityName || null, isLocating, noLocation };
 };
 
 export { WMO_CODES };

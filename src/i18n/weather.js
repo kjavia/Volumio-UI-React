@@ -60,6 +60,7 @@ const en = {
   vis_poor: 'Poor',
   loading: 'Loading weather\u2026',
   error: 'Failed to load weather',
+  no_location: 'No location configured. Set latitude and longitude in the plugin settings.',
 };
 
 const de = {
@@ -116,6 +117,7 @@ const de = {
   vis_poor: 'Schlecht',
   loading: 'Wetter wird geladen\u2026',
   error: 'Wetter konnte nicht geladen werden',
+  no_location: 'Kein Standort konfiguriert. Breiten- und Längengrad in den Plugin-Einstellungen setzen.',
 };
 
 const fr = {
@@ -172,6 +174,7 @@ const fr = {
   vis_poor: 'Mauvais',
   loading: 'Chargement météo\u2026',
   error: 'Impossible de charger la météo',
+  no_location: 'Aucun emplacement configuré. Définir la latitude et la longitude dans les paramètres du plugin.',
 };
 
 const es = {
@@ -228,6 +231,7 @@ const es = {
   vis_poor: 'Malo',
   loading: 'Cargando clima\u2026',
   error: 'Error al cargar el clima',
+  no_location: 'Sin ubicación configurada. Establece la latitud y longitud en los ajustes del plugin.',
 };
 
 const it = {
@@ -284,6 +288,7 @@ const it = {
   vis_poor: 'Scarso',
   loading: 'Caricamento meteo\u2026',
   error: 'Impossibile caricare il meteo',
+  no_location: 'Nessuna posizione configurata. Imposta latitudine e longitudine nelle impostazioni del plugin.',
 };
 
 const pt = {
@@ -340,6 +345,7 @@ const pt = {
   vis_poor: 'Fraco',
   loading: 'A carregar o tempo\u2026',
   error: 'Falha ao carregar o tempo',
+  no_location: 'Nenhuma localização configurada. Define latitude e longitude nas configurações do plugin.',
 };
 
 const nl = {
@@ -396,6 +402,7 @@ const nl = {
   vis_poor: 'Slecht',
   loading: 'Weer laden\u2026',
   error: 'Weer kon niet worden geladen',
+  no_location: 'Geen locatie geconfigureerd. Stel breedte- en lengtegraad in via de plugin-instellingen.',
 };
 
 const ru = {
@@ -452,6 +459,7 @@ const ru = {
   vis_poor: 'Плохо',
   loading: 'Загрузка погоды\u2026',
   error: 'Не удалось загрузить погоду',
+  no_location: 'Местоположение не настроено. Укажите широту и долготу в настройках плагина.',
 };
 
 const ja = {
@@ -508,6 +516,7 @@ const ja = {
   vis_poor: '不良',
   loading: '天気データ取得中\u2026',
   error: '天気の取得に失敗しました',
+  no_location: '場所が設定されていません。プラグイン設定で緯度と経度を設定してください。',
 };
 
 const ko = {
@@ -564,6 +573,7 @@ const ko = {
   vis_poor: '나쁨',
   loading: '날씨 불러오는 중\u2026',
   error: '날씨를 불러오지 못했습니다',
+  no_location: '위치가 설정되지 않았습니다. 플러그인 설정에서 위도와 경도를 설정하세요.',
 };
 
 const zhCN = {
@@ -620,6 +630,7 @@ const zhCN = {
   vis_poor: '较差',
   loading: '正在获取天气\u2026',
   error: '天气获取失败',
+  no_location: '未配置位置。请在插件设置中设置纬度和经度。',
 };
 
 const zhTW = {
@@ -646,6 +657,7 @@ const zhTW = {
   vis_poor: '較差',
   loading: '正在獲取天氣\u2026',
   error: '天氣獲取失敗',
+  no_location: '未設定位置。請在外掛設定中設置緯度和經度。',
 };
 
 const pl = {
@@ -702,6 +714,7 @@ const pl = {
   vis_poor: 'Słabo',
   loading: 'Pobieranie pogody\u2026',
   error: 'Nie udało się pobrać pogody',
+  no_location: 'Brak skonfigurowanej lokalizacji. Ustaw szerokość i długość geograficzną w ustawieniach pluginu.',
 };
 
 const cs = {
@@ -758,6 +771,7 @@ const cs = {
   vis_poor: 'Špatné',
   loading: 'Načítání počasí\u2026',
   error: 'Nepodařilo se načíst počasí',
+  no_location: 'Není nakonfigurována žádná poloha. Nastavte zeměpisnou šířku a délku v nastavení pluginu.',
 };
 
 const sk = {
@@ -814,6 +828,7 @@ const sk = {
   vis_poor: 'Zlé',
   loading: 'Načítavanie počasia\u2026',
   error: 'Nepodarilo sa načítať počasie',
+  no_location: 'Nie je nakonfigurovaná žiadna poloha. Nastavte zemepisnú šírku a dĺžku v nastaveniach pluginu.',
 };
 
 const hu = {
@@ -870,6 +885,7 @@ const hu = {
   vis_poor: 'Gyenge',
   loading: 'Időjárás betöltése\u2026',
   error: 'Nem sikerült betölteni az időjárást',
+  no_location: 'Nincs konfigurált helyszín. Adja meg a szélességi és hosszúsági fokot a plugin beállításaiban.',
 };
 
 const el = {
@@ -926,6 +942,7 @@ const el = {
   vis_poor: 'Κακή',
   loading: 'Φόρτωση καιρού\u2026',
   error: 'Αποτυχία φόρτωσης καιρού',
+  no_location: 'Δεν έχει διαμορφωθεί τοποθεσία. Ορίστε γεωγραφικό πλάτος και μήκος στις ρυθμίσεις του plugin.',
 };
 
 const tr = {
@@ -982,6 +999,7 @@ const tr = {
   vis_poor: 'Kötü',
   loading: 'Hava durumu yükleniyor\u2026',
   error: 'Hava durumu yüklenemedi',
+  no_location: 'Konum yapılandırılmamış. Plugin ayarlarında enlem ve boylamı ayarlayın.',
 };
 
 const uk = {
@@ -1038,6 +1056,7 @@ const uk = {
   vis_poor: 'Погано',
   loading: 'Завантаження погоди\u2026',
   error: 'Не вдалося завантажити погоду',
+  no_location: 'Місцезнаходження не налаштовано. Вкажіть широту та довготу в налаштуваннях плагіна.',
 };
 
 const sv = {
@@ -1094,6 +1113,7 @@ const sv = {
   vis_poor: 'Dåligt',
   loading: 'Laddar väder\u2026',
   error: 'Kunde inte ladda väder',
+  no_location: 'Ingen plats konfigurerad. Ange latitud och longitud i plugin-inställningarna.',
 };
 
 const no = {
@@ -1150,6 +1170,7 @@ const no = {
   vis_poor: 'Dårlig',
   loading: 'Laster vær\u2026',
   error: 'Kunne ikke laste vær',
+  no_location: 'Ingen plassering konfigurert. Angi breddegrad og lengdegrad i plugin-innstillingene.',
 };
 
 const da = {
@@ -1206,6 +1227,7 @@ const da = {
   vis_poor: 'Dårlig',
   loading: 'Indlæser vejr\u2026',
   error: 'Kunne ikke indlæse vejr',
+  no_location: 'Ingen placering konfigureret. Indstil bredde- og længdegrad i plugin-indstillingerne.',
 };
 
 const fi = {
@@ -1262,6 +1284,7 @@ const fi = {
   vis_poor: 'Heikko',
   loading: 'Ladataan säätä\u2026',
   error: 'Sään lataaminen epäonnistui',
+  no_location: 'Sijaintia ei ole määritetty. Aseta leveys- ja pituusaste lisäosan asetuksissa.',
 };
 
 const th = {
@@ -1318,6 +1341,7 @@ const th = {
   vis_poor: 'แย่',
   loading: 'กำลังโหลดสภาพอากาศ\u2026',
   error: 'ไม่สามารถโหลดสภาพอากาศได้',
+  no_location: 'ไม่ได้กำหนดค่าตำแหน่ง กรุณาตั้งค่าละติจูดและลองจิจูดในการตั้งค่าปลั๊กอิน',
 };
 
 const vi = {
@@ -1374,6 +1398,7 @@ const vi = {
   vis_poor: 'Kém',
   loading: 'Đang tải thời tiết\u2026',
   error: 'Không thể tải thời tiết',
+  no_location: 'Chưa cấu hình vị trí. Đặt vĩ độ và kinh độ trong cài đặt plugin.',
 };
 
 i18n.use(initReactI18next).init({

@@ -480,28 +480,36 @@ const Weather = ({
   hours = 24,
   use24Hour = false,
 }) => {
-  const { data, isLoading, isError, locationName } = useWeather();
+  const { data, isLoading, isError, isLocating, noLocation, locationName } = useWeather();
   const { t } = useTranslation('weather');
   useLanguageSync();
-  if (isLoading) {
+
+  if (isLoading || isLocating) {
     return (
       <div className="weather-container weather-container--loading">
         <span className="material-icons weather-loading-icon">cloud_sync</span>
       </div>
     );
   }
-  if (!data) {
-    return (
-      <div className="weather-container weather-container--error">
-        <span className="weather-error-text">{t('loading')}</span>
-      </div>
-    );
-  }
-  console.log('Weather data:', isError);
   if (isError) {
     return (
       <div className="weather-container weather-container--error">
         <span className="weather-error-text">{t('error')}</span>
+      </div>
+    );
+  }
+  if (noLocation) {
+    return (
+      <div className="weather-container weather-container--error">
+        <span className="material-icons weather-loading-icon">location_off</span>
+        <span className="weather-error-text">{t('no_location')}</span>
+      </div>
+    );
+  }
+  if (!data) {
+    return (
+      <div className="weather-container weather-container--loading">
+        <span className="material-icons weather-loading-icon">cloud_sync</span>
       </div>
     );
   }
