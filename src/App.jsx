@@ -3,26 +3,35 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Player from './pages/Player';
+import useLanguageSync from './hooks/useLanguageSync';
 // import './App.scss'; // Assuming you might have app-specific styles or use index.scss
 
-const App = () => {
+// Inner component — rendered inside SocketProvider so hooks can access context.
+const AppInner = () => {
+  useLanguageSync();
+  return (
+    <Router>
+      <div className="d-flex flex-column h-100 bg-dark">
+        <main className="flex-grow-1 d-flex flex-column overflow-hidden">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/player" element={<Player />} />
+            {/* Add more routes as needed */}
+          </Routes>
+        </main>
+      </div>
+    </Router>
+  );
+};
+
+const AppContent = () => {
   return (
     <SocketProvider>
       <ThemeProvider>
-        <Router>
-          <div className="d-flex flex-column h-100 bg-dark">
-            <main className="flex-grow-1 d-flex flex-column overflow-hidden">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/player" element={<Player />} />
-                {/* Add more routes as needed */}
-              </Routes>
-            </main>
-          </div>
-        </Router>
+        <AppInner />
       </ThemeProvider>
     </SocketProvider>
   );
 };
 
-export default App;
+export default AppContent;

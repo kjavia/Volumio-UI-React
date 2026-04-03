@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 import { useTranslation } from 'react-i18next';
 import useWeather from '@/hooks/useWeather';
-import useLanguageSync from '@/hooks/useLanguageSync';
 import WeatherEffects from './weather-effects/WeatherEffects';
 import './Weather.scss';
 
@@ -482,7 +481,6 @@ const Weather = ({
 }) => {
   const { data, isLoading, isError, isLocating, noLocation, locationName } = useWeather();
   const { t } = useTranslation('weather');
-  useLanguageSync();
 
   if (isLoading || isLocating) {
     return (
