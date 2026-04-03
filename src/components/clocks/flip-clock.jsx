@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 // @pqina/flip is loaded as a global UMD script in index.html.
 // It sets window.Tick (with the Flip view already registered).
@@ -69,6 +70,7 @@ FlipPanel.displayName = 'FlipPanel';
 FlipPanel.propTypes = { value: PropTypes.number.isRequired };
 
 const FlipClock = ({ showSeconds = true, showWeather = false, use12Hour = true }) => {
+  const { i18n } = useTranslation();
   const { data: weather } = useWeather();
   const [time, setTime] = useState(() => new Date());
 
@@ -90,9 +92,11 @@ const FlipClock = ({ showSeconds = true, showWeather = false, use12Hour = true }
   const displayHours = use12Hour ? (hours24 % 12 || 12) : hours24;
   const minutes = time.getMinutes();
   const seconds = time.getSeconds();
-  const ampm = hours24 >= 12 ? 'PM' : 'AM';
+  const ampm = new Intl.DateTimeFormat(i18n.language, { hour: 'numeric', hour12: true })
+    .formatToParts(time)
+    .find(p => p.type === 'dayPeriod')?.value ?? (hours24 >= 12 ? 'PM' : 'AM');
 
-  const dateString = time.toLocaleDateString(undefined, {
+  const dateString = time.toLocaleDateString(i18n.language, {
     weekday: 'long',
     year: 'numeric',
     month: 'long',

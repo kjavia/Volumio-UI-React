@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import useWeather from '@/hooks/useWeather';
 
 const HOURS = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 const AnalogClock = ({ showSeconds = true, showWeather = false, showDate = true }) => {
+  const { i18n } = useTranslation();
   const { data: weather } = useWeather();
   const [time, setTime] = useState(() => new Date());
 
@@ -30,8 +32,8 @@ const AnalogClock = ({ showSeconds = true, showWeather = false, showDate = true 
   const minuteDeg = minutes * 6 + seconds * 0.1;
   const hourDeg = hours * 30 + minutes * 0.5;
 
-  const dayName = time.toLocaleDateString(undefined, { weekday: 'short' }).toUpperCase();
-  const dateStr = time.toLocaleDateString(undefined, {
+  const dayName = time.toLocaleDateString(i18n.language, { weekday: 'short' }).toUpperCase();
+  const dateStr = time.toLocaleDateString(i18n.language, {
     day: 'numeric',
     month: 'short',
     year: 'numeric',

@@ -1,8 +1,7 @@
 import { useState, useEffect, memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import useWeather from '@/hooks/useWeather';
-
-const DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
 // Segment map: [a, b, c, d, e, f, g]
 //  _a_
@@ -48,6 +47,7 @@ const LcdColon = memo(({ blink = false }) => (
 LcdColon.displayName = 'LcdColon';
 
 const DigitalClock = ({ showSeconds = true, use12Hour = true, showWeather = false }) => {
+  const { i18n } = useTranslation();
   const { data: weather } = useWeather();
   const [time, setTime] = useState(() => new Date());
 
@@ -86,9 +86,16 @@ const DigitalClock = ({ showSeconds = true, use12Hour = true, showWeather = fals
   const seconds = time.getSeconds();
   const dayIndex = time.getDay();
 
+  // Jan 7 2001 was a Sunday — generate locale-aware short day names
+  const DAYS = Array.from({ length: 7 }, (_, i) =>
+    new Date(2001, 0, 7 + i).toLocaleDateString(i18n.language, { weekday: 'short' }).toUpperCase()
+  );
+
   let ampm = '';
   if (use12Hour) {
-    ampm = hours >= 12 ? 'PM' : 'AM';
+    ampm = new Intl.DateTimeFormat(i18n.language, { hour: 'numeric', hour12: true })
+      .formatToParts(time)
+      .find(p => p.type === 'dayPeriod')?.value ?? (hours >= 12 ? 'PM' : 'AM');
     hours = hours % 12 || 12;
   }
 
@@ -96,7 +103,7 @@ const DigitalClock = ({ showSeconds = true, use12Hour = true, showWeather = fals
   const m = String(minutes).padStart(2, '0').split('').map(Number);
   const s = String(seconds).padStart(2, '0').split('').map(Number);
 
-  const dateString = time.toLocaleDateString(undefined, {
+  const dateString = time.toLocaleDateString(i18n.language, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
