@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { useGeoLocation } from '@bigdatacloudapi/react-reverse-geocode-client';
 import usePluginConfig from './usePluginConfig';
 
 // Fetches a city name from lat/lng via BigDataCloud reverse-geocode (free, no key needed).
@@ -18,34 +19,12 @@ const fetchCityName = async ({ latitude, longitude, language }) => {
 };
 
 // Given lat/lng (and the Volumio system language), resolves to a city name string.
+// Only used when the plugin config has explicit coordinates saved.
 const useCityNameFromConfigLocation = (latitude, longitude, language) =>
   useQuery({
     queryKey: ['geo-detect', latitude, longitude, language],
     queryFn: () => fetchCityName({ latitude, longitude, language }),
     enabled: Boolean(latitude) && Boolean(longitude),
-    staleTime: Infinity,
-    retry: false,
-  });
-
-// Asks the browser for the user's current coordinates (only used when the plugin
-// config has no explicit lat/lng saved).
-const fetchBrowserLocation = () =>
-  new Promise((resolve, reject) => {
-    if (!navigator.geolocation) {
-      reject(new Error('Geolocation not supported'));
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      (pos) => resolve({ latitude: pos.coords.latitude, longitude: pos.coords.longitude }),
-      reject
-    );
-  });
-
-const useBrowserLocation = (enabled) =>
-  useQuery({
-    queryKey: ['browser-location'],
-    queryFn: fetchBrowserLocation,
-    enabled,
     staleTime: Infinity,
     retry: false,
   });
@@ -213,20 +192,16 @@ const useWeather = () => {
   const configLng = config?.longitude ? Number(config.longitude) : null;
   const hasConfigLocation = Boolean(configLat) && Boolean(configLng);
 
-  // Don't ask the browser for location until config has loaded and confirmed no
-  // saved coordinates — avoids a spurious permission prompt on every load.
-  const {
-    data: browserLoc,
-    isLoading: browserLocLoading,
-  } = useBrowserLocation(!configLoading && !hasConfigLocation);
+  // useGeoLocation handles GPS → IP fallback automatically, so it works on
+  // Volumio where browser geolocation is unavailable.
+  const { data: geoData, loading: geoLoading } = useGeoLocation({ language });
 
-  const latitude = configLat || browserLoc?.latitude || null;
-  const longitude = configLng || browserLoc?.longitude || null;
+  const latitude = configLat || geoData?.latitude || null;
+  const longitude = configLng || geoData?.longitude || null;
   const hasLocation = Boolean(latitude) && Boolean(longitude);
 
   // True while we're still determining the location (config fetch or geolocation).
-  const isLocating =
-    configLoading || (!hasConfigLocation && !configLoading && browserLocLoading);
+  const isLocating = configLoading || (!hasConfigLocation && geoLoading);
 
   // True when location is definitively unavailable (not just slow).
   const noLocation = !isLocating && !hasLocation;
@@ -234,7 +209,16 @@ const useWeather = () => {
   const unitSystem = config?.unitSystem || 'metric';
   const weatherApiKey = config?.weatherApiKey || '';
 
-  const { data: cityName } = useCityNameFromConfigLocation(latitude, longitude, language);
+  // When config has explicit coords, reverse-geocode them for the city name.
+  // Otherwise use the city name already returned by the geo hook (no extra call).
+  const { data: configCityName } = useCityNameFromConfigLocation(
+    hasConfigLocation ? configLat : null,
+    hasConfigLocation ? configLng : null,
+    language
+  );
+  const cityName = hasConfigLocation
+    ? configCityName
+    : (geoData?.city || geoData?.locality || geoData?.principalSubdivision || geoData?.countryName || null);
 
   const query = useQuery({
     queryKey: ['weather', latitude, longitude, unitSystem, weatherApiKey],
