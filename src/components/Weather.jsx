@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
+import { useTranslation } from 'react-i18next';
 import useWeather from '@/hooks/useWeather';
+import useLanguageSync from '@/hooks/useLanguageSync';
 import WeatherEffects from './weather-effects/WeatherEffects';
 import './Weather.scss';
 
@@ -16,14 +18,14 @@ const formatHour = (iso, use24Hour = false) => {
   return dt.toFormat(use24Hour ? 'HH:mm' : 'h a');
 };
 
-const formatDay = (iso) => {
+const formatDay = (iso, locale) => {
   const d = new Date(iso + 'T00:00:00');
-  return d.toLocaleDateString(undefined, { weekday: 'short' });
+  return d.toLocaleDateString(locale || undefined, { weekday: 'short' });
 };
 
-const formatDate = (iso) => {
+const formatDate = (iso, locale) => {
   const d = new Date(iso + 'T00:00:00');
-  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  return d.toLocaleDateString(locale || undefined, { month: 'short', day: 'numeric' });
 };
 
 const round = (n) => Math.round(n);
@@ -81,43 +83,46 @@ const CurrentWeather = ({
   todaySunrise,
   todaySunset,
   use24Hour,
-}) => (
-  <div className="weather-current">
-    <div className="weather-current-main">
-      <WeatherIcon name={current.icon} className="weather-current-icon" />
-      <span className="weather-current-temp">
-        {round(current.temperature)}
-        <span className="weather-current-unit">{units.tempUnit}</span>
-      </span>
+}) => {
+  const { t } = useTranslation('weather');
+  return (
+    <div className="weather-current">
+      <div className="weather-current-main">
+        <WeatherIcon name={current.icon} className="weather-current-icon" />
+        <span className="weather-current-temp">
+          {round(current.temperature)}
+          <span className="weather-current-unit">{units.tempUnit}</span>
+        </span>
+      </div>
+      <span className="weather-current-desc">{t(current.description)}</span>
+      <div className="weather-details">
+        {showFeelsLike && (
+          <DetailRow
+            icon="thermostat"
+            label={t('feels_like')}
+            value={`${round(current.apparentTemperature)}${units.tempUnit}`}
+          />
+        )}
+        {showWind && (
+          <DetailRow
+            icon="air"
+            label={t('wind')}
+            value={`${round(current.windSpeed)} ${units.windUnit}`}
+          />
+        )}
+        {showHumidity && (
+          <DetailRow icon="water_drop" label={t('humidity')} value={`${current.humidity}%`} />
+        )}
+        {showSunrise && todaySunrise && (
+          <DetailRow icon="wb_twilight" label={t('sunrise')} value={formatTime(todaySunrise, use24Hour)} />
+        )}
+        {showSunset && todaySunset && (
+          <DetailRow icon="nights_stay" label={t('sunset')} value={formatTime(todaySunset, use24Hour)} />
+        )}
+      </div>
     </div>
-    <span className="weather-current-desc">{current.description}</span>
-    <div className="weather-details">
-      {showFeelsLike && (
-        <DetailRow
-          icon="thermostat"
-          label="Feels like"
-          value={`${round(current.apparentTemperature)}${units.tempUnit}`}
-        />
-      )}
-      {showWind && (
-        <DetailRow
-          icon="air"
-          label="Wind"
-          value={`${round(current.windSpeed)} ${units.windUnit}`}
-        />
-      )}
-      {showHumidity && (
-        <DetailRow icon="water_drop" label="Humidity" value={`${current.humidity}%`} />
-      )}
-      {showSunrise && todaySunrise && (
-        <DetailRow icon="wb_twilight" label="Sunrise" value={formatTime(todaySunrise, use24Hour)} />
-      )}
-      {showSunset && todaySunset && (
-        <DetailRow icon="nights_stay" label="Sunset" value={formatTime(todaySunset, use24Hour)} />
-      )}
-    </div>
-  </div>
-);
+  );
+};
 CurrentWeather.propTypes = {
   current: PropTypes.object.isRequired,
   units: PropTypes.object.isRequired,
@@ -164,50 +169,54 @@ HourlyForecast.propTypes = {
 
 /* ── Daily Forecast Card ──────────────────────────────────────────────── */
 
-const DailyCard = ({ day, units, showWind, showSunrise, showSunset, showPrecip, isToday, use24Hour }) => (
-  <div className={`weather-daily-card ${isToday ? 'weather-daily-card--today' : ''}`}>
-    <span className="weather-daily-day">{isToday ? 'Today' : formatDay(day.date)}</span>
-    <span className="weather-daily-date">{formatDate(day.date)}</span>
-    <WeatherIcon name={day.icon} className="weather-daily-icon" />
-    <span className="weather-daily-desc">{day.description}</span>
-    <div className="weather-daily-temps">
-      <span className="weather-daily-hi">{round(day.tempMax)}°</span>
-      <span className="weather-daily-lo">{round(day.tempMin)}°</span>
+const DailyCard = ({ day, units, showWind, showSunrise, showSunset, showPrecip, isToday, use24Hour }) => {
+  const { t, i18n } = useTranslation('weather');
+  const locale = i18n.language;
+  return (
+    <div className={`weather-daily-card ${isToday ? 'weather-daily-card--today' : ''}`}>
+      <span className="weather-daily-day">{isToday ? t('today') : formatDay(day.date, locale)}</span>
+      <span className="weather-daily-date">{formatDate(day.date, locale)}</span>
+      <WeatherIcon name={day.icon} className="weather-daily-icon" />
+      <span className="weather-daily-desc">{t(day.description)}</span>
+      <div className="weather-daily-temps">
+        <span className="weather-daily-hi">{round(day.tempMax)}°</span>
+        <span className="weather-daily-lo">{round(day.tempMin)}°</span>
+      </div>
+      {showWind && (
+        <div className="weather-daily-meta">
+          <WeatherIcon name="air" className="weather-daily-meta-icon" />
+          <span>
+            {round(day.windSpeedMax)} {units.windUnit}
+          </span>
+        </div>
+      )}
+      {showPrecip && day.precipitation > 0 && (
+        <div className="weather-daily-meta">
+          <WeatherIcon name="water_drop" className="weather-daily-meta-icon" />
+          <span>
+            {day.precipitation} {units.precipUnit}
+          </span>
+        </div>
+      )}
+      {(showSunrise || showSunset) && (
+        <div className="weather-daily-sun">
+          {showSunrise && (
+            <span className="weather-daily-sun-item">
+              <WeatherIcon name="wb_twilight" className="weather-daily-meta-icon" />
+              {formatTime(day.sunrise, use24Hour)}
+            </span>
+          )}
+          {showSunset && (
+            <span className="weather-daily-sun-item">
+              <WeatherIcon name="nights_stay" className="weather-daily-meta-icon" />
+              {formatTime(day.sunset, use24Hour)}
+            </span>
+          )}
+        </div>
+      )}
     </div>
-    {showWind && (
-      <div className="weather-daily-meta">
-        <WeatherIcon name="air" className="weather-daily-meta-icon" />
-        <span>
-          {round(day.windSpeedMax)} {units.windUnit}
-        </span>
-      </div>
-    )}
-    {showPrecip && day.precipitation > 0 && (
-      <div className="weather-daily-meta">
-        <WeatherIcon name="water_drop" className="weather-daily-meta-icon" />
-        <span>
-          {day.precipitation} {units.precipUnit}
-        </span>
-      </div>
-    )}
-    {(showSunrise || showSunset) && (
-      <div className="weather-daily-sun">
-        {showSunrise && (
-          <span className="weather-daily-sun-item">
-            <WeatherIcon name="wb_twilight" className="weather-daily-meta-icon" />
-            {formatTime(day.sunrise, use24Hour)}
-          </span>
-        )}
-        {showSunset && (
-          <span className="weather-daily-sun-item">
-            <WeatherIcon name="nights_stay" className="weather-daily-meta-icon" />
-            {formatTime(day.sunset, use24Hour)}
-          </span>
-        )}
-      </div>
-    )}
-  </div>
-);
+  );
+};
 DailyCard.propTypes = {
   day: PropTypes.object.isRequired,
   units: PropTypes.object.isRequired,
@@ -241,6 +250,8 @@ const LocationBadge = ({ name }) =>
 LocationBadge.propTypes = { name: PropTypes.string };
 
 const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour }) => {
+  const { t, i18n } = useTranslation('weather');
+  const locale = i18n.language;
   const today = daily[0];
   const precipitation = today.precipitation || 0;
   const visKm = hourly[0]?.visibility ? round(hourly[0].visibility / 1000) : null;
@@ -250,12 +261,12 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
     uvVal === '—'
       ? ''
       : uvVal < 3
-        ? 'Low'
+        ? t('uv_low')
         : uvVal < 6
-          ? 'Moderate'
+          ? t('uv_moderate')
           : uvVal < 8
-            ? 'High'
-            : 'Very High';
+            ? t('uv_high')
+            : t('uv_very_high');
 
   // For temp range bars: compute span across all days
   const allMin = Math.min(...daily.map((d) => d.tempMin));
@@ -275,7 +286,7 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
             {round(current.temperature)}
             <span className="weather-full-hero-unit">{units.tempUnit}</span>
           </div>
-          <div className="weather-full-hero-desc">{current.description}</div>
+          <div className="weather-full-hero-desc">{t(current.description)}</div>
           {locationName && (
             <div className="weather-full-hero-location">
               <span className="material-icons weather-full-hero-location-icon">location_on</span>
@@ -292,14 +303,14 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
 
         {/* 10-Day */}
         <div className="weather-full-tenday">
-          <div className="weather-full-tenday-title">10-DAY FORECAST</div>
+          <div className="weather-full-tenday-title">{t('ten_day_forecast').toUpperCase()}</div>
           {daily.map((d, i) => {
             const lo = ((d.tempMin - allMin) / span) * 100;
             const width = ((d.tempMax - d.tempMin) / span) * 100;
             return (
               <div key={d.date} className="weather-full-tenday-row">
                 <span className="weather-full-tenday-day">
-                  {i === 0 ? 'Today' : formatDay(d.date)}
+                  {i === 0 ? t('today') : formatDay(d.date, locale)}
                 </span>
                 <WeatherIcon name={d.icon} className="weather-full-tenday-icon" />
                 <span className="weather-full-tenday-lo">{round(d.tempMin)}°</span>
@@ -322,7 +333,7 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
           {hourly.slice(0, 24).map((h, i) => (
             <div key={h.time} className="weather-full-hourly-item">
               <span className="weather-full-hourly-time">
-                {i === 0 ? 'Now' : formatHour(h.time, use24Hour)}
+                {i === 0 ? t('now') : formatHour(h.time, use24Hour)}
               </span>
               <WeatherIcon name={h.icon} className="weather-full-hourly-icon" />
               <span className="weather-full-hourly-temp">
@@ -339,7 +350,7 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
         <div className="weather-full-tile">
           <div className="weather-full-tile-top">
             <span className="material-icons weather-full-tile-hdr-icon">wb_sunny</span>
-            <span className="weather-full-tile-label">UV INDEX</span>
+            <span className="weather-full-tile-label">{t('uv_index').toUpperCase()}</span>
           </div>
           <div className="weather-full-tile-value">{uvVal}</div>
           {uvLabel && <div className="weather-full-tile-sub">{uvLabel}</div>}
@@ -353,36 +364,36 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
             >
               wb_twilight
             </span>
-            <span className="weather-full-tile-label">SUNRISE</span>
+            <span className="weather-full-tile-label">{t('sunrise').toUpperCase()}</span>
           </div>
           <div className="weather-full-tile-value">{formatTime(today.sunrise, use24Hour)}</div>
-          <div className="weather-full-tile-sub">Sunset {formatTime(today.sunset, use24Hour)}</div>
+          <div className="weather-full-tile-sub">{t('sunset')} {formatTime(today.sunset, use24Hour)}</div>
         </div>
 
         <div className="weather-full-tile">
           <div className="weather-full-tile-top">
             <span className="material-icons weather-full-tile-hdr-icon">air</span>
-            <span className="weather-full-tile-label">WIND</span>
+            <span className="weather-full-tile-label">{t('wind').toUpperCase()}</span>
           </div>
           <div className="weather-full-tile-value">
             {round(current.windSpeed)}
             <span className="weather-full-tile-unit"> {units.windUnit}</span>
           </div>
           {current.windDirection != null && (
-            <div className="weather-full-tile-sub">{current.windDirection}° bearing</div>
+            <div className="weather-full-tile-sub">{t('bearing', { deg: current.windDirection })}</div>
           )}
         </div>
 
         <div className="weather-full-tile">
           <div className="weather-full-tile-top">
             <span className="material-icons weather-full-tile-hdr-icon">water_drop</span>
-            <span className="weather-full-tile-label">PRECIPITATION</span>
+            <span className="weather-full-tile-label">{t('precipitation').toUpperCase()}</span>
           </div>
           <div className="weather-full-tile-value">
             {precipitation}
             <span className="weather-full-tile-unit"> {units.precipUnit}</span>
           </div>
-          <div className="weather-full-tile-sub">Today</div>
+          <div className="weather-full-tile-sub">{t('today')}</div>
         </div>
 
         <div className="weather-full-tile">
@@ -393,21 +404,21 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
             >
               thermostat
             </span>
-            <span className="weather-full-tile-label">FEELS LIKE</span>
+            <span className="weather-full-tile-label">{t('feels_like').toUpperCase()}</span>
           </div>
           <div className="weather-full-tile-value">
             {feelsLike}
             <span className="weather-full-tile-unit">{units.tempUnit}</span>
           </div>
           <div className="weather-full-tile-sub">
-            {feelsLike < round(current.temperature) ? 'Feels colder' : 'Feels warmer'}
+            {feelsLike < round(current.temperature) ? t('feels_colder') : t('feels_warmer')}
           </div>
         </div>
 
         <div className="weather-full-tile">
           <div className="weather-full-tile-top">
             <span className="material-icons weather-full-tile-hdr-icon">water</span>
-            <span className="weather-full-tile-label">HUMIDITY</span>
+            <span className="weather-full-tile-label">{t('humidity').toUpperCase()}</span>
           </div>
           <div className="weather-full-tile-value">
             {current.humidity}
@@ -419,14 +430,14 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
           <div className="weather-full-tile">
             <div className="weather-full-tile-top">
               <span className="material-icons weather-full-tile-hdr-icon">visibility</span>
-              <span className="weather-full-tile-label">VISIBILITY</span>
+              <span className="weather-full-tile-label">{t('visibility').toUpperCase()}</span>
             </div>
             <div className="weather-full-tile-value">
               {visKm}
               <span className="weather-full-tile-unit"> km</span>
             </div>
             <div className="weather-full-tile-sub">
-              {visKm > 10 ? 'Clear' : visKm > 5 ? 'Average' : 'Poor'}
+              {visKm > 10 ? t('vis_clear') : visKm > 5 ? t('vis_average') : t('vis_poor')}
             </div>
           </div>
         )}
@@ -434,7 +445,7 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
         <div className="weather-full-tile">
           <div className="weather-full-tile-top">
             <span className="material-icons weather-full-tile-hdr-icon">speed</span>
-            <span className="weather-full-tile-label">PRESSURE</span>
+            <span className="weather-full-tile-label">{t('pressure').toUpperCase()}</span>
           </div>
           <div className="weather-full-tile-value">
             {round(current.pressure)}
@@ -470,6 +481,8 @@ const Weather = ({
   use24Hour = false,
 }) => {
   const { data, isLoading, isError, locationName } = useWeather();
+  const { t } = useTranslation('weather');
+  useLanguageSync();
   if (isLoading) {
     return (
       <div className="weather-container weather-container--loading">
@@ -480,7 +493,7 @@ const Weather = ({
   if (!data) {
     return (
       <div className="weather-container weather-container--error">
-        <span className="weather-error-text">Fetching Weather...</span>
+        <span className="weather-error-text">{t('loading')}</span>
       </div>
     );
   }
@@ -488,7 +501,7 @@ const Weather = ({
   if (isError) {
     return (
       <div className="weather-container weather-container--error">
-        <span className="weather-error-text">Failed to fetch weather</span>
+        <span className="weather-error-text">{t('error')}</span>
       </div>
     );
   }

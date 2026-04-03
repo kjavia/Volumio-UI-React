@@ -51,38 +51,38 @@ const useBrowserLocation = (enabled) =>
   });
 
 const WMO_CODES = {
-  0: { description: 'Clear sky', icon: 'wb_sunny', nightIcon: 'nights_stay' },
-  1: { description: 'Mainly clear', icon: 'wb_sunny', nightIcon: 'nights_stay' },
-  2: { description: 'Partly cloudy', icon: 'cloud', nightIcon: 'nights_stay' },
-  3: { description: 'Overcast', icon: 'cloud' },
-  45: { description: 'Fog', icon: 'foggy' },
-  48: { description: 'Depositing rime fog', icon: 'foggy' },
-  51: { description: 'Light drizzle', icon: 'grain' },
-  53: { description: 'Moderate drizzle', icon: 'grain' },
-  55: { description: 'Dense drizzle', icon: 'grain' },
-  56: { description: 'Light freezing drizzle', icon: 'ac_unit' },
-  57: { description: 'Dense freezing drizzle', icon: 'ac_unit' },
-  61: { description: 'Slight rain', icon: 'water_drop' },
-  63: { description: 'Moderate rain', icon: 'water_drop' },
-  65: { description: 'Heavy rain', icon: 'water_drop' },
-  66: { description: 'Light freezing rain', icon: 'ac_unit' },
-  67: { description: 'Heavy freezing rain', icon: 'ac_unit' },
-  71: { description: 'Slight snow', icon: 'ac_unit' },
-  73: { description: 'Moderate snow', icon: 'ac_unit' },
-  75: { description: 'Heavy snow', icon: 'ac_unit' },
-  77: { description: 'Snow grains', icon: 'ac_unit' },
-  80: { description: 'Slight showers', icon: 'water_drop' },
-  81: { description: 'Moderate showers', icon: 'water_drop' },
-  82: { description: 'Violent showers', icon: 'water_drop' },
-  85: { description: 'Slight snow showers', icon: 'ac_unit' },
-  86: { description: 'Heavy snow showers', icon: 'ac_unit' },
-  95: { description: 'Thunderstorm', icon: 'thunderstorm' },
-  96: { description: 'Thunderstorm with slight hail', icon: 'thunderstorm' },
-  99: { description: 'Thunderstorm with heavy hail', icon: 'thunderstorm' },
+  0: { description: 'clear_sky', icon: 'wb_sunny', nightIcon: 'nights_stay' },
+  1: { description: 'mainly_clear', icon: 'wb_sunny', nightIcon: 'nights_stay' },
+  2: { description: 'partly_cloudy', icon: 'cloud', nightIcon: 'nights_stay' },
+  3: { description: 'overcast', icon: 'cloud' },
+  45: { description: 'fog', icon: 'foggy' },
+  48: { description: 'depositing_rime_fog', icon: 'foggy' },
+  51: { description: 'light_drizzle', icon: 'grain' },
+  53: { description: 'moderate_drizzle', icon: 'grain' },
+  55: { description: 'dense_drizzle', icon: 'grain' },
+  56: { description: 'light_freezing_drizzle', icon: 'ac_unit' },
+  57: { description: 'dense_freezing_drizzle', icon: 'ac_unit' },
+  61: { description: 'slight_rain', icon: 'water_drop' },
+  63: { description: 'moderate_rain', icon: 'water_drop' },
+  65: { description: 'heavy_rain', icon: 'water_drop' },
+  66: { description: 'light_freezing_rain', icon: 'ac_unit' },
+  67: { description: 'heavy_freezing_rain', icon: 'ac_unit' },
+  71: { description: 'slight_snow', icon: 'ac_unit' },
+  73: { description: 'moderate_snow', icon: 'ac_unit' },
+  75: { description: 'heavy_snow', icon: 'ac_unit' },
+  77: { description: 'snow_grains', icon: 'ac_unit' },
+  80: { description: 'slight_showers', icon: 'water_drop' },
+  81: { description: 'moderate_showers', icon: 'water_drop' },
+  82: { description: 'violent_showers', icon: 'water_drop' },
+  85: { description: 'slight_snow_showers', icon: 'ac_unit' },
+  86: { description: 'heavy_snow_showers', icon: 'ac_unit' },
+  95: { description: 'thunderstorm', icon: 'thunderstorm' },
+  96: { description: 'thunderstorm_slight_hail', icon: 'thunderstorm' },
+  99: { description: 'thunderstorm_heavy_hail', icon: 'thunderstorm' },
 };
 
 const resolveWmo = (code, isDay = true) => {
-  const entry = WMO_CODES[code] || { description: 'Unknown', icon: 'help_outline' };
+  const entry = WMO_CODES[code] || { description: 'unknown', icon: 'help_outline' };
   const icon = (!isDay && entry.nightIcon) ? entry.nightIcon : entry.icon;
   return { ...entry, icon };
 };
@@ -208,7 +208,6 @@ const fetchWeather = async ({ latitude, longitude, unitSystem, weatherApiKey }) 
 
 const useWeather = () => {
   const { data: config, isLoading: configLoading } = usePluginConfig();
-
   const language = config?.language || 'en';
   const configLat = config?.latitude ? Number(config.latitude) : null;
   const configLng = config?.longitude ? Number(config.longitude) : null;
