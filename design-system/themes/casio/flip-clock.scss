@@ -22,15 +22,14 @@
 .tick-flip-panel {
     font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace !important;
     border-radius: 2px !important;
-    border: 2px solid var(--casio-edge) !important;  /* dark inset ring */
+    border: 1px solid rgba(12, 30, 24, 0.25) !important;
     background: #c8d4cf !important;                  /* light grey = track-info-group */
     color: #3a5850 !important;
     text-shadow:
         0 1px 0 rgba(0, 0, 0, 0.20),
         0 -1px 0 rgba(255, 255, 255, 0.50) !important;
     box-shadow:
-        0 0 0 1px var(--casio-edge),
-        inset 0 1px 3px rgba(0, 0, 0, 0.12) !important;
+        inset 0 1px 3px rgba(0, 0, 0, 0.10) !important;
     -webkit-font-smoothing: antialiased !important;
     letter-spacing: 0.06em !important;
 }
