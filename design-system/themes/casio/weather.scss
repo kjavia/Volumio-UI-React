@@ -1,0 +1,151 @@
+/* ══════════════════════════════════════════════════════════════════════
+   WEATHER — 80s Casio Theme
+   LCD glass panel background · DS Digital font · artist-name green
+   ══════════════════════════════════════════════════════════════════════ */
+
+$seg-color:  #3a5850;
+$seg-dim:    rgba(58, 88, 80, 0.45);
+$lcd-bg:     #c8d4cf;
+$lcd-shadow: 0 1px 0 rgba(0, 0, 0, 0.20), 0 -1px 0 rgba(255, 255, 255, 0.50);
+$lcd-font:   'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+
+.weather-container {
+    font-family: $lcd-font;
+    background: $lcd-bg;
+    color: $seg-color;
+    border-radius: 0.4cqw;
+    border: 0.25cqw solid var(--casio-edge);
+    box-shadow:
+        0 0 0 0.3cqw var(--casio-edge),
+        inset 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Current ─────────────────────────────────────────────────────────── */
+
+.weather-current-temp {
+    font-family: $lcd-font;
+    font-style: italic;
+    color: $seg-color;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-current-unit {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-current-desc {
+    font-family: $lcd-font;
+    font-style: italic;
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}
+
+/* ── Detail rows ─────────────────────────────────────────────────────── */
+
+.weather-detail {
+    font-family: $lcd-font;
+    font-style: italic;
+}
+
+.weather-detail-label {
+    color: $seg-dim;
+}
+
+.weather-detail-value {
+    color: $seg-color;
+    font-weight: 400;   /* DS Digital has no bold */
+    text-shadow: $lcd-shadow;
+}
+
+/* ── Hourly ──────────────────────────────────────────────────────────── */
+
+.weather-hourly-item {
+    background: rgba(12, 30, 24, 0.06);
+    border-color: rgba(58, 88, 80, 0.25);
+    border-radius: 2px;
+}
+
+.weather-hourly-time {
+    font-family: $lcd-font;
+    font-style: italic;
+    color: $seg-dim;
+}
+
+.weather-hourly-temp {
+    font-family: $lcd-font;
+    font-style: italic;
+    font-weight: 400;
+    color: $seg-color;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-hourly-wind {
+    font-family: $lcd-font;
+    font-style: italic;
+    color: $seg-dim;
+}
+
+/* ── Daily cards ─────────────────────────────────────────────────────── */
+
+.weather-daily-card {
+    background: rgba(12, 30, 24, 0.06);
+    border-color: rgba(58, 88, 80, 0.25);
+    border-radius: 2px;
+}
+
+.weather-daily-card--today {
+    border-color: var(--casio-red);
+}
+
+.weather-daily-day {
+    font-family: $lcd-font;
+    font-style: italic;
+    color: $seg-color;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-daily-date {
+    font-family: $lcd-font;
+    font-style: italic;
+    color: $seg-dim;
+}
+
+.weather-daily-desc {
+    font-family: $lcd-font;
+    font-style: italic;
+    color: $seg-dim;
+}
+
+.weather-daily-hi {
+    font-family: $lcd-font;
+    font-style: italic;
+    color: $seg-color;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-daily-lo {
+    font-family: $lcd-font;
+    font-style: italic;
+    color: $seg-dim;
+}
+
+.weather-daily-meta {
+    font-family: $lcd-font;
+    font-style: italic;
+    color: $seg-dim;
+}
+
+.weather-daily-sun-item {
+    font-family: $lcd-font;
+    font-style: italic;
+    color: $seg-dim;
+}
+
+/* ── Loading / error states ──────────────────────────────────────────── */
+
+.weather-loading-icon,
+.weather-error-icon,
+.weather-error-text {
+    color: $seg-dim;
+}

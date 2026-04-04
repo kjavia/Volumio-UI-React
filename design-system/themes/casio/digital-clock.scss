@@ -150,6 +150,9 @@ $lcd-border:      #060f0a;   /* very dark inset ring border */
     height: 1.2cqw;
     background: $seg-color;
     border-radius: 0;   /* square dots — like actual Casio segments */
+    box-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.20),
+        0 -1px 0 rgba(255, 255, 255, 0.50);
 }
 
 @keyframes lcd-blink {
@@ -193,44 +196,64 @@ $lcd-border:      #060f0a;   /* very dark inset ring border */
 
 .lcd-weather-icon {
     font-size: clamp(0.8rem, 1.8cqw, 2.8rem);
-    color: #0c1e18;
+    color: rgba(58, 88, 80, 0.45);
+    text-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.12),
+        0 -1px 0 rgba(255, 255, 255, 0.50);
 }
 
 .lcd-weather-temp {
     font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
     font-size: clamp(0.6rem, 1.6cqw, 2.5rem);
     font-style: italic;
-    color: #0c1e18;
+    color: rgba(58, 88, 80, 0.45);
     -webkit-font-smoothing: antialiased;
     text-shadow:
-        0 1px 1px rgba(0, 0, 0, 0.15),
-        0 -1px 0 rgba(255, 255, 255, 0.55);
+        0 1px 1px rgba(0, 0, 0, 0.12),
+        0 -1px 0 rgba(255, 255, 255, 0.50);
 }
 
-/* ── 7-Segment Digit — font-based (DS Digital) ───────────────────────── */
+/* ── 7-Segment Digit — font overlay (Casio only; segments hidden) ────── */
 .lcd-digit {
     position: relative;
-    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
-    font-size: clamp(2rem, 9cqw, 7rem);
-    font-style: italic;
-    line-height: 1;
+    width: 14cqw;
+    height: calc(14cqw * 1.7);
 
-    .seg-ghost {
-        display: block;
-        color: $seg-color;
-        opacity: $seg-off-opacity;
-    }
+    /* Hide the polygon segment divs — font does the rendering */
+    .seg { display: none; }
 
-    .seg-active {
+    /* Ghost "8" — all-segments-on at off-segment opacity */
+    &::before {
+        content: '8';
         position: absolute;
         inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+        font-size: clamp(2.5rem, 31cqw, 28rem);
+        font-style: italic;
+        line-height: 1;
+        color: $seg-color;
+        opacity: $seg-off-opacity;
+    }
+
+    /* Active digit */
+    &::after {
+        content: attr(data-digit);
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+        font-size: clamp(2.5rem, 31cqw, 28rem);
+        font-style: italic;
+        line-height: 1;
         color: $seg-color;
         text-shadow:
-            0 1px 1px rgba(0, 0, 0, 0.15),
-            0 -1px 0 rgba(255, 255, 255, 0.55);
+            0 1px 0 rgba(0, 0, 0, 0.20),
+            0 -1px 0 rgba(255, 255, 255, 0.50);
     }
 }
 

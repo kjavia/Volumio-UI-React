@@ -4499,6 +4499,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 1.2cqw;
   background: #3a5850;
   border-radius: 0; /* square dots — like actual Casio segments */
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 @keyframes lcd-blink {
@@ -4543,39 +4544,62 @@ input[type=range]::-webkit-slider-thumb {
 
 .lcd-weather-icon {
   font-size: clamp(0.8rem, 1.8cqw, 2.8rem);
-  color: #0c1e18;
+  color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .lcd-weather-temp {
   font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
   font-size: clamp(0.6rem, 1.6cqw, 2.5rem);
   font-style: italic;
-  color: #0c1e18;
+  color: rgba(58, 88, 80, 0.45);
   -webkit-font-smoothing: antialiased;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 -1px 0 rgba(255, 255, 255, 0.55);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
-/* ── 7-Segment Digit — font-based (DS Digital) ───────────────────────── */
+/* ── 7-Segment Digit — font overlay (Casio only; segments hidden) ────── */
 .lcd-digit {
   position: relative;
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-size: clamp(2rem, 9cqw, 7rem);
-  font-style: italic;
-  line-height: 1;
+  width: 14cqw;
+  height: 23.8cqw;
+  /* Hide the polygon segment divs — font does the rendering */
 }
-.lcd-digit .seg-ghost {
-  display: block;
-  color: #3a5850;
-  opacity: 0.07;
+.lcd-digit .seg {
+  display: none;
 }
-.lcd-digit .seg-active {
+.lcd-digit {
+  /* Ghost "8" — all-segments-on at off-segment opacity */
+}
+.lcd-digit::before {
+  content: "8";
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-size: clamp(2.5rem, 31cqw, 28rem);
+  font-style: italic;
+  line-height: 1;
   color: #3a5850;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 -1px 0 rgba(255, 255, 255, 0.55);
+  opacity: 0.07;
+}
+.lcd-digit {
+  /* Active digit */
+}
+.lcd-digit::after {
+  content: attr(data-digit);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-size: clamp(2.5rem, 31cqw, 28rem);
+  font-style: italic;
+  line-height: 1;
+  color: #3a5850;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 /* ── Button row below display (decorative — like Casio's mode keys) ── */
@@ -4931,8 +4955,8 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 2px !important;
   border: 2px solid var(--casio-edge) !important; /* dark inset ring */
   background: #c8d4cf !important; /* light grey = track-info-group */
-  color: #0c1e18 !important; /* dark teal = track title colour */
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), 0 -1px 0 rgba(255, 255, 255, 0.6) !important;
+  color: #3a5850 !important;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5) !important;
   box-shadow: 0 0 0 1px var(--casio-edge), inset 0 1px 3px rgba(0, 0, 0, 0.12) !important;
   -webkit-font-smoothing: antialiased !important;
   letter-spacing: 0.06em !important;
@@ -4940,13 +4964,13 @@ input[type=range]::-webkit-slider-thumb {
 
 .flip-colon {
   font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  color: #0c1e18;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), 0 -1px 0 rgba(255, 255, 255, 0.6);
+  color: #3a5850;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .flip-ampm {
   font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  color: #0c1e18;
+  color: #3a5850;
   background: #c8d4cf;
   border: 2px solid var(--casio-edge);
   border-radius: 2px;
@@ -4968,6 +4992,144 @@ input[type=range]::-webkit-slider-thumb {
   border-bottom: 3px solid var(--casio-edge);
   border-right: 3px solid var(--casio-edge);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   WEATHER — 80s Casio Theme
+   LCD glass panel background · DS Digital font · artist-name green
+   ══════════════════════════════════════════════════════════════════════ */
+.weather-container {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  background: #c8d4cf;
+  color: #3a5850;
+  border-radius: 0.4cqw;
+  border: 0.25cqw solid var(--casio-edge);
+  box-shadow: 0 0 0 0.3cqw var(--casio-edge), inset 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Current ─────────────────────────────────────────────────────────── */
+.weather-current-temp {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  color: #3a5850;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.weather-current-unit {
+  color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.weather-current-desc {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ── Detail rows ─────────────────────────────────────────────────────── */
+.weather-detail {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+}
+
+.weather-detail-label {
+  color: rgba(58, 88, 80, 0.45);
+}
+
+.weather-detail-value {
+  color: #3a5850;
+  font-weight: 400; /* DS Digital has no bold */
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ── Hourly ──────────────────────────────────────────────────────────── */
+.weather-hourly-item {
+  background: rgba(12, 30, 24, 0.06);
+  border-color: rgba(58, 88, 80, 0.25);
+  border-radius: 2px;
+}
+
+.weather-hourly-time {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  color: rgba(58, 88, 80, 0.45);
+}
+
+.weather-hourly-temp {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  font-weight: 400;
+  color: #3a5850;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.weather-hourly-wind {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  color: rgba(58, 88, 80, 0.45);
+}
+
+/* ── Daily cards ─────────────────────────────────────────────────────── */
+.weather-daily-card {
+  background: rgba(12, 30, 24, 0.06);
+  border-color: rgba(58, 88, 80, 0.25);
+  border-radius: 2px;
+}
+
+.weather-daily-card--today {
+  border-color: var(--casio-red);
+}
+
+.weather-daily-day {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  color: #3a5850;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.weather-daily-date {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  color: rgba(58, 88, 80, 0.45);
+}
+
+.weather-daily-desc {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  color: rgba(58, 88, 80, 0.45);
+}
+
+.weather-daily-hi {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  color: #3a5850;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.weather-daily-lo {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  color: rgba(58, 88, 80, 0.45);
+}
+
+.weather-daily-meta {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  color: rgba(58, 88, 80, 0.45);
+}
+
+.weather-daily-sun-item {
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-style: italic;
+  color: rgba(58, 88, 80, 0.45);
+}
+
+/* ── Loading / error states ──────────────────────────────────────────── */
+.weather-loading-icon,
+.weather-error-icon,
+.weather-error-text {
+  color: rgba(58, 88, 80, 0.45);
 }
 
 body {

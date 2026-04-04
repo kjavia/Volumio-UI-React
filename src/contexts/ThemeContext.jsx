@@ -55,11 +55,11 @@ export const ThemeProvider = ({ children }) => {
 
     // In dev, themes are in public/themes/
     // In prod, they are in /themes/ (relative to root)
-    link.href = `/themes/${'casio'}.css`;
+    link.href = `/themes/${theme}.css`;
 
   }, [theme]);
 
-  return <ThemeContext.Provider value={{ theme: 'casio' }}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>;
 };
 
 export const useTheme = () => {

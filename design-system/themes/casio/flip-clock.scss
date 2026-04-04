@@ -24,10 +24,10 @@
     border-radius: 2px !important;
     border: 2px solid var(--casio-edge) !important;  /* dark inset ring */
     background: #c8d4cf !important;                  /* light grey = track-info-group */
-    color: #0c1e18 !important;                       /* dark teal = track title colour */
+    color: #3a5850 !important;
     text-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.18),
-        0 -1px 0 rgba(255, 255, 255, 0.60) !important;
+        0 1px 0 rgba(0, 0, 0, 0.20),
+        0 -1px 0 rgba(255, 255, 255, 0.50) !important;
     box-shadow:
         0 0 0 1px var(--casio-edge),
         inset 0 1px 3px rgba(0, 0, 0, 0.12) !important;
@@ -37,15 +37,15 @@
 
 .flip-colon {
     font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
-    color: #0c1e18;
+    color: #3a5850;
     text-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.18),
-        0 -1px 0 rgba(255, 255, 255, 0.60);
+        0 1px 0 rgba(0, 0, 0, 0.20),
+        0 -1px 0 rgba(255, 255, 255, 0.50);
 }
 
 .flip-ampm {
     font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
-    color: #0c1e18;
+    color: #3a5850;
     background: #c8d4cf;
     border: 2px solid var(--casio-edge);
     border-radius: 2px;

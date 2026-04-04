@@ -3,12 +3,39 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import useWeather from '@/hooks/useWeather';
 
-const SegmentDigit = memo(({ digit }) => (
-  <div className="lcd-digit">
-    <span className="seg-ghost" aria-hidden="true">8</span>
-    <span className="seg-active">{digit}</span>
-  </div>
-));
+// Segment map: [a, b, c, d, e, f, g]
+//  _a_
+// |   |
+// f   b
+// |_g_|
+// |   |
+// e   c
+// |_d_|
+const SEGMENT_MAP = [
+  [1, 1, 1, 1, 1, 1, 0], // 0
+  [0, 1, 1, 0, 0, 0, 0], // 1
+  [1, 1, 0, 1, 1, 0, 1], // 2
+  [1, 1, 1, 1, 0, 0, 1], // 3
+  [0, 1, 1, 0, 0, 1, 1], // 4
+  [1, 0, 1, 1, 0, 1, 1], // 5
+  [1, 0, 1, 1, 1, 1, 1], // 6
+  [1, 1, 1, 0, 0, 0, 0], // 7
+  [1, 1, 1, 1, 1, 1, 1], // 8
+  [1, 1, 1, 1, 0, 1, 1], // 9
+];
+
+const SEG_NAMES = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+
+const SegmentDigit = memo(({ digit }) => {
+  const segs = SEGMENT_MAP[digit] || SEGMENT_MAP[0];
+  return (
+    <div className="lcd-digit" data-digit={digit}>
+      {SEG_NAMES.map((name, i) => (
+        <div key={name} className={`seg seg-${name} ${segs[i] ? 'on' : 'off'}`} />
+      ))}
+    </div>
+  );
+});
 SegmentDigit.displayName = 'SegmentDigit';
 
 const LcdColon = memo(({ blink = false }) => (
