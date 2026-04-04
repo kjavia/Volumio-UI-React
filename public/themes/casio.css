@@ -28,9 +28,9 @@
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -183,9 +183,9 @@
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -448,9 +448,9 @@ p {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -764,6 +764,139 @@ p {
   max-height: calc(100vh - 2rem);
 }
 
+/* ── Label / Input — shared structure, visual props from theme vars ── */
+.dialog-label {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-secondary, var(--color-gray-500));
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.dialog-input {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--input-bg, var(--color-gray-800));
+  border: 1px solid var(--input-border, var(--border-dark));
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+}
+.dialog-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+.dialog-input::placeholder {
+  color: var(--text-secondary, var(--color-gray-600));
+  opacity: 0.6;
+}
+
+/* ── Section title ── */
+.dialog-section-title {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-secondary, var(--color-gray-500));
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* ── List Items (playlist rows, favourites) ── */
+.dialog-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  background: transparent;
+  border: 1px solid transparent;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 6px;
+  font-family: var(--font-label);
+}
+.dialog-list-item .material-icons {
+  font-size: 18px;
+  color: var(--text-secondary, var(--color-gray-500));
+  flex-shrink: 0;
+}
+.dialog-list-item:hover:not(:disabled) {
+  background: var(--list-item-bg-hover, rgba(255, 255, 255, 0.07));
+  color: var(--color-primary);
+}
+.dialog-list-item:hover:not(:disabled) .material-icons {
+  color: var(--color-primary);
+}
+.dialog-list-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.dialog-list-item.active {
+  background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.dialog-list-item.active .material-icons {
+  color: var(--color-primary);
+}
+
+/* ── Track Info ── */
+.dialog-track-info {
+  padding: 12px 14px;
+  margin-bottom: 1rem;
+  border-radius: var(--radius-md);
+  background: var(--panel-bg-subtle, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--border-dark);
+}
+
+.dialog-track-title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.dialog-track-meta {
+  font-size: var(--text-sm);
+  color: var(--text-secondary, var(--color-gray-500));
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Alerts ── */
+.dialog-alert {
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  margin-bottom: 1rem;
+  border: 1px solid;
+}
+.dialog-alert.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+.dialog-alert.success {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--color-success);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE — 80s Casio Theme
@@ -787,9 +920,9 @@ p {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -920,24 +1053,25 @@ p {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   BUTTONS — 80s Casio Theme
-   Tactile plastic key aesthetic — raised, depresses on press
-   Standard keys: dark plastic | Function key: RED | Labels: pixel font
+   BUTTONS — Casio Calculator Key Style
+   Domed dark charcoal keys · Deep bottom shadow · Orange accent ring
+   Reference: Casio calculator keyboard
    ═══════════════════════════════════════════════════════════════════════ */
-/* ─── Mixin: plastic raised key ────────────────────────────────────────── */
+/* ─── Shared key mixins ─────────────────────────────────────────────────── */
+/* ─── Base key ────────────────────────────────────────────────────────────── */
 .btn {
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 4px 14px;
-  min-height: 28px;
-  border-top: 2px solid var(--casio-key-hi);
-  border-left: 2px solid var(--casio-key-hi);
-  border-bottom: 2px solid var(--casio-key-sh);
-  border-right: 2px solid var(--casio-key-sh);
-  background: var(--casio-key-face);
-  border-radius: var(--radius-sm);
+  padding: 5px 16px;
+  min-height: 32px;
+  /* Domed surface: radial highlight at top-center → darker toward edges */
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 50%, #1e2530 100%);
+  box-shadow: 0 4px 0 0 #0d1018, 0 5px 8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.08); /* faint dome top-sheen */
+  border: 1px solid #10141c;
+  border-bottom-color: #080b12;
+  border-radius: 6px;
   font-family: var(--font-label);
   font-size: var(--text-sm);
   font-weight: 400;
@@ -946,113 +1080,94 @@ p {
   text-transform: uppercase;
   cursor: pointer;
   user-select: none;
-  transition: none;
+  transition: transform 60ms ease, box-shadow 60ms ease;
 }
 .btn:hover {
-  background: var(--casio-ridge);
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #4a5260 0%, #323848 50%, #242c3a 100%);
 }
 .btn:active, .btn.active {
-  border-top: 2px solid var(--casio-key-sh);
-  border-left: 2px solid var(--casio-key-sh);
-  border-bottom: 2px solid var(--casio-key-hi);
-  border-right: 2px solid var(--casio-key-hi);
-  background: var(--casio-edge);
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #303840 0%, #202830 50%, #181e26 100%);
+  box-shadow: 0 1px 0 0 #0d1018, 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  border: 1px solid #10141c;
+  transform: translateY(2px);
 }
 .btn:focus-visible {
+  outline: 2px solid var(--casio-red);
+  outline-offset: 2px;
+}
+
+/* ─── Primary — orange-ringed function key ──────────────────────────────── */
+.btn-primary {
+  /* Domed surface: radial highlight at top-center → darker toward edges */
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 50%, #1e2530 100%);
+  box-shadow: 0 4px 0 0 #0d1018, 0 5px 8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.08); /* faint dome top-sheen */
+  border: 1px solid #10141c;
+  border-bottom-color: #080b12;
+  color: #ffffff;
+  /* Orange accent ring — key visual from the image */
+  outline: 2px solid var(--casio-red);
+  outline-offset: 1px;
+  box-shadow: 0 4px 0 0 #0d1018, 0 5px 8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 0 0 5px rgba(224, 96, 32, 0.18); /* soft orange ambient glow */
+}
+.btn-primary:active, .btn-primary.active {
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #303840 0%, #202830 50%, #181e26 100%);
+  box-shadow: 0 1px 0 0 #0d1018, 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  border: 1px solid #10141c;
+  transform: translateY(2px);
   outline: 2px solid var(--casio-red);
   outline-offset: 1px;
 }
 
-/* ─── Primary  — RED function key ─────────────────────────────────────── */
-.btn.btn-primary, .btn[data-type=primary],
-.btn-primary.btn-primary,
-.btn-primary[data-type=primary] {
-  border-top: 2px solid var(--casio-red-hi);
-  border-left: 2px solid var(--casio-red-hi);
-  border-bottom: 2px solid var(--casio-red-sh);
-  border-right: 2px solid var(--casio-red-sh);
-  background: var(--casio-red);
-  color: #ffffff;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-}
-.btn.btn-primary:active, .btn.btn-primary.active, .btn[data-type=primary]:active, .btn[data-type=primary].active,
-.btn-primary.btn-primary:active,
-.btn-primary.btn-primary.active,
-.btn-primary[data-type=primary]:active,
-.btn-primary[data-type=primary].active {
-  border-top: 2px solid var(--casio-red-sh);
-  border-left: 2px solid var(--casio-red-sh);
-  border-bottom: 2px solid var(--casio-red-hi);
-  border-right: 2px solid var(--casio-red-hi);
-  background: #a01000;
-}
-
-.btn-primary {
-  border-top: 2px solid var(--casio-red-hi);
-  border-left: 2px solid var(--casio-red-hi);
-  border-bottom: 2px solid var(--casio-red-sh);
-  border-right: 2px solid var(--casio-red-sh);
-  background: var(--casio-red);
-  color: #ffffff;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-}
-.btn-primary:active, .btn-primary.active {
-  border-top: 2px solid var(--casio-red-sh);
-  border-left: 2px solid var(--casio-red-sh);
-  border-bottom: 2px solid var(--casio-red-hi);
-  border-right: 2px solid var(--casio-red-hi);
-  background: #a01000;
-}
-
-/* ─── Secondary — same as standard key, slightly lighter ──────────────── */
+/* ─── Secondary ─────────────────────────────────────────────────────────── */
 .btn-secondary,
 .btn-white {
-  background: var(--casio-face);
-  border-top: 2px solid var(--casio-sheen);
-  border-left: 2px solid var(--casio-sheen);
-  border-bottom: 2px solid var(--casio-edge);
-  border-right: 2px solid var(--casio-edge);
+  /* Domed surface: radial highlight at top-center → darker toward edges */
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 50%, #1e2530 100%);
+  box-shadow: 0 4px 0 0 #0d1018, 0 5px 8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.08); /* faint dome top-sheen */
+  border: 1px solid #10141c;
+  border-bottom-color: #080b12;
   color: var(--casio-on-dark);
 }
 .btn-secondary:active, .btn-secondary.active,
 .btn-white:active,
 .btn-white.active {
-  border-top: 2px solid var(--casio-key-sh);
-  border-left: 2px solid var(--casio-key-sh);
-  border-bottom: 2px solid var(--casio-key-hi);
-  border-right: 2px solid var(--casio-key-hi);
-  background: var(--casio-edge);
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #303840 0%, #202830 50%, #181e26 100%);
+  box-shadow: 0 1px 0 0 #0d1018, 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  border: 1px solid #10141c;
+  transform: translateY(2px);
 }
 
-/* ─── Danger ────────────────────────────────────────────────────────── */
+/* ─── Danger — same orange ring ─────────────────────────────────────────── */
 .btn-danger {
-  background: var(--casio-red);
-  border-top: 2px solid var(--casio-red-hi);
-  border-left: 2px solid var(--casio-red-hi);
-  border-bottom: 2px solid var(--casio-red-sh);
-  border-right: 2px solid var(--casio-red-sh);
+  /* Domed surface: radial highlight at top-center → darker toward edges */
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 50%, #1e2530 100%);
+  box-shadow: 0 4px 0 0 #0d1018, 0 5px 8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.08); /* faint dome top-sheen */
+  border: 1px solid #10141c;
+  border-bottom-color: #080b12;
   color: #ffffff;
+  outline: 2px solid var(--casio-red);
+  outline-offset: 1px;
 }
 
-/* ─── Icon-only key (small square) ────────────────────────────────────── */
+/* ─── Icon-only key (small square) ─────────────────────────────────────── */
 .btn-icon {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   padding: 0;
-  border-radius: var(--radius-sm);
-  border-top: 2px solid var(--casio-key-hi);
-  border-left: 2px solid var(--casio-key-hi);
-  border-bottom: 2px solid var(--casio-key-sh);
-  border-right: 2px solid var(--casio-key-sh);
-  background: var(--casio-key-face);
+  border-radius: 6px;
+  /* Domed surface: radial highlight at top-center → darker toward edges */
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 50%, #1e2530 100%);
+  box-shadow: 0 4px 0 0 #0d1018, 0 5px 8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.08); /* faint dome top-sheen */
+  border: 1px solid #10141c;
+  border-bottom-color: #080b12;
   color: var(--casio-on-dark);
+  transition: transform 60ms ease, box-shadow 60ms ease;
 }
 .btn-icon:active, .btn-icon.active {
-  border-top: 2px solid var(--casio-key-sh);
-  border-left: 2px solid var(--casio-key-sh);
-  border-bottom: 2px solid var(--casio-key-hi);
-  border-right: 2px solid var(--casio-key-hi);
-  background: var(--casio-edge);
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #303840 0%, #202830 50%, #181e26 100%);
+  box-shadow: 0 1px 0 0 #0d1018, 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  border: 1px solid #10141c;
+  transform: translateY(2px);
 }
 
 :root {
@@ -1078,9 +1193,9 @@ p {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -1390,9 +1505,9 @@ input[type=range]::-webkit-slider-thumb {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -1653,9 +1768,9 @@ input[type=range]::-webkit-slider-thumb {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -1818,19 +1933,24 @@ input[type=range]::-webkit-slider-thumb {
 
 .slider-cap {
   position: absolute;
-  right: -7px;
+  right: -8px;
   top: 50%;
-  transform: translateY(-50%);
-  width: 14px;
-  height: 22px;
-  background: var(--casio-key-face);
-  border-top: 2px solid var(--casio-key-hi);
-  border-left: 2px solid var(--casio-key-hi);
-  border-bottom: 2px solid var(--casio-key-sh);
-  border-right: 2px solid var(--casio-key-sh);
-  border-radius: 2px;
+  transform: translateY(calc(-50% - 1.5px)); /* offset half the 3px bottom shadow so visual centre aligns with track */
+  width: 16px;
+  height: 26px;
+  /* Domed calculator key — matches button style */
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 50%, #1e2530 100%);
+  box-shadow: 0 3px 0 0 #0d1018, 0 4px 6px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  border: 1px solid #10141c;
+  border-bottom-color: #080b12;
+  border-radius: 4px;
   cursor: pointer;
   z-index: 1;
+}
+.slider-cap:active {
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #303840 0%, #202830 50%, #181e26 100%);
+  box-shadow: 0 1px 0 0 #0d1018, 0 2px 3px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: translateY(calc(-50% - 1.5px + 2px)); /* pressed: sink 2px */
 }
 
 /* ─── Vertical Fader Track — recessed groove ────────────────────────── */
@@ -1860,21 +1980,21 @@ input[type=range]::-webkit-slider-thumb {
   border-right: 1px solid var(--casio-sheen);
 }
 
-/* ─── Fader Cap — rectangular plastic key ───────────────────────────── */
+/* ─── Fader Cap — domed calculator key style ────────────────────────── */
 .fader-cap {
-  width: 44px;
-  height: 22px;
-  background: var(--casio-key-face);
-  border-radius: 2px;
+  width: 48px;
+  height: 24px;
+  border-radius: 5px;
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-top: 2px solid var(--casio-key-hi);
-  border-left: 2px solid var(--casio-key-hi);
-  border-bottom: 2px solid var(--casio-key-sh);
-  border-right: 2px solid var(--casio-key-sh);
   cursor: ns-resize;
   z-index: 1;
+  /* Domed surface — matches button.scss casio-key-up mixin */
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 50%, #1e2530 100%);
+  box-shadow: 0 3px 0 0 #0d1018, 0 4px 6px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  border: 1px solid #10141c;
+  border-bottom-color: #080b12;
   /* Center grip line */
   display: flex;
   justify-content: center;
@@ -1884,17 +2004,17 @@ input[type=range]::-webkit-slider-thumb {
   content: "";
   width: 55%;
   height: 2px;
-  background: var(--casio-edge);
-  border-bottom: 1px solid var(--casio-sheen);
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1px;
 }
 .fader-cap:hover {
-  background: var(--casio-ridge);
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #4a5260 0%, #323848 50%, #242c3a 100%);
 }
 .fader-cap:active {
-  border-top: 2px solid var(--casio-key-sh);
-  border-left: 2px solid var(--casio-key-sh);
-  border-bottom: 2px solid var(--casio-key-hi);
-  border-right: 2px solid var(--casio-key-hi);
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #303840 0%, #202830 50%, #181e26 100%);
+  box-shadow: 0 1px 0 0 #0d1018, 0 2px 3px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, calc(-50% + 2px));
 }
 
 /* ─── Scale tick marks ──────────────────────────────────────────────── */
@@ -1953,9 +2073,9 @@ input[type=range]::-webkit-slider-thumb {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -2173,9 +2293,9 @@ input[type=range]::-webkit-slider-thumb {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -2409,9 +2529,9 @@ input[type=range]::-webkit-slider-thumb {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -2724,6 +2844,7 @@ input[type=range]::-webkit-slider-thumb {
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--casio-lcd-panel);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), 0 -1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .artist-name,
@@ -2735,6 +2856,7 @@ input[type=range]::-webkit-slider-thumb {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 -1px 0 rgba(255, 255, 255, 0.55);
 }
 
 .responsive-title {
@@ -2746,50 +2868,49 @@ input[type=range]::-webkit-slider-thumb {
   color: var(--casio-lcd-off);
 }
 
-/* ─── Control buttons — plastic keys ────────────────────────────────── */
+/* ─── Control buttons — calculator key style ──────────────────────────── */
 .control-btn {
-  width: 42px;
-  height: 38px;
-  border-radius: var(--radius-sm);
-  background: var(--casio-key-face);
-  border-top: 2px solid var(--casio-key-hi);
-  border-left: 2px solid var(--casio-key-hi);
-  border-bottom: 2px solid var(--casio-key-sh);
-  border-right: 2px solid var(--casio-key-sh);
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   color: var(--casio-on-dark);
   font-size: 18px;
-  transition: none;
+  transition: transform 60ms ease, box-shadow 60ms ease;
+  /* Domed dark key */
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 50%, #1e2530 100%);
+  box-shadow: 0 5px 0 0 #0d1018, 0 6px 10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  border: 1px solid #10141c;
+  border-bottom-color: #080b12;
 }
 .control-btn:hover {
-  background: var(--casio-ridge);
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #4a5260 0%, #323848 50%, #242c3a 100%);
+}
+.control-btn {
+  /* Play button — same key shape, orange accent ring */
 }
 .control-btn.play-btn {
-  width: 52px;
-  height: 48px;
-  background: var(--casio-red);
-  border-top: 2px solid var(--casio-red-hi);
-  border-left: 2px solid var(--casio-red-hi);
-  border-bottom: 2px solid var(--casio-red-sh);
-  border-right: 2px solid var(--casio-red-sh);
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
   color: #ffffff;
+  /* Orange ring from image */
+  outline: 2px solid var(--casio-red);
+  outline-offset: 2px;
+  box-shadow: 0 5px 0 0 #0d1018, 0 6px 10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 0 0 5px rgba(224, 96, 32, 0.18);
 }
 .control-btn:active {
-  border-top: 2px solid var(--casio-key-sh);
-  border-left: 2px solid var(--casio-key-sh);
-  border-bottom: 2px solid var(--casio-key-hi);
-  border-right: 2px solid var(--casio-key-hi);
-  background: var(--casio-edge);
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #303840 0%, #202830 50%, #181e26 100%);
+  box-shadow: 0 1px 0 0 #0d1018, 0 2px 5px rgba(0, 0, 0, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.4);
+  transform: translateY(3px);
+  border-color: #10141c;
 }
 .control-btn:active.play-btn {
-  border-top: 2px solid var(--casio-red-sh);
-  border-left: 2px solid var(--casio-red-sh);
-  border-bottom: 2px solid var(--casio-red-hi);
-  border-right: 2px solid var(--casio-red-hi);
-  background: #9a0e00;
+  outline: 2px solid var(--casio-red);
+  outline-offset: 2px;
 }
 
 /* ─── Seekbar / Volume sliders ──────────────────────────────────────── */
@@ -2947,9 +3068,9 @@ input[type=range]::-webkit-slider-thumb {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -3221,9 +3342,9 @@ input[type=range]::-webkit-slider-thumb {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -3498,9 +3619,9 @@ input[type=range]::-webkit-slider-thumb {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -3740,9 +3861,9 @@ input[type=range]::-webkit-slider-thumb {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -4009,9 +4130,9 @@ input[type=range]::-webkit-slider-thumb {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -4189,37 +4310,35 @@ input[type=range]::-webkit-slider-thumb {
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: 400;
-  color: var(--casio-lcd-on);
+  color: var(--casio-lcd-panel);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   -webkit-font-smoothing: none;
 }
 
-/* Close button — small dark plastic key */
+/* Close button — domed calculator key matching main buttons */
 .dialog-close {
-  width: 22px;
-  height: 20px;
+  width: 28px;
+  height: 26px;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--casio-key-face);
-  border-radius: 2px;
-  border-top: 2px solid var(--casio-key-hi);
-  border-left: 2px solid var(--casio-key-hi);
-  border-bottom: 2px solid var(--casio-key-sh);
-  border-right: 2px solid var(--casio-key-sh);
+  border-radius: 5px;
   cursor: pointer;
   color: var(--casio-on-dark);
   font-size: 10px;
   flex-shrink: 0;
+  transition: transform 60ms ease, box-shadow 60ms ease;
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 50%, #1e2530 100%);
+  box-shadow: 0 4px 0 0 #0d1018, 0 5px 8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  border: 1px solid #10141c;
+  border-bottom-color: #080b12;
 }
 .dialog-close:active {
-  border-top: 2px solid var(--casio-key-sh);
-  border-left: 2px solid var(--casio-key-sh);
-  border-bottom: 2px solid var(--casio-key-hi);
-  border-right: 2px solid var(--casio-key-hi);
-  background: var(--casio-edge);
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #303840 0%, #202830 50%, #181e26 100%);
+  box-shadow: 0 1px 0 0 #0d1018, 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  transform: translateY(2px);
 }
 .dialog-close .material-icons {
   font-size: 14px;
@@ -4255,10 +4374,10 @@ input[type=range]::-webkit-slider-thumb {
  *   DSEG7 Classic — authentic 7-segment LCD digit font
  *   day-of-week dots along the top (like Casio F-91W)
  * ──────────────────────────────────────────────────────────────────────── */
-/* bright teal — segment ON */
-/* barely-visible ghost segment */
-/* dark teal panel background */
-/* very dark bezel border */
+/* green — same as artist-name colour */
+/* ghost segment on light background */
+/* light grey panel — same as track-info-group mid-point */
+/* very dark inset ring border */
 /* ── Outer wrapper ───────────────────────────────────────────────────── */
 .digital-clock-wrapper {
   display: flex;
@@ -4270,24 +4389,23 @@ input[type=range]::-webkit-slider-thumb {
   max-width: none;
   margin: 0 auto;
   container-type: size;
-  /* Dark plastic desktop */
-  background: #111111;
+  background: transparent;
 }
 
-/* ── Outer device body — dark plastic with strap feel ───────────────── */
+/* ── Outer device body — dark plastic casing ─────────────────────────── */
 .digital-clock-frame {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   width: fit-content;
   padding: 2.5cqw 3cqw;
-  background: #1e1e1e;
+  background: var(--casio-body);
   border-radius: 1.5cqw;
-  /* Plastic casing bevel */
-  border-top: 0.4cqw solid #363636;
-  border-left: 0.4cqw solid #363636;
-  border-bottom: 0.4cqw solid #0a0a0a;
-  border-right: 0.4cqw solid #0a0a0a;
+  /* Plastic bevel */
+  border-top: 0.4cqw solid var(--casio-sheen);
+  border-left: 0.4cqw solid var(--casio-sheen);
+  border-bottom: 0.4cqw solid var(--casio-edge);
+  border-right: 0.4cqw solid var(--casio-edge);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   user-select: none;
 }
@@ -4298,17 +4416,16 @@ input[type=range]::-webkit-slider-thumb {
   flex-direction: column;
   align-items: stretch;
   padding: 1cqw 1.5cqw;
-  background: #0c1e18;
+  /* Light grey — same mid-point as track-info-group */
+  background: #c8d4cf;
   border-radius: 0.3cqw;
-  /* Classic LCD sunken border */
-  border-top: 0.25cqw solid #060f0a;
-  border-left: 0.25cqw solid #060f0a;
-  border-bottom: 0.15cqw solid rgba(220, 240, 100, 0.3);
-  border-right: 0.15cqw solid rgba(220, 240, 100, 0.3);
-  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3), inset 0 0 0 0.05cqw rgba(0, 0, 0, 0.08);
-  /* LCD glare reflection */
+  color: #3a5850;
+  /* Dark inset ring — panel embedded into frame */
+  border: 0.25cqw solid #060f0a;
+  box-shadow: 0 0 0 0.3cqw var(--casio-edge), inset 0 2px 6px rgba(0, 0, 0, 0.14);
   position: relative;
   overflow: hidden;
+  /* Subtle top dome glare on the panel surface */
 }
 .digital-clock::before {
   content: "";
@@ -4317,7 +4434,7 @@ input[type=range]::-webkit-slider-thumb {
   left: 0;
   right: 0;
   height: 30%;
-  background: linear-gradient(to bottom, rgba(255, 255, 220, 0.12) 0%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.28) 0%, transparent 100%);
   pointer-events: none;
   border-radius: 0.3cqw 0.3cqw 0 0;
 }
@@ -4329,11 +4446,12 @@ input[type=range]::-webkit-slider-thumb {
   gap: 0.5cqw;
   margin-bottom: 0.6cqw;
   font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  color: rgba(12, 30, 24, 0.3); /* inactive day — dim on light bg */
 }
 .lcd-days .active {
-  color: #44dda8;
+  color: #3a5850;
   opacity: 1;
-  border-bottom: 0.15cqw solid #44dda8;
+  border-bottom: 0.15cqw solid #3a5850;
 }
 
 /* ── Time row ─────────────────────────────────────────────────────────── */
@@ -4355,12 +4473,13 @@ input[type=range]::-webkit-slider-thumb {
   font-size: clamp(0.7rem, 2cqw, 3rem);
   font-weight: 400;
   font-style: italic;
-  color: #44dda8;
+  color: #3a5850;
   letter-spacing: 0.06em;
   padding-bottom: 0.2cqw;
   margin-left: 0.4cqw;
   text-transform: uppercase;
-  -webkit-font-smoothing: none;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 -1px 0 rgba(255, 255, 255, 0.55);
 }
 
 /* ── Colon ───────────────────────────────────────────────────────────── */
@@ -4378,10 +4497,18 @@ input[type=range]::-webkit-slider-thumb {
 .lcd-colon-dot {
   width: 1.2cqw;
   height: 1.2cqw;
-  background: #44dda8;
+  background: #3a5850;
   border-radius: 0; /* square dots — like actual Casio segments */
 }
 
+@keyframes lcd-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
 .lcd-colon--blink .lcd-colon-dot {
   animation: lcd-blink 1s step-start infinite;
 }
@@ -4402,9 +4529,10 @@ input[type=range]::-webkit-slider-thumb {
   font-style: italic;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--casio-lcd-off, #8aaa28);
+  color: rgba(58, 88, 80, 0.45); /* dim green for secondary info */
   text-align: center;
-  -webkit-font-smoothing: none;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .lcd-weather {
@@ -4415,86 +4543,39 @@ input[type=range]::-webkit-slider-thumb {
 
 .lcd-weather-icon {
   font-size: clamp(0.8rem, 1.8cqw, 2.8rem);
-  color: #44dda8;
+  color: #0c1e18;
 }
 
 .lcd-weather-temp {
   font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
   font-size: clamp(0.6rem, 1.6cqw, 2.5rem);
   font-style: italic;
-  color: #44dda8;
-  -webkit-font-smoothing: none;
+  color: #0c1e18;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 -1px 0 rgba(255, 255, 255, 0.55);
 }
 
-/* ── 7-Segment Digit ─────────────────────────────────────────────────── */
+/* ── 7-Segment Digit — font-based (DS Digital) ───────────────────────── */
 .lcd-digit {
   position: relative;
-  width: 11cqw;
-  height: 18.7cqw;
+  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  font-size: clamp(2rem, 9cqw, 7rem);
+  font-style: italic;
+  line-height: 1;
 }
-
-.seg {
+.lcd-digit .seg-ghost {
+  display: block;
+  color: #3a5850;
+  opacity: 0.07;
+}
+.lcd-digit .seg-active {
   position: absolute;
-  background: #44dda8;
-  /* No transition — instant snap like a real LCD */
-}
-.seg.on {
-  opacity: 1;
-}
-.seg.off {
-  opacity: 0.12;
-}
-
-/* Horizontal segments: a (top), g (middle), d (bottom) */
-.seg-a,
-.seg-d,
-.seg-g {
-  left: 10%;
-  width: 80%;
-  height: 7%;
-  clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
-}
-
-.seg-a {
-  top: 0;
-}
-
-.seg-g {
-  top: 46.5%;
-}
-
-.seg-d {
-  bottom: 0;
-}
-
-/* Vertical segments: b,c (right), e,f (left) */
-.seg-b,
-.seg-c,
-.seg-e,
-.seg-f {
-  width: 13%;
-  height: 42%;
-  clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
-}
-
-.seg-b {
-  top: 4%;
-  right: 0;
-}
-
-.seg-c {
-  bottom: 4%;
-  right: 0;
-}
-
-.seg-f {
-  top: 4%;
-  left: 0;
-}
-
-.seg-e {
-  bottom: 4%;
-  left: 0;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3a5850;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 -1px 0 rgba(255, 255, 255, 0.55);
 }
 
 /* ── Button row below display (decorative — like Casio's mode keys) ── */
@@ -4513,8 +4594,8 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 /* ── Analog Clock — 80s Casio Theme ────────────────────────────────────────
- * Dark plastic face with luminescent yellow-green indices
- * Angular, no decorative flourishes — pure functional watch aesthetic
+ * Light grey glass face — same material as track-info-group watch panel
+ * Dark teal indices and hands — readable on the light surface
  * ──────────────────────────────────────────────────────────────────────── */
 /* Outer bezel — hard dark plastic ring */
 .clock-bezel {
@@ -4531,14 +4612,17 @@ input[type=range]::-webkit-slider-thumb {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
-/* Face — very dark, nearly black with faint green tint */
+/* Face — same glass material as track-info-group watch panel */
 .clock-face {
   position: relative;
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, #1a1c14 0%, #0e1008 70%, #080a04 100%);
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  /* Glass layers identical to .track-info-group */
+  background-image: radial-gradient(ellipse 80% 38% at 50% 0%, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.1) 55%, transparent 100%), linear-gradient(to top, rgba(255, 255, 255, 0.22) 0%, transparent 14%), linear-gradient(160deg, #d8e0dc 0%, #c8d4cf 40%, #b8c8c2 100%);
+  background-size: cover;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 /* Tick marks — LCD-green luminescent bars */
@@ -4552,29 +4636,31 @@ input[type=range]::-webkit-slider-thumb {
 
 .clock-tick--hour::before {
   height: 12%;
-  background: #9db834;
+  background: #3a5850;
   width: 4px;
   margin-left: -2px;
-  box-shadow: 0 0 4px rgba(157, 184, 52, 0.7);
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.55), 0 1px 1px rgba(0, 0, 0, 0.15);
 }
 
 .clock-tick--minute::before {
   height: 6%;
-  background: rgba(157, 184, 52, 0.5);
+  background: rgba(12, 30, 24, 0.45);
   width: 2px;
   margin-left: -1px;
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.65), 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Hour digit labels — LCD-green pixel font */
+/* Hour digit labels — large, readable from across the room */
 .clock-hour-digit {
   position: absolute;
   transform: translate(-50%, -50%);
   font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-size: clamp(0.6rem, 3cqi, 1.2rem);
-  font-weight: 400;
-  color: #9db834;
-  -webkit-font-smoothing: none;
-  text-shadow: 0 0 4px rgba(157, 184, 52, 0.5);
+  font-size: clamp(1.1rem, 5.6cqi, 4rem);
+  font-weight: 700;
+  color: #3a5850;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 -1px 0 rgba(255, 255, 255, 0.55);
+  line-height: 1;
 }
 
 /* Hands — LCD-green glow */
@@ -4590,8 +4676,8 @@ input[type=range]::-webkit-slider-thumb {
   width: 5px;
   height: 26%;
   margin-left: -2.5px;
-  background: #9db834;
-  box-shadow: 0 0 6px rgba(157, 184, 52, 0.7);
+  background: #0c1e18;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
   border-radius: 2px;
   z-index: 3;
 }
@@ -4600,8 +4686,8 @@ input[type=range]::-webkit-slider-thumb {
   width: 3px;
   height: 36%;
   margin-left: -1.5px;
-  background: #c0dc40;
-  box-shadow: 0 0 5px rgba(192, 220, 64, 0.6);
+  background: #1a3830;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   border-radius: 1px;
   z-index: 4;
 }
@@ -4610,8 +4696,8 @@ input[type=range]::-webkit-slider-thumb {
   width: 1.5px;
   height: 40%;
   margin-left: -0.75px;
-  background: #e02010;
-  box-shadow: 0 0 5px rgba(224, 32, 16, 0.8);
+  background: var(--casio-red);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   border-radius: 1px;
   z-index: 5;
 }
@@ -4626,9 +4712,9 @@ input[type=range]::-webkit-slider-thumb {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #9db834;
-  border: 2px solid #0e1008;
-  box-shadow: 0 0 6px rgba(157, 184, 52, 0.7);
+  background: var(--casio-red);
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   z-index: 10;
 }
 
@@ -4641,14 +4727,29 @@ input[type=range]::-webkit-slider-thumb {
   font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
   font-size: clamp(0.5rem, 2.5cqi, 0.9rem);
   font-weight: 400;
-  color: #1a2400;
-  background: #9db834;
-  border: 1px solid #0a1400;
-  border-radius: 1px;
+  color: var(--casio-lcd-on);
+  background: var(--casio-lcd-panel);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
   padding: 0 3px;
   min-width: 18px;
   text-align: center;
   -webkit-font-smoothing: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Weather overlay — dark on light face */
+.clock-face-weather-icon {
+  color: #0c1e18;
+  font-size: clamp(1rem, 5cqi, 2.2rem);
+}
+
+.clock-face-weather-temp {
+  font-family: var(--font-display);
+  color: #0c1e18;
+  font-size: clamp(0.9rem, 4cqi, 1.8rem);
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 :root {
@@ -4674,9 +4775,9 @@ input[type=range]::-webkit-slider-thumb {
   --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
   --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #d41404; /* MODE / function key — red (unchanged) */
-  --casio-red-hi: #e83020; /* red key highlight edge */
-  --casio-red-sh: #8a0000; /* red key shadow edge */
+  --casio-red: #e06020; /* orange accent — function key ring */
+  --casio-red-hi: #f07830; /* orange highlight */
+  --casio-red-sh: #904010; /* orange shadow */
   --casio-key-face: #18203a; /* standard key face — navy */
   --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
   --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
@@ -4810,33 +4911,63 @@ input[type=range]::-webkit-slider-thumb {
    FLIP CLOCK — 80s Casio Theme
    Dark plastic panels, LCD-green digits, square corners, DSEG7 font
    ═══════════════════════════════════════════════════════════════════════ */
+/* Centre DS Digital within each flip panel and scale the glyph up.
+   DS Digital sits above the geometric midpoint, so positive Y aligns
+   the fold crease with the visual centre of the character.
+   Back wrapper is 200% height → half the front Y value = same pixel shift.
+   font-size >1 makes the digit fill more of the panel without resizing tiles. */
+.tick-flip-panel-front-text .tick-flip-panel-text-wrapper {
+  transform: translateY(0%) !important;
+  font-size: 0.98em !important;
+}
+
+.tick-flip-panel-back-text .tick-flip-panel-text-wrapper {
+  transform: translateY(-2%) !important;
+  font-size: 0.98em !important;
+}
+
 .tick-flip-panel {
   font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace !important;
   border-radius: 2px !important;
-  border: 2px solid var(--casio-lcd-frame) !important;
-  background: var(--casio-lcd-panel) !important;
-  color: var(--casio-lcd-on) !important;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2) !important;
-  -webkit-font-smoothing: none !important;
+  border: 2px solid var(--casio-edge) !important; /* dark inset ring */
+  background: #c8d4cf !important; /* light grey = track-info-group */
+  color: #0c1e18 !important; /* dark teal = track title colour */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), 0 -1px 0 rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 0 0 1px var(--casio-edge), inset 0 1px 3px rgba(0, 0, 0, 0.12) !important;
+  -webkit-font-smoothing: antialiased !important;
   letter-spacing: 0.06em !important;
 }
 
 .flip-colon {
   font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  color: var(--casio-lcd-on);
+  color: #0c1e18;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), 0 -1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .flip-ampm {
   font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  color: var(--casio-lcd-on);
-  background: var(--casio-lcd-panel);
-  border: 2px solid var(--casio-lcd-frame);
+  color: #0c1e18;
+  background: #c8d4cf;
+  border: 2px solid var(--casio-edge);
   border-radius: 2px;
   padding: 0 5px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
-  -webkit-font-smoothing: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+  -webkit-font-smoothing: antialiased;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+/* ─── Flip clock outer body — dark plastic casing ───────────────────── */
+.flip-clock-body {
+  padding: 20px 28px 18px;
+  border-radius: 8px;
+  background: var(--casio-body);
+  /* Plastic bevel */
+  border-top: 2px solid var(--casio-sheen);
+  border-left: 2px solid var(--casio-sheen);
+  border-bottom: 3px solid var(--casio-edge);
+  border-right: 3px solid var(--casio-edge);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 body {

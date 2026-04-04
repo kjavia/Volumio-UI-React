@@ -53,37 +53,54 @@
     font-family: var(--font-display);
     font-size: var(--text-lg);
     font-weight: 400;
-    color: var(--casio-lcd-on);
+    color: var(--casio-lcd-panel);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     -webkit-font-smoothing: none;
 }
 
-/* Close button — small dark plastic key */
+/* Close button — domed calculator key matching main buttons */
 .dialog-close {
-    width: 22px;
-    height: 20px;
+    width: 28px;
+    height: 26px;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--casio-key-face);
-    border-radius: 2px;
-    border-top:   2px solid var(--casio-key-hi);
-    border-left:  2px solid var(--casio-key-hi);
-    border-bottom: 2px solid var(--casio-key-sh);
-    border-right:  2px solid var(--casio-key-sh);
+    border-radius: 5px;
     cursor: pointer;
     color: var(--casio-on-dark);
     font-size: 10px;
     flex-shrink: 0;
+    transition: transform 60ms ease, box-shadow 60ms ease;
+
+    background:
+        radial-gradient(
+            ellipse 80% 55% at 50% 20%,
+            #404855 0%,
+            #2a3040 50%,
+            #1e2530 100%
+        );
+    box-shadow:
+        0 4px 0 0 #0d1018,
+        0 5px 8px rgba(0, 0, 0, 0.55),
+        inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    border: 1px solid #10141c;
+    border-bottom-color: #080b12;
 
     &:active {
-        border-top:   2px solid var(--casio-key-sh);
-        border-left:  2px solid var(--casio-key-sh);
-        border-bottom: 2px solid var(--casio-key-hi);
-        border-right:  2px solid var(--casio-key-hi);
-        background: var(--casio-edge);
+        background:
+            radial-gradient(
+                ellipse 80% 55% at 50% 20%,
+                #303840 0%,
+                #202830 50%,
+                #181e26 100%
+            );
+        box-shadow:
+            0 1px 0 0 #0d1018,
+            0 2px 4px rgba(0, 0, 0, 0.5),
+            inset 0 2px 4px rgba(0, 0, 0, 0.4);
+        transform: translateY(2px);
     }
 
     .material-icons {

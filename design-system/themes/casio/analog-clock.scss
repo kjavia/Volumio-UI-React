@@ -1,6 +1,6 @@
 /* ── Analog Clock — 80s Casio Theme ────────────────────────────────────────
- * Dark plastic face with luminescent yellow-green indices
- * Angular, no decorative flourishes — pure functional watch aesthetic
+ * Light grey glass face — same material as track-info-group watch panel
+ * Dark teal indices and hands — readable on the light surface
  * ──────────────────────────────────────────────────────────────────────── */
 
 /* Outer bezel — hard dark plastic ring */
@@ -25,19 +25,35 @@
         0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
-/* Face — very dark, nearly black with faint green tint */
+/* Face — same glass material as track-info-group watch panel */
 .clock-face {
     position: relative;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: radial-gradient(
-        circle at 50% 50%,
-        #1a1c14 0%,
-        #0e1008 70%,
-        #080a04 100%
-    );
-    border: 1px solid rgba(0, 0, 0, 0.8);
+
+    /* Glass layers identical to .track-info-group */
+    background-image:
+        radial-gradient(
+            ellipse 80% 38% at 50% 0%,
+            rgba(255, 255, 255, 0.52) 0%,
+            rgba(255, 255, 255, 0.10) 55%,
+            transparent 100%
+        ),
+        linear-gradient(
+            to top,
+            rgba(255, 255, 255, 0.22) 0%,
+            transparent 14%
+        ),
+        linear-gradient(
+            160deg,
+            #d8e0dc 0%,
+            #c8d4cf 40%,
+            #b8c8c2 100%
+        );
+    background-size: cover;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 /* Tick marks — LCD-green luminescent bars */
@@ -51,29 +67,37 @@
 
 .clock-tick--hour::before {
     height: 12%;
-    background: #9db834;
+    background: #3a5850;
     width: 4px;
     margin-left: -2px;
-    box-shadow: 0 0 4px rgba(157, 184, 52, 0.7);
+    box-shadow:
+        0 -1px 0 rgba(255, 255, 255, 0.55),
+        0 1px 1px rgba(0, 0, 0, 0.15);
 }
 
 .clock-tick--minute::before {
     height: 6%;
-    background: rgba(157, 184, 52, 0.5);
+    background: rgba(12, 30, 24, 0.45);
     width: 2px;
     margin-left: -1px;
+    box-shadow:
+        0 -1px 0 rgba(255, 255, 255, 0.65),
+        0 2px 4px rgba(0, 0, 0, 0.30);
 }
 
-/* Hour digit labels — LCD-green pixel font */
+/* Hour digit labels — large, readable from across the room */
 .clock-hour-digit {
     position: absolute;
     transform: translate(-50%, -50%);
     font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
-    font-size: clamp(0.6rem, 3cqi, 1.2rem);
-    font-weight: 400;
-    color: #9db834;
-    -webkit-font-smoothing: none;
-    text-shadow: 0 0 4px rgba(157, 184, 52, 0.5);
+    font-size: clamp(1.1rem, 5.6cqi, 4rem);
+    font-weight: 700;
+    color: #3a5850;
+    -webkit-font-smoothing: antialiased;
+    text-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.15),
+        0 -1px 0 rgba(255, 255, 255, 0.55);
+    line-height: 1;
 }
 
 /* Hands — LCD-green glow */
@@ -89,8 +113,8 @@
     width: 5px;
     height: 26%;
     margin-left: -2.5px;
-    background: #9db834;
-    box-shadow: 0 0 6px rgba(157, 184, 52, 0.7);
+    background: #0c1e18;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
     border-radius: 2px;
     z-index: 3;
 }
@@ -99,8 +123,8 @@
     width: 3px;
     height: 36%;
     margin-left: -1.5px;
-    background: #c0dc40;
-    box-shadow: 0 0 5px rgba(192, 220, 64, 0.6);
+    background: #1a3830;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     border-radius: 1px;
     z-index: 4;
 }
@@ -109,8 +133,8 @@
     width: 1.5px;
     height: 40%;
     margin-left: -0.75px;
-    background: #e02010;
-    box-shadow: 0 0 5px rgba(224, 32, 16, 0.8);
+    background: var(--casio-red);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     border-radius: 1px;
     z-index: 5;
 }
@@ -125,9 +149,9 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #9db834;
-    border: 2px solid #0e1008;
-    box-shadow: 0 0 6px rgba(157, 184, 52, 0.7);
+    background: var(--casio-red);
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     z-index: 10;
 }
 
@@ -140,12 +164,27 @@
     font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
     font-size: clamp(0.5rem, 2.5cqi, 0.9rem);
     font-weight: 400;
-    color: #1a2400;
-    background: #9db834;
-    border: 1px solid #0a1400;
-    border-radius: 1px;
+    color: var(--casio-lcd-on);
+    background: var(--casio-lcd-panel);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
     padding: 0 3px;
     min-width: 18px;
     text-align: center;
     -webkit-font-smoothing: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Weather overlay — dark on light face */
+.clock-face-weather-icon {
+    color: #0c1e18;
+    font-size: clamp(1rem, 5cqi, 2.2rem);
+}
+
+.clock-face-weather-temp {
+    font-family: var(--font-display);
+    color: #0c1e18;
+    font-size: clamp(0.9rem, 4cqi, 1.8rem);
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }

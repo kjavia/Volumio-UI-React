@@ -241,6 +241,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--casio-lcd-panel);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), 0 -1px 0 rgba(255, 255, 255, 0.60);
 }
 
 .artist-name,
@@ -252,6 +253,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 -1px 0 rgba(255, 255, 255, 0.55);
 }
 
 .responsive-title {
@@ -263,52 +265,78 @@
     color: var(--casio-lcd-off);
 }
 
-/* ─── Control buttons — plastic keys ────────────────────────────────── */
+/* ─── Control buttons — calculator key style ──────────────────────────── */
 .control-btn {
-    width: 42px;
-    height: 38px;
-    border-radius: var(--radius-sm);
-    background: var(--casio-key-face);
-    border-top:   2px solid var(--casio-key-hi);
-    border-left:  2px solid var(--casio-key-hi);
-    border-bottom: 2px solid var(--casio-key-sh);
-    border-right:  2px solid var(--casio-key-sh);
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     color: var(--casio-on-dark);
     font-size: 18px;
-    transition: none;
+    transition: transform 60ms ease, box-shadow 60ms ease;
+
+    /* Domed dark key */
+    background:
+        radial-gradient(
+            ellipse 80% 55% at 50% 20%,
+            #404855 0%,
+            #2a3040 50%,
+            #1e2530 100%
+        );
+    box-shadow:
+        0 5px 0 0 #0d1018,
+        0 6px 10px rgba(0, 0, 0, 0.6),
+        inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    border: 1px solid #10141c;
+    border-bottom-color: #080b12;
 
     &:hover {
-        background: var(--casio-ridge);
+        background:
+            radial-gradient(
+                ellipse 80% 55% at 50% 20%,
+                #4a5260 0%,
+                #323848 50%,
+                #242c3a 100%
+            );
     }
 
+    /* Play button — same key shape, orange accent ring */
     &.play-btn {
-        width: 52px;
-        height: 48px;
-        background: var(--casio-red);
-        border-top:   2px solid var(--casio-red-hi);
-        border-left:  2px solid var(--casio-red-hi);
-        border-bottom: 2px solid var(--casio-red-sh);
-        border-right:  2px solid var(--casio-red-sh);
+        width: 54px;
+        height: 54px;
+        border-radius: 10px;
         color: #ffffff;
+        /* Orange ring from image */
+        outline: 2px solid var(--casio-red);
+        outline-offset: 2px;
+        box-shadow:
+            0 5px 0 0 #0d1018,
+            0 6px 10px rgba(0, 0, 0, 0.6),
+            inset 0 1px 1px rgba(255, 255, 255, 0.08),
+            0 0 0 5px rgba(224, 96, 32, 0.18);
     }
 
     &:active {
-        border-top:   2px solid var(--casio-key-sh);
-        border-left:  2px solid var(--casio-key-sh);
-        border-bottom: 2px solid var(--casio-key-hi);
-        border-right:  2px solid var(--casio-key-hi);
-        background: var(--casio-edge);
+        background:
+            radial-gradient(
+                ellipse 80% 55% at 50% 20%,
+                #303840 0%,
+                #202830 50%,
+                #181e26 100%
+            );
+        box-shadow:
+            0 1px 0 0 #0d1018,
+            0 2px 5px rgba(0, 0, 0, 0.5),
+            inset 0 2px 5px rgba(0, 0, 0, 0.4);
+        transform: translateY(3px);
+        border-color: #10141c;
 
         &.play-btn {
-            border-top:   2px solid var(--casio-red-sh);
-            border-left:  2px solid var(--casio-red-sh);
-            border-bottom: 2px solid var(--casio-red-hi);
-            border-right:  2px solid var(--casio-red-hi);
-            background: #9a0e00;
+            outline: 2px solid var(--casio-red);
+            outline-offset: 2px;
         }
     }
 }

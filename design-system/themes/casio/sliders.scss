@@ -34,19 +34,44 @@
 
 .slider-cap {
     position: absolute;
-    right: -7px;
+    right: -8px;
     top: 50%;
-    transform: translateY(-50%);
-    width: 14px;
-    height: 22px;
-    background: var(--casio-key-face);
-    border-top:   2px solid var(--casio-key-hi);
-    border-left:  2px solid var(--casio-key-hi);
-    border-bottom: 2px solid var(--casio-key-sh);
-    border-right:  2px solid var(--casio-key-sh);
-    border-radius: 2px;
+    transform: translateY(calc(-50% - 1.5px));  /* offset half the 3px bottom shadow so visual centre aligns with track */
+    width: 16px;
+    height: 26px;
+
+    /* Domed calculator key — matches button style */
+    background:
+        radial-gradient(
+            ellipse 80% 55% at 50% 20%,
+            #404855 0%,
+            #2a3040 50%,
+            #1e2530 100%
+        );
+    box-shadow:
+        0 3px 0 0 #0d1018,
+        0 4px 6px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    border: 1px solid #10141c;
+    border-bottom-color: #080b12;
+    border-radius: 4px;
     cursor: pointer;
     z-index: 1;
+
+    &:active {
+        background:
+            radial-gradient(
+                ellipse 80% 55% at 50% 20%,
+                #303840 0%,
+                #202830 50%,
+                #181e26 100%
+            );
+        box-shadow:
+            0 1px 0 0 #0d1018,
+            0 2px 3px rgba(0, 0, 0, 0.4),
+            inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        transform: translateY(calc(-50% - 1.5px + 2px));  /* pressed: sink 2px */
+    }
 }
 
 /* ─── Vertical Fader Track — recessed groove ────────────────────────── */
@@ -77,21 +102,31 @@
     }
 }
 
-/* ─── Fader Cap — rectangular plastic key ───────────────────────────── */
+/* ─── Fader Cap — domed calculator key style ────────────────────────── */
 .fader-cap {
-    width: 44px;
-    height: 22px;
-    background: var(--casio-key-face);
-    border-radius: 2px;
+    width: 48px;
+    height: 24px;
+    border-radius: 5px;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-top:   2px solid var(--casio-key-hi);
-    border-left:  2px solid var(--casio-key-hi);
-    border-bottom: 2px solid var(--casio-key-sh);
-    border-right:  2px solid var(--casio-key-sh);
     cursor: ns-resize;
     z-index: 1;
+
+    /* Domed surface — matches button.scss casio-key-up mixin */
+    background:
+        radial-gradient(
+            ellipse 80% 55% at 50% 20%,
+            #404855 0%,
+            #2a3040 50%,
+            #1e2530 100%
+        );
+    box-shadow:
+        0 3px 0 0 #0d1018,
+        0 4px 6px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    border: 1px solid #10141c;
+    border-bottom-color: #080b12;
 
     /* Center grip line */
     display: flex;
@@ -102,19 +137,34 @@
         content: '';
         width: 55%;
         height: 2px;
-        background: var(--casio-edge);
-        border-bottom: 1px solid var(--casio-sheen);
+        background: rgba(0, 0, 0, 0.25);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+        border-radius: 1px;
     }
 
     &:hover {
-        background: var(--casio-ridge);
+        background:
+            radial-gradient(
+                ellipse 80% 55% at 50% 20%,
+                #4a5260 0%,
+                #323848 50%,
+                #242c3a 100%
+            );
     }
 
     &:active {
-        border-top:   2px solid var(--casio-key-sh);
-        border-left:  2px solid var(--casio-key-sh);
-        border-bottom: 2px solid var(--casio-key-hi);
-        border-right:  2px solid var(--casio-key-hi);
+        background:
+            radial-gradient(
+                ellipse 80% 55% at 50% 20%,
+                #303840 0%,
+                #202830 50%,
+                #181e26 100%
+            );
+        box-shadow:
+            0 1px 0 0 #0d1018,
+            0 2px 3px rgba(0, 0, 0, 0.4),
+            inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        transform: translate(-50%, calc(-50% + 2px));
     }
 }
 
