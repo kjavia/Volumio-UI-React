@@ -1,0 +1,123 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PROGRESSBAR — 80s Casio Theme
+   Blocky segmented LED-style progress + LCD-panel seek
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.progress-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 250px;
+}
+
+/* ─── LED segment bar ─────────────────────────────────────────────────── */
+.led-bar-container {
+    display: flex;
+    gap: 2px;
+    background: var(--casio-edge);
+    padding: 3px;
+    border-radius: 2px;
+    border-top:   2px solid var(--casio-edge);
+    border-left:  2px solid var(--casio-edge);
+    border-bottom: 1px solid var(--casio-sheen);
+    border-right:  1px solid var(--casio-sheen);
+}
+
+.led-segment {
+    flex: 1;
+    height: 10px;
+    background: rgba(157, 184, 52, 0.12);
+    border-radius: 1px;
+}
+
+.led-segment.on {
+    background: var(--casio-lcd-bg);
+    box-shadow: 0 0 4px rgba(157, 184, 52, 0.6);
+}
+
+/* ─── Smooth LCD-style progress bar ────────────────────────────────────── */
+.smooth-bar-track {
+    height: 14px;
+    width: 100%;
+    background: var(--casio-lcd-bg);
+    border-radius: 2px;
+    border-top:   2px solid var(--casio-lcd-frame);
+    border-left:  2px solid var(--casio-lcd-frame);
+    border-bottom: 1px solid rgba(255, 255, 200, 0.2);
+    border-right:  1px solid rgba(255, 255, 200, 0.2);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.smooth-bar-fill {
+    height: 100%;
+    background: repeating-linear-gradient(
+        to right,
+        var(--casio-lcd-on) 0px,
+        var(--casio-lcd-on) 6px,
+        transparent 6px,
+        transparent 9px
+    );
+    border-radius: 1px;
+}
+
+/* ─── Bootstrap .progress override ─────────────────────────────────────── */
+.progress {
+    height: 14px;
+    background: var(--casio-lcd-bg);
+    border-radius: 2px;
+    border-top:   2px solid var(--casio-lcd-frame);
+    border-left:  2px solid var(--casio-lcd-frame);
+    border-bottom: 1px solid rgba(255, 255, 200, 0.2);
+    border-right:  1px solid rgba(255, 255, 200, 0.2);
+    overflow: hidden;
+
+    .progress-bar {
+        height: 100%;
+        background: repeating-linear-gradient(
+            to right,
+            var(--casio-lcd-on) 0px,
+            var(--casio-lcd-on) 6px,
+            transparent 6px,
+            transparent 9px
+        );
+        border-radius: 0;
+        transition: none;
+    }
+}
+
+/* ─── Seekbar ─────────────────────────────────────────────────────────── */
+.seekbar-track {
+    height: 6px;
+    border-radius: 0;
+    background: var(--casio-ridge);
+    border-top:  1px solid var(--casio-edge);
+    border-bottom: 1px solid var(--casio-sheen);
+    overflow: visible;
+    position: relative;
+}
+
+.seekbar-fill {
+    height: 100%;
+    border-radius: 0;
+    background: var(--casio-lcd-bg);
+    box-shadow: 0 0 4px rgba(157, 184, 52, 0.4);
+}
+
+.seekbar-thumb {
+    width: 12px;
+    height: 18px;
+    border-radius: 2px;
+    background: var(--casio-key-face);
+    border-top:   2px solid var(--casio-key-hi);
+    border-left:  2px solid var(--casio-key-hi);
+    border-bottom: 2px solid var(--casio-key-sh);
+    border-right:  2px solid var(--casio-key-sh);
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}

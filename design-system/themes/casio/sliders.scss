@@ -1,0 +1,154 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDERS — 80s Casio Theme
+   Flat-top plastic slider with rectangular fader cap
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.slider-group {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+/* ─── Volume Slider (horizontal) — used by VolumeManager ───────────────── */
+.slider-track {
+    position: relative;
+    flex-grow: 1;
+    height: 10px;
+    background: var(--casio-edge);
+    border-top:   2px solid var(--casio-edge);
+    border-left:  2px solid var(--casio-edge);
+    border-bottom: 2px solid var(--casio-sheen);
+    border-right:  2px solid var(--casio-sheen);
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.slider-fill {
+    height: 100%;
+    background: var(--casio-lcd-bg);
+    position: relative;
+    opacity: 0.85;
+}
+
+.slider-cap {
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 22px;
+    background: var(--casio-key-face);
+    border-top:   2px solid var(--casio-key-hi);
+    border-left:  2px solid var(--casio-key-hi);
+    border-bottom: 2px solid var(--casio-key-sh);
+    border-right:  2px solid var(--casio-key-sh);
+    border-radius: 2px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* ─── Vertical Fader Track — recessed groove ────────────────────────── */
+.fader-track {
+    width: 10px;
+    height: 200px;
+    background: var(--casio-edge);
+    border-radius: 0;
+    border-top:   2px solid var(--casio-edge);
+    border-left:  2px solid var(--casio-edge);
+    border-bottom: 2px solid var(--casio-sheen);
+    border-right:  2px solid var(--casio-sheen);
+    position: relative;
+    margin: 0 20px;
+
+    /* Inner groove — slightly lighter */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 100%;
+        background: var(--casio-ridge);
+        border-left:  1px solid var(--casio-edge);
+        border-right: 1px solid var(--casio-sheen);
+    }
+}
+
+/* ─── Fader Cap — rectangular plastic key ───────────────────────────── */
+.fader-cap {
+    width: 44px;
+    height: 22px;
+    background: var(--casio-key-face);
+    border-radius: 2px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-top:   2px solid var(--casio-key-hi);
+    border-left:  2px solid var(--casio-key-hi);
+    border-bottom: 2px solid var(--casio-key-sh);
+    border-right:  2px solid var(--casio-key-sh);
+    cursor: ns-resize;
+    z-index: 1;
+
+    /* Center grip line */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::after {
+        content: '';
+        width: 55%;
+        height: 2px;
+        background: var(--casio-edge);
+        border-bottom: 1px solid var(--casio-sheen);
+    }
+
+    &:hover {
+        background: var(--casio-ridge);
+    }
+
+    &:active {
+        border-top:   2px solid var(--casio-key-sh);
+        border-left:  2px solid var(--casio-key-sh);
+        border-bottom: 2px solid var(--casio-key-hi);
+        border-right:  2px solid var(--casio-key-hi);
+    }
+}
+
+/* ─── Scale tick marks ──────────────────────────────────────────────── */
+.scale {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(calc(100% + 8px));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.scale-tick {
+    width: 6px;
+    height: 1px;
+    background: var(--casio-sheen);
+
+    &.major {
+        width: 12px;
+        background: var(--casio-lcd-bg);
+
+        &::after {
+            content: attr(data-label);
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: var(--text-xs);
+            color: var(--casio-on-dark-dim);
+            font-family: var(--font-mono);
+            white-space: nowrap;
+        }
+    }
+}

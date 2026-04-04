@@ -1,0 +1,259 @@
+/* ── Digital Clock — 80s Casio Theme ──────────────────────────────────────
+ * Full Casio watch face replica:
+ *   dark plastic outer strap/body
+ *   yellow-green LCD glass with dark segments
+ *   DSEG7 Classic — authentic 7-segment LCD digit font
+ *   day-of-week dots along the top (like Casio F-91W)
+ * ──────────────────────────────────────────────────────────────────────── */
+
+$seg-color:       #44dda8;   /* bright teal — segment ON */
+$seg-off-opacity: 0.12;      /* barely-visible ghost segment */
+$lcd-bg:          #0c1e18;   /* dark teal panel background */
+$lcd-border:      #060f0a;   /* very dark bezel border */
+
+/* ── Outer wrapper ───────────────────────────────────────────────────── */
+.digital-clock-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90vw;
+    height: 90dvh;
+    max-width: none;
+    margin: 0 auto;
+    container-type: size;
+    /* Dark plastic desktop */
+    background: #111111;
+}
+
+/* ── Outer device body — dark plastic with strap feel ───────────────── */
+.digital-clock-frame {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    padding: 2.5cqw 3cqw;
+
+    background: #1e1e1e;
+    border-radius: 1.5cqw;
+
+    /* Plastic casing bevel */
+    border-top:   0.4cqw solid #363636;
+    border-left:  0.4cqw solid #363636;
+    border-bottom: 0.4cqw solid #0a0a0a;
+    border-right:  0.4cqw solid #0a0a0a;
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.8),
+        0 2px 8px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    user-select: none;
+}
+
+/* ── LCD panel — the signature green glass ──────────────────────────── */
+.digital-clock {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1cqw 1.5cqw;
+    background: $lcd-bg;
+    border-radius: 0.3cqw;
+
+    /* Classic LCD sunken border */
+    border-top:   0.25cqw solid $lcd-border;
+    border-left:  0.25cqw solid $lcd-border;
+    border-bottom: 0.15cqw solid rgba(220, 240, 100, 0.3);
+    border-right:  0.15cqw solid rgba(220, 240, 100, 0.3);
+
+    box-shadow:
+        inset 0 1px 4px rgba(0, 0, 0, 0.3),
+        inset 0 0 0 0.05cqw rgba(0, 0, 0, 0.08);
+
+    /* LCD glare reflection */
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 30%;
+        background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 220, 0.12) 0%,
+            transparent 100%
+        );
+        pointer-events: none;
+        border-radius: 0.3cqw 0.3cqw 0 0;
+    }
+}
+
+/* ── Day-of-week bar — small indicator dots/caps like F-91W ─────────── */
+.lcd-days {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5cqw;
+    margin-bottom: 0.6cqw;
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+
+    .active {
+        color: $seg-color;
+        opacity: 1;
+        border-bottom: 0.15cqw solid $seg-color;
+    }
+}
+
+/* ── Time row ─────────────────────────────────────────────────────────── */
+.lcd-time {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5cqw;
+}
+
+.lcd-digits {
+    display: flex;
+    align-items: center;
+    gap: 1.5cqw;
+}
+
+/* ── AM/PM indicator ─────────────────────────────────────────────────── */
+.lcd-ampm {
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+    font-size: clamp(0.7rem, 2cqw, 3rem);
+    font-weight: 400;
+    font-style: italic;
+    color: $seg-color;
+    letter-spacing: 0.06em;
+    padding-bottom: 0.2cqw;
+    margin-left: 0.4cqw;
+    text-transform: uppercase;
+    -webkit-font-smoothing: none;
+}
+
+/* ── Colon ───────────────────────────────────────────────────────────── */
+.lcd-colon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5cqw;
+    width: 2cqw;
+    height: 100%;
+    padding: 1.5cqh 0;
+}
+
+.lcd-colon-dot {
+    width: 1.2cqw;
+    height: 1.2cqw;
+    background: $seg-color;
+    border-radius: 0;   /* square dots — like actual Casio segments */
+}
+
+.lcd-colon--blink .lcd-colon-dot {
+    animation: lcd-blink 1s step-start infinite;
+}
+
+/* ── Date + info row below the time ─────────────────────────────────── */
+.lcd-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5cqw;
+    margin-top: 0.5cqw;
+}
+
+.lcd-date {
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+    font-size: clamp(0.6rem, 1.6cqw, 2.5rem);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--casio-lcd-off, #8aaa28);
+    text-align: center;
+    -webkit-font-smoothing: none;
+}
+
+.lcd-weather {
+    display: flex;
+    align-items: center;
+    gap: 0.4cqw;
+}
+
+.lcd-weather-icon {
+    font-size: clamp(0.8rem, 1.8cqw, 2.8rem);
+    color: $seg-color;
+}
+
+.lcd-weather-temp {
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+    font-size: clamp(0.6rem, 1.6cqw, 2.5rem);
+    font-style: italic;
+    color: $seg-color;
+    -webkit-font-smoothing: none;
+}
+
+/* ── 7-Segment Digit ─────────────────────────────────────────────────── */
+.lcd-digit {
+    position: relative;
+    width: 11cqw;
+    height: calc(11cqw * 1.7);
+}
+
+.seg {
+    position: absolute;
+    background: $seg-color;
+    /* No transition — instant snap like a real LCD */
+
+    &.on  { opacity: 1; }
+    &.off { opacity: $seg-off-opacity; }
+}
+
+/* Horizontal segments: a (top), g (middle), d (bottom) */
+.seg-a,
+.seg-d,
+.seg-g {
+    left: 10%;
+    width: 80%;
+    height: 7%;
+    clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
+}
+
+.seg-a { top: 0; }
+.seg-g { top: 46.5%; }
+.seg-d { bottom: 0; }
+
+/* Vertical segments: b,c (right), e,f (left) */
+.seg-b,
+.seg-c,
+.seg-e,
+.seg-f {
+    width: 13%;
+    height: 42%;
+    clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
+}
+
+.seg-b { top: 4%;    right: 0; }
+.seg-c { bottom: 4%; right: 0; }
+.seg-f { top: 4%;    left: 0; }
+.seg-e { bottom: 4%; left: 0; }
+
+/* ── Button row below display (decorative — like Casio's mode keys) ── */
+.digital-clock-frame::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1.5cqw;
+    background: repeating-linear-gradient(
+        to right,
+        #282828 0, #282828 3cqw,
+        #0a0a0a 3cqw, #0a0a0a 3.5cqw
+    );
+    margin-top: 1.5cqw;
+    border-radius: 0.4cqw;
+    border-top:   0.2cqw solid #363636;
+    border-left:  0.2cqw solid #363636;
+    border-bottom: 0.2cqw solid #0a0a0a;
+    border-right:  0.2cqw solid #0a0a0a;
+}

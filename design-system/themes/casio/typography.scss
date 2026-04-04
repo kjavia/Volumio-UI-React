@@ -1,0 +1,106 @@
+@use './variables.scss';
+
+// ─── DS Digital — local LCD digit / 7-segment font ─────────────────────────
+@font-face {
+    font-family: 'DS Digital';
+    src: url('/assets/fonts/DS-DIGI.TTF') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DS Digital';
+    src: url('/assets/fonts/DS-DIGIB.TTF') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DS Digital';
+    src: url('/assets/fonts/DS-DIGII.TTF') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DS Digital';
+    src: url('/assets/fonts/DS-DIGIT.TTF') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+// ─── VT323 — dot-matrix fallback pixel font ──────────────────────────────
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+// ─── Base ─────────────────────────────────────────────────────────────────────
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: var(--leading-normal);
+    color: var(--text-primary);
+    background-color: var(--bg-color);
+    /* Share Tech Mono at small sizes — allow antialiasing for readability */
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    image-rendering: auto;
+    letter-spacing: var(--tracking-normal);
+}
+
+// ─── Headings ─────────────────────────────────────────────────────────────────
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-wide);
+    color: var(--casio-on-dark);
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 0.3em;
+}
+
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-base); }
+
+.display-heading {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: 400;
+    color: var(--casio-on-dark);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    line-height: var(--leading-relaxed);
+}
+
+.lead {
+    font-size: var(--text-xl);
+    color: var(--casio-on-dark-dim);
+}
+
+// ─── LCD text — used inside .casio-lcd elements ───────────────────────────────
+.lcd-text {
+    font-family: var(--font-display);
+    color: var(--casio-lcd-on);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    -webkit-font-smoothing: none;
+}
+
+// ─── Selection ────────────────────────────────────────────────────────────────
+::selection {
+    background: var(--casio-red);
+    color: #ffffff;
+}

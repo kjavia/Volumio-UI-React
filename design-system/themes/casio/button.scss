@@ -1,0 +1,141 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BUTTONS — 80s Casio Theme
+   Tactile plastic key aesthetic — raised, depresses on press
+   Standard keys: dark plastic | Function key: RED | Labels: pixel font
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Mixin: plastic raised key ────────────────────────────────────────── */
+@mixin casio-raised {
+    border-top:   2px solid var(--casio-key-hi);
+    border-left:  2px solid var(--casio-key-hi);
+    border-bottom: 2px solid var(--casio-key-sh);
+    border-right:  2px solid var(--casio-key-sh);
+    background: var(--casio-key-face);
+}
+
+@mixin casio-pressed {
+    border-top:   2px solid var(--casio-key-sh);
+    border-left:  2px solid var(--casio-key-sh);
+    border-bottom: 2px solid var(--casio-key-hi);
+    border-right:  2px solid var(--casio-key-hi);
+    background: var(--casio-edge);
+}
+
+.btn {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 14px;
+    min-height: 28px;
+
+    @include casio-raised;
+    border-radius: var(--radius-sm);
+
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--casio-on-dark);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+
+    cursor: pointer;
+    user-select: none;
+    transition: none;
+
+    &:hover {
+        background: var(--casio-ridge);
+    }
+
+    &:active,
+    &.active {
+        @include casio-pressed;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--casio-red);
+        outline-offset: 1px;
+    }
+}
+
+/* ─── Primary  — RED function key ─────────────────────────────────────── */
+.btn,
+.btn-primary {
+    &.btn-primary,
+    &[data-type='primary'] {
+        border-top:   2px solid var(--casio-red-hi);
+        border-left:  2px solid var(--casio-red-hi);
+        border-bottom: 2px solid var(--casio-red-sh);
+        border-right:  2px solid var(--casio-red-sh);
+        background: var(--casio-red);
+        color: #ffffff;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+
+        &:active, &.active {
+            border-top:   2px solid var(--casio-red-sh);
+            border-left:  2px solid var(--casio-red-sh);
+            border-bottom: 2px solid var(--casio-red-hi);
+            border-right:  2px solid var(--casio-red-hi);
+            background: #a01000;
+        }
+    }
+}
+
+.btn-primary {
+    border-top:   2px solid var(--casio-red-hi);
+    border-left:  2px solid var(--casio-red-hi);
+    border-bottom: 2px solid var(--casio-red-sh);
+    border-right:  2px solid var(--casio-red-sh);
+    background: var(--casio-red);
+    color: #ffffff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+
+    &:active, &.active {
+        border-top:   2px solid var(--casio-red-sh);
+        border-left:  2px solid var(--casio-red-sh);
+        border-bottom: 2px solid var(--casio-red-hi);
+        border-right:  2px solid var(--casio-red-hi);
+        background: #a01000;
+    }
+}
+
+/* ─── Secondary — same as standard key, slightly lighter ──────────────── */
+.btn-secondary,
+.btn-white {
+    background: var(--casio-face);
+    border-top:   2px solid var(--casio-sheen);
+    border-left:  2px solid var(--casio-sheen);
+    border-bottom: 2px solid var(--casio-edge);
+    border-right:  2px solid var(--casio-edge);
+    color: var(--casio-on-dark);
+
+    &:active, &.active {
+        @include casio-pressed;
+    }
+}
+
+/* ─── Danger ────────────────────────────────────────────────────────── */
+.btn-danger {
+    background: var(--casio-red);
+    border-top:   2px solid var(--casio-red-hi);
+    border-left:  2px solid var(--casio-red-hi);
+    border-bottom: 2px solid var(--casio-red-sh);
+    border-right:  2px solid var(--casio-red-sh);
+    color: #ffffff;
+}
+
+/* ─── Icon-only key (small square) ────────────────────────────────────── */
+.btn-icon {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border-radius: var(--radius-sm);
+    @include casio-raised;
+    color: var(--casio-on-dark);
+
+    &:active, &.active {
+        @include casio-pressed;
+    }
+}

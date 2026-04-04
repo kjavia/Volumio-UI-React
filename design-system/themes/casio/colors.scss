@@ -1,0 +1,75 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   COLOR UTILITIES — 80s Casio Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.bg-dark    { background-color: var(--casio-body) !important; }
+.bg-surface { background-color: var(--casio-face) !important; }
+.bg-app     { background-color: var(--casio-body) !important; }
+.bg-list-item { background-color: var(--list-item-bg) !important; }
+
+.border-dark  { border-color: var(--casio-edge) !important; }
+.border-light { border-color: var(--casio-sheen) !important; }
+
+/* ─── Plastic raised panel ───────────────────────────────────────────── */
+/* Mimics injection-molded plastic: raised left/top edge, shadow right/bottom */
+.panel {
+    background: var(--casio-face);
+    border-radius: var(--radius-sm);
+    border-top:   1px solid var(--casio-sheen);
+    border-left:  1px solid var(--casio-sheen);
+    border-bottom: 1px solid var(--casio-edge);
+    border-right:  1px solid var(--casio-edge);
+}
+
+/* ─── Raised plastic surface — same as panel but higher contrast ──────── */
+.surface {
+    background: var(--casio-face);
+    border-radius: var(--radius-sm);
+    border-top:   2px solid var(--casio-sheen);
+    border-left:  2px solid var(--casio-sheen);
+    border-bottom: 2px solid var(--casio-edge);
+    border-right:  2px solid var(--casio-edge);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ─── Device chrome — the outer dark plastic casing ──────────────────── */
+.device-chrome {
+    background: var(--casio-body);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--casio-edge);
+    box-shadow:
+        inset 0 1px 0 var(--casio-sheen),
+        0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* ─── LCD inset well — sunken display panel ────────────────────────────── */
+.inset-well {
+    background: var(--casio-lcd-panel);
+    border-radius: 2px;
+    border-top:   2px solid var(--casio-lcd-frame);
+    border-left:  2px solid var(--casio-lcd-frame);
+    border-bottom: 2px solid rgba(68, 221, 168, 0.12);
+    border-right:  2px solid rgba(68, 221, 168, 0.12);
+    box-shadow:
+        inset 0 4px 12px rgba(0, 0, 0, 0.55),
+        inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+/* ─── Molding separator line ───────────────────────────────────────────── */
+.casio-divider {
+    height: 2px;
+    background: var(--casio-edge);
+    box-shadow: 0 1px 0 var(--casio-sheen);
+    margin: 4px 0;
+}
+
+/* ─── LCD label strip ──────────────────────────────────────────────────── */
+.casio-label {
+    font-family: var(--font-label);
+    font-size: var(--text-xs);
+    color: var(--casio-on-dark-dim);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+}

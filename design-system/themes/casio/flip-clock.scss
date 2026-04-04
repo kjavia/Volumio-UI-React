@@ -1,0 +1,36 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FLIP CLOCK — 80s Casio Theme
+   Dark plastic panels, LCD-green digits, square corners, DSEG7 font
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.tick-flip-panel {
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace !important;
+    border-radius: 2px !important;
+    border: 2px solid var(--casio-lcd-frame) !important;
+    background: var(--casio-lcd-panel) !important;
+    color: var(--casio-lcd-on) !important;
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+    -webkit-font-smoothing: none !important;
+    letter-spacing: 0.06em !important;
+}
+
+.flip-colon {
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+    color: var(--casio-lcd-on);
+}
+
+.flip-ampm {
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+    color: var(--casio-lcd-on);
+    background: var(--casio-lcd-panel);
+    border: 2px solid var(--casio-lcd-frame);
+    border-radius: 2px;
+    padding: 0 5px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+    -webkit-font-smoothing: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}

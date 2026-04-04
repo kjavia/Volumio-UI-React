@@ -1,0 +1,447 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MEDIA PLAYER — 80s Casio Theme
+   Dark plastic device shell · LCD info panel · Rectangular key buttons
+   Inspired by: Casio HT series, PV-1000, handheld calculator-audio hybrids
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Main device casing ─────────────────────────────────────────────── */
+.player-casing {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+
+    /* Dark plastic body */
+    background: var(--casio-body);
+
+    /* Subtle molding ridges via repeating gradient */
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 4px,
+        rgba(255, 255, 255, 0.012) 4px,
+        rgba(255, 255, 255, 0.012) 5px
+    );
+
+    border-radius: var(--radius-lg);
+    padding: 20px 24px 24px;
+
+    /* Plastic casing bevel */
+    border-top:   3px solid var(--casio-sheen);
+    border-left:  3px solid var(--casio-sheen);
+    border-bottom: 3px solid var(--casio-edge);
+    border-right:  3px solid var(--casio-edge);
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+}
+
+/* ─── Layout wrappers ──────────────────────────────────────────────── */
+.media-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.controls-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+/* ─── LCD display panel — dark backlit glass with inset chrome bezel ── */
+.screen-frame {
+    background: var(--casio-lcd-panel);
+    border-radius: 4px;
+    padding: 10px 14px;
+
+    /* Chrome bezel — thin sheen rim + shadow rim = inset ring effect */
+    border-top:   1px solid var(--casio-sheen);
+    border-left:  1px solid var(--casio-sheen);
+    border-bottom: 2px solid var(--casio-edge);
+    border-right:  2px solid var(--casio-edge);
+
+    box-shadow:
+        inset 0 6px 20px rgba(0, 0, 0, 0.65),   /* deep top shadow — recessed */
+        inset 0 0 8px rgba(0, 0, 0, 0.40),       /* ambient inner darkness */
+        0 0 0 2px var(--casio-edge),              /* outer dark chrome band */
+        0 0 0 4px var(--casio-sheen),             /* outer chrome rim highlight */
+        0 4px 16px rgba(0, 0, 0, 0.50);          /* outer drop shadow */
+
+    /* Glass cover effect */
+    position: relative;
+    overflow: hidden;
+
+    /* Glass ambient tint — subtle teal glow from the LCD beneath */
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            155deg,
+            rgba(68, 221, 168, 0.06) 0%,
+            transparent 55%
+        );
+        pointer-events: none;
+        border-radius: inherit;
+        z-index: 5;
+    }
+
+    /* Glass surface highlight — bright reflection stripe near the top */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 8%;
+        right: 8%;
+        height: 22%;
+        background: linear-gradient(
+            to bottom,
+            rgba(200, 255, 230, 0.22) 0%,
+            rgba(140, 230, 200, 0.07) 60%,
+            transparent 100%
+        );
+        pointer-events: none;
+        border-radius: 0 0 50% 50% / 0 0 10px 10px;
+        z-index: 6;
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+}
+
+/* ─── Album art containers ────────────────────────────────────────── */
+.album-art-container,
+.vinyl-container,
+.cd-container {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* Art displayed in a LCD panel-bordered frame — album art only */
+.album-art-image {
+    border-radius: 2px;
+    border: 2px solid var(--casio-lcd-frame);
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.2),
+        0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Vinyl disc — must stay circular, no custom border */
+.vinyl-disc {
+    background-color: transparent;
+    border-radius: 50%;
+    border: none;
+    box-shadow: none;
+}
+
+/* CD jewel case — remove all chrome so it acts as a plain art window */
+.cd-jewel-case {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+/* CD disc spinning — keep circular, no extra border */
+.cd-disc-spinning {
+    border: none;
+}
+
+/* Format + hi-res logos — smaller to fit the pixel-font aesthetic */
+.format-logo-responsive {
+    height: clamp(0.75rem, 1.8cqw, 1.6rem);
+    display: block;
+}
+
+/* ─── Track Info Group — 80s watch face with glass cover ─────────────── */
+.track-info-group {
+    border-radius: 6px;
+    padding: 14px 18px 12px;
+
+    /* Glass layers baked into background — no pseudo-elements needed:
+       Layer 1 (top): white-to-transparent arc = top dome reflection
+       Layer 2 (bottom): glint stripe at the very bottom edge
+       Layer 3: base light-grey surface gradient */
+    background-image:
+        radial-gradient(
+            ellipse 80% 38% at 50% 0%,
+            rgba(255, 255, 255, 0.52) 0%,
+            rgba(255, 255, 255, 0.10) 55%,
+            transparent 100%
+        ),
+        linear-gradient(
+            to top,
+            rgba(255, 255, 255, 0.22) 0%,
+            transparent 14%
+        ),
+        linear-gradient(
+            160deg,
+            #d8e0dc 0%,
+            #c8d4cf 40%,
+            #b8c8c2 100%
+        );
+    background-size: cover;
+
+    /* Outer chrome band: dark border + sheen inset ring = watch casing */
+    border-top:   2px solid var(--casio-sheen);
+    border-left:  2px solid var(--casio-sheen);
+    border-bottom: 3px solid var(--casio-edge);
+    border-right:  3px solid var(--casio-edge);
+
+    box-shadow:
+        0 0 0 1px var(--casio-edge),              /* outermost dark band */
+        0 0 0 3px var(--casio-silver),             /* chrome ring */
+        0 0 0 4px rgba(0, 0, 0, 0.5),             /* shadow under chrome */
+        inset 0 6px 18px rgba(0, 0, 0, 0.18),     /* deep inset — recessed face */
+        inset 0 1px 3px rgba(0, 0, 0, 0.10);      /* top inner shadow */
+}
+
+/* ─── Track Info — dark digits on light panel ─────────────────────── */
+.track-info {
+    font-family: var(--font-display);
+    color: var(--casio-lcd-panel);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 4px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.track-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.2rem, 4.5vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 2px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--casio-lcd-panel);
+}
+
+.artist-name,
+.album-name {
+    font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+    color: #3a5850;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.responsive-title {
+    font-size: clamp(1.2rem, 5cqw, 3.2rem);
+}
+
+.responsive-artist {
+    font-size: clamp(0.9rem, 3cqw, 2rem);
+    color: var(--casio-lcd-off);
+}
+
+/* ─── Control buttons — plastic keys ────────────────────────────────── */
+.control-btn {
+    width: 42px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    background: var(--casio-key-face);
+    border-top:   2px solid var(--casio-key-hi);
+    border-left:  2px solid var(--casio-key-hi);
+    border-bottom: 2px solid var(--casio-key-sh);
+    border-right:  2px solid var(--casio-key-sh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--casio-on-dark);
+    font-size: 18px;
+    transition: none;
+
+    &:hover {
+        background: var(--casio-ridge);
+    }
+
+    &.play-btn {
+        width: 52px;
+        height: 48px;
+        background: var(--casio-red);
+        border-top:   2px solid var(--casio-red-hi);
+        border-left:  2px solid var(--casio-red-hi);
+        border-bottom: 2px solid var(--casio-red-sh);
+        border-right:  2px solid var(--casio-red-sh);
+        color: #ffffff;
+    }
+
+    &:active {
+        border-top:   2px solid var(--casio-key-sh);
+        border-left:  2px solid var(--casio-key-sh);
+        border-bottom: 2px solid var(--casio-key-hi);
+        border-right:  2px solid var(--casio-key-hi);
+        background: var(--casio-edge);
+
+        &.play-btn {
+            border-top:   2px solid var(--casio-red-sh);
+            border-left:  2px solid var(--casio-red-sh);
+            border-bottom: 2px solid var(--casio-red-hi);
+            border-right:  2px solid var(--casio-red-hi);
+            background: #9a0e00;
+        }
+    }
+}
+
+/* ─── Seekbar / Volume sliders ──────────────────────────────────────── */
+.slider-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Time stamps in LCD mono font */
+.time-elapsed,
+.time-total {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--casio-lcd-on);
+    min-width: 36px;
+    background: var(--casio-lcd-panel);
+    padding: 1px 4px;
+    border: 1px solid var(--casio-lcd-frame);
+    border-radius: 1px;
+    text-align: center;
+    -webkit-font-smoothing: none;
+}
+
+.volume-slider,
+.seek-slider {
+    flex: 1;
+    height: 4px;
+    border-radius: 0;
+    background: var(--casio-ridge);
+    border-top:  1px solid var(--casio-edge);
+    border-bottom: 1px solid var(--casio-sheen);
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 12px;
+        height: 20px;
+        border-radius: 2px;
+        background: var(--casio-key-face);
+        border-top:   2px solid var(--casio-key-hi);
+        border-left:  2px solid var(--casio-key-hi);
+        border-bottom: 2px solid var(--casio-key-sh);
+        border-right:  2px solid var(--casio-key-sh);
+        cursor: pointer;
+    }
+}
+
+/* ─── Seekbar (element-based) ────────────────────────────────────────── */
+.seekbar-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ─── Stream info row ────────────────────────────────────────────────── */
+.stream-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--casio-lcd-off);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+
+    /* Displayed inside the LCD panel if present */
+    background: var(--casio-lcd-panel);
+    padding: 2px 6px;
+    width: fit-content;
+    margin: 0 auto;
+    border: 1px solid var(--casio-lcd-frame);
+    border-radius: 1px;
+}
+
+/* ─── Volume ring indicator ────────────────────────────────────────── */
+.volume-ring {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--casio-lcd-on);
+}
+
+/* ─── Weather section (on LCD panel) ────────────────────────────────── */
+.weather-section,
+.weather-widget {
+    background: var(--casio-lcd-panel);
+    border-radius: 2px;
+    border: 1px solid var(--casio-lcd-frame);
+    border-top: 1px solid var(--casio-sheen);
+    border-left: 1px solid var(--casio-sheen);
+    padding: 6px 10px;
+    box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.weather-temp {
+    color: var(--casio-lcd-on);
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 3cqw, 2.2rem);
+    -webkit-font-smoothing: none;
+    text-transform: uppercase;
+}
+
+.weather-desc {
+    color: var(--casio-lcd-off);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.weather-icon {
+    color: var(--casio-lcd-on);
+    font-size: clamp(1.2rem, 3.5cqw, 2.5rem);
+}
+
+/* ─── Mode label strip (above LCD, like Casio ALARM/TIMER labels) ──── */
+.player-mode-strip {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 6px;
+    background: var(--casio-face);
+    border-bottom: 1px solid var(--casio-edge);
+    font-family: var(--font-label);
+    font-size: var(--text-xs);
+    color: var(--casio-on-dark-dim);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+}
