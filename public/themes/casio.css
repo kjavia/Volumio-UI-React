@@ -131,6 +131,7 @@
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -286,6 +287,7 @@
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -551,6 +553,7 @@ p {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -1023,6 +1026,7 @@ p {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -1296,6 +1300,7 @@ p {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -1608,6 +1613,7 @@ input[type=range]::-webkit-slider-thumb {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -1871,6 +1877,7 @@ input[type=range]::-webkit-slider-thumb {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -2176,6 +2183,7 @@ input[type=range]::-webkit-slider-thumb {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -2396,6 +2404,7 @@ input[type=range]::-webkit-slider-thumb {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -2632,6 +2641,7 @@ input[type=range]::-webkit-slider-thumb {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -3171,6 +3181,7 @@ input[type=range]::-webkit-slider-thumb {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -3445,6 +3456,7 @@ input[type=range]::-webkit-slider-thumb {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -3722,6 +3734,7 @@ input[type=range]::-webkit-slider-thumb {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -3964,6 +3977,7 @@ input[type=range]::-webkit-slider-thumb {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -4233,6 +4247,7 @@ input[type=range]::-webkit-slider-thumb {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -4902,6 +4917,7 @@ input[type=range]::-webkit-slider-thumb {
   --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
   --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
   --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   --text-xs: 0.75rem; /* 12px equivalent */
   --text-sm: 0.875rem; /* 14px */
@@ -4996,23 +5012,64 @@ input[type=range]::-webkit-slider-thumb {
 
 /* ══════════════════════════════════════════════════════════════════════
    WEATHER — 80s Casio Theme
-   LCD glass panel background · DS Digital font · artist-name green
+   LCD glass panel background · DS Digital font (via --font-display) · artist-name green
    ══════════════════════════════════════════════════════════════════════ */
+/* Outer wrapper — dark plastic casing matching digital-clock-frame */
 .weather-container {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  background: #c8d4cf;
+  background: var(--casio-body);
   color: #3a5850;
-  border-radius: 0.4cqw;
-  border: 0.25cqw solid var(--casio-edge);
-  box-shadow: 0 0 0 0.3cqw var(--casio-edge), inset 0 2px 6px rgba(0, 0, 0, 0.12);
+  font-style: italic;
+  /* Plastic bevel */
+  border-top: 0.4cqw solid var(--casio-sheen);
+  border-left: 0.4cqw solid var(--casio-sheen);
+  border-bottom: 0.4cqw solid var(--casio-edge);
+  border-right: 0.4cqw solid var(--casio-edge);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Inner LCD panel — light grey glass matching .digital-clock */
+.weather-current,
+.weather-hourly,
+.weather-daily {
+  background: #c8d4cf;
+  border: 0.25cqw solid #060f0a;
+  border-radius: 0.3cqw;
+  box-shadow: 0 0 0 0.3cqw var(--casio-edge), inset 0 2px 6px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+  position: relative;
+  /* Top glare — same dome highlight as .digital-clock::before */
+}
+.weather-current::before,
+.weather-hourly::before,
+.weather-daily::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.28) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.weather-current {
+  padding: 1.2rem 1.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Override .weather-full which explicitly sets --font-body */
+.weather-full {
+  font-family: var(--font-display);
+  /* Glass gradient matching .track-info-group */
+  background-image: radial-gradient(ellipse 80% 38% at 50% 0%, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.1) 55%, transparent 100%), linear-gradient(to top, rgba(255, 255, 255, 0.22) 0%, transparent 14%), linear-gradient(160deg, #d8e0dc 0%, #c8d4cf 40%, #b8c8c2 100%);
+  background-size: cover;
 }
 
 /* ── Current ─────────────────────────────────────────────────────────── */
 .weather-current-temp {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   color: #3a5850;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35), 0 4px 0 rgba(0, 0, 0, 0.15), 0 -1px 0 rgba(255, 255, 255, 0.65);
 }
 
 .weather-current-unit {
@@ -5021,20 +5078,15 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .weather-current-desc {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   color: rgba(58, 88, 80, 0.45);
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 /* ── Detail rows ─────────────────────────────────────────────────────── */
-.weather-detail {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
-}
-
 .weather-detail-label {
   color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
+  margin-right: 0.5rem;
 }
 
 .weather-detail-value {
@@ -5051,23 +5103,19 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .weather-hourly-time {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .weather-hourly-temp {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   font-weight: 400;
   color: #3a5850;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .weather-hourly-wind {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 /* ── Daily cards ─────────────────────────────────────────────────────── */
@@ -5082,47 +5130,38 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .weather-daily-day {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   color: #3a5850;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .weather-daily-date {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .weather-daily-desc {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .weather-daily-hi {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   color: #3a5850;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .weather-daily-lo {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .weather-daily-meta {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .weather-daily-sun-item {
-  font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
-  font-style: italic;
   color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 /* ── Loading / error states ──────────────────────────────────────────── */
@@ -5130,6 +5169,7 @@ input[type=range]::-webkit-slider-thumb {
 .weather-error-icon,
 .weather-error-text {
   color: rgba(58, 88, 80, 0.45);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(255, 255, 255, 0.5);
 }
 
 body {

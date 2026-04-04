@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  font-family: var(--font-body, 'Roboto', sans-serif);
+  font-family: var(--font-display, var(--font-body, 'Roboto', sans-serif));
   color: var(--text-light, #fff);
   overflow: hidden;
   container-type: size;
