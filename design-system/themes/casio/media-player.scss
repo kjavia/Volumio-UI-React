@@ -130,7 +130,7 @@
 .vinyl-container,
 .cd-container {
     width: 100%;
-    max-width: 360px;
+    max-width: 460px;
     aspect-ratio: 1;
     display: flex;
     justify-content: center;
@@ -178,6 +178,8 @@
 .track-info-group {
     border-radius: 6px;
     padding: 14px 18px 12px;
+    position: relative; /* needed for ::before glass sheen */
+    overflow: hidden;   /* clip sheen to the panel boundary */
 
     /* Glass layers baked into background — no pseudo-elements needed:
        Layer 1 (top): white-to-transparent arc = top dome reflection
@@ -211,10 +213,46 @@
 
     box-shadow:
         0 0 0 1px var(--casio-edge),              /* outermost dark band */
-        0 0 0 3px var(--casio-silver),             /* chrome ring */
-        0 0 0 4px rgba(0, 0, 0, 0.5),             /* shadow under chrome */
-        inset 0 6px 18px rgba(0, 0, 0, 0.18),     /* deep inset — recessed face */
-        inset 0 1px 3px rgba(0, 0, 0, 0.10);      /* top inner shadow */
+        0 0 0 4px var(--casio-silver),             /* chrome ring — wider */
+        0 0 0 6px rgba(0, 0, 0, 0.65),            /* shadow under chrome — deeper */
+        0 8px 20px rgba(0, 0, 0, 0.55),            /* drop shadow — more lift */
+        inset 0 10px 30px rgba(0, 0, 0, 0.35),    /* deep inset — stronger recession */
+        inset 0 2px 6px rgba(0, 0, 0, 0.25),      /* top inner shadow — sharper */
+        inset 0 -8px 18px rgba(0, 0, 0, 0.40),    /* bottom inner shadow — pushes base deep */
+        inset 6px 0 14px rgba(0, 0, 0, 0.20),     /* left wall depth */
+        inset -6px 0 14px rgba(0, 0, 0, 0.20),    /* right wall depth */
+        inset 0 3px 0 rgba(255, 255, 255, 0.60);  /* bright glass rim — more prominent */
+
+    /* Glass sheen overlay — convex highlight spanning the top ~45% */
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background:
+            /* Top convex dome — bright centre tapering to the sides */
+            radial-gradient(
+                ellipse 90% 50% at 50% -5%,
+                rgba(255, 255, 255, 0.55) 0%,
+                rgba(255, 255, 255, 0.18) 40%,
+                transparent 70%
+            ),
+            /* Angled streak from top-left — light source glint */
+            linear-gradient(
+                128deg,
+                rgba(255, 255, 255, 0.30) 0%,
+                rgba(255, 255, 255, 0.08) 30%,
+                transparent 55%
+            );
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    /* Children sit above the sheen */
+    > * {
+        position: relative;
+        z-index: 2;
+    }
 }
 
 /* ─── Track Info — dark digits on light panel ─────────────────────── */
