@@ -5,9 +5,9 @@
   justify-content: center;
   position: relative;
   width: 100%;
-  /* Assembly width = sleeve (1H) + disc protrusion (0.41×0.94H = 0.385H) = 1.385H.
-     Use 1.4 to leave ~1.07% shadow breathing room on each side (see left: 2.7% below). */
-  aspect-ratio: 1.4;
+  /* Assembly: sleeve (1H) + disc protrusion (0.50×0.94H = 0.47H) = 1.47H.
+     aspect-ratio 1.5 gives 4.5% H buffer on each side for shadow breathing room. */
+  aspect-ratio: 1.5;
   margin: 0 auto;
 }
 
@@ -20,17 +20,17 @@
   border-radius: 50%;
   position: absolute;
   top: 3%;
-  /* left: 2.7% centres the assembly: dead space = (1.4H - 1.385H) / 2 ≈ 2.7% of container width */
-  left: 2.7%;
+  /* left: 3% centres the assembly: dead space = (1.5H - 1.47H) / 2 = 4.5% H, as % of W = 3% */
+  left: 3%;
   z-index: 1;
   /* Behind sleeve */
   box-shadow: 0 0 20px var(--shadow-60);
   /* Shadow cast on right/under */
 
   /* The "sticking out" mechanism */
-  /* Move disc to the right */
+  /* translateX(50%): exposes ~44% of disc diameter past the sleeve right edge. */
   transform-origin: center;
-  transform: translateX(41%);
+  transform: translateX(50%);
   animation: vinyl-cover-spin 4s linear infinite;
   animation-play-state: paused;
 
@@ -41,11 +41,11 @@
 
 @keyframes vinyl-cover-spin {
   from {
-    transform: translateX(41%) rotate(0deg);
+    transform: translateX(50%) rotate(0deg);
   }
 
   to {
-    transform: translateX(41%) rotate(360deg);
+    transform: translateX(50%) rotate(360deg);
   }
 }
 
@@ -124,10 +124,14 @@
   border-radius: 4px;
   z-index: 10;
   position: absolute;
-  /* left: 2.7% matches vinyl-disc offset — keeps assembly centred */
-  left: 2.7%;
+  /* left: 3% matches vinyl-disc offset — keeps assembly centred */
+  left: 3%;
   top: 0;
   box-shadow: 0 10px 30px var(--shadow-50);
+  /* Small oval notch (~50px tall) on the right-middle edge to reveal the vinyl disc beneath.
+     ellipse: 15px horizontal depth × 25px vertical radius (= ~50px span). */
+  mask: radial-gradient(ellipse 15px 25px at 100% 50%, transparent 99%, black 100%) 0 / 100% 100% no-repeat;
+  -webkit-mask: radial-gradient(ellipse 15px 25px at 100% 50%, transparent 99%, black 100%) 0 / 100% 100% no-repeat;
 }
 
 /* No breakpoint overrides needed — the base styles scale correctly at all sizes.

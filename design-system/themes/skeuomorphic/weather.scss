@@ -2,6 +2,44 @@
  * Reduced font sizes for hourly and daily screens so content fits cards.
  * ─────────────────────────────────────────────────────────────────────── */
 
+/* Use display font (Michroma) for all weather values and temperatures */
+.weather-current-temp,
+.weather-current-desc,
+.weather-detail-value,
+.weather-detail-label,
+.weather-hourly-temp,
+.weather-hourly-time,
+.weather-daily-day,
+.weather-daily-date,
+.weather-daily-temps,
+.weather-daily-desc,
+.weather-daily-meta,
+.weather-daily-sun-item,
+.weather-full-hero-location,
+.weather-full-hero-temp,
+.weather-full-hero-desc,
+.weather-full-hero-hilow,
+.weather-full-tenday-row,
+.weather-full-tenday-day,
+.weather-full-tenday-lo,
+.weather-full-tenday-hi,
+.weather-full-hourly-time,
+.weather-full-tile-value,
+.weather-full-tile-sub {
+    font-family: var(--font-display);
+}
+
+/* Use secondary font (Roboto) for time and day labels on full weather screen */
+.weather-full-hourly-time,
+.weather-full-tenday-day,
+.weather-full-tenday-lo,
+.weather-full-tenday-hi,
+.weather-full-hourly-temp,
+.weather-full-tenday-row {
+    font-family: var(--font-label);
+}
+
+
 /* ── Hourly ──────────────────────────────────────────────────────────── */
 
 .weather-hourly-time {
