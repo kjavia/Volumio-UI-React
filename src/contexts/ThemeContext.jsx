@@ -53,6 +53,22 @@ export const ThemeProvider = ({ children }) => {
       document.head.appendChild(link);
     }
 
+    const revealRoot = () => {
+      const root = document.getElementById('root');
+      if (root) root.style.opacity = '1';
+    };
+
+    // If this theme is already loaded (cached), reveal immediately
+    if (link.dataset.theme === theme && link.sheet) {
+      revealRoot();
+      return;
+    }
+
+    link.dataset.theme = theme;
+    link.onload = revealRoot;
+    // Reveal even if the stylesheet fails to load (don't leave a blank screen)
+    link.onerror = revealRoot;
+
     // In dev, themes are in public/themes/
     // In prod, they are in /themes/ (relative to root)
     link.href = `/themes/${theme}.css`;
