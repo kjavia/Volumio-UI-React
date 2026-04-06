@@ -235,3 +235,10 @@
         color: var(--win95-titlebar);
     }
 }
+
+/* ─── Small Button ─────────────────────────────────────────────────────── */
+.btn-sm {
+    padding: 2px 10px;
+    min-height: 22px;
+    font-size: var(--text-xs, 11px);
+}

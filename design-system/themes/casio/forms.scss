@@ -162,3 +162,41 @@ input[type='range'] {
         cursor: ns-resize;
     }
 }
+
+/* ─── Select / Dropdown ─────────────────────────────────────────────────────── */
+.form-select {
+    @extend .btn;
+    @extend .btn-secondary;
+    appearance: none;
+    display: block;
+    text-align: left;
+    padding: 5px 26px 5px 10px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23aaaaaa'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+
+    option {
+        background: var(--casio-face);
+        color: var(--casio-on-dark);
+    }
+
+    &:hover {
+        background-image:
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23aaaaaa'/%3E%3C/svg%3E"),
+            radial-gradient(ellipse 80% 55% at 50% 20%, #4a5260 0%, #323848 50%, #242c3a 100%);
+        background-repeat: no-repeat, no-repeat;
+        background-position: right 8px center, 0 0;
+        background-size: auto, cover;
+    }
+
+    &:focus {
+        outline: none;
+        border-top-color: var(--casio-red);
+        border-left-color: var(--casio-red);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}

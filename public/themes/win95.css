@@ -1270,7 +1270,7 @@ code, pre {
    BUTTONS - Windows 95 Theme
    Classic 3D raised bevel buttons, depressed on click
    ═══════════════════════════════════════════════════════════════════════ */
-.btn {
+.btn, .form-select {
   position: relative;
   display: inline-flex;
   justify-content: center;
@@ -1294,10 +1294,10 @@ code, pre {
   user-select: none;
   transition: none;
 }
-.btn:hover {
+.btn:hover, .form-select:hover {
   background: var(--win95-light);
 }
-.btn:active, .btn.active {
+.btn:active, .form-select:active, .btn.active, .active.form-select {
   /* Depressed: invert bevel */
   border-top: 2px solid var(--win95-dark);
   border-left: 2px solid var(--win95-dark);
@@ -1308,23 +1308,23 @@ code, pre {
   padding-bottom: 3px;
   padding-right: 15px;
 }
-.btn:focus-visible {
+.btn:focus-visible, .form-select:focus-visible {
   outline: 1px dotted var(--text-primary);
   outline-offset: -4px;
 }
 
 /* No gel shine */
-.btn::after {
+.btn::after, .form-select::after {
   display: none;
 }
 
 /* ─── Secondary / White button ─────────────────────────────────────────── */
-.btn-secondary,
+.btn-secondary, .form-select,
 .btn-white {
   background: var(--win95-face);
   color: var(--text-primary);
 }
-.btn-secondary:hover,
+.btn-secondary:hover, .form-select:hover,
 .btn-white:hover {
   background: var(--win95-light);
 }
@@ -1474,6 +1474,13 @@ code, pre {
 .btn-icon.active:hover {
   background: rgba(0, 0, 128, 0.08);
   color: var(--win95-titlebar);
+}
+
+/* ─── Small Button ─────────────────────────────────────────────────────── */
+.btn-sm {
+  padding: 2px 10px;
+  min-height: 22px;
+  font-size: var(--text-xs, 11px);
 }
 
 :root {
@@ -1793,14 +1800,29 @@ label {
 }
 
 .form-select {
-  background-color: #ffffff;
+  appearance: none;
+  display: block;
+  text-align: left;
+  padding: 4px 26px 4px 6px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23000000'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+.form-select option {
+  background: #ffffff;
   color: var(--text-primary);
-  border-top: 2px solid var(--win95-dark);
-  border-left: 2px solid var(--win95-dark);
-  border-bottom: 2px solid var(--win95-highlight);
-  border-right: 2px solid var(--win95-highlight);
-  border-radius: 0;
-  font-family: var(--font-body);
+}
+.form-select:hover {
+  background: var(--win95-face) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23000000'/%3E%3C/svg%3E") no-repeat right 8px center;
+}
+.form-select:focus {
+  outline: 1px dotted var(--text-primary);
+  outline-offset: -3px;
+}
+.form-select:disabled {
+  background: var(--win95-face);
+  color: var(--win95-shadow);
+  cursor: not-allowed;
 }
 
 :root {

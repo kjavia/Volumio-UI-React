@@ -139,3 +139,10 @@
         @include casio-key-down;
     }
 }
+
+/* ─── Small Button ─────────────────────────────────────────────────────── */
+.btn-sm {
+    padding: 3px 10px;
+    min-height: 24px;
+    font-size: var(--text-xs, 11px);
+}

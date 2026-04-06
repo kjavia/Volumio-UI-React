@@ -102,6 +102,9 @@
     color: var(--text-secondary, #94a3b8);
     margin: 0;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   &__body {
@@ -484,4 +487,77 @@
   color: var(--text-secondary, #94a3b8);
   text-align: center;
   font-family: var(--font-body, sans-serif);
+}
+
+// ─── Count badge ─────────────────────────────────────────────────────────────
+
+.pm-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1;
+  padding: 5px;
+  border-radius: 10px;
+  background: var(--panel-bg-subtle, rgba(255, 255, 255, 0.1));
+  color: var(--text-secondary, #94a3b8);
+}
+
+// ─── Column dragover highlight ───────────────────────────────────────────────
+
+.pm-column--dragover {
+  background: color-mix(in srgb, var(--color-primary, #7c9cff) 6%, transparent);
+  outline: 2px dashed color-mix(in srgb, var(--color-primary, #7c9cff) 50%, transparent);
+  outline-offset: -3px;
+}
+
+// ─── Playlist select dropdown ─────────────────────────────────────────────────
+
+.pm-playlist-select {
+  flex: 1;
+  min-width: 0;
+  max-width: 160px;
+}
+
+// ─── Playlist track list ─────────────────────────────────────────────────────
+
+.pm-playlist-track-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pm-playlist-track-item {
+  display: flex;
+  align-items: center;
+  padding: 5px 0.75rem;
+  transition: background 0.1s;
+
+  &:hover {
+    background: var(--list-item-bg-hover, rgba(255, 255, 255, 0.05));
+  }
+}
+
+// ─── Drop target empty state ─────────────────────────────────────────────────
+
+.pm-empty--drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0.75rem;
+  padding: 1.5rem;
+  border: 2px dashed color-mix(in srgb, var(--color-primary, #7c9cff) 35%, transparent);
+  border-radius: var(--radius-md, 6px);
+  color: var(--text-secondary, #94a3b8);
+  font-size: 0.78rem;
+
+  .material-icons {
+    font-size: 28px;
+    color: color-mix(in srgb, var(--color-primary, #7c9cff) 60%, transparent);
+  }
 }

@@ -130,3 +130,42 @@
     background: var(--color-primary);
     box-shadow: 0 0 10px var(--color-primary);
 }
+
+/* ─── Select / Dropdown ─────────────────────────────────────────────────────── */
+.form-select {
+    @extend .btn;
+    @extend .btn-white;
+    appearance: none;
+    display: block;
+    text-align: left;
+    padding: 8px 30px 8px 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23aaaaaa'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+
+    option {
+        background: #1a1a1a;
+        color: var(--color-gray-100);
+    }
+
+    &:hover {
+        background-image:
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23aaaaaa'/%3E%3C/svg%3E"),
+            linear-gradient(180deg, #555 0%, #333 100%);
+        background-repeat: no-repeat, no-repeat;
+        background-position: right 10px center, 0 0;
+        background-size: auto, cover;
+        box-shadow: none;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 8px rgba(0, 225, 255, 0.2);
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}

@@ -1,8 +1,9 @@
-import { useState, useMemo, useCallback, useRef } from 'react';
+import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import PropTypes from 'prop-types';
 import { useAlbums, useAlbumTracks } from '@/hooks/useAlbums';
 import usePlaylists from '@/hooks/usePlaylists';
+import useBrowse from '@/hooks/useBrowse';
 import useFavourites from '@/hooks/useFavourites';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import { normalizeUri } from '@/hooks/useVolumioStatus';
@@ -48,7 +49,14 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
   return (
     <div className="pm-column pm-column--albums">
       <div className="pm-column__header">
-        <h2 className="pm-column__title">Albums</h2>
+        <h2 className="pm-column__title">
+          Albums
+          {!isLoading && (
+            <span className="pm-count">
+              {filter ? `${filtered.length} / ${albums.length}` : albums.length}
+            </span>
+          )}
+        </h2>
         <div className="pm-toolbar">
           <div className="pm-search">
             <span className="material-icons pm-search__icon">search</span>
@@ -66,7 +74,7 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
             )}
           </div>
           <select
-            className="pm-sort-select"
+            className="form-select pm-sort-select"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
           >
@@ -77,7 +85,7 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
             ))}
           </select>
           <button
-            className="btn btn-link"
+            className="btn btn-sm btn-secondary"
             title={viewMode === 'list' ? 'Switch to grid view' : 'Switch to list view'}
             onClick={() => setViewMode((v) => v === 'list' ? 'grid' : 'list')}
           >
@@ -162,16 +170,21 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
   return (
     <div className="pm-column pm-column--tracks">
       <div className="pm-column__header">
-        <h2 className="pm-column__title">Tracks</h2>
+        <h2 className="pm-column__title">
+          Tracks
+          {albumUri && !isLoading && (
+            <span className="pm-count">{tracks.length}</span>
+          )}
+        </h2>
         <div className="pm-toolbar pm-toolbar--tracks">
           <button
-            className="btn btn-secondary"
+            className="btn btn-sm btn-secondary d-flex align-items-center gap-3"
             title="Toggle selected tracks as Favourites"
             disabled={favCount === 0}
             onClick={() => onToggleFavourites([...selectedTracks.values()])}
           >
             <span className="material-icons">favorite</span>
-            <span>Favourites{favCount > 0 ? ` (${favCount})` : ''}</span>
+            {favCount > 0 && <span>{` (${favCount})`}</span>}
           </button>
         </div>
       </div>
@@ -225,7 +238,7 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
                     )}
                   </div>
                   <button
-                    className="btn btn-link pm-track-item__play"
+                    className="btn btn-sm btn-link pm-track-item__play"
                     title={normalizeUri(track.uri) === nowPlayingNorm && isPlaying ? 'Pause' : 'Play'}
                     onClick={(e) => handlePlayTrack(e, track)}
                   >
@@ -255,24 +268,32 @@ TrackList.propTypes = {
 // ─── Playlist Column (col 3) ──────────────────────────────────────────────────
 
 const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast }) => {
-  const { playlists, isLoading } = usePlaylists();
+  const { playlists, isLoading: playlistsLoading } = usePlaylists();
   const { socket } = useSocket();
   const queryClient = useQueryClient();
+  const [selectedPlaylist, setSelectedPlaylist] = useState('');
   const [newName, setNewName] = useState('');
   const [creatingNew, setCreatingNew] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
-  const [dragOverId, setDragOverId] = useState(null);
-  const [feedback, setFeedback] = useState({});
+  const [isDragOver, setIsDragOver] = useState(false);
 
-  const showFeedback = (name, msg) => {
-    setFeedback((f) => ({ ...f, [name]: msg }));
-    setTimeout(() => setFeedback((f) => { const n = { ...f }; delete n[name]; return n; }), 2000);
-  };
+  // Auto-select the first playlist once loaded
+  useEffect(() => {
+    if (!selectedPlaylist && playlists.length > 0) {
+      setSelectedPlaylist(playlists[0].name);
+    }
+  }, [playlists, selectedPlaylist]);
 
-  const handleDrop = (e, playlistName) => {
+  // Browse the selected playlist's tracks
+  const selectedPlaylistObj = playlists.find((p) => p.name === selectedPlaylist);
+  const playlistBrowseUri = selectedPlaylistObj?.uri ?? null;
+  const { data: tracksNav, isLoading: tracksLoading } = useBrowse(playlistBrowseUri);
+  const playlistTracks = tracksNav?.lists?.[0]?.items ?? [];
+
+  const handleDrop = (e) => {
     e.preventDefault();
-    setDragOverId(null);
-    if (!socket) return;
+    setIsDragOver(false);
+    if (!socket || !selectedPlaylist) return;
     let tracks;
     try {
       tracks = JSON.parse(e.dataTransfer.getData('application/json'));
@@ -280,17 +301,19 @@ const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast }) => {
       return;
     }
     if (!tracks?.length) return;
-
     tracks.forEach((track) => {
       socket.emit('addToPlaylist', {
-        name: playlistName,
+        name: selectedPlaylist,
         uri: track.uri,
         service: track.service ?? 'mpd',
       });
     });
-    showFeedback(playlistName, `+${tracks.length}`);
     onTracksAdded?.();
-    onToast?.(`Added ${tracks.length} track${tracks.length !== 1 ? 's' : ''} to "${playlistName}"`);
+    onToast?.(`Added ${tracks.length} track${tracks.length !== 1 ? 's' : ''} to "${selectedPlaylist}"`);
+    setTimeout(() => {
+      queryClient.invalidateQueries({ queryKey: ['browse', playlistBrowseUri] });
+      queryClient.invalidateQueries({ queryKey: ['playlists'] });
+    }, 800);
   };
 
   const handleCreate = () => {
@@ -298,23 +321,49 @@ const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast }) => {
     if (!name || !socket) return;
     setIsCreating(true);
     socket.emit('createPlaylist', { name });
-    // Give Volumio a moment to persist the new playlist then refresh
     setTimeout(() => {
       queryClient.invalidateQueries({ queryKey: ['playlists'] });
       setIsCreating(false);
       setNewName('');
       setCreatingNew(false);
+      setSelectedPlaylist(name);
     }, 800);
   };
 
   return (
-    <div className="pm-column pm-column--playlists">
+    <div
+      className={`pm-column pm-column--playlists${isDragOver ? ' pm-column--dragover' : ''}`}
+      onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+      onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setIsDragOver(false); }}
+      onDrop={handleDrop}
+    >
       <div className="pm-column__header">
-        <h2 className="pm-column__title">Playlists</h2>
-        <button className="btn btn-secondary pm-btn--new" onClick={() => setCreatingNew((v) => !v)}>
-          <span className="material-icons">add</span>
-          <span>New</span>
-        </button>
+        <h2 className="pm-column__title">
+          Playlist
+          {playlistTracks.length > 0 && (
+            <span className="pm-count">{playlistTracks.length}</span>
+          )}
+        </h2>
+        <div className="pm-toolbar">
+          <select
+            className="form-select pm-sort-select pm-playlist-select"
+            value={selectedPlaylist}
+            onChange={(e) => setSelectedPlaylist(e.target.value)}
+            disabled={playlistsLoading || playlists.length === 0}
+          >
+            {playlists.length === 0 && <option value="">No playlists</option>}
+            {playlists.map((pl) => (
+              <option key={pl.name} value={pl.name}>{pl.name}</option>
+            ))}
+          </select>
+          <button
+            className="btn btn-sm btn-secondary"
+            title="New playlist"
+            onClick={() => setCreatingNew((v) => !v)}
+          >
+            <span className="material-icons">add</span>
+          </button>
+        </div>
       </div>
 
       {creatingNew && (
@@ -340,39 +389,28 @@ const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast }) => {
       )}
 
       <div className="pm-column__body">
-        {isLoading && <div className="pm-loading">Loading playlists…</div>}
-        {!isLoading && playlists.length === 0 && (
+        {(playlistsLoading || tracksLoading) && <div className="pm-loading">Loading…</div>}
+        {!playlistsLoading && playlists.length === 0 && (
           <div className="pm-empty">No playlists yet. Create one above.</div>
         )}
-        <ul className="pm-playlist-list">
-          {playlists.map((pl) => (
-            <li
-              key={pl.name}
-              className={`pm-playlist-item${dragOverId === pl.name ? ' pm-playlist-item--dragover' : ''}`}
-              onDragOver={(e) => { e.preventDefault(); setDragOverId(pl.name); }}
-              onDragLeave={() => setDragOverId(null)}
-              onDrop={(e) => handleDrop(e, pl.name)}
-            >
-              <span className="material-icons pm-playlist-item__icon">queue_music</span>
-              <span className="pm-playlist-item__name">{pl.name}</span>
-              {pl.trackCount != null && (
-                <span className="pm-playlist-item__count">{pl.trackCount}</span>
-              )}
-              {feedback[pl.name] && (
-                <span className="pm-playlist-item__feedback">{feedback[pl.name]}</span>
-              )}
-              {dragOverId === pl.name && (
-                <span className="pm-playlist-item__drop-hint material-icons">add_circle</span>
-              )}
+        {!tracksLoading && selectedPlaylist && playlistTracks.length === 0 && (
+          <div className="pm-empty pm-empty--drop">
+            <span className="material-icons">playlist_add</span>
+            Drop tracks here to add to &ldquo;{selectedPlaylist}&rdquo;
+          </div>
+        )}
+        <ul className="pm-playlist-track-list">
+          {playlistTracks.map((track, idx) => (
+            <li key={`${track.uri}-${idx}`} className="pm-playlist-track-item">
+              <div className="pm-track-item__info">
+                <span className="pm-track-item__title">{track.title}</span>
+                {track.artist && (
+                  <span className="pm-track-item__artist">{track.artist}</span>
+                )}
+              </div>
             </li>
           ))}
         </ul>
-        {selectedTracks.size > 0 && (
-          <div className="pm-drag-hint">
-            <span className="material-icons">info</span>
-            Drag {selectedTracks.size} track{selectedTracks.size !== 1 ? 's' : ''} onto a playlist
-          </div>
-        )}
       </div>
     </div>
   );
