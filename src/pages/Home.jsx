@@ -78,6 +78,10 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz, i
         <>
           <div className="context-menu-backdrop" onClick={() => setIsOpen(false)} />
           <div className="context-menu open">
+            <button className="context-menu-item" onClick={close(() => navigate('/playlist-manager'))}>
+              <span className="material-icons">queue_music</span>
+              Playlist Manager
+            </button>
             {onBackToPlayer && (
               <>
                 <button className="context-menu-item" onClick={close(onBackToPlayer)}>

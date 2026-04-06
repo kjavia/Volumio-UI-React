@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import PropTypes from 'prop-types';
 import { useAlbums, useAlbumTracks } from '@/hooks/useAlbums';
 import usePlaylists from '@/hooks/usePlaylists';
@@ -27,14 +28,7 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
   const [filter, setFilter] = useState('');
   const [sortBy, setSortBy] = useState('title');
   const [viewMode, setViewMode] = useState('list'); // 'list' | 'grid'
-  const selectedAlbumRef = useRef(null);
-
-  // Scroll the selected album into the center when it changes or albums load
-  useEffect(() => {
-    if (selectedAlbumRef.current) {
-      selectedAlbumRef.current.scrollIntoView({ block: 'center', behavior: 'smooth' });
-    }
-  }, [selectedAlbumUri, albums]);
+  const parentRef = useRef(null);
 
   const resolveArt = (url) => {
     if (!url) return null;
@@ -53,6 +47,25 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
         return av < bv ? -1 : av > bv ? 1 : 0;
       });
   }, [albums, filter, sortBy]);
+
+  const selectedIndex = useMemo(
+    () => filtered.findIndex((a) => a.uri === selectedAlbumUri),
+    [filtered, selectedAlbumUri]
+  );
+
+  const virtualizer = useVirtualizer({
+    count: filtered.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 64,
+    overscan: 8,
+    enabled: viewMode === 'list',
+  });
+
+  // Scroll selected album into view using virtualizer in list mode
+  useEffect(() => {
+    if (viewMode !== 'list' || selectedIndex < 0) return;
+    virtualizer.scrollToIndex(selectedIndex, { align: 'center', behavior: 'smooth' });
+  }, [selectedIndex, viewMode]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="pm-column pm-column--albums">
@@ -104,36 +117,77 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
         </div>
       </div>
 
-      <div className="pm-column__body">
+      <div className="pm-column__body" ref={parentRef}>
         {isLoading && <div className="pm-loading">Loading albums…</div>}
         {!isLoading && filtered.length === 0 && (
           <div className="pm-empty">No albums found.</div>
         )}
-        <ul className={`pm-album-list pm-album-list--${viewMode}`}>
-          {filtered.map((album) => (
-            <li
-              key={album.uri}
-              ref={album.uri === selectedAlbumUri ? selectedAlbumRef : null}
-              className={`pm-album-item${album.uri === selectedAlbumUri ? ' pm-album-item--active' : ''}`}
-              title={viewMode === 'grid' ? `${album.title}${album.artist ? ` — ${album.artist}` : ''}${album.year ? ` (${album.year})` : ''}` : undefined}
-              onClick={() => onSelect(album.uri)}
-            >
-              <img
-                className="pm-album-item__thumb"
-                src={resolveArt(album.albumart) || '/assets/images/default-albumart.png'}
-                alt=""
-                loading="lazy"
-              />
-              <div className="pm-album-item__text">
-                <div className="pm-album-item__title">{album.title}</div>
-                <div className="pm-album-item__meta">
-                  {album.artist}
-                  {album.year ? ` · ${album.year}` : ''}
+
+        {viewMode === 'list' ? (
+          <ul
+            className="pm-album-list pm-album-list--list"
+            style={{ height: virtualizer.getTotalSize(), position: 'relative' }}
+          >
+            {virtualizer.getVirtualItems().map((virtualItem) => {
+              const album = filtered[virtualItem.index];
+              return (
+                <li
+                  key={album.uri}
+                  data-index={virtualItem.index}
+                  ref={virtualizer.measureElement}
+                  className={`pm-album-item${album.uri === selectedAlbumUri ? ' pm-album-item--active' : ''}`}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    transform: `translateY(${virtualItem.start}px)`,
+                  }}
+                  onClick={() => onSelect(album.uri)}
+                >
+                  <img
+                    className="pm-album-item__thumb"
+                    src={resolveArt(album.albumart) || '/assets/images/default-albumart.png'}
+                    alt=""
+                    loading="lazy"
+                  />
+                  <div className="pm-album-item__text">
+                    <div className="pm-album-item__title">{album.title}</div>
+                    <div className="pm-album-item__meta">
+                      {album.artist}
+                      {album.year ? ` · ${album.year}` : ''}
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <ul className="pm-album-list pm-album-list--grid">
+            {filtered.map((album) => (
+              <li
+                key={album.uri}
+                className={`pm-album-item${album.uri === selectedAlbumUri ? ' pm-album-item--active' : ''}`}
+                title={`${album.title}${album.artist ? ` — ${album.artist}` : ''}${album.year ? ` (${album.year})` : ''}`}
+                onClick={() => onSelect(album.uri)}
+              >
+                <img
+                  className="pm-album-item__thumb"
+                  src={resolveArt(album.albumart) || '/assets/images/default-albumart.png'}
+                  alt=""
+                  loading="lazy"
+                />
+                <div className="pm-album-item__text">
+                  <div className="pm-album-item__title">{album.title}</div>
+                  <div className="pm-album-item__meta">
+                    {album.artist}
+                    {album.year ? ` · ${album.year}` : ''}
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
