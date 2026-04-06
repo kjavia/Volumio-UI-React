@@ -27,6 +27,14 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
   const [filter, setFilter] = useState('');
   const [sortBy, setSortBy] = useState('title');
   const [viewMode, setViewMode] = useState('list'); // 'list' | 'grid'
+  const selectedAlbumRef = useRef(null);
+
+  // Scroll the selected album into the center when it changes or albums load
+  useEffect(() => {
+    if (selectedAlbumRef.current) {
+      selectedAlbumRef.current.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+  }, [selectedAlbumUri, albums]);
 
   const resolveArt = (url) => {
     if (!url) return null;
@@ -103,6 +111,7 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
           {filtered.map((album) => (
             <li
               key={album.uri}
+              ref={album.uri === selectedAlbumUri ? selectedAlbumRef : null}
               className={`pm-album-item${album.uri === selectedAlbumUri ? ' pm-album-item--active' : ''}`}
               title={viewMode === 'grid' ? `${album.title}${album.artist ? ` — ${album.artist}` : ''}${album.year ? ` (${album.year})` : ''}` : undefined}
               onClick={() => onSelect(album.uri)}
@@ -135,17 +144,37 @@ AlbumList.propTypes = {
 
 // ─── Track List (col 2) ───────────────────────────────────────────────────────
 
-const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites, socket }) => {
+const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites, favouritesUris = new Set(), playlistNormUris = new Set(), socket }) => {
   const { data: tracks = [], isLoading } = useAlbumTracks(albumUri);
   const { isPlaying, queue, position, togglePlay } = useVolumioStatus();
   const nowPlayingUri = queue[position]?.uri ?? null;
   const nowPlayingNorm = normalizeUri(nowPlayingUri);
+  const playingItemRef = useRef(null);
 
-  const allSelected = tracks.length > 0 && tracks.every((t) => selectedTracks.has(t.uri));
+  const normFavUris = useMemo(
+    () => new Set([...favouritesUris].map(normalizeUri)),
+    [favouritesUris]
+  );
+  const visibleTracks = useMemo(
+    () => tracks.filter((t) => {
+      const n = normalizeUri(t.uri);
+      return !normFavUris.has(n) && !playlistNormUris.has(n);
+    }),
+    [tracks, normFavUris, playlistNormUris]
+  );
+
+  // Scroll the currently playing track into view when tracks load or the playing track changes
+  useEffect(() => {
+    if (playingItemRef.current) {
+      playingItemRef.current.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+  }, [nowPlayingNorm, visibleTracks]);
+
+  const allSelected = visibleTracks.length > 0 && visibleTracks.every((t) => selectedTracks.has(t.uri));
 
   const toggleAll = useCallback(() => {
-    tracks.forEach((t) => onToggleTrack(t, !allSelected));
-  }, [tracks, allSelected, onToggleTrack]);
+    visibleTracks.forEach((t) => onToggleTrack(t, !allSelected));
+  }, [visibleTracks, allSelected, onToggleTrack]);
 
   const favCount = selectedTracks.size;
 
@@ -173,7 +202,7 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
         <h2 className="pm-column__title">
           Tracks
           {albumUri && !isLoading && (
-            <span className="pm-count">{tracks.length}</span>
+            <span className="pm-count">{visibleTracks.length}</span>
           )}
         </h2>
         <div className="pm-toolbar pm-toolbar--tracks">
@@ -192,10 +221,12 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
       <div className="pm-column__body">
         {!albumUri && <div className="pm-empty">Select an album to see its tracks.</div>}
         {albumUri && isLoading && <div className="pm-loading">Loading tracks…</div>}
-        {albumUri && !isLoading && tracks.length === 0 && (
-          <div className="pm-empty">No tracks available.</div>
+        {albumUri && !isLoading && visibleTracks.length === 0 && (
+          <div className="pm-empty">
+            {tracks.length > 0 ? 'All tracks are already in Favourites or the selected playlist.' : 'No tracks available.'}
+          </div>
         )}
-        {tracks.length > 0 && (
+        {visibleTracks.length > 0 && (
           <>
             <div className="pm-track-selectall">
               <label className="pm-checkbox-label">
@@ -204,9 +235,10 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
               </label>
             </div>
             <ul className="pm-track-list">
-              {tracks.map((track) => (
+              {visibleTracks.map((track) => (
                 <li
                   key={track.uri}
+                  ref={normalizeUri(track.uri) === nowPlayingNorm ? playingItemRef : null}
                   className={[
                     'pm-track-item',
                     selectedTracks.has(track.uri) ? 'pm-track-item--selected' : '',
@@ -262,16 +294,17 @@ TrackList.propTypes = {
   selectedTracks: PropTypes.instanceOf(Map).isRequired,
   onToggleTrack: PropTypes.func.isRequired,
   onToggleFavourites: PropTypes.func.isRequired,
+  favouritesUris: PropTypes.instanceOf(Set),
+  playlistNormUris: PropTypes.instanceOf(Set),
   socket: PropTypes.object,
 };
 
 // ─── Playlist Column (col 3) ──────────────────────────────────────────────────
 
-const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast }) => {
+const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast, selectedPlaylist, onSelectPlaylist }) => {
   const { playlists, isLoading: playlistsLoading } = usePlaylists();
   const { socket } = useSocket();
   const queryClient = useQueryClient();
-  const [selectedPlaylist, setSelectedPlaylist] = useState('');
   const [newName, setNewName] = useState('');
   const [creatingNew, setCreatingNew] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
@@ -280,9 +313,9 @@ const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast }) => {
   // Auto-select the first playlist once loaded
   useEffect(() => {
     if (!selectedPlaylist && playlists.length > 0) {
-      setSelectedPlaylist(playlists[0].name);
+      onSelectPlaylist(playlists[0].name);
     }
-  }, [playlists, selectedPlaylist]);
+  }, [playlists, selectedPlaylist, onSelectPlaylist]);
 
   // Browse the selected playlist's tracks
   const selectedPlaylistObj = playlists.find((p) => p.name === selectedPlaylist);
@@ -316,6 +349,18 @@ const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast }) => {
     }, 800);
   };
 
+  const handleRemoveTrack = useCallback((track) => {
+    if (!socket || !selectedPlaylist) return;
+    socket.emit('removeFromPlaylist', {
+      name: selectedPlaylist,
+      uri: track.uri,
+      service: track.service ?? 'mpd',
+    });
+    setTimeout(() => {
+      queryClient.invalidateQueries({ queryKey: ['browse', playlistBrowseUri] });
+    }, 500);
+  }, [socket, selectedPlaylist, queryClient, playlistBrowseUri]);
+
   const handleCreate = () => {
     const name = newName.trim();
     if (!name || !socket) return;
@@ -326,7 +371,7 @@ const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast }) => {
       setIsCreating(false);
       setNewName('');
       setCreatingNew(false);
-      setSelectedPlaylist(name);
+      onSelectPlaylist(name);
     }, 800);
   };
 
@@ -348,7 +393,7 @@ const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast }) => {
           <select
             className="form-select pm-sort-select pm-playlist-select"
             value={selectedPlaylist}
-            onChange={(e) => setSelectedPlaylist(e.target.value)}
+            onChange={(e) => onSelectPlaylist(e.target.value)}
             disabled={playlistsLoading || playlists.length === 0}
           >
             {playlists.length === 0 && <option value="">No playlists</option>}
@@ -408,6 +453,13 @@ const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast }) => {
                   <span className="pm-track-item__artist">{track.artist}</span>
                 )}
               </div>
+              <button
+                className="btn btn-sm btn-link pm-track-item__remove"
+                title="Remove from playlist"
+                onClick={() => handleRemoveTrack(track)}
+              >
+                <span className="material-icons">remove_circle_outline</span>
+              </button>
             </li>
           ))}
         </ul>
@@ -420,6 +472,8 @@ PlaylistColumn.propTypes = {
   selectedTracks: PropTypes.instanceOf(Map).isRequired,
   onTracksAdded: PropTypes.func,
   onToast: PropTypes.func,
+  selectedPlaylist: PropTypes.string.isRequired,
+  onSelectPlaylist: PropTypes.func.isRequired,
 };
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -431,6 +485,27 @@ const PlaylistManager = () => {
   const { toasts, showToast } = useToast();
 
   const [selectedAlbumUri, setSelectedAlbumUri] = useState(null);
+  const [selectedPlaylist, setSelectedPlaylist] = useState('');
+
+  // Fetch the selected playlist's tracks to filter the track list
+  const { playlists } = usePlaylists();
+  const selectedPlaylistObj = playlists.find((p) => p.name === selectedPlaylist);
+  const { data: playlistTracksNav } = useBrowse(selectedPlaylistObj?.uri ?? null);
+  const playlistNormUris = useMemo(() => {
+    const items = playlistTracksNav?.lists?.[0]?.items ?? [];
+    return new Set(items.map((t) => normalizeUri(t.uri)));
+  }, [playlistTracksNav]);
+
+  // Auto-select the album of the currently playing track on first load
+  const { queue, position } = useVolumioStatus();
+  const { data: albums } = useAlbums();
+  const nowPlayingAlbumName = queue[position]?.album ?? null;
+  useEffect(() => {
+    if (selectedAlbumUri !== null) return;
+    if (!nowPlayingAlbumName || !albums?.length) return;
+    const match = albums.find((a) => a.title === nowPlayingAlbumName);
+    if (match) setSelectedAlbumUri(match.uri);
+  }, [albums, nowPlayingAlbumName, selectedAlbumUri]);
   // Map<uri, track> — preserves insertion order for drag payloads
   const [selectedTracks, setSelectedTracks] = useState(new Map());
 
@@ -524,6 +599,8 @@ const PlaylistManager = () => {
           selectedTracks={selectedTracks}
           onToggleTrack={handleToggleTrack}
           onToggleFavourites={handleToggleFavourites}
+          favouritesUris={favouritesUris}
+          playlistNormUris={playlistNormUris}
           socket={socket}
         />
         <div className="pm-resize-handle" onMouseDown={(e) => startResize(e, 1)} />
@@ -531,6 +608,8 @@ const PlaylistManager = () => {
           selectedTracks={selectedTracks}
           onTracksAdded={() => setSelectedTracks(new Map())}
           onToast={showToast}
+          selectedPlaylist={selectedPlaylist}
+          onSelectPlaylist={setSelectedPlaylist}
         />
       </div>
       <Toast toasts={toasts} />
