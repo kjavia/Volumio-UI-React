@@ -61,22 +61,24 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
           Albums
           {!isLoading && (
             <span className="pm-count">
-              {filter ? `${filtered.length} / ${albums.length}` : albums.length}
+              {filter ? `${filtered.length}/${albums.length}` : albums.length}
             </span>
           )}
         </h2>
         <div className="pm-toolbar">
-          <div className="pm-search">
-            <span className="material-icons pm-search__icon">search</span>
+          <div className="input-group">
+            <span className="input-group-text">
+              <span className="material-icons">search</span>
+            </span>
             <input
-              className="pm-search__input"
+              className="form-control"
               type="text"
               placeholder="Filter albums…"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
             />
             {filter && (
-              <button className="btn btn-link pm-search__clear" onClick={() => setFilter('')}>
+              <button className="btn btn-secondary" type="button" onClick={() => setFilter('')}>
                 <span className="material-icons">close</span>
               </button>
             )}
@@ -150,17 +152,26 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
   const nowPlayingUri = queue[position]?.uri ?? null;
   const nowPlayingNorm = normalizeUri(nowPlayingUri);
   const playingItemRef = useRef(null);
+  const [trackFilter, setTrackFilter] = useState('');
+
+  // Clear filter when album changes
+  useEffect(() => { setTrackFilter(''); }, [albumUri]);
 
   const normFavUris = useMemo(
     () => new Set([...favouritesUris].map(normalizeUri)),
     [favouritesUris]
   );
   const visibleTracks = useMemo(
-    () => tracks.filter((t) => {
-      const n = normalizeUri(t.uri);
-      return !normFavUris.has(n) && !playlistNormUris.has(n);
-    }),
-    [tracks, normFavUris, playlistNormUris]
+    () => {
+      const q = trackFilter.toLowerCase();
+      return tracks.filter((t) => {
+        const n = normalizeUri(t.uri);
+        if (normFavUris.has(n) || playlistNormUris.has(n)) return false;
+        if (!q) return true;
+        return t.title.toLowerCase().includes(q) || (t.artist ?? '').toLowerCase().includes(q);
+      });
+    },
+    [tracks, normFavUris, playlistNormUris, trackFilter]
   );
 
   // Scroll the currently playing track into view when tracks load or the playing track changes
@@ -206,6 +217,23 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
           )}
         </h2>
         <div className="pm-toolbar pm-toolbar--tracks">
+          <div className="input-group">
+            <span className="input-group-text">
+              <span className="material-icons">search</span>
+            </span>
+            <input
+              className="form-control"
+              type="text"
+              placeholder="Filter tracks…"
+              value={trackFilter}
+              onChange={(e) => setTrackFilter(e.target.value)}
+            />
+            {trackFilter && (
+              <button className="btn btn-secondary" type="button" onClick={() => setTrackFilter('')}>
+                <span className="material-icons">close</span>
+              </button>
+            )}
+          </div>
           <button
             className="btn btn-sm btn-secondary d-flex align-items-center gap-3"
             title="Toggle selected tracks as Favourites"

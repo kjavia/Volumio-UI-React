@@ -1178,10 +1178,10 @@ ol li {
 }
 .dialog-list-item:hover:not(:disabled) {
   background: var(--list-item-bg-hover, rgba(255, 255, 255, 0.07));
-  color: var(--color-primary);
+  color: var(--list-item-text-hover, var(--color-primary));
 }
 .dialog-list-item:hover:not(:disabled) .material-icons {
-  color: var(--color-primary);
+  color: var(--list-item-text-hover, var(--color-primary));
 }
 .dialog-list-item:disabled {
   opacity: 0.5;

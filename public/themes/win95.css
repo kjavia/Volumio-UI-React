@@ -75,7 +75,7 @@
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -98,6 +98,7 @@
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -286,7 +287,7 @@
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -309,6 +310,7 @@
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -600,7 +602,7 @@ code, pre {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -623,6 +625,7 @@ code, pre {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -988,10 +991,10 @@ code, pre {
 }
 .dialog-list-item:hover:not(:disabled) {
   background: var(--list-item-bg-hover, rgba(255, 255, 255, 0.07));
-  color: var(--color-primary);
+  color: var(--list-item-text-hover, var(--color-primary));
 }
 .dialog-list-item:hover:not(:disabled) .material-icons {
-  color: var(--color-primary);
+  color: var(--list-item-text-hover, var(--color-primary));
 }
 .dialog-list-item:disabled {
   opacity: 0.5;
@@ -1120,7 +1123,7 @@ code, pre {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -1143,6 +1146,7 @@ code, pre {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -1553,7 +1557,7 @@ code, pre {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -1576,6 +1580,7 @@ code, pre {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -1825,6 +1830,33 @@ label {
   cursor: not-allowed;
 }
 
+/* ─── Bootstrap Input Group ──────────────────────────────────────────────── */
+.input-group > input {
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+.input-group .input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  min-height: 28px;
+  border-radius: 0;
+  border-top: 2px solid var(--win95-dark);
+  border-left: 2px solid var(--win95-dark);
+  border-bottom: 2px solid var(--win95-highlight);
+  border-right: 2px solid var(--win95-highlight);
+  background: var(--win95-face);
+  color: var(--text-primary);
+}
+.input-group .form-control {
+  min-height: 28px;
+  border-radius: 0;
+}
+.input-group .btn, .input-group .form-select {
+  border-radius: 0;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Windows 95 Theme
@@ -1895,7 +1927,7 @@ label {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -1918,6 +1950,7 @@ label {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -2169,7 +2202,7 @@ label {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -2192,6 +2225,7 @@ label {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -2503,7 +2537,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -2526,6 +2560,7 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -2762,7 +2797,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -2785,6 +2820,7 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -3053,7 +3089,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -3076,6 +3112,7 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -3677,7 +3714,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -3700,6 +3737,7 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -3977,7 +4015,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -4000,6 +4038,7 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -4330,7 +4369,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -4353,6 +4392,7 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -4615,7 +4655,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -4638,6 +4678,7 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -4920,7 +4961,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -4943,6 +4984,7 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
@@ -5674,7 +5716,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-desktop); /* teal desktop background */
+  --bg-color: var(--win95-face); /* page background */
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -5697,6 +5739,7 @@ input[type=range]::-webkit-slider-runnable-track {
   /* ─── UI Components ───────────────────────────────────────────────── */
   --list-item-bg: rgba(0, 0, 0, 0.04);
   --list-item-bg-hover: #000080;
+  --list-item-text-hover: #ffffff;
   --border-dark: var(--win95-dark);
   --border-light: var(--win95-highlight);
   --border-warm: var(--win95-shadow);
