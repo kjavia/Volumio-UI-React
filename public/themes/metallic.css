@@ -1032,6 +1032,7 @@ pre {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 0.4rem;
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 600;

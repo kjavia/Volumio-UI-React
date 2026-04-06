@@ -1489,6 +1489,7 @@ ol li {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 0.4rem;
   padding: 8px;
   font-size: 14px;
   font-weight: 500;

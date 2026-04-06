@@ -3,6 +3,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Player from './pages/Player';
+import PlaylistManager from './pages/PlaylistManager';
 import useLanguageSync from './hooks/useLanguageSync';
 // import './App.scss'; // Assuming you might have app-specific styles or use index.scss
 
@@ -16,6 +17,7 @@ const AppInner = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/player" element={<Player />} />
+            <Route path="/playlist-manager" element={<PlaylistManager />} />
             {/* Add more routes as needed */}
           </Routes>
         </main>

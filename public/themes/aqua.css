@@ -1515,6 +1515,7 @@ pre {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  gap: 0.4rem;
   padding: 4px 20px;
   min-height: 26px;
   background: linear-gradient(to bottom, #74b0e6 0%, #1e69de 50%, #1254c0 51%, #539fe1 100%);
