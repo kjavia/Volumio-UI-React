@@ -228,6 +228,11 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
     [tracks, normFavUris, playlistNormUris, trackFilter]
   );
 
+  const discCount = useMemo(
+    () => new Set(tracks.map((t) => t.discNumber).filter(Boolean)).size,
+    [tracks]
+  );
+
   // Scroll the currently playing track into view when tracks load or the playing track changes
   useEffect(() => {
     if (playingItemRef.current) {
@@ -346,6 +351,9 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
                     />
                   </label>
                   <div className="pm-track-item__info">
+                    {discCount > 1 && track.discNumber && (
+                      <span className="pm-track-item__disc-badge">CD {track.discNumber}</span>
+                    )}
                     <span className="pm-track-item__title">{track.title}</span>
                     {track.artist && (
                       <span className="pm-track-item__artist">{track.artist}</span>
@@ -387,6 +395,10 @@ const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast, selectedPlayli
   const { playlists, isLoading: playlistsLoading } = usePlaylists();
   const { socket } = useSocket();
   const queryClient = useQueryClient();
+  const { isPlaying, queue, position } = useVolumioStatus();
+  const nowPlayingUri = queue[position]?.uri ?? null;
+  const nowPlayingNorm = normalizeUri(nowPlayingUri);
+  const playingItemRef = useRef(null);
   const [newName, setNewName] = useState('');
   const [creatingNew, setCreatingNew] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
@@ -404,6 +416,13 @@ const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast, selectedPlayli
   const playlistBrowseUri = selectedPlaylistObj?.uri ?? null;
   const { data: tracksNav, isLoading: tracksLoading } = useBrowse(playlistBrowseUri);
   const playlistTracks = tracksNav?.lists?.[0]?.items ?? [];
+
+  // Scroll to the playing track once playlist tracks load
+  useEffect(() => {
+    if (playingItemRef.current) {
+      playingItemRef.current.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+  }, [nowPlayingNorm, playlistTracks]);
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -527,23 +546,36 @@ const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast, selectedPlayli
           </div>
         )}
         <ul className="pm-playlist-track-list">
-          {playlistTracks.map((track, idx) => (
-            <li key={`${track.uri}-${idx}`} className="pm-playlist-track-item">
-              <div className="pm-track-item__info">
-                <span className="pm-track-item__title">{track.title}</span>
-                {track.artist && (
-                  <span className="pm-track-item__artist">{track.artist}</span>
-                )}
-              </div>
-              <button
-                className="btn btn-sm btn-link pm-track-item__remove"
-                title="Remove from playlist"
-                onClick={() => handleRemoveTrack(track)}
+          {playlistTracks.map((track, idx) => {
+            const isThisPlaying = normalizeUri(track.uri) === nowPlayingNorm;
+            return (
+              <li
+                key={`${track.uri}-${idx}`}
+                ref={isThisPlaying ? playingItemRef : null}
+                className={`pm-playlist-track-item${isThisPlaying ? ' pm-playlist-track-item--playing' : ''}`}
               >
-                <span className="material-icons">remove_circle_outline</span>
-              </button>
-            </li>
-          ))}
+                <span className="pm-playlist-track-item__num">{idx + 1}</span>
+                <div className="pm-track-item__info">
+                  <span className="pm-track-item__title">{track.title}</span>
+                  {track.artist && (
+                    <span className="pm-track-item__artist">{track.artist}</span>
+                  )}
+                </div>
+                {isThisPlaying && (
+                  <span className="material-icons pm-playlist-track-item__playing-icon">
+                    {isPlaying ? 'volume_up' : 'pause'}
+                  </span>
+                )}
+                <button
+                  className="btn btn-sm btn-link pm-track-item__remove"
+                  title="Remove from playlist"
+                  onClick={() => handleRemoveTrack(track)}
+                >
+                  <span className="material-icons">remove_circle_outline</span>
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

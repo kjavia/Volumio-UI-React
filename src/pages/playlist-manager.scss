@@ -316,6 +316,19 @@
     min-width: 0;
   }
 
+  &__disc-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--color-primary, #7c9cff) 20%, transparent);
+    color: var(--color-primary, #7c9cff);
+    margin-bottom: 2px;
+    align-self: flex-start;
+  }
+
   &__title {
     font-size: 0.8rem;
     font-weight: 500;
@@ -555,7 +568,26 @@
   display: flex;
   align-items: center;
   padding: 5px 0.75rem;
+  gap: 0.5rem;
   transition: background 0.1s;
+
+  &__num {
+    font-size: 0.72rem;
+    color: var(--text-secondary, #94a3b8);
+    min-width: 1.5rem;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  &__playing-icon {
+    font-size: 16px !important;
+    color: var(--color-primary, #7c9cff);
+    flex-shrink: 0;
+  }
+
+  &--playing &__num {
+    color: var(--color-primary, #7c9cff);
+  }
 
   &:hover {
     background: var(--list-item-bg-hover, rgba(255, 255, 255, 0.05));
@@ -563,7 +595,9 @@
   }
 
   &:hover .pm-track-item__title,
-  &:hover .pm-track-item__artist {
+  &:hover .pm-track-item__artist,
+  &:hover &__num,
+  &:hover &__playing-icon {
     color: var(--list-item-text-hover, inherit);
   }
 }

@@ -43,6 +43,7 @@ export const useAlbumTracks = (albumUri) => {
         albumart: item.albumart ?? null,
         duration: item.duration ?? null,
         trackNumber: item.tracknumber ?? null,
+        discNumber: item.discnumber ?? null,
       }));
   }, [data, albumUri]);
 
