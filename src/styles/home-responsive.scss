@@ -904,12 +904,55 @@ body,
 
 /* ── Album Art Max Space: expand controls panel ── */
 .album-art-max-space .area-controls {
+  /* Width overrides: remove hard caps from inline styles */
   .track-info-group {
     width: 95% !important;
   }
-
   .seekbar-container-wrap,
   .volume-manager-wrap {
-    width: clamp(300px, 90%, 100%) !important;
+    width: 92% !important;
+    max-width: 100% !important;
+  }
+  /* Seekbar inner track: remove its own maxWidth */
+  .slider-container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Larger fonts: raise clamp max values */
+  .responsive-title {
+    font-size: clamp(1.5rem, 5cqw, 5rem) !important;
+  }
+  .responsive-artist {
+    font-size: clamp(1rem, 3.8cqw, 4rem) !important;
+  }
+  .responsive-album {
+    font-size: clamp(0.85rem, 2.2cqw, 2rem) !important;
+  }
+  .responsive-stream-info {
+    font-size: clamp(1rem, 2.5cqw, 2.5rem) !important;
+  }
+
+  /* Bigger format / hi-res logos */
+  .format-logo-responsive {
+    height: clamp(2rem, 5cqw, 5.5rem) !important;
+  }
+
+  /* Larger transport buttons */
+  .btn-round {
+    width: clamp(60px, 8cqw, 90px) !important;
+    height: clamp(60px, 8cqw, 90px) !important;
+  }
+  .btn-round .material-icons {
+    font-size: clamp(1.5rem, 4cqw, 2.5rem) !important;
+  }
+
+  /* Larger secondary icon buttons */
+  .btn-icon {
+    width: clamp(36px, 5cqw, 56px) !important;
+    height: clamp(36px, 5cqw, 56px) !important;
+  }
+  .btn-icon .material-icons {
+    font-size: clamp(1.25rem, 3cqw, 2rem) !important;
   }
 }
