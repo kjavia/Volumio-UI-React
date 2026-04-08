@@ -955,4 +955,14 @@ body,
   .btn-icon .material-icons {
     font-size: clamp(1.25rem, 3cqw, 2rem) !important;
   }
+
+  /* Seekbar time labels: 2x */
+  .time-label {
+    font-size: 1.6rem !important;
+  }
+
+  /* Seekbar track: taller to match larger labels */
+  .seekbar-container-wrap .slider-track {
+    height: clamp(14px, 2cqh, 24px) !important;
+  }
 }
