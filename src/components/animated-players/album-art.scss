@@ -6,16 +6,24 @@
     width: 100%;
     height: 100%;
 
-    .rainbow-border,
-    .album-art-inner,
-    .album-art-image {
+    .rainbow-border {
       width: 100%;
       height: 100%;
       border-radius: 0;
     }
 
+    .album-art-inner {
+      width: 100%;
+      height: 100%;
+    }
+
     .album-art-image {
-      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;   /* fill full height, crop width */
+      object-position: center;
+      border-radius: 0;
+      display: block;
     }
   }
 }

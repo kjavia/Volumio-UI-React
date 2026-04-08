@@ -104,10 +104,10 @@ body,
     }
 
     &.album-art-max-space {
-      grid-template-columns: 3fr 2fr;
+      grid-template-columns: 2fr 3fr; /* player 40%, controls 60% */
 
       &.no-viz {
-        grid-template-columns: 3fr 2fr;
+        grid-template-columns: 2fr 3fr;
       }
     }
   }
@@ -135,10 +135,10 @@ body,
     }
 
     &.album-art-max-space {
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr; /* player ~40% of non-spectrum, controls ~60% */
 
       &.no-viz {
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 2fr 3fr;
       }
     }
   }
