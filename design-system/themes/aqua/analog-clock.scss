@@ -129,7 +129,7 @@
 
 .clock-face-day {
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
-  font-size: clamp(0.8rem, 4cqi, 1.5rem);
+  font-size: clamp(0.6rem, 3cqi, 1rem);
   font-weight: 600;
   color: var(--color-gray-400, #ababab);
   letter-spacing: 0.1em;
@@ -138,7 +138,7 @@
 
 .clock-face-date {
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
-  font-size: clamp(0.8rem, 4cqi, 1.5rem);
+  font-size: clamp(0.6rem, 3cqi, 1rem);
   font-weight: 700;
   color: #1d1d1f;
 }

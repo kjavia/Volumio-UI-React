@@ -85,7 +85,7 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz, i
             {onBackToPlayer && (
               <>
                 <button className="context-menu-item" onClick={close(onBackToPlayer)}>
-                  <span className="material-icons">queue_music</span>
+                  <span className="material-icons">arrow_back</span>
                   Back to Player
                 </button>
                 <div className="context-menu-separator" />

@@ -118,7 +118,7 @@
 
 .clock-face-day {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(0.8rem, 4cqi, 1.5rem);
+  font-size: clamp(0.6rem, 3cqi, 1rem);
   font-weight: 600;
   color: rgba(148, 163, 184, 0.6);
   letter-spacing: 0.12em;
@@ -127,7 +127,7 @@
 
 .clock-face-date {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(0.8rem, 4cqi, 1.5rem);
+  font-size: clamp(0.6rem, 3cqi, 1rem);
   font-weight: 500;
   color: #94a3b8;
   white-space: nowrap;
