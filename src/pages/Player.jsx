@@ -76,6 +76,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const { data: pluginConfig } = usePluginConfig();
   const playerType = pluginConfig?.playerType || 'radio';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
+  const albumArtMaxSpace = pluginConfig?.albumArtMaxSpace === true;
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
 
@@ -208,7 +209,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
         )}
 
         {/* Main Grid Layout */}
-        <div className={`home-grid position-relative ${!showViz ? 'no-viz' : ''}`} style={{ zIndex: 1 }}>
+        <div className={`home-grid position-relative ${!showViz ? 'no-viz' : ''} ${albumArtMaxSpace && effectivePlayerType === 'albumArt' ? 'album-art-max-space' : ''}`} style={{ zIndex: 1 }}>
           {/* PLAYER SECTION */}
           <div className="home-panel area-player">
             <div
@@ -220,7 +221,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               onMouseUp={handleTouchEnd}
               onMouseLeave={handleTouchEnd}
             >
-              <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
+              <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} maxSpace={albumArtMaxSpace && effectivePlayerType === 'albumArt'} />
             </div>
           </div>
 

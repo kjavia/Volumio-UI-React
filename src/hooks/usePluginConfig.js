@@ -6,6 +6,7 @@ import { SocketContext } from '@/contexts/SocketContext';
 
 const fetchPluginConfig = async () => {
   const { data } = await axios.get(`${PLUGIN_BASE_URL}/api/config`);
+  console.log('Fetched plugin config:', data);
   return data;
 };
 

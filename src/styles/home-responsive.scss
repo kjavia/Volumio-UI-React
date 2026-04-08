@@ -83,6 +83,12 @@ body,
   cursor: pointer;
 }
 
+/* Max-space album art: player panel fills its cell entirely */
+.album-art-max-space .area-player .player-responsive {
+  width: 100%;
+  height: 100%;
+}
+
 /* ── DESKTOP  (768 px – 2 499 px) ── */
 @media (min-width: 768px) and (max-width: 2499px) {
   .home-grid {
@@ -95,6 +101,14 @@ body,
     &.no-viz {
       grid-template-rows: 1fr;
       grid-template-areas: 'player controls';
+    }
+
+    &.album-art-max-space {
+      grid-template-columns: 3fr 2fr;
+
+      &.no-viz {
+        grid-template-columns: 3fr 2fr;
+      }
     }
   }
 
@@ -117,6 +131,14 @@ body,
       /* Let player be slightly bigger if we have more room */
        .player-responsive {
         --p-size: 80;
+      }
+    }
+
+    &.album-art-max-space {
+      grid-template-columns: 2fr 1fr 1fr;
+
+      &.no-viz {
+        grid-template-columns: 2fr 1fr;
       }
     }
   }
@@ -878,4 +900,16 @@ body,
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+/* ── Album Art Max Space: expand controls panel ── */
+.album-art-max-space .area-controls {
+  .track-info-group {
+    width: 95% !important;
+  }
+
+  .seekbar-container-wrap,
+  .volume-manager-wrap {
+    width: clamp(300px, 90%, 100%) !important;
+  }
 }
