@@ -921,13 +921,13 @@ body,
 
   /* Larger fonts: raise clamp max values */
   .responsive-title {
-    font-size: clamp(1.5rem, 5cqw, 5rem) !important;
+    font-size: clamp(3rem, 10cqw, 10rem) !important;
   }
   .responsive-artist {
-    font-size: clamp(1rem, 3.8cqw, 4rem) !important;
+    font-size: clamp(2rem, 7.6cqw, 8rem) !important;
   }
   .responsive-album {
-    font-size: clamp(0.85rem, 2.2cqw, 2rem) !important;
+    font-size: clamp(1.7rem, 4.4cqw, 4rem) !important;
   }
   .responsive-stream-info {
     font-size: clamp(1rem, 2.5cqw, 2.5rem) !important;
