@@ -926,6 +926,7 @@ body,
   /* Width overrides: remove hard caps from inline styles */
   .track-info-group {
     width: 95% !important;
+    margin-top: 1.5em !important;
   }
   .seekbar-container-wrap,
   .volume-manager-wrap {
@@ -949,7 +950,7 @@ body,
     font-size: clamp(1.7rem, 4.4cqw, 4rem) !important;
   }
   .responsive-stream-info {
-    font-size: clamp(1rem, 2.5cqw, 2.5rem) !important;
+    font-size: clamp(1.5rem, 5cqw, 5rem) !important;
   }
 
   /* Bigger format / hi-res logos */

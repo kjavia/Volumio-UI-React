@@ -6,7 +6,7 @@ const TrackInfo = ({ title, artist, album, isInFooter }) => {
     <div
       className={`track-info d-flex flex-column ${isInFooter
         ? 'align-items-start ms-3'
-        : 'align-items-center text-center overflow-hidden cq-track-info'
+        : 'align-items-center w-100 text-center overflow-hidden cq-track-info'
         }`}
     >
       <div

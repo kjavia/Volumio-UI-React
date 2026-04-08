@@ -2628,6 +2628,7 @@ h2 {
 .track-info-group {
   width: calc(100% - 2rem) !important;
   margin-inline: 1rem;
+  margin-top: 2em;
 }
 
 /* ─── Progress Sliders ────────────────────────────────────────────────── */
