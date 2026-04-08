@@ -2543,7 +2543,7 @@ h2 {
   padding: 20px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 12px;
-  width: 95%;
+  width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
 }
@@ -2622,6 +2622,12 @@ h2 {
   object-fit: cover;
   border: 4px solid #111;
   background: #000;
+}
+
+/* ─── Track info group: use full panel width ───────────────────────────── */
+.track-info-group {
+  width: calc(100% - 2rem) !important;
+  margin-inline: 1rem;
 }
 
 /* ─── Progress Sliders ────────────────────────────────────────────────── */

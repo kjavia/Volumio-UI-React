@@ -19,13 +19,7 @@ const PlayerSeekbar = ({ readOnly }) => {
   const progressPercent = durationSeconds > 0 ? Math.min((currentSeconds / durationSeconds) * 100, 100) : 0;
 
   return (
-    <div className={`slider-container ${readOnly ? 'read-only' : ''}`} style={{ maxWidth: '450px' }}>
-      <span
-        className="time-label text-end text-white opacity-75"
-        style={{ lineHeight: 1, fontSize: '0.9em', fontFamily: 'inherit' }}
-      >
-        {formatTime(currentSeconds)}
-      </span>
+    <div className={`slider-container ${readOnly ? 'read-only' : ''}`}>
       <div className="slider-track position-relative flex-grow-1">
         {!readOnly && (
           <input
@@ -42,12 +36,20 @@ const PlayerSeekbar = ({ readOnly }) => {
           {!readOnly && <div className="slider-cap"></div>}
         </div>
       </div>
-      <span
-        className="time-label text-start text-white opacity-75"
-        style={{ lineHeight: 1, fontSize: '0.9em', fontFamily: 'inherit' }}
-      >
-        {formatTime(durationSeconds)}
-      </span>
+      <div className="seekbar-labels d-flex justify-content-between w-100">
+        <span
+          className="time-label text-start text-white opacity-75"
+          style={{ lineHeight: 1, fontSize: '0.9em', fontFamily: 'inherit' }}
+        >
+          {formatTime(currentSeconds)}
+        </span>
+        <span
+          className="time-label text-end text-white opacity-75"
+          style={{ lineHeight: 1, fontSize: '0.9em', fontFamily: 'inherit' }}
+        >
+          {formatTime(durationSeconds)}
+        </span>
+      </div>
     </div>
   );
 };

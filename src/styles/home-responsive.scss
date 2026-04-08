@@ -286,11 +286,30 @@ body,
 }
 
 /* ── Typography Overrides for Mobile ── */
+
+/* Seekbar: labels below the track, track spans full width */
+.slider-container {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 4px !important;
+  padding: 0 0.5rem !important;
+}
+
+/* Reset flex-basis so the theme's height property is respected in column context */
+.slider-container .slider-track {
+  flex-basis: auto !important;
+  width: 100%;
+}
+
+.seekbar-labels {
+  padding: 0 0.1rem;
+}
+
 .time-label {
   font-size: 0.8rem !important; /* Default (desktop/tablet) */
   width: auto;
   white-space: nowrap;
-  padding: 0 0.5rem; /* Add some breathing room since we lost fixed width centering */
+  padding: 0;
 }
 
 @media (max-width: 768px) {
