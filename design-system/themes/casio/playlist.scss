@@ -1,0 +1,126 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PLAYLIST — 80s Casio Theme
+   Dark plastic list panel · LCD-green active indicator · pixel font
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.playlist-info {
+    font-size: var(--text-xs);
+    border-bottom: 1px solid var(--casio-edge);
+    box-shadow: 0 1px 0 var(--casio-sheen);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+    color: var(--casio-on-dark);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-normal);
+}
+
+.playlist-info-count {
+    color: var(--casio-on-dark-dim);
+    font-family: var(--font-label);
+}
+
+.playlist-info-position {
+    color: var(--casio-lcd-bg);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    text-shadow: 0 0 6px rgba(157, 184, 52, 0.5);
+}
+
+.playlist-list {
+    padding-bottom: 1rem;
+}
+
+.playlist-item {
+    border-bottom: 1px solid var(--casio-edge);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    padding: 8px 6px;
+
+    &:last-child { border-bottom: none; }
+
+    &:hover {
+        background: var(--casio-ridge);
+    }
+}
+
+.playlist-item--active {
+    background: var(--casio-edge);
+    border-left: 3px solid var(--casio-lcd-bg);
+
+    .playlist-track-title {
+        color: var(--casio-lcd-bg);
+        text-shadow: 0 0 4px rgba(157, 184, 52, 0.5);
+    }
+}
+
+.playlist-art-wrap {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    position: relative;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border-top:   1px solid var(--casio-sheen);
+    border-left:  1px solid var(--casio-sheen);
+    border-bottom: 1px solid var(--casio-edge);
+    border-right:  1px solid var(--casio-edge);
+}
+
+.playlist-art {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* slightly desaturated on LCD-panel aesthetic */
+    filter: saturate(0.7) contrast(1.1);
+}
+
+.playlist-art--empty {
+    background: var(--casio-face);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .material-icons {
+        font-size: 18px;
+        color: var(--casio-on-dark-dim);
+    }
+}
+
+.playlist-art-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.55);
+    color: var(--casio-lcd-bg);
+}
+
+.playlist-track-title {
+    font-size: var(--text-sm);
+    color: var(--casio-on-dark);
+    line-height: 1.25;
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-normal);
+}
+
+.playlist-track-artist {
+    font-size: var(--text-xs);
+    color: var(--casio-on-dark-dim);
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.playlist-track-duration {
+    font-size: var(--text-xs);
+    color: var(--casio-lcd-bg);
+    font-family: var(--font-mono);
+    flex-shrink: 0;
+}

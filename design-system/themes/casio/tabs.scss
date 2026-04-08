@@ -1,0 +1,87 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TABS — 80s Casio Theme
+   MODE selector: rectangular key bank, active = LCD-green accent
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Key bank container ────────────────────────────────────────────── */
+.tabs {
+    display: flex;
+    background: var(--casio-body);
+    border-top:   2px solid var(--casio-sheen);
+    border-left:  2px solid var(--casio-sheen);
+    border-bottom: 2px solid var(--casio-edge);
+    border-right:  2px solid var(--casio-edge);
+    padding: 3px;
+    gap: 2px;
+    border-radius: var(--radius-sm);
+}
+
+.tab {
+    flex: 1;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    background: var(--casio-key-face);
+    border-top:   1px solid var(--casio-key-hi);
+    border-left:  1px solid var(--casio-key-hi);
+    border-bottom: 1px solid var(--casio-key-sh);
+    border-right:  1px solid var(--casio-key-sh);
+    cursor: pointer;
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--casio-on-dark-dim);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-normal);
+    transition: none;
+
+    &:hover {
+        background: var(--casio-ridge);
+        color: var(--casio-on-dark);
+    }
+
+    &.active {
+        background: var(--casio-edge);
+        color: var(--casio-lcd-bg);   /* LCD green when active */
+        border-top:   1px solid var(--casio-key-sh);
+        border-left:  1px solid var(--casio-key-sh);
+        border-bottom: 1px solid var(--casio-key-hi);
+        border-right:  1px solid var(--casio-key-hi);
+        /* LCD glow on selected tab text */
+        text-shadow: 0 0 6px rgba(157, 184, 52, 0.7);
+    }
+}
+
+/* ─── Larger tab nav variant ────────────────────────────────────────── */
+.tab-nav {
+    display: flex;
+    background: var(--casio-body);
+    border-bottom: 2px solid var(--casio-edge);
+    box-shadow: 0 1px 0 var(--casio-sheen);
+    gap: 1px;
+    padding: 0 4px;
+}
+
+.tab-nav-item {
+    padding: 6px 16px;
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--casio-on-dark-dim);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-normal);
+
+    &:hover {
+        color: var(--casio-on-dark);
+    }
+
+    &.active {
+        color: var(--casio-lcd-bg);
+        border-bottom-color: var(--casio-lcd-bg);
+        text-shadow: 0 0 6px rgba(157, 184, 52, 0.6);
+    }
+}

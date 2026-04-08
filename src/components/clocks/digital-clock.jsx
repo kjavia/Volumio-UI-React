@@ -29,7 +29,7 @@ const SEG_NAMES = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 const SegmentDigit = memo(({ digit }) => {
   const segs = SEGMENT_MAP[digit] || SEGMENT_MAP[0];
   return (
-    <div className="lcd-digit">
+    <div className="lcd-digit" data-digit={digit}>
       {SEG_NAMES.map((name, i) => (
         <div key={name} className={`seg seg-${name} ${segs[i] ? 'on' : 'off'}`} />
       ))}

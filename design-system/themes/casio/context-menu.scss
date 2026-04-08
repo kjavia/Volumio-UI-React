@@ -1,0 +1,123 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CONTEXT MENU — 80s Casio Theme
+   Dark plastic popup · rectangular keys · LCD-green selection highlight
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.context-menu-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5rem;
+    z-index: 100;
+}
+
+.context-menu-toggle {
+    position: relative;
+    width: 36px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: var(--casio-key-face);
+    border-top:   2px solid var(--casio-key-hi);
+    border-left:  2px solid var(--casio-key-hi);
+    border-bottom: 2px solid var(--casio-key-sh);
+    border-right:  2px solid var(--casio-key-sh);
+
+    &:active,
+    &.active {
+        border-top:   2px solid var(--casio-key-sh);
+        border-left:  2px solid var(--casio-key-sh);
+        border-bottom: 2px solid var(--casio-key-hi);
+        border-right:  2px solid var(--casio-key-hi);
+        background: var(--casio-edge);
+    }
+
+    &--no-shadow {
+        background: rgba(0, 0, 0, 0.4);
+        border: none;
+        box-shadow: none;
+
+        &:hover { background: rgba(0, 0, 0, 0.55); }
+        &:active, &.active { background: rgba(0, 0, 0, 0.7); }
+
+        .material-icons { color: var(--casio-lcd-bg); }
+    }
+
+    .material-icons {
+        font-size: 18px;
+        color: var(--casio-on-dark);
+    }
+}
+
+.context-menu {
+    position: absolute;
+    top: calc(100% + 3px);
+    left: 0;
+    min-width: 180px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    z-index: 101;
+    padding: 3px 0;
+
+    background: var(--casio-face);
+    border-top:   2px solid var(--casio-sheen);
+    border-left:  2px solid var(--casio-sheen);
+    border-bottom: 2px solid var(--casio-edge);
+    border-right:  2px solid var(--casio-edge);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+
+    opacity: 0;
+
+    &.open {
+        opacity: 1;
+    }
+}
+
+.context-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px 5px 12px;
+    font-size: var(--text-sm);
+    color: var(--casio-on-dark);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-normal);
+
+    &:hover {
+        background: var(--casio-edge);
+        color: var(--casio-lcd-bg);
+        border-left: 3px solid var(--casio-lcd-bg);
+        padding-left: 9px;
+        text-shadow: 0 0 4px rgba(157, 184, 52, 0.5);
+
+        .material-icons {
+            color: var(--casio-lcd-bg);
+        }
+    }
+
+    &.divider {
+        border-top: 1px solid var(--casio-edge);
+        box-shadow: 0 1px 0 var(--casio-sheen);
+        height: 2px;
+        padding: 0;
+        margin: 2px 0;
+        pointer-events: none;
+    }
+
+    .material-icons {
+        font-size: 16px;
+        color: var(--casio-on-dark-dim);
+    }
+}

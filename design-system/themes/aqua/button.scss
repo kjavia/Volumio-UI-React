@@ -7,6 +7,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  gap: 0.4rem;
   padding: 4px 20px;
   min-height: 26px;
 
@@ -372,4 +373,11 @@
     background: var(--color-green-vivid);
     border-color: #16aa29;
   }
+}
+
+// ─── Small Button ────────────────────────────────────────────────────────────
+.btn-sm {
+  padding: 2px 12px;
+  min-height: 20px;
+  font-size: 11px;
 }

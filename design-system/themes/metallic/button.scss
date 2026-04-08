@@ -12,9 +12,10 @@
   cursor: pointer;
   font-family: var(--font-label);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 0.4rem;
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 600;
@@ -179,5 +180,12 @@
     pointer-events: none;
     filter: none;
   }
+}
+
+/* ─── Small Button ─────────────────────────────────────────────────────── */
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 12px;
+  min-height: 24px;
 }
 

@@ -1,0 +1,79 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   KNOBS — 80s Casio Theme
+   Dark plastic rotary dial — angular ribs, LCD green indicator
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.knob-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+}
+
+/* ─── Outer ring ────────────────────────────────────────────────────── */
+.knob {
+    position: relative;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 38% 32%,
+        var(--casio-face) 0%,
+        var(--casio-body) 55%,
+        var(--casio-edge) 100%
+    );
+    border: 2px solid var(--casio-edge);
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 var(--casio-sheen);
+    cursor: pointer;
+
+    /* Ribbed texture via repeating conic gradient */
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 6px;
+        border-radius: 50%;
+        background: repeating-conic-gradient(
+            from 0deg,
+            var(--casio-face) 0deg 8deg,
+            var(--casio-edge) 8deg 10deg
+        );
+        border: 1px solid var(--casio-edge);
+    }
+}
+
+/* ─── Knob face (center disc) ───────────────────────────────────────── */
+.knob-face {
+    position: absolute;
+    inset: 25%;
+    border-radius: 50%;
+    background: var(--casio-body);
+    border: 1px solid var(--casio-edge);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ─── Indicator — LCD yellow-green dot ─────────────────────────────── */
+.knob-indicator {
+    position: absolute;
+    width: 8%;
+    height: 8%;
+    border-radius: 50%;
+    background: var(--casio-lcd-bg);
+    box-shadow: 0 0 5px rgba(157, 184, 52, 0.8);
+    top: 16%;
+    left: 50%;
+    transform: translateX(-50%);
+    transform-origin: 50% 300%;
+}
+
+/* ─── Label ─────────────────────────────────────────────────────────── */
+.knob-label {
+    font-family: var(--font-label);
+    font-size: var(--text-xs);
+    color: var(--casio-lcd-bg);
+    text-align: center;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+}

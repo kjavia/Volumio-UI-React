@@ -1,0 +1,148 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BUTTONS — Casio Calculator Key Style
+   Domed dark charcoal keys · Deep bottom shadow · Orange accent ring
+   Reference: Casio calculator keyboard
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Shared key mixins ─────────────────────────────────────────────────── */
+@mixin casio-key-up {
+    /* Domed surface: radial highlight at top-center → darker toward edges */
+    background:
+        radial-gradient(
+            ellipse 80% 55% at 50% 20%,
+            #404855 0%,
+            #2a3040 50%,
+            #1e2530 100%
+        );
+    box-shadow:
+        0 4px 0 0 #0d1018,              /* thick bottom edge = key height */
+        0 5px 8px rgba(0, 0, 0, 0.55), /* diffuse drop shadow below key */
+        inset 0 1px 1px rgba(255, 255, 255, 0.08); /* faint dome top-sheen */
+    border: 1px solid #10141c;
+    border-bottom-color: #080b12;
+}
+
+@mixin casio-key-down {
+    background:
+        radial-gradient(
+            ellipse 80% 55% at 50% 20%,
+            #303840 0%,
+            #202830 50%,
+            #181e26 100%
+        );
+    box-shadow:
+        0 1px 0 0 #0d1018,
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    border: 1px solid #10141c;
+    transform: translateY(2px);
+}
+
+/* ─── Base key ────────────────────────────────────────────────────────────── */
+.btn {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 5px 16px;
+    min-height: 32px;
+
+    @include casio-key-up;
+    border-radius: 6px;
+
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--casio-on-dark);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+
+    cursor: pointer;
+    user-select: none;
+    transition: transform 60ms ease, box-shadow 60ms ease;
+
+    &:hover {
+        background:
+            radial-gradient(
+                ellipse 80% 55% at 50% 20%,
+                #4a5260 0%,
+                #323848 50%,
+                #242c3a 100%
+            );
+    }
+
+    &:active,
+    &.active {
+        @include casio-key-down;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--casio-red);
+        outline-offset: 2px;
+    }
+}
+
+/* ─── Primary — orange-ringed function key ──────────────────────────────── */
+.btn-primary {
+    @include casio-key-up;
+    color: #ffffff;
+
+    /* Orange accent ring — key visual from the image */
+    outline: 2px solid var(--casio-red);
+    outline-offset: 1px;
+    box-shadow:
+        0 4px 0 0 #0d1018,
+        0 5px 8px rgba(0, 0, 0, 0.55),
+        inset 0 1px 1px rgba(255, 255, 255, 0.08),
+        0 0 0 5px rgba(224, 96, 32, 0.18); /* soft orange ambient glow */
+
+    &:active, &.active {
+        @include casio-key-down;
+        outline: 2px solid var(--casio-red);
+        outline-offset: 1px;
+    }
+}
+
+/* ─── Secondary ─────────────────────────────────────────────────────────── */
+.btn-secondary,
+.btn-white {
+    @include casio-key-up;
+    color: var(--casio-on-dark);
+
+    &:active, &.active {
+        @include casio-key-down;
+    }
+}
+
+/* ─── Danger — same orange ring ─────────────────────────────────────────── */
+.btn-danger {
+    @include casio-key-up;
+    color: #ffffff;
+    outline: 2px solid var(--casio-red);
+    outline-offset: 1px;
+}
+
+/* ─── Icon-only key (small square) ─────────────────────────────────────── */
+.btn-icon {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 6px;
+    @include casio-key-up;
+    color: var(--casio-on-dark);
+    transition: transform 60ms ease, box-shadow 60ms ease;
+
+    &:active, &.active {
+        @include casio-key-down;
+    }
+}
+
+/* ─── Small Button ─────────────────────────────────────────────────────── */
+.btn-sm {
+    padding: 3px 10px;
+    min-height: 24px;
+    font-size: var(--text-xs, 11px);
+}

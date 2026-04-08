@@ -10,6 +10,7 @@ const fetchPlaylists = async () => {
   return items.map((item) => ({
     name: item.title,
     uri: item.uri,
+    trackCount: item.albumLength ?? item.trackCount ?? null,
   }));
 };
 

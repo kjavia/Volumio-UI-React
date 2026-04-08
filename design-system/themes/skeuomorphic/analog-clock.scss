@@ -58,7 +58,7 @@
 .clock-hour-digit {
   position: absolute;
   transform: translate(-50%, -50%);
-  font-family: var(--font-label, 'Roboto', sans-serif);
+  font-family: var(--font-display);
   font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
   font-weight: 700;
   color: var(--color-gray-800, #222);
@@ -126,7 +126,7 @@
 }
 
 .clock-face-day {
-  font-family: var(--font-label, 'Roboto', sans-serif);
+  font-family: var(--font-display);
   font-size: clamp(0.8rem, 4cqi, 1.5rem);
   font-weight: 600;
   color: var(--color-gray-300, #bbb);
@@ -134,7 +134,7 @@
 }
 
 .clock-face-date {
-  font-family: var(--font-label, 'Roboto', sans-serif);
+  font-family: var(--font-display);
   font-size: clamp(0.8rem, 4cqi, 1.5rem);
   font-weight: 700;
   color: var(--color-gray-700, #333);
@@ -150,7 +150,7 @@
 }
 
 .clock-face-weather-temp {
-  font-family: var(--font-label, 'Roboto', sans-serif);
+  font-family: var(--font-display);
   font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
   font-weight: 700;
   color: var(--color-gray-700, #333);

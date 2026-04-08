@@ -1,0 +1,190 @@
+/* ── Analog Clock — 80s Casio Theme ────────────────────────────────────────
+ * Light grey glass face — same material as track-info-group watch panel
+ * Dark teal indices and hands — readable on the light surface
+ * ──────────────────────────────────────────────────────────────────────── */
+
+/* Outer bezel — hard dark plastic ring */
+.clock-bezel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 4%;
+    background: radial-gradient(
+        circle at 40% 30%,
+        #2a2a2a 0%,
+        #1a1a1a 50%,
+        #0a0a0a 100%
+    );
+    /* Flat plastic — no gloss gradient */
+    border-top:   3px solid #363636;
+    border-left:  3px solid #363636;
+    border-bottom: 3px solid #050505;
+    border-right:  3px solid #050505;
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.8),
+        0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Face — same glass material as track-info-group watch panel */
+.clock-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+
+    /* Glass layers identical to .track-info-group */
+    background-image:
+        radial-gradient(
+            ellipse 80% 38% at 50% 0%,
+            rgba(255, 255, 255, 0.52) 0%,
+            rgba(255, 255, 255, 0.10) 55%,
+            transparent 100%
+        ),
+        linear-gradient(
+            to top,
+            rgba(255, 255, 255, 0.22) 0%,
+            transparent 14%
+        ),
+        linear-gradient(
+            160deg,
+            #d8e0dc 0%,
+            #c8d4cf 40%,
+            #b8c8c2 100%
+        );
+    background-size: cover;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Tick marks — LCD-green luminescent bars */
+.clock-tick::before {
+    content: '';
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 3%;
+}
+
+.clock-tick--hour::before {
+    height: 12%;
+    background: #3a5850;
+    width: 4px;
+    margin-left: -2px;
+    box-shadow:
+        0 -1px 0 rgba(255, 255, 255, 0.55),
+        0 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.clock-tick--minute::before {
+    height: 6%;
+    background: rgba(12, 30, 24, 0.45);
+    width: 2px;
+    margin-left: -1px;
+    box-shadow:
+        0 -1px 0 rgba(255, 255, 255, 0.65),
+        0 2px 4px rgba(0, 0, 0, 0.30);
+}
+
+/* Hour digit labels — large, readable from across the room */
+.clock-hour-digit {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+    font-size: clamp(1.1rem, 5.6cqi, 4rem);
+    font-weight: 700;
+    color: #3a5850;
+    -webkit-font-smoothing: antialiased;
+    text-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.15),
+        0 -1px 0 rgba(255, 255, 255, 0.55);
+    line-height: 1;
+}
+
+/* Hands — LCD-green glow */
+.clock-hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 1px;
+}
+
+.clock-hand--hour {
+    width: 5px;
+    height: 26%;
+    margin-left: -2.5px;
+    background: #0c1e18;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    border-radius: 2px;
+    z-index: 3;
+}
+
+.clock-hand--minute {
+    width: 3px;
+    height: 36%;
+    margin-left: -1.5px;
+    background: #1a3830;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 1px;
+    z-index: 4;
+}
+
+.clock-hand--second {
+    width: 1.5px;
+    height: 40%;
+    margin-left: -0.75px;
+    background: var(--casio-red);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 1px;
+    z-index: 5;
+}
+
+/* Center cap — class used by component is .clock-center */
+.clock-center,
+.clock-center-cap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--casio-red);
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+}
+
+/* Date pod (in the 3 o'clock position) */
+.clock-date-pod {
+    position: absolute;
+    right: 20%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+    font-size: clamp(0.5rem, 2.5cqi, 0.9rem);
+    font-weight: 400;
+    color: var(--casio-lcd-on);
+    background: var(--casio-lcd-panel);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    padding: 0 3px;
+    min-width: 18px;
+    text-align: center;
+    -webkit-font-smoothing: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Weather overlay — dark on light face */
+.clock-face-weather-icon {
+    color: #0c1e18;
+    font-size: clamp(1rem, 5cqi, 2.2rem);
+}
+
+.clock-face-weather-temp {
+    font-family: var(--font-display);
+    color: #0c1e18;
+    font-size: clamp(0.9rem, 4cqi, 1.8rem);
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}

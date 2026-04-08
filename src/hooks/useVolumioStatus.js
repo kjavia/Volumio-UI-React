@@ -16,6 +16,8 @@ const normalizeUri = (uri) => {
     .replace(/^\/mnt\//, '');
 };
 
+export { normalizeUri };
+
 /**
  * Check if a URI is in the favorites set, accounting for different prefixes
  */

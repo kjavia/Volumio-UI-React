@@ -1,0 +1,179 @@
+:root {
+    /* ═══════════════════════════════════════════════════════════════════════
+       COLOR PALETTE — 80s Casio Theme
+       Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+       Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+       ═══════════════════════════════════════════════════════════════════════ */
+
+    /* ─── Casio Hardware Palette ────────────────────────────────────────── */
+    --casio-body:      #0e1218;   /* main dark navy plastic casing */
+    --casio-face:      #161c28;   /* button / raised surface face */
+    --casio-sheen:     #263048;   /* plastic highlight edge (top-left bevel) */
+    --casio-edge:      #07080e;   /* deep plastic shadow edge (bottom-right) */
+    --casio-ridge:     #1a2238;   /* molding lines / panel dividers */
+    --casio-silver:    #4a6080;   /* metal trim / side rails */
+    --casio-silver-hi: #6880a0;   /* silver highlight */
+
+    /* ─── LCD Display ───────────────────────────────────────────────────── */
+    --casio-lcd-bg:     #44dda8;  /* bright teal — segment / accent color */
+    --casio-lcd-bg-alt: #58f0bc;  /* brighter teal variant */
+    --casio-lcd-panel:  #0c1e18;  /* dark teal LCD panel background */
+    --casio-lcd-on:     #44dda8;  /* segment ON — bright teal (= lcd-bg) */
+    --casio-lcd-off:    #2a7858;  /* segment OFF — dimmer teal, secondary text */
+    --casio-lcd-frame:  #060f0a;  /* LCD bezel (very dark border) */
+    --casio-lcd-glare:  rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+
+    /* ─── Key Colors ────────────────────────────────────────────────────── */
+    --casio-red:        #e06020;  /* orange accent — function key ring */
+    --casio-red-hi:     #f07830;  /* orange highlight */
+    --casio-red-sh:     #904010;  /* orange shadow */
+    --casio-key-face:   #18203a;  /* standard key face — navy */
+    --casio-key-hi:     #2a3858;  /* key top-left bevel — blue highlight */
+    --casio-key-sh:     #0c1020;  /* key bottom-right bevel — near-black */
+
+    /* ─── Pixel display text colors ────────────────────────────────────── */
+    --casio-on-lcd:     var(--casio-lcd-on);
+    --casio-on-dark:    #a8ccbe;  /* teal-tinted light text on dark plastic */
+    --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+
+    /* ─── Standard fallback palette (keep token parity with other themes) ── */
+    --color-primary:        var(--casio-red);
+    --color-primary-light:  var(--casio-red-hi);
+    --color-primary-dark:   var(--casio-red-sh);
+    --color-primary-deep:   #600000;
+
+    --color-black:     #000000;
+    --color-gray-950:  #070a10;
+    --color-gray-900:  #0d121c;
+    --color-gray-850:  #131a26;
+    --color-gray-800:  #18202e;
+    --color-gray-750:  #1e2840;
+    --color-gray-700:  #2a344e;
+    --color-gray-600:  #3a4860;
+    --color-gray-550:  #4e6070;
+    --color-gray-500:  #6a8088;
+    --color-gray-400:  #8a9ea8;
+    --color-gray-300:  #aabcc4;
+    --color-gray-200:  #c4d4da;
+    --color-gray-100:  #dce8ec;
+    --color-gray-050:  #edf4f6;
+    --color-white:     #ffffff;
+
+    --color-success:       #28a020;
+    --color-success-dark:  #186010;
+    --color-success-light: #40c030;
+    --color-warning:       var(--casio-lcd-bg);
+    --color-warning-dark:  #1e6044;
+    --color-danger:        var(--casio-red);
+    --color-danger-dark:   var(--casio-red-sh);
+    --color-danger-light:  var(--casio-red-hi);
+    --color-danger-muted:  #400000;
+    --color-info:          #2060c0;
+    --color-info-dark:     #1040a0;
+    --color-info-light:    #4080e0;
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       SEMANTIC TOKENS
+       ═══════════════════════════════════════════════════════════════════════ */
+
+    --text-primary:    var(--casio-on-dark);
+    --text-secondary:  var(--casio-on-dark-dim);
+    --text-muted:      #3a5850;
+    --text-dim:        #2a3c38;
+    --text-inverted:   var(--casio-lcd-on);
+    --text-dark:       var(--casio-on-dark);
+    --text-accent:     var(--casio-red);
+
+    --bg-color:        var(--casio-body);
+    --panel-bg-dark:   var(--casio-body);
+    --device-surface:  var(--casio-face);
+
+    --list-item-bg:       rgba(255, 255, 255, 0.04);
+    --list-item-bg-hover: rgba(212, 20, 4, 0.2);
+    --border-dark:        var(--casio-edge);
+    --border-light:       var(--casio-sheen);
+    --border-primary:     var(--casio-red);
+
+    --btn-bg-dark:      var(--casio-key-face);
+    --btn-bg-light:     var(--casio-face);
+    --btn-bg-primary:   var(--casio-red);
+    --btn-bg-secondary: var(--casio-face);
+    --btn-bg-success:   var(--color-success);
+    --btn-bg-warning:   var(--color-warning);
+    --btn-bg-danger:    var(--casio-red);
+    --btn-bg-info:      var(--color-info);
+
+    --alert-bg-success: rgba(40, 160, 32, 0.18);
+    --alert-bg-warning: rgba(68, 221, 168, 0.12);
+    --alert-bg-danger:  rgba(212, 20, 4, 0.18);
+    --alert-bg-info:    rgba(32, 96, 192, 0.18);
+    --alert-border-success: var(--color-success);
+    --alert-border-warning: var(--casio-lcd-bg);
+    --alert-border-danger:  var(--casio-red);
+    --alert-border-info:    var(--color-info);
+
+    --led-on:  #00e000;
+    --led-off: #003000;
+    --indicator-success: #00e000;
+
+    /* ─── Shadows / Highlights ──────────────────────────────────────────── */
+    --shadow-05:  rgba(0, 0, 0, 0.05);
+    --shadow-10:  rgba(0, 0, 0, 0.10);
+    --shadow-15:  rgba(0, 0, 0, 0.15);
+    --shadow-20:  rgba(0, 0, 0, 0.20);
+    --shadow-30:  rgba(0, 0, 0, 0.30);
+    --shadow-40:  rgba(0, 0, 0, 0.40);
+    --shadow-50:  rgba(0, 0, 0, 0.50);
+    --shadow-60:  rgba(0, 0, 0, 0.60);
+
+    --highlight-10: rgba(255, 255, 255, 0.04);
+    --highlight-20: rgba(255, 255, 255, 0.08);
+    --highlight-30: rgba(255, 255, 255, 0.12);
+    --highlight-40: rgba(255, 255, 255, 0.18);
+    --highlight-60: rgba(255, 255, 255, 0.28);
+    --highlight-80: rgba(255, 255, 255, 0.40);
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       TYPOGRAPHY — pixel-crisp, no smoothing
+       ═══════════════════════════════════════════════════════════════════════ */
+
+    --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;   /* large display — track title, clock */
+    --font-body:    'Share Tech Mono', 'Courier New', monospace;    /* body text — readable */
+    --font-label:   'Share Tech Mono', 'Courier New', monospace;    /* buttons, labels, menus */
+    --font-title:   'Share Tech Mono', 'Courier New', monospace;    /* section headings */
+    --font-mono:    'Share Tech Mono', 'Courier New', monospace;    /* times, values, metadata */
+    --font-tech:    'DS Digital', 'Share Tech Mono', 'Courier New', monospace;   /* tech/data labels */
+
+    /* VT323 renders large — calibrate sizes down one step */
+    --text-xs:    0.75rem;    /* 12px equivalent */
+    --text-sm:    0.875rem;   /* 14px */
+    --text-base:  1rem;       /* 16px */
+    --text-lg:    1.25rem;
+    --text-xl:    1.5rem;
+    --text-2xl:   1.875rem;
+    --text-3xl:   2.25rem;
+    --text-4xl:   3rem;
+
+    --leading-tight:   1.0;
+    --leading-normal:  1.2;
+    --leading-relaxed: 1.4;
+
+    --tracking-tight:  0em;
+    --tracking-normal: 0.05em;
+    --tracking-wide:   0.1em;
+    --tracking-wider:  0.18em;
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       RADIUS & TRANSITIONS  — hard edges, no animation
+       ═══════════════════════════════════════════════════════════════════════ */
+
+    --radius-sm:   2px;    /* very slight plastic corner */
+    --radius-md:   2px;
+    --radius-lg:   3px;
+    --radius-xl:   3px;
+    --radius-pill: 4px;    /* even "pill" buttons are almost rectangular */
+
+    --transition-fast:   none;
+    --transition-normal: none;
+    --transition-slow:   none;
+}

@@ -57,7 +57,7 @@ const AnalogClock = ({ showSeconds = true, showWeather = false, showDate = true 
             {/* Hour digits */}
             {HOURS.map((h, i) => {
               const angle = (i * 30 - 90) * (Math.PI / 180);
-              const radius = 40; // % from center
+              const radius = 37; // % from center
               const x = 50 + radius * Math.cos(angle);
               const y = 50 + radius * Math.sin(angle);
               return (

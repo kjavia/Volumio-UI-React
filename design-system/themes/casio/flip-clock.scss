@@ -1,0 +1,75 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FLIP CLOCK — 80s Casio Theme
+   Dark plastic panels, LCD-green digits, square corners, DSEG7 font
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Centre DS Digital within each flip panel and scale the glyph up.
+   DS Digital sits above the geometric midpoint, so positive Y aligns
+   the fold crease with the visual centre of the character.
+   Back wrapper is 200% height → half the front Y value = same pixel shift.
+   font-size >1 makes the digit fill more of the panel without resizing tiles. */
+.tick-flip-panel-front-text .tick-flip-panel-text-wrapper {
+    transform: translateY(0%) !important;
+    font-size: 0.98em !important;
+}
+.tick-flip-panel-back-text .tick-flip-panel-text-wrapper {
+    transform: translateY(-2%) !important;
+    font-size: 0.98em !important;
+}
+
+.tick-flip-panel {
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace !important;
+    border-radius: 2px !important;
+    border: 1px solid rgba(12, 30, 24, 0.25) !important;
+    background: #c8d4cf !important;                  /* light grey = track-info-group */
+    color: #3a5850 !important;
+    text-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.20),
+        0 -1px 0 rgba(255, 255, 255, 0.50) !important;
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.10) !important;
+    -webkit-font-smoothing: antialiased !important;
+    letter-spacing: 0.06em !important;
+}
+
+.flip-colon {
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+    color: #3a5850;
+    text-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.20),
+        0 -1px 0 rgba(255, 255, 255, 0.50);
+}
+
+.flip-ampm {
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+    color: #3a5850;
+    background: #c8d4cf;
+    border: 2px solid var(--casio-edge);
+    border-radius: 2px;
+    padding: 0 5px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* ─── Flip clock outer body — dark plastic casing ───────────────────── */
+.flip-clock-body {
+    padding: 20px 28px 18px;
+    border-radius: 8px;
+
+    background: var(--casio-body);
+
+    /* Plastic bevel */
+    border-top:   2px solid var(--casio-sheen);
+    border-left:  2px solid var(--casio-sheen);
+    border-bottom: 3px solid var(--casio-edge);
+    border-right:  3px solid var(--casio-edge);
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.8),
+        0 2px 8px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}

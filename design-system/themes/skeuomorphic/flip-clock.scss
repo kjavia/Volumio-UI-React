@@ -73,11 +73,15 @@
 }
 
 // ─── Text wrapper alignment ───────────────────────────────────────────────
-// The base stylesheet shifts text down 10%/5% to center most fonts on the
-// fold line. This font's metrics are already centered — cancel the offset.
+// Michroma's cap-height sits closer to the em-box midpoint than Roboto Mono,
+// so reduce the translateY offsets accordingly.
+.tick-flip-panel {
+  font-family: var(--font-display);
+}
+
 .tick-flip-panel-front-text .tick-flip-panel-text-wrapper {
-  transform: translateY(-10%);
+  transform: translateX(-15%) translateY(-10%);
 }
 .tick-flip-panel-back-text .tick-flip-panel-text-wrapper {
-  transform: translateY(-5%);
+  transform: translateX(-15%) translateY(-5%);
 }

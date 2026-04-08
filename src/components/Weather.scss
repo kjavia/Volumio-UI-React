@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  font-family: var(--font-body, 'Roboto', sans-serif);
+  font-family: var(--font-display, var(--font-body, 'Roboto', sans-serif));
   color: var(--text-light, #fff);
   overflow: hidden;
   container-type: size;
@@ -109,6 +109,7 @@
 
 .weather-detail-label {
   color: var(--text-muted, #aaa);
+  margin-right: 0.25rem;
 }
 
 .weather-detail-value {
@@ -536,7 +537,7 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  font-size: clamp(0.75rem, 1.8cqw, 1.1rem);
+  font-size: clamp(0.95rem, 2.4cqw, 2rem);
   opacity: 0.75;
   letter-spacing: 0.02em;
 }
@@ -559,7 +560,7 @@
   display: flex;
   align-items: center;
   gap: 0.2em;
-  font-size: clamp(0.8rem, 1.8cqw, 1.2rem);
+  font-size: clamp(1rem, 2.4cqw, 1.6rem);
   opacity: 0.7;
   margin-top: 0.25em;
 }

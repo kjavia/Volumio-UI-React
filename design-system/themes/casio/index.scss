@@ -1,0 +1,86 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   80S CASIO THEME — Main Index
+   Dark plastic casing · Yellow-green LCD (9DB834) · VT323 pixel font
+   Red function key · No border radius · Square digital edges
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@import './variables.scss';
+@import './typography.scss';
+@import './colors.scss';
+@import '../common/analog-clock';
+@import '../common/dialog';
+@import './button.scss';
+@import './forms.scss';
+@import './progressbar.scss';
+@import './sliders.scss';
+@import './knobs.scss';
+@import './tabs.scss';
+@import './media-player.scss';
+@import './album-browser.scss';
+@import './playlist.scss';
+@import './sidepanel.scss';
+@import './context-menu.scss';
+@import './dialog.scss';
+@import './digital-clock.scss';
+@import './analog-clock.scss';
+@import './flip-clock.scss';
+@import './weather.scss';
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+// ─── Global Scrollbar — thin dark plastic with LCD-green thumb ────────────────
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    background: var(--casio-body);
+    border-left: 1px solid var(--casio-edge);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--casio-key-face);
+    border-top:   2px solid var(--casio-key-hi);
+    border-left:  2px solid var(--casio-key-hi);
+    border-bottom: 2px solid var(--casio-key-sh);
+    border-right:  2px solid var(--casio-key-sh);
+    border-radius: 0;
+    min-height: 24px;
+
+    &:hover {
+        background: var(--casio-ridge);
+    }
+
+    &:active {
+        background: var(--casio-lcd-bg);
+    }
+}
+
+::-webkit-scrollbar-track {
+    background: var(--casio-body);
+    border-top:   1px solid var(--casio-edge);
+    border-bottom: 1px solid var(--casio-sheen);
+}
+
+::-webkit-scrollbar-button {
+    background: var(--casio-key-face);
+    border-top:   2px solid var(--casio-key-hi);
+    border-left:  2px solid var(--casio-key-hi);
+    border-bottom: 2px solid var(--casio-key-sh);
+    border-right:  2px solid var(--casio-key-sh);
+    display: block;
+    height: 12px;
+    width: 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 6px 6px;
+}
+
+::-webkit-scrollbar-button:vertical:decrement {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpolygon points='4,1 7,7 1,7' fill='%239db834'/%3E%3C/svg%3E");
+}
+
+::-webkit-scrollbar-button:vertical:increment {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpolygon points='4,7 7,1 1,1' fill='%239db834'/%3E%3C/svg%3E");
+}

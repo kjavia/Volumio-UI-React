@@ -10,6 +10,7 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    gap: 0.4rem;
     padding: 6px 20px;
     min-height: 32px;
 
@@ -252,4 +253,11 @@
 .btn-rect-medium {
     width: 100px;
     height: 50px;
+}
+
+/* ─── Small Button ─────────────────────────────────────────────────────── */
+.btn-sm {
+    padding: 3px 12px;
+    min-height: 24px;
+    font-size: var(--text-xs, 11px);
 }

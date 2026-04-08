@@ -1,0 +1,201 @@
+/* ══════════════════════════════════════════════════════════════════════
+   WEATHER — 80s Casio Theme
+   LCD glass panel background · DS Digital font (via --font-display) · artist-name green
+   ══════════════════════════════════════════════════════════════════════ */
+
+$seg-color:  #3a5850;
+$seg-dim:    rgba(58, 88, 80, 0.45);
+$lcd-bg:     #c8d4cf;
+$lcd-border: #060f0a;
+$lcd-shadow: 0 1px 0 rgba(0, 0, 0, 0.20), 0 -1px 0 rgba(255, 255, 255, 0.50);
+
+/* Outer wrapper — dark plastic casing matching digital-clock-frame */
+.weather-container {
+    background: var(--casio-body);
+    color: $seg-color;
+    font-style: italic;
+
+    /* Plastic bevel */
+    border-top:    0.4cqw solid var(--casio-sheen);
+    border-left:   0.4cqw solid var(--casio-sheen);
+    border-bottom: 0.4cqw solid var(--casio-edge);
+    border-right:  0.4cqw solid var(--casio-edge);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.8),
+        0 2px 8px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Inner LCD panel — light grey glass matching .digital-clock */
+.weather-current,
+.weather-hourly,
+.weather-daily {
+    background: $lcd-bg;
+    border: 0.25cqw solid $lcd-border;
+    border-radius: 0.3cqw;
+    box-shadow:
+        0 0 0 0.3cqw var(--casio-edge),
+        inset 0 2px 6px rgba(0, 0, 0, 0.14);
+    overflow: hidden;
+    position: relative;
+
+    /* Top glare — same dome highlight as .digital-clock::before */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 30%;
+        background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.28) 0%,
+            transparent 100%
+        );
+        pointer-events: none;
+        z-index: 0;
+    }
+}
+
+.weather-current {
+    padding: 1.2rem 1.5rem;
+    border-radius: 0.5rem;
+}
+
+/* Override .weather-full which explicitly sets --font-body */
+.weather-full {
+    font-family: var(--font-display);
+
+    /* Glass gradient matching .track-info-group */
+    background-image:
+        radial-gradient(
+            ellipse 80% 38% at 50% 0%,
+            rgba(255, 255, 255, 0.52) 0%,
+            rgba(255, 255, 255, 0.10) 55%,
+            transparent 100%
+        ),
+        linear-gradient(
+            to top,
+            rgba(255, 255, 255, 0.22) 0%,
+            transparent 14%
+        ),
+        linear-gradient(
+            160deg,
+            #d8e0dc 0%,
+            #c8d4cf 40%,
+            #b8c8c2 100%
+        );
+    background-size: cover;
+}
+
+/* ── Current ─────────────────────────────────────────────────────────── */
+
+.weather-current-temp {
+    color: $seg-color;
+    text-shadow:
+        0 2px 0 rgba(0, 0, 0, 0.35),
+        0 4px 0 rgba(0, 0, 0, 0.15),
+        0 -1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.weather-current-unit {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-current-desc {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}
+
+/* ── Detail rows ─────────────────────────────────────────────────────── */
+
+.weather-detail-label {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+    margin-right: 0.5rem;
+}
+
+.weather-detail-value {
+    color: $seg-color;
+    font-weight: 400;   /* DS Digital has no bold */
+    text-shadow: $lcd-shadow;
+}
+
+/* ── Hourly ──────────────────────────────────────────────────────────── */
+
+.weather-hourly-item {
+    background: rgba(12, 30, 24, 0.06);
+    border-color: rgba(58, 88, 80, 0.25);
+    border-radius: 2px;
+}
+
+.weather-hourly-time {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-hourly-temp {
+    font-weight: 400;
+    color: $seg-color;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-hourly-wind {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}
+
+/* ── Daily cards ─────────────────────────────────────────────────────── */
+
+.weather-daily-card {
+    background: rgba(12, 30, 24, 0.06);
+    border-color: rgba(58, 88, 80, 0.25);
+    border-radius: 2px;
+}
+
+.weather-daily-card--today {
+    border-color: var(--casio-red);
+}
+
+.weather-daily-day {
+    color: $seg-color;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-daily-date {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-daily-desc {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-daily-hi {
+    color: $seg-color;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-daily-lo {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-daily-meta {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}
+
+.weather-daily-sun-item {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}
+
+/* ── Loading / error states ──────────────────────────────────────────── */
+
+.weather-loading-icon,
+.weather-error-icon,
+.weather-error-text {
+    color: $seg-dim;
+    text-shadow: $lcd-shadow;
+}

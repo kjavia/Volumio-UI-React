@@ -79,7 +79,7 @@
     --text-danger:    var(--color-danger);
     --text-info:      var(--color-info);
 
-    --bg-color:        var(--win95-desktop);    /* teal desktop background */
+    --bg-color:        var(--win95-face);    /* page background */
     --panel-bg-dark:   var(--win95-face);
     --device-surface:  var(--win95-face);
 
@@ -105,6 +105,7 @@
     /* ─── UI Components ───────────────────────────────────────────────── */
     --list-item-bg:       rgba(0, 0, 0, 0.04);
     --list-item-bg-hover: #000080;
+    --list-item-text-hover: #ffffff;
     --border-dark:        var(--win95-dark);
     --border-light:       var(--win95-highlight);
     --border-warm:        var(--win95-shadow);
