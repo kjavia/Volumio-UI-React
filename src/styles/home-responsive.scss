@@ -949,11 +949,11 @@ body,
 
   /* Larger secondary icon buttons */
   .btn-icon {
-    width: clamp(36px, 5cqw, 56px) !important;
-    height: clamp(36px, 5cqw, 56px) !important;
+    width: clamp(72px, 10cqw, 112px) !important;
+    height: clamp(72px, 10cqw, 112px) !important;
   }
   .btn-icon .material-icons {
-    font-size: clamp(1.25rem, 3cqw, 2rem) !important;
+    font-size: clamp(2.5rem, 6cqw, 4rem) !important;
   }
 
   /* Seekbar time labels: 2x */
