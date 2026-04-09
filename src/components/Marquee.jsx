@@ -13,7 +13,7 @@ import './marquee.scss';
  * @param {number}  speed     - Pixels per second (default 40)
  * @param {string}  gap       - Space between the two copies (default '4em')
  */
-const Marquee = memo(({ children, className, speed = 40, gap = '4em' }) => {
+const Marquee = memo(({ children, className, speed = 40, gap = '4em', align = 'center' }) => {
   const outerRef = useRef(null);
   const trackRef = useRef(null);
   const copy1Ref = useRef(null);
@@ -83,7 +83,7 @@ const Marquee = memo(({ children, className, speed = 40, gap = '4em' }) => {
   }, [text, speed, gap]);
 
   return (
-    <div ref={outerRef} className={`marquee-outer${className ? ` ${className}` : ''}`}>
+    <div ref={outerRef} className={`marquee-outer${className ? ` ${className}` : ''}`} style={{ textAlign: align }}>
       <span ref={trackRef} className="marquee-track" style={{ '--marquee-gap': gap }}>
         <span ref={copy1Ref} className="marquee-copy">{text}</span>
         <span ref={copy2Ref} className="marquee-copy" aria-hidden="true">{text}</span>
@@ -99,6 +99,7 @@ Marquee.propTypes = {
   className: PropTypes.string,
   speed: PropTypes.number,
   gap: PropTypes.string,
+  align: PropTypes.oneOf(['left', 'center', 'right']),
 };
 
 export default Marquee;

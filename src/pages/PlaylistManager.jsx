@@ -391,7 +391,7 @@ TrackList.propTypes = {
 
 // ─── Playlist Column (col 3) ──────────────────────────────────────────────────
 
-const PlaylistColumn = ({ selectedTracks, onTracksAdded, onToast, selectedPlaylist, onSelectPlaylist }) => {
+const PlaylistColumn = ({ onTracksAdded, onToast, selectedPlaylist, onSelectPlaylist }) => {
   const { playlists, isLoading: playlistsLoading } = usePlaylists();
   const { socket } = useSocket();
   const queryClient = useQueryClient();

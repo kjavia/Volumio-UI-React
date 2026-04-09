@@ -52,6 +52,7 @@ const Dialog = ({
   closeOnEscape = true,
   showCloseButton = true,
   className,
+  bodyRef,
 }) => {
   const dialogRef = useRef(null);
 
@@ -148,7 +149,7 @@ const Dialog = ({
           {toolbar && <div className="dialog-toolbar">{toolbar}</div>}
 
           {/* Body */}
-          <div className="dialog-body">{children}</div>
+          <div className="dialog-body" ref={bodyRef}>{children}</div>
 
           {/* Footer */}
           {footer && <div className="dialog-footer">{footer}</div>}
@@ -171,6 +172,7 @@ Dialog.propTypes = {
   closeOnEscape: PropTypes.bool,
   showCloseButton: PropTypes.bool,
   className: PropTypes.string,
+  bodyRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 export default Dialog;

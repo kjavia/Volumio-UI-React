@@ -1,4 +1,5 @@
-import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect, useLayoutEffect } from 'react';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import Dialog from './Dialog';
@@ -71,6 +72,8 @@ const BrowseDialog = ({ open, onClose }) => {
   const [albumAddToPlaylistOpen, setAlbumAddToPlaylistOpen] = useState(false);
   const albumMenuBtnRef = useRef(null);
   const albumMenuRef = useRef(null);
+  const browseBodyRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
 
   const { data: browseData, isLoading, isError, refetch: refetchBrowse } = useBrowse(currentNav?.uri ?? null);
   const { data: searchData, isLoading: isSearchLoading } = useSearch(debouncedSearch);
@@ -83,6 +86,21 @@ const BrowseDialog = ({ open, onClose }) => {
     const t = setTimeout(() => setDebouncedSearch(search.trim()), 400);
     return () => clearTimeout(t);
   }, [search]);
+
+  // Observe dialog-body width for grid column calculation — useLayoutEffect so the
+  // measurement is committed before the first paint, preventing a 0-width flash.
+  useLayoutEffect(() => {
+    const el = browseBodyRef.current;
+    if (!el) return;
+    const style = window.getComputedStyle(el);
+    const contentWidth = el.clientWidth
+      - parseFloat(style.paddingLeft || '0')
+      - parseFloat(style.paddingRight || '0');
+    setContainerWidth(contentWidth || 0);
+    const ro = new ResizeObserver(([entry]) => setContainerWidth(entry.contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [open]);
 
   const isFavouritesView = currentNav?.uri === 'favourites';
   const isPlaylistsView = currentNav?.uri === 'playlists';
@@ -104,7 +122,7 @@ const BrowseDialog = ({ open, onClose }) => {
     artist: albumArtist,
     albumart: browseItems.find((i) => i.albumart)?.albumart,
     type: 'folder',
-  }), [currentNav, browseItems, albumArtist]); // eslint-disable-line react-hooks/exhaustive-deps
+  }), [currentNav, browseItems, albumArtist]);
 
   useEffect(() => {
     if (!albumMenuOpen) return;
@@ -203,6 +221,23 @@ const BrowseDialog = ({ open, onClose }) => {
   }, []);
 
   const filteredItems = browseItems;
+
+  const useVirtual = !isSearching && !isFavouritesView;
+  const gridItemMin = largeGrid ? 260 : 130;
+  const numCols = viewMode === 'grid'
+    ? (containerWidth > 0 ? Math.max(1, Math.floor(containerWidth / gridItemMin)) : 4)
+    : 1;
+  const virtCount = useVirtual
+    ? (viewMode === 'grid' ? Math.ceil(filteredItems.length / numCols) : filteredItems.length)
+    : 0;
+
+  const browseVirtualizer = useVirtualizer({
+    count: virtCount,
+    getScrollElement: () => browseBodyRef.current,
+    estimateSize: () => viewMode === 'grid' ? (largeGrid ? 330 : 200) : 56,
+    overscan: 10,
+    enabled: useVirtual,
+  });
 
   // Search result sections (each list from the API has a title like "Artists", "Albums", etc.)
   const searchSections = isSearching ? (searchData?.lists ?? []) : null;
@@ -428,6 +463,99 @@ const BrowseDialog = ({ open, onClose }) => {
       );
     }
 
+    if (useVirtual) {
+      const virtualItems = browseVirtualizer.getVirtualItems();
+
+      const scrollContent = viewMode === 'grid' ? (
+        <div style={{ height: browseVirtualizer.getTotalSize(), position: 'relative' }}>
+          {virtualItems.map((virtualRow) => {
+            const startIdx = virtualRow.index * numCols;
+            const rowItems = filteredItems.slice(startIdx, startIdx + numCols);
+            // Pad with nulls so every row has exactly numCols cells — keeps item widths uniform
+            const cells = rowItems.length < numCols
+              ? [...rowItems, ...Array(numCols - rowItems.length).fill(null)]
+              : rowItems;
+            return (
+              <div
+                key={virtualRow.index}
+                data-index={virtualRow.index}
+                ref={browseVirtualizer.measureElement}
+                className={containerClass}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  transform: `translateY(${virtualRow.start}px)`,
+                  // Override CSS auto-fill with the computed column count;
+                  // minmax(0,1fr) prevents implicit auto-min expansion.
+                  gridTemplateColumns: `repeat(${numCols}, minmax(0, 1fr))`,
+                  // Remove CSS class padding — rows are positioned absolutely, gap is handled
+                  // by virtualRow.start offsets and paddingBottom on each row.
+                  padding: 0,
+                  paddingBottom: '1rem',
+                }}
+              >
+                {cells.map((item, colIdx) =>
+                  item ? (
+                    <TrackItem
+                      key={item.uri ?? (startIdx + colIdx)}
+                      item={item}
+                      viewMode={viewMode}
+                      onNavigate={navigate}
+                      queueUris={queueUris}
+                      onFavouriteToggled={isFavouritesView ? refetchBrowse : undefined}
+                      isPlaylistItem={isPlaylistsView}
+                      onPlaylistDeleted={isPlaylistsView ? refetchBrowse : undefined}
+                    />
+                  ) : (
+                    <div key={`empty-${colIdx}`} />
+                  )
+                )}
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div style={{ height: browseVirtualizer.getTotalSize(), position: 'relative' }}>
+          {virtualItems.map((virtualItem) => {
+            const item = filteredItems[virtualItem.index];
+            return (
+              <div
+                key={item.uri ?? virtualItem.index}
+                data-index={virtualItem.index}
+                ref={browseVirtualizer.measureElement}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  transform: `translateY(${virtualItem.start}px)`,
+                  textAlign: 'left',
+                }}
+              >
+                <TrackItem
+                  item={item}
+                  viewMode={viewMode}
+                  onNavigate={navigate}
+                  queueUris={queueUris}
+                  onFavouriteToggled={isFavouritesView ? refetchBrowse : undefined}
+                  isPlaylistItem={isPlaylistsView}
+                  onPlaylistDeleted={isPlaylistsView ? refetchBrowse : undefined}
+                />
+              </div>
+            );
+          })}
+        </div>
+      );
+
+      return (
+        <>
+          {scrollContent}
+        </>
+      );
+    }
+
     return (
       <div className={containerClass}>
         {isFavouritesView && (
@@ -463,6 +591,7 @@ const BrowseDialog = ({ open, onClose }) => {
         headerActions={headerActions}
         toolbar={toolbar}
         footer={albumFooter}
+        bodyRef={browseBodyRef}
       >
         {isSearching || currentNav ? renderBrowseResults() : renderHome()}
       </Dialog>

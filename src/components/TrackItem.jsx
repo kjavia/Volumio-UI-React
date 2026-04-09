@@ -396,9 +396,9 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
           }
         </div>
         <div className="browse-result-row__info">
-          <Marquee className="browse-result-row__title">{item.title}</Marquee>
+          <Marquee className="browse-result-row__title" align="left">{item.title}</Marquee>
           {(item.artist || item.album) && (
-            <Marquee className="browse-result-row__sub">
+            <Marquee className="browse-result-row__sub" align="left">
               {[item.artist, item.album].filter(Boolean).join(' · ')}
             </Marquee>
           )}
