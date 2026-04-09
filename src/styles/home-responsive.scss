@@ -303,6 +303,19 @@ body,
 
 .seekbar-labels {
   padding: 0 0.1rem;
+  margin-top: 0.4rem; /* default (mobile) */
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+  .seekbar-labels {
+    margin-top: 0.75rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .seekbar-labels {
+    margin-top: 1rem;
+  }
 }
 
 .time-label {
@@ -316,6 +329,118 @@ body,
   .time-label {
     font-size: 0.65rem !important;
     width: 45px;
+  }
+}
+
+/* ── Medium Screen (769px – 1199px): 75% of large-screen values ── */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .time-label {
+    font-size: 0.9rem !important;
+  }
+
+  .responsive-stream-info {
+    font-size: 1.05rem !important;
+  }
+
+  .format-logo-responsive {
+    height: 1.5rem !important;
+  }
+
+  .area-controls .volume-manager .small {
+    font-size: 0.75rem !important;
+  }
+
+  .controls-transport-row .btn-round .material-icons,
+  .controls-transport-row .btn-round .play-icon {
+    font-size: 1.875rem !important;
+  }
+}
+
+/* ── Large Screen (≥ 1200px): 2× scaling for seekbar labels, stream info, volume text ── */
+@media (min-width: 1200px) {
+  .time-label {
+    font-size: 1.2rem !important;
+  }
+
+  .responsive-stream-info {
+    font-size: 1.4rem !important;
+  }
+
+  .format-logo-responsive {
+    height: 2rem !important;
+  }
+
+  .area-controls .volume-manager .small {
+    font-size: 1rem !important;
+  }
+
+  .controls-transport-row .btn-round .material-icons,
+  .controls-transport-row .btn-round .play-icon {
+    font-size: 2.5rem !important;
+  }
+}
+
+/* ── Large panel (controls area ≥ 700px tall): enlarge buttons and volume icon ── */
+@container (min-height: 700px) {
+  .btn-round {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .btn-round .material-icons,
+  .btn-round .play-icon {
+    font-size: 2.5rem !important;
+  }
+
+  .controls-transport-row .btn-round .material-icons,
+  .controls-transport-row .btn-round .play-icon {
+    font-size: 3.125rem !important;
+  }
+
+  .btn-icon {
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  .btn-icon .material-icons {
+    font-size: 1.75rem !important;
+  }
+
+  .volume-manager .material-icons {
+    font-size: 1.75rem !important;
+  }
+}
+
+/* ── Medium panel (tablet 769px–1199px): 75% of large-panel button sizes ── */
+@media (min-width: 769px) and (max-width: 1199px) {
+  @container (min-height: 500px) {
+    .btn-round {
+      width: 70px !important;
+      height: 70px !important;
+    }
+
+    .btn-round .material-icons,
+    .btn-round .play-icon {
+      font-size: 2rem !important;
+    }
+
+    .controls-transport-row .btn-round .material-icons,
+    .controls-transport-row .btn-round .play-icon {
+      font-size: 2.5rem !important;
+    }
+
+    .btn-icon {
+      width: 44px !important;
+      height: 44px !important;
+    }
+
+    .btn-icon .material-icons {
+      font-size: 1.5rem !important;
+    }
+
+    .volume-manager .material-icons {
+      font-size: 1.5rem !important;
+    }
   }
 }
 
@@ -923,11 +1048,11 @@ body,
 
 /* ── Transport button icon sizing ── */
 .btn-round.btn-white .material-icons {
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 .btn-round.btn-orange .material-icons,
 .btn-round .play-icon {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 /* ── Album Art Max Space: expand controls panel ── */
