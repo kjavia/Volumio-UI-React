@@ -921,6 +921,15 @@ body,
   text-transform: uppercase;
 }
 
+/* ── Transport button icon sizing ── */
+.btn-round.btn-white .material-icons {
+  font-size: 1.25rem;
+}
+.btn-round.btn-orange .material-icons,
+.btn-round .play-icon {
+  font-size: 1.5rem;
+}
+
 /* ── Album Art Max Space: expand controls panel ── */
 .album-art-max-space .area-controls {
   /* Width overrides: remove hard caps from inline styles */
@@ -964,7 +973,7 @@ body,
     height: clamp(60px, 8cqw, 90px) !important;
   }
   .btn-round .material-icons {
-    font-size: clamp(1.5rem, 4cqw, 2.5rem) !important;
+    font-size: clamp(1.875rem, 4.5cqw, 3rem) !important;
   }
 
   /* Larger secondary icon buttons */
