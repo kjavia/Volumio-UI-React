@@ -48,7 +48,12 @@ export const SeekProvider = ({ children }) => {
     setSeek(val * 1000); // Optimistic update
   };
 
-  return <SeekContext.Provider value={{ seek, duration, seekTo }}>{children}</SeekContext.Provider>;
+  const refreshState = () => {
+    if (!socket) return;
+    socket.emit('getState', '');
+  };
+
+  return <SeekContext.Provider value={{ seek, duration, seekTo, refreshState }}>{children}</SeekContext.Provider>;
 };
 
 SeekProvider.propTypes = {

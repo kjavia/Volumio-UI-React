@@ -2,6 +2,7 @@ import { useMemo, useState, useRef, useEffect } from 'react';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
+import { useSeek } from '@/contexts/SeekContext';
 import AlbumArtPlayer from '@/components/animated-players/AlbumArtPlayer';
 import VinylPlayer from '@/components/animated-players/VinylPlayer';
 import VinylCoverPlayer from '@/components/animated-players/VinylCoverPlayer';
@@ -123,6 +124,14 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
   const [showBrowse, setShowBrowse] = useState(false);
   const touchTimer = useRef(null);
+
+  const { refreshState } = useSeek();
+
+  // Refresh Volumio state on mount so seek is accurate after navigating away
+  useEffect(() => {
+    refreshState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Pick a random player index on mount or when a new track starts
   const [randomIndex, setRandomIndex] = useState(() =>
