@@ -2,7 +2,6 @@ import { useMemo, useState, useRef, useEffect } from 'react';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
-import { SeekProvider } from '@/contexts/SeekContext';
 import AlbumArtPlayer from '@/components/animated-players/AlbumArtPlayer';
 import VinylPlayer from '@/components/animated-players/VinylPlayer';
 import VinylCoverPlayer from '@/components/animated-players/VinylCoverPlayer';
@@ -192,182 +191,180 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   }
 
   return (
-    <SeekProvider>
-      <div className="container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100">
-        {/* Background Blur */}
-        {fullAlbumArt && (
-          <div
-            className="position-absolute top-0 start-0 w-100 h-100"
-            style={{
-              backgroundImage: `url(${fullAlbumArt})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              filter: 'blur(80px) brightness(0.3)',
-              zIndex: 0,
-            }}
-          />
-        )}
-
-        {/* Main Grid Layout */}
-        <div className={`home-grid position-relative ${!showViz ? 'no-viz' : ''} ${albumArtMaxSpace && effectivePlayerType === 'albumArt' ? 'album-art-max-space' : ''}`} style={{ zIndex: 1 }}>
-          {/* PLAYER SECTION */}
-          <div className="home-panel area-player">
-            <div
-              className="player-responsive"
-              onDoubleClick={cyclePlayer}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-              onMouseDown={handleTouchStart}
-              onMouseUp={handleTouchEnd}
-              onMouseLeave={handleTouchEnd}
-            >
-              <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} maxSpace={albumArtMaxSpace && effectivePlayerType === 'albumArt'} />
-            </div>
-          </div>
-
-          {/* CONTROLS SECTION */}
-          <div className="home-panel area-controls text-white">
-            <div
-              className="d-flex flex-column align-items-center justify-content-center w-100 player-controls-container">
-              {/* Track info — sized to content only */}
-              <div className="track-info-group" style={{ width: 'clamp(300px, 95%, 99%)' }}>
-                <TrackInfo title={title} artist={artist} album={album} />
-              </div>
-
-              {/* Top half of spacer — pushes stream info toward center */}
-              <div className="controls-spacer" />
-
-              {/* Stream info — floats centered between track info and seekbar */}
-              <StreamInfo
-                trackType={trackType}
-                samplerate={samplerate}
-                bitdepth={bitdepth}
-                bitrate={bitrate}
-              />
-
-              {/* Bottom half of spacer */}
-              <div className="controls-spacer" />
-
-              <div className="m-auto seekbar-container-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
-                <PlayerSeekbar readOnly={!showPlayerControls} />
-              </div>
-
-              {showPlayerControls && (
-                <PlayerControls
-                  isPlaying={isPlaying}
-                  onPlayPause={togglePlay}
-                  onNext={next}
-                  onPrev={prev}
-                  shuffle={random}
-                  repeat={repeat}
-                  onShuffle={toggleRandom}
-                  onRepeat={toggleRepeat}
-                  onAddToPlaylist={() => setShowAddToPlaylist(true)}
-                  onShowPlaylist={() => setShowPlaylist(true)}
-                  onBrowse={() => setShowBrowse(true)}
-                  isFavourite={isFavourite}
-                  onToggleFavourite={toggleFavourite}
-                />
-              )}
-
-              {!disableVolumeControl && showPlayerControls && (
-                <div className="volume-manager-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
-                  <VolumeManager
-                    volume={volume}
-                    mute={mute}
-                    onVolumeChange={setVolume}
-                    onMute={toggleMute}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* VISUALIZATION SECTION */}
-          {showViz && (
-            <div className="spectrum-panel area-spectrum" ref={vizContainerRef}>
-              {vizType === 'spectrum' && (
-                <SpectrumAnalyzer
-                  stopped={vizStopped}
-                  onResumed={onVizResumed}
-                  streamUrl={SPECTRUM_STREAM_URL}
-                  options={spectrumOptions}
-                />
-              )}
-              {vizType === 'vuMeter1' && (
-                <VUMeter
-                  variant={1}
-                  needleColor="#0d0d0d"
-                  stopped={vizStopped}
-                  onResumed={onVizResumed}
-                  streamUrl={SPECTRUM_STREAM_URL}
-                />
-              )}
-              {vizType === 'vuMeter2' && (
-                <VUMeter
-                  variant={2}
-                  needleColor="lightblue"
-                  stopped={vizStopped}
-                  onResumed={onVizResumed}
-                  streamUrl={SPECTRUM_STREAM_URL}
-                />
-              )}
-              {vizType === 'vuMeter3' && (
-                <VUMeter
-                  variant={3}
-                  needleColor="#0d0d0d"
-                  stopped={vizStopped}
-                  onResumed={onVizResumed}
-                  streamUrl={SPECTRUM_STREAM_URL}
-                />
-              )}
-              {vizType === 'vuMeter4' && (
-                <VUMeter
-                  variant={4}
-                  needleColor="silver"
-                  stopped={vizStopped}
-                  onResumed={onVizResumed}
-                  streamUrl={SPECTRUM_STREAM_URL}
-                />
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Playlist Slide Panel */}
-        <Playlist
-          open={showPlaylist}
-          onClose={() => setShowPlaylist(false)}
-          queue={queue}
-          currentPosition={position}
-          isPlaying={isPlaying}
-          onPlay={playFromQueue}
-          onRemove={removeFromQueue}
-          onClear={clearQueue}
-          host={VOLUMIO_BASE_URL}
-        />
-
-        {/* Browse Dialog */}
-        <BrowseDialog
-          open={showBrowse}
-          onClose={() => setShowBrowse(false)}
-        />
-
-        {/* Add to Playlist Dialog */}
-        <AddToPlaylistDialog
-          open={showAddToPlaylist}
-          onClose={() => setShowAddToPlaylist(false)}
-          track={{
-            title,
-            artist,
-            album,
-            albumart,
-            uri: queue[position]?.uri,
-            service,
+    <div className="container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100">
+      {/* Background Blur */}
+      {fullAlbumArt && (
+        <div
+          className="position-absolute top-0 start-0 w-100 h-100"
+          style={{
+            backgroundImage: `url(${fullAlbumArt})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'blur(80px) brightness(0.3)',
+            zIndex: 0,
           }}
         />
+      )}
+
+      {/* Main Grid Layout */}
+      <div className={`home-grid position-relative ${!showViz ? 'no-viz' : ''} ${albumArtMaxSpace && effectivePlayerType === 'albumArt' ? 'album-art-max-space' : ''}`} style={{ zIndex: 1 }}>
+        {/* PLAYER SECTION */}
+        <div className="home-panel area-player">
+          <div
+            className="player-responsive"
+            onDoubleClick={cyclePlayer}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleTouchStart}
+            onMouseUp={handleTouchEnd}
+            onMouseLeave={handleTouchEnd}
+          >
+            <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} maxSpace={albumArtMaxSpace && effectivePlayerType === 'albumArt'} />
+          </div>
+        </div>
+
+        {/* CONTROLS SECTION */}
+        <div className="home-panel area-controls text-white">
+          <div
+            className="d-flex flex-column align-items-center justify-content-center w-100 player-controls-container">
+            {/* Track info — sized to content only */}
+            <div className="track-info-group" style={{ width: 'clamp(300px, 95%, 99%)' }}>
+              <TrackInfo title={title} artist={artist} album={album} />
+            </div>
+
+            {/* Top half of spacer — pushes stream info toward center */}
+            <div className="controls-spacer" />
+
+            {/* Stream info — floats centered between track info and seekbar */}
+            <StreamInfo
+              trackType={trackType}
+              samplerate={samplerate}
+              bitdepth={bitdepth}
+              bitrate={bitrate}
+            />
+
+            {/* Bottom half of spacer */}
+            <div className="controls-spacer" />
+
+            <div className="m-auto seekbar-container-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
+              <PlayerSeekbar readOnly={!showPlayerControls} />
+            </div>
+
+            {showPlayerControls && (
+              <PlayerControls
+                isPlaying={isPlaying}
+                onPlayPause={togglePlay}
+                onNext={next}
+                onPrev={prev}
+                shuffle={random}
+                repeat={repeat}
+                onShuffle={toggleRandom}
+                onRepeat={toggleRepeat}
+                onAddToPlaylist={() => setShowAddToPlaylist(true)}
+                onShowPlaylist={() => setShowPlaylist(true)}
+                onBrowse={() => setShowBrowse(true)}
+                isFavourite={isFavourite}
+                onToggleFavourite={toggleFavourite}
+              />
+            )}
+
+            {!disableVolumeControl && showPlayerControls && (
+              <div className="volume-manager-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
+                <VolumeManager
+                  volume={volume}
+                  mute={mute}
+                  onVolumeChange={setVolume}
+                  onMute={toggleMute}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* VISUALIZATION SECTION */}
+        {showViz && (
+          <div className="spectrum-panel area-spectrum" ref={vizContainerRef}>
+            {vizType === 'spectrum' && (
+              <SpectrumAnalyzer
+                stopped={vizStopped}
+                onResumed={onVizResumed}
+                streamUrl={SPECTRUM_STREAM_URL}
+                options={spectrumOptions}
+              />
+            )}
+            {vizType === 'vuMeter1' && (
+              <VUMeter
+                variant={1}
+                needleColor="#0d0d0d"
+                stopped={vizStopped}
+                onResumed={onVizResumed}
+                streamUrl={SPECTRUM_STREAM_URL}
+              />
+            )}
+            {vizType === 'vuMeter2' && (
+              <VUMeter
+                variant={2}
+                needleColor="lightblue"
+                stopped={vizStopped}
+                onResumed={onVizResumed}
+                streamUrl={SPECTRUM_STREAM_URL}
+              />
+            )}
+            {vizType === 'vuMeter3' && (
+              <VUMeter
+                variant={3}
+                needleColor="#0d0d0d"
+                stopped={vizStopped}
+                onResumed={onVizResumed}
+                streamUrl={SPECTRUM_STREAM_URL}
+              />
+            )}
+            {vizType === 'vuMeter4' && (
+              <VUMeter
+                variant={4}
+                needleColor="silver"
+                stopped={vizStopped}
+                onResumed={onVizResumed}
+                streamUrl={SPECTRUM_STREAM_URL}
+              />
+            )}
+          </div>
+        )}
       </div>
-    </SeekProvider>
+
+      {/* Playlist Slide Panel */}
+      <Playlist
+        open={showPlaylist}
+        onClose={() => setShowPlaylist(false)}
+        queue={queue}
+        currentPosition={position}
+        isPlaying={isPlaying}
+        onPlay={playFromQueue}
+        onRemove={removeFromQueue}
+        onClear={clearQueue}
+        host={VOLUMIO_BASE_URL}
+      />
+
+      {/* Browse Dialog */}
+      <BrowseDialog
+        open={showBrowse}
+        onClose={() => setShowBrowse(false)}
+      />
+
+      {/* Add to Playlist Dialog */}
+      <AddToPlaylistDialog
+        open={showAddToPlaylist}
+        onClose={() => setShowAddToPlaylist(false)}
+        track={{
+          title,
+          artist,
+          album,
+          albumart,
+          uri: queue[position]?.uri,
+          service,
+        }}
+      />
+    </div>
   );
 };
 

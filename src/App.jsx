@@ -1,5 +1,6 @@
 import { SocketProvider } from './contexts/SocketContext';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { SeekProvider } from './contexts/SeekContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Player from './pages/Player';
@@ -30,7 +31,9 @@ const AppContent = () => {
   return (
     <SocketProvider>
       <ThemeProvider>
-        <AppInner />
+        <SeekProvider>
+          <AppInner />
+        </SeekProvider>
       </ThemeProvider>
     </SocketProvider>
   );
