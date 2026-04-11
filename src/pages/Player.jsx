@@ -79,6 +79,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const albumArtMaxSpace = pluginConfig?.albumArtMaxSpace === true;
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
+  const backgroundColor = pluginConfig?.backgroundColor || '';
 
   const spectrumOptions = useMemo(() => {
     const raw = pluginConfig?.spectrumOptions;
@@ -209,8 +210,13 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
 
   return (
     <div className="container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100">
-      {/* Background Blur */}
-      {fullAlbumArt && (
+      {/* Background */}
+      {backgroundColor ? (
+        <div
+          className="position-absolute top-0 start-0 w-100 h-100"
+          style={{ backgroundColor, zIndex: 0 }}
+        />
+      ) : fullAlbumArt ? (
         <div
           className="position-absolute top-0 start-0 w-100 h-100"
           style={{
@@ -221,7 +227,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
             zIndex: 0,
           }}
         />
-      )}
+      ) : null}
 
       {/* Main Grid Layout */}
       <div className={`home-grid position-relative ${!showViz ? 'no-viz' : ''} ${albumArtMaxSpace && effectivePlayerType === 'albumArt' ? 'album-art-max-space' : ''}`} style={{ zIndex: 1 }}>

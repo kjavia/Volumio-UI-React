@@ -122,6 +122,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
+  const backgroundColor = pluginConfig?.backgroundColor || '';
 
   const spectrumOptions = useMemo(() => {
     const raw = pluginConfig?.spectrumOptions;
@@ -229,12 +230,14 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
   return (
     <div className="lsp-root">
       {/* ── Background wallpaper ── */}
-      {fullAlbumArt && (
+      {backgroundColor ? (
+        <div className="lsp-bg" style={{ backgroundColor, filter: 'none', transform: 'none' }} />
+      ) : fullAlbumArt ? (
         <div
           className="lsp-bg"
           style={{ backgroundImage: `url(${fullAlbumArt})` }}
         />
-      )}
+      ) : null}
 
       {/* ── Content ── */}
       <div className="lsp-content">
