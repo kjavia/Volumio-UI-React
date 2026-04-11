@@ -145,14 +145,15 @@
     --font-tech:    'DS Digital', 'Share Tech Mono', 'Courier New', monospace;   /* tech/data labels */
 
     /* VT323 renders large — calibrate sizes down one step */
-    --text-xs:    0.75rem;    /* 12px equivalent */
-    --text-sm:    0.875rem;   /* 14px */
-    --text-base:  1rem;       /* 16px */
-    --text-lg:    1.25rem;
-    --text-xl:    1.5rem;
-    --text-2xl:   1.875rem;
-    --text-3xl:   2.25rem;
-    --text-4xl:   3rem;
+    /* clamp() makes every rem-based rule responsive across all viewport widths */
+    --text-xs:    clamp(0.75rem,  0.7vw,  1rem);
+    --text-sm:    clamp(0.875rem, 0.9vw,  1.25rem);
+    --text-base:  clamp(1rem,     1.05vw, 1.5rem);
+    --text-lg:    clamp(1.25rem,  1.3vw,  1.875rem);
+    --text-xl:    clamp(1.5rem,   1.6vw,  2.25rem);
+    --text-2xl:   clamp(1.875rem, 2vw,    2.75rem);
+    --text-3xl:   clamp(2.25rem,  2.5vw,  3.5rem);
+    --text-4xl:   clamp(3rem,     3.2vw,  4.5rem);
 
     --leading-tight:   1.0;
     --leading-normal:  1.2;

@@ -92,7 +92,7 @@ const Playlist = ({ open, onClose, queue, currentPosition, isPlaying, onPlay, on
 
                 {/* Remove button */}
                 <button
-                  className="btn btn-link p-0 playlist-remove"
+                  className="btn btn-link playlist-remove"
                   onClick={(e) => {
                     e.stopPropagation();
                     onRemove(index);

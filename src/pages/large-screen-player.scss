@@ -350,16 +350,45 @@
     height: 160px;
   }
 
-  /* Vertical range input via appearance + writing-mode trick */
+  /* Vertical range input — standardized writing-mode approach */
+  /* Override any theme input[type='range'] appearance resets */
   &__range {
-    -webkit-appearance: slider-vertical;
-    appearance: slider-vertical;
-    writing-mode: vertical-lr;
-    direction: rtl;
-    width: 8px;
-    height: 140px;
+    writing-mode: vertical-lr !important;
+    direction: rtl !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    width: 8px !important;
+    height: 140px !important;
     cursor: pointer;
     accent-color: var(--color-primary, #ff7a00);
+    // Ensure the track renders as a thin vertical bar across all themes
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    padding: 0;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+
+    &::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
   }
 
   &__value {

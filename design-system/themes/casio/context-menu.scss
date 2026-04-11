@@ -84,7 +84,7 @@
     align-items: center;
     gap: 8px;
     padding: 5px 14px 5px 12px;
-    font-size: var(--text-base);
+    font-size: var(--text-base) !important;
     color: var(--casio-on-dark);
     cursor: pointer;
     background: transparent;
@@ -117,7 +117,7 @@
     }
 
     .material-icons {
-        font-size: 16px;
+        font-size: clamp(16px, 1.4vw, 2rem);
         color: var(--casio-on-dark-dim);
     }
 }

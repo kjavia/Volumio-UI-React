@@ -4282,11 +4282,12 @@ input[type=range]::-webkit-slider-runnable-track {
   border-left: 2px solid var(--win95-highlight);
   border-bottom: 2px solid var(--win95-dark);
   border-right: 2px solid var(--win95-dark);
-  padding: 0;
+  padding: 15px !important;
   cursor: pointer;
 }
 .playlist-remove .material-icons {
   font-size: 13px;
+  line-height: 1;
 }
 .playlist-remove:active {
   border-top: 2px solid var(--win95-dark);
