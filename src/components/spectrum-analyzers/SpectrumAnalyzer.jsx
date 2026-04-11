@@ -95,7 +95,12 @@ const SpectrumAnalyzer = forwardRef(({ streamUrl, gradient = 'prism', initialMod
 
     let entry = mediaSourceCache.get(audio);
     if (!entry) {
-      const ctx = new AudioContext({ sampleRate: 44100 });
+      // Use sinkId:{type:'none'} so Chromium never opens the ALSA hardware
+      // output device for this context.  On the Volumio kiosk (Chromium ≥108
+      // without PulseAudio), creating a normal AudioContext grabs the ALSA
+      // device before MPD can open it, causing "Device or resource busy".
+      // Older browsers silently ignore the unknown sinkId option.
+      const ctx = new AudioContext({ sampleRate: 44100, sinkId: { type: 'none' } });
       const sourceNode = ctx.createMediaElementSource(audio);
       entry = { ctx, sourceNode };
       mediaSourceCache.set(audio, entry);
