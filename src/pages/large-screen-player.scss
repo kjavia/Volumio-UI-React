@@ -50,6 +50,12 @@
   margin-bottom: 1.5rem;
 }
 
+/* Row 2 gets a bit of breathing room below the title */
+.lsp-top__row2 + .lsp-top__row2,
+.lsp-top__row1 + .lsp-top__row2 {
+  margin-top: 0.4rem;
+}
+
 /* Row 1: title (left) + service logo (right) */
 .lsp-top__row1 {
   display: flex;
@@ -100,7 +106,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 0.6rem;
+  margin-top: 1rem;
 }
 
 /* Stream info variant for large screen: left-aligned, larger, always white */
