@@ -16,22 +16,20 @@
     background: var(--casio-body);
 
     /* Subtle molding ridges via repeating gradient */
-    background-image: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 4px,
-        rgba(255, 255, 255, 0.012) 4px,
-        rgba(255, 255, 255, 0.012) 5px
-    );
+    background-image: repeating-linear-gradient(to bottom,
+            transparent 0px,
+            transparent 4px,
+            rgba(255, 255, 255, 0.012) 4px,
+            rgba(255, 255, 255, 0.012) 5px);
 
     border-radius: var(--radius-lg);
     padding: 20px 24px 24px;
 
     /* Plastic casing bevel */
-    border-top:   3px solid var(--casio-sheen);
-    border-left:  3px solid var(--casio-sheen);
+    border-top: 3px solid var(--casio-sheen);
+    border-left: 3px solid var(--casio-sheen);
     border-bottom: 3px solid var(--casio-edge);
-    border-right:  3px solid var(--casio-edge);
+    border-right: 3px solid var(--casio-edge);
 
     box-shadow:
         0 6px 20px rgba(0, 0, 0, 0.7),
@@ -69,17 +67,22 @@
     padding: 10px 14px;
 
     /* Chrome bezel — thin sheen rim + shadow rim = inset ring effect */
-    border-top:   1px solid var(--casio-sheen);
-    border-left:  1px solid var(--casio-sheen);
+    border-top: 1px solid var(--casio-sheen);
+    border-left: 1px solid var(--casio-sheen);
     border-bottom: 2px solid var(--casio-edge);
-    border-right:  2px solid var(--casio-edge);
+    border-right: 2px solid var(--casio-edge);
 
     box-shadow:
-        inset 0 6px 20px rgba(0, 0, 0, 0.65),   /* deep top shadow — recessed */
-        inset 0 0 8px rgba(0, 0, 0, 0.40),       /* ambient inner darkness */
-        0 0 0 2px var(--casio-edge),              /* outer dark chrome band */
-        0 0 0 4px var(--casio-sheen),             /* outer chrome rim highlight */
-        0 4px 16px rgba(0, 0, 0, 0.50);          /* outer drop shadow */
+        inset 0 6px 20px rgba(0, 0, 0, 0.65),
+        /* deep top shadow — recessed */
+        inset 0 0 8px rgba(0, 0, 0, 0.40),
+        /* ambient inner darkness */
+        0 0 0 2px var(--casio-edge),
+        /* outer dark chrome band */
+        0 0 0 4px var(--casio-sheen),
+        /* outer chrome rim highlight */
+        0 4px 16px rgba(0, 0, 0, 0.50);
+    /* outer drop shadow */
 
     /* Glass cover effect */
     position: relative;
@@ -90,11 +93,9 @@
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-            155deg,
-            rgba(68, 221, 168, 0.06) 0%,
-            transparent 55%
-        );
+        background: linear-gradient(155deg,
+                rgba(68, 221, 168, 0.06) 0%,
+                transparent 55%);
         pointer-events: none;
         border-radius: inherit;
         z-index: 5;
@@ -108,12 +109,10 @@
         left: 8%;
         right: 8%;
         height: 22%;
-        background: linear-gradient(
-            to bottom,
-            rgba(200, 255, 230, 0.22) 0%,
-            rgba(140, 230, 200, 0.07) 60%,
-            transparent 100%
-        );
+        background: linear-gradient(to bottom,
+                rgba(200, 255, 230, 0.22) 0%,
+                rgba(140, 230, 200, 0.07) 60%,
+                transparent 100%);
         pointer-events: none;
         border-radius: 0 0 50% 50% / 0 0 10px 10px;
         z-index: 6;
@@ -178,50 +177,56 @@
 .track-info-group {
     border-radius: 6px;
     padding: 14px 18px 12px;
-    position: relative; /* needed for ::before glass sheen */
-    overflow: hidden;   /* clip sheen to the panel boundary */
+    position: relative;
+    /* needed for ::before glass sheen */
+    overflow: hidden;
+    /* clip sheen to the panel boundary */
 
     /* Glass layers baked into background — no pseudo-elements needed:
        Layer 1 (top): white-to-transparent arc = top dome reflection
        Layer 2 (bottom): glint stripe at the very bottom edge
        Layer 3: base light-grey surface gradient */
     background-image:
-        radial-gradient(
-            ellipse 80% 38% at 50% 0%,
+        radial-gradient(ellipse 80% 38% at 50% 0%,
             rgba(255, 255, 255, 0.52) 0%,
             rgba(255, 255, 255, 0.10) 55%,
-            transparent 100%
-        ),
-        linear-gradient(
-            to top,
+            transparent 100%),
+        linear-gradient(to top,
             rgba(255, 255, 255, 0.22) 0%,
-            transparent 14%
-        ),
-        linear-gradient(
-            160deg,
+            transparent 14%),
+        linear-gradient(160deg,
             #d8e0dc 0%,
             #c8d4cf 40%,
-            #b8c8c2 100%
-        );
+            #b8c8c2 100%);
     background-size: cover;
 
     /* Outer chrome band: dark border + sheen inset ring = watch casing */
-    border-top:   2px solid var(--casio-sheen);
-    border-left:  2px solid var(--casio-sheen);
+    border-top: 2px solid var(--casio-sheen);
+    border-left: 2px solid var(--casio-sheen);
     border-bottom: 3px solid var(--casio-edge);
-    border-right:  3px solid var(--casio-edge);
+    border-right: 3px solid var(--casio-edge);
 
     box-shadow:
-        0 0 0 1px var(--casio-edge),              /* outermost dark band */
-        0 0 0 4px var(--casio-silver),             /* chrome ring — wider */
-        0 0 0 6px rgba(0, 0, 0, 0.65),            /* shadow under chrome — deeper */
-        0 8px 20px rgba(0, 0, 0, 0.55),            /* drop shadow — more lift */
-        inset 0 10px 30px rgba(0, 0, 0, 0.35),    /* deep inset — stronger recession */
-        inset 0 2px 6px rgba(0, 0, 0, 0.25),      /* top inner shadow — sharper */
-        inset 0 -8px 18px rgba(0, 0, 0, 0.40),    /* bottom inner shadow — pushes base deep */
-        inset 6px 0 14px rgba(0, 0, 0, 0.20),     /* left wall depth */
-        inset -6px 0 14px rgba(0, 0, 0, 0.20),    /* right wall depth */
-        inset 0 3px 0 rgba(255, 255, 255, 0.60);  /* bright glass rim — more prominent */
+        0 0 0 1px var(--casio-edge),
+        /* outermost dark band */
+        0 0 0 4px var(--casio-silver),
+        /* chrome ring — wider */
+        0 0 0 6px rgba(0, 0, 0, 0.65),
+        /* shadow under chrome — deeper */
+        0 8px 20px rgba(0, 0, 0, 0.55),
+        /* drop shadow — more lift */
+        inset 0 10px 30px rgba(0, 0, 0, 0.35),
+        /* deep inset — stronger recession */
+        inset 0 2px 6px rgba(0, 0, 0, 0.25),
+        /* top inner shadow — sharper */
+        inset 0 -8px 18px rgba(0, 0, 0, 0.40),
+        /* bottom inner shadow — pushes base deep */
+        inset 6px 0 14px rgba(0, 0, 0, 0.20),
+        /* left wall depth */
+        inset -6px 0 14px rgba(0, 0, 0, 0.20),
+        /* right wall depth */
+        inset 0 3px 0 rgba(255, 255, 255, 0.60);
+    /* bright glass rim — more prominent */
 
     /* Glass sheen overlay — convex highlight spanning the top ~45% */
     &::before {
@@ -231,25 +236,21 @@
         border-radius: inherit;
         background:
             /* Top convex dome — bright centre tapering to the sides */
-            radial-gradient(
-                ellipse 90% 50% at 50% -5%,
+            radial-gradient(ellipse 90% 50% at 50% -5%,
                 rgba(255, 255, 255, 0.55) 0%,
                 rgba(255, 255, 255, 0.18) 40%,
-                transparent 70%
-            ),
+                transparent 70%),
             /* Angled streak from top-left — light source glint */
-            linear-gradient(
-                128deg,
+            linear-gradient(128deg,
                 rgba(255, 255, 255, 0.30) 0%,
                 rgba(255, 255, 255, 0.08) 30%,
-                transparent 55%
-            );
+                transparent 55%);
         pointer-events: none;
         z-index: 1;
     }
 
     /* Children sit above the sheen */
-    > * {
+    >* {
         position: relative;
         z-index: 2;
     }
@@ -318,12 +319,10 @@
 
     /* Domed dark key */
     background:
-        radial-gradient(
-            ellipse 80% 55% at 50% 20%,
+        radial-gradient(ellipse 80% 55% at 50% 20%,
             #404855 0%,
             #2a3040 50%,
-            #1e2530 100%
-        );
+            #1e2530 100%);
     box-shadow:
         0 5px 0 0 #0d1018,
         0 6px 10px rgba(0, 0, 0, 0.6),
@@ -333,12 +332,10 @@
 
     &:hover {
         background:
-            radial-gradient(
-                ellipse 80% 55% at 50% 20%,
+            radial-gradient(ellipse 80% 55% at 50% 20%,
                 #4a5260 0%,
                 #323848 50%,
-                #242c3a 100%
-            );
+                #242c3a 100%);
     }
 
     /* Play button — same key shape, orange accent ring */
@@ -359,12 +356,10 @@
 
     &:active {
         background:
-            radial-gradient(
-                ellipse 80% 55% at 50% 20%,
+            radial-gradient(ellipse 80% 55% at 50% 20%,
                 #303840 0%,
                 #202830 50%,
-                #181e26 100%
-            );
+                #181e26 100%);
         box-shadow:
             0 1px 0 0 #0d1018,
             0 2px 5px rgba(0, 0, 0, 0.5),
@@ -408,7 +403,7 @@
     height: 4px;
     border-radius: 0;
     background: var(--casio-ridge);
-    border-top:  1px solid var(--casio-edge);
+    border-top: 1px solid var(--casio-edge);
     border-bottom: 1px solid var(--casio-sheen);
     -webkit-appearance: none;
     appearance: none;
@@ -421,10 +416,10 @@
         height: 20px;
         border-radius: 2px;
         background: var(--casio-key-face);
-        border-top:   2px solid var(--casio-key-hi);
-        border-left:  2px solid var(--casio-key-hi);
+        border-top: 2px solid var(--casio-key-hi);
+        border-left: 2px solid var(--casio-key-hi);
         border-bottom: 2px solid var(--casio-key-sh);
-        border-right:  2px solid var(--casio-key-sh);
+        border-right: 2px solid var(--casio-key-sh);
         cursor: pointer;
     }
 }
@@ -510,4 +505,10 @@
     color: var(--casio-on-dark-dim);
     text-transform: uppercase;
     letter-spacing: var(--tracking-wider);
+}
+
+/* ─── Volume label spacing ─────────────────────────────────────────────── */
+.volume-manager .small {
+    min-width: 3.5ch;
+    padding-left: 0.4rem;
 }

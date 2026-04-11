@@ -3122,6 +3122,12 @@ input[type=range]::-webkit-slider-thumb {
   letter-spacing: var(--tracking-wider);
 }
 
+/* ─── Volume label spacing ─────────────────────────────────────────────── */
+.volume-manager .small {
+  min-width: 3.5ch;
+  padding-left: 0.4rem;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE — 80s Casio Theme

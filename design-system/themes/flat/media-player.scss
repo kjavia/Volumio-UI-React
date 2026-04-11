@@ -94,11 +94,11 @@
 }
 
 .responsive-title {
-  font-size: clamp(1rem, 4.5cqw, 3rem);
+    font-size: clamp(1rem, 4.5cqw, 3rem);
 }
 
 .responsive-artist {
-  font-size: clamp(0.75rem, 3.5cqw, 2.5rem);
+    font-size: clamp(0.75rem, 3.5cqw, 2.5rem);
 }
 
 .responsive-album {
@@ -212,9 +212,16 @@
 
 /* ─── Volume Slider ────────────────────────────────────────────────────── */
 .volume-manager {
-  .slider-fill {
-    height: 8px;;
-  }
+    .slider-fill {
+        height: 8px;
+        ;
+    }
+
+    /* Ensure the value label never collapses flush against the slider */
+    .small {
+        min-width: 3.5ch;
+        padding-left: 0.4rem;
+    }
 }
 
 /* ─── Player Controls Container ────────────────────────────────────────── */

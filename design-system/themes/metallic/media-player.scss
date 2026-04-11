@@ -10,13 +10,11 @@
     height: 100vh;
     background: var(--bg-color);
     background-image:
-        repeating-linear-gradient(
-            90deg,
-            rgba(255,255,255,0.02) 0px,
-            rgba(255,255,255,0.02) 1px,
+        repeating-linear-gradient(90deg,
+            rgba(255, 255, 255, 0.02) 0px,
+            rgba(255, 255, 255, 0.02) 1px,
             transparent 1px,
-            transparent 4px
-        ),
+            transparent 4px),
         linear-gradient(180deg, #111 0%, #050505 100%);
 }
 
@@ -38,10 +36,11 @@
     background: var(--panel-bg-dark);
     border-radius: 12px;
     box-shadow:
-        inset 0 1px 3px rgba(0,0,0,0.8),
-        0 1px 0 rgba(255,255,255,0.1);
+        inset 0 1px 3px rgba(0, 0, 0, 0.8),
+        0 1px 0 rgba(255, 255, 255, 0.1);
     border: 1px solid #000;
 }
+
 /* ─── Media Containers ────────────────────────────────────────────────── */
 .album-art-container,
 .vinyl-container,
@@ -55,6 +54,7 @@
     position: relative;
     margin: 0 auto;
 }
+
 .volume-control {
     width: 100%;
     display: flex;
@@ -66,17 +66,17 @@
     border: 1px solid #000;
     box-shadow:
         inset 0 0 10px #000,
-        0 1px 0 rgba(255,255,255,0.05);
+        0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .track-info {
     text-align: center;
     padding: 20px;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 12px;
     width: 95%;
-    border: 1px solid rgba(0,0,0,0.5);
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
 .track-title {
@@ -86,7 +86,7 @@
     color: var(--color-white);
     margin: 0 0 8px 0;
     text-shadow:
-        0 0 10px rgba(255,255,255,0.3),
+        0 0 10px rgba(255, 255, 255, 0.3),
         0 2px 0 #000;
     letter-spacing: 0.5px;
     white-space: nowrap;
@@ -152,8 +152,8 @@
     height: 280px;
     border-radius: 12px;
     box-shadow:
-        0 10px 30px rgba(0,0,0,0.8),
-        inset 0 0 0 1px rgba(255,255,255,0.1);
+        0 10px 30px rgba(0, 0, 0, 0.8),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
     object-fit: cover;
     border: 4px solid #111;
     background: #000;
@@ -181,28 +181,28 @@
     background-color: #050505;
     border-radius: 10px;
     box-shadow:
-        inset 0 2px 5px rgba(0,0,0,0.9),
-        inset 0 0 2px rgba(0,0,0,1),
-        0 1px 0 rgba(255,255,255,0.1);
+        inset 0 2px 5px rgba(0, 0, 0, 0.9),
+        inset 0 0 2px rgba(0, 0, 0, 1),
+        0 1px 0 rgba(255, 255, 255, 0.1);
     position: relative;
     cursor: pointer;
     border: 1px solid #000;
-    overflow: hidden; /* Keep fill inside */
+    overflow: hidden;
+    /* Keep fill inside */
 }
 
 .slider-fill {
     height: 100%;
-    background: linear-gradient(
-        180deg,
-        var(--color-primary-light) 0%,
-        var(--color-primary) 50%,
-        var(--color-primary-deep) 100%
-    );
+    background: linear-gradient(180deg,
+            var(--color-primary-light) 0%,
+            var(--color-primary) 50%,
+            var(--color-primary-deep) 100%);
     border-radius: 10px;
-    width: 0%; /* Dynamic */
+    width: 0%;
+    /* Dynamic */
     position: relative;
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
         0 0 10px var(--color-primary);
 }
 
@@ -215,10 +215,41 @@
     transform: translateY(-50%);
     width: 4px;
     height: 80%;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 2px;
     box-shadow: 0 0 5px #fff;
     opacity: 0.8;
 }
-.read-only .slider-fill::after { display: none; }
-.read-only .slider-track { cursor: default; }
+
+.read-only .slider-fill::after {
+    display: none;
+}
+
+.read-only .slider-track {
+    cursor: default;
+}
+
+/* ─── Mobile compact (portrait ≤ 768px) ──────────────────────────────── */
+/* At 393×842 the controls panel is ~421px tall. The theme's generous padding
+   on .track-info (20px), .volume-control (16px top/bottom), and the
+   .player-controls (24px padding / 20px gap) push elements below the fold.
+   Scale everything down so nothing gets clipped. */
+@media (max-width: 768px) {
+    .track-info {
+        padding: 10px 14px;
+    }
+
+    .player-controls {
+        padding: 10px 16px;
+        gap: 10px;
+    }
+
+    .volume-control {
+        padding: 10px 14px;
+    }
+
+    .track-info-group {
+        width: calc(100% - 1rem) !important;
+        margin-inline: 0.5rem;
+    }
+}
