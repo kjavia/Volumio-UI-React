@@ -9,6 +9,17 @@
   aspect-ratio: 1.4;
   position: relative;
   margin: 0 auto;
+
+  /* Leave room for the protruding hinge at small/medium sizes */
+  @media (max-width: 768px) {
+    width: 90%;
+    max-width: 420px;
+  }
+
+  @media (min-width: 769px) and (max-width: 1199px) {
+    width: 85%;
+    max-width: 460px;
+  }
 }
 
 /* The CD Jewel Case Cover */
@@ -16,7 +27,7 @@
   height: 100%;
   aspect-ratio: 1/1;
   width: auto;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   /* Glassy feel */
   border-radius: 4px;
   z-index: 10;
@@ -25,27 +36,27 @@
   left: 1.3%;
   top: 0;
   box-shadow:
-    5px 5px 15px rgba(0,0,0,0.3),
-    inset 1px 1px 0 rgba(255,255,255,0.3),
-    inset -1px -1px 0 rgba(0,0,0,0.2);
+    5px 5px 15px rgba(0, 0, 0, 0.3),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.3),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Hinge detail on the left of jewel case */
 .cd-jewel-case::before {
   content: '';
   position: absolute;
-  left: 0;
+  left: -20px;
   top: 0;
   bottom: 0;
-  width: 12px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(0,0,0,0.2), rgba(255,255,255,0.1));
-  z-index: 12;
-  border-right: 1px solid rgba(0,0,0,0.3);
+  width: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 3px 0 0 3px;
 }
 
 .case-art {
@@ -53,19 +64,16 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-  /* Placeholder art pattern */
   background-color: #3a3a3a;
-  background-image: repeating-linear-gradient(
-    135deg,
-    #0d47a1,
-    #0d47a1 10px,
-    #1565c0 10px,
-    #1565c0 20px
-  );
+  background-image: repeating-linear-gradient(135deg,
+      #0d47a1,
+      #0d47a1 10px,
+      #1565c0 10px,
+      #1565c0 20px);
   /* Inset slightly for case borders */
-  margin: 2px 2px 2px 14px;
+  margin: 2px;
   /* Left margin for hinge area */
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .case-art-img {
@@ -84,17 +92,15 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient(
-    125deg,
-    rgba(255,255,255,0.2) 0%,
-    transparent 30%,
-    transparent 45%,
-    rgba(255,255,255,0.1) 48%,
-    rgba(255,255,255,0.2) 50%,
-    rgba(255,255,255,0.1) 52%,
-    transparent 60%,
-    transparent 100%
-  );
+  background: linear-gradient(125deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 30%,
+      transparent 45%,
+      rgba(255, 255, 255, 0.1) 48%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.1) 52%,
+      transparent 60%,
+      transparent 100%);
   z-index: 11;
   pointer-events: none;
 }
@@ -107,10 +113,11 @@
   border-radius: 50%;
   position: absolute;
   top: 2%;
-  left: 1.3%; /* matches jewel-case offset — keeps assembly centred */
+  left: 1.3%;
+  /* matches jewel-case offset — keeps assembly centred */
   z-index: 1;
   /* Behind case */
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 
   /* The "sticking out" mechanism */
   /* Disc is shifted right so it peeks from behind the jewel case.
@@ -128,32 +135,41 @@
   overflow: hidden;
 
   /* Iridescent CD Surface */
-  background-image:
-    radial-gradient(circle, transparent 60%, rgba(0,0,0,0.1) 68%, transparent 70%),
-    conic-gradient(
-      from 0deg,
-      transparent 0%,
-      rgba(255, 0, 0, 0.15) 10%,
-      rgba(255, 255, 0, 0.15) 20%,
-      transparent 30%,
-      rgba(0, 255, 255, 0.15) 50%,
-      rgba(0, 0, 255, 0.15) 65%,
-      transparent 80%,
-      rgba(255, 0, 255, 0.15) 90%,
-      transparent 100%
-    ),
-    conic-gradient(
-      from 180deg,
-      transparent 0%,
-      #ffffff 15%,
-      #bdc3c7 30%,
-      #95a5a6 45%,
-      #bdc3c7 60%,
-      #ffffff 75%,
-      #bdc3c7 90%,
-      transparent 100%
-    );
-  background-blend-mode: normal, overlay, normal;
+  background-image: radial-gradient(circle, transparent 60%, rgba(0, 0, 0, 0.15) 68%, transparent 70%),
+  conic-gradient(from 0deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 0, 0, 0.35) 36%,
+    rgba(255, 165, 0, 0.35) 38%,
+    rgba(255, 255, 0, 0.35) 40%,
+    rgba(0, 255, 0, 0.35) 42%,
+    rgba(0, 255, 255, 0.35) 44%,
+    rgba(0, 0, 255, 0.35) 46%,
+    rgba(128, 0, 255, 0.35) 48%,
+    rgba(255, 0, 255, 0.35) 50%,
+    transparent 52%,
+    transparent 83%,
+    rgba(255, 0, 0, 0.18) 84%,
+    rgba(255, 165, 0, 0.18) 86%,
+    rgba(255, 255, 0, 0.18) 88%,
+    rgba(0, 255, 0, 0.18) 90%,
+    rgba(0, 255, 255, 0.18) 92%,
+    rgba(0, 0, 255, 0.18) 94%,
+    rgba(128, 0, 255, 0.18) 96%,
+    rgba(255, 0, 255, 0.18) 98%,
+    transparent 100%),
+  conic-gradient(from 180deg,
+    transparent 0%,
+    #ffffff 15%,
+    #bdc3c7 30%,
+    #95a5a6 45%,
+    #bdc3c7 60%,
+    #ffffff 75%,
+    #bdc3c7 90%,
+    transparent 100%);
+  background-blend-mode: normal,
+  overlay,
+  normal;
 }
 
 /* Surface Shine/Glare on CD */
@@ -165,13 +181,11 @@
   bottom: 0;
   border-radius: 50%;
   z-index: 2;
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.3) 0%,
-    transparent 40%,
-    transparent 60%,
-    rgba(255,255,255,0.1) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.1) 100%);
   pointer-events: none;
 }
 
@@ -187,8 +201,8 @@
   border-radius: 50%;
   z-index: 3;
   backdrop-filter: blur(3px);
-  border: 1px solid rgba(255,255,255,0.2);
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Center Hole */
@@ -206,11 +220,12 @@
   border-radius: 50%;
   z-index: 4;
   box-shadow:
-    inset 1px 1px 2px rgba(0,0,0,0.9),
-    0 0 0 2px rgba(255,255,255,0.1);
+    inset 1px 1px 2px rgba(0, 0, 0, 0.9),
+    0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 @keyframes cd-cover-spin {
+
   /* Use % translation for responsiveness */
   /* 100px shift for 240px wide disc ~ 42% */
   from {

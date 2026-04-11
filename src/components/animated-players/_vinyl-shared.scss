@@ -1,0 +1,30 @@
+// Shared vinyl disc texture — used by both VinylPlayer and VinylCoverPlayer.
+// Import this partial instead of duplicating these rules in each file.
+
+/* Groove rings etched into the disc surface */
+.vinyl-grooves {
+    position: absolute;
+    inset: 2%;
+    border-radius: 50%;
+    background: repeating-radial-gradient(#1a1a1a,
+            #1a1a1a 1px,
+            #000 2px,
+            #000 4px);
+    pointer-events: none;
+}
+
+/* Specular highlight — two narrow opposing arcs */
+.vinyl-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 4%,
+            transparent 8%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.3) 54%,
+            transparent 58%);
+    pointer-events: none;
+    z-index: 10;
+}

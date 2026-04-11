@@ -1,14 +1,16 @@
+@use 'vinyl-shared';
+
 /* VINYL STYLES */
 .vinyl-record {
   width: 95%;
   /* Adjust relative to container */
   height: 95%;
-  background-color: #000;
+  background-color: #000 !important;
   border-radius: 50%;
   position: relative;
   box-shadow:
-    0 10px 20px var(--shadow-40),
-    0 0 0 2px var(--color-gray-950);
+    0 10px 20px rgba(0, 0, 0, 0.8),
+    0 0 0 2px #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,45 +20,6 @@
 
 .vinyl-record.playing {
   animation-play-state: running;
-}
-
-/* Grooves (Texture) */
-.vinyl-grooves {
-  position: absolute;
-  top: 2%;
-  left: 2%;
-  right: 2%;
-  bottom: 2%;
-  border-radius: 50%;
-  background: repeating-radial-gradient(
-    #050505,
-    #050505 2px,
-    #000 3px,
-    #000 4px
-  );
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
-  pointer-events: none;
-}
-
-/* Shine / Reflection */
-.vinyl-shine {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.07) 3%,
-    transparent 5%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.07) 53%,
-    transparent 55%
-  );
-  pointer-events: none;
-  z-index: 10;
 }
 
 /* Center Label */
@@ -92,13 +55,11 @@
   inset: 0;
   border-radius: 50%;
   /* Placeholder pattern if no image */
-  background: repeating-linear-gradient(
-    45deg,
-    var(--color-red-vivid),
-    var(--color-red-vivid) 10px,
-    var(--color-red-deep) 10px,
-    var(--color-red-deep) 20px
-  );
+  background: repeating-linear-gradient(45deg,
+      var(--color-red-vivid),
+      var(--color-red-vivid) 10px,
+      var(--color-red-deep) 10px,
+      var(--color-red-deep) 20px);
 }
 
 /* Spindle Hole */
