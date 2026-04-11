@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSocket } from './SocketContext';
 
@@ -8,16 +8,50 @@ export const SeekProvider = ({ children }) => {
   const { socket } = useSocket();
   const [seek, setSeek] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [status, setStatus] = useState('stop');
+  const workerRef = useRef(null);
+
+  // Create the Web Worker once on mount — runs on a separate thread,
+  // immune to browser tab throttling that would degrade setInterval accuracy.
+  useEffect(() => {
+    const worker = new Worker(new URL('../utils/seekTimerWorker.js', import.meta.url));
+    worker.onmessage = (e) => {
+      if (e.data.event === 'seek') {
+        setSeek(e.data.seek);
+      }
+    };
+    workerRef.current = worker;
+    return () => {
+      worker.terminate();
+      workerRef.current = null;
+    };
+  }, []);
 
   useEffect(() => {
     if (!socket) return;
 
     const handlePushState = (data) => {
       if (!data) return;
-      setSeek(data.seek);
+      const seekVal = data.seek || 0;
+      const maxVal = (data.duration || 0) * 1000;
       setDuration(data.duration);
-      setStatus(data.status);
+      setSeek(seekVal);
+
+      const worker = workerRef.current;
+      if (!worker) return;
+
+      switch (data.status) {
+        case 'play':
+          worker.postMessage({ command: 'start', beginSeek: seekVal, max: maxVal });
+          break;
+        case 'pause':
+          worker.postMessage({ command: 'pause', pauseSeek: seekVal, max: maxVal });
+          break;
+        case 'stop':
+          worker.postMessage({ command: 'stop' });
+          break;
+        default:
+          break;
+      }
     };
 
     socket.on('pushState', handlePushState);
@@ -27,25 +61,15 @@ export const SeekProvider = ({ children }) => {
     };
   }, [socket]);
 
-  // Update seek periodically when playing to make UI fluid
-  // Skip for web radio (duration === 0) and stop when seek reaches duration
-  useEffect(() => {
-    let interval;
-    if (status === 'play' && duration > 0) {
-      interval = setInterval(() => {
-        setSeek((prev) => {
-          const next = prev + 1000;
-          return next <= duration * 1000 ? next : prev;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [status, duration]);
-
   const seekTo = (val) => {
     if (!socket) return;
     socket.emit('seek', val);
-    setSeek(val * 1000); // Optimistic update
+    // Optimistic update — also restart the worker from new position
+    const seekMs = val * 1000;
+    setSeek(seekMs);
+    if (workerRef.current) {
+      workerRef.current.postMessage({ command: 'start', beginSeek: seekMs, max: duration * 1000 });
+    }
   };
 
   const refreshState = () => {
