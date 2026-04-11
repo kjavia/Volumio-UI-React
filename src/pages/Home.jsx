@@ -135,7 +135,7 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz, i
 };
 
 const Home = () => {
-  const isLargeScreen = useMediaQuery('(min-width: 1980px)');
+  const isLargeScreen = useMediaQuery('(min-width: 1920px)');
   const [vizStopped, setVizStopped] = useState(false);
   const [forcePlayer, setForcePlayer] = useState(false);
   const [isVizFullscreen, setIsVizFullscreen] = useState(false);

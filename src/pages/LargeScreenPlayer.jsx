@@ -106,7 +106,7 @@ VolumePopup.propTypes = {
 };
 
 /**
- * LargeScreenPlayer — full-screen layout for displays ≥ 1980 px wide.
+ * LargeScreenPlayer — full-screen layout for displays ≥ 1920 px wide.
  *
  * Layout overview:
  *   • Full-screen blurred album-art wallpaper
