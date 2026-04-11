@@ -279,6 +279,9 @@
     color 0.15s;
   box-shadow: none;
 
+  // Remove the Aqua gel shine — icon buttons are transparent, the overlay is invisible anyway
+  &::after { display: none; }
+
   &:hover {
     background: rgba(0, 0, 0, 0.06);
     color: var(--color-gray-600, #555);
@@ -380,4 +383,28 @@
   padding: 2px 12px;
   min-height: 20px;
   font-size: 11px;
+}
+
+// ─── Link / Transparent Button ───────────────────────────────────────────────
+.btn-link {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--text-primary);
+  min-height: unset;
+  padding: 0;
+  text-decoration: none;
+
+  // Remove the Aqua gel shine overlay
+  &::after { display: none; }
+
+  &:hover {
+    background: transparent;
+    color: var(--color-primary);
+  }
+
+  &:active {
+    background: transparent;
+  }
 }

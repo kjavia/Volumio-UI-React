@@ -306,7 +306,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   const headerActions = (
     <button
       type="button"
-      className="dialog-close"
+      className="dialog-close dialog-close--expand"
       onClick={() => setIsFullscreen((v) => !v)}
       aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
     >

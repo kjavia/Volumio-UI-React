@@ -242,3 +242,31 @@
     outline: 2px solid var(--color-primary);
     outline-offset: -2px;
 }
+
+/* ─── Responsive sizing at ≥1980px ───────────────────────────────────── */
+@media (min-width: 1980px) {
+  .context-menu-toggle {
+    width: clamp(40px, 3vw, 72px);
+    height: clamp(40px, 3vw, 72px);
+    border-radius: 50%;
+
+    .material-icons {
+      font-size: clamp(24px, 1.8vw, 40px);
+    }
+  }
+
+  .context-menu {
+    min-width: clamp(180px, 16vw, 360px);
+    border-radius: clamp(8px, 0.6vw, 14px);
+  }
+
+  .context-menu-item {
+    font-size: clamp(13px, 1.1vw, 1.6rem);
+    padding: clamp(8px, 0.7vw, 18px) clamp(16px, 1.2vw, 28px);
+    gap: clamp(10px, 0.8vw, 20px);
+
+    .material-icons {
+      font-size: clamp(18px, 1.5vw, 2.2rem);
+    }
+  }
+}

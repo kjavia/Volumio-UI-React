@@ -84,7 +84,7 @@
     align-items: center;
     gap: 8px;
     padding: 5px 14px 5px 12px;
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     color: var(--casio-on-dark);
     cursor: pointer;
     background: transparent;
@@ -120,4 +120,26 @@
         font-size: 16px;
         color: var(--casio-on-dark-dim);
     }
+}
+
+/* ─── Responsive sizing at ≥1980px ───────────────────────────────────────── */
+@media (min-width: 1980px) {
+  .context-menu-toggle {
+    width: clamp(36px, 3vw, 72px);
+    height: clamp(30px, 2.5vw, 60px);
+
+    .material-icons { font-size: clamp(18px, 1.6vw, 30px); }
+  }
+
+  .context-menu {
+    min-width: clamp(180px, 16vw, 360px);
+  }
+
+  .context-menu-item {
+    font-size: clamp(15px, 1.2vw, 1.8rem);
+    gap: clamp(8px, 0.8vw, 18px);
+    padding: clamp(6px, 0.5vw, 12px) clamp(10px, 0.9vw, 20px);
+
+    .material-icons { font-size: clamp(16px, 1.5vw, 2.2rem); }
+  }
 }

@@ -46,7 +46,7 @@
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.3rem;
   margin-bottom: 1.5rem;
 }
 
@@ -66,7 +66,6 @@
   font-weight: 700;
   color: #fff;
   line-height: 1.25;
-  padding-bottom: 0.1em;
   overflow: visible;
   white-space: nowrap;
   text-align: left;
@@ -101,6 +100,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  margin-top: 0.6rem;
 }
 
 /* Stream info variant for large screen: left-aligned, larger, always white */
@@ -223,7 +223,7 @@
   }
 
   .seekbar-labels {
-    margin-top: 4px;
+    margin-top: 0.75rem;
     font-size: 1rem !important;
   }
 }
@@ -381,22 +381,27 @@
 // handles responsive font scaling for 1980px+ displays.
 
 .browse-dialog--lsp {
+  // Establish a size container so all cqi units below are relative to the
+  // dialog's own width — not the viewport. This means fonts and icons scale
+  // correctly whether the dialog is maximised or floating at any size.
+  container-type: inline-size;
+
   // Dialog header title
   &.dialog .dialog-header .dialog-title,
   & .dialog-title {
-    font-size: clamp(1.1rem, 1.2vw, 1.6rem);
+    font-size: clamp(1.1rem, 1.2cqi, 1.6rem);
   }
 
   // Toolbar buttons and icons
   .browse-toolbar .btn-icon {
-    width: clamp(36px, 3vw, 52px) !important;
-    height: clamp(36px, 3vw, 52px) !important;
+    width: clamp(36px, 3cqi, 52px) !important;
+    height: clamp(36px, 3cqi, 52px) !important;
     padding: 0 !important;
   }
 
   .browse-toolbar .btn-icon .material-icons,
   .browse-toolbar .material-icons {
-    font-size: clamp(1.1rem, 1.4vw, 1.8rem) !important;
+    font-size: clamp(1.1rem, 1.4cqi, 1.8rem) !important;
   }
 
   // Search input
@@ -409,18 +414,18 @@
   }
 
   .browse-search__icon {
-    font-size: clamp(1.1rem, 1.3vw, 1.6rem) !important;
-    left: clamp(0.5rem, 0.75vw, 1rem);
+    font-size: clamp(1.1rem, 1.3cqi, 1.6rem) !important;
+    left: clamp(0.5rem, 0.75cqi, 1rem);
   }
 
   .browse-search__input {
     width: 100%;
     max-width: 100%;
     transition: none;
-    font-size: clamp(0.9rem, 1.1vw, 1.4rem);
-    padding-top: clamp(0.3rem, 0.6vw, 0.6rem);
-    padding-bottom: clamp(0.3rem, 0.6vw, 0.6rem);
-    padding-left: clamp(2.2rem, 2.8vw, 3.2rem);
+    font-size: clamp(0.9rem, 1.1cqi, 1.4rem);
+    padding-top: clamp(0.3rem, 0.6cqi, 0.6rem);
+    padding-bottom: clamp(0.3rem, 0.6cqi, 0.6rem);
+    padding-left: clamp(2.2rem, 2.8cqi, 3.2rem);
   }
 
   .browse-search__input:focus {
@@ -429,34 +434,110 @@
 
   // Home page tiles
   .browse-tile {
-    padding: clamp(1.5rem, 2.5vw, 3.5rem) clamp(0.75rem, 1.5vw, 2rem);
+    padding: clamp(1.5rem, 2.5cqi, 3.5rem) clamp(0.75rem, 1.5cqi, 2rem);
   }
 
   .browse-tile__icon {
-    font-size: clamp(2.5rem, 3.5vw, 5rem) !important;
+    font-size: clamp(2.5rem, 3.5cqi, 5rem) !important;
   }
 
   .browse-tile__label {
-    font-size: clamp(0.85rem, 1vw, 1.3rem);
+    font-size: clamp(0.85rem, 1cqi, 1.3rem);
   }
 
-  // Track item text in grid and list views
-  .track-item__title {
-    font-size: clamp(0.8rem, 0.95vw, 1.15rem);
+  // Track item — grid card
+  .browse-result-card__title {
+    font-size: clamp(0.8rem, 0.95cqi, 1.15rem);
   }
 
-  .track-item__subtitle {
-    font-size: clamp(0.7rem, 0.8vw, 1rem);
+  .browse-result-card__sub {
+    font-size: clamp(0.7rem, 0.8cqi, 1rem);
+  }
+
+  // Track item — list row
+  .browse-result-row__title {
+    font-size: clamp(0.85rem, 1cqi, 1.2rem);
+  }
+
+  .browse-result-row__sub {
+    font-size: clamp(0.75rem, 0.85cqi, 1.05rem);
+  }
+
+  .browse-result-row__chevron {
+    font-size: clamp(1rem, 1.2cqi, 1.5rem) !important;
   }
 
   // Search section headings
   .browse-search-section__title {
-    font-size: clamp(0.85rem, 1vw, 1.2rem);
+    font-size: clamp(0.85rem, 1cqi, 1.2rem);
   }
 
   // Album footer chips
   .album-footer__chip,
   .album-footer__format-text {
-    font-size: clamp(0.7rem, 0.8vw, 1rem);
+    font-size: clamp(0.7rem, 0.8cqi, 1rem);
+  }
+}
+
+// ── Playlist slide-panel — responsive text (container-relative) ────────────
+// The slide-panel is in-layout so a size container works here.
+// Override max-width from theme CSS so the inline width prop is respected.
+.lsp-root .slide-panel {
+  max-width: 100vw !important;
+}
+
+.slide-panel {
+  container-type: inline-size;
+
+  .slide-panel-title {
+    font-size: clamp(0.95rem, 5cqi, 2rem);
+  }
+
+  .slide-panel-subtitle {
+    font-size: clamp(0.75rem, 3.5cqi, 1.4rem);
+  }
+
+  // Header action buttons (clear queue, close)
+  .slide-panel-header .btn-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(2rem, 6cqi, 3.5rem);
+    height: clamp(2rem, 6cqi, 3.5rem);
+  }
+
+  .slide-panel-header .material-icons {
+    font-size: clamp(1.2rem, 5cqi, 2.4rem) !important;
+  }
+
+  .playlist-track-title {
+    font-size: clamp(0.8rem, 4.5cqi, 1.6rem);
+  }
+
+  .playlist-track-meta {
+    font-size: clamp(0.7rem, 3.5cqi, 1.3rem);
+  }
+
+  .playlist-remove .material-icons {
+    font-size: clamp(1rem, 5cqi, 2rem) !important;
+  }
+}
+
+// ── Track context menu — responsive text at ≥1980px ───────────────────────
+// Portaled to document.body (position: fixed) so it can't use container
+// queries — use a viewport media query instead.
+@media (min-width: 1980px) {
+  .track-menu {
+    min-width: clamp(200px, 18vw, 420px);
+  }
+
+  .track-menu__item {
+    font-size: clamp(0.875rem, 1.2vw, 1.8rem);
+    padding: clamp(8px, 0.8vw, 18px) clamp(12px, 1.1vw, 24px);
+    gap: clamp(8px, 0.8vw, 18px);
+  }
+
+  .track-menu__item .material-icons {
+    font-size: clamp(1.1rem, 1.5vw, 2.2rem) !important;
   }
 }
