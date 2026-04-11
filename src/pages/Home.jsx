@@ -8,7 +8,9 @@ import IframeScreen from '@/components/IframeScreen';
 import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
 import Player from './Player';
+import LargeScreenPlayer from './LargeScreenPlayer';
 import useIdleScreen from '@/hooks/useIdleScreen';
+import useMediaQuery from '@/hooks/useMediaQuery';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import { VOLUMIO_BASE_URL } from '@/config';
 
@@ -133,6 +135,7 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz, i
 };
 
 const Home = () => {
+  const isLargeScreen = useMediaQuery('(min-width: 1980px)');
   const [vizStopped, setVizStopped] = useState(false);
   const [forcePlayer, setForcePlayer] = useState(false);
   const [isVizFullscreen, setIsVizFullscreen] = useState(false);
@@ -196,7 +199,18 @@ const Home = () => {
   let content;
 
   if (showPlayer) {
-    content = <Player vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
+    const contextMenuNode = (
+      <ContextMenu
+        vizStopped={vizStopped}
+        onStopViz={isSpectrumViz ? () => setVizStopped(true) : undefined}
+        onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
+        onFullscreenViz={isSpectrumViz ? handleFullscreenViz : undefined}
+        isVizFullscreen={isVizFullscreen}
+      />
+    );
+    content = isLargeScreen
+      ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} />
+      : <Player vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
   } else if (idleScreen === 'wallpaper') {
     content = (
       <Wallpaper
@@ -242,7 +256,9 @@ const Home = () => {
 
   const vizFullscreen = isVizFullscreen && !!vizPortalTarget;
 
-  const contextMenu = (
+  // On the large-screen layout the menu is embedded in the bottom row,
+  // so the floating overlay is only needed for the standard layout.
+  const floatingContextMenu = !isLargeScreen && (
     <ContextMenu
       vizStopped={vizStopped}
       onStopViz={showPlayer && isSpectrumViz ? () => setVizStopped(true) : undefined}
@@ -254,9 +270,9 @@ const Home = () => {
 
   return (
     <div className="position-relative h-100">
-      {vizFullscreen
-        ? createPortal(contextMenu, vizPortalTarget)
-        : contextMenu}
+      {vizFullscreen && floatingContextMenu
+        ? createPortal(floatingContextMenu, vizPortalTarget)
+        : floatingContextMenu}
       {content}
     </div>
   );

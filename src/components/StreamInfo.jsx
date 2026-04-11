@@ -11,7 +11,7 @@ const LOGO_MAP = {
   dff: '/assets/logos/dsd.svg',
 };
 
-const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate }) => {
+const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate, className }) => {
   // Don't render if we have nothing to show
   if (!trackType && !samplerate && !bitdepth && !bitrate) {
     return null;
@@ -31,7 +31,7 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate }) => {
 
   return (
     <div
-      className="stream-info d-flex align-items-center justify-content-center gap-3 w-100 responsive-stream-info overflow-hidden"
+      className={`stream-info d-flex align-items-center gap-3 responsive-stream-info overflow-hidden${className ? ` ${className}` : ' justify-content-center w-100'}`}
       style={{ opacity: 0.6, userSelect: 'none' }}
     >
       {/* Format logo or text fallback */}
@@ -55,7 +55,7 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate }) => {
         <img
           src="/assets/logos/hires.svg"
           alt="Hi-Res"
-          className="format-logo-responsive"
+          className="format-logo-responsive hires-logo"
           style={{ width: 'auto' }}
         />
       )}
@@ -83,6 +83,7 @@ StreamInfo.propTypes = {
   samplerate: PropTypes.string,
   bitdepth: PropTypes.string,
   bitrate: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default StreamInfo;

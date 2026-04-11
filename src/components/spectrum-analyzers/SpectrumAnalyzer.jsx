@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import AudioMotionAnalyzer from 'audiomotion-analyzer';
 
@@ -8,7 +8,7 @@ const mediaSourceCache = new WeakMap();
 
 const MODES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 10]; // Discrete to Octaves to Line
 
-const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stopped = false, onResumed, options = null }) => {
+const SpectrumAnalyzer = forwardRef(({ streamUrl, gradient = 'prism', initialMode = 2, stopped = false, onResumed, options = null, isPlaying = false }, ref) => {
   const containerRef = useRef(null);
   const audioRef = useRef(null);
   const analyzerRef = useRef(null);
@@ -83,8 +83,14 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
     const container = containerRef.current;
     if (!audio || !container) return;
 
-    // Do NOT mute the audio element itself, or the MediaElementSourceNode will
-    // output silence (zeroes) to the analyzer.
+    // Bail if the container has no layout yet — AudioMotionAnalyzer will throw
+    // if the container dimensions are zero, leaving analyzerRef null and the
+    // viz permanently broken.
+    if (container.offsetWidth === 0 || container.offsetHeight === 0) {
+      console.warn('SpectrumAnalyzer: container has no dimensions yet, skipping enable');
+      return;
+    }
+
     audio.muted = false;
 
     let entry = mediaSourceCache.get(audio);
@@ -95,13 +101,19 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
       mediaSourceCache.set(audio, entry);
     }
 
-    // iOS requires AudioContext.resume() synchronously within the user gesture.
-    // A newly created AudioContext starts suspended on iOS/Safari.
+    // Resume synchronously within the user gesture on iOS/Safari.
     if (entry.ctx.state === 'suspended') {
       entry.ctx.resume();
     }
 
     const { ctx, sourceNode } = entry;
+
+    // Start the audio stream NOW — within the synchronous user gesture window.
+    // This is what triggers ffmpeg on the Volumio device. Must happen before any
+    // async work or try/catch that might return early. audio.play() is a no-op
+    // if the stream is already playing (e.g. on a second enable call).
+    audio.play().catch(() => { });
+    onResumed?.();
 
     if (!analyzerRef.current) {
       try {
@@ -114,22 +126,37 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
           ledBars: true,
           ansiBands: true,
           showScaleX: true,
-          showBgColor: true,
-          bgAlpha: 1,
+          showBgColor: false,
           smoothing: 0.8,
           reflexRatio: 0.3,
           reflexAlpha: 0.4,
           reflexFit: true,
         };
+        // Coerce any string numeric values in user options (config JSON may have them)
+        const coerced = options
+          ? Object.fromEntries(
+            Object.entries(options).map(([k, v]) => [k, typeof v === 'string' && !isNaN(v) ? Number(v) : v])
+          )
+          : null;
         analyzerRef.current = new AudioMotionAnalyzer(container, {
-          // Internal wiring — not overridable
           audioCtx: ctx,
           source: sourceNode,
           connectSpeakers: false,
-          ...(options || defaultOptions),
+          ...defaultOptions,
+          ...(coerced || {}),
+          // Always force transparent canvas — the album art behind the viz
+          // acts as the background; the analyzer's own bg must be invisible.
+          // overlay:true is required by AudioMotionAnalyzer to make the canvas
+          // transparent; without it the canvas fills with a solid black bg.
+          showBgColor: false,
+          bgAlpha: 0,
+          overlay: true,
         });
       } catch (e) {
+        // Analyzer failed to initialize but audio is already playing — mark
+        // enabled so the overlay hides and the user sees the bare album art.
         console.warn('SpectrumAnalyzer: failed to initialize', e);
+        setEnabled(true);
         return;
       }
     }
@@ -140,16 +167,27 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
       // Resume synchronously — iOS won't allow it in a .then() callback
       if (entry?.ctx.state === 'suspended') entry.ctx.resume();
       analyzerRef.current.start?.();
-      audio.play().catch(() => { });
-      onResumed?.();
       setEnabled(true);
       return;
     }
 
-    audio.play().catch(() => { });
-    onResumed?.();
     setEnabled(true);
   };
+
+  const handleEnableRef = useRef(null);
+  handleEnableRef.current = handleEnable; // always points to the latest closure
+
+  // Expose enable() so parent components can trigger it during a user gesture
+  // (e.g. clicking the play/pause button counts as user interaction).
+  useImperativeHandle(ref, () => ({
+    enable: () => handleEnableRef.current?.(),
+  }), []);
+
+  // NOTE: Do NOT call handleEnable from a useEffect reacting to isPlaying.
+  // useEffect runs asynchronously after render — outside the browser's
+  // user-gesture activation window — which causes "AudioContext not allowed
+  // to start". The only valid trigger path is the synchronous click handler
+  // in the parent (handlePlayPause → vizRef.current.enable()).
 
   // Stop animation when the stopped prop goes true
   useEffect(() => {
@@ -195,7 +233,11 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
     >
       <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
 
-      {!enabled && (
+      {/* Show prompt whenever music is playing but viz hasn't been enabled yet.
+           This covers: (a) page load while already playing, (b) returning to
+           the large-screen layout mid-playback. Once the user clicks (or the
+           play button triggers a user-gesture enable), the overlay disappears. */}
+      {!enabled && isPlaying && (
         <div
           style={{
             position: 'absolute',
@@ -231,7 +273,9 @@ const SpectrumAnalyzer = ({ streamUrl, gradient = 'prism', initialMode = 2, stop
       />
     </div>
   );
-};
+});
+
+SpectrumAnalyzer.displayName = 'SpectrumAnalyzer';
 
 SpectrumAnalyzer.propTypes = {
   streamUrl: PropTypes.string.isRequired,
@@ -240,6 +284,7 @@ SpectrumAnalyzer.propTypes = {
   stopped: PropTypes.bool,
   onResumed: PropTypes.func,
   options: PropTypes.object,
+  isPlaying: PropTypes.bool,
 };
 
 export default SpectrumAnalyzer;

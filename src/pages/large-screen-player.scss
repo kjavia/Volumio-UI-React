@@ -1,0 +1,462 @@
+/*
+  LARGE SCREEN PLAYER  (≥ 1980 px)
+  ─────────────────────────────────────────────────────────────────────────────
+  Full-screen immersive layout with blurred album-art wallpaper, large track
+  info at the top, a mini player + viz widget section, and a three-group
+  button bar at the bottom.
+  ─────────────────────────────────────────────────────────────────────────────
+*/
+
+/* ── Root container ── */
+.lsp-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Blurred wallpaper background ── */
+.lsp-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(90px) brightness(0.25) saturate(1.4);
+  transform: scale(1.1); /* prevent blur edge bleed */
+  z-index: 0;
+}
+
+/* ── Foreground content layer ── */
+.lsp-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2.5rem 3rem 1.5rem;
+  gap: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   TOP SECTION — track metadata
+   ════════════════════════════════════════════════════════════════ */
+.lsp-top {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Row 1: title (left) + service logo (right) */
+.lsp-top__row1 {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  overflow: hidden;
+}
+
+.lsp-top__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--font-display, sans-serif);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  padding-bottom: 0.1em;
+  overflow: visible;
+  white-space: nowrap;
+  text-align: left;
+}
+
+/* Service logo — image or text badge */
+.lsp-top__service-logo {
+  flex: 0 0 auto;
+}
+
+.service-logo-img {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.service-logo-badge {
+  display: inline-block;
+  font-size: clamp(0.75rem, 1vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 4px;
+  padding: 0.15em 0.55em;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+/* Row 3: stream info — small, left aligned */
+.lsp-top__row3 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Stream info variant for large screen: left-aligned, larger, always white */
+.lsp-stream-info {
+  opacity: 0.75;
+  gap: 0.75rem;
+  color: #fff !important;
+
+  span {
+    color: #fff !important;
+    font-size: 1rem !important;
+  }
+
+  .format-logo-responsive:not(.hires-logo) {
+    height: 1.6rem !important;
+    width: auto !important;
+    filter: brightness(0) invert(1) !important;
+  }
+
+  .hires-logo {
+    height: 1.6rem !important;
+    width: auto !important;
+    filter: none !important; /* keep original gold/colour */
+  }
+}
+
+/* Row 2: artist · album */
+.lsp-top__row2 {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: clamp(1rem, 1.6vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.75);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.lsp-top__artist {
+  font-weight: 600;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.lsp-top__sep {
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.lsp-top__album {
+  font-weight: 400;
+  font-style: italic;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   BOTTOM SECTION — player widget, viz, seekbar, buttons
+   ════════════════════════════════════════════════════════════════ */
+.lsp-bottom {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 0;
+}
+
+/* ── Row 1: mini player (left) + visualization (right) — opposite ends ── */
+.lsp-bottom__row1 {
+  flex: 0 0 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  min-height: 0;
+  margin-top: auto; /* pushes row1 + row2 + row3 to the bottom of lsp-bottom */
+}
+
+/* Mini animated player — 400 × 400 px, left edge */
+.lsp-bottom__player {
+  flex: 0 0 400px;
+  width: 400px;
+  height: 400px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* All animated players accept 100% size inside this wrapper */
+.lsp-bottom__player > * {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Visualization area — 600 × 400 px, right edge */
+.lsp-bottom__viz {
+  flex: 0 0 600px;
+  width: 600px;
+  height: 400px;
+  display: flex;
+  align-items: stretch;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  /* background intentionally transparent — album art shows through */
+
+  > * {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* ── Row 2: seekbar ── */
+.lsp-bottom__row2 {
+  flex: 0 0 auto;
+
+  /* Override the default seekbar padding so it spans full row width */
+  .slider-container {
+    padding: 0 !important;
+  }
+
+  .seekbar-labels {
+    margin-top: 4px;
+    font-size: 1rem !important;
+  }
+}
+
+/* ── Override theme absolute-positioning so ContextMenu renders inline in the bar ── */
+.lsp-bottom__row3 .context-menu-container {
+  position: relative; /* stays in flex flow; dropdown anchors to this element */
+  top: auto;
+  left: auto;
+  padding: 0;
+  z-index: auto;
+
+  /* Flip dropdown to open upward — button is at the bottom of the screen */
+  .context-menu {
+    top: auto;
+    bottom: calc(100% + 4px);
+    left: 0;
+    right: auto;
+  }
+}
+
+/* ── Row 3: three button groups ── */
+.lsp-bottom__row3 {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 0.25rem;
+}
+
+/* ─ Shared group base ─ */
+.lsp-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lsp-btn-group--left {
+  justify-content: flex-start;
+}
+
+.lsp-btn-group--center {
+  justify-content: center;
+  gap: 1rem;
+}
+
+.lsp-btn-group--right {
+  justify-content: flex-end;
+}
+
+/* ─ Button size variants ─ */
+.lsp-btn {
+  /* Base icon button size on large screen — matches medium transport buttons */
+  &.btn-icon {
+    width: 60px !important;
+    height: 60px !important;
+
+    .material-icons {
+      font-size: 1.8rem !important;
+    }
+  }
+
+  /* Small secondary buttons (repeat, shuffle) — same size as medium */
+  &.lsp-btn--sm.btn-icon {
+    width: 60px !important;
+    height: 60px !important;
+
+    .material-icons {
+      font-size: 1.8rem !important;
+    }
+  }
+
+  /* Medium transport buttons (skip prev / next) */
+  &.lsp-btn--md.btn-round {
+    width: 60px !important;
+    height: 60px !important;
+
+    .material-icons {
+      font-size: 1.8rem !important;
+    }
+  }
+
+  /* Large play/pause button */
+  &.lsp-btn--lg.btn-round {
+    width: 80px !important;
+    height: 80px !important;
+
+    .material-icons.play-icon {
+      font-size: 2.4rem !important;
+    }
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   VOLUME POPUP — vertical slider appearing above the volume button
+   ════════════════════════════════════════════════════════════════ */
+.lsp-volume-btn-wrap {
+  position: relative;
+}
+
+.lsp-volume-popup {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 50%;
+  transform: translateX(50%);
+  background: rgba(20, 20, 20, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 100;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  min-width: 56px;
+
+  &__slider-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 160px;
+  }
+
+  /* Vertical range input via appearance + writing-mode trick */
+  &__range {
+    -webkit-appearance: slider-vertical;
+    appearance: slider-vertical;
+    writing-mode: vertical-lr;
+    direction: rtl;
+    width: 8px;
+    height: 140px;
+    cursor: pointer;
+    accent-color: var(--color-primary, #ff7a00);
+  }
+
+  &__value {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-variant-numeric: tabular-nums;
+    min-width: 2.5ch;
+    text-align: center;
+  }
+
+  &__mute {
+    margin-top: 0.25rem;
+  }
+}
+
+// ── Browse dialog — large screen overrides ─────────────────────────────────
+// Applied via className="browse-dialog--lsp" on the BrowseDialog in LSP.
+// Opens maximized & large-grid by default (handled via props), this block
+// handles responsive font scaling for 1980px+ displays.
+
+.browse-dialog--lsp {
+  // Dialog header title
+  &.dialog .dialog-header .dialog-title,
+  & .dialog-title {
+    font-size: clamp(1.1rem, 1.2vw, 1.6rem);
+  }
+
+  // Toolbar buttons and icons
+  .browse-toolbar .btn-icon {
+    width: clamp(36px, 3vw, 52px) !important;
+    height: clamp(36px, 3vw, 52px) !important;
+    padding: 0 !important;
+  }
+
+  .browse-toolbar .btn-icon .material-icons,
+  .browse-toolbar .material-icons {
+    font-size: clamp(1.1rem, 1.4vw, 1.8rem) !important;
+  }
+
+  // Search input
+  .browse-toolbar__right {
+    flex: 0 0 40%;
+  }
+
+  .browse-search {
+    width: 100%;
+  }
+
+  .browse-search__icon {
+    font-size: clamp(1.1rem, 1.3vw, 1.6rem) !important;
+    left: clamp(0.5rem, 0.75vw, 1rem);
+  }
+
+  .browse-search__input {
+    width: 100%;
+    max-width: 100%;
+    transition: none;
+    font-size: clamp(0.9rem, 1.1vw, 1.4rem);
+    padding-top: clamp(0.3rem, 0.6vw, 0.6rem);
+    padding-bottom: clamp(0.3rem, 0.6vw, 0.6rem);
+    padding-left: clamp(2.2rem, 2.8vw, 3.2rem);
+  }
+
+  .browse-search__input:focus {
+    width: 100%;
+  }
+
+  // Home page tiles
+  .browse-tile {
+    padding: clamp(1.5rem, 2.5vw, 3.5rem) clamp(0.75rem, 1.5vw, 2rem);
+  }
+
+  .browse-tile__icon {
+    font-size: clamp(2.5rem, 3.5vw, 5rem) !important;
+  }
+
+  .browse-tile__label {
+    font-size: clamp(0.85rem, 1vw, 1.3rem);
+  }
+
+  // Track item text in grid and list views
+  .track-item__title {
+    font-size: clamp(0.8rem, 0.95vw, 1.15rem);
+  }
+
+  .track-item__subtitle {
+    font-size: clamp(0.7rem, 0.8vw, 1rem);
+  }
+
+  // Search section headings
+  .browse-search-section__title {
+    font-size: clamp(0.85rem, 1vw, 1.2rem);
+  }
+
+  // Album footer chips
+  .album-footer__chip,
+  .album-footer__format-text {
+    font-size: clamp(0.7rem, 0.8vw, 1rem);
+  }
+}

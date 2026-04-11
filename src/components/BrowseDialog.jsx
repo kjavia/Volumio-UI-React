@@ -59,12 +59,12 @@ const itemFormat = (item) => {
   return (ext && FORMAT_EXTS.has(ext)) ? ext : null;
 };
 
-const BrowseDialog = ({ open, onClose }) => {
+const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGrid = false, className: classNameProp }) => {
   const [viewMode, setViewMode] = useState('grid');
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [largeGrid, setLargeGrid] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(initialFullscreen);
+  const [largeGrid, setLargeGrid] = useState(initialLargeGrid);
   const [history, setHistory] = useState([]);
   const [currentNav, setCurrentNav] = useState(null);
   const [albumMenuOpen, setAlbumMenuOpen] = useState(false);
@@ -587,7 +587,7 @@ const BrowseDialog = ({ open, onClose }) => {
         onClose={onClose}
         title={isSearching ? `Search: ${debouncedSearch}` : currentNav ? currentNav.title : 'Browse'}
         size={isFullscreen ? 'full' : 'lg'}
-        className={isFullscreen ? 'browse-dialog--fullscreen' : undefined}
+        className={[isFullscreen ? 'browse-dialog--fullscreen' : null, classNameProp].filter(Boolean).join(' ') || undefined}
         headerActions={headerActions}
         toolbar={toolbar}
         footer={albumFooter}
@@ -640,6 +640,9 @@ const BrowseDialog = ({ open, onClose }) => {
 BrowseDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  initialFullscreen: PropTypes.bool,
+  initialLargeGrid: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default BrowseDialog;

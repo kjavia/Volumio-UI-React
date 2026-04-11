@@ -124,6 +124,14 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
   const [showBrowse, setShowBrowse] = useState(false);
   const touchTimer = useRef(null);
+  const vizRef = useRef(null);
+
+  // Wrap togglePlay so that clicking play/pause (a user gesture) also enables
+  // the visualization if it hasn't been enabled yet.
+  const handlePlayPause = () => {
+    vizRef.current?.enable();
+    togglePlay();
+  };
 
   const { refreshState } = useSeek();
 
@@ -262,7 +270,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
             {showPlayerControls && (
               <PlayerControls
                 isPlaying={isPlaying}
-                onPlayPause={togglePlay}
+                onPlayPause={handlePlayPause}
                 onNext={next}
                 onPrev={prev}
                 shuffle={random}
@@ -295,10 +303,12 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
           <div className="spectrum-panel area-spectrum" ref={vizContainerRef}>
             {vizType === 'spectrum' && (
               <SpectrumAnalyzer
+                ref={vizRef}
                 stopped={vizStopped}
                 onResumed={onVizResumed}
                 streamUrl={SPECTRUM_STREAM_URL}
                 options={spectrumOptions}
+                isPlaying={isPlaying}
               />
             )}
             {vizType === 'vuMeter1' && (
