@@ -108,12 +108,15 @@ const SpectrumAnalyzer = forwardRef(({ streamUrl, gradient = 'prism', initialMod
 
     const { ctx, sourceNode } = entry;
 
-    // Start the audio stream NOW — within the synchronous user gesture window.
-    // This is what triggers ffmpeg on the Volumio device. Must happen before any
-    // async work or try/catch that might return early. audio.play() is a no-op
-    // if the stream is already playing (e.g. on a second enable call).
-    audio.play().catch(() => { });
-    onResumed?.();
+    // Delay the actual stream connection by 1 second so ALSA/Volumio finishes
+    // opening the audio device before FFmpeg tries to read the FIFO.
+    // AudioContext setup above must stay synchronous (user-gesture window),
+    // but the HTTP stream request can be deferred safely.
+    const doPlay = () => {
+      audio.play().catch(() => { });
+      onResumed?.();
+    };
+    setTimeout(doPlay, 1000);
 
     if (!analyzerRef.current) {
       try {
