@@ -576,3 +576,76 @@
     font-size: clamp(1.1rem, 1.5vw, 2.2rem) !important;
   }
 }
+
+// ── Short-screen compact layout (e.g. 2650×700 ultrawide landscape) ─────────
+// The normal layout has a rigid 400px player/viz section.  At ≤ 800px viewport
+// height that pushes the seekbar and button row below the fold where they are
+// clipped by overflow: hidden.  Scale everything down so the full UI fits.
+@media (max-height: 800px) {
+  .lsp-content {
+    padding: 1rem 3rem 0.75rem;
+  }
+
+  .lsp-top {
+    margin-bottom: 0.5rem;
+  }
+
+  .lsp-top__title {
+    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+    line-height: 1.2;
+  }
+
+  .lsp-top__row3 {
+    margin-top: 0.25rem;
+  }
+
+  .lsp-bottom {
+    gap: 0.5rem;
+  }
+
+  // Shrink from 400px to 200px
+  .lsp-bottom__row1 {
+    flex: 0 0 200px;
+    align-items: center;
+  }
+
+  .lsp-bottom__player {
+    flex: 0 0 200px;
+    width: 200px;
+    height: 200px;
+  }
+
+  .lsp-bottom__viz {
+    flex: 0 0 320px;
+    width: 320px;
+    height: 200px;
+  }
+
+  // Reduce seekbar label breathing room
+  .lsp-bottom__row2 .seekbar-labels {
+    margin-top: 0.35rem;
+  }
+
+  // Scale down all button sizes
+  .lsp-btn {
+    &.btn-icon,
+    &.lsp-btn--sm.btn-icon,
+    &.lsp-btn--md.btn-round {
+      width: 44px !important;
+      height: 44px !important;
+
+      .material-icons {
+        font-size: 1.4rem !important;
+      }
+    }
+
+    &.lsp-btn--lg.btn-round {
+      width: 56px !important;
+      height: 56px !important;
+
+      .material-icons.play-icon {
+        font-size: 1.8rem !important;
+      }
+    }
+  }
+}

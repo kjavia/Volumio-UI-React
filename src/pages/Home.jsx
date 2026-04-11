@@ -256,9 +256,11 @@ const Home = () => {
 
   const vizFullscreen = isVizFullscreen && !!vizPortalTarget;
 
-  // On the large-screen layout the menu is embedded in the bottom row,
-  // so the floating overlay is only needed for the standard layout.
-  const floatingContextMenu = !isLargeScreen && (
+  // On the large-screen layout the menu is embedded in the bottom row, so we
+  // normally skip the floating overlay. However when the idle screen is active
+  // the player (and its embedded menu) is not mounted, so we still need the
+  // floating overlay as the only way for the user to get back to the player.
+  const floatingContextMenu = (!isLargeScreen || idle) && (
     <ContextMenu
       vizStopped={vizStopped}
       onStopViz={showPlayer && isSpectrumViz ? () => setVizStopped(true) : undefined}
