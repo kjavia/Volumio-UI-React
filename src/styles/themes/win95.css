@@ -3889,6 +3889,17 @@ input[type=range]::-webkit-slider-runnable-track {
   border-bottom: 2px solid var(--win95-highlight);
   border-right: 2px solid var(--win95-highlight);
 }
+.album-browser::-webkit-scrollbar {
+  width: 16px;
+  background: var(--win95-face);
+}
+.album-browser::-webkit-scrollbar-thumb {
+  background: var(--win95-face);
+  border-top: 2px solid var(--win95-highlight);
+  border-left: 2px solid var(--win95-highlight);
+  border-bottom: 2px solid var(--win95-dark);
+  border-right: 2px solid var(--win95-dark);
+}
 
 .album-card {
   display: flex;
@@ -4573,7 +4584,7 @@ input[type=range]::-webkit-slider-runnable-track {
   padding: 0;
 }
 .slide-panel-body::-webkit-scrollbar {
-  width: 8px;
+  width: 16px;
   background: var(--win95-face);
 }
 .slide-panel-body::-webkit-scrollbar-thumb {

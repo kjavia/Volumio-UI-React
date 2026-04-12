@@ -3425,6 +3425,18 @@ input[type=range]::-webkit-slider-thumb {
   border-right: 2px solid var(--casio-sheen);
   border-radius: var(--radius-sm);
 }
+.album-browser::-webkit-scrollbar {
+  width: 12px;
+  background: var(--casio-body);
+}
+.album-browser::-webkit-scrollbar-thumb {
+  background: var(--casio-key-face);
+  border-top: 2px solid var(--casio-key-hi);
+  border-left: 2px solid var(--casio-key-hi);
+  border-bottom: 2px solid var(--casio-key-sh);
+  border-right: 2px solid var(--casio-key-sh);
+  border-radius: 0;
+}
 
 .album-card {
   display: flex;
@@ -4050,12 +4062,15 @@ input[type=range]::-webkit-slider-thumb {
   background: var(--casio-face);
 }
 .slide-panel-body::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;
   background: var(--casio-body);
 }
 .slide-panel-body::-webkit-scrollbar-thumb {
-  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 100%);
-  border: 1px solid #10141c;
+  background: var(--casio-key-face);
+  border-top: 2px solid var(--casio-key-hi);
+  border-left: 2px solid var(--casio-key-hi);
+  border-bottom: 2px solid var(--casio-key-sh);
+  border-right: 2px solid var(--casio-key-sh);
   border-radius: 0;
 }
 

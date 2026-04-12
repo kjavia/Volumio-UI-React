@@ -4145,12 +4145,12 @@ input[type=range]::-moz-range-thumb:active {
   overflow-y: auto;
 }
 .album-browser::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
   background: transparent;
 }
 .album-browser::-webkit-scrollbar-thumb {
   background: var(--color-gray-700);
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 .album-card {
@@ -5795,12 +5795,12 @@ input[type=range]::-moz-range-thumb:active {
   line-height: var(--leading-relaxed);
 }
 .dialog-body::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
   background: transparent;
 }
 .dialog-body::-webkit-scrollbar-thumb {
   background: var(--color-gray-700);
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 /* ── Footer ── */
@@ -6432,14 +6432,14 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-gray-700);
-  border-radius: 3px;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-gray-600);

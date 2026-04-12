@@ -12,13 +12,13 @@
     overflow-y: auto;
 
     &::-webkit-scrollbar {
-        width: 4px;
+        width: 8px;
         background: transparent;
     }
 
     &::-webkit-scrollbar-thumb {
         background: var(--color-gray-700);
-        border-radius: 2px;
+        border-radius: 4px;
     }
 }
 

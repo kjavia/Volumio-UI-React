@@ -224,36 +224,25 @@
   /* Custom scrollbar */
   &::-webkit-scrollbar {
     width: 15px;
+    height: 15px;
     background-color: #f8f8f8;
-  }
-
-  &::-webkit-scrollbar-track {
     border-left: 1px solid #e0e0e0;
   }
 
+  &::-webkit-scrollbar-track {
+    background: repeating-linear-gradient(to bottom, #f9f9f9, #f9f9f9 2px, #efefef 2px, #efefef 4px);
+    box-shadow: inset 1px 0 0 white;
+  }
+
   &::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg,
-        #e8e8e8 0%,
-        #d0d0d0 50%,
-        #c0c0c0 100%);
-    border-radius: 8px;
-    border: 3px solid #f8f8f8;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.8),
-      0 1px 2px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to right, #7caef7 0%, #4a90e2 50%, #256bc1 51%, #6ea6e8 100%);
+    border-radius: 7px;
+    border: 1px solid #fff;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    min-height: 20px;
 
     &:hover {
-      background: linear-gradient(180deg,
-          #e0e0e0 0%,
-          #c8c8c8 50%,
-          #b8b8b8 100%);
-    }
-
-    &:active {
-      background: linear-gradient(180deg,
-          #c0c0c0 0%,
-          #a8a8a8 50%,
-          #989898 100%);
+      background: linear-gradient(to right, #8abdfa 0%, #5ba1f2 50%, #357bd1 51%, #7eb6f8 100%);
     }
   }
 }
