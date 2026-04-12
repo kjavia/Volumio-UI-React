@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useQueryClient } from '@tanstack/react-query';
 import Dialog from './Dialog';
 import Button from './Button';
 import usePlaylists from '@/hooks/usePlaylists';
@@ -9,14 +10,16 @@ import { useSocket } from '@/contexts/SocketContext';
 const AddToPlaylistDialog = ({ open, onClose, track }) => {
   const [newPlaylistName, setNewPlaylistName] = useState('');
   const [isCreatingNew, setIsCreatingNew] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [addingToFavorites, setAddingToFavorites] = useState(false);
 
-  const { playlists, isLoading, createPlaylist, addToPlaylist, isAdding, isCreating } =
-    usePlaylists();
+  const { playlists, isLoading } = usePlaylists();
   const { favouritesUris, refetchFavourites } = useFavourites();
   const { socket } = useSocket();
+  const queryClient = useQueryClient();
 
   const isInFavourites = track?.uri && favouritesUris.has(track.uri);
 
@@ -59,48 +62,48 @@ const AddToPlaylistDialog = ({ open, onClose, track }) => {
     }
   };
 
-  const handleAddToPlaylist = async (playlistName) => {
-    if (!track || !track.uri) {
+  const handleAddToPlaylist = useCallback((playlistName) => {
+    if (!track || !track.uri || !socket) {
       setError('No track selected');
       return;
     }
 
-    try {
-      setError('');
+    setError('');
+    setSuccess('');
+    setIsAdding(true);
+    socket.emit('addToPlaylist', {
+      name: playlistName,
+      uri: track.uri,
+      service: track.service ?? 'mpd',
+    });
+    setSuccess(`Added to "${playlistName}"`);
+    setTimeout(() => {
+      queryClient.invalidateQueries({ queryKey: ['playlists'] });
+      setIsAdding(false);
+      onClose();
       setSuccess('');
-      await addToPlaylist({
-        playlistName,
-        uri: track.uri,
-        service: track.service,
-      });
-      setSuccess(`Added to "${playlistName}"`);
-      setTimeout(() => {
-        onClose();
-        setSuccess('');
-      }, 1500);
-    } catch (err) {
-      setError('Failed to add track to playlist');
-      console.error('Add to playlist error:', err);
-    }
-  };
+    }, 1000);
+  }, [track, socket, queryClient, onClose]);
 
-  const handleCreateAndAdd = async () => {
-    if (!newPlaylistName.trim()) {
+  const handleCreateAndAdd = () => {
+    const name = newPlaylistName.trim();
+    if (!name) {
       setError('Please enter a playlist name');
       return;
     }
+    if (!socket) return;
 
-    try {
-      setError('');
-      setSuccess('');
-      await createPlaylist(newPlaylistName.trim());
-      await handleAddToPlaylist(newPlaylistName.trim());
+    setError('');
+    setSuccess('');
+    setIsCreating(true);
+    socket.emit('createPlaylist', { name });
+    setTimeout(() => {
+      queryClient.invalidateQueries({ queryKey: ['playlists'] });
+      setIsCreating(false);
+      handleAddToPlaylist(name);
       setNewPlaylistName('');
       setIsCreatingNew(false);
-    } catch (err) {
-      setError('Failed to create playlist');
-      console.error('Create playlist error:', err);
-    }
+    }, 800);
   };
 
   const handleClose = () => {

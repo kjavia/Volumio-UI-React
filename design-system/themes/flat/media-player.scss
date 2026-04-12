@@ -186,7 +186,7 @@
     position: relative;
     flex-grow: 1;
     height: 4px;
-    background: var(--color-gray-700);
+    background: var(--color-gray-550);
     border-radius: 2px;
     cursor: pointer;
     overflow: visible;
@@ -218,6 +218,7 @@
         min-width: 3.5ch;
         padding-left: 0.4rem;
     }
+
 }
 
 /* ─── Player Controls Container ────────────────────────────────────────── */

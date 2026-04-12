@@ -233,6 +233,15 @@ body,
     height: 44px !important;
   }
 
+  .btn-round.btn-sm {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .btn-round.btn-sm .material-icons {
+    font-size: 1.15rem !important;
+  }
+
   /* Icon buttons: 36px → 28px */
   .btn-icon {
     width: 28px !important;
@@ -253,8 +262,17 @@ body,
     height: 36px !important;
   }
 
+  .btn-round.btn-sm {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
   .btn-round .material-icons {
     font-size: 1.1rem !important;
+  }
+
+  .btn-round.btn-sm .material-icons {
+    font-size: 0.8rem !important;
   }
 
   /* Icon buttons: → 24px */
@@ -395,14 +413,27 @@ body,
     height: 80px !important;
   }
 
+  .btn-round.btn-sm {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
   .btn-round .material-icons,
   .btn-round .play-icon {
     font-size: 2.5rem !important;
   }
 
+  .btn-round.btn-sm .material-icons {
+    font-size: 1.75rem !important;
+  }
+
   .controls-transport-row .btn-round .material-icons,
   .controls-transport-row .btn-round .play-icon {
     font-size: 3.125rem !important;
+  }
+
+  .controls-transport-row .btn-round.btn-sm .material-icons {
+    font-size: 2.2rem !important;
   }
 
   .btn-icon {
@@ -427,14 +458,27 @@ body,
       height: 70px !important;
     }
 
+    .btn-round.btn-sm {
+      width: 50px !important;
+      height: 50px !important;
+    }
+
     .btn-round .material-icons,
     .btn-round .play-icon {
       font-size: 2rem !important;
     }
 
+    .btn-round.btn-sm .material-icons {
+      font-size: 1.4rem !important;
+    }
+
     .controls-transport-row .btn-round .material-icons,
     .controls-transport-row .btn-round .play-icon {
       font-size: 2.5rem !important;
+    }
+
+    .controls-transport-row .btn-round.btn-sm .material-icons {
+      font-size: 1.75rem !important;
     }
 
     .btn-icon {
@@ -1118,6 +1162,15 @@ body,
   .btn-round {
     width: clamp(60px, 8cqw, 90px) !important;
     height: clamp(60px, 8cqw, 90px) !important;
+  }
+
+  .btn-round.btn-sm {
+    width: clamp(43px, 5.7cqw, 64px) !important;
+    height: clamp(43px, 5.7cqw, 64px) !important;
+  }
+
+  .btn-round.btn-sm .material-icons {
+    font-size: clamp(1.33rem, 3.2cqw, 2.13rem) !important;
   }
 
   .btn-round .material-icons {
