@@ -1480,6 +1480,27 @@ code, pre {
   color: var(--win95-titlebar);
 }
 
+/* ─── Link / Transparent Button ─────────────────────────────────────────── */
+.btn-link {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--win95-titlebar);
+  padding: 0;
+  min-height: unset;
+  text-decoration: underline;
+}
+.btn-link:hover {
+  background: transparent;
+  text-decoration: none;
+  color: var(--color-primary-light, #4d79ff);
+}
+.btn-link:active {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
 /* ─── Small Button ─────────────────────────────────────────────────────── */
 .btn-sm {
   padding: 2px 10px;
@@ -1851,9 +1872,6 @@ label {
 }
 .input-group .form-control {
   min-height: 28px;
-  border-radius: 0;
-}
-.input-group .btn, .input-group .form-select {
   border-radius: 0;
 }
 
@@ -4556,6 +4574,10 @@ input[type=range]::-webkit-slider-runnable-track {
   display: flex;
   align-items: center;
 }
+.slide-panel-header .btn .material-icons, .slide-panel-header .form-select .material-icons,
+.slide-panel-header .btn-link .material-icons {
+  font-size: 9px;
+}
 
 .slide-panel-title-group {
   display: flex;
@@ -4565,13 +4587,13 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .slide-panel-subtitle {
-  font-size: 0.65rem;
+  font-size: 0.5rem;
   color: rgba(255, 255, 255, 0.7);
   font-family: var(--font-label);
 }
 
 .slide-panel-title {
-  font-size: var(--text-base);
+  font-size: clamp(0.75rem, 0.975vw, 0.86rem);
   font-weight: 700;
   color: #ffffff;
   font-family: var(--font-label);
@@ -4579,11 +4601,22 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .slide-panel-body {
   color: var(--text-primary);
-  font-size: var(--text-sm);
+  font-size: calc(var(--text-sm) * 0.75);
   font-family: var(--font-body);
   overflow-y: auto;
   flex: 1 1 auto;
   padding: 0;
+}
+.slide-panel-body::-webkit-scrollbar {
+  width: 8px;
+  background: var(--win95-face);
+}
+.slide-panel-body::-webkit-scrollbar-thumb {
+  background: var(--win95-face);
+  border-top: 2px solid var(--win95-highlight);
+  border-left: 2px solid var(--win95-highlight);
+  border-bottom: 2px solid var(--win95-dark);
+  border-right: 2px solid var(--win95-dark);
 }
 
 :root {

@@ -11,10 +11,10 @@ select {
     font-size: var(--text-sm);
     color: var(--text-primary);
     background: #ffffff;
-    border-top:    2px solid var(--win95-dark);
-    border-left:   2px solid var(--win95-dark);
+    border-top: 2px solid var(--win95-dark);
+    border-left: 2px solid var(--win95-dark);
     border-bottom: 2px solid var(--win95-highlight);
-    border-right:  2px solid var(--win95-highlight);
+    border-right: 2px solid var(--win95-highlight);
     border-radius: 0;
     padding: 4px 6px;
     outline: none;
@@ -79,10 +79,10 @@ label {
     height: 13px;
     border-radius: 0;
     background-color: #ffffff;
-    border-top:    2px solid var(--win95-dark);
-    border-left:   2px solid var(--win95-dark);
+    border-top: 2px solid var(--win95-dark);
+    border-left: 2px solid var(--win95-dark);
     border-bottom: 2px solid var(--win95-highlight);
-    border-right:  2px solid var(--win95-highlight);
+    border-right: 2px solid var(--win95-highlight);
     cursor: pointer;
     appearance: none;
     position: relative;
@@ -144,7 +144,7 @@ label {
 // @layer rule that sets `width: 1%; flex: 1 1 auto` on .input-group > .form-control.
 // Restore the correct flex behaviour with a higher-specificity unlayered rule.
 .input-group {
-    > input {
+    >input {
         flex: 1 1 auto;
         width: 1%;
         min-width: 0;
@@ -156,20 +156,16 @@ label {
         padding: 4px 8px;
         min-height: 28px;
         border-radius: 0;
-        border-top:    2px solid var(--win95-dark);
-        border-left:   2px solid var(--win95-dark);
+        border-top: 2px solid var(--win95-dark);
+        border-left: 2px solid var(--win95-dark);
         border-bottom: 2px solid var(--win95-highlight);
-        border-right:  2px solid var(--win95-highlight);
+        border-right: 2px solid var(--win95-highlight);
         background: var(--win95-face);
         color: var(--text-primary);
     }
 
     .form-control {
         min-height: 28px;
-        border-radius: 0;
-    }
-
-    .btn {
         border-radius: 0;
     }
 }

@@ -46,6 +46,12 @@
   min-height: 40px;
   display: flex;
   align-items: center;
+
+  // Compact icon buttons — half the default material-icons size
+  .btn .material-icons,
+  .btn-link .material-icons {
+    font-size: 9px;
+  }
 }
 
 .slide-panel-title-group {
@@ -56,13 +62,13 @@
 }
 
 .slide-panel-subtitle {
-  font-size: 0.65rem;
-  color: rgba(255,255,255,0.7);
+  font-size: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
   font-family: var(--font-label);
 }
 
 .slide-panel-title {
-  font-size: var(--text-base);
+  font-size: clamp(0.75rem, 0.975vw, 0.86rem);
   font-weight: 700;
   color: #ffffff;
   font-family: var(--font-label);
@@ -70,9 +76,22 @@
 
 .slide-panel-body {
   color: var(--text-primary);
-  font-size: var(--text-sm);
+  font-size: calc(var(--text-sm) * 0.75);
   font-family: var(--font-body);
   overflow-y: auto;
   flex: 1 1 auto;
   padding: 0;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background: var(--win95-face);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--win95-face);
+    border-top:    2px solid var(--win95-highlight);
+    border-left:   2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right:  2px solid var(--win95-dark);
+  }
 }

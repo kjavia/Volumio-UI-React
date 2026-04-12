@@ -10,28 +10,27 @@
 @mixin casio-key-up {
     /* Domed surface: radial highlight at top-center → darker toward edges */
     background:
-        radial-gradient(
-            ellipse 80% 55% at 50% 20%,
+        radial-gradient(ellipse 80% 55% at 50% 20%,
             #404855 0%,
             #2a3040 50%,
-            #1e2530 100%
-        );
+            #1e2530 100%);
     box-shadow:
-        0 4px 0 0 #0d1018,              /* thick bottom edge = key height */
-        0 5px 8px rgba(0, 0, 0, 0.55), /* diffuse drop shadow below key */
-        inset 0 1px 1px rgba(255, 255, 255, 0.08); /* faint dome top-sheen */
+        0 4px 0 0 #0d1018,
+        /* thick bottom edge = key height */
+        0 5px 8px rgba(0, 0, 0, 0.55),
+        /* diffuse drop shadow below key */
+        inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    /* faint dome top-sheen */
     border: 1px solid #10141c;
     border-bottom-color: #080b12;
 }
 
 @mixin casio-key-down {
     background:
-        radial-gradient(
-            ellipse 80% 55% at 50% 20%,
+        radial-gradient(ellipse 80% 55% at 50% 20%,
             #303840 0%,
             #202830 50%,
-            #181e26 100%
-        );
+            #181e26 100%);
     box-shadow:
         0 1px 0 0 #0d1018,
         0 2px 4px rgba(0, 0, 0, 0.5),
@@ -66,12 +65,10 @@
 
     &:hover {
         background:
-            radial-gradient(
-                ellipse 80% 55% at 50% 20%,
+            radial-gradient(ellipse 80% 55% at 50% 20%,
                 #4a5260 0%,
                 #323848 50%,
-                #242c3a 100%
-            );
+                #242c3a 100%);
     }
 
     &:active,
@@ -97,9 +94,11 @@
         0 4px 0 0 #0d1018,
         0 5px 8px rgba(0, 0, 0, 0.55),
         inset 0 1px 1px rgba(255, 255, 255, 0.08),
-        0 0 0 5px rgba(224, 96, 32, 0.18); /* soft orange ambient glow */
+        0 0 0 5px rgba(224, 96, 32, 0.18);
+    /* soft orange ambient glow */
 
-    &:active, &.active {
+    &:active,
+    &.active {
         @include casio-key-down;
         outline: 2px solid var(--casio-red);
         outline-offset: 1px;
@@ -112,7 +111,8 @@
     @include casio-key-up;
     color: var(--casio-on-dark);
 
-    &:active, &.active {
+    &:active,
+    &.active {
         @include casio-key-down;
     }
 }
@@ -125,18 +125,118 @@
     outline-offset: 1px;
 }
 
+/* ─── Success ─────────────────────────────────────────────────────── */
+.btn-success {
+    @include casio-key-up;
+    color: #ffffff;
+    outline: 2px solid var(--color-success);
+    outline-offset: 1px;
+
+    &:active,
+    &.active {
+        @include casio-key-down;
+        outline: 2px solid var(--color-success);
+        outline-offset: 1px;
+    }
+}
+
+/* ─── Warning ─────────────────────────────────────────────────────── */
+.btn-warning {
+    @include casio-key-up;
+    color: #000000;
+    outline: 2px solid var(--color-warning);
+    outline-offset: 1px;
+
+    &:active,
+    &.active {
+        @include casio-key-down;
+        outline: 2px solid var(--color-warning);
+        outline-offset: 1px;
+    }
+}
+
+/* ─── Info ────────────────────────────────────────────────────────── */
+.btn-info {
+    @include casio-key-up;
+    color: #ffffff;
+    outline: 2px solid var(--color-info);
+    outline-offset: 1px;
+
+    &:active,
+    &.active {
+        @include casio-key-down;
+        outline: 2px solid var(--color-info);
+        outline-offset: 1px;
+    }
+}
+
+/* ─── Black / Dark ──────────────────────────────────────────────── */
+.btn-black {
+    background: radial-gradient(ellipse 80% 55% at 50% 20%, #1c2028 0%, #12161e 50%, #0a0e14 100%);
+    box-shadow: 0 4px 0 0 #04070c, 0 5px 8px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.04);
+    border: 1px solid #06090f;
+    color: var(--casio-on-dark);
+
+    &:active,
+    &.active {
+        @include casio-key-down;
+    }
+}
+
+/* ─── Link / Transparent ──────────────────────────────────────── */
+.btn-link {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: var(--casio-on-dark);
+    padding: 0;
+    min-height: unset;
+    text-transform: none;
+    letter-spacing: normal;
+
+    &:hover {
+        background: transparent;
+        color: var(--casio-lcd-panel, #c8e040);
+    }
+
+    &:active {
+        background: transparent;
+        transform: none;
+        box-shadow: none;
+    }
+}
+
 /* ─── Icon-only key (small square) ─────────────────────────────────────── */
 .btn-icon {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     padding: 0;
     border-radius: 6px;
     @include casio-key-up;
     color: var(--casio-on-dark);
     transition: transform 60ms ease, box-shadow 60ms ease;
 
-    &:active, &.active {
+    &:active,
+    &.active {
         @include casio-key-down;
+    }
+}
+
+/* ─── Round Button (circle — for transport controls) ───────────────────── */
+.btn-round {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include casio-key-up;
+
+    &:active,
+    &.active {
+        @include casio-key-down;
+        border-radius: 50%;
     }
 }
 

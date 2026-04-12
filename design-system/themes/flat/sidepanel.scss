@@ -45,6 +45,12 @@
   border-bottom: 1px solid var(--border-dark);
   background: var(--color-gray-900);
   flex-shrink: 0;
+
+  // Compact icon buttons — half the default material-icons size
+  .btn .material-icons,
+  .btn-link .material-icons {
+    font-size: 9px;
+  }
 }
 
 /* ── Title Group ── */
@@ -56,13 +62,13 @@
 }
 
 .slide-panel-subtitle {
-  font-size: 0.7rem;
+  font-size: 0.53rem;
   color: var(--color-gray-500);
   font-family: var(--font-label);
 }
 
 .slide-panel-title {
-  font-size: var(--text-base);
+  font-size: clamp(0.75rem, 0.975vw, 0.86rem);
   font-weight: 600;
   color: var(--text-primary);
   font-family: var(--font-label);
@@ -71,17 +77,17 @@
 /* ── Body ── */
 .slide-panel-body {
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.68rem;
   font-family: var(--font-body);
   padding: 12px 16px;
 
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 8px;
     background: transparent;
   }
 
   &::-webkit-scrollbar-thumb {
     background: var(--color-gray-700);
-    border-radius: 2px;
+    border-radius: 4px;
   }
 }

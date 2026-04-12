@@ -5015,6 +5015,10 @@ input[type=range]::-moz-range-thumb:active {
   background: var(--color-gray-900);
   flex-shrink: 0;
 }
+.slide-panel-header .btn .material-icons, .slide-panel-header .form-select .material-icons,
+.slide-panel-header .btn-link .material-icons {
+  font-size: 9px;
+}
 
 /* ── Title Group ── */
 .slide-panel-title-group {
@@ -5025,13 +5029,13 @@ input[type=range]::-moz-range-thumb:active {
 }
 
 .slide-panel-subtitle {
-  font-size: 0.7rem;
+  font-size: 0.53rem;
   color: var(--color-gray-500);
   font-family: var(--font-label);
 }
 
 .slide-panel-title {
-  font-size: var(--text-base);
+  font-size: clamp(0.75rem, 0.975vw, 0.86rem);
   font-weight: 600;
   color: var(--text-primary);
   font-family: var(--font-label);
@@ -5040,17 +5044,17 @@ input[type=range]::-moz-range-thumb:active {
 /* ── Body ── */
 .slide-panel-body {
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.68rem;
   font-family: var(--font-body);
   padding: 12px 16px;
 }
 .slide-panel-body::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
   background: transparent;
 }
 .slide-panel-body::-webkit-scrollbar-thumb {
   background: var(--color-gray-700);
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 :root {
