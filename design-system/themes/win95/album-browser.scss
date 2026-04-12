@@ -11,10 +11,23 @@
     padding: 8px;
     overflow-y: auto;
     background: #ffffff;
-    border-top:    2px solid var(--win95-dark);
-    border-left:   2px solid var(--win95-dark);
+    border-top: 2px solid var(--win95-dark);
+    border-left: 2px solid var(--win95-dark);
     border-bottom: 2px solid var(--win95-highlight);
-    border-right:  2px solid var(--win95-highlight);
+    border-right: 2px solid var(--win95-highlight);
+
+    &::-webkit-scrollbar {
+        width: 16px;
+        background: var(--win95-face);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--win95-face);
+        border-top: 2px solid var(--win95-highlight);
+        border-left: 2px solid var(--win95-highlight);
+        border-bottom: 2px solid var(--win95-dark);
+        border-right: 2px solid var(--win95-dark);
+    }
 }
 
 .album-card {
@@ -42,10 +55,10 @@
     border-radius: 0;
     object-fit: cover;
     background: var(--win95-face);
-    border-top:    1px solid var(--win95-dark);
-    border-left:   1px solid var(--win95-dark);
+    border-top: 1px solid var(--win95-dark);
+    border-left: 1px solid var(--win95-dark);
     border-bottom: 1px solid var(--win95-highlight);
-    border-right:  1px solid var(--win95-highlight);
+    border-right: 1px solid var(--win95-highlight);
 }
 
 .album-card__title {
@@ -87,8 +100,8 @@
     object-fit: cover;
     flex-shrink: 0;
     border-radius: 0;
-    border-top:    1px solid var(--win95-dark);
-    border-left:   1px solid var(--win95-dark);
+    border-top: 1px solid var(--win95-dark);
+    border-left: 1px solid var(--win95-dark);
     border-bottom: 1px solid var(--win95-highlight);
-    border-right:  1px solid var(--win95-highlight);
+    border-right: 1px solid var(--win95-highlight);
 }

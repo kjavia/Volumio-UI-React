@@ -24,7 +24,8 @@
   background-size: cover;
   background-position: center;
   filter: blur(90px) brightness(0.25) saturate(1.4);
-  transform: scale(1.1); /* prevent blur edge bleed */
+  transform: scale(1.1);
+  /* prevent blur edge bleed */
   z-index: 0;
 }
 
@@ -51,8 +52,8 @@
 }
 
 /* Row 2 gets a bit of breathing room below the title */
-.lsp-top__row2 + .lsp-top__row2,
-.lsp-top__row1 + .lsp-top__row2 {
+.lsp-top__row2+.lsp-top__row2,
+.lsp-top__row1+.lsp-top__row2 {
   margin-top: 0.4rem;
 }
 
@@ -68,10 +69,10 @@
   flex: 1 1 auto;
   min-width: 0;
   font-family: var(--font-display, sans-serif);
-  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 700;
   color: #fff;
-  line-height: 1.25;
+  line-height: 1.5;
   overflow: visible;
   white-space: nowrap;
   text-align: left;
@@ -129,7 +130,8 @@
   .hires-logo {
     height: 1.6rem !important;
     width: auto !important;
-    filter: none !important; /* keep original gold/colour */
+    filter: none !important;
+    /* keep original gold/colour */
   }
 }
 
@@ -181,7 +183,8 @@
   align-items: flex-end;
   gap: 2rem;
   min-height: 0;
-  margin-top: auto; /* pushes row1 + row2 + row3 to the bottom of lsp-bottom */
+  margin-top: auto;
+  /* pushes row1 + row2 + row3 to the bottom of lsp-bottom */
 }
 
 /* Mini animated player — 400 × 400 px, left edge */
@@ -196,7 +199,7 @@
 }
 
 /* All animated players accept 100% size inside this wrapper */
-.lsp-bottom__player > * {
+.lsp-bottom__player>* {
   width: 100% !important;
   height: 100% !important;
 }
@@ -212,7 +215,7 @@
   overflow: hidden;
   /* background intentionally transparent — album art shows through */
 
-  > * {
+  >* {
     flex: 1 1 auto;
     width: 100%;
     height: 100%;
@@ -236,7 +239,8 @@
 
 /* ── Override theme absolute-positioning so ContextMenu renders inline in the bar ── */
 .lsp-bottom__row3 .context-menu-container {
-  position: relative; /* stays in flex flow; dropdown anchors to this element */
+  position: relative;
+  /* stays in flex flow; dropdown anchors to this element */
   top: auto;
   left: auto;
   padding: 0;
@@ -283,6 +287,7 @@
 
 /* ─ Button size variants ─ */
 .lsp-btn {
+
   /* Base icon button size on large screen — matches medium transport buttons */
   &.btn-icon {
     width: 60px !important;
@@ -346,7 +351,7 @@
   align-items: center;
   gap: 0.5rem;
   z-index: 100;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
   min-width: 56px;
 
   &__slider-wrap {
@@ -383,7 +388,7 @@
       background: #fff;
       cursor: pointer;
       border: none;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
     }
 
     &::-moz-range-thumb {
@@ -393,7 +398,7 @@
       background: #fff;
       cursor: pointer;
       border: none;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
     }
   }
 
@@ -541,20 +546,16 @@
     height: clamp(2rem, 6cqi, 3.5rem);
   }
 
-  .slide-panel-header .material-icons {
-    font-size: clamp(1.2rem, 5cqi, 2.4rem) !important;
-  }
-
   .playlist-track-title {
-    font-size: clamp(0.8rem, 4.5cqi, 1.6rem);
+    font-size: clamp(0.8rem, 4.5cqi, 1.2rem);
   }
 
   .playlist-track-meta {
-    font-size: clamp(0.7rem, 3.5cqi, 1.3rem);
+    font-size: clamp(0.7rem, 3.5cqi, 1rem);
   }
 
   .playlist-remove .material-icons {
-    font-size: clamp(1rem, 5cqi, 2rem) !important;
+    font-size: clamp(1rem, 5cqi, 1.2rem) !important;
   }
 }
 
@@ -628,6 +629,7 @@
 
   // Scale down all button sizes
   .lsp-btn {
+
     &.btn-icon,
     &.lsp-btn--sm.btn-icon,
     &.lsp-btn--md.btn-round {

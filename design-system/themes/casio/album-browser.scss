@@ -12,11 +12,25 @@
     padding: 8px;
     overflow-y: auto;
     background: var(--casio-body);
-    border-top:   2px solid var(--casio-edge);
-    border-left:  2px solid var(--casio-edge);
+    border-top: 2px solid var(--casio-edge);
+    border-left: 2px solid var(--casio-edge);
     border-bottom: 2px solid var(--casio-sheen);
-    border-right:  2px solid var(--casio-sheen);
+    border-right: 2px solid var(--casio-sheen);
     border-radius: var(--radius-sm);
+
+    &::-webkit-scrollbar {
+        width: 12px;
+        background: var(--casio-body);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--casio-key-face);
+        border-top: 2px solid var(--casio-key-hi);
+        border-left: 2px solid var(--casio-key-hi);
+        border-bottom: 2px solid var(--casio-key-sh);
+        border-right: 2px solid var(--casio-key-sh);
+        border-radius: 0;
+    }
 }
 
 .album-card {
@@ -44,10 +58,10 @@
     border-radius: var(--radius-sm);
     object-fit: cover;
     background: var(--casio-face);
-    border-top:   1px solid var(--casio-sheen);
-    border-left:  1px solid var(--casio-sheen);
+    border-top: 1px solid var(--casio-sheen);
+    border-left: 1px solid var(--casio-sheen);
     border-bottom: 1px solid var(--casio-edge);
-    border-right:  1px solid var(--casio-edge);
+    border-right: 1px solid var(--casio-edge);
     filter: saturate(0.7) contrast(1.1);
 }
 

@@ -306,7 +306,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   const headerActions = (
     <button
       type="button"
-      className="dialog-close dialog-close--expand"
+      className="btn btn-icon dialog-close dialog-close--expand"
       onClick={() => setIsFullscreen((v) => !v)}
       aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
     >
@@ -394,7 +394,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   const renderHome = () => (
     <div className={viewMode === 'grid' ? 'browse-grid' : 'browse-list'}>
       {BROWSE_TILES.map(({ id, label, icon, uri }) => (
-        <Button key={id} label={label} classNames="browse-tile" onClick={() => navigate(uri, label)}>
+        <Button key={id} label={label} classNames="btn-secondary browse-tile" onClick={() => navigate(uri, label)}>
           <span className="material-icons browse-tile__icon">{icon}</span>
           <span className="browse-tile__label">{label}</span>
         </Button>

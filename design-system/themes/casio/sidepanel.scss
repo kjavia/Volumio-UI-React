@@ -6,98 +6,107 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 .slide-panel-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 1040;
-    background: transparent;
-    pointer-events: none;
-    transition: none;
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: transparent;
+  pointer-events: none;
+  transition: none;
 
-    &.show {
-        background: rgba(0, 0, 0, 0.6);
-        pointer-events: auto;
-    }
+  &.show {
+    background: rgba(0, 0, 0, 0.6);
+    pointer-events: auto;
+  }
 }
 
 .slide-panel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 1050;
-    display: flex;
-    flex-direction: column;
-    max-width: 80vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 3010;
+  display: flex;
+  flex-direction: column;
+  max-width: 80vw;
 
-    background: var(--casio-face);
-    border-right: 3px solid var(--casio-body);
-    border-right-color: var(--casio-sheen);
-    box-shadow:
-        4px 0 20px rgba(0, 0, 0, 0.7),
-        inset -1px 0 0 var(--casio-edge);
+  background: var(--casio-face);
+  border-right: 3px solid var(--casio-body);
+  border-right-color: var(--casio-sheen);
+  box-shadow:
+    4px 0 20px rgba(0, 0, 0, 0.7),
+    inset -1px 0 0 var(--casio-edge);
 
-    transform: translateX(-100%);
-    transition: none;
-    outline: none;
+  transform: translateX(-100%);
+  transition: none;
+  outline: none;
 
-    &.open {
-        transform: translateX(0);
-    }
+  &.open {
+    transform: translateX(0);
+  }
 }
 
 .slide-panel-header {
-    border-bottom: 2px solid var(--casio-edge);
-    box-shadow: 0 1px 0 var(--casio-sheen);
-    flex-shrink: 0;
-    background: var(--casio-body);
-    padding: 8px 12px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
+  border-bottom: 2px solid var(--casio-edge);
+  box-shadow: 0 1px 0 var(--casio-sheen);
+  flex-shrink: 0;
+  background: var(--casio-body);
+  padding: 8px 12px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 
-    /* Molding ridge texture on header */
-    background-image: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(255, 255, 255, 0.015) 3px,
-        rgba(255, 255, 255, 0.015) 4px
-    );
+  /* Molding ridge texture on header */
+  background-image: repeating-linear-gradient(to bottom,
+      transparent 0px,
+      transparent 3px,
+      rgba(255, 255, 255, 0.015) 3px,
+      rgba(255, 255, 255, 0.015) 4px);
 
-    /* LCD-green left indicator stripe */
-    border-left: 4px solid var(--casio-lcd-bg);
+  /* LCD-green left indicator stripe */
+  border-left: 4px solid var(--casio-lcd-bg);
+
 }
 
 .slide-panel-title-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
 }
 
 .slide-panel-subtitle {
-    font-size: var(--text-xs);
-    color: var(--casio-on-dark-dim);
-    font-family: var(--font-label);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wider);
+  font-size: 0.53rem;
+  color: var(--casio-on-dark-dim);
+  font-family: var(--font-label);
 }
 
 .slide-panel-title {
-    font-size: var(--text-lg);
-    font-weight: 400;
-    color: var(--casio-on-dark);
-    font-family: var(--font-display);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-normal);
+  font-size: clamp(0.75rem, 0.975vw, 0.86rem);
+  font-weight: 600;
+  color: var(--casio-on-dark);
+  font-family: var(--font-label);
 }
 
 .slide-panel-body {
-    color: var(--casio-on-dark);
-    font-size: var(--text-sm);
-    font-family: var(--font-body);
-    overflow-y: auto;
-    flex: 1 1 auto;
-    padding: 0;
-    background: var(--casio-face);
+  color: var(--casio-on-dark);
+  font-size: calc(var(--text-sm) * 0.75);
+  font-family: var(--font-body);
+  overflow-y: auto;
+  flex: 1 1 auto;
+  padding: 0;
+  background: var(--casio-face);
+
+  &::-webkit-scrollbar {
+    width: 12px;
+    background: var(--casio-body);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--casio-key-face);
+    border-top: 2px solid var(--casio-key-hi);
+    border-left: 2px solid var(--casio-key-hi);
+    border-bottom: 2px solid var(--casio-key-sh);
+    border-right: 2px solid var(--casio-key-sh);
+    border-radius: 0;
+  }
 }

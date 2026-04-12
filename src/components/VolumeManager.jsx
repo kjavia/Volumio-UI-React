@@ -17,20 +17,18 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
         </span>
       </Button>
 
-      <div className="d-flex flex-column flex-grow-1">
-        <div className="slider-track position-relative mb-1" style={{ width: '100%' }}>
-          <input
-            type="range"
-            className="form-range position-absolute w-100 h-100 top-0 start-0 opacity-0 z-2"
-            min="0"
-            max="100"
-            value={getVolume() || 0}
-            onChange={(e) => onVolumeChange(Number(e.target.value))}
-            style={{ cursor: 'pointer', margin: 0 }}
-          />
-          <div className="slider-fill position-relative" style={{ width: `${getVolume()}%` }}>
-            <div className="slider-cap"></div>
-          </div>
+      <div className="slider-track position-relative flex-grow-1">
+        <input
+          type="range"
+          className="form-range position-absolute w-100 h-100 top-0 start-0 opacity-0 z-2"
+          min="0"
+          max="100"
+          value={getVolume() || 0}
+          onChange={(e) => onVolumeChange(Number(e.target.value))}
+          style={{ cursor: 'pointer', margin: 0 }}
+        />
+        <div className="slider-fill position-relative" style={{ width: `${getVolume()}%` }}>
+          <div className="slider-cap"></div>
         </div>
       </div>
       <div className="text-center text-white small opacity-75" style={{ fontSize: '0.75em' }}>

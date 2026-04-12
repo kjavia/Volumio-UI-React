@@ -185,9 +185,9 @@
 .slider-track {
     position: relative;
     flex-grow: 1;
-    height: 8px;
-    background: var(--color-gray-700);
-    border-radius: 4px;
+    height: 4px;
+    background: var(--color-gray-550);
+    border-radius: 2px;
     cursor: pointer;
     overflow: visible;
 }
@@ -195,7 +195,7 @@
 .slider-fill {
     height: 100%;
     background: var(--color-primary);
-    border-radius: 4px;
+    border-radius: 2px;
     position: relative;
 }
 
@@ -212,16 +212,13 @@
 
 /* ─── Volume Slider ────────────────────────────────────────────────────── */
 .volume-manager {
-    .slider-fill {
-        height: 8px;
-        ;
-    }
 
     /* Ensure the value label never collapses flush against the slider */
     .small {
         min-width: 3.5ch;
         padding-left: 0.4rem;
     }
+
 }
 
 /* ─── Player Controls Container ────────────────────────────────────────── */

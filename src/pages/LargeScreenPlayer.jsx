@@ -355,19 +355,19 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
                 <span className="material-icons">repeat</span>
               </Button>
 
-              <Button classNames="btn-round btn-white lsp-btn lsp-btn--md" onClick={prev} label="Previous">
+              <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={prev} label="Previous">
                 <span className="material-icons">skip_previous</span>
               </Button>
 
               <Button
-                classNames="btn-round btn-orange lsp-btn lsp-btn--lg"
+                classNames="btn-round btn-primary lsp-btn lsp-btn--lg"
                 onClick={handlePlayPause}
                 label={isPlaying ? 'Pause' : 'Play'}
               >
                 <span className="material-icons play-icon">{isPlaying ? 'pause' : 'play_arrow'}</span>
               </Button>
 
-              <Button classNames="btn-round btn-white lsp-btn lsp-btn--md" onClick={next} label="Next">
+              <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={next} label="Next">
                 <span className="material-icons">skip_next</span>
               </Button>
 

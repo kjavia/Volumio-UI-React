@@ -8,7 +8,7 @@
     position: fixed;
     top: 20px;
     left: 20px;
-    z-index: 5000;
+    z-index: 100;
 }
 
 .context-menu-toggle {
@@ -83,7 +83,7 @@
     position: fixed;
     inset: 0;
     background: transparent;
-    z-index: 4999;
+    z-index: 99;
 }
 
 .context-menu {
@@ -102,7 +102,7 @@
         0 8px 24px var(--shadow-50),
         inset 0 1px 0 var(--highlight-10);
     padding: 6px;
-    z-index: 5001;
+    z-index: 101;
     animation: contextMenuIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
     transform-origin: top right;
 }

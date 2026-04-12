@@ -2,15 +2,16 @@
 
 /* ── Playlist Items ── */
 .playlist-list {
+  padding-left: 0;
   padding-bottom: 1rem;
 }
 
 .playlist-item {
   border-bottom: 1px solid var(--highlight-05);
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 0;
   transition: background 0.15s;
-  padding: 8px 4px;
+  padding: 8px 8px 8px 16px;
 }
 
 .playlist-item:hover {
@@ -74,17 +75,5 @@
   line-height: 1.3;
 }
 
-/* ── Remove Button ── */
-.playlist-remove {
-  flex-shrink: 0;
-  transition: color 0.15s;
-  text-decoration: none !important;
-}
-
-.playlist-remove:hover {
-  color: var(--color-red-vivid) !important;
-}
-
-.playlist-remove .material-icons {
-  font-size: 1.1rem;
-}
+/* ─── Edge-to-edge rows ─── */
+/* padding and border-radius set directly on .playlist-item above */

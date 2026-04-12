@@ -61,10 +61,10 @@
   position: relative;
   border-radius: 0;
   overflow: hidden;
-  border-top:    1px solid var(--win95-dark);
-  border-left:   1px solid var(--win95-dark);
+  border-top: 1px solid var(--win95-dark);
+  border-left: 1px solid var(--win95-dark);
   border-bottom: 1px solid var(--win95-highlight);
-  border-right:  1px solid var(--win95-highlight);
+  border-right: 1px solid var(--win95-highlight);
 }
 
 .playlist-art {
@@ -94,6 +94,7 @@
 
 .playlist-item:hover,
 .playlist-item--active {
+
   .playlist-track-title,
   .playlist-track-artist,
   .playlist-track-meta {
@@ -116,37 +117,9 @@
   font-family: var(--font-mono);
 }
 
-.playlist-remove {
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-primary);
-  background: var(--win95-face);
-  border-top:    2px solid var(--win95-highlight);
-  border-left:   2px solid var(--win95-highlight);
-  border-bottom: 2px solid var(--win95-dark);
-  border-right:  2px solid var(--win95-dark);
-  padding: clamp(0.5rem, 1vw, 1rem) !important;
-  cursor: pointer;
-
-  .material-icons {
-    font-size: 13px;
-    line-height: 1;
-  }
-
-  &:active {
-    border-top:    2px solid var(--win95-dark);
-    border-left:   2px solid var(--win95-dark);
-    border-bottom: 2px solid var(--win95-highlight);
-    border-right:  2px solid var(--win95-highlight);
-  }
-
-  .playlist-item--active &,
-  .playlist-item:hover & {
-    background: var(--win95-face);
-    color: var(--text-primary);
-  }
+/* ─── Edge-to-edge rows ─── */
+.playlist-item {
+  border-radius: 0;
+  padding-left: 16px;
+  padding-right: 8px;
 }

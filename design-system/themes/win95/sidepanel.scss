@@ -7,7 +7,7 @@
 .slide-panel-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 1040;
+  z-index: 3000;
   background: transparent;
   pointer-events: none;
   transition: background 0.2s;
@@ -23,7 +23,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 1050;
+  z-index: 3010;
   display: flex;
   flex-direction: column;
   max-width: 80vw;
@@ -46,6 +46,7 @@
   min-height: 40px;
   display: flex;
   align-items: center;
+
 }
 
 .slide-panel-title-group {
@@ -56,13 +57,13 @@
 }
 
 .slide-panel-subtitle {
-  font-size: 0.65rem;
-  color: rgba(255,255,255,0.7);
+  font-size: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
   font-family: var(--font-label);
 }
 
 .slide-panel-title {
-  font-size: var(--text-base);
+  font-size: clamp(0.75rem, 0.975vw, 0.86rem);
   font-weight: 700;
   color: #ffffff;
   font-family: var(--font-label);
@@ -70,9 +71,22 @@
 
 .slide-panel-body {
   color: var(--text-primary);
-  font-size: var(--text-sm);
+  font-size: calc(var(--text-sm) * 0.75);
   font-family: var(--font-body);
   overflow-y: auto;
   flex: 1 1 auto;
   padding: 0;
+
+  &::-webkit-scrollbar {
+    width: 16px;
+    background: var(--win95-face);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--win95-face);
+    border-top: 2px solid var(--win95-highlight);
+    border-left: 2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right: 2px solid var(--win95-dark);
+  }
 }

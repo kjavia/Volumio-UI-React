@@ -8,141 +8,372 @@
 
 /* ─── Shared key mixins ─────────────────────────────────────────────────── */
 @mixin casio-key-up {
-    /* Domed surface: radial highlight at top-center → darker toward edges */
-    background:
-        radial-gradient(
-            ellipse 80% 55% at 50% 20%,
-            #404855 0%,
-            #2a3040 50%,
-            #1e2530 100%
-        );
-    box-shadow:
-        0 4px 0 0 #0d1018,              /* thick bottom edge = key height */
-        0 5px 8px rgba(0, 0, 0, 0.55), /* diffuse drop shadow below key */
-        inset 0 1px 1px rgba(255, 255, 255, 0.08); /* faint dome top-sheen */
-    border: 1px solid #10141c;
-    border-bottom-color: #080b12;
+  /* Domed surface: radial highlight at top-center → darker toward edges */
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 20%,
+      #404855 0%,
+      #2a3040 50%,
+      #1e2530 100%);
+  box-shadow:
+    0 4px 0 0 #0d1018,
+    /* thick bottom edge = key height */
+    0 5px 8px rgba(0, 0, 0, 0.55),
+    /* diffuse drop shadow below key */
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  /* faint dome top-sheen */
+  border: 1px solid #10141c;
+  border-bottom-color: #080b12;
 }
 
 @mixin casio-key-down {
-    background:
-        radial-gradient(
-            ellipse 80% 55% at 50% 20%,
-            #303840 0%,
-            #202830 50%,
-            #181e26 100%
-        );
-    box-shadow:
-        0 1px 0 0 #0d1018,
-        0 2px 4px rgba(0, 0, 0, 0.5),
-        inset 0 2px 4px rgba(0, 0, 0, 0.4);
-    border: 1px solid #10141c;
-    transform: translateY(2px);
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 20%,
+      #303840 0%,
+      #202830 50%,
+      #181e26 100%);
+  box-shadow:
+    0 1px 0 0 #0d1018,
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  border: 1px solid #10141c;
+  transform: translateY(2px);
 }
 
 /* ─── Base key ────────────────────────────────────────────────────────────── */
 .btn {
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 5px 16px;
-    min-height: 32px;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 5px 16px;
+  min-height: 32px;
 
-    @include casio-key-up;
-    border-radius: 6px;
+  @include casio-key-up;
+  border-radius: 6px;
 
-    font-family: var(--font-label);
-    font-size: var(--text-sm);
-    font-weight: 400;
-    color: var(--casio-on-dark);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
+  font-family: var(--font-label);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--casio-on-dark);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
 
-    cursor: pointer;
-    user-select: none;
-    transition: transform 60ms ease, box-shadow 60ms ease;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 60ms ease, box-shadow 60ms ease;
 
-    &:hover {
-        background:
-            radial-gradient(
-                ellipse 80% 55% at 50% 20%,
-                #4a5260 0%,
-                #323848 50%,
-                #242c3a 100%
-            );
-    }
+  &:hover {
+    background:
+      radial-gradient(ellipse 80% 55% at 50% 20%,
+        #4a5260 0%,
+        #323848 50%,
+        #242c3a 100%);
+  }
 
-    &:active,
-    &.active {
-        @include casio-key-down;
-    }
+  &:active,
+  &.active {
+    @include casio-key-down;
+  }
 
-    &:focus-visible {
-        outline: 2px solid var(--casio-red);
-        outline-offset: 2px;
-    }
+  &:focus-visible {
+    outline: 2px solid var(--casio-red);
+    outline-offset: 2px;
+  }
 }
 
-/* ─── Primary — orange-ringed function key ──────────────────────────────── */
+/* ─── Primary — orange function key ────────────────────────────────────── */
 .btn-primary {
-    @include casio-key-up;
-    color: #ffffff;
+  color: #ffffff;
+  background: radial-gradient(ellipse 80% 55% at 50% 20%,
+      #d06830 0%,
+      #a04010 50%,
+      #742808 100%);
+  box-shadow:
+    0 4px 0 0 #3a1004,
+    0 5px 8px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18);
+  border: 1px solid #5e1e06;
+  border-bottom-color: #2a0c02;
 
-    /* Orange accent ring — key visual from the image */
-    outline: 2px solid var(--casio-red);
-    outline-offset: 1px;
+  &:hover {
+    background: radial-gradient(ellipse 80% 55% at 50% 20%,
+        #e07840 0%,
+        #b85020 50%,
+        #883010 100%);
+  }
+
+  &:active,
+  &.active {
+    background: radial-gradient(ellipse 80% 55% at 50% 20%,
+        #903810 0%,
+        #6a2408 50%,
+        #4e1804 100%);
     box-shadow:
-        0 4px 0 0 #0d1018,
-        0 5px 8px rgba(0, 0, 0, 0.55),
-        inset 0 1px 1px rgba(255, 255, 255, 0.08),
-        0 0 0 5px rgba(224, 96, 32, 0.18); /* soft orange ambient glow */
-
-    &:active, &.active {
-        @include casio-key-down;
-        outline: 2px solid var(--casio-red);
-        outline-offset: 1px;
-    }
+      0 1px 0 0 #3a1004,
+      0 2px 4px rgba(0, 0, 0, 0.5),
+      inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    border: 1px solid #3e1204;
+    transform: translateY(2px);
+  }
 }
 
 /* ─── Secondary ─────────────────────────────────────────────────────────── */
 .btn-secondary,
 .btn-white {
-    @include casio-key-up;
-    color: var(--casio-on-dark);
+  @include casio-key-up;
+  color: var(--casio-on-dark);
 
-    &:active, &.active {
-        @include casio-key-down;
-    }
+  &:active,
+  &.active {
+    @include casio-key-down;
+  }
 }
 
-/* ─── Danger — same orange ring ─────────────────────────────────────────── */
+/* ─── Danger — deep red key ──────────────────────────────────────────────── */
 .btn-danger {
-    @include casio-key-up;
-    color: #ffffff;
-    outline: 2px solid var(--casio-red);
-    outline-offset: 1px;
+  color: #ffffff;
+  background: radial-gradient(ellipse 80% 55% at 50% 20%,
+      #c04030 0%,
+      #902018 50%,
+      #680e0e 100%);
+  box-shadow:
+    0 4px 0 0 #380808,
+    0 5px 8px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  border: 1px solid #4e0c0c;
+  border-bottom-color: #280404;
+
+  &:hover {
+    background: radial-gradient(ellipse 80% 55% at 50% 20%,
+        #d85040 0%,
+        #a83028 50%,
+        #7c1a18 100%);
+  }
+
+  &:active,
+  &.active {
+    background: radial-gradient(ellipse 80% 55% at 50% 20%,
+        #882818 0%,
+        #601010 50%,
+        #480808 100%);
+    box-shadow:
+      0 1px 0 0 #380808,
+      0 2px 4px rgba(0, 0, 0, 0.5),
+      inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    border: 1px solid #380808;
+    transform: translateY(2px);
+  }
+}
+
+/* ─── Success ─────────────────────────────────────────────────────── */
+.btn-success {
+  color: #ffffff;
+  background: radial-gradient(ellipse 80% 55% at 50% 20%,
+      #38b830 0%,
+      #208018 50%,
+      #145810 100%);
+  box-shadow:
+    0 4px 0 0 #0a2e08,
+    0 5px 8px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  border: 1px solid #0e3c0a;
+  border-bottom-color: #061c04;
+
+  &:hover {
+    background: radial-gradient(ellipse 80% 55% at 50% 20%,
+        #48d03c 0%,
+        #289820 50%,
+        #1a6c14 100%);
+  }
+
+  &:active,
+  &.active {
+    background: radial-gradient(ellipse 80% 55% at 50% 20%,
+        #188810 0%,
+        #0e5c0a 50%,
+        #084006 100%);
+    box-shadow:
+      0 1px 0 0 #0a2e08,
+      0 2px 4px rgba(0, 0, 0, 0.5),
+      inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    border: 1px solid #082808;
+    transform: translateY(2px);
+  }
+}
+
+/* ─── Warning ─────────────────────────────────────────────────────── */
+.btn-warning {
+  color: #061010;
+  background: radial-gradient(ellipse 80% 55% at 50% 20%,
+      #68f0c0 0%,
+      #2eaa78 50%,
+      #1a7050 100%);
+  box-shadow:
+    0 4px 0 0 #0c3828,
+    0 5px 8px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  border: 1px solid #104830;
+  border-bottom-color: #061e14;
+
+  &:hover {
+    background: radial-gradient(ellipse 80% 55% at 50% 20%,
+        #80ffd0 0%,
+        #3cc090 50%,
+        #228060 100%);
+  }
+
+  &:active,
+  &.active {
+    background: radial-gradient(ellipse 80% 55% at 50% 20%,
+        #1e8060 0%,
+        #135840 50%,
+        #0c3c2c 100%);
+    color: #a8e8d0;
+    box-shadow:
+      0 1px 0 0 #0c3828,
+      0 2px 4px rgba(0, 0, 0, 0.5),
+      inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    border: 1px solid #0c3828;
+    transform: translateY(2px);
+  }
+}
+
+/* ─── Info ────────────────────────────────────────────────────────── */
+.btn-info {
+  color: #ffffff;
+  background: radial-gradient(ellipse 80% 55% at 50% 20%,
+      #4888e0 0%,
+      #2458a8 50%,
+      #143878 100%);
+  box-shadow:
+    0 4px 0 0 #0c2050,
+    0 5px 8px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  border: 1px solid #102c60;
+  border-bottom-color: #081630;
+
+  &:hover {
+    background: radial-gradient(ellipse 80% 55% at 50% 20%,
+        #5898f0 0%,
+        #2c68c0 50%,
+        #1a488c 100%);
+  }
+
+  &:active,
+  &.active {
+    background: radial-gradient(ellipse 80% 55% at 50% 20%,
+        #1c4888 0%,
+        #103060 50%,
+        #081e40 100%);
+    box-shadow:
+      0 1px 0 0 #0c2050,
+      0 2px 4px rgba(0, 0, 0, 0.5),
+      inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    border: 1px solid #0c2050;
+    transform: translateY(2px);
+  }
+}
+
+/* ─── Black / Dark ──────────────────────────────────────────────── */
+.btn-black {
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #1c2028 0%, #12161e 50%, #0a0e14 100%);
+  box-shadow: 0 4px 0 0 #04070c, 0 5px 8px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.04);
+  border: 1px solid #06090f;
+  color: var(--casio-on-dark);
+
+  &:active,
+  &.active {
+    @include casio-key-down;
+  }
+}
+
+/* ─── Link / Transparent ──────────────────────────────────────── */
+.btn-link {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--casio-on-dark);
+  padding: 0;
+  min-height: unset;
+  text-transform: none;
+  letter-spacing: normal;
+
+  &:hover {
+    background: transparent;
+    color: var(--casio-lcd-bg);
+  }
+
+  &:active {
+    background: transparent;
+    transform: none;
+    box-shadow: none;
+  }
 }
 
 /* ─── Icon-only key (small square) ─────────────────────────────────────── */
 .btn-icon {
-    width: 34px;
-    height: 34px;
-    padding: 0;
-    border-radius: 6px;
-    @include casio-key-up;
-    color: var(--casio-on-dark);
-    transition: transform 60ms ease, box-shadow 60ms ease;
+  width: 36px;
+  height: 36px;
+  min-height: unset;
+  padding: 0;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--casio-on-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
 
-    &:active, &.active {
-        @include casio-key-down;
-    }
+  &:hover {
+    background: rgba(68, 221, 168, 0.18);
+    color: var(--casio-lcd-bg-alt);
+  }
+
+  &:active,
+  &.active {
+    @include casio-key-down;
+  }
+}
+
+/* ─── Round Button (circle — for transport controls) ───────────────────── */
+.btn-round {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include casio-key-up;
+
+  &:active,
+  &.active {
+    @include casio-key-down;
+    border-radius: 50%;
+  }
 }
 
 /* ─── Small Button ─────────────────────────────────────────────────────── */
 .btn-sm {
-    padding: 3px 10px;
-    min-height: 24px;
-    font-size: var(--text-xs, 11px);
+  padding: 3px 10px;
+  min-height: 24px;
+  font-size: var(--text-xs, 11px);
+}
+
+.btn-round.btn-sm {
+  width: 40px;
+  height: 40px;
+}
+
+// ─── Disabled State ────────────────────────────────────────────────
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }

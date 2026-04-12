@@ -42,16 +42,16 @@ const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px',
         tabIndex={-1}
       >
         {/* Header */}
-        <div className="slide-panel-header d-flex align-items-center justify-content-between px-3 py-2">
+        <div className="slide-panel-header d-flex align-items-center justify-content-between px-3 py-1 py-lg-2">
           <div className="slide-panel-title-group">
-            {title && <h5 className="slide-panel-title m-0">{title}</h5>}
+            {title && <h5 className="slide-panel-title m-0 mb-2">{title}</h5>}
             {subtitle && <span className="slide-panel-subtitle">{subtitle}</span>}
           </div>
-          <div className="d-flex align-items-center ms-auto gap-1">
+          <div className="d-flex align-items-center ms-auto gap-3">
             {headerActions}
             <button
               type="button"
-              className="btn btn-link p-0"
+              className="btn-icon dialog-close"
               onClick={onClose}
               aria-label="Close"
             >

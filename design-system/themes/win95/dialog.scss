@@ -24,10 +24,10 @@
   outline: none;
   background: var(--win95-face);
   border-radius: 0;
-  border-top:    2px solid var(--win95-highlight);
-  border-left:   2px solid var(--win95-highlight);
+  border-top: 2px solid var(--win95-highlight);
+  border-left: 2px solid var(--win95-highlight);
   border-bottom: 2px solid var(--win95-dark);
-  border-right:  2px solid var(--win95-dark);
+  border-right: 2px solid var(--win95-dark);
   overflow: hidden;
 }
 
@@ -35,11 +35,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 6px 5px 10px;
+  padding: 3px 4px 3px 10px;
   background: linear-gradient(90deg, var(--win95-titlebar), #1084d0);
   flex-shrink: 0;
   gap: 8px;
-  height: 36px;
+  min-height: 28px;
 }
 
 .dialog-title {
@@ -51,36 +51,23 @@
 }
 
 .dialog-close {
-  width: 24px;
-  height: 22px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--win95-face);
   border-radius: 0;
-  border-top:    1px solid var(--win95-highlight);
-  border-left:   1px solid var(--win95-highlight);
-  border-bottom: 1px solid var(--win95-dark);
-  border-right:  1px solid var(--win95-dark);
-  cursor: pointer;
+  border-top: 2px solid var(--win95-highlight);
+  border-left: 2px solid var(--win95-highlight);
+  border-bottom: 2px solid var(--win95-dark);
+  border-right: 2px solid var(--win95-dark);
   color: var(--text-primary);
-  font-size: 11px;
   font-weight: 700;
-  flex-shrink: 0;
 
   &:active {
-    border-top:    1px solid var(--win95-dark);
-    border-left:   1px solid var(--win95-dark);
-    border-bottom: 1px solid var(--win95-highlight);
-    border-right:  1px solid var(--win95-highlight);
-  }
-
-  .material-icons {
-    font-size: 16px;
-    line-height: 1;
+    border-top: 2px solid var(--win95-dark);
+    border-left: 2px solid var(--win95-dark);
+    border-bottom: 2px solid var(--win95-highlight);
+    border-right: 2px solid var(--win95-highlight);
   }
 }
+
 .dialog-toolbar {
   border-bottom: 2px solid var(--win95-shadow);
   padding: 4px 8px;
@@ -145,10 +132,10 @@
   background: transparent;
   opacity: 1;
   // Win95 sunken pane bevel
-  border-top:    1px solid var(--win95-shadow);
-  border-left:   1px solid var(--win95-shadow);
+  border-top: 1px solid var(--win95-shadow);
+  border-left: 1px solid var(--win95-shadow);
   border-bottom: 1px solid var(--win95-highlight);
-  border-right:  1px solid var(--win95-highlight);
+  border-right: 1px solid var(--win95-highlight);
 
   .material-icons {
     display: none; // Win95 status bar uses text labels, not round icons
@@ -165,20 +152,14 @@
 
 /* ── Browse Tiles ── */
 .browse-tile {
-    color: var(--text-primary);
-    background: var(--win95-face);
-    border: 2px solid transparent;
+  .browse-tile__icon {
+    font-size: clamp(18px, 3cqi, 30px) !important;
+    display: block;
+    margin-bottom: 4px;
+  }
 
-    &:hover {
-        border-color: var(--win95-titlebar);
-        background: var(--win95-light);
-    }
-
-    .browse-tile__icon {
-        color: var(--win95-titlebar);
-    }
-
-    .browse-tile__label {
-        color: var(--text-primary);
-    }
+  .browse-tile__label {
+    font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
+    font-weight: 600;
+  }
 }

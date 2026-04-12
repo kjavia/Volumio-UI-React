@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.25rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-dark);
   background: var(--color-gray-900);
   flex-shrink: 0;
@@ -48,31 +48,6 @@
   color: var(--text-primary);
   letter-spacing: var(--tracking-tight);
   font-family: var(--font-label);
-}
-
-.dialog-close {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  color: var(--text-secondary);
-  flex-shrink: 0;
-  transition: background 0.15s, color 0.15s;
-
-  .material-icons {
-    font-size: 20px;
-  }
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.07);
-    color: var(--text-primary);
-  }
 }
 
 /* ── Toolbar ── */
@@ -106,13 +81,13 @@
   line-height: var(--leading-relaxed);
 
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 8px;
     background: transparent;
   }
 
   &::-webkit-scrollbar-thumb {
     background: var(--color-gray-700);
-    border-radius: 2px;
+    border-radius: 4px;
   }
 }
 
@@ -268,115 +243,76 @@
 
 .modal-dialog,
 .dialog-box {
-    background: var(--color-gray-850);
-    border: 1px solid var(--border-dark);
-    border-radius: var(--radius-xl);
-    padding: 28px;
-    width: 100%;
-    max-width: 480px;
-    box-shadow: none;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.dialog-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
+  background: var(--color-gray-850);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .dialog-title {
-    font-size: var(--text-xl);
-    font-weight: 700;
-    color: var(--text-primary);
-    letter-spacing: var(--tracking-tight);
-    margin: 0;
-}
-
-.dialog-close {
-    width: 32px;
-    height: 32px;
-    border: none;
-    background: transparent;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--text-secondary);
-    flex-shrink: 0;
-    transition: background 0.15s;
-
-    .material-icons { font-size: 20px; }
-
-    &:hover {
-        background: rgba(255, 255, 255, 0.07);
-        color: var(--text-primary);
-    }
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
 }
 
 .dialog-body {
-    font-size: var(--text-base);
-    color: var(--text-secondary);
-    line-height: var(--leading-relaxed);
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
 }
 
 .dialog-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 /* ─── Add to Playlist list ─────────────────────────────────────────────── */
 .modal-list-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: background 0.12s;
-    color: var(--text-primary);
-    font-size: var(--text-sm);
-    font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.12s;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+
+  .material-icons {
+    font-size: 18px;
+    color: var(--text-secondary);
+  }
+
+  &:hover {
+    background: var(--list-item-bg-hover);
+    color: var(--color-primary-light);
 
     .material-icons {
-        font-size: 18px;
-        color: var(--text-secondary);
+      color: var(--color-primary-light);
     }
-
-    &:hover {
-        background: var(--list-item-bg-hover);
-        color: var(--color-primary-light);
-
-        .material-icons {
-            color: var(--color-primary-light);
-        }
-    }
+  }
 }
 
 /* ── Browse Tiles ── */
 .browse-tile {
-    color: var(--text-secondary);
-    background: transparent;
+  .browse-tile__icon {
+    font-size: clamp(18px, 3cqi, 30px) !important;
+    display: block;
+    margin-bottom: 4px;
+  }
 
-    &:hover {
-        background: rgba(0, 0, 0, 0.05);
-        color: var(--color-primary);
-
-        .browse-tile__icon,
-        .browse-tile__label {
-            color: var(--color-primary);
-        }
-    }
-
-    .browse-tile__icon {
-        color: var(--color-primary);
-    }
-
-    .browse-tile__label {
-        color: var(--text-secondary);
-    }
+  .browse-tile__label {
+    font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
+    font-weight: 600;
+  }
 }

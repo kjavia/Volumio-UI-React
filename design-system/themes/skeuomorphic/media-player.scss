@@ -182,9 +182,9 @@
 
 .slider-track {
   flex-grow: 1;
-  height: clamp(8px, 1.2vw, 16px);
+  height: 6px;
   background-color: var(--color-gray-850, #1a1a1a);
-  border-radius: 5px;
+  border-radius: 3px;
   box-shadow:
     inset 1px 1px 3px rgba(0, 0, 0, 0.7),
     0 1px 0 rgba(255, 255, 255, 0.1);
@@ -197,23 +197,26 @@
   background: linear-gradient(90deg,
       var(--color-orange-light, #ff7043),
       var(--color-orange-dark, #d84315));
-  border-radius: 5px 0 0 5px;
+  border-radius: 3px 0 0 3px;
   width: 30%;
   position: relative;
 }
 
 .slider-cap {
-  width: clamp(12px, 1.4vw, 20px);
-  height: clamp(18px, 2.2vw, 30px);
+  width: 14px;
+  height: 24px;
   background: var(--grad-metallic, linear-gradient(180deg, #e0e0e0, #bdbdbd));
   border-radius: 2px;
   position: absolute;
-  right: calc(clamp(12px, 1.4vw, 20px) / -2);
+  right: -7px;
   top: 50%;
   transform: translateY(-50%);
   box-shadow:
     0 2px 4px rgba(0, 0, 0, 0.4),
     inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .slider-cap::after {

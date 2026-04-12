@@ -4145,12 +4145,12 @@ input[type=range]::-moz-range-thumb:active {
   overflow-y: auto;
 }
 .album-browser::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
   background: transparent;
 }
 .album-browser::-webkit-scrollbar-thumb {
   background: var(--color-gray-700);
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 .album-card {
@@ -4599,24 +4599,6 @@ input[type=range]::-moz-range-thumb:active {
   font-family: var(--font-label);
 }
 
-/* ── Remove Button ── */
-.playlist-remove {
-  flex-shrink: 0;
-  text-decoration: none !important;
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  transition: color 0.15s, background 0.15s;
-}
-.playlist-remove .material-icons {
-  font-size: 1.1rem;
-}
-
-.playlist-item:hover .playlist-remove:hover {
-  background: rgba(239, 68, 68, 0.18);
-  color: var(--color-danger) !important;
-}
-
 .playlist-container {
   display: flex;
   flex-direction: column;
@@ -5025,13 +5007,13 @@ input[type=range]::-moz-range-thumb:active {
 }
 
 .slide-panel-subtitle {
-  font-size: 0.7rem;
+  font-size: 0.53rem;
   color: var(--color-gray-500);
   font-family: var(--font-label);
 }
 
 .slide-panel-title {
-  font-size: var(--text-base);
+  font-size: clamp(0.75rem, 0.975vw, 0.86rem);
   font-weight: 600;
   color: var(--text-primary);
   font-family: var(--font-label);
@@ -5040,17 +5022,17 @@ input[type=range]::-moz-range-thumb:active {
 /* ── Body ── */
 .slide-panel-body {
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.68rem;
   font-family: var(--font-body);
   padding: 12px 16px;
 }
 .slide-panel-body::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
   background: transparent;
 }
 .slide-panel-body::-webkit-scrollbar-thumb {
   background: var(--color-gray-700);
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 :root {
@@ -5813,12 +5795,12 @@ input[type=range]::-moz-range-thumb:active {
   line-height: var(--leading-relaxed);
 }
 .dialog-body::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
   background: transparent;
 }
 .dialog-body::-webkit-scrollbar-thumb {
   background: var(--color-gray-700);
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 /* ── Footer ── */
@@ -6450,14 +6432,14 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-gray-700);
-  border-radius: 3px;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-gray-600);
