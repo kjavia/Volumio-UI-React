@@ -8,7 +8,7 @@
 .slide-panel-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 1040;
+  z-index: 3000;
   background: transparent;
   pointer-events: none;
   transition: none;
@@ -24,7 +24,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 1050;
+  z-index: 3010;
   display: flex;
   flex-direction: column;
   max-width: 80vw;
@@ -75,20 +75,16 @@
 }
 
 .slide-panel-subtitle {
-  font-size: calc(var(--text-xs) * 0.75);
+  font-size: 0.53rem;
   color: var(--casio-on-dark-dim);
   font-family: var(--font-label);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wider);
 }
 
 .slide-panel-title {
   font-size: clamp(0.75rem, 0.975vw, 0.86rem);
-  font-weight: 400;
+  font-weight: 600;
   color: var(--casio-on-dark);
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-normal);
+  font-family: var(--font-label);
 }
 
 .slide-panel-body {

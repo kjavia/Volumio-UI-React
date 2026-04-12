@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.25rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-dark);
   background: var(--color-gray-900);
   flex-shrink: 0;
@@ -51,23 +51,9 @@
 }
 
 .dialog-close {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
   border-radius: 50%;
-  cursor: pointer;
   color: var(--text-secondary);
-  flex-shrink: 0;
   transition: background 0.15s, color 0.15s;
-
-  .material-icons {
-    font-size: 20px;
-  }
 
   &:hover {
     background: rgba(255, 255, 255, 0.07);
@@ -280,43 +266,12 @@
   gap: 20px;
 }
 
-.dialog-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
 .dialog-title {
   font-size: var(--text-xl);
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: var(--tracking-tight);
   margin: 0;
-}
-
-.dialog-close {
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: transparent;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-secondary);
-  flex-shrink: 0;
-  transition: background 0.15s;
-
-  .material-icons {
-    font-size: 20px;
-  }
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.07);
-    color: var(--text-primary);
-  }
 }
 
 .dialog-body {
@@ -361,24 +316,14 @@
 
 /* ── Browse Tiles ── */
 .browse-tile {
-  color: var(--text-secondary);
-  background: transparent;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.05);
-    color: var(--color-primary);
-
-    .browse-tile__icon,
-    .browse-tile__label {
-      color: var(--color-primary);
-    }
-  }
-
   .browse-tile__icon {
-    color: var(--color-primary);
+    font-size: clamp(18px, 3cqi, 30px) !important;
+    display: block;
+    margin-bottom: 4px;
   }
 
   .browse-tile__label {
-    color: var(--text-secondary);
+    font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
+    font-weight: 600;
   }
 }

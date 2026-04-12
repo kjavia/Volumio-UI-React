@@ -24,7 +24,8 @@
   width: 100%;
   pointer-events: auto;
   outline: none;
-  overflow: hidden; /* Prevents border clipping on corners */
+  overflow: hidden;
+  /* Prevents border clipping on corners */
 
   /* Industrial metallic surface */
   background: var(--device-surface);
@@ -50,6 +51,7 @@
     opacity: 0;
     transform: scale(0.9) translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -67,11 +69,9 @@
   flex-shrink: 0;
 
   /* Slightly darker header */
-  background: linear-gradient(
-    180deg,
-    var(--color-gray-600),
-    var(--color-gray-700)
-  );
+  background: linear-gradient(180deg,
+      var(--color-gray-600),
+      var(--color-gray-700));
 }
 
 .dialog-title {
@@ -85,28 +85,12 @@
 }
 
 .dialog-close {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  margin-left: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
   border-radius: 4px;
-  cursor: pointer;
-  color: var(--text-muted);
+  color: var(--text-light);
   transition: all 0.15s ease;
-  flex-shrink: 0;
-
-  .material-icons {
-    font-size: 20px;
-  }
 
   &:hover {
     background: var(--highlight-15);
-    color: var(--text-light);
   }
 
   &:active {
@@ -190,11 +174,9 @@
   flex-shrink: 0;
 
   /* Match header background */
-  background: linear-gradient(
-    180deg,
-    var(--color-gray-700),
-    var(--color-gray-750)
-  );
+  background: linear-gradient(180deg,
+      var(--color-gray-700),
+      var(--color-gray-750));
 }
 
 /* ── Dialog List Items ── */
@@ -371,19 +353,14 @@
 
 /* ── Browse Tiles ── */
 .browse-tile {
-    color: var(--text-secondary);
-    background: transparent;
+  .browse-tile__icon {
+    font-size: clamp(18px, 3cqi, 30px) !important;
+    display: block;
+    margin-bottom: 4px;
+  }
 
-    &:hover {
-        background: rgba(255, 255, 255, 0.06);
-        color: var(--color-primary);
-    }
-
-    .browse-tile__icon {
-        color: var(--color-primary);
-    }
-
-    .browse-tile__label {
-        color: var(--text-secondary);
-    }
+  .browse-tile__label {
+    font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
+    font-weight: 600;
+  }
 }

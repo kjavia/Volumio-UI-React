@@ -24,10 +24,10 @@
 
     background: var(--casio-face);
     border-radius: var(--radius-sm);
-    border-top:   3px solid var(--casio-sheen);
-    border-left:  3px solid var(--casio-sheen);
+    border-top: 3px solid var(--casio-sheen);
+    border-left: 3px solid var(--casio-sheen);
     border-bottom: 3px solid var(--casio-edge);
-    border-right:  3px solid var(--casio-edge);
+    border-right: 3px solid var(--casio-edge);
     box-shadow:
         6px 6px 0 rgba(0, 0, 0, 0.5),
         0 8px 24px rgba(0, 0, 0, 0.6);
@@ -61,51 +61,16 @@
 
 /* Close button — domed calculator key matching main buttons */
 .dialog-close {
-    width: 28px;
-    height: 26px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 5px;
-    cursor: pointer;
-    color: var(--casio-on-dark);
-    font-size: 10px;
-    flex-shrink: 0;
-    transition: transform 60ms ease, box-shadow 60ms ease;
+    color: var(--casio-lcd-panel);
 
-    background:
-        radial-gradient(
-            ellipse 80% 55% at 50% 20%,
-            #404855 0%,
-            #2a3040 50%,
-            #1e2530 100%
-        );
-    box-shadow:
-        0 4px 0 0 #0d1018,
-        0 5px 8px rgba(0, 0, 0, 0.55),
-        inset 0 1px 1px rgba(255, 255, 255, 0.08);
-    border: 1px solid #10141c;
-    border-bottom-color: #080b12;
-
-    &:active {
-        background:
-            radial-gradient(
-                ellipse 80% 55% at 50% 20%,
-                #303840 0%,
-                #202830 50%,
-                #181e26 100%
-            );
-        box-shadow:
-            0 1px 0 0 #0d1018,
-            0 2px 4px rgba(0, 0, 0, 0.5),
-            inset 0 2px 4px rgba(0, 0, 0, 0.4);
-        transform: translateY(2px);
+    &:hover {
+        background: rgba(0, 0, 0, 0.15);
+        color: var(--casio-lcd-panel);
     }
 
-    .material-icons {
-        font-size: 14px;
-        color: var(--casio-on-dark);
+    &:active {
+        background: rgba(0, 0, 0, 0.25);
     }
 }
 

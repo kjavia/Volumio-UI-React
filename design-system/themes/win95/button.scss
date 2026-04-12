@@ -291,3 +291,16 @@
     min-height: 22px;
     font-size: var(--text-xs, 11px);
 }
+
+.btn-round.btn-sm {
+    width: 40px;
+    height: 40px;
+}
+
+// ─── Disabled State ────────────────────────────────────────────────
+.btn:disabled,
+.btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}

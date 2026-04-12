@@ -169,6 +169,7 @@
 // Structural only — visual from global select rules in forms.scss
 .pm-sort-select {
   width: auto;
+  max-width: 110px;
   flex-shrink: 0;
 }
 
@@ -502,6 +503,24 @@
   }
 }
 
+// ─── Favourite button count badge ────────────────────────────────────────────
+
+.pm-fav-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 1.4em;
+  height: 1.4em;
+  padding: 0 0.35em;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #b91c1c;
+  vertical-align: middle;
+}
+
 // ─── Button layout helpers ────────────────────────────────────────────────────
 // Visual styles come from .btn/.btn-primary/.btn-secondary in theme button.scss
 
@@ -619,5 +638,69 @@
   .material-icons {
     font-size: 28px;
     color: color-mix(in srgb, var(--color-primary, #7c9cff) 60%, transparent);
+  }
+}
+
+// ─── Large-screen font bumps ──────────────────────────────────────────────────
+
+@media (min-width: 1200px) {
+  .pm-topbar__title {
+    font-size: 1.1rem;
+  }
+
+  .pm-column__title {
+    font-size: 1.1rem;
+  }
+
+  .pm-album-item {
+    &__title {
+      font-size: 0.92rem;
+    }
+
+    &__meta {
+      font-size: 0.8rem;
+    }
+  }
+
+  .pm-track-item {
+    &__title {
+      font-size: 0.9rem;
+    }
+
+    &__artist {
+      font-size: 0.78rem;
+    }
+
+    &__disc-badge {
+      font-size: 0.7rem;
+    }
+  }
+
+  .pm-playlist-item {
+    &__name {
+      font-size: 0.92rem;
+    }
+
+    &__count {
+      font-size: 0.75rem;
+    }
+  }
+
+  .pm-playlist-track-item {
+    &__num {
+      font-size: 0.8rem;
+    }
+  }
+
+  .pm-loading,
+  .pm-empty {
+    font-size: 0.88rem;
+  }
+
+  .pm-checkbox-label {
+    input[type='checkbox'] {
+      width: 17px;
+      height: 17px;
+    }
   }
 }

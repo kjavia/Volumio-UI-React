@@ -51,7 +51,7 @@ const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px',
             {headerActions}
             <button
               type="button"
-              className="btn btn-danger btn-sm p-1"
+              className="btn-icon dialog-close"
               onClick={onClose}
               aria-label="Close"
             >

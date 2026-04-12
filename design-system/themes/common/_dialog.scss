@@ -14,20 +14,38 @@
   pointer-events: none;
 }
 
+/* Allow children to use cqi units relative to the dialog width */
+.dialog {
+  container-type: inline-size;
+}
+
 @keyframes dialogBackdropFadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
 
 /* ── Size Variants ── */
-.dialog-sm   { max-width: 400px; }
-.dialog-md   { max-width: 600px; }
-.dialog-lg   { max-width: 800px; }
-.dialog-xl   { max-width: 1200px; }
+.dialog-sm {
+  max-width: 400px;
+}
+
+.dialog-md {
+  max-width: 600px;
+}
+
+.dialog-lg {
+  max-width: 800px;
+}
+
+.dialog-xl {
+  max-width: 1200px;
+}
+
 .dialog-full {
   max-width: calc(100vw - 2rem);
   max-height: calc(100vh - 2rem);
@@ -67,6 +85,24 @@
     color: var(--text-secondary, var(--color-gray-600));
     opacity: 0.6;
   }
+}
+
+/* ── Dialog title — ensure it never touches edges ── */
+.dialog-title {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* ── Close button — structural base, theme files add visual overrides only ── */
+.dialog-close {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 /* ── Section title ── */
@@ -125,7 +161,9 @@
     color: var(--color-primary);
     font-weight: 600;
 
-    .material-icons { color: var(--color-primary); }
+    .material-icons {
+      color: var(--color-primary);
+    }
   }
 }
 

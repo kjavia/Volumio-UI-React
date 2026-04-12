@@ -975,6 +975,11 @@ code, pre {
   pointer-events: none;
 }
 
+/* Allow children to use cqi units relative to the dialog width */
+.dialog {
+  container-type: inline-size;
+}
+
 @keyframes dialogBackdropFadeIn {
   from {
     opacity: 0;
@@ -1037,6 +1042,24 @@ code, pre {
 .dialog-input::placeholder {
   color: var(--text-secondary, var(--color-gray-600));
   opacity: 0.6;
+}
+
+/* ── Dialog title — ensure it never touches edges ── */
+.dialog-title {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* ── Close button — structural base, theme files add visual overrides only ── */
+.dialog-close {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 /* ── Section title ── */
@@ -1564,6 +1587,7 @@ code, pre {
 .btn-icon {
   width: 36px;
   height: 36px;
+  min-height: unset;
   border-radius: 50%;
   background: transparent;
   color: var(--color-gray-400);
@@ -1642,6 +1666,19 @@ code, pre {
   padding: 3px 12px;
   min-height: 24px;
   font-size: var(--text-xs, 11px);
+}
+
+.btn-round.btn-sm {
+  width: 40px;
+  height: 40px;
+}
+
+.btn:disabled, .form-select:disabled,
+.btn.disabled,
+.disabled.form-select {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 :root {
@@ -4961,7 +4998,7 @@ input[type=range]::-moz-range-thumb:active {
 .slide-panel-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 1040;
+  z-index: 3000;
   background: transparent;
   pointer-events: none;
   transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -4977,7 +5014,7 @@ input[type=range]::-moz-range-thumb:active {
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 1050;
+  z-index: 3010;
   display: flex;
   flex-direction: column;
   max-width: 80vw;
@@ -5728,7 +5765,7 @@ input[type=range]::-moz-range-thumb:active {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.25rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-dark);
   background: var(--color-gray-900);
   flex-shrink: 0;
@@ -5745,22 +5782,9 @@ input[type=range]::-moz-range-thumb:active {
 }
 
 .dialog-close {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
   border-radius: 50%;
-  cursor: pointer;
   color: var(--text-secondary);
-  flex-shrink: 0;
   transition: background 0.15s, color 0.15s;
-}
-.dialog-close .material-icons {
-  font-size: 20px;
 }
 .dialog-close:hover {
   background: rgba(255, 255, 255, 0.07);
@@ -5957,41 +5981,12 @@ input[type=range]::-moz-range-thumb:active {
   gap: 20px;
 }
 
-.dialog-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
 .dialog-title {
   font-size: var(--text-xl);
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: var(--tracking-tight);
   margin: 0;
-}
-
-.dialog-close {
-  width: 32px;
-  height: 32px;
-  border: none;
-  background: transparent;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-secondary);
-  flex-shrink: 0;
-  transition: background 0.15s;
-}
-.dialog-close .material-icons {
-  font-size: 20px;
-}
-.dialog-close:hover {
-  background: rgba(255, 255, 255, 0.07);
-  color: var(--text-primary);
 }
 
 .dialog-body {
@@ -6032,23 +6027,14 @@ input[type=range]::-moz-range-thumb:active {
 }
 
 /* ── Browse Tiles ── */
-.browse-tile {
-  color: var(--text-secondary);
-  background: transparent;
-}
-.browse-tile:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: var(--color-primary);
-}
-.browse-tile:hover .browse-tile__icon,
-.browse-tile:hover .browse-tile__label {
-  color: var(--color-primary);
-}
 .browse-tile .browse-tile__icon {
-  color: var(--color-primary);
+  font-size: clamp(18px, 3cqi, 30px) !important;
+  display: block;
+  margin-bottom: 4px;
 }
 .browse-tile .browse-tile__label {
-  color: var(--text-secondary);
+  font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
+  font-weight: 600;
 }
 
 /* ── Digital LCD Clock — Flat Dark Theme ───────────────────────────────────
@@ -6448,5 +6434,3 @@ body {
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
-/*# sourceMappingURL=flat.css.map */

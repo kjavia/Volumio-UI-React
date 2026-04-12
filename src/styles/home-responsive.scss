@@ -22,7 +22,8 @@ body,
 .home-grid {
   display: grid;
   width: 100%;
-  height: 100%; /* fill parent completely */
+  height: 100%;
+  /* fill parent completely */
   justify-content: center;
   overflow: hidden;
 
@@ -38,9 +39,11 @@ body,
 .area-player {
   grid-area: player;
 }
+
 .area-controls {
   grid-area: controls;
 }
+
 .area-spectrum {
   grid-area: spectrum;
 }
@@ -93,7 +96,8 @@ body,
 @media (min-width: 768px) and (max-width: 2499px) {
   .home-grid {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 70fr 30fr; /* 70 / 30 split */
+    grid-template-rows: 70fr 30fr;
+    /* 70 / 30 split */
     grid-template-areas:
       'player  controls'
       'spectrum spectrum';
@@ -104,7 +108,8 @@ body,
     }
 
     &.album-art-max-space {
-      grid-template-columns: 2fr 3fr; /* player 40%, controls 60% */
+      grid-template-columns: 2fr 3fr;
+      /* player 40%, controls 60% */
 
       &.no-viz {
         grid-template-columns: 2fr 3fr;
@@ -120,8 +125,10 @@ body,
 /* ── ULTRA-WIDE  (≥ 2 500 px) ── */
 @media (min-width: 2500px) {
   .home-grid {
-    grid-template-columns: 1fr 1fr 1fr; /* three equal columns */
-    grid-template-rows: 1fr; /* single full-height row */
+    grid-template-columns: 1fr 1fr 1fr;
+    /* three equal columns */
+    grid-template-rows: 1fr;
+    /* single full-height row */
     grid-template-areas: 'player controls spectrum';
 
     &.no-viz {
@@ -129,13 +136,14 @@ body,
       grid-template-areas: 'player controls';
 
       /* Let player be slightly bigger if we have more room */
-       .player-responsive {
+      .player-responsive {
         --p-size: 80;
       }
     }
 
     &.album-art-max-space {
-      grid-template-columns: 1fr 1fr 1fr; /* player ~40% of non-spectrum, controls ~60% */
+      grid-template-columns: 1fr 1fr 1fr;
+      /* player ~40% of non-spectrum, controls ~60% */
 
       &.no-viz {
         grid-template-columns: 2fr 3fr;
@@ -218,6 +226,7 @@ body,
 
 /* ── Medium-compact: transport + icon buttons shrink at ≤560px panel height ── */
 @container (max-height: 560px) {
+
   /* Transport buttons: 56px → 44px */
   .btn-round {
     width: 44px !important;
@@ -237,6 +246,7 @@ body,
 
 /* ── Fully compact: ≤380px panel height (landscape mobile, very small screens) ── */
 @container (max-height: 380px) {
+
   /* Transport buttons: → 36px */
   .btn-round {
     width: 36px !important;
@@ -273,6 +283,7 @@ body,
 
 /* ── Mobile-Specific Tweaks (Portrait) ── */
 @media (max-width: 768px) {
+
   /* Reduce track info padding/margins */
   .cq-track-info {
     margin-bottom: 2px !important;
@@ -303,7 +314,8 @@ body,
 
 .seekbar-labels {
   padding: 0 0.1rem;
-  margin-top: 0.4rem; /* default (mobile) */
+  margin-top: 0.4rem;
+  /* default (mobile) */
 }
 
 @media (min-width: 769px) and (max-width: 1199px) {
@@ -319,7 +331,8 @@ body,
 }
 
 .time-label {
-  font-size: 0.8rem !important; /* Default (desktop/tablet) */
+  font-size: 0.8rem !important;
+  /* Default (desktop/tablet) */
   width: auto;
   white-space: nowrap;
   padding: 0;
@@ -502,7 +515,7 @@ body,
 .browse-search__icon {
   position: absolute;
   left: 0.5rem;
-  font-size: 1.1rem !important;
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem) !important;
   pointer-events: none;
   opacity: 0.6;
 }
@@ -512,8 +525,8 @@ body,
   border-radius: 20px;
   border: 1px solid rgba(128, 128, 128, 0.35);
   background: transparent;
-  font-size: 1rem;
-  width: 160px;
+  font-size: clamp(0.78rem, 1.2vw, 1rem);
+  width: clamp(120px, 15vw, 220px);
   max-width: 300px;
   outline: none;
   transition: width 0.2s, border-color 0.15s;
@@ -521,7 +534,7 @@ body,
 }
 
 .browse-search__input:focus {
-  width: 300px;
+  width: clamp(180px, 25vw, 300px);
   border-color: rgba(128, 128, 128, 0.7);
 }
 
@@ -542,9 +555,13 @@ body,
   opacity: 0.5;
   line-height: 1;
 
-  &:hover { opacity: 0.9; }
+  &:hover {
+    opacity: 0.9;
+  }
 
-  .material-icons { font-size: 1rem !important; }
+  .material-icons {
+    font-size: 1rem !important;
+  }
 }
 
 /* ── Browse search results (sectioned) ── */
@@ -614,8 +631,11 @@ body,
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
+
 .spin {
   animation: spin 1s linear infinite;
 }
@@ -1045,6 +1065,7 @@ body,
 .btn-round.btn-white .material-icons {
   font-size: 2rem;
 }
+
 .btn-round.btn-orange .material-icons,
 .btn-round .play-icon {
   font-size: 2rem;
@@ -1052,16 +1073,19 @@ body,
 
 /* ── Album Art Max Space: expand controls panel ── */
 .album-art-max-space .area-controls {
+
   /* Width overrides: remove hard caps from inline styles */
   .track-info-group {
     width: 95% !important;
     margin-top: 1.5em !important;
   }
+
   .seekbar-container-wrap,
   .volume-manager-wrap {
     width: 92% !important;
     max-width: 100% !important;
   }
+
   /* Seekbar inner track: remove its own maxWidth */
   .slider-container {
     max-width: 100% !important;
@@ -1072,12 +1096,15 @@ body,
   .responsive-title {
     font-size: clamp(3rem, 10cqw, 10rem) !important;
   }
+
   .responsive-artist {
     font-size: clamp(2rem, 7.6cqw, 8rem) !important;
   }
+
   .responsive-album {
     font-size: clamp(1.7rem, 4.4cqw, 4rem) !important;
   }
+
   .responsive-stream-info {
     font-size: clamp(1.5rem, 5cqw, 5rem) !important;
   }
@@ -1092,6 +1119,7 @@ body,
     width: clamp(60px, 8cqw, 90px) !important;
     height: clamp(60px, 8cqw, 90px) !important;
   }
+
   .btn-round .material-icons {
     font-size: clamp(1.875rem, 4.5cqw, 3rem) !important;
   }
@@ -1101,6 +1129,7 @@ body,
     width: clamp(54px, 7.5cqw, 84px) !important;
     height: clamp(54px, 7.5cqw, 84px) !important;
   }
+
   .btn-icon .material-icons {
     font-size: clamp(1.875rem, 4.5cqw, 3rem) !important;
   }

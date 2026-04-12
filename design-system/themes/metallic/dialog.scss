@@ -25,15 +25,14 @@
   width: 100%;
   pointer-events: auto;
   outline: none;
-  overflow: hidden; /* Prevents border clipping on corners */
+  overflow: hidden;
+  /* Prevents border clipping on corners */
 
   /* Chrome metallic surface */
-  background: linear-gradient(
-    135deg,
-    var(--color-gray-800) 0%,
-    var(--color-gray-850) 50%,
-    var(--color-gray-800) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--color-gray-800) 0%,
+      var(--color-gray-850) 50%,
+      var(--color-gray-800) 100%);
   border-radius: 10px;
   border: 1px solid var(--color-gray-700);
   box-shadow:
@@ -51,6 +50,7 @@
     opacity: 0;
     transform: scale(0.92) translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -68,11 +68,9 @@
   flex-shrink: 0;
 
   /* Slightly lighter header */
-  background: linear-gradient(
-    180deg,
-    var(--color-gray-750),
-    var(--color-gray-800)
-  );
+  background: linear-gradient(180deg,
+      var(--color-gray-750),
+      var(--color-gray-800));
 }
 
 .dialog-title {
@@ -86,28 +84,13 @@
 }
 
 .dialog-close {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  margin-left: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
   border-radius: 6px;
-  cursor: pointer;
-  color: var(--text-muted);
+  color: var(--text-light);
   transition: all 0.15s ease;
-  flex-shrink: 0;
-
-  .material-icons {
-    font-size: 20px;
-  }
 
   &:hover {
     background: var(--highlight-10);
-    color: var(--text-light);
+    color: #ffffff;
   }
 
   &:active {
@@ -189,11 +172,9 @@
   flex-shrink: 0;
 
   /* Match header background */
-  background: linear-gradient(
-    180deg,
-    var(--color-gray-800),
-    var(--color-gray-850)
-  );
+  background: linear-gradient(180deg,
+      var(--color-gray-800),
+      var(--color-gray-850));
 }
 
 /* ── Dialog List Items ────────────────────────────────────────────────── */
@@ -239,11 +220,9 @@
   }
 
   &.active {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary),
-      var(--color-primary-dark)
-    );
+    background: linear-gradient(135deg,
+        var(--color-primary),
+        var(--color-primary-dark));
     color: var(--color-white);
     box-shadow:
       0 4px 12px var(--glow-primary),
@@ -395,19 +374,14 @@
 
 /* ── Browse Tiles ── */
 .browse-tile {
-    color: var(--text-secondary);
-    background: transparent;
+  .browse-tile__icon {
+    font-size: clamp(18px, 3cqi, 30px) !important;
+    display: block;
+    margin-bottom: 4px;
+  }
 
-    &:hover {
-        background: rgba(255, 255, 255, 0.08);
-        color: var(--color-primary);
-    }
-
-    .browse-tile__icon {
-        color: var(--color-primary);
-    }
-
-    .browse-tile__label {
-        color: var(--text-secondary);
-    }
+  .browse-tile__label {
+    font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
+    font-weight: 600;
+  }
 }

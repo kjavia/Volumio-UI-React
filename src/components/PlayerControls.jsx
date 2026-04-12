@@ -20,7 +20,7 @@ const PlayerControls = ({
     <div className="player-controls d-flex flex-column align-items-center w-100">
       {/* Main transport controls */}
       <div className="controls-transport-row d-flex gap-3 align-items-center justify-content-center">
-        <Button classNames="btn-round" onClick={onPrev} label="Previous">
+        <Button classNames="btn-round btn-sm" onClick={onPrev} label="Previous">
           <span className="material-icons">skip_previous</span>
         </Button>
 
@@ -32,7 +32,7 @@ const PlayerControls = ({
           <span className="material-icons play-icon">{isPlaying ? 'pause' : 'play_arrow'}</span>
         </Button>
 
-        <Button classNames="btn-round" onClick={onNext} label="Next">
+        <Button classNames="btn-round btn-sm" onClick={onNext} label="Next">
           <span className="material-icons">skip_next</span>
         </Button>
       </div>

@@ -88,7 +88,6 @@
   width: clamp(28px, 3.2vw, 32px);
   height: clamp(28px, 3.2vw, 32px);
   padding: 0;
-  margin-left: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,38 +111,27 @@
     pointer-events: none;
   }
 
+  // Hide icon — macOS traffic light dots show no symbol at rest
   .material-icons {
-    position: relative;
-    z-index: 1;
-    font-size: clamp(14px, 1.8vw, 18px);
+    display: none;
   }
 
   &:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.12);
   }
 
   &:active {
     filter: brightness(0.88);
   }
 
-  // Default (close) — Aqua red
+  // Default (close) — Aqua red traffic light
   background: linear-gradient(to bottom, #ff7b7e 0%, var(--color-red-vivid) 50%, #c9302c 51%, #f07070 100%);
   border: 1px solid #e04347;
-  color: #fff;
 
-  .material-icons {
-    color: #fff;
-  }
-
-  // Fullscreen/expand toggle — Aqua green
+  // Fullscreen/expand toggle — Aqua green traffic light
   &.dialog-close--expand {
     background: linear-gradient(to bottom, #6ee06e 0%, var(--color-green-vivid) 50%, #168a20 51%, #5ed85e 100%);
     border: 1px solid #16aa29;
-    color: #fff;
-
-    .material-icons {
-      color: #fff;
-    }
   }
 }
 
@@ -454,19 +442,14 @@
 
 /* ── Browse Tiles ── */
 .browse-tile {
-  color: var(--text-secondary);
-  background: transparent;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--color-primary);
-  }
-
   .browse-tile__icon {
-    color: var(--color-primary);
+    font-size: clamp(18px, 3cqi, 30px) !important;
+    display: block;
+    margin-bottom: 4px;
   }
 
   .browse-tile__label {
-    color: var(--text-secondary);
+    font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
+    font-weight: 600;
   }
 }

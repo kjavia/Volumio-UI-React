@@ -246,7 +246,6 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
     visibleTracks.forEach((t) => onToggleTrack(t, !allSelected));
   }, [visibleTracks, allSelected, onToggleTrack]);
 
-  const favCount = selectedTracks.size;
 
   const handlePlayTrack = useCallback((e, track) => {
     e.stopPropagation();
@@ -294,13 +293,15 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
             )}
           </div>
           <button
-            className="btn btn-sm btn-secondary d-flex align-items-center gap-3"
+            className="btn btn-sm text-danger d-flex align-items-center gap-2"
             title="Toggle selected tracks as Favourites"
-            disabled={favCount === 0}
+            disabled={selectedTracks.size === 0}
             onClick={() => onToggleFavourites([...selectedTracks.values()])}
           >
             <span className="material-icons">favorite</span>
-            {favCount > 0 && <span>{` (${favCount})`}</span>}
+            {selectedTracks.size > 0 && (
+              <span className="pm-fav-count">{selectedTracks.size}</span>
+            )}
           </button>
         </div>
       </div>

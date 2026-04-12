@@ -740,6 +740,11 @@ p {
   pointer-events: none;
 }
 
+/* Allow children to use cqi units relative to the dialog width */
+.dialog {
+  container-type: inline-size;
+}
+
 @keyframes dialogBackdropFadeIn {
   from {
     opacity: 0;
@@ -802,6 +807,24 @@ p {
 .dialog-input::placeholder {
   color: var(--text-secondary, var(--color-gray-600));
   opacity: 0.6;
+}
+
+/* ── Dialog title — ensure it never touches edges ── */
+.dialog-title {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* ── Close button — structural base, theme files add visual overrides only ── */
+.dialog-close {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 /* ── Section title ── */
@@ -1244,7 +1267,7 @@ p {
 }
 .btn-link:hover {
   background: transparent;
-  color: var(--casio-lcd-panel, #c8e040);
+  color: var(--casio-lcd-bg);
 }
 .btn-link:active {
   background: transparent;
@@ -1258,14 +1281,15 @@ p {
   height: 36px;
   padding: 0;
   border-radius: 6px;
-  /* Domed surface: radial highlight at top-center → darker toward edges */
-  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 50%, #1e2530 100%);
-  box-shadow: 0 4px 0 0 #0d1018, 0 5px 8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.08);
-  /* faint dome top-sheen */
-  border: 1px solid #10141c;
-  border-bottom-color: #080b12;
+  background: transparent;
+  border: none;
+  box-shadow: none;
   color: var(--casio-on-dark);
-  transition: transform 60ms ease, box-shadow 60ms ease;
+  transition: background 0.1s, color 0.1s;
+}
+.btn-icon:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--casio-lcd-bg);
 }
 .btn-icon:active, .btn-icon.active {
   background: radial-gradient(ellipse 80% 55% at 50% 20%, #303840 0%, #202830 50%, #181e26 100%);
@@ -1303,6 +1327,19 @@ p {
   padding: 3px 10px;
   min-height: 24px;
   font-size: var(--text-xs, 11px);
+}
+
+.btn-round.btn-sm {
+  width: 40px;
+  height: 40px;
+}
+
+.btn:disabled, .form-select:disabled,
+.btn.disabled,
+.disabled.form-select {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 :root {
@@ -3982,7 +4019,7 @@ input[type=range]::-webkit-slider-thumb {
 .slide-panel-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 1040;
+  z-index: 3000;
   background: transparent;
   pointer-events: none;
   transition: none;
@@ -3997,7 +4034,7 @@ input[type=range]::-webkit-slider-thumb {
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 1050;
+  z-index: 3010;
   display: flex;
   flex-direction: column;
   max-width: 80vw;
@@ -4036,20 +4073,16 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .slide-panel-subtitle {
-  font-size: calc(var(--text-xs) * 0.75);
+  font-size: 0.53rem;
   color: var(--casio-on-dark-dim);
   font-family: var(--font-label);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wider);
 }
 
 .slide-panel-title {
   font-size: clamp(0.75rem, 0.975vw, 0.86rem);
-  font-weight: 400;
+  font-weight: 600;
   color: var(--casio-on-dark);
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-normal);
+  font-family: var(--font-label);
 }
 
 .slide-panel-body {
@@ -4579,31 +4612,15 @@ input[type=range]::-webkit-slider-thumb {
 
 /* Close button — domed calculator key matching main buttons */
 .dialog-close {
-  width: 28px;
-  height: 26px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: 5px;
-  cursor: pointer;
-  color: var(--casio-on-dark);
-  font-size: 10px;
-  flex-shrink: 0;
-  transition: transform 60ms ease, box-shadow 60ms ease;
-  background: radial-gradient(ellipse 80% 55% at 50% 20%, #404855 0%, #2a3040 50%, #1e2530 100%);
-  box-shadow: 0 4px 0 0 #0d1018, 0 5px 8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.08);
-  border: 1px solid #10141c;
-  border-bottom-color: #080b12;
+  color: var(--casio-lcd-panel);
+}
+.dialog-close:hover {
+  background: rgba(0, 0, 0, 0.15);
+  color: var(--casio-lcd-panel);
 }
 .dialog-close:active {
-  background: radial-gradient(ellipse 80% 55% at 50% 20%, #303840 0%, #202830 50%, #181e26 100%);
-  box-shadow: 0 1px 0 0 #0d1018, 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.4);
-  transform: translateY(2px);
-}
-.dialog-close .material-icons {
-  font-size: 14px;
-  color: var(--casio-on-dark);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 /* Body — dark panel */
@@ -5500,5 +5517,3 @@ body {
 ::-webkit-scrollbar-button:vertical:increment {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpolygon points='4,7 7,1 1,1' fill='%239db834'/%3E%3C/svg%3E");
 }
-
-/*# sourceMappingURL=casio.css.map */

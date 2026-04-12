@@ -314,6 +314,7 @@
 .btn-icon {
   width: 36px;
   height: 36px;
+  min-height: unset;
   border-radius: 50%;
   background: transparent;
   color: var(--color-gray-300, #bbb);
@@ -395,4 +396,17 @@
   padding: 3px 10px;
   font-size: var(--text-xs, 11px);
   min-height: 24px;
+}
+
+.btn-round.btn-sm {
+  width: 40px;
+  height: 40px;
+}
+
+// ─── Disabled State ────────────────────────────────────────────────
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }

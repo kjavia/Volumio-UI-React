@@ -135,7 +135,7 @@ const Dialog = ({
               {showCloseButton && (
                 <button
                   type="button"
-                  className="dialog-close"
+                  className="btn-icon dialog-close"
                   onClick={onClose}
                   aria-label="Close dialog"
                 >

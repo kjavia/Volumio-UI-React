@@ -69,10 +69,10 @@
   flex: 1 1 auto;
   min-width: 0;
   font-family: var(--font-display, sans-serif);
-  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 700;
   color: #fff;
-  line-height: 1.25;
+  line-height: 1.5;
   overflow: visible;
   white-space: nowrap;
   text-align: left;
@@ -544,10 +544,6 @@
     justify-content: center;
     width: clamp(2rem, 6cqi, 3.5rem);
     height: clamp(2rem, 6cqi, 3.5rem);
-  }
-
-  .slide-panel-header .material-icons {
-    font-size: clamp(1.2rem, 5cqi, 2rem) !important;
   }
 
   .playlist-track-title {

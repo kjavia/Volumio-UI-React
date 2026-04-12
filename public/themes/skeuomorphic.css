@@ -1077,6 +1077,11 @@ ol li {
   pointer-events: none;
 }
 
+/* Allow children to use cqi units relative to the dialog width */
+.dialog {
+  container-type: inline-size;
+}
+
 @keyframes dialogBackdropFadeIn {
   from {
     opacity: 0;
@@ -1139,6 +1144,24 @@ ol li {
 .dialog-input::placeholder {
   color: var(--text-secondary, var(--color-gray-600));
   opacity: 0.6;
+}
+
+/* ── Dialog title — ensure it never touches edges ── */
+.dialog-title {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* ── Close button — structural base, theme files add visual overrides only ── */
+.dialog-close {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 /* ── Section title ── */
@@ -1737,6 +1760,7 @@ ol li {
 .btn-icon {
   width: 36px;
   height: 36px;
+  min-height: unset;
   border-radius: 50%;
   background: transparent;
   color: var(--color-gray-300, #bbb);
@@ -1814,6 +1838,19 @@ ol li {
   padding: 3px 10px;
   font-size: var(--text-xs, 11px);
   min-height: 24px;
+}
+
+.btn-round.btn-sm {
+  width: 40px;
+  height: 40px;
+}
+
+.btn:disabled, .form-select:disabled,
+.btn.disabled,
+.disabled.form-select {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 :root {
@@ -4365,7 +4402,7 @@ h2 {
 .slide-panel-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 1040;
+  z-index: 3000;
   background: transparent;
   pointer-events: none;
   transition: background 0.3s ease;
@@ -4382,7 +4419,7 @@ h2 {
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 1050;
+  z-index: 3010;
   display: flex;
   flex-direction: column;
   max-width: 80vw;
@@ -5117,7 +5154,8 @@ h2 {
   width: 100%;
   pointer-events: auto;
   outline: none;
-  overflow: hidden; /* Prevents border clipping on corners */
+  overflow: hidden;
+  /* Prevents border clipping on corners */
   /* Industrial metallic surface */
   background: var(--device-surface);
   border-radius: 8px;
@@ -5164,27 +5202,12 @@ h2 {
 }
 
 .dialog-close {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  margin-left: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
   border-radius: 4px;
-  cursor: pointer;
-  color: var(--text-muted);
+  color: var(--text-light);
   transition: all 0.15s ease;
-  flex-shrink: 0;
-}
-.dialog-close .material-icons {
-  font-size: 20px;
 }
 .dialog-close:hover {
   background: var(--highlight-15);
-  color: var(--text-light);
 }
 .dialog-close:active {
   background: var(--shadow-20);
@@ -5409,19 +5432,14 @@ h2 {
   }
 }
 /* ── Browse Tiles ── */
-.browse-tile {
-  color: var(--text-secondary);
-  background: transparent;
-}
-.browse-tile:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--color-primary);
-}
 .browse-tile .browse-tile__icon {
-  color: var(--color-primary);
+  font-size: clamp(18px, 3cqi, 30px) !important;
+  display: block;
+  margin-bottom: 4px;
 }
 .browse-tile .browse-tile__label {
-  color: var(--text-secondary);
+  font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
+  font-weight: 600;
 }
 
 /* ── Digital LCD Clock ─────────────────────────────────────────────────────── */
@@ -5937,5 +5955,3 @@ h2 {
 body {
   background-color: var(--bg-color);
 }
-
-/*# sourceMappingURL=skeuomorphic.css.map */

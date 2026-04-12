@@ -27,7 +27,7 @@ const Playlist = ({ open, onClose, queue, currentPosition, isPlaying, onPlay, on
   const headerActions = queue.length > 0 ? (
     <button
       type="button"
-      className="btn btn-danger btn-sm p-1 me-1"
+      className="btn-icon text-danger p-1"
       onClick={onClear}
       aria-label="Clear queue"
       title="Clear queue"
@@ -92,7 +92,7 @@ const Playlist = ({ open, onClose, queue, currentPosition, isPlaying, onPlay, on
 
                 {/* Remove button */}
                 <button
-                  className="btn btn-sm btn-danger p-1 playlist-remove"
+                  className="btn-icon text-danger p-1 playlist-remove"
                   onClick={(e) => {
                     e.stopPropagation();
                     onRemove(index);

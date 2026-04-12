@@ -301,7 +301,7 @@
 
   &:hover {
     background: transparent;
-    color: var(--casio-lcd-panel, #c8e040);
+    color: var(--casio-lcd-bg);
   }
 
   &:active {
@@ -317,9 +317,16 @@
   height: 36px;
   padding: 0;
   border-radius: 6px;
-  @include casio-key-up;
+  background: transparent;
+  border: none;
+  box-shadow: none;
   color: var(--casio-on-dark);
-  transition: transform 60ms ease, box-shadow 60ms ease;
+  transition: background 0.1s, color 0.1s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--casio-lcd-bg);
+  }
 
   &:active,
   &.active {
@@ -350,4 +357,17 @@
   padding: 3px 10px;
   min-height: 24px;
   font-size: var(--text-xs, 11px);
+}
+
+.btn-round.btn-sm {
+  width: 40px;
+  height: 40px;
+}
+
+// ─── Disabled State ────────────────────────────────────────────────
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }

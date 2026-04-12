@@ -1,7 +1,7 @@
 @use './variables.scss';
 
 // ─── Aqua Silver button — DEFAULT ────────────────────────────────────────────
-// In macOS Aqua, regular (non-default) buttons are silver/gray.
+// In macOS Aqua/Lion, regular buttons are rounded-rect silver.
 // The blue pill is reserved for the primary/default action (.btn-primary).
 .btn {
   position: relative;
@@ -10,12 +10,12 @@
   align-items: center;
   gap: 0.4rem;
   padding: 4px 20px;
-  min-height: 30px;
+  min-height: 22px;
 
   // Silver gradient
   background: linear-gradient(to bottom, #fcfcfc 0%, #e2e2e2 50%, #d4d4d4 51%, #f4f4f4 100%);
-  border: 1px solid #9c9c9c;
-  border-radius: 18px;
+  border: 1px solid #a0a0a0;
+  border-radius: 6px;   // Lion rounded-rect, not pill
 
   // Text
   font-family: var(--font-label);
@@ -59,7 +59,11 @@
 }
 
 // ─── Gel shine overlay — the signature Aqua highlight arc ────────────────────
-// This creates the "glassy" top half
+// This creates the "glassy" top half — clipped by overflow: hidden on the button
+.btn {
+  overflow: hidden;
+}
+
 .btn::after {
   content: '';
   position: absolute;
@@ -67,11 +71,10 @@
   left: 2px;
   right: 2px;
   height: 48%;
-  border-radius: 14px 14px 4px 4px;
-  // Silver buttons get a bright top-shine overlay
+  border-radius: 4px 4px 2px 2px;
   background: linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.85) 0%,
-      rgba(255, 255, 255, 0.15) 100%);
+      rgba(255, 255, 255, 0.88) 0%,
+      rgba(255, 255, 255, 0.12) 100%);
   pointer-events: none;
 }
 
@@ -86,8 +89,8 @@
 // ─── Primary — the Blue Pill (default action button in Aqua) ─────────────────
 .btn-primary {
   background: linear-gradient(to bottom, #74b0e6 0%, #1e69de 50%, #1254c0 51%, #539fe1 100%);
-  border: 1px solid #104191;
-  border-radius: 18px;
+  border: 1px solid #1050a0;
+  border-radius: 6px;   // same rounded-rect as standard button
   color: #ffffff;
   text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
   box-shadow:
@@ -296,12 +299,18 @@
 // Default: transparent. Hover: silver gel capsule (Tiger/Panther toolbar look).
 // Active/selected: blue-tinted highlight matching Aqua selection colour.
 .btn-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px; // rounded-rect, not circle — matches Aqua toolbar
-  background: transparent;
-  color: var(--color-gray-500, #888);
-  border: 1px solid transparent;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%; // Lion-style round toolbar button
+  // Gel gradient visible at rest — matches Lion round action buttons
+  background: linear-gradient(to bottom,
+      #f8f8f8 0%,
+      #e4e4e4 49%,
+      #d8d8d8 51%,
+      #f0f0f0 100%);
+  border: 1px solid rgba(0, 0, 0, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.14);
+  color: #444444;
   padding: 0;
   display: flex;
   justify-content: center;
@@ -309,60 +318,46 @@
   flex-shrink: 0;
   cursor: pointer;
   user-select: none;
+  overflow: hidden;
   transition:
-    background 0.12s,
-    border-color 0.12s,
-    box-shadow 0.12s,
-    color 0.12s;
-  box-shadow: none;
+    filter 0.1s,
+    box-shadow 0.1s;
 
-  // Remove the Aqua gel shine — icon buttons are transparent
+  // Remove the Aqua gel ::after shine — gradient is on the button itself
   &::after {
     display: none;
   }
 
-  // Hover: subtle silver Aqua gel capsule (Tiger era toolbar item highlight)
+  .material-icons {
+    font-size: 16px !important;
+  }
+
+  // Hover: brighten
   &:hover {
-    background: linear-gradient(to bottom,
-        rgba(255, 255, 255, 0.82) 0%,
-        rgba(225, 225, 225, 0.65) 50%,
-        rgba(210, 210, 210, 0.60) 51%,
-        rgba(240, 240, 240, 0.70) 100%);
-    border-color: rgba(0, 0, 0, 0.18);
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.14),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    color: var(--color-gray-700, #444);
+    filter: brightness(1.07);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 3px rgba(0, 0, 0, 0.22);
   }
 
   // Active / pressed
   &:active {
-    background: linear-gradient(to bottom,
-        rgba(170, 170, 170, 0.70) 0%,
-        rgba(195, 195, 195, 0.65) 100%);
-    border-color: rgba(0, 0, 0, 0.22);
+    filter: brightness(0.88);
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.22);
-    color: var(--color-gray-700, #444);
-    transform: none;
   }
 
-  // Active/toggled state — Aqua blue selection tint
+  // Active/toggled state — Aqua blue gel
   &.active {
     background: linear-gradient(to bottom,
-        rgba(88, 152, 228, 0.28) 0%,
-        rgba(60, 120, 210, 0.18) 100%);
-    border-color: rgba(88, 152, 228, 0.5);
-    box-shadow:
-      inset 0 1px 2px rgba(0, 0, 0, 0.10),
-      inset 0 0 0 1px rgba(88, 152, 228, 0.25);
-    color: #1254c0;
-    transform: none;
+        #6eb8f8 0%,
+        #1e69de 49%,
+        #1050b4 51%,
+        #4a90e2 100%);
+    border-color: #1050a0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
   }
 
   &.active:hover {
-    background: linear-gradient(to bottom,
-        rgba(110, 168, 238, 0.35) 0%,
-        rgba(78, 138, 220, 0.25) 100%);
+    filter: brightness(1.1);
   }
 }
 
@@ -448,13 +443,19 @@
   font-size: var(--text-xs, 11px);
 }
 
+.btn-round.btn-sm {
+  width: 40px;
+  height: 40px;
+}
+
 // ─── Link / Transparent Button ───────────────────────────────────────────────
 .btn-link {
   background: transparent;
   border: none;
   border-radius: 0;
   box-shadow: none;
-  color: var(--text-primary);
+  // Lion hyperlink blue
+  color: #2c6ecd;
   min-height: unset;
   padding: 0;
   text-decoration: none;
@@ -466,10 +467,26 @@
 
   &:hover {
     background: transparent;
-    color: var(--color-primary);
+    color: #1a4fa0;
   }
 
   &:active {
     background: transparent;
+    color: #0f3070;
   }
+
+  &:disabled,
+  &.disabled {
+    color: #8a8a8a;
+    pointer-events: none;
+    text-decoration: none;
+  }
+}
+
+// ─── Disabled State ────────────────────────────────────────────────
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
