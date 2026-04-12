@@ -1462,14 +1462,11 @@ code, pre {
 .btn-icon {
   width: 36px;
   height: 36px;
+  min-height: unset;
   border-radius: 0;
-  background: var(--win95-face);
-  color: var(--text-primary);
-  /* Win95 raised bevel */
-  border-top: 2px solid var(--win95-highlight);
-  border-left: 2px solid var(--win95-highlight);
-  border-bottom: 2px solid var(--win95-dark);
-  border-right: 2px solid var(--win95-dark);
+  background: transparent;
+  color: var(--win95-shadow);
+  border: 1px solid transparent;
   padding: 0;
   display: flex;
   justify-content: center;
@@ -1477,21 +1474,18 @@ code, pre {
   flex-shrink: 0;
   cursor: pointer;
   user-select: none;
-  transition: none;
+  transition: background 0.1s, border-color 0.1s;
   box-shadow: none;
 }
 .btn-icon:hover {
-  background: var(--win95-light);
-  color: var(--text-primary);
+  background: rgba(0, 0, 128, 0.08);
+  border-color: var(--win95-shadow);
+  color: var(--win95-shadow);
 }
 .btn-icon:active {
-  /* Depressed: invert bevel */
-  border-top: 2px solid var(--win95-dark);
-  border-left: 2px solid var(--win95-dark);
-  border-bottom: 2px solid var(--win95-highlight);
-  border-right: 2px solid var(--win95-highlight);
-  background: var(--win95-face);
-  color: var(--text-primary);
+  background: rgba(0, 0, 128, 0.14);
+  border-color: var(--win95-dark);
+  color: var(--win95-shadow);
 }
 .btn-icon.active {
   background: transparent;
@@ -1501,6 +1495,31 @@ code, pre {
 .btn-icon.active:hover {
   background: rgba(0, 0, 128, 0.08);
   color: var(--win95-titlebar);
+}
+
+/* ─── btn-icon in title bars: restore Win95 bevel ───────────────────────── */
+.dialog-header .btn-icon,
+.slide-panel-header .btn-icon {
+  background: var(--win95-face);
+  border-top: 2px solid var(--win95-highlight);
+  border-left: 2px solid var(--win95-highlight);
+  border-bottom: 2px solid var(--win95-dark);
+  border-right: 2px solid var(--win95-dark);
+  color: var(--text-primary);
+}
+.dialog-header .btn-icon:hover,
+.slide-panel-header .btn-icon:hover {
+  background: var(--win95-light);
+  color: var(--text-primary);
+}
+.dialog-header .btn-icon:active,
+.slide-panel-header .btn-icon:active {
+  border-top: 2px solid var(--win95-dark);
+  border-left: 2px solid var(--win95-dark);
+  border-bottom: 2px solid var(--win95-highlight);
+  border-right: 2px solid var(--win95-highlight);
+  background: var(--win95-face);
+  color: var(--text-primary);
 }
 
 /* ─── Link / Transparent Button ─────────────────────────────────────────── */
@@ -3530,13 +3549,14 @@ input[type=range]::-webkit-slider-runnable-track {
 .slider-track {
   position: relative;
   flex-grow: 1;
-  height: 12px;
+  height: 6px;
   background: #ffffff;
-  border-top: 2px solid var(--win95-dark);
-  border-left: 2px solid var(--win95-dark);
-  border-bottom: 2px solid var(--win95-highlight);
-  border-right: 2px solid var(--win95-highlight);
+  border-top: 1px solid var(--win95-dark);
+  border-left: 1px solid var(--win95-dark);
+  border-bottom: 1px solid var(--win95-highlight);
+  border-right: 1px solid var(--win95-highlight);
   cursor: pointer;
+  overflow: visible;
 }
 
 .slider-fill {
@@ -4334,6 +4354,13 @@ input[type=range]::-webkit-slider-runnable-track {
   font-family: var(--font-mono);
 }
 
+/* ─── Edge-to-edge rows ─── */
+.playlist-item {
+  border-radius: 0;
+  padding-left: 16px;
+  padding-right: 8px;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Windows 95 Theme
@@ -4953,6 +4980,9 @@ input[type=range]::-webkit-slider-runnable-track {
     font-size: clamp(13px, 1.1vw, 1.6rem);
     gap: clamp(8px, 0.8vw, 18px);
     padding: clamp(4px, 0.4vw, 10px) clamp(16px, 1.2vw, 28px) clamp(4px, 0.4vw, 10px) clamp(20px, 1.5vw, 36px);
+  }
+  .context-menu-item .material-icons {
+    font-size: clamp(18px, 1.5vw, 2.2rem);
   }
 }
 :root {
@@ -5978,3 +6008,5 @@ body {
 ::-webkit-scrollbar-button:horizontal:increment {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpolygon points='7,4 1,1 1,7' fill='%23000000'/%3E%3C/svg%3E");
 }
+
+/*# sourceMappingURL=win95.css.map */

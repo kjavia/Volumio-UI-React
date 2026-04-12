@@ -1279,17 +1279,23 @@ p {
 .btn-icon {
   width: 36px;
   height: 36px;
+  min-height: unset;
   padding: 0;
   border-radius: 6px;
   background: transparent;
   border: none;
   box-shadow: none;
   color: var(--casio-on-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
   transition: background 0.1s, color 0.1s;
 }
 .btn-icon:hover {
-  background: rgba(255, 255, 255, 0.07);
-  color: var(--casio-lcd-bg);
+  background: rgba(68, 221, 168, 0.18);
+  color: var(--casio-lcd-bg-alt);
 }
 .btn-icon:active, .btn-icon.active {
   background: radial-gradient(ellipse 80% 55% at 50% 20%, #303840 0%, #202830 50%, #181e26 100%);
@@ -3855,6 +3861,18 @@ input[type=range]::-webkit-slider-thumb {
   flex-shrink: 0;
 }
 
+/* ─── Edge-to-edge rows ─── */
+.playlist-item {
+  border-radius: 0;
+  padding-left: 16px;
+  padding-right: 8px;
+}
+
+.playlist-item--active {
+  padding-left: 13px;
+  /* 16px - 3px border-left */
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE — 80s Casio Theme
@@ -4597,6 +4615,14 @@ input[type=range]::-webkit-slider-thumb {
   background: var(--casio-lcd-bg);
   border-bottom: 2px solid var(--casio-lcd-frame);
   box-shadow: 0 1px 0 rgba(220, 240, 100, 0.15) inset;
+  /* Buttons on the green header need dark text for contrast */
+}
+.dialog-header .btn-icon {
+  color: var(--casio-lcd-panel);
+}
+.dialog-header .btn-icon:hover {
+  background: rgba(0, 0, 0, 0.12);
+  color: var(--casio-lcd-panel);
 }
 
 .dialog-title {
@@ -4610,17 +4636,23 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-font-smoothing: none;
 }
 
-/* Close button — domed calculator key matching main buttons */
-.dialog-close {
-  border-radius: 5px;
-  color: var(--casio-lcd-panel);
+/* Toolbar — below header, dark plastic face */
+.dialog-toolbar {
+  background: var(--casio-face);
+  border-bottom: 1px solid var(--casio-edge);
+  padding: 4px 8px;
+  flex-shrink: 0;
 }
-.dialog-close:hover {
-  background: rgba(0, 0, 0, 0.15);
-  color: var(--casio-lcd-panel);
+.dialog-toolbar .browse-search__input {
+  color: var(--casio-on-dark);
+  border-color: var(--casio-edge);
+  background: var(--casio-body);
 }
-.dialog-close:active {
-  background: rgba(0, 0, 0, 0.25);
+.dialog-toolbar .browse-search__input:focus {
+  border-color: var(--casio-lcd-bg);
+}
+.dialog-toolbar .browse-search__icon {
+  color: var(--casio-on-dark-dim);
 }
 
 /* Body — dark panel */
@@ -5517,3 +5549,5 @@ body {
 ::-webkit-scrollbar-button:vertical:increment {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpolygon points='4,7 7,1 1,1' fill='%239db834'/%3E%3C/svg%3E");
 }
+
+/*# sourceMappingURL=casio.css.map */

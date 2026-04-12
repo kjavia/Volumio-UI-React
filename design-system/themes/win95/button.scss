@@ -217,14 +217,11 @@
 .btn-icon {
     width: 36px;
     height: 36px;
+    min-height: unset;
     border-radius: 0;
-    background: var(--win95-face);
-    color: var(--text-primary);
-    /* Win95 raised bevel */
-    border-top: 2px solid var(--win95-highlight);
-    border-left: 2px solid var(--win95-highlight);
-    border-bottom: 2px solid var(--win95-dark);
-    border-right: 2px solid var(--win95-dark);
+    background: transparent;
+    color: var(--win95-shadow);
+    border: 1px solid transparent;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -232,22 +229,19 @@
     flex-shrink: 0;
     cursor: pointer;
     user-select: none;
-    transition: none;
+    transition: background 0.1s, border-color 0.1s;
     box-shadow: none;
 
     &:hover {
-        background: var(--win95-light);
-        color: var(--text-primary);
+        background: rgba(0, 0, 128, 0.08);
+        border-color: var(--win95-shadow);
+        color: var(--win95-shadow);
     }
 
     &:active {
-        /* Depressed: invert bevel */
-        border-top: 2px solid var(--win95-dark);
-        border-left: 2px solid var(--win95-dark);
-        border-bottom: 2px solid var(--win95-highlight);
-        border-right: 2px solid var(--win95-highlight);
-        background: var(--win95-face);
-        color: var(--text-primary);
+        background: rgba(0, 0, 128, 0.14);
+        border-color: var(--win95-dark);
+        color: var(--win95-shadow);
     }
 
     &.active {
@@ -259,6 +253,31 @@
     &.active:hover {
         background: rgba(0, 0, 128, 0.08);
         color: var(--win95-titlebar);
+    }
+}
+
+/* ─── btn-icon in title bars: restore Win95 bevel ───────────────────────── */
+.dialog-header .btn-icon,
+.slide-panel-header .btn-icon {
+    background: var(--win95-face);
+    border-top: 2px solid var(--win95-highlight);
+    border-left: 2px solid var(--win95-highlight);
+    border-bottom: 2px solid var(--win95-dark);
+    border-right: 2px solid var(--win95-dark);
+    color: var(--text-primary);
+
+    &:hover {
+        background: var(--win95-light);
+        color: var(--text-primary);
+    }
+
+    &:active {
+        border-top: 2px solid var(--win95-dark);
+        border-left: 2px solid var(--win95-dark);
+        border-bottom: 2px solid var(--win95-highlight);
+        border-right: 2px solid var(--win95-highlight);
+        background: var(--win95-face);
+        color: var(--text-primary);
     }
 }
 

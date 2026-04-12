@@ -86,3 +86,21 @@
   line-height: 1.3;
   font-family: var(--font-label);
 }
+/* ─── Edge-to-edge rows ─── */
+.playlist-item {
+  border-radius: 0;
+  padding-left: 16px;
+  padding-right: 8px;
+}
+
+/* ─── Edge-to-edge rows ─── */
+.playlist-list {
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+.playlist-item {
+  border-radius: 0;
+  padding-left: 16px;
+  padding-right: 8px;
+}

@@ -116,3 +116,10 @@
   color: var(--text-secondary);
   font-family: var(--font-mono);
 }
+
+/* ─── Edge-to-edge rows ─── */
+.playlist-item {
+  border-radius: 0;
+  padding-left: 16px;
+  padding-right: 8px;
+}

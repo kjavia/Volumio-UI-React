@@ -13,10 +13,10 @@
     background-color: var(--win95-face);
     border-radius: 0;
     padding: 2px;
-    border-top:    2px solid var(--win95-highlight);
-    border-left:   2px solid var(--win95-highlight);
+    border-top: 2px solid var(--win95-highlight);
+    border-left: 2px solid var(--win95-highlight);
     border-bottom: 2px solid var(--win95-dark);
-    border-right:  2px solid var(--win95-dark);
+    border-right: 2px solid var(--win95-dark);
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -47,10 +47,10 @@
     background: #ffffff;
     border-radius: 0;
     padding: 12px;
-    border-top:    2px solid var(--win95-dark);
-    border-left:   2px solid var(--win95-dark);
+    border-top: 2px solid var(--win95-dark);
+    border-left: 2px solid var(--win95-dark);
     border-bottom: 2px solid var(--win95-highlight);
-    border-right:  2px solid var(--win95-highlight);
+    border-right: 2px solid var(--win95-highlight);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -102,10 +102,10 @@
     background: var(--win95-face);
     padding: 0;
     /* Raised outer bevel */
-    border-top:    2px solid var(--win95-highlight);
-    border-left:   2px solid var(--win95-highlight);
+    border-top: 2px solid var(--win95-highlight);
+    border-left: 2px solid var(--win95-highlight);
     border-bottom: 2px solid var(--win95-dark);
-    border-right:  2px solid var(--win95-dark);
+    border-right: 2px solid var(--win95-dark);
 }
 
 /* Navy title-bar header inside the panel */
@@ -125,15 +125,15 @@
 }
 
 /* Inner content area */
-.track-info > * {
+.track-info>* {
     padding: 0 10px;
 }
 
-.track-info > *:first-child {
+.track-info>*:first-child {
     padding-top: 8px;
 }
 
-.track-info > *:last-child {
+.track-info>*:last-child {
     padding-bottom: 8px;
 }
 
@@ -208,10 +208,10 @@
     height: 44px;
     border-radius: 0;
     background: var(--win95-face);
-    border-top:    2px solid var(--win95-highlight);
-    border-left:   2px solid var(--win95-highlight);
+    border-top: 2px solid var(--win95-highlight);
+    border-left: 2px solid var(--win95-highlight);
     border-bottom: 2px solid var(--win95-dark);
-    border-right:  2px solid var(--win95-dark);
+    border-right: 2px solid var(--win95-dark);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -231,10 +231,10 @@
     }
 
     &:active {
-        border-top:    2px solid var(--win95-dark);
-        border-left:   2px solid var(--win95-dark);
+        border-top: 2px solid var(--win95-dark);
+        border-left: 2px solid var(--win95-dark);
         border-bottom: 2px solid var(--win95-highlight);
-        border-right:  2px solid var(--win95-highlight);
+        border-right: 2px solid var(--win95-highlight);
     }
 }
 
@@ -250,13 +250,14 @@
 .slider-track {
     position: relative;
     flex-grow: 1;
-    height: 12px;
+    height: 6px;
     background: #ffffff;
-    border-top:    2px solid var(--win95-dark);
-    border-left:   2px solid var(--win95-dark);
-    border-bottom: 2px solid var(--win95-highlight);
-    border-right:  2px solid var(--win95-highlight);
+    border-top: 1px solid var(--win95-dark);
+    border-left: 1px solid var(--win95-dark);
+    border-bottom: 1px solid var(--win95-highlight);
+    border-right: 1px solid var(--win95-highlight);
     cursor: pointer;
+    overflow: visible;
 }
 
 .slider-fill {
@@ -273,10 +274,10 @@
     width: 14px;
     height: 20px;
     background: var(--win95-face);
-    border-top:    2px solid var(--win95-highlight);
-    border-left:   2px solid var(--win95-highlight);
+    border-top: 2px solid var(--win95-highlight);
+    border-left: 2px solid var(--win95-highlight);
     border-bottom: 2px solid var(--win95-dark);
-    border-right:  2px solid var(--win95-dark);
+    border-right: 2px solid var(--win95-dark);
     border-radius: 0;
     cursor: pointer;
 }
@@ -325,17 +326,17 @@
 .weather-daily-card {
     background: rgba(255, 255, 255, 0.35);
     border-radius: 0;
-    border-top:    2px solid var(--win95-highlight);
-    border-left:   2px solid var(--win95-highlight);
+    border-top: 2px solid var(--win95-highlight);
+    border-left: 2px solid var(--win95-highlight);
     border-bottom: 2px solid var(--win95-dark);
-    border-right:  2px solid var(--win95-dark);
+    border-right: 2px solid var(--win95-dark);
 }
 
 .weather-daily-card--today {
-    border-top:    2px solid var(--win95-titlebar);
-    border-left:   2px solid var(--win95-titlebar);
+    border-top: 2px solid var(--win95-titlebar);
+    border-left: 2px solid var(--win95-titlebar);
     border-bottom: 2px solid var(--win95-dark);
-    border-right:  2px solid var(--win95-dark);
+    border-right: 2px solid var(--win95-dark);
 }
 
 /* Full-screen weather panels — transparent so gradient shows through */
@@ -357,7 +358,7 @@
 
 .weather-full-tile {
     background: rgba(255, 255, 255, 0.25);
-    border-right:  1px solid rgba(0, 0, 0, 0.12);
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     backdrop-filter: none;
 }

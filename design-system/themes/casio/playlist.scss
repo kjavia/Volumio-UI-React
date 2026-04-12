@@ -38,7 +38,9 @@
     border-radius: var(--radius-sm);
     padding: 8px 6px;
 
-    &:last-child { border-bottom: none; }
+    &:last-child {
+        border-bottom: none;
+    }
 
     &:hover {
         background: var(--casio-ridge);
@@ -62,10 +64,10 @@
     position: relative;
     border-radius: var(--radius-sm);
     overflow: hidden;
-    border-top:   1px solid var(--casio-sheen);
-    border-left:  1px solid var(--casio-sheen);
+    border-top: 1px solid var(--casio-sheen);
+    border-left: 1px solid var(--casio-sheen);
     border-bottom: 1px solid var(--casio-edge);
-    border-right:  1px solid var(--casio-edge);
+    border-right: 1px solid var(--casio-edge);
 }
 
 .playlist-art {
@@ -123,4 +125,16 @@
     color: var(--casio-lcd-bg);
     font-family: var(--font-mono);
     flex-shrink: 0;
+}
+
+/* ─── Edge-to-edge rows ─── */
+.playlist-item {
+    border-radius: 0;
+    padding-left: 16px;
+    padding-right: 8px;
+}
+
+.playlist-item--active {
+    padding-left: 13px;
+    /* 16px - 3px border-left */
 }

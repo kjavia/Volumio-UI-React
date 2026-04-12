@@ -50,17 +50,6 @@
   font-family: var(--font-label);
 }
 
-.dialog-close {
-  border-radius: 50%;
-  color: var(--text-secondary);
-  transition: background 0.15s, color 0.15s;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.07);
-    color: var(--text-primary);
-  }
-}
-
 /* ── Toolbar ── */
 .dialog-toolbar {
   border-bottom: 1px solid var(--border-light);
