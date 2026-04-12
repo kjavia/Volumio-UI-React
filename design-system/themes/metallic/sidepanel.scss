@@ -53,11 +53,6 @@
   border-bottom: 1px solid var(--color-gray-700);
   flex-shrink: 0;
 
-  // Compact icon buttons — half the default material-icons size
-  .btn .material-icons,
-  .btn-link .material-icons {
-    font-size: 9px;
-  }
 }
 
 /* ── Title Group ── */
@@ -95,6 +90,6 @@
     background: linear-gradient(180deg, #555 0%, #333 100%);
     border-radius: 4px;
     border: 1px solid #111;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 }

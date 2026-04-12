@@ -53,53 +53,6 @@
   flex-shrink: 0;
   background: var(--highlight-10);
 
-  // Header buttons — Aqua red gel pill (close & clear-queue are both destructive)
-  .btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    width: clamp(12px, 1.5vw, 16px);
-    height: clamp(12px, 1.5vw, 16px);
-    min-height: unset;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 1px solid #e04347;
-    background: linear-gradient(to bottom, #ff7b7e 0%, var(--color-red-vivid) 50%, #c9302c 51%, #f07070 100%);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    color: #fff;
-    cursor: pointer;
-    transition: filter 0.12s ease;
-    text-shadow: none;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 1px;
-      left: 2px;
-      right: 2px;
-      height: 48%;
-      border-radius: 10px 10px 2px 2px;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.05) 100%);
-      pointer-events: none;
-    }
-
-    .material-icons {
-      position: relative;
-      z-index: 1;
-      font-size: clamp(6px, 0.68vw, 8px) !important;
-      color: #fff;
-    }
-
-    &:hover {
-      filter: brightness(1.1);
-    }
-
-    &:active {
-      filter: brightness(0.88);
-    }
-  }
 }
 
 /* ── Title Group ── */
@@ -118,7 +71,7 @@
 }
 
 .slide-panel-title {
-  font-size: clamp(0.75rem, 1.05vw, 0.9rem);
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--text-primary);

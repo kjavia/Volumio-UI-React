@@ -4287,37 +4287,6 @@ input[type=range]::-webkit-slider-runnable-track {
   font-family: var(--font-mono);
 }
 
-.playlist-remove {
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-primary);
-  background: var(--win95-face);
-  border-top: 2px solid var(--win95-highlight);
-  border-left: 2px solid var(--win95-highlight);
-  border-bottom: 2px solid var(--win95-dark);
-  border-right: 2px solid var(--win95-dark);
-  padding: clamp(0.5rem, 1vw, 1rem) !important;
-  cursor: pointer;
-}
-.playlist-remove .material-icons {
-  font-size: 13px;
-  line-height: 1;
-}
-.playlist-remove:active {
-  border-top: 2px solid var(--win95-dark);
-  border-left: 2px solid var(--win95-dark);
-  border-bottom: 2px solid var(--win95-highlight);
-  border-right: 2px solid var(--win95-highlight);
-}
-.playlist-item--active .playlist-remove, .playlist-item:hover .playlist-remove {
-  background: var(--win95-face);
-  color: var(--text-primary);
-}
-
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Windows 95 Theme
@@ -4573,10 +4542,6 @@ input[type=range]::-webkit-slider-runnable-track {
   min-height: 40px;
   display: flex;
   align-items: center;
-}
-.slide-panel-header .btn .material-icons, .slide-panel-header .form-select .material-icons,
-.slide-panel-header .btn-link .material-icons {
-  font-size: 9px;
 }
 
 .slide-panel-title-group {

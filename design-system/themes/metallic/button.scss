@@ -133,6 +133,24 @@
   }
 }
 
+/* Danger */
+.btn-danger {
+  background: linear-gradient(180deg, #2a1010 0%, #1a0808 100%);
+  color: #f44336;
+  border: 1px solid #000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6), inset 0 0 5px rgba(200, 30, 30, 0.08);
+
+  &:hover {
+    color: #ef9a9a;
+    box-shadow: 0 4px 12px rgba(200, 30, 30, 0.2), inset 0 0 10px rgba(200, 30, 30, 0.2);
+  }
+
+  &:active,
+  &.active {
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.9);
+  }
+}
+
 /* Info */
 .btn-info {
   background: linear-gradient(180deg, #0a1a2a 0%, #06101a 100%);

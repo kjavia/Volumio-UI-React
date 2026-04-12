@@ -46,11 +46,6 @@
   background: var(--color-gray-900);
   flex-shrink: 0;
 
-  // Compact icon buttons — half the default material-icons size
-  .btn .material-icons,
-  .btn-link .material-icons {
-    font-size: 9px;
-  }
 }
 
 /* ── Title Group ── */

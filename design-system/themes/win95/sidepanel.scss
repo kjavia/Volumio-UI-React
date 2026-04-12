@@ -47,11 +47,6 @@
   display: flex;
   align-items: center;
 
-  // Compact icon buttons — half the default material-icons size
-  .btn .material-icons,
-  .btn-link .material-icons {
-    font-size: 9px;
-  }
 }
 
 .slide-panel-title-group {
@@ -89,9 +84,9 @@
 
   &::-webkit-scrollbar-thumb {
     background: var(--win95-face);
-    border-top:    2px solid var(--win95-highlight);
-    border-left:   2px solid var(--win95-highlight);
+    border-top: 2px solid var(--win95-highlight);
+    border-left: 2px solid var(--win95-highlight);
     border-bottom: 2px solid var(--win95-dark);
-    border-right:  2px solid var(--win95-dark);
+    border-right: 2px solid var(--win95-dark);
   }
 }

@@ -4599,24 +4599,6 @@ input[type=range]::-moz-range-thumb:active {
   font-family: var(--font-label);
 }
 
-/* ── Remove Button ── */
-.playlist-remove {
-  flex-shrink: 0;
-  text-decoration: none !important;
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  transition: color 0.15s, background 0.15s;
-}
-.playlist-remove .material-icons {
-  font-size: 1.1rem;
-}
-
-.playlist-item:hover .playlist-remove:hover {
-  background: rgba(239, 68, 68, 0.18);
-  color: var(--color-danger) !important;
-}
-
 .playlist-container {
   display: flex;
   flex-direction: column;
@@ -5014,10 +4996,6 @@ input[type=range]::-moz-range-thumb:active {
   border-bottom: 1px solid var(--border-dark);
   background: var(--color-gray-900);
   flex-shrink: 0;
-}
-.slide-panel-header .btn .material-icons, .slide-panel-header .form-select .material-icons,
-.slide-panel-header .btn-link .material-icons {
-  font-size: 9px;
 }
 
 /* ── Title Group ── */
