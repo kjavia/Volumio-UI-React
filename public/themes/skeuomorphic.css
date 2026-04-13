@@ -3577,6 +3577,16 @@ h2 {
   min-width: clamp(28px, 3.5vw, 44px);
 }
 
+/* Align time labels with the slider track edges (compensate for 1em side padding) */
+.seekbar-labels {
+  padding-inline: 1em;
+}
+
+@media (max-width: 768px) {
+  .seekbar-labels {
+    padding-inline: 0;
+  }
+}
 /* Utiltiy Controls */
 .controls-row {
   display: flex;
@@ -5961,5 +5971,3 @@ h2 {
 body {
   background-color: var(--bg-color);
 }
-
-/*# sourceMappingURL=skeuomorphic.css.map */

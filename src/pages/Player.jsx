@@ -17,6 +17,7 @@ import TrackInfo from '@/components/TrackInfo';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
 import VolumeManager from '@/components/VolumeManager';
 import SpectrumAnalyzer from '@/components/spectrum-analyzers/SpectrumAnalyzer';
+import mobileSpectrumOptions from '@/config/mobileSpectrumOptions';
 import StreamInfo from '@/components/StreamInfo';
 import Playlist from '@/components/Playlist';
 import DisconnectedScreen from '@/components/DisconnectedScreen';
@@ -126,11 +127,13 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const [showBrowse, setShowBrowse] = useState(false);
   const touchTimer = useRef(null);
   const vizRef = useRef(null);
+  const mobileVizRef = useRef(null);
 
   // Wrap togglePlay so that clicking play/pause (a user gesture) also enables
   // the visualization if it hasn't been enabled yet.
   const handlePlayPause = () => {
     vizRef.current?.enable();
+    mobileVizRef.current?.enable();
     togglePlay();
   };
 
@@ -245,6 +248,20 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
             <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} maxSpace={albumArtMaxSpace && effectivePlayerType === 'albumArt'} />
           </div>
         </div>
+
+        {/* MOBILE VISUALIZER — between player and controls on mobile only */}
+        {showViz && vizType === 'spectrum' && (
+          <div className="home-panel area-mobile-viz">
+            <SpectrumAnalyzer
+              ref={mobileVizRef}
+              stopped={vizStopped}
+              onResumed={onVizResumed}
+              streamUrl={SPECTRUM_STREAM_URL}
+              options={mobileSpectrumOptions}
+              isPlaying={isPlaying}
+            />
+          </div>
+        )}
 
         {/* CONTROLS SECTION */}
         <div className="home-panel area-controls text-white">
