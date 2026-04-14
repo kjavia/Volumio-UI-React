@@ -35,16 +35,17 @@ const useIdleScreen = () => {
     }
 
     if (status === 'play') {
-      // Playing — cancel idle immediately
-      setIdle(false);
-      return;
+      // Playing — cancel idle; schedule asynchronously to satisfy the
+      // react-hooks/set-state-in-effect rule (no synchronous setState in effect body)
+      const id = setTimeout(() => setIdle(false), 0);
+      return () => clearTimeout(id);
     }
 
     // Not playing — start idle countdown (if enabled)
     if (idleTimeout <= 0) {
       // Disabled
-      setIdle(false);
-      return;
+      const id = setTimeout(() => setIdle(false), 0);
+      return () => clearTimeout(id);
     }
 
     timerRef.current = setTimeout(

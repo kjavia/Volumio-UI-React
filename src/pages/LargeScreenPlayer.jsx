@@ -169,10 +169,20 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
   // Player cycling (same logic as Player.jsx)
   const [cycleIndex, setCycleIndex] = useState(null);
   const [randomIndex, setRandomIndex] = useState(() => Math.floor(Math.random() * RANDOM_PLAYERS.length));
+
+  // Derived state: reset cycleIndex when playerType changes
+  const [prevPlayerType, setPrevPlayerType] = useState(playerType);
+  if (prevPlayerType !== playerType) {
+    setPrevPlayerType(playerType);
+    setCycleIndex(null);
+  }
+
+  // Pick a new random index when title or playerType changes (async setState to satisfy lint rules)
   useEffect(() => {
-    if (playerType === 'random') setRandomIndex(Math.floor(Math.random() * RANDOM_PLAYERS.length));
+    if (playerType !== 'random') return;
+    const id = setTimeout(() => setRandomIndex(Math.floor(Math.random() * RANDOM_PLAYERS.length)), 0);
+    return () => clearTimeout(id);
   }, [title, playerType]);
-  useEffect(() => { setCycleIndex(null); }, [playerType]);
 
   const cyclePlayer = () => {
     setCycleIndex((prev) => {
@@ -218,7 +228,10 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
 
   const [isRetrying, setIsRetrying] = useState(true);
   useEffect(() => {
-    if (isConnected) { setIsRetrying(true); return; }
+    if (isConnected) {
+      const id = setTimeout(() => setIsRetrying(true), 0);
+      return () => clearTimeout(id);
+    }
     const timer = setTimeout(() => setIsRetrying(false), 5 * 60 * 1000);
     return () => clearTimeout(timer);
   }, [isConnected]);

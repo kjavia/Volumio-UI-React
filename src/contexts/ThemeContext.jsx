@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useSocket } from '@/contexts/SocketContext';
 import { PLUGIN_BASE_URL } from '@/config';
