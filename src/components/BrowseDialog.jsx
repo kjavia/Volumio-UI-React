@@ -60,6 +60,7 @@ const itemFormat = (item) => {
 };
 
 const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGrid = false, className: classNameProp }) => {
+  "use no memo";
   const [viewMode, setViewMode] = useState('grid');
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
@@ -107,9 +108,12 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
 
   const queueUris = useMemo(() => new Set((queue ?? []).map((q) => q.uri)), [queue]);
 
-  const browseItems = isSearching
-    ? (searchData?.lists?.flatMap((l) => l.items) ?? [])
-    : (browseData?.lists?.flatMap((l) => l.items) ?? []);
+  const browseItems = useMemo(
+    () => isSearching
+      ? (searchData?.lists?.flatMap((l) => l.items) ?? [])
+      : (browseData?.lists?.flatMap((l) => l.items) ?? []),
+    [isSearching, searchData, browseData]
+  );
   const albumInfo = browseData?.info ?? null;
   const albumArtist = albumInfo?.artist
     || browseItems.find((i) => i.artist)?.artist
@@ -231,6 +235,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     ? (viewMode === 'grid' ? Math.ceil(filteredItems.length / numCols) : filteredItems.length)
     : 0;
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const browseVirtualizer = useVirtualizer({
     count: virtCount,
     getScrollElement: () => browseBodyRef.current,

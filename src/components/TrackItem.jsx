@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import Marquee from './Marquee';
@@ -22,30 +22,30 @@ const ALBUM_TYPES = new Set(['folder', 'album', 'artist', 'genre']);
 
 // Maps genre title keywords to a Material Icon name.
 const GENRE_ICON_MAP = [
-  [/rock|metal|punk|grunge|hardcore|heavy/i, <GiGuitar />],
-  [/jazz/i, <GiSaxophone />],
-  [/classical|orchestra|symphony|chamber|opera|baroque/i, <GiMusicalNotes />],
-  [/electronic|techno|new age|edm|trance|house|dubstep|drum.?n.?bass|dnb|synthwave|ambient|chill/i, <CgPiano />],
-  [/hip.?hop|rap|r&b|rnb|soul|funk/i, <GiMicrophone />],
-  [/country|folk|bluegrass|americana/i, <GiBanjo />],
-  [/blues/i, <GiGrandPiano />],
-  [/reggae|ska/i, <GiBeachBall />],
-  [/latin|salsa|bossa|samba|flamenco/i, <PiGuitar />],
-  [/world|afro|celtic|indian|asian/i, <FaGlobeAmericas />],
-  [/gospel|spiritual|christian|worship/i, <FaCross />],
-  [/children|kids|nursery/i, <MdChildCare />],
-  [/comedy|humor/i, <MdTheaterComedy />],
-  [/soundtrack|film|movie|score|cinema/i, <BiSolidCameraMovie />],
-  [/podcast|talk|spoken/i, <LuPodcast />],
-  [/christmas|holiday/i, <TbChristmasTree />],
-  [/dance/i, <PiDiscoBall />],
-  [/pop|chart|hit/i, <FaRegGrinStars />],
+  [/rock|metal|punk|grunge|hardcore|heavy/i, () => <GiGuitar />],
+  [/jazz/i, () => <GiSaxophone />],
+  [/classical|orchestra|symphony|chamber|opera|baroque/i, () => <GiMusicalNotes />],
+  [/electronic|techno|new age|edm|trance|house|dubstep|drum.?n.?bass|dnb|synthwave|ambient|chill/i, () => <CgPiano />],
+  [/hip.?hop|rap|r&b|rnb|soul|funk/i, () => <GiMicrophone />],
+  [/country|folk|bluegrass|americana/i, () => <GiBanjo />],
+  [/blues/i, () => <GiGrandPiano />],
+  [/reggae|ska/i, () => <GiBeachBall />],
+  [/latin|salsa|bossa|samba|flamenco/i, () => <PiGuitar />],
+  [/world|afro|celtic|indian|asian/i, () => <FaGlobeAmericas />],
+  [/gospel|spiritual|christian|worship/i, () => <FaCross />],
+  [/children|kids|nursery/i, () => <MdChildCare />],
+  [/comedy|humor/i, () => <MdTheaterComedy />],
+  [/soundtrack|film|movie|score|cinema/i, () => <BiSolidCameraMovie />],
+  [/podcast|talk|spoken/i, () => <LuPodcast />],
+  [/christmas|holiday/i, () => <TbChristmasTree />],
+  [/dance/i, () => <PiDiscoBall />],
+  [/pop|chart|hit/i, () => <FaRegGrinStars />],
 ];
 
 const genreIcon = (title) => {
   if (!title) return 'category';
   for (const [pattern, icon] of GENRE_ICON_MAP) {
-    if (pattern.test(title)) return icon;
+    if (pattern.test(title)) return icon();
   }
   return 'category';
 };
@@ -122,7 +122,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
-  const trackPayload = {
+  const trackPayload = useMemo(() => ({
     uri: item.uri,
     service: item.service,
     title: item.title,
@@ -130,26 +130,26 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
     album: item.album,
     albumart: item.albumart,
     type: item.type,
-  };
+  }), [item.uri, item.service, item.title, item.artist, item.album, item.albumart, item.type]);
 
   const handlePlay = useCallback((e) => {
     e.stopPropagation();
     socket?.emit('replaceAndPlay', trackPayload);
     closeMenu();
-  }, [socket, trackPayload, closeMenu]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [socket, trackPayload, closeMenu]);
 
   const handleAddToQueue = useCallback((e) => {
     e.stopPropagation();
     if (!isInQueue) socket?.emit('addToQueue', trackPayload);
     closeMenu();
-  }, [socket, trackPayload, isInQueue, closeMenu]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [socket, trackPayload, isInQueue, closeMenu]);
 
   const handleClearAndPlay = useCallback((e) => {
     e.stopPropagation();
     socket?.emit('clearQueue');
     socket?.emit('replaceAndPlay', trackPayload);
     closeMenu();
-  }, [socket, trackPayload, closeMenu]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [socket, trackPayload, closeMenu]);
 
   const handleToggleFavourite = useCallback((e) => {
     e.stopPropagation();
@@ -162,7 +162,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
     }
     onFavouriteToggled?.();
     closeMenu();
-  }, [socket, item.uri, item.service, trackPayload, isFavourite, addFavouriteOptimistic, removeFavouriteOptimistic, onFavouriteToggled, closeMenu]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [socket, item.uri, item.service, trackPayload, isFavourite, addFavouriteOptimistic, removeFavouriteOptimistic, onFavouriteToggled, closeMenu]);
 
   const handleOpenAddToPlaylist = useCallback((e) => {
     e.stopPropagation();
@@ -174,7 +174,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
     e.stopPropagation();
     socket?.emit('replaceAndPlay', trackPayload);
     closeMenu();
-  }, [socket, trackPayload, closeMenu]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [socket, trackPayload, closeMenu]);
 
   const handleAddPlaylistToQueue = useCallback((e) => {
     e.stopPropagation();
@@ -187,7 +187,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
     socket?.emit('clearQueue');
     socket?.emit('replaceAndPlay', trackPayload);
     closeMenu();
-  }, [socket, trackPayload, closeMenu]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [socket, trackPayload, closeMenu]);
 
   const handleDeletePlaylist = useCallback((e) => {
     e.stopPropagation();
@@ -208,7 +208,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
     } else {
       onNavigate?.(item.uri, item.title);
     }
-  }, [isPlayable, socket, trackPayload, onNavigate, item.uri, item.title]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isPlayable, socket, trackPayload, onNavigate, item.uri, item.title]);
 
   const isGenre = item.uri.startsWith('genre');
   const artUrl = isGenre ? null : albumartUrl(item.albumart);

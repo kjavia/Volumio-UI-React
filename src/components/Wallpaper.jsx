@@ -28,13 +28,16 @@ const Wallpaper = ({
   const { data: images = [] } = useWallpaperImages(url);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [time, setTime] = useState(() => new Date());
+
+  // Reset index when URL changes (derived state — avoids a setState-in-effect)
+  const [prevUrl, setPrevUrl] = useState(url);
+  if (prevUrl !== url) {
+    setPrevUrl(url);
+    setCurrentIndex(0);
+  }
+
   const { data: weather } = useWeather();
   const { t } = useTranslation('weather');
-
-  // Reset index when images change
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [images]);
 
   // Slideshow cycling
   useEffect(() => {
