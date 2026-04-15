@@ -796,6 +796,7 @@ body,
   justify-content: center;
   position: relative;
   cursor: pointer;
+  container-type: inline-size;
 }
 
 .browse-result-card__play {
@@ -838,13 +839,26 @@ body,
 }
 
 .browse-result-card__art .material-icons {
-  font-size: 2rem !important;
+  font-size: clamp(2rem, 25cqi, 5rem) !important;
   opacity: 0.4;
 }
 
 .browse-result-card__genre-icon.material-icons {
-  font-size: 2.5rem !important;
+  font-size: clamp(2.5rem, 35cqi, 7rem) !important;
   opacity: 0.85 !important;
+}
+
+/* react-icons SVG genre icon in card view */
+.browse-result-card__genre-icon {
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: clamp(2.5rem, 35cqi, 7rem);
+    height: clamp(2.5rem, 35cqi, 7rem);
+  }
 }
 
 .browse-result-card__info {
@@ -924,6 +938,19 @@ body,
 .browse-result-row__genre-icon.material-icons {
   font-size: 1.5rem !important;
   opacity: 0.85 !important;
+}
+
+/* react-icons SVG genre icon in list row view */
+.browse-result-row__genre-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 .browse-result-row__info {

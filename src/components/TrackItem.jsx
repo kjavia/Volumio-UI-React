@@ -8,14 +8,15 @@ import useFavourites from '@/hooks/useFavourites';
 import { VOLUMIO_BASE_URL } from '@/config';
 import { CgPiano } from "react-icons/cg";
 import { FaGlobeAmericas, FaCross } from "react-icons/fa";
-import { MdChildCare, MdTheaterComedy } from "react-icons/md";
+import { MdChildCare, MdDarkMode, MdQueueMusic, MdTheaterComedy } from "react-icons/md";
 import { BiSolidCameraMovie } from "react-icons/bi";
 import { LuPodcast } from "react-icons/lu";
 import { TbChristmasTree } from "react-icons/tb";
-import { PiDiscoBall } from "react-icons/pi";
-import { GiGuitar, GiSaxophone, GiMusicalNotes, GiMicrophone, GiBanjo, GiGrandPiano, GiBeachBall } from "react-icons/gi";
+import { PiClover, PiDiscoBall } from "react-icons/pi";
+import { GiGuitar, GiSaxophone, GiMusicalNotes, GiMicrophone, GiBanjo, GiGrandPiano, GiBeachBall, GiNightSleep } from "react-icons/gi";
 import { PiGuitar } from "react-icons/pi";
 import { FaRegGrinStars } from "react-icons/fa";
+import { SiStarship } from 'react-icons/si';
 
 const PLAYABLE_TYPES = new Set(['song', 'webradio', 'mywebradio', 'cuesong', 'remdisk']);
 const ALBUM_TYPES = new Set(['folder', 'album', 'artist', 'genre']);
@@ -24,22 +25,27 @@ const ALBUM_TYPES = new Set(['folder', 'album', 'artist', 'genre']);
 const GENRE_ICON_MAP = [
   [/rock|metal|punk|grunge|hardcore|heavy/i, () => <GiGuitar />],
   [/jazz/i, () => <GiSaxophone />],
-  [/classical|orchestra|symphony|chamber|opera|baroque/i, () => <GiMusicalNotes />],
+  [/alternative/i, () => <SiStarship />],
+  [/downtempo|lo.?fi|trip.?hop|chill/i, () => <GiNightSleep />],
+  [/dark/i, () => <MdDarkMode />],
   [/electronic|techno|new age|edm|trance|house|dubstep|drum.?n.?bass|dnb|synthwave|ambient|chill/i, () => <CgPiano />],
   [/hip.?hop|rap|r&b|rnb|soul|funk/i, () => <GiMicrophone />],
   [/country|folk|bluegrass|americana/i, () => <GiBanjo />],
   [/blues/i, () => <GiGrandPiano />],
   [/reggae|ska/i, () => <GiBeachBall />],
   [/latin|salsa|bossa|samba|flamenco/i, () => <PiGuitar />],
-  [/world|afro|celtic|indian|asian/i, () => <FaGlobeAmericas />],
+  [/celtic/i, () => <PiClover />],
+  [/world|afro|indian|asian/i, () => <FaGlobeAmericas />],
+  [/classical|orchestra|symphony|chamber|opera|baroque/i, () => <GiMusicalNotes />],
   [/gospel|spiritual|christian|worship/i, () => <FaCross />],
   [/children|kids|nursery/i, () => <MdChildCare />],
   [/comedy|humor/i, () => <MdTheaterComedy />],
   [/soundtrack|film|movie|score|cinema/i, () => <BiSolidCameraMovie />],
   [/podcast|talk|spoken/i, () => <LuPodcast />],
   [/christmas|holiday/i, () => <TbChristmasTree />],
-  [/dance/i, () => <PiDiscoBall />],
+  [/disco|dance/i, () => <PiDiscoBall />],
   [/pop|chart|hit/i, () => <FaRegGrinStars />],
+  [/miscellaneous|other|unknown/i, () => <MdQueueMusic />],
 ];
 
 const genreIcon = (title) => {
@@ -336,7 +342,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
             onKeyDown={(e) => e.key === 'Enter' && handleItemClick()}
           >
             {isGenre
-              ? <span className="material-icons browse-result-card__genre-icon">{genreIcon(item.title)}</span>
+              ? <span className="browse-result-card__genre-icon">{genreIcon(item.title)}</span>
               : artUrl
                 ? <img src={artUrl} alt="" loading="lazy" />
                 : <span className="material-icons">music_note</span>
@@ -389,7 +395,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
       >
         <div className="browse-result-row__art">
           {isGenre
-            ? <span className="material-icons browse-result-row__genre-icon">{genreIcon(item.title)}</span>
+            ? <span className="browse-result-row__genre-icon">{genreIcon(item.title)}</span>
             : artUrl
               ? <img src={artUrl} alt="" loading="lazy" />
               : <span className="material-icons">music_note</span>
