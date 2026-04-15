@@ -2,6 +2,7 @@ import { useMemo, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
+import useMediaQuery from '@/hooks/useMediaQuery';
 import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
 import { useSeek } from '@/contexts/SeekContext';
 import AlbumArtPlayer from '@/components/animated-players/AlbumArtPlayer';
@@ -124,6 +125,10 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
   const backgroundColor = pluginConfig?.backgroundColor || '';
 
+  // Ultrawide landscape short — 3-column layout (player | meta | viz)
+  // Targets screens like 2650×700 or 1920×515 where width >> height
+  const isUwls = useMediaQuery('(max-height: 700px) and (min-width: 1440px) and (min-aspect-ratio: 2/1)');
+
   const spectrumOptions = useMemo(() => {
     const raw = pluginConfig?.spectrumOptions;
     if (!raw) return null;
@@ -240,202 +245,301 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
     return <DisconnectedScreen isRetrying={isRetrying} host={VOLUMIO_BASE_URL} />;
   }
 
+  // ── Shared JSX blocks reused in both standard and UWLS layouts ──────────
+
+  const vizBlock = showViz && (
+    <div className="lsp-viz-area">
+      {vizType === 'spectrum' && (
+        <SpectrumAnalyzer
+          ref={vizRef}
+          stopped={vizStopped}
+          onResumed={onVizResumed}
+          streamUrl={SPECTRUM_STREAM_URL}
+          options={spectrumOptions}
+          isPlaying={isPlaying}
+        />
+      )}
+      {vizType === 'vuMeter1' && <VUMeter variant={1} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+      {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+      {vizType === 'vuMeter3' && <VUMeter variant={3} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+      {vizType === 'vuMeter4' && <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+    </div>
+  );
+
+  const playerBlock = (
+    <div
+      className="lsp-player-area"
+      onDoubleClick={cyclePlayer}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleTouchStart}
+      onMouseUp={handleTouchEnd}
+      onMouseLeave={handleTouchEnd}
+    >
+      <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
+    </div>
+  );
+
+  const metaBlock = (
+    <div className="lsp-meta-area">
+      <div className="lsp-top">
+        {/* Row 1: Title (left) + Service logo (right) */}
+        <div className="lsp-top__row1">
+          <div className="lsp-top__title">
+            <Marquee align="left">{title || 'Unknown Title'}</Marquee>
+          </div>
+          <ServiceLogo service={service} className="lsp-top__service-logo" />
+        </div>
+
+        {/* Row 2: Artist · Album */}
+        <div className="lsp-top__row2">
+          <span className="lsp-top__artist">
+            <Marquee align="left">{artist || 'Unknown Artist'}</Marquee>
+          </span>
+          {album && (
+            <>
+              <span className="lsp-top__sep"> · </span>
+              <span className="lsp-top__album">
+                <Marquee align="left">{album}</Marquee>
+              </span>
+            </>
+          )}
+        </div>
+
+        {/* Row 3: Stream info */}
+        <div className="lsp-top__row3">
+          <StreamInfo
+            trackType={/radio|internet/i.test(trackType || service || '') ? null : trackType}
+            samplerate={samplerate}
+            bitdepth={bitdepth}
+            bitrate={bitrate}
+            className="lsp-stream-info"
+          />
+        </div>
+      </div>
+    </div>
+  );
+
+  const seekbarBlock = (
+    <div className="lsp-seekbar-area">
+      <PlayerSeekbar readOnly={!showPlayerControls} />
+    </div>
+  );
+
+  const controlsBlock = (
+    <div className="lsp-controls-area">
+      {/* Left edge buttons */}
+      <div className="lsp-btn-group lsp-btn-group--left">
+        {menuSlot}
+        {showPlayerControls && (
+          <Button
+            classNames={`btn-icon lsp-btn ${isFavourite ? 'active' : ''}`}
+            onClick={toggleFavourite}
+            label={isFavourite ? 'Remove from Favourites' : 'Add to Favourites'}
+          >
+            <span className="material-icons">{isFavourite ? 'favorite' : 'favorite_border'}</span>
+          </Button>
+        )}
+      </div>
+
+      {/* Centre transport controls */}
+      <div className="lsp-btn-group lsp-btn-group--center">
+        <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${repeat ? 'active' : ''}`} onClick={toggleRepeat} label={repeat ? 'Repeat On' : 'Repeat Off'}>
+          <span className="material-icons">repeat</span>
+        </Button>
+        <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={prev} label="Previous">
+          <span className="material-icons">skip_previous</span>
+        </Button>
+        <Button classNames="btn-round btn-primary lsp-btn lsp-btn--lg" onClick={handlePlayPause} label={isPlaying ? 'Pause' : 'Play'}>
+          <span className="material-icons play-icon">{isPlaying ? 'pause' : 'play_arrow'}</span>
+        </Button>
+        <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={next} label="Next">
+          <span className="material-icons">skip_next</span>
+        </Button>
+        <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${random ? 'active' : ''}`} onClick={toggleRandom} label={random ? 'Shuffle On' : 'Shuffle Off'}>
+          <span className="material-icons">shuffle</span>
+        </Button>
+      </div>
+
+      {/* Right edge buttons */}
+      <div className="lsp-btn-group lsp-btn-group--right">
+        <Button classNames="btn-icon lsp-btn" onClick={() => setShowAddToPlaylist(true)} label="Add to Playlist">
+          <span className="material-icons">playlist_add</span>
+        </Button>
+        <Button classNames="btn-icon lsp-btn" onClick={() => setShowPlaylist(true)} label="Current Playlist">
+          <span className="material-icons">queue_music</span>
+        </Button>
+        <Button classNames="btn-icon lsp-btn" onClick={() => setShowBrowse(true)} label="Browse">
+          <span className="material-icons">library_music</span>
+        </Button>
+        {!disableVolumeControl && (
+          <div className="lsp-volume-btn-wrap position-relative">
+            <Button
+              classNames={`btn-icon lsp-btn ${showVolumePopup ? 'active' : ''}`}
+              onClick={() => setShowVolumePopup((v) => !v)}
+              label="Volume"
+            >
+              <span className="material-icons">
+                {(mute || volume === 0) ? 'volume_off' : volume < 50 ? 'volume_down' : 'volume_up'}
+              </span>
+            </Button>
+            {showVolumePopup && (
+              <VolumePopup
+                volume={volume}
+                mute={mute}
+                onVolumeChange={setVolume}
+                onMute={toggleMute}
+                onClose={() => setShowVolumePopup(false)}
+              />
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <div className="lsp-root">
       {/* ── Background wallpaper ── */}
       {backgroundColor ? (
         <div className="lsp-bg" style={{ backgroundColor, filter: 'none', transform: 'none' }} />
       ) : fullAlbumArt ? (
-        <div
-          className="lsp-bg"
-          style={{ backgroundImage: `url(${fullAlbumArt})` }}
-        />
+        <div className="lsp-bg" style={{ backgroundImage: `url(${fullAlbumArt})` }} />
       ) : null}
 
       {/* ── Content ── */}
-      <div className="lsp-content">
-
-        {/* ════ TOP SECTION ════ */}
-        <div className="lsp-top">
-          {/* Row 1: Title (left) + Service logo (right) */}
-          <div className="lsp-top__row1">
-            <div className="lsp-top__title">
-              <Marquee align="left">{title || 'Unknown Title'}</Marquee>
-            </div>
-            <ServiceLogo service={service} className="lsp-top__service-logo" />
+      {isUwls ? (
+        /* ═══ UWLS layout: [player + meta] | viz / seekbar / controls ═══ */
+        <div className={`lsp-content lsp-content--uwls${showViz ? '' : ' lsp-content--uwls-noviz'}`}>
+          <div className="lsp-left-group">
+            {playerBlock}
+            {metaBlock}
           </div>
-
-          {/* Row 2: Artist · Album */}
-          <div className="lsp-top__row2">
-            <span className="lsp-top__artist">
-              <Marquee>{artist || 'Unknown Artist'}</Marquee>
-            </span>
-            {album && (
-              <>
-                <span className="lsp-top__sep"> · </span>
-                <span className="lsp-top__album">
-                  <Marquee>{album}</Marquee>
-                </span>
-              </>
-            )}
-          </div>
-
-          {/* Row 3: Stream info / format (small, left aligned) — hidden for radio */}
-          <div className="lsp-top__row3">
-            <StreamInfo
-              trackType={/radio|internet/i.test(trackType || service || '') ? null : trackType}
-              samplerate={samplerate}
-              bitdepth={bitdepth}
-              bitrate={bitrate}
-              className="lsp-stream-info"
-            />
-          </div>
+          {vizBlock}
+          {seekbarBlock}
+          {controlsBlock}
         </div>
-
-        {/* ════ BOTTOM SECTION ════ */}
-        <div className="lsp-bottom">
-
-          {/* Row 1: Mini player (left) + Visualization (right) */}
-          <div className="lsp-bottom__row1">
-            <div className="lsp-bottom__player"
-              onDoubleClick={cyclePlayer}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-              onMouseDown={handleTouchStart}
-              onMouseUp={handleTouchEnd}
-              onMouseLeave={handleTouchEnd}
-            >
-              <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
-            </div>
-
-            {showViz && (
-              <div className="lsp-bottom__viz">
-                {vizType === 'spectrum' && (
-                  <SpectrumAnalyzer
-                    ref={vizRef}
-                    stopped={vizStopped}
-                    onResumed={onVizResumed}
-                    streamUrl={SPECTRUM_STREAM_URL}
-                    options={spectrumOptions}
-                    isPlaying={isPlaying}
-                  />
-                )}
-                {vizType === 'vuMeter1' && (
-                  <VUMeter variant={1} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />
-                )}
-                {vizType === 'vuMeter2' && (
-                  <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />
-                )}
-                {vizType === 'vuMeter3' && (
-                  <VUMeter variant={3} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />
-                )}
-                {vizType === 'vuMeter4' && (
-                  <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />
-                )}
+      ) : (
+        /* ═══ Standard layout: meta top / player+viz / seekbar / controls ═══ */
+        <div className="lsp-content">
+          {/* ════ TOP SECTION ════ */}
+          <div className="lsp-top">
+            <div className="lsp-top__row1">
+              <div className="lsp-top__title">
+                <Marquee align="left">{title || 'Unknown Title'}</Marquee>
               </div>
-            )}
-          </div>
-
-          {/* Row 2: Seekbar */}
-          <div className="lsp-bottom__row2">
-            <PlayerSeekbar readOnly={!showPlayerControls} />
-          </div>
-
-          {/* Row 3: Three button groups — menu always visible regardless of showPlayerControls */}
-          <div className="lsp-bottom__row3">
-            {/* Left edge buttons */}
-            <div className="lsp-btn-group lsp-btn-group--left">
-              {menuSlot}
-
-              {showPlayerControls && (
-                <Button
-                  classNames={`btn-icon lsp-btn ${isFavourite ? 'active' : ''}`}
-                  onClick={toggleFavourite}
-                  label={isFavourite ? 'Remove from Favourites' : 'Add to Favourites'}
-                >
-                  <span className="material-icons">{isFavourite ? 'favorite' : 'favorite_border'}</span>
-                </Button>
+              <ServiceLogo service={service} className="lsp-top__service-logo" />
+            </div>
+            <div className="lsp-top__row2">
+              <span className="lsp-top__artist">
+                <Marquee align="left">{artist || 'Unknown Artist'}</Marquee>
+              </span>
+              {album && (
+                <>
+                  <span className="lsp-top__sep"> · </span>
+                  <span className="lsp-top__album">
+                    <Marquee align="left">{album}</Marquee>
+                  </span>
+                </>
               )}
             </div>
-
-            {/* Centre transport controls */}
-            <div className="lsp-btn-group lsp-btn-group--center">
-              <Button
-                classNames={`btn-icon lsp-btn lsp-btn--sm ${repeat ? 'active' : ''}`}
-                onClick={toggleRepeat}
-                label={repeat ? 'Repeat On' : 'Repeat Off'}
-              >
-                <span className="material-icons">repeat</span>
-              </Button>
-
-              <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={prev} label="Previous">
-                <span className="material-icons">skip_previous</span>
-              </Button>
-
-              <Button
-                classNames="btn-round btn-primary lsp-btn lsp-btn--lg"
-                onClick={handlePlayPause}
-                label={isPlaying ? 'Pause' : 'Play'}
-              >
-                <span className="material-icons play-icon">{isPlaying ? 'pause' : 'play_arrow'}</span>
-              </Button>
-
-              <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={next} label="Next">
-                <span className="material-icons">skip_next</span>
-              </Button>
-
-              <Button
-                classNames={`btn-icon lsp-btn lsp-btn--sm ${random ? 'active' : ''}`}
-                onClick={toggleRandom}
-                label={random ? 'Shuffle On' : 'Shuffle Off'}
-              >
-                <span className="material-icons">shuffle</span>
-              </Button>
+            <div className="lsp-top__row3">
+              <StreamInfo
+                trackType={/radio|internet/i.test(trackType || service || '') ? null : trackType}
+                samplerate={samplerate}
+                bitdepth={bitdepth}
+                bitrate={bitrate}
+                className="lsp-stream-info"
+              />
             </div>
+          </div>
 
-            {/* Right edge buttons */}
-            <div className="lsp-btn-group lsp-btn-group--right">
-              <Button classNames="btn-icon lsp-btn" onClick={() => setShowAddToPlaylist(true)} label="Add to Playlist">
-                <span className="material-icons">playlist_add</span>
-              </Button>
-
-              <Button classNames="btn-icon lsp-btn" onClick={() => setShowPlaylist(true)} label="Current Playlist">
-                <span className="material-icons">queue_music</span>
-              </Button>
-
-              <Button classNames="btn-icon lsp-btn" onClick={() => setShowBrowse(true)} label="Browse">
-                <span className="material-icons">library_music</span>
-              </Button>
-
-              {!disableVolumeControl && (
-                <div className="lsp-volume-btn-wrap position-relative">
-                  <Button
-                    classNames={`btn-icon lsp-btn ${showVolumePopup ? 'active' : ''}`}
-                    onClick={() => setShowVolumePopup((v) => !v)}
-                    label="Volume"
-                  >
-                    <span className="material-icons">
-                      {(mute || volume === 0) ? 'volume_off' : volume < 50 ? 'volume_down' : 'volume_up'}
-                    </span>
-                  </Button>
-
-                  {showVolumePopup && (
-                    <VolumePopup
-                      volume={volume}
-                      mute={mute}
-                      onVolumeChange={setVolume}
-                      onMute={toggleMute}
-                      onClose={() => setShowVolumePopup(false)}
-                    />
+          {/* ════ BOTTOM SECTION ════ */}
+          <div className="lsp-bottom">
+            {/* Row 1: Mini player (left) + Visualization (right) */}
+            <div className="lsp-bottom__row1">
+              <div className="lsp-bottom__player"
+                onDoubleClick={cyclePlayer}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+                onMouseDown={handleTouchStart}
+                onMouseUp={handleTouchEnd}
+                onMouseLeave={handleTouchEnd}
+              >
+                <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
+              </div>
+              {showViz && (
+                <div className="lsp-bottom__viz">
+                  {vizType === 'spectrum' && (
+                    <SpectrumAnalyzer ref={vizRef} stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} options={spectrumOptions} isPlaying={isPlaying} />
                   )}
+                  {vizType === 'vuMeter1' && <VUMeter variant={1} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+                  {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+                  {vizType === 'vuMeter3' && <VUMeter variant={3} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+                  {vizType === 'vuMeter4' && <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
                 </div>
               )}
             </div>
+
+            {/* Row 2: Seekbar */}
+            <div className="lsp-bottom__row2">
+              <PlayerSeekbar readOnly={!showPlayerControls} />
+            </div>
+
+            {/* Row 3: Button groups */}
+            <div className="lsp-bottom__row3">
+              <div className="lsp-btn-group lsp-btn-group--left">
+                {menuSlot}
+                {showPlayerControls && (
+                  <Button classNames={`btn-icon lsp-btn ${isFavourite ? 'active' : ''}`} onClick={toggleFavourite} label={isFavourite ? 'Remove from Favourites' : 'Add to Favourites'}>
+                    <span className="material-icons">{isFavourite ? 'favorite' : 'favorite_border'}</span>
+                  </Button>
+                )}
+              </div>
+              <div className="lsp-btn-group lsp-btn-group--center">
+                <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${repeat ? 'active' : ''}`} onClick={toggleRepeat} label={repeat ? 'Repeat On' : 'Repeat Off'}>
+                  <span className="material-icons">repeat</span>
+                </Button>
+                <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={prev} label="Previous">
+                  <span className="material-icons">skip_previous</span>
+                </Button>
+                <Button classNames="btn-round btn-primary lsp-btn lsp-btn--lg" onClick={handlePlayPause} label={isPlaying ? 'Pause' : 'Play'}>
+                  <span className="material-icons play-icon">{isPlaying ? 'pause' : 'play_arrow'}</span>
+                </Button>
+                <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={next} label="Next">
+                  <span className="material-icons">skip_next</span>
+                </Button>
+                <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${random ? 'active' : ''}`} onClick={toggleRandom} label={random ? 'Shuffle On' : 'Shuffle Off'}>
+                  <span className="material-icons">shuffle</span>
+                </Button>
+              </div>
+              <div className="lsp-btn-group lsp-btn-group--right">
+                <Button classNames="btn-icon lsp-btn" onClick={() => setShowAddToPlaylist(true)} label="Add to Playlist">
+                  <span className="material-icons">playlist_add</span>
+                </Button>
+                <Button classNames="btn-icon lsp-btn" onClick={() => setShowPlaylist(true)} label="Current Playlist">
+                  <span className="material-icons">queue_music</span>
+                </Button>
+                <Button classNames="btn-icon lsp-btn" onClick={() => setShowBrowse(true)} label="Browse">
+                  <span className="material-icons">library_music</span>
+                </Button>
+                {!disableVolumeControl && (
+                  <div className="lsp-volume-btn-wrap position-relative">
+                    <Button classNames={`btn-icon lsp-btn ${showVolumePopup ? 'active' : ''}`} onClick={() => setShowVolumePopup((v) => !v)} label="Volume">
+                      <span className="material-icons">
+                        {(mute || volume === 0) ? 'volume_off' : volume < 50 ? 'volume_down' : 'volume_up'}
+                      </span>
+                    </Button>
+                    {showVolumePopup && (
+                      <VolumePopup volume={volume} mute={mute} onVolumeChange={setVolume} onMute={toggleMute} onClose={() => setShowVolumePopup(false)} />
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* ── Overlays / Dialogs ── */}
+      )}
       <Playlist
         open={showPlaylist}
         onClose={() => setShowPlaylist(false)}
