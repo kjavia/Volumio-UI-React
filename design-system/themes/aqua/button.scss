@@ -15,7 +15,7 @@
   // Silver gradient
   background: linear-gradient(to bottom, #fcfcfc 0%, #e2e2e2 50%, #d4d4d4 51%, #f4f4f4 100%);
   border: 1px solid #a0a0a0;
-  border-radius: 6px;   // Lion rounded-rect, not pill
+  border-radius: 6px; // Lion rounded-rect, not pill
 
   // Text
   font-family: var(--font-label);
@@ -90,7 +90,7 @@
 .btn-primary {
   background: linear-gradient(to bottom, #74b0e6 0%, #1e69de 50%, #1254c0 51%, #539fe1 100%);
   border: 1px solid #1050a0;
-  border-radius: 6px;   // same rounded-rect as standard button
+  border-radius: 6px; // same rounded-rect as standard button
   color: #ffffff;
   text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
   box-shadow:
@@ -302,15 +302,10 @@
   width: 28px;
   height: 28px;
   border-radius: 50%; // Lion-style round toolbar button
-  // Gel gradient visible at rest — matches Lion round action buttons
-  background: linear-gradient(to bottom,
-      #f8f8f8 0%,
-      #e4e4e4 49%,
-      #d8d8d8 51%,
-      #f0f0f0 100%);
-  border: 1px solid rgba(0, 0, 0, 0.28);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.14);
-  color: #444444;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--text-secondary, #666);
   padding: 0;
   display: flex;
   justify-content: center;
@@ -323,7 +318,7 @@
     filter 0.1s,
     box-shadow 0.1s;
 
-  // Remove the Aqua gel ::after shine — gradient is on the button itself
+  // Remove the Aqua gel ::after shine
   &::after {
     display: none;
   }
@@ -332,16 +327,16 @@
     font-size: 16px !important;
   }
 
-  // Hover: brighten
+  // Hover: subtle highlight
   &:hover {
-    filter: brightness(1.07);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 3px rgba(0, 0, 0, 0.22);
+    background: rgba(0, 0, 0, 0.06);
+    box-shadow: none;
   }
 
   // Active / pressed
   &:active {
-    filter: brightness(0.88);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.22);
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: none;
   }
 
   // Active/toggled state — Aqua blue gel

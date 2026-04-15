@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import Marquee from './Marquee';
@@ -115,16 +115,42 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
     e.stopPropagation();
     const rect = btnRef.current?.getBoundingClientRect();
     if (!rect) return;
-    // Position below the button, aligned to the right edge; flip up if near bottom
-    const menuHeight = 220;
-    const spaceBelow = window.innerHeight - rect.bottom;
-    const top = spaceBelow >= menuHeight
-      ? rect.bottom + 4
-      : rect.top - menuHeight - 4;
+    // Initial position below the button — will be adjusted after render
+    const top = rect.bottom + 4;
     const left = Math.min(rect.right - 180, window.innerWidth - 188);
     setMenuPos({ top, left });
     setMenuOpen((v) => !v);
   }, []);
+
+  // After the menu renders, measure it and reposition if it overflows the viewport
+  useLayoutEffect(() => {
+    if (!menuOpen || !menuRef.current) return;
+    const el = menuRef.current;
+    const menuRect = el.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    let { top, left } = menuPos;
+    // Flip up if overflowing bottom
+    if (menuRect.bottom > vh) {
+      const btnRect = btnRef.current?.getBoundingClientRect();
+      if (btnRect) {
+        top = btnRect.top - menuRect.height - 4;
+      } else {
+        top = vh - menuRect.height - 8;
+      }
+    }
+    // Clamp to top
+    if (top < 4) top = 4;
+    // Clamp right edge
+    if (left + menuRect.width > vw - 8) {
+      left = vw - menuRect.width - 8;
+    }
+    // Clamp left edge
+    if (left < 4) left = 4;
+    if (top !== menuPos.top || left !== menuPos.left) {
+      setMenuPos({ top, left });
+    }
+  }, [menuOpen]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 

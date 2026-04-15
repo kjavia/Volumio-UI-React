@@ -1015,8 +1015,12 @@
     }
 
     &.lsp-btn--sm.btn-icon {
-      width: 52px !important;
-      height: 52px !important;
+      width: 56px !important;
+      height: 56px !important;
+
+      .material-icons {
+        font-size: 2rem !important;
+      }
     }
 
     &.lsp-btn--md.btn-round {
@@ -1071,13 +1075,13 @@
   }
 
   .track-menu {
-    min-width: 200px;
+    min-width: 200px !important;
   }
 
   .track-menu__item {
-    font-size: 1rem;
-    padding: 10px 16px;
-    gap: 10px;
+    font-size: 1rem !important;
+    padding: 10px 16px !important;
+    gap: 10px !important;
   }
 
   .track-menu__item .material-icons {

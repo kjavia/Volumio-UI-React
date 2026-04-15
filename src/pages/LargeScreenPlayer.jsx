@@ -552,7 +552,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
         host={VOLUMIO_BASE_URL}
       />
 
-      <BrowseDialog open={showBrowse} onClose={() => setShowBrowse(false)} initialFullscreen initialLargeGrid className="browse-dialog--lsp" />
+      <BrowseDialog open={showBrowse} onClose={() => setShowBrowse(false)} initialFullscreen initialLargeGrid={!isUwls} className="browse-dialog--lsp" />
 
       <AddToPlaylistDialog
         open={showAddToPlaylist}

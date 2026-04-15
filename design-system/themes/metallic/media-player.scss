@@ -594,16 +594,16 @@
 
     // Track context menu (portaled to body)
     .track-menu {
-        min-width: clamp(240px, 20vw, 460px) !important;
+        min-width: 280px !important;
     }
 
     .track-menu__item {
-        font-size: clamp(1rem, 1.4vw, 2rem) !important;
-        padding: clamp(10px, 1vw, 20px) clamp(14px, 1.3vw, 28px) !important;
-        gap: clamp(10px, 1vw, 20px) !important;
+        font-size: 1.5rem !important;
+        padding: 16px 24px !important;
+        gap: 12px !important;
     }
 
     .track-menu__item .material-icons {
-        font-size: clamp(1.3rem, 1.8vw, 2.4rem) !important;
+        font-size: 1.9rem !important;
     }
 }
