@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import io from 'socket.io-client';
 import { VOLUMIO_BASE_URL } from '@/config';
@@ -5,35 +6,41 @@ import { VOLUMIO_BASE_URL } from '@/config';
 export const SocketContext = createContext(null);
 
 export const SocketProvider = ({ children }) => {
-  const [socket, setSocket] = useState(null);
+  // Lazy initializer creates the socket once — avoids calling setState inside an effect
+  const [socket] = useState(() => io(VOLUMIO_BASE_URL, {
+    transports: ['websocket'],
+    autoConnect: true,
+  }));
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const newSocket = io(VOLUMIO_BASE_URL, {
-      transports: ['websocket'],
-      autoConnect: true,
-    });
+    // Re-connect if the socket was disconnected by a previous cleanup
+    // (e.g. React Strict Mode double-invocation)
+    if (!socket.connected) socket.connect();
 
-    setSocket(newSocket);
-
-    newSocket.on('connect', () => {
+    const handleConnect = () => {
       console.log('Socket connected');
       setIsConnected(true);
-    });
-
-    newSocket.on('disconnect', () => {
+    };
+    const handleDisconnect = () => {
       console.log('Socket disconnected');
       setIsConnected(false);
-    });
-
-    newSocket.on('connect_error', (err) => {
+    };
+    const handleError = (err) => {
       console.error('Socket connection error:', err);
-    });
+    };
+
+    socket.on('connect', handleConnect);
+    socket.on('disconnect', handleDisconnect);
+    socket.on('connect_error', handleError);
 
     return () => {
-      newSocket.disconnect();
+      socket.off('connect', handleConnect);
+      socket.off('disconnect', handleDisconnect);
+      socket.off('connect_error', handleError);
+      socket.disconnect();
     };
-  }, []);
+  }, [socket]);
 
   const value = useMemo(
     () => ({

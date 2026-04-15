@@ -17,7 +17,9 @@ import TrackInfo from '@/components/TrackInfo';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
 import VolumeManager from '@/components/VolumeManager';
 import SpectrumAnalyzer from '@/components/spectrum-analyzers/SpectrumAnalyzer';
+import mobileSpectrumOptions from '@/config/mobileSpectrumOptions';
 import StreamInfo from '@/components/StreamInfo';
+import ServiceLogo from '@/components/ServiceLogo';
 import Playlist from '@/components/Playlist';
 import DisconnectedScreen from '@/components/DisconnectedScreen';
 import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
@@ -126,11 +128,13 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const [showBrowse, setShowBrowse] = useState(false);
   const touchTimer = useRef(null);
   const vizRef = useRef(null);
+  const mobileVizRef = useRef(null);
 
   // Wrap togglePlay so that clicking play/pause (a user gesture) also enables
   // the visualization if it hasn't been enabled yet.
   const handlePlayPause = () => {
     vizRef.current?.enable();
+    mobileVizRef.current?.enable();
     togglePlay();
   };
 
@@ -246,6 +250,20 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
           </div>
         </div>
 
+        {/* MOBILE VISUALIZER — between player and controls on mobile only */}
+        {showViz && vizType === 'spectrum' && (
+          <div className="home-panel area-mobile-viz">
+            <SpectrumAnalyzer
+              ref={mobileVizRef}
+              stopped={vizStopped}
+              onResumed={onVizResumed}
+              streamUrl={SPECTRUM_STREAM_URL}
+              options={mobileSpectrumOptions}
+              isPlaying={isPlaying}
+            />
+          </div>
+        )}
+
         {/* CONTROLS SECTION */}
         <div className="home-panel area-controls text-white">
           <div
@@ -258,13 +276,16 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
             {/* Top half of spacer — pushes stream info toward center */}
             <div className="controls-spacer" />
 
-            {/* Stream info — floats centered between track info and seekbar */}
-            <StreamInfo
-              trackType={trackType}
-              samplerate={samplerate}
-              bitdepth={bitdepth}
-              bitrate={bitrate}
-            />
+            {/* Stream info + service logo — floats centered between track info and seekbar */}
+            <div className="d-flex align-items-center justify-content-center gap-3">
+              <ServiceLogo service={service} />
+              <StreamInfo
+                trackType={trackType}
+                samplerate={samplerate}
+                bitdepth={bitdepth}
+                bitrate={bitrate}
+              />
+            </div>
 
             {/* Bottom half of spacer */}
             <div className="controls-spacer" />

@@ -11,13 +11,22 @@ const LOGO_MAP = {
   dff: '/assets/logos/dsd.svg',
 };
 
+// trackType values that are streaming service names, not audio formats
+const STREAMING_SERVICES = new Set([
+  'spotify', 'spop', 'tidal', 'qobuz', 'deezer', 'soundcloud',
+  'youtube', 'youtubemusic', 'applemusic', 'pandora', 'bandcamp',
+  'napster', 'webradio', 'radio',
+]);
+
 const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate, className }) => {
   // Don't render if we have nothing to show
   if (!trackType && !samplerate && !bitdepth && !bitrate) {
     return null;
   }
 
-  const logoSrc = trackType ? LOGO_MAP[trackType.toLowerCase()] : null;
+  // Don't treat streaming service names as audio format labels
+  const formatType = trackType && !STREAMING_SERVICES.has(trackType.toLowerCase()) ? trackType : null;
+  const logoSrc = formatType ? LOGO_MAP[formatType.toLowerCase()] : null;
 
   const samplerateKhz = samplerate ? parseFloat(samplerate) : 0;
   const bitdepthNum = bitdepth ? parseInt(bitdepth, 10) : 0;
@@ -32,20 +41,20 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate, className }) => 
   return (
     <div
       className={`stream-info d-flex align-items-center gap-3 responsive-stream-info overflow-hidden${className ? ` ${className}` : ' justify-content-center w-100'}`}
-      style={{ opacity: 0.6, userSelect: 'none' }}
+      style={className ? { userSelect: 'none' } : { opacity: 0.6, userSelect: 'none' }}
     >
       {/* Format logo or text fallback */}
       {logoSrc ? (
         <img
           src={logoSrc}
-          alt={trackType}
+          alt={formatType}
           className="format-logo-responsive"
           style={{ width: 'auto', filter: 'brightness(0) invert(1)', opacity: 0.8 }}
         />
       ) : (
-        trackType && (
+        formatType && (
           <span className="text-uppercase fw-semibold" style={{ letterSpacing: '0.05em' }}>
-            {trackType}
+            {formatType}
           </span>
         )
       )}
@@ -67,10 +76,10 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate, className }) => 
         </>
       )}
 
-      {/* Bitrate (shown if no samplerate/bitdepth, e.g. for mp3) */}
-      {bitrate && !qualityStr && (
+      {/* Bitrate — always shown when available */}
+      {bitrate && (
         <>
-          {(logoSrc || trackType) && <span className="text-white-50">·</span>}
+          {(logoSrc || formatType || qualityStr) && <span className="text-white-50">·</span>}
           <span>{bitrate}</span>
         </>
       )}

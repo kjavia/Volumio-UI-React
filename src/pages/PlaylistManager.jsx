@@ -53,6 +53,7 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
     [filtered, selectedAlbumUri]
   );
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const virtualizer = useVirtualizer({
     count: filtered.length,
     getScrollElement: () => parentRef.current,
@@ -416,7 +417,7 @@ const PlaylistColumn = ({ onTracksAdded, onToast, selectedPlaylist, onSelectPlay
   const selectedPlaylistObj = playlists.find((p) => p.name === selectedPlaylist);
   const playlistBrowseUri = selectedPlaylistObj?.uri ?? null;
   const { data: tracksNav, isLoading: tracksLoading } = useBrowse(playlistBrowseUri);
-  const playlistTracks = tracksNav?.lists?.[0]?.items ?? [];
+  const playlistTracks = useMemo(() => tracksNav?.lists?.[0]?.items ?? [], [tracksNav]);
 
   // Scroll to the playing track once playlist tracks load
   useEffect(() => {
@@ -619,7 +620,9 @@ const PlaylistManager = () => {
     if (selectedAlbumUri !== null) return;
     if (!nowPlayingAlbumName || !albums?.length) return;
     const match = albums.find((a) => a.title === nowPlayingAlbumName);
-    if (match) setSelectedAlbumUri(match.uri);
+    if (!match) return;
+    const id = setTimeout(() => setSelectedAlbumUri(match.uri), 0);
+    return () => clearTimeout(id);
   }, [albums, nowPlayingAlbumName, selectedAlbumUri]);
   // Map<uri, track> — preserves insertion order for drag payloads
   const [selectedTracks, setSelectedTracks] = useState(new Map());

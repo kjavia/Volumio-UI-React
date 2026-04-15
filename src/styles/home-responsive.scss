@@ -27,11 +27,12 @@ body,
   justify-content: center;
   overflow: hidden;
 
-  /* MOBILE (default): two equal rows, one column */
+  /* MOBILE (default): three rows — player / compact viz / controls */
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 80px 1fr;
   grid-template-areas:
     'player'
+    'mobile-viz'
     'controls';
 }
 
@@ -46,6 +47,16 @@ body,
 
 .area-spectrum {
   grid-area: spectrum;
+}
+
+.area-mobile-viz {
+  grid-area: mobile-viz;
+  overflow: hidden;
+}
+
+/* Hide mobile-viz strip when there is no viz configured */
+.home-grid.no-viz .area-mobile-viz {
+  display: none;
 }
 
 /* ── Panel base ──
@@ -117,6 +128,11 @@ body,
     }
   }
 
+  /* Mobile viz strip is not used on desktop — hide it entirely */
+  .area-mobile-viz {
+    display: none;
+  }
+
   .spectrum-panel {
     display: flex;
   }
@@ -149,6 +165,11 @@ body,
         grid-template-columns: 2fr 3fr;
       }
     }
+  }
+
+  /* Mobile viz strip not used on ultra-wide */
+  .area-mobile-viz {
+    display: none;
   }
 
   .spectrum-panel {
@@ -227,62 +248,62 @@ body,
 /* ── Medium-compact: transport + icon buttons shrink at ≤560px panel height ── */
 @container (max-height: 560px) {
 
-  /* Transport buttons: 56px → 44px */
+  /* Transport buttons: play 60px / prev-next 46px */
   .btn-round {
-    width: 44px !important;
-    height: 44px !important;
+    width: 60px !important;
+    height: 60px !important;
   }
 
   .btn-round.btn-sm {
-    width: 32px !important;
-    height: 32px !important;
+    width: 46px !important;
+    height: 46px !important;
   }
 
   .btn-round.btn-sm .material-icons {
-    font-size: 1.15rem !important;
+    font-size: 1.6rem !important;
   }
 
-  /* Icon buttons: 36px → 28px */
+  /* Secondary icon buttons */
   .btn-icon {
-    width: 28px !important;
-    height: 28px !important;
+    width: 34px !important;
+    height: 34px !important;
   }
 
   .btn-icon .material-icons {
-    font-size: 1.05rem !important;
+    font-size: 1.25rem !important;
   }
 }
 
 /* ── Fully compact: ≤380px panel height (landscape mobile, very small screens) ── */
 @container (max-height: 380px) {
 
-  /* Transport buttons: → 36px */
+  /* Transport buttons: play 52px / prev-next 40px */
   .btn-round {
-    width: 36px !important;
-    height: 36px !important;
+    width: 52px !important;
+    height: 52px !important;
   }
 
   .btn-round.btn-sm {
-    width: 26px !important;
-    height: 26px !important;
+    width: 40px !important;
+    height: 40px !important;
   }
 
   .btn-round .material-icons {
-    font-size: 1.1rem !important;
+    font-size: 1.5rem !important;
   }
 
   .btn-round.btn-sm .material-icons {
-    font-size: 0.8rem !important;
+    font-size: 1.15rem !important;
   }
 
-  /* Icon buttons: → 24px */
+  /* Secondary icon buttons */
   .btn-icon {
-    width: 24px !important;
-    height: 24px !important;
+    width: 30px !important;
+    height: 30px !important;
   }
 
   .btn-icon .material-icons {
-    font-size: 0.95rem !important;
+    font-size: 1.1rem !important;
   }
 
   .volume-manager .material-icons {
@@ -292,11 +313,6 @@ body,
   .volume-manager .small {
     font-size: 0.7rem !important;
   }
-
-  /* Hide album name to reclaim space */
-  .album-name {
-    display: none !important;
-  }
 }
 
 /* ── Mobile-Specific Tweaks (Portrait) ── */
@@ -305,12 +321,62 @@ body,
   /* Reduce track info padding/margins */
   .cq-track-info {
     margin-bottom: 2px !important;
-    padding-bottom: 0 !important;
+    padding-bottom: 4px !important;
+    /* prevent overflow-hidden clipping the album row */
   }
 
-  /* Also tighten the gap in the controls container slightly for mobile */
+  /* Uniform row gap between Player / Viz strip / Controls grid areas */
+  .home-grid {
+    row-gap: 8px;
+  }
+
+  /* Collapse the mobile-viz row when no viz is configured */
+  .home-grid.no-viz {
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      'player'
+      'controls';
+  }
+
+  /* Stretch the controls panel so its inner column fills the full cell height */
+  .area-controls.home-panel {
+    align-items: stretch;
+  }
+
+  /* Controls column fills cell height; items stack from the top with equal gap.
+     Volume bar is pushed to the bottom via margin-top: auto on its wrapper. */
   .player-controls-container {
-    gap: clamp(2px, 4cqh, 16px) !important;
+    height: 100%;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+  }
+
+  /* Remove extra margin-block / margin-bottom – flex gap handles spacing */
+  .player-controls {
+    margin-block: 0 !important;
+    /* Match outer container gap inside the transport/secondary rows */
+    gap: 8px;
+  }
+
+  .controls-transport-row {
+    margin-bottom: 0 !important;
+  }
+
+  /* Seekbar: m-auto class adds auto margins that disrupt uniform spacing */
+  .seekbar-container-wrap {
+    margin: 0 auto !important;
+    /* horizontal centering only, no vertical auto */
+  }
+
+  /* Hide flexible spacers – uniform gap replaces them on mobile */
+  .controls-spacer {
+    display: none;
+  }
+
+  /* Volume bar pinned to the bottom with a small breathing margin */
+  .volume-manager-wrap {
+    margin-top: auto !important;
+    padding-bottom: 14px;
   }
 }
 
@@ -332,7 +398,7 @@ body,
 
 .seekbar-labels {
   padding: 0 0.1rem;
-  margin-top: 0.4rem;
+  margin-top: 1rem;
   /* default (mobile) */
 }
 
@@ -730,6 +796,7 @@ body,
   justify-content: center;
   position: relative;
   cursor: pointer;
+  container-type: inline-size;
 }
 
 .browse-result-card__play {
@@ -772,13 +839,26 @@ body,
 }
 
 .browse-result-card__art .material-icons {
-  font-size: 2rem !important;
+  font-size: clamp(2rem, 25cqi, 5rem) !important;
   opacity: 0.4;
 }
 
 .browse-result-card__genre-icon.material-icons {
-  font-size: 2.5rem !important;
+  font-size: clamp(2.5rem, 35cqi, 7rem) !important;
   opacity: 0.85 !important;
+}
+
+/* react-icons SVG genre icon in card view */
+.browse-result-card__genre-icon {
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: clamp(2.5rem, 35cqi, 7rem);
+    height: clamp(2.5rem, 35cqi, 7rem);
+  }
 }
 
 .browse-result-card__info {
@@ -858,6 +938,19 @@ body,
 .browse-result-row__genre-icon.material-icons {
   font-size: 1.5rem !important;
   opacity: 0.85 !important;
+}
+
+/* react-icons SVG genre icon in list row view */
+.browse-result-row__genre-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 .browse-result-row__info {

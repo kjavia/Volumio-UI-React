@@ -42,7 +42,7 @@ const useWallpaperImages = (url) => {
   const unsplashApiKey = config?.unsplashApiKey ?? '';
 
   return useQuery({
-    queryKey: ['wallpaperImages', url],
+    queryKey: ['wallpaperImages', url, unsplashApiKey],
     queryFn: () => fetchImages(url, unsplashApiKey),
     enabled: !!url,
     staleTime: 10 * 60 * 1000,

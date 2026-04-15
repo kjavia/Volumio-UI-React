@@ -88,6 +88,12 @@
   opacity: 0.8;
 }
 
+/* react-icons brand icon — scale with viewport, inherit brand colour */
+.service-logo-icon {
+  font-size: clamp(2rem, 2.5vw, 3.5rem) !important;
+  opacity: 0.85;
+}
+
 .service-logo-badge {
   display: inline-block;
   font-size: clamp(0.75rem, 1vw, 1rem);
@@ -112,23 +118,24 @@
 
 /* Stream info variant for large screen: left-aligned, larger, always white */
 .lsp-stream-info {
-  opacity: 0.75;
+  opacity: 0.8;
   gap: 0.75rem;
   color: #fff !important;
 
   span {
     color: #fff !important;
-    font-size: 1rem !important;
+    font-size: clamp(1rem, 1.1vw, 1.6rem) !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
   }
 
   .format-logo-responsive:not(.hires-logo) {
-    height: 1.6rem !important;
+    height: clamp(1.6rem, 2vw, 2.8rem) !important;
     width: auto !important;
     filter: brightness(0) invert(1) !important;
   }
 
   .hires-logo {
-    height: 1.6rem !important;
+    height: clamp(1.6rem, 2vw, 2.8rem) !important;
     width: auto !important;
     filter: none !important;
     /* keep original gold/colour */
@@ -501,6 +508,11 @@
 
   .browse-result-row__sub {
     font-size: clamp(0.75rem, 0.85cqi, 1.05rem);
+  }
+
+  .browse-result-row__genre-icon svg {
+    width: clamp(1.5rem, 2.5cqi, 3rem);
+    height: clamp(1.5rem, 2.5cqi, 3rem);
   }
 
   .browse-result-row__chevron {
