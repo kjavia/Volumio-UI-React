@@ -342,4 +342,26 @@
   .context-menu {
     min-width: 240px !important;
   }
+
+  // ── Dialogs / Queue ──
+  .dialog-title {
+    font-size: 1.6rem !important;
+  }
+
+  .dialog-track-title {
+    font-size: 1.4rem !important;
+  }
+
+  .dialog-track-meta {
+    font-size: 1.2rem !important;
+  }
+
+  .dialog-list-item {
+    font-size: 1.3rem !important;
+    padding: 0.65rem 1.1rem !important;
+  }
+
+  .dialog-section-title {
+    font-size: 1rem !important;
+  }
 }
