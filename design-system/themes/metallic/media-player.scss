@@ -372,82 +372,126 @@
         &.btn-icon,
         &.lsp-btn--sm.btn-icon,
         &.lsp-btn--md.btn-round {
-            width: 64px !important;
-            height: 64px !important;
+            width: 72px !important;
+            height: 72px !important;
 
             .material-icons {
-                font-size: 2rem !important;
+                font-size: 2.4rem !important;
             }
         }
 
         &.lsp-btn--lg.btn-round {
-            width: 80px !important;
-            height: 80px !important;
+            width: 92px !important;
+            height: 92px !important;
 
             .material-icons.play-icon {
-                font-size: 2.6rem !important;
+                font-size: 3rem !important;
             }
         }
     }
 
     .context-menu-toggle {
-        width: 64px !important;
-        height: 64px !important;
+        width: 72px !important;
+        height: 72px !important;
 
         .material-icons {
-            font-size: 2.2rem !important;
+            font-size: 2.4rem !important;
         }
     }
 
     .context-menu-item {
-        font-size: 1.3rem !important;
-        padding: 14px 20px !important;
+        font-size: 1.5rem !important;
+        padding: 16px 24px !important;
 
         .material-icons {
-            font-size: 1.7rem !important;
+            font-size: 1.9rem !important;
         }
     }
 
     .context-menu {
-        min-width: 240px !important;
+        min-width: 280px !important;
     }
 
     // ── Dialogs / Queue ──
     .dialog-title {
-        font-size: 1.6rem !important;
+        font-size: 2rem !important;
+    }
+
+    .dialog-close {
+        width: 36px !important;
+        height: 36px !important;
+
+        .material-icons {
+            font-size: 1.4rem !important;
+        }
+    }
+
+    .dialog-header {
+        padding: 1.2rem 1.8rem !important;
+    }
+
+    .dialog-body {
+        padding: 1.2rem 1.5rem !important;
+        font-size: 1.3rem !important;
+    }
+
+    .dialog-footer {
+        padding: 1.2rem 1.8rem !important;
     }
 
     .dialog-track-title {
-        font-size: 1.4rem !important;
+        font-size: 1.7rem !important;
     }
 
     .dialog-track-meta {
-        font-size: 1.2rem !important;
+        font-size: 1.4rem !important;
     }
 
     .dialog-list-item {
-        font-size: 1.3rem !important;
-        padding: 0.65rem 1.1rem !important;
+        font-size: 1.5rem !important;
+        padding: 0.8rem 1.3rem !important;
+
+        .material-icons {
+            font-size: 1.5rem !important;
+        }
     }
 
     .dialog-section-title {
-        font-size: 1rem !important;
+        font-size: 1.2rem !important;
+    }
+
+    .dialog-label {
+        font-size: 1.1rem !important;
+    }
+
+    .dialog-input {
+        font-size: 1.3rem !important;
+        padding: 0.6rem 0.8rem !important;
+    }
+
+    .dialog .btn {
+        font-size: 1.3rem !important;
+        padding: 0.6rem 1.2rem !important;
     }
 
     // ── Queue (SlidePanel) track rows ──
     .playlist-track-title {
-        font-size: 1.3rem !important;
+        font-size: 1.5rem !important;
     }
 
     .playlist-track-meta {
-        font-size: 1.1rem !important;
+        font-size: 1.3rem !important;
     }
 
     .playlist-item {
-        padding: 0.65rem 1rem !important;
+        padding: 0.8rem 1.2rem !important;
     }
 
     .playlist-info {
-        font-size: 1rem !important;
+        font-size: 1.2rem !important;
+    }
+
+    .playlist-remove .material-icons {
+        font-size: 1.4rem !important;
     }
 }
