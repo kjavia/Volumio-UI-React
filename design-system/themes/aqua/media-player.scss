@@ -365,6 +365,42 @@
     font-size: 1rem !important;
   }
 
+  .dialog-close {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .dialog-header {
+    padding: 1.1rem 1.6rem !important;
+  }
+
+  .dialog-body {
+    padding: 1.1rem 1.4rem !important;
+    font-size: 1.2rem !important;
+  }
+
+  .dialog-footer {
+    padding: 1.1rem 1.6rem !important;
+  }
+
+  .dialog-label {
+    font-size: 1.1rem !important;
+  }
+
+  .dialog-input {
+    font-size: 1.2rem !important;
+    padding: 0.55rem 0.75rem !important;
+  }
+
+  .dialog .btn {
+    font-size: 1.2rem !important;
+    padding: 0.55rem 1.1rem !important;
+  }
+
+  .dialog-list-item .material-icons {
+    font-size: 1.3rem !important;
+  }
+
   // ── Queue (SlidePanel) track rows ──
   .playlist-track-title {
     font-size: 1.3rem !important;
@@ -380,5 +416,28 @@
 
   .playlist-info {
     font-size: 1rem !important;
+  }
+
+  .playlist-remove.btn-icon {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+
+    .material-icons {
+      font-size: 1.4rem !important;
+    }
+  }
+
+  // ── SlidePanel header buttons (clear queue, close) ──
+  .slide-panel-header .btn-icon,
+  .slide-panel-header .btn-link,
+  .slide-panel-header .dialog-close {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+
+    .material-icons {
+      font-size: 1.8rem !important;
+    }
   }
 }

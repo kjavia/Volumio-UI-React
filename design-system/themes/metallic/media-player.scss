@@ -418,11 +418,11 @@
     }
 
     .dialog-close {
-        width: 36px !important;
-        height: 36px !important;
+        width: 48px !important;
+        height: 48px !important;
 
         .material-icons {
-            font-size: 1.4rem !important;
+            font-size: 1.8rem !important;
         }
     }
 
@@ -491,7 +491,119 @@
         font-size: 1.2rem !important;
     }
 
-    .playlist-remove .material-icons {
-        font-size: 1.4rem !important;
+    .playlist-remove.btn-icon {
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px !important;
+
+        .material-icons {
+            font-size: 1.6rem !important;
+        }
+    }
+
+    // ── SlidePanel header buttons (close, clear queue) ──
+    .slide-panel-header .btn-icon,
+    .slide-panel-header .btn-link,
+    .slide-panel-header .dialog-close {
+        width: 48px !important;
+        height: 48px !important;
+        min-width: 48px !important;
+
+        .material-icons {
+            font-size: 1.8rem !important;
+        }
+    }
+
+    .slide-panel-title {
+        font-size: clamp(1.2rem, 6cqi, 2.4rem) !important;
+    }
+
+    .slide-panel-subtitle {
+        font-size: clamp(0.9rem, 4.5cqi, 1.8rem) !important;
+    }
+
+    .playlist-art-wrap {
+        width: 56px !important;
+        height: 56px !important;
+    }
+
+    // ── Browse Dialog ──
+    .browse-dialog--lsp .dialog-title,
+    .browse-dialog--lsp.dialog .dialog-header .dialog-title {
+        font-size: clamp(1.4rem, 1.6cqi, 2.2rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-toolbar .btn-icon {
+        width: clamp(44px, 3.5cqi, 60px) !important;
+        height: clamp(44px, 3.5cqi, 60px) !important;
+    }
+
+    .browse-dialog--lsp .browse-toolbar .btn-icon .material-icons,
+    .browse-dialog--lsp .browse-toolbar .material-icons {
+        font-size: clamp(1.3rem, 1.8cqi, 2.2rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-search__icon {
+        font-size: clamp(1.3rem, 1.6cqi, 2rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-search__input {
+        font-size: clamp(1.1rem, 1.4cqi, 1.8rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-tile {
+        padding: clamp(2rem, 3cqi, 4rem) clamp(1rem, 2cqi, 2.5rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-tile__icon {
+        font-size: clamp(3rem, 4.5cqi, 6rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-tile__label {
+        font-size: clamp(1rem, 1.3cqi, 1.6rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-result-card__title {
+        font-size: clamp(1rem, 1.2cqi, 1.5rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-result-card__sub {
+        font-size: clamp(0.85rem, 1cqi, 1.3rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-result-row__title {
+        font-size: clamp(1.1rem, 1.3cqi, 1.6rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-result-row__sub {
+        font-size: clamp(0.9rem, 1.1cqi, 1.4rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-result-row__chevron {
+        font-size: clamp(1.2rem, 1.5cqi, 1.8rem) !important;
+    }
+
+    .browse-dialog--lsp .browse-search-section__title {
+        font-size: clamp(1rem, 1.3cqi, 1.5rem) !important;
+    }
+
+    .browse-dialog--lsp .album-footer__chip,
+    .browse-dialog--lsp .album-footer__format-text {
+        font-size: clamp(0.85rem, 1cqi, 1.3rem) !important;
+    }
+
+    // Track context menu (portaled to body)
+    .track-menu {
+        min-width: clamp(240px, 20vw, 460px) !important;
+    }
+
+    .track-menu__item {
+        font-size: clamp(1rem, 1.4vw, 2rem) !important;
+        padding: clamp(10px, 1vw, 20px) clamp(14px, 1.3vw, 28px) !important;
+        gap: clamp(10px, 1vw, 20px) !important;
+    }
+
+    .track-menu__item .material-icons {
+        font-size: clamp(1.3rem, 1.8vw, 2.4rem) !important;
     }
 }
