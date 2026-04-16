@@ -22,7 +22,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background: var(--win95-face);
+    background: rgba(var(--win95-face-rgb, 192, 192, 192), 0.75);
     border-top: 2px solid var(--win95-highlight);
     border-left: 2px solid var(--win95-highlight);
     border-bottom: 2px solid var(--win95-dark);

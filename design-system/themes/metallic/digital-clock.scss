@@ -4,17 +4,17 @@
  * ──────────────────────────────────────────────────────────────────────── */
 
 // LCD glass & segment palette
-$seg-color:        #1c3038;   // deep dark teal — classic LCD segment ink
-$seg-off-opacity:  0.03;
-$lcd-bg:           #bfcfe8;   // pale cool-blue LCD glass
-$lcd-border:       #7a9ab8;
+$seg-color: #1c3038; // deep dark teal — classic LCD segment ink
+$seg-off-opacity: 0.03;
+$lcd-bg: #bfcfe8; // pale cool-blue LCD glass
+$lcd-border: #7a9ab8;
 $lcd-shadow-inset: rgba(0, 0, 0, 0.35);
 
 // Outer frame — dark gunmetal brushed metal
-$frame-bg-top:     #2e2e2e;
-$frame-bg-bottom:  #0e0e0e;
-$frame-border:     #111111;
-$frame-highlight:  rgba(255, 255, 255, 0.07);
+$frame-bg-top: #2e2e2e;
+$frame-bg-bottom: #0e0e0e;
+$frame-border: #111111;
+$frame-highlight: rgba(255, 255, 255, 0.07);
 
 /* ── Centering wrapper ──────────────────────────────────────────────────── */
 .digital-clock-wrapper {
@@ -24,7 +24,7 @@ $frame-highlight:  rgba(255, 255, 255, 0.07);
   justify-content: center;
   width: 90vw;
   height: 90dvh;
-  max-width: none;
+  max-width: 180dvh;
   margin: 0 auto;
   container-type: size;
 }
@@ -103,13 +103,11 @@ $frame-highlight:  rgba(255, 255, 255, 0.07);
 
   // Scanline texture + slight cool gradient on the LCD glass
   background:
-    repeating-linear-gradient(
-      0deg,
+    repeating-linear-gradient(0deg,
       transparent,
       transparent 2px,
       rgba(0, 0, 0, 0.02) 2px,
-      rgba(0, 0, 0, 0.02) 3px
-    ),
+      rgba(0, 0, 0, 0.02) 3px),
     linear-gradient(180deg, #ccd8e8 0%, $lcd-bg 55%, #aec4e0 100%);
 
   // Bottom-only blue glow: radial gradient on a pseudo-element anchored to
@@ -122,12 +120,10 @@ $frame-highlight:  rgba(255, 255, 255, 0.07);
     left: 0;
     width: 100%;
     height: 55%;
-    background: radial-gradient(
-      ellipse 100% 100% at 50% 100%,
-      rgba(0, 100, 255, 0.38) 0%,
-      rgba(0,  70, 220, 0.20) 40%,
-      transparent 75%
-    );
+    background: radial-gradient(ellipse 100% 100% at 50% 100%,
+        rgba(0, 100, 255, 0.38) 0%,
+        rgba(0, 70, 220, 0.20) 40%,
+        transparent 75%);
     pointer-events: none;
   }
 }
@@ -208,8 +204,15 @@ $frame-highlight:  rgba(255, 255, 255, 0.07);
 }
 
 @keyframes lcd-blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.15; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
 }
 
 /* ── 7-Segment Digit ────────────────────────────────────────────────────── */
@@ -225,8 +228,13 @@ $frame-highlight:  rgba(255, 255, 255, 0.07);
   background: $seg-color;
   transition: opacity 0.1s ease;
 
-  &.on  { opacity: 1; }
-  &.off { opacity: $seg-off-opacity; }
+  &.on {
+    opacity: 1;
+  }
+
+  &.off {
+    opacity: $seg-off-opacity;
+  }
 }
 
 // Horizontal segments (a, d, g) — diamond/hex clip shape
@@ -239,9 +247,17 @@ $frame-highlight:  rgba(255, 255, 255, 0.07);
   clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
 }
 
-.seg-a { top: 0; }
-.seg-g { top: 46.5%; }
-.seg-d { bottom: 0; }
+.seg-a {
+  top: 0;
+}
+
+.seg-g {
+  top: 46.5%;
+}
+
+.seg-d {
+  bottom: 0;
+}
 
 // Vertical segments (b, c, e, f) — diamond/hex clip shape
 .seg-b,
@@ -253,7 +269,22 @@ $frame-highlight:  rgba(255, 255, 255, 0.07);
   clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
 }
 
-.seg-b { top: 4%;    right: 0; }
-.seg-c { bottom: 4%; right: 0; }
-.seg-f { top: 4%;    left: 0; }
-.seg-e { bottom: 4%; left: 0; }
+.seg-b {
+  top: 4%;
+  right: 0;
+}
+
+.seg-c {
+  bottom: 4%;
+  right: 0;
+}
+
+.seg-f {
+  top: 4%;
+  left: 0;
+}
+
+.seg-e {
+  bottom: 4%;
+  left: 0;
+}

@@ -17,7 +17,7 @@ $frame-color: var(--color-gray-150, #bbbbbb);
   justify-content: center;
   width: 90vw;
   height: 90dvh;
-  max-width: none;
+  max-width: 180dvh;
   margin: 0 auto;
   container-type: size;
 }
@@ -162,8 +162,15 @@ $frame-color: var(--color-gray-150, #bbbbbb);
 }
 
 @keyframes lcd-blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.15; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
 }
 
 .lcd-digit {
@@ -243,4 +250,3 @@ $frame-color: var(--color-gray-150, #bbbbbb);
 }
 
 /* ── Responsive sizing — handled via container-query units (cqw) above ── */
-

@@ -2,9 +2,9 @@
  * Retro Win95 LCD-style clock with pixel font aesthetic
  * ──────────────────────────────────────────────────────────────────────── */
 
-$seg-color:       #000080;
+$seg-color: #000080;
 $seg-off-opacity: 0.03;
-$lcd-bg:          #c0c0c0;
+$lcd-bg: #c0c0c0;
 
 .digital-clock-wrapper {
   display: flex;
@@ -13,7 +13,7 @@ $lcd-bg:          #c0c0c0;
   justify-content: center;
   width: 90vw;
   height: 90dvh;
-  max-width: none;
+  max-width: 180dvh;
   margin: 0 auto;
   container-type: size;
 }
@@ -26,10 +26,10 @@ $lcd-bg:          #c0c0c0;
   width: fit-content;
   padding: 2cqw 2.5cqw;
   background: var(--win95-face);
-  border-top:    3px solid var(--win95-highlight);
-  border-left:   3px solid var(--win95-highlight);
+  border-top: 3px solid var(--win95-highlight);
+  border-left: 3px solid var(--win95-highlight);
   border-bottom: 3px solid var(--win95-dark);
-  border-right:  3px solid var(--win95-dark);
+  border-right: 3px solid var(--win95-dark);
   user-select: none;
 }
 
@@ -39,11 +39,12 @@ $lcd-bg:          #c0c0c0;
   flex-direction: column;
   align-items: stretch;
   padding: 1.2cqw 1.8cqw;
-  background: #c8d0b8;  /* Win95 LCD greenish tint */
-  border-top:    2px solid var(--win95-dark);
-  border-left:   2px solid var(--win95-dark);
+  background: #c8d0b8;
+  /* Win95 LCD greenish tint */
+  border-top: 2px solid var(--win95-dark);
+  border-left: 2px solid var(--win95-dark);
   border-bottom: 2px solid var(--win95-highlight);
-  border-right:  2px solid var(--win95-highlight);
+  border-right: 2px solid var(--win95-highlight);
 }
 
 /* Day-of-week bar */
@@ -120,8 +121,15 @@ $lcd-bg:          #c0c0c0;
 }
 
 @keyframes lcd-blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.2; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
 }
 
 /* Date + weather row */
@@ -174,8 +182,13 @@ $lcd-bg:          #c0c0c0;
   background: $seg-color;
   transition: opacity 0.1s ease;
 
-  &.on  { opacity: 1; }
-  &.off { opacity: $seg-off-opacity; }
+  &.on {
+    opacity: 1;
+  }
+
+  &.off {
+    opacity: $seg-off-opacity;
+  }
 }
 
 .seg-a,
@@ -187,9 +200,17 @@ $lcd-bg:          #c0c0c0;
   clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
 }
 
-.seg-a { top: 0; }
-.seg-g { top: 46.5%; }
-.seg-d { bottom: 0; }
+.seg-a {
+  top: 0;
+}
+
+.seg-g {
+  top: 46.5%;
+}
+
+.seg-d {
+  bottom: 0;
+}
 
 .seg-b,
 .seg-c,
@@ -200,7 +221,22 @@ $lcd-bg:          #c0c0c0;
   clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
 }
 
-.seg-b { top: 4%;    right: 0; }
-.seg-c { bottom: 4%; right: 0; }
-.seg-f { top: 4%;    left: 0; }
-.seg-e { bottom: 4%; left: 0; }
+.seg-b {
+  top: 4%;
+  right: 0;
+}
+
+.seg-c {
+  bottom: 4%;
+  right: 0;
+}
+
+.seg-f {
+  top: 4%;
+  left: 0;
+}
+
+.seg-e {
+  bottom: 4%;
+  left: 0;
+}

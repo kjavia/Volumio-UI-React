@@ -355,18 +355,31 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
           {uvLabel && <div className="weather-full-tile-sub">{uvLabel}</div>}
         </div>
 
-        <div className="weather-full-tile">
-          <div className="weather-full-tile-top">
-            <span
-              className="material-icons weather-full-tile-hdr-icon"
-              style={{ color: '#FF8F00' }}
-            >
-              wb_twilight
-            </span>
-            <span className="weather-full-tile-label">{t('sunrise').toUpperCase()}</span>
+        <div className="weather-full-tile weather-full-tile--suntime">
+          <div className="weather-full-suntime-group">
+            <div className="weather-full-tile-top">
+              <span
+                className="material-icons weather-full-tile-hdr-icon"
+                style={{ color: '#FF8F00' }}
+              >
+                wb_twilight
+              </span>
+              <span className="weather-full-tile-label">{t('sunrise').toUpperCase()}</span>
+            </div>
+            <div className="weather-full-tile-value">{formatTime(today.sunrise, use24Hour)}</div>
           </div>
-          <div className="weather-full-tile-value">{formatTime(today.sunrise, use24Hour)}</div>
-          <div className="weather-full-tile-sub">{t('sunset')} {formatTime(today.sunset, use24Hour)}</div>
+          <div className="weather-full-suntime-group">
+            <div className="weather-full-tile-top">
+              <span
+                className="material-icons weather-full-tile-hdr-icon"
+                style={{ color: '#5C6BC0' }}
+              >
+                nights_stay
+              </span>
+              <span className="weather-full-tile-label">{t('sunset').toUpperCase()}</span>
+            </div>
+            <div className="weather-full-tile-value">{formatTime(today.sunset, use24Hour)}</div>
+          </div>
         </div>
 
         <div className="weather-full-tile">

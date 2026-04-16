@@ -87,3 +87,56 @@
 .weather-daily-sun-item {
     font-size: clamp(0.42rem, 1.0dvh, 0.85rem);
 }
+
+/* ── Full weather — UWS + short screen adjustments ───────────────────── */
+
+@media (max-height: 700px) and (min-width: 1440px) and (min-aspect-ratio: 2/1),
+(max-height: 650px) {
+    .weather-full-hero {
+        padding: 1rem 1.5rem;
+    }
+
+    .weather-full-hero-temp {
+        font-size: clamp(2rem, min(8cqw, 18cqh), 5rem);
+    }
+
+    .weather-full-hero-desc {
+        font-size: clamp(0.7rem, min(2cqw, 3.5cqh), 1.2rem);
+    }
+
+    .weather-full-hero-hilow {
+        font-size: clamp(0.65rem, min(1.5cqw, 2.8cqh), 1rem);
+    }
+
+    .weather-full-hero-location {
+        font-size: clamp(0.65rem, min(1.5cqw, 2.8cqh), 1rem);
+    }
+
+    .weather-full-hero-icon {
+        font-size: clamp(3rem, min(12cqw, 22cqh), 7rem) !important;
+    }
+
+    .weather-full-tile-label {
+        font-size: clamp(0.6rem, min(1.1cqw, 2.2cqh), 1rem);
+    }
+
+    .weather-full-tile-value {
+        font-size: clamp(0.8rem, min(2cqw, 4cqh), 1.8rem);
+    }
+
+    .weather-full-tile-sub {
+        font-size: clamp(0.8rem, min(2cqw, 4cqh), 1.8rem);
+    }
+
+    .weather-full-tile-unit {
+        font-size: 0.65em;
+    }
+
+    .weather-full-hourly-time {
+        font-size: clamp(0.6rem, min(1cqw, 2.5cqh), 1rem);
+    }
+
+    .weather-full-hourly-temp {
+        font-size: clamp(0.65rem, min(1.1cqw, 2.8cqh), 1.1rem);
+    }
+}

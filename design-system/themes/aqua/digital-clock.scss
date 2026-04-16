@@ -4,17 +4,17 @@
  * ──────────────────────────────────────────────────────────────────────── */
 
 // LCD glass & segment palette
-$seg-color:        #003366;   // deep navy — classic LCD segment ink on a light panel
-$seg-off-opacity:  0.03;
-$lcd-bg:           #e8eff5;   // cool white — backlit LCD glass
-$lcd-border:       #b0bec5;
+$seg-color: #003366; // deep navy — classic LCD segment ink on a light panel
+$seg-off-opacity: 0.03;
+$lcd-bg: #e8eff5; // cool white — backlit LCD glass
+$lcd-border: #b0bec5;
 $lcd-shadow-inset: rgba(0, 0, 0, 0.18);
 
 // Outer frame — brushed aluminum (light macOS chrome)
-$frame-bg-top:     #e2e2e2;
-$frame-bg-bottom:  #c8c8c8;
-$frame-border:     #aaaaaa;
-$frame-highlight:  rgba(255, 255, 255, 0.75);
+$frame-bg-top: #e2e2e2;
+$frame-bg-bottom: #c8c8c8;
+$frame-border: #aaaaaa;
+$frame-highlight: rgba(255, 255, 255, 0.75);
 
 /* ── Centering wrapper ──────────────────────────────────────────────────── */
 .digital-clock-wrapper {
@@ -24,7 +24,7 @@ $frame-highlight:  rgba(255, 255, 255, 0.75);
   justify-content: center;
   width: 90vw;
   height: 90dvh;
-  max-width: none;
+  max-width: 180dvh;
   margin: 0 auto;
   container-type: size;
 }
@@ -99,13 +99,11 @@ $frame-highlight:  rgba(255, 255, 255, 0.75);
 
   // Subtle horizontal scanlines + top-to-bottom depth gradient
   background:
-    repeating-linear-gradient(
-      0deg,
+    repeating-linear-gradient(0deg,
       transparent,
       transparent 2px,
       rgba(0, 0, 0, 0.015) 2px,
-      rgba(0, 0, 0, 0.015) 3px
-    ),
+      rgba(0, 0, 0, 0.015) 3px),
     linear-gradient(180deg, #f0f5f9 0%, $lcd-bg 55%, #d8e5ee 100%);
 }
 
@@ -184,9 +182,17 @@ $frame-highlight:  rgba(255, 255, 255, 0.75);
 }
 
 @keyframes lcd-blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.15; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
 }
+
 .lcd-digit {
   position: relative;
   width: 11cqw;
@@ -199,9 +205,15 @@ $frame-highlight:  rgba(255, 255, 255, 0.75);
   background: $seg-color;
   transition: opacity 0.1s ease;
 
-  &.on  { opacity: 1; }
-  &.off { opacity: $seg-off-opacity; }
+  &.on {
+    opacity: 1;
+  }
+
+  &.off {
+    opacity: $seg-off-opacity;
+  }
 }
+
 .seg-a,
 .seg-d,
 .seg-g {
@@ -211,9 +223,17 @@ $frame-highlight:  rgba(255, 255, 255, 0.75);
   clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
 }
 
-.seg-a { top: 0; }
-.seg-g { top: 46.5%; }
-.seg-d { bottom: 0; }
+.seg-a {
+  top: 0;
+}
+
+.seg-g {
+  top: 46.5%;
+}
+
+.seg-d {
+  bottom: 0;
+}
 
 // Vertical segments (b, c, e, f) — diamond/hex clip shape
 .seg-b,
@@ -225,7 +245,22 @@ $frame-highlight:  rgba(255, 255, 255, 0.75);
   clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
 }
 
-.seg-b { top: 4%;    right: 0; }
-.seg-c { bottom: 4%; right: 0; }
-.seg-f { top: 4%;    left: 0; }
-.seg-e { bottom: 4%; left: 0; }
+.seg-b {
+  top: 4%;
+  right: 0;
+}
+
+.seg-c {
+  bottom: 4%;
+  right: 0;
+}
+
+.seg-f {
+  top: 4%;
+  left: 0;
+}
+
+.seg-e {
+  bottom: 4%;
+  left: 0;
+}

@@ -3,9 +3,9 @@
  * ──────────────────────────────────────────────────────────────────────── */
 
 // Segment palette — indigo on near-black
-$seg-color:       var(--color-primary);
+$seg-color: var(--color-primary);
 $seg-off-opacity: 0.03;
-$lcd-bg:          #0d0d14;
+$lcd-bg: #0d0d14;
 
 /* ── Centering wrapper ──────────────────────────────────────────────────── */
 .digital-clock-wrapper {
@@ -15,7 +15,7 @@ $lcd-bg:          #0d0d14;
   justify-content: center;
   width: 90vw;
   height: 90dvh;
-  max-width: none;
+  max-width: 180dvh;
   margin: 0 auto;
   container-type: size;
 }
@@ -119,8 +119,15 @@ $lcd-bg:          #0d0d14;
 }
 
 @keyframes lcd-blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.15; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
 }
 
 /* ── Date + weather row ─────────────────────────────────────────────────── */
@@ -174,8 +181,13 @@ $lcd-bg:          #0d0d14;
   background: $seg-color;
   transition: opacity 0.1s ease;
 
-  &.on  { opacity: 1; }
-  &.off { opacity: $seg-off-opacity; }
+  &.on {
+    opacity: 1;
+  }
+
+  &.off {
+    opacity: $seg-off-opacity;
+  }
 }
 
 // Horizontal segments (a, d, g)
@@ -188,9 +200,17 @@ $lcd-bg:          #0d0d14;
   clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
 }
 
-.seg-a { top: 0; }
-.seg-g { top: 46.5%; }
-.seg-d { bottom: 0; }
+.seg-a {
+  top: 0;
+}
+
+.seg-g {
+  top: 46.5%;
+}
+
+.seg-d {
+  bottom: 0;
+}
 
 // Vertical segments (b, c, e, f)
 .seg-b,
@@ -202,7 +222,22 @@ $lcd-bg:          #0d0d14;
   clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
 }
 
-.seg-b { top: 4%;    right: 0; }
-.seg-c { bottom: 4%; right: 0; }
-.seg-f { top: 4%;    left: 0; }
-.seg-e { bottom: 4%; left: 0; }
+.seg-b {
+  top: 4%;
+  right: 0;
+}
+
+.seg-c {
+  bottom: 4%;
+  right: 0;
+}
+
+.seg-f {
+  top: 4%;
+  left: 0;
+}
+
+.seg-e {
+  bottom: 4%;
+  left: 0;
+}

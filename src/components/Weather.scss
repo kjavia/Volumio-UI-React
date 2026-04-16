@@ -8,6 +8,8 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  padding: 1.5dvh 0;
+  box-sizing: border-box;
   font-family: var(--font-display, var(--font-body, 'Roboto', sans-serif));
   color: var(--text-light, #fff);
   overflow: hidden;
@@ -121,7 +123,8 @@
 
 .weather-hourly {
   width: 100%;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
 }
 
 .weather-hourly-scroll {
@@ -151,18 +154,18 @@
 }
 
 .weather-hourly-time {
-  font-size: clamp(0.7rem, 1.8cqw, 3rem);
+  font-size: clamp(0.7rem, min(1.8cqw, 3.5cqh), 3rem);
   font-weight: 600;
   color: var(--text-muted, #aaa);
   white-space: nowrap;
 }
 
 .weather-hourly-icon {
-  font-size: clamp(1.5rem, 4cqw, 6rem);
+  font-size: clamp(1.5rem, min(4cqw, 8cqh), 6rem);
 }
 
 .weather-hourly-temp {
-  font-size: clamp(0.9rem, 2.2cqw, 3.5rem);
+  font-size: clamp(0.9rem, min(2.2cqw, 4.5cqh), 3.5rem);
   font-weight: 700;
 }
 
@@ -170,7 +173,7 @@
   display: flex;
   align-items: center;
   gap: 0.15rem;
-  font-size: clamp(0.62rem, 1.4cqw, 2rem);
+  font-size: clamp(0.62rem, min(1.4cqw, 3cqh), 2rem);
   color: var(--text-dim, #888);
 }
 
@@ -187,8 +190,9 @@
   align-content: center;
   gap: clamp(0.4rem, 1vw, 1.2rem);
   width: 100%;
-  height: 100%;
-  padding: 2dvh 2vw;
+  flex: 1;
+  min-height: 0;
+  padding: 0 2vw;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -520,6 +524,10 @@
   line-height: 1.1;
 }
 
+.weather-full-tile-value--secondary {
+  opacity: 0.6;
+}
+
 .weather-full-tile-unit {
   font-size: 0.48em;
   opacity: 0.65;
@@ -529,6 +537,137 @@
 .weather-full-tile-sub {
   font-size: clamp(0.6rem, 1.8cqh, 1.2rem);
   opacity: 0.6;
+}
+
+/* ── Sunrise / Sunset side-by-side tile ─────────────────────────────── */
+
+.weather-full-tile--suntime {
+  flex-direction: row;
+  gap: 0;
+}
+
+.weather-full-suntime-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+/* ── Full weather — short screen adjustments (UWS + small displays) ──── */
+
+@media (max-height: 700px) and (min-width: 1440px) and (min-aspect-ratio: 2/1),
+(max-height: 650px) {
+  .weather-full-top {
+    flex: 0 0 52%;
+  }
+
+  .weather-full-hero {
+    padding: 1.2rem 2rem;
+    padding-top: 3.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto;
+    align-content: end;
+    align-items: baseline;
+    column-gap: 0.5em;
+  }
+
+  .weather-full-hero-temp {
+    font-size: clamp(3rem, min(12cqw, 28cqh), 8rem);
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .weather-full-hero-location {
+    grid-column: 2;
+    grid-row: 1;
+    margin-bottom: 0;
+    font-size: clamp(0.8rem, min(2cqw, 4cqh), 1.6rem);
+    align-self: baseline;
+  }
+
+  .weather-full-hero-desc {
+    font-size: clamp(0.85rem, min(2.5cqw, 5cqh), 1.8rem);
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .weather-full-hero-hilow {
+    font-size: clamp(0.75rem, min(1.8cqw, 3.5cqh), 1.4rem);
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .weather-full-hero-icon {
+    font-size: clamp(5rem, min(18cqw, 35cqh), 12rem) !important;
+  }
+
+  .weather-full-hourly {
+    padding: 0.4rem 1.5rem;
+  }
+
+  .weather-full-hourly-time {
+    font-size: clamp(0.7rem, min(1.2cqw, 3cqh), 1.2rem);
+  }
+
+  .weather-full-hourly-icon {
+    font-size: clamp(1rem, min(2cqw, 5cqh), 2rem) !important;
+  }
+
+  .weather-full-hourly-temp {
+    font-size: clamp(0.75rem, min(1.3cqw, 3.2cqh), 1.3rem);
+  }
+
+  .weather-full-hourly-item {
+    gap: 0.15rem;
+  }
+
+  .weather-full-tile {
+    padding: 0.4rem 1.25rem;
+  }
+
+  .weather-full-tile-hdr-icon {
+    font-size: clamp(1rem, 3cqh, 1.6rem) !important;
+  }
+
+  .weather-full-tile-label {
+    font-size: clamp(0.7rem, min(1.4cqw, 2.8cqh), 1.3rem);
+  }
+
+  .weather-full-tile-value {
+    font-size: clamp(0.9rem, min(2.5cqw, 5cqh), 2.4rem);
+    white-space: nowrap;
+  }
+
+  .weather-full-tile-unit {
+    font-size: 0.7em;
+  }
+
+  .weather-full-tile-sub {
+    font-size: clamp(0.9rem, min(2.5cqw, 5cqh), 2.4rem);
+    white-space: nowrap;
+  }
+}
+
+/* ── Full weather — UWS-only tile horizontal layout ──────────────────── */
+
+@media (max-height: 700px) and (min-width: 1440px) and (min-aspect-ratio: 2/1) {
+  .weather-full-tile {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.6rem;
+  }
+
+  .weather-full-tile-top {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .weather-full-tile-value {
+    flex-shrink: 0;
+  }
 }
 
 /* ── Location badge (current / hourly / daily modes) ─────────────────── */
