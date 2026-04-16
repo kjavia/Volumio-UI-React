@@ -5,242 +5,242 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 .player-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background: var(--bg-color);
-    background-image:
-        repeating-linear-gradient(90deg,
-            rgba(255, 255, 255, 0.02) 0px,
-            rgba(255, 255, 255, 0.02) 1px,
-            transparent 1px,
-            transparent 4px),
-        linear-gradient(180deg, #111 0%, #050505 100%);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg-color);
+  background-image:
+    repeating-linear-gradient(90deg,
+      rgba(255, 255, 255, 0.02) 0px,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 4px),
+    linear-gradient(180deg, #111 0%, #050505 100%);
 }
 
 .player-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 24px;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  gap: 20px;
 }
 
 .transport-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 10px;
-    padding: 15px;
-    background: var(--panel-bg-dark);
-    border-radius: 12px;
-    box-shadow:
-        inset 0 1px 3px rgba(0, 0, 0, 0.8),
-        0 1px 0 rgba(255, 255, 255, 0.1);
-    border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+  padding: 15px;
+  background: var(--panel-bg-dark);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.8),
+    0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid #000;
 }
 
 /* ─── Media Containers ────────────────────────────────────────────────── */
 .album-art-container,
 .vinyl-container,
 .cd-container {
-    width: 100%;
-    max-width: 460px;
-    aspect-ratio: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
 }
 
 .volume-control {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 20px;
-    background: linear-gradient(180deg, #151515 0%, #1a1a1a 100%);
-    border-radius: 10px;
-    border: 1px solid #000;
-    box-shadow:
-        inset 0 0 10px #000,
-        0 1px 0 rgba(255, 255, 255, 0.05);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: linear-gradient(180deg, #151515 0%, #1a1a1a 100%);
+  border-radius: 10px;
+  border: 1px solid #000;
+  box-shadow:
+    inset 0 0 10px #000,
+    0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .track-info {
-    text-align: center;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    width: 95%;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  width: 95%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
 .track-title {
-    font-family: var(--font-display);
-    font-size: clamp(1.1rem, 4vw, 2rem);
-    font-weight: 700;
-    color: var(--color-white);
-    margin: 0 0 8px 0;
-    text-shadow:
-        0 0 10px rgba(255, 255, 255, 0.3),
-        0 2px 0 #000;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 4vw, 2rem);
+  font-weight: 700;
+  color: var(--color-white);
+  margin: 0 0 8px 0;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.3),
+    0 2px 0 #000;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .artist-name {
-    font-family: var(--font-body);
-    font-size: clamp(0.75rem, 2vw, 1.1rem);
-    color: var(--color-primary);
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 0 8px rgba(0, 225, 255, 0.4);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-family: var(--font-body);
+  font-size: clamp(0.75rem, 2vw, 1.1rem);
+  color: var(--color-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(0, 225, 255, 0.4);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .track-artist {
-    font-family: var(--font-body);
-    font-size: clamp(0.75rem, 2vw, 1.1rem);
-    color: var(--color-primary);
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 0 8px rgba(0, 225, 255, 0.4);
+  font-family: var(--font-body);
+  font-size: clamp(0.75rem, 2vw, 1.1rem);
+  color: var(--color-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(0, 225, 255, 0.4);
 }
 
 .album-name {
-    font-size: clamp(0.7rem, 1.8vw, 1rem);
-    color: rgba(255, 255, 255, 0.5);
-    font-style: italic;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 6px;
+  font-size: clamp(0.7rem, 1.8vw, 1rem);
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 6px;
 }
 
 .responsive-title {
-    font-size: clamp(1rem, 4.5cqw, 3rem);
+  font-size: clamp(1rem, 4.5cqw, 3rem);
 }
 
 .responsive-artist {
-    font-size: clamp(0.75rem, 3.5cqw, 2.5rem);
+  font-size: clamp(0.75rem, 3.5cqw, 2.5rem);
 }
 
 .responsive-album {
-    font-size: clamp(0.7rem, 1.8cqw, 0.95rem);
+  font-size: clamp(0.7rem, 1.8cqw, 0.95rem);
 }
 
 .responsive-stream-info {
-    font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
+  font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
 }
 
 .format-logo-responsive {
-    height: clamp(1.3rem, 3.8cqw, 4.2rem);
-    display: block;
+  height: clamp(1.3rem, 3.8cqw, 4.2rem);
+  display: block;
 }
 
 .album-art {
-    width: 280px;
-    height: 280px;
-    border-radius: 12px;
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.8),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-    object-fit: cover;
-    border: 4px solid #111;
-    background: #000;
+  width: 280px;
+  height: 280px;
+  border-radius: 12px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  object-fit: cover;
+  border: 4px solid #111;
+  background: #000;
 }
 
 /* ─── Track info group: use full panel width ───────────────────────────── */
 .track-info-group {
-    width: calc(100% - 2rem) !important;
-    margin-inline: 1rem;
+  width: calc(100% - 2rem) !important;
+  margin-inline: 1rem;
 }
 
 /* ─── Progress Sliders ────────────────────────────────────────────────── */
 .slider-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    position: relative;
-    padding: 0 1em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  padding: 0 1em;
 }
 
 .slider-track {
-    flex-grow: 1;
-    height: 6px;
-    background-color: #050505;
-    border-radius: 3px;
-    box-shadow:
-        inset 0 2px 5px rgba(0, 0, 0, 0.9),
-        inset 0 0 2px rgba(0, 0, 0, 1),
-        0 1px 0 rgba(255, 255, 255, 0.1);
-    position: relative;
-    cursor: pointer;
-    border: 1px solid #000;
-    overflow: visible;
+  flex-grow: 1;
+  height: 6px;
+  background-color: #050505;
+  border-radius: 3px;
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.9),
+    inset 0 0 2px rgba(0, 0, 0, 1),
+    0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #000;
+  overflow: visible;
 }
 
 .slider-fill {
-    height: 100%;
-    background: linear-gradient(180deg,
-            var(--color-primary-light) 0%,
-            var(--color-primary) 50%,
-            var(--color-primary-deep) 100%);
-    border-radius: 3px;
-    width: 0%;
-    position: relative;
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.4),
-        0 0 10px var(--color-primary);
+  height: 100%;
+  background: linear-gradient(180deg,
+      var(--color-primary-light) 0%,
+      var(--color-primary) 50%,
+      var(--color-primary-deep) 100%);
+  border-radius: 3px;
+  width: 0%;
+  position: relative;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 10px var(--color-primary);
 }
 
 .slider-cap {
-    width: 14px;
-    height: 24px;
-    background: linear-gradient(180deg, #666 0%, #3a3a3a 50%, #222 51%, #333 100%);
-    border-radius: 2px;
-    position: absolute;
-    right: -7px;
-    top: 50%;
-    transform: translateY(-50%);
-    box-shadow:
-        0 3px 6px rgba(0, 0, 0, 0.7),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.5);
-    border: 1px solid #111;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 14px;
+  height: 24px;
+  background: linear-gradient(180deg, #666 0%, #3a3a3a 50%, #222 51%, #333 100%);
+  border-radius: 2px;
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  border: 1px solid #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .slider-cap::after {
-    content: '';
-    position: absolute;
-    left: 3px;
-    right: 3px;
-    height: 2px;
-    background: rgba(0, 0, 0, 0.6);
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.6), 0 -4px 0 rgba(0, 0, 0, 0.6),
-        0 5px 0 rgba(255, 255, 255, 0.08), 0 -3px 0 rgba(255, 255, 255, 0.08);
+  content: '';
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.6), 0 -4px 0 rgba(0, 0, 0, 0.6),
+    0 5px 0 rgba(255, 255, 255, 0.08), 0 -3px 0 rgba(255, 255, 255, 0.08);
 }
 
 .read-only .slider-fill::after {
-    display: none;
+  display: none;
 }
 
 .read-only .slider-track {
-    cursor: default;
+  cursor: default;
 }
 
 /* ─── Mobile compact (portrait ≤ 768px) ──────────────────────────────── */
@@ -249,361 +249,396 @@
    .player-controls (24px padding / 20px gap) push elements below the fold.
    Scale everything down so nothing gets clipped. */
 @media (max-width: 768px) {
-    .track-info {
-        padding: 8px 12px 10px;
-        /* extra 2px bottom so album row isn't clipped */
-    }
+  .track-info {
+    padding: 8px 12px 10px;
+    /* extra 2px bottom so album row isn't clipped */
+  }
 
-    .player-controls {
-        padding: 10px 16px;
-        gap: 10px;
-    }
+  .player-controls {
+    padding: 10px 16px;
+    gap: 10px;
+  }
 
-    .volume-control {
-        padding: 10px 14px;
-    }
+  .volume-control {
+    padding: 10px 14px;
+  }
 
-    .track-info-group {
-        width: calc(100% - 1rem) !important;
-        margin-inline: 0.5rem;
-        padding: 8px 10px;
-    }
+  .track-info-group {
+    width: calc(100% - 1rem) !important;
+    margin-inline: 0.5rem;
+    padding: 8px 10px;
+  }
 }
 
 /* ── Large-screen player: boost font sizes on short screens so Rajdhani
-   (a condensed display font) reads at a similar optical size to Michroma ── */
-@media (max-height: 700px) and (not ((min-aspect-ratio: 2/1) and (min-width: 1440px))) {
-    .lsp-top__title {
-        font-size: clamp(1.4rem, 2vw, 2rem) !important;
+   (a condensed display font) reads at a similar optical size to Michroma.
+   Requires min-width: 1024px so small screens (800×600) are excluded. ── */
+@media (max-height: 700px) and (min-width: 1024px) and (not ((min-aspect-ratio: 2/1) and (min-width: 1440px))) {
+  .lsp-top__title {
+    font-size: clamp(1.4rem, 2vw, 2rem) !important;
+  }
+
+  .lsp-top__row2 {
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem) !important;
+  }
+
+  .lsp-stream-info span {
+    font-size: clamp(1rem, 1.2vw, 1.4rem) !important;
+  }
+
+  .lsp-stream-info .format-logo-responsive:not(.hires-logo),
+  .lsp-stream-info .hires-logo {
+    height: clamp(1.2rem, 1.6vw, 1.8rem) !important;
+  }
+
+  .service-logo-icon {
+    font-size: clamp(1.6rem, 2vw, 2.4rem) !important;
+  }
+
+  // Seekbar labels
+  .seekbar-labels,
+  .time-label {
+    font-size: 1rem !important;
+  }
+
+  // Seekbar track height
+  .slider-track {
+    height: clamp(12px, 1.4vw, 18px) !important;
+  }
+
+  // Larger buttons
+  .lsp-btn {
+
+    &.btn-icon,
+    &.lsp-btn--sm.btn-icon,
+    &.lsp-btn--md.btn-round {
+      width: 56px !important;
+      height: 56px !important;
+
+      .material-icons {
+        font-size: 1.8rem !important;
+      }
     }
 
-    .lsp-top__row2 {
-        font-size: clamp(1.1rem, 1.5vw, 1.5rem) !important;
+    &.lsp-btn--lg.btn-round {
+      width: 68px !important;
+      height: 68px !important;
+
+      .material-icons.play-icon {
+        font-size: 2.2rem !important;
+      }
     }
+  }
 
-    .lsp-stream-info span {
-        font-size: clamp(1rem, 1.2vw, 1.4rem) !important;
+  .context-menu-toggle {
+    width: 48px !important;
+    height: 48px !important;
+
+    .material-icons {
+      font-size: 1.6rem !important;
     }
+  }
+}
 
-    .lsp-stream-info .format-logo-responsive:not(.hires-logo),
-    .lsp-stream-info .hires-logo {
-        height: clamp(1.2rem, 1.6vw, 1.8rem) !important;
-    }
+/* ── Small/short screens (800×600 etc.): compact the standard player ──── */
+@media (max-height: 650px) and (max-width: 1023px) {
 
-    .service-logo-icon {
-        font-size: clamp(1.6rem, 2vw, 2.4rem) !important;
-    }
+  /* Tighten the track-info panel */
+  .track-info {
+    padding: 8px 12px 10px;
+  }
 
-    // Seekbar labels
-    .seekbar-labels,
-    .time-label {
-        font-size: 1rem !important;
-    }
+  /* Reduce player-controls padding & gap so buttons fit */
+  .player-controls {
+    padding: 6px 10px;
+    gap: 8px;
+  }
 
-    // Seekbar track height
-    .slider-track {
-        height: clamp(12px, 1.4vw, 18px) !important;
-    }
+  /* Smaller transport-controls panel */
+  .transport-controls {
+    gap: 10px;
+    margin-top: 4px;
+    padding: 8px;
+  }
 
-    // Larger buttons
-    .lsp-btn {
+  /* Volume area — tighter padding */
+  .volume-control {
+    padding: 8px 12px;
+  }
 
-        &.btn-icon,
-        &.lsp-btn--sm.btn-icon,
-        &.lsp-btn--md.btn-round {
-            width: 56px !important;
-            height: 56px !important;
-
-            .material-icons {
-                font-size: 1.8rem !important;
-            }
-        }
-
-        &.lsp-btn--lg.btn-round {
-            width: 68px !important;
-            height: 68px !important;
-
-            .material-icons.play-icon {
-                font-size: 2.2rem !important;
-            }
-        }
-    }
-
-    .context-menu-toggle {
-        width: 48px !important;
-        height: 48px !important;
-
-        .material-icons {
-            font-size: 1.6rem !important;
-        }
-    }
+  /* Shrink the slider cap for tighter vertical space */
+  .slider-cap {
+    width: 12px;
+    height: 18px;
+    right: -6px;
+  }
 }
 
 /* ── UWLS (ultrawide + short): boost Rajdhani to match Michroma optical size ── */
 @media (max-height: 700px) and (min-width: 1440px) and (min-aspect-ratio: 2/1) {
-    .lsp-top__title {
-        font-size: clamp(2rem, 2.8vw, 3.2rem) !important;
+  .lsp-top__title {
+    font-size: clamp(2rem, 2.8vw, 3.2rem) !important;
+  }
+
+  .lsp-top__row2 {
+    font-size: clamp(1.4rem, 1.9vw, 2.2rem) !important;
+  }
+
+  .lsp-stream-info span {
+    font-size: clamp(1.1rem, 1.4vw, 1.8rem) !important;
+  }
+
+  .lsp-stream-info .format-logo-responsive:not(.hires-logo),
+  .lsp-stream-info .hires-logo {
+    height: clamp(1.4rem, 1.8vw, 2.2rem) !important;
+  }
+
+  .service-logo-icon {
+    font-size: clamp(2rem, 2.5vw, 3rem) !important;
+  }
+
+  .seekbar-labels,
+  .time-label {
+    font-size: 1.2rem !important;
+  }
+
+  .lsp-btn {
+
+    &.btn-icon,
+    &.lsp-btn--sm.btn-icon,
+    &.lsp-btn--md.btn-round {
+      width: 72px !important;
+      height: 72px !important;
+
+      .material-icons {
+        font-size: 2.4rem !important;
+      }
     }
 
-    .lsp-top__row2 {
-        font-size: clamp(1.4rem, 1.9vw, 2.2rem) !important;
+    &.lsp-btn--lg.btn-round {
+      width: 92px !important;
+      height: 92px !important;
+
+      .material-icons.play-icon {
+        font-size: 3rem !important;
+      }
     }
+  }
 
-    .lsp-stream-info span {
-        font-size: clamp(1.1rem, 1.4vw, 1.8rem) !important;
+  .context-menu-toggle {
+    width: 72px !important;
+    height: 72px !important;
+
+    .material-icons {
+      font-size: 2.4rem !important;
     }
+  }
 
-    .lsp-stream-info .format-logo-responsive:not(.hires-logo),
-    .lsp-stream-info .hires-logo {
-        height: clamp(1.4rem, 1.8vw, 2.2rem) !important;
+  .context-menu-item {
+    font-size: 1.5rem !important;
+    padding: 16px 24px !important;
+
+    .material-icons {
+      font-size: 1.9rem !important;
     }
+  }
 
-    .service-logo-icon {
-        font-size: clamp(2rem, 2.5vw, 3rem) !important;
+  .context-menu {
+    min-width: 280px !important;
+  }
+
+  // ── Dialogs / Queue ──
+  .dialog-title {
+    font-size: 2rem !important;
+  }
+
+  .dialog-close {
+    width: 48px !important;
+    height: 48px !important;
+
+    .material-icons {
+      font-size: 1.8rem !important;
     }
+  }
 
-    .seekbar-labels,
-    .time-label {
-        font-size: 1.2rem !important;
+  .dialog-header {
+    padding: 1.2rem 1.8rem !important;
+  }
+
+  .dialog-body {
+    padding: 1.2rem 1.5rem !important;
+    font-size: 1.3rem !important;
+  }
+
+  .dialog-footer {
+    padding: 1.2rem 1.8rem !important;
+  }
+
+  .dialog-track-title {
+    font-size: 1.7rem !important;
+  }
+
+  .dialog-track-meta {
+    font-size: 1.4rem !important;
+  }
+
+  .dialog-list-item {
+    font-size: 1.5rem !important;
+    padding: 0.8rem 1.3rem !important;
+
+    .material-icons {
+      font-size: 1.5rem !important;
     }
+  }
 
-    .lsp-btn {
+  .dialog-section-title {
+    font-size: 1.2rem !important;
+  }
 
-        &.btn-icon,
-        &.lsp-btn--sm.btn-icon,
-        &.lsp-btn--md.btn-round {
-            width: 72px !important;
-            height: 72px !important;
+  .dialog-label {
+    font-size: 1.1rem !important;
+  }
 
-            .material-icons {
-                font-size: 2.4rem !important;
-            }
-        }
+  .dialog-input {
+    font-size: 1.3rem !important;
+    padding: 0.6rem 0.8rem !important;
+  }
 
-        &.lsp-btn--lg.btn-round {
-            width: 92px !important;
-            height: 92px !important;
+  .dialog .btn {
+    font-size: 1.3rem !important;
+    padding: 0.6rem 1.2rem !important;
+  }
 
-            .material-icons.play-icon {
-                font-size: 3rem !important;
-            }
-        }
+  // ── Queue (SlidePanel) track rows ──
+  .playlist-track-title {
+    font-size: 1.5rem !important;
+  }
+
+  .playlist-track-meta {
+    font-size: 1.3rem !important;
+  }
+
+  .playlist-item {
+    padding: 0.8rem 1.2rem !important;
+  }
+
+  .playlist-info {
+    font-size: 1.2rem !important;
+  }
+
+  .playlist-remove.btn-icon {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+
+    .material-icons {
+      font-size: 1.6rem !important;
     }
+  }
 
-    .context-menu-toggle {
-        width: 72px !important;
-        height: 72px !important;
+  // ── SlidePanel header buttons (close, clear queue) ──
+  .slide-panel-header .btn-icon,
+  .slide-panel-header .btn-link,
+  .slide-panel-header .dialog-close {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
 
-        .material-icons {
-            font-size: 2.4rem !important;
-        }
+    .material-icons {
+      font-size: 1.8rem !important;
     }
+  }
 
-    .context-menu-item {
-        font-size: 1.5rem !important;
-        padding: 16px 24px !important;
+  .slide-panel-title {
+    font-size: clamp(1.2rem, 6cqi, 2.4rem) !important;
+  }
 
-        .material-icons {
-            font-size: 1.9rem !important;
-        }
-    }
+  .slide-panel-subtitle {
+    font-size: clamp(0.9rem, 4.5cqi, 1.8rem) !important;
+  }
 
-    .context-menu {
-        min-width: 280px !important;
-    }
+  .playlist-art-wrap {
+    width: 56px !important;
+    height: 56px !important;
+  }
 
-    // ── Dialogs / Queue ──
-    .dialog-title {
-        font-size: 2rem !important;
-    }
+  // ── Browse Dialog ──
+  .browse-dialog--lsp .dialog-title,
+  .browse-dialog--lsp.dialog .dialog-header .dialog-title {
+    font-size: clamp(1.4rem, 1.6cqi, 2.2rem) !important;
+  }
 
-    .dialog-close {
-        width: 48px !important;
-        height: 48px !important;
+  .browse-dialog--lsp .browse-toolbar .btn-icon {
+    width: clamp(44px, 3.5cqi, 60px) !important;
+    height: clamp(44px, 3.5cqi, 60px) !important;
+  }
 
-        .material-icons {
-            font-size: 1.8rem !important;
-        }
-    }
+  .browse-dialog--lsp .browse-toolbar .btn-icon .material-icons,
+  .browse-dialog--lsp .browse-toolbar .material-icons {
+    font-size: clamp(1.3rem, 1.8cqi, 2.2rem) !important;
+  }
 
-    .dialog-header {
-        padding: 1.2rem 1.8rem !important;
-    }
+  .browse-dialog--lsp .browse-search__icon {
+    font-size: clamp(1.3rem, 1.6cqi, 2rem) !important;
+  }
 
-    .dialog-body {
-        padding: 1.2rem 1.5rem !important;
-        font-size: 1.3rem !important;
-    }
+  .browse-dialog--lsp .browse-search__input {
+    font-size: clamp(1.1rem, 1.4cqi, 1.8rem) !important;
+  }
 
-    .dialog-footer {
-        padding: 1.2rem 1.8rem !important;
-    }
+  .browse-dialog--lsp .browse-tile {
+    padding: clamp(2rem, 3cqi, 4rem) clamp(1rem, 2cqi, 2.5rem) !important;
+  }
 
-    .dialog-track-title {
-        font-size: 1.7rem !important;
-    }
+  .browse-dialog--lsp .browse-tile__icon {
+    font-size: clamp(3rem, 4.5cqi, 6rem) !important;
+  }
 
-    .dialog-track-meta {
-        font-size: 1.4rem !important;
-    }
+  .browse-dialog--lsp .browse-tile__label {
+    font-size: clamp(1rem, 1.3cqi, 1.6rem) !important;
+  }
 
-    .dialog-list-item {
-        font-size: 1.5rem !important;
-        padding: 0.8rem 1.3rem !important;
+  .browse-dialog--lsp .browse-result-card__title {
+    font-size: clamp(1rem, 1.2cqi, 1.5rem) !important;
+  }
 
-        .material-icons {
-            font-size: 1.5rem !important;
-        }
-    }
+  .browse-dialog--lsp .browse-result-card__sub {
+    font-size: clamp(0.85rem, 1cqi, 1.3rem) !important;
+  }
 
-    .dialog-section-title {
-        font-size: 1.2rem !important;
-    }
+  .browse-dialog--lsp .browse-result-row__title {
+    font-size: clamp(1.1rem, 1.3cqi, 1.6rem) !important;
+  }
 
-    .dialog-label {
-        font-size: 1.1rem !important;
-    }
+  .browse-dialog--lsp .browse-result-row__sub {
+    font-size: clamp(0.9rem, 1.1cqi, 1.4rem) !important;
+  }
 
-    .dialog-input {
-        font-size: 1.3rem !important;
-        padding: 0.6rem 0.8rem !important;
-    }
+  .browse-dialog--lsp .browse-result-row__chevron {
+    font-size: clamp(1.2rem, 1.5cqi, 1.8rem) !important;
+  }
 
-    .dialog .btn {
-        font-size: 1.3rem !important;
-        padding: 0.6rem 1.2rem !important;
-    }
+  .browse-dialog--lsp .browse-search-section__title {
+    font-size: clamp(1rem, 1.3cqi, 1.5rem) !important;
+  }
 
-    // ── Queue (SlidePanel) track rows ──
-    .playlist-track-title {
-        font-size: 1.5rem !important;
-    }
+  .browse-dialog--lsp .album-footer__chip,
+  .browse-dialog--lsp .album-footer__format-text {
+    font-size: clamp(0.85rem, 1cqi, 1.3rem) !important;
+  }
 
-    .playlist-track-meta {
-        font-size: 1.3rem !important;
-    }
+  // Track context menu (portaled to body)
+  .track-menu {
+    min-width: 280px !important;
+  }
 
-    .playlist-item {
-        padding: 0.8rem 1.2rem !important;
-    }
+  .track-menu__item {
+    font-size: 1.5rem !important;
+    padding: 16px 24px !important;
+    gap: 12px !important;
+  }
 
-    .playlist-info {
-        font-size: 1.2rem !important;
-    }
-
-    .playlist-remove.btn-icon {
-        width: 44px !important;
-        height: 44px !important;
-        min-width: 44px !important;
-
-        .material-icons {
-            font-size: 1.6rem !important;
-        }
-    }
-
-    // ── SlidePanel header buttons (close, clear queue) ──
-    .slide-panel-header .btn-icon,
-    .slide-panel-header .btn-link,
-    .slide-panel-header .dialog-close {
-        width: 48px !important;
-        height: 48px !important;
-        min-width: 48px !important;
-
-        .material-icons {
-            font-size: 1.8rem !important;
-        }
-    }
-
-    .slide-panel-title {
-        font-size: clamp(1.2rem, 6cqi, 2.4rem) !important;
-    }
-
-    .slide-panel-subtitle {
-        font-size: clamp(0.9rem, 4.5cqi, 1.8rem) !important;
-    }
-
-    .playlist-art-wrap {
-        width: 56px !important;
-        height: 56px !important;
-    }
-
-    // ── Browse Dialog ──
-    .browse-dialog--lsp .dialog-title,
-    .browse-dialog--lsp.dialog .dialog-header .dialog-title {
-        font-size: clamp(1.4rem, 1.6cqi, 2.2rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-toolbar .btn-icon {
-        width: clamp(44px, 3.5cqi, 60px) !important;
-        height: clamp(44px, 3.5cqi, 60px) !important;
-    }
-
-    .browse-dialog--lsp .browse-toolbar .btn-icon .material-icons,
-    .browse-dialog--lsp .browse-toolbar .material-icons {
-        font-size: clamp(1.3rem, 1.8cqi, 2.2rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-search__icon {
-        font-size: clamp(1.3rem, 1.6cqi, 2rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-search__input {
-        font-size: clamp(1.1rem, 1.4cqi, 1.8rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-tile {
-        padding: clamp(2rem, 3cqi, 4rem) clamp(1rem, 2cqi, 2.5rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-tile__icon {
-        font-size: clamp(3rem, 4.5cqi, 6rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-tile__label {
-        font-size: clamp(1rem, 1.3cqi, 1.6rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-result-card__title {
-        font-size: clamp(1rem, 1.2cqi, 1.5rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-result-card__sub {
-        font-size: clamp(0.85rem, 1cqi, 1.3rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-result-row__title {
-        font-size: clamp(1.1rem, 1.3cqi, 1.6rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-result-row__sub {
-        font-size: clamp(0.9rem, 1.1cqi, 1.4rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-result-row__chevron {
-        font-size: clamp(1.2rem, 1.5cqi, 1.8rem) !important;
-    }
-
-    .browse-dialog--lsp .browse-search-section__title {
-        font-size: clamp(1rem, 1.3cqi, 1.5rem) !important;
-    }
-
-    .browse-dialog--lsp .album-footer__chip,
-    .browse-dialog--lsp .album-footer__format-text {
-        font-size: clamp(0.85rem, 1cqi, 1.3rem) !important;
-    }
-
-    // Track context menu (portaled to body)
-    .track-menu {
-        min-width: 280px !important;
-    }
-
-    .track-menu__item {
-        font-size: 1.5rem !important;
-        padding: 16px 24px !important;
-        gap: 12px !important;
-    }
-
-    .track-menu__item .material-icons {
-        font-size: 1.9rem !important;
-    }
+  .track-menu__item .material-icons {
+    font-size: 1.9rem !important;
+  }
 }

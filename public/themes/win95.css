@@ -4891,7 +4891,7 @@ input[type=range]::-webkit-slider-runnable-track {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background: rgba(var(--win95-face-rgb, 192, 192, 192), 0.75);
+  background: rgba(192, 192, 192, 0.2);
   border-top: 2px solid var(--win95-highlight);
   border-left: 2px solid var(--win95-highlight);
   border-bottom: 2px solid var(--win95-dark);
@@ -4904,7 +4904,7 @@ input[type=range]::-webkit-slider-runnable-track {
   border-right: 2px solid var(--win95-highlight);
 }
 .context-menu-toggle--no-shadow {
-  background: var(--win95-face);
+  background: rgba(192, 192, 192, 0.2);
   border: 2px solid var(--win95-shadow);
 }
 .context-menu-toggle--no-shadow .material-icons {

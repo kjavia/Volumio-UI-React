@@ -2907,8 +2907,9 @@ h2 {
   }
 }
 /* ── Large-screen player: boost font sizes on short screens so Rajdhani
-   (a condensed display font) reads at a similar optical size to Michroma ── */
-@media (max-height: 700px) and (not ((min-aspect-ratio: 2/1) and (min-width: 1440px))) {
+   (a condensed display font) reads at a similar optical size to Michroma.
+   Requires min-width: 1024px so small screens (800×600) are excluded. ── */
+@media (max-height: 700px) and (min-width: 1024px) and (not ((min-aspect-ratio: 2/1) and (min-width: 1440px))) {
   .lsp-top__title {
     font-size: clamp(1.4rem, 2vw, 2rem) !important;
   }
@@ -2952,6 +2953,34 @@ h2 {
   }
   .context-menu-toggle .material-icons {
     font-size: 1.6rem !important;
+  }
+}
+/* ── Small/short screens (800×600 etc.): compact the standard player ──── */
+@media (max-height: 650px) and (max-width: 1023px) {
+  /* Tighten the track-info panel */
+  .track-info {
+    padding: 8px 12px 10px;
+  }
+  /* Reduce player-controls padding & gap so buttons fit */
+  .player-controls {
+    padding: 6px 10px;
+    gap: 8px;
+  }
+  /* Smaller transport-controls panel */
+  .transport-controls {
+    gap: 10px;
+    margin-top: 4px;
+    padding: 8px;
+  }
+  /* Volume area — tighter padding */
+  .volume-control {
+    padding: 8px 12px;
+  }
+  /* Shrink the slider cap for tighter vertical space */
+  .slider-cap {
+    width: 12px;
+    height: 18px;
+    right: -6px;
   }
 }
 /* ── UWLS (ultrawide + short): boost Rajdhani to match Michroma optical size ── */
