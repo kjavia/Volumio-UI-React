@@ -19,42 +19,29 @@ body,
 }
 
 /* ── User color overrides via plugin config ──
-   Custom properties (--sp-*) are set on :root by the app when the user
-   configures color overrides.  Fallbacks ensure theme defaults are
-   preserved when no override is set. */
-.track-title {
-  color: var(--sp-track-color, inherit) !important;
+   Rules are scoped behind .sp-has-* classes that the app toggles on :root
+   only when the user has configured a color.  When no override is set
+   the class is absent → rules don't match → theme colors apply. */
+:root.sp-has-track-color .track-title,
+:root.sp-has-track-color .lsp-top__title {
+  color: var(--sp-track-color) !important;
 }
 
-.artist-name {
-  color: var(--sp-artist-color, inherit) !important;
+:root.sp-has-artist-color .artist-name,
+:root.sp-has-artist-color .lsp-top__artist {
+  color: var(--sp-artist-color) !important;
 }
 
-.album-name {
-  color: var(--sp-album-color, inherit) !important;
+:root.sp-has-album-color .album-name,
+:root.sp-has-album-color .lsp-top__album {
+  color: var(--sp-album-color) !important;
 }
 
-.responsive-stream-info,
-.responsive-stream-info span {
-  color: var(--sp-stream-info-color, inherit) !important;
-}
-
-/* Large screen player — default text is white */
-.lsp-top__title {
-  color: var(--sp-track-color, #fff) !important;
-}
-
-.lsp-top__artist {
-  color: var(--sp-artist-color, rgba(255, 255, 255, 0.75)) !important;
-}
-
-.lsp-top__album {
-  color: var(--sp-album-color, rgba(255, 255, 255, 0.75)) !important;
-}
-
-.lsp-stream-info,
-.lsp-stream-info span {
-  color: var(--sp-stream-info-color, #fff) !important;
+:root.sp-has-stream-info-color .responsive-stream-info,
+:root.sp-has-stream-info-color .responsive-stream-info span,
+:root.sp-has-stream-info-color .lsp-stream-info,
+:root.sp-has-stream-info-color .lsp-stream-info span {
+  color: var(--sp-stream-info-color) !important;
 }
 
 /* ── Grid Container ── */

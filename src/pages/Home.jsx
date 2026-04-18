@@ -198,16 +198,18 @@ const Home = () => {
   useEffect(() => {
     const root = document.documentElement;
     const colorMap = {
-      '--sp-track-color': pluginConfig?.trackColor,
-      '--sp-artist-color': pluginConfig?.artistColor,
-      '--sp-album-color': pluginConfig?.albumColor,
-      '--sp-stream-info-color': pluginConfig?.streamInfoColor,
+      '--sp-track-color': { val: pluginConfig?.trackColor, cls: 'sp-has-track-color' },
+      '--sp-artist-color': { val: pluginConfig?.artistColor, cls: 'sp-has-artist-color' },
+      '--sp-album-color': { val: pluginConfig?.albumColor, cls: 'sp-has-album-color' },
+      '--sp-stream-info-color': { val: pluginConfig?.streamInfoColor, cls: 'sp-has-stream-info-color' },
     };
-    Object.entries(colorMap).forEach(([prop, val]) => {
+    Object.entries(colorMap).forEach(([prop, { val, cls }]) => {
       if (val) {
         root.style.setProperty(prop, val);
+        root.classList.add(cls);
       } else {
         root.style.removeProperty(prop);
+        root.classList.remove(cls);
       }
     });
   }, [pluginConfig?.trackColor, pluginConfig?.artistColor, pluginConfig?.albumColor, pluginConfig?.streamInfoColor]);
