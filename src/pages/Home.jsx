@@ -194,6 +194,24 @@ const Home = () => {
   const vizType = pluginConfig?.vizType || 'spectrum';
   const isSpectrumViz = vizType === 'spectrum';
 
+  // Apply user color overrides as CSS custom properties on :root
+  useEffect(() => {
+    const root = document.documentElement;
+    const colorMap = {
+      '--sp-track-color': pluginConfig?.trackColor,
+      '--sp-artist-color': pluginConfig?.artistColor,
+      '--sp-album-color': pluginConfig?.albumColor,
+      '--sp-stream-info-color': pluginConfig?.streamInfoColor,
+    };
+    Object.entries(colorMap).forEach(([prop, val]) => {
+      if (val) {
+        root.style.setProperty(prop, val);
+      } else {
+        root.style.removeProperty(prop);
+      }
+    });
+  }, [pluginConfig?.trackColor, pluginConfig?.artistColor, pluginConfig?.albumColor, pluginConfig?.streamInfoColor]);
+
   const showPlayer = !idle || forcePlayer;
 
   let content;

@@ -18,6 +18,46 @@ body,
   height: 100%;
 }
 
+/* ── User color overrides via plugin config ──
+   Custom properties (--sp-*) are set on :root by the app when the user
+   configures color overrides.  When NOT set, var() with no fallback makes
+   the declaration invalid at computed-value time → it's silently ignored
+   and the theme's own color applies normally. */
+.track-title {
+  color: var(--sp-track-color) !important;
+}
+
+.artist-name {
+  color: var(--sp-artist-color) !important;
+}
+
+.album-name {
+  color: var(--sp-album-color) !important;
+}
+
+.responsive-stream-info,
+.responsive-stream-info span {
+  color: var(--sp-stream-info-color) !important;
+}
+
+/* Large screen player */
+.lsp-top__title {
+  color: var(--sp-track-color) !important;
+}
+
+.lsp-top__artist {
+  color: var(--sp-artist-color) !important;
+}
+
+.lsp-top__album {
+  color: var(--sp-album-color) !important;
+}
+
+.lsp-stream-info,
+.lsp-stream-info span {
+  color: var(--sp-stream-info-color) !important;
+}
+
 /* ── Grid Container ── */
 .home-grid {
   display: grid;

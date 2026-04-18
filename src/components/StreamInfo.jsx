@@ -45,11 +45,24 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate, className }) => 
     >
       {/* Format logo or text fallback */}
       {logoSrc ? (
-        <img
-          src={logoSrc}
-          alt={formatType}
+        <span
           className="format-logo-responsive"
-          style={{ width: 'auto', filter: 'brightness(0) invert(1)', opacity: 0.8 }}
+          role="img"
+          aria-label={formatType}
+          style={{
+            display: 'inline-block',
+            aspectRatio: '2.5 / 1',
+            WebkitMaskImage: `url(${logoSrc})`,
+            maskImage: `url(${logoSrc})`,
+            WebkitMaskSize: 'contain',
+            maskSize: 'contain',
+            WebkitMaskRepeat: 'no-repeat',
+            maskRepeat: 'no-repeat',
+            WebkitMaskPosition: 'center',
+            maskPosition: 'center',
+            backgroundColor: 'currentColor',
+            opacity: 0.8,
+          }}
         />
       ) : (
         formatType && (
