@@ -76,7 +76,7 @@ const albumartUrl = (url) => {
  * @param {Set}     queueUris    - Optional set of URIs currently in the queue,
  *                                 used to disable "Add to Queue" when already queued
  */
-const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavouriteToggled, isPlaylistItem = false, onPlaylistDeleted }) => {
+const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavouriteToggled, isPlaylistItem = false, onPlaylistDeleted, itemIndex }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPos, setMenuPos] = useState({ top: 0, left: 0 });
   const [addToPlaylistOpen, setAddToPlaylistOpen] = useState(false);
@@ -372,6 +372,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
     return (
       <>
         <div className="browse-result-card" role="button" tabIndex={0}
+          data-item-index={itemIndex}
           onClick={handleItemClick}
           onKeyDown={(e) => e.key === 'Enter' && handleItemClick()}
         >
@@ -429,6 +430,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
         onClick={handleItemClick}
         role="button"
         tabIndex={0}
+        data-item-index={itemIndex}
         onKeyDown={(e) => e.key === 'Enter' && handleItemClick()}
       >
         <div className="browse-result-row__art">
@@ -485,6 +487,7 @@ TrackItem.propTypes = {
   onFavouriteToggled: PropTypes.func,
   isPlaylistItem: PropTypes.bool,
   onPlaylistDeleted: PropTypes.func,
+  itemIndex: PropTypes.number,
 };
 
 export default TrackItem;

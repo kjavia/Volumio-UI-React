@@ -87,9 +87,10 @@ export default function useSpatialNav() {
       if (!direction) return;
 
       // Don't hijack left/right inside text inputs (needed for cursor movement)
+      // — but allow spatial nav when the field is empty (no text to navigate)
       const tag = e.target.tagName;
       const type = e.target.type;
-      if (tag === 'INPUT' && (type === 'text' || type === 'search' || type === 'number') && (direction === 'left' || direction === 'right')) return;
+      if (tag === 'INPUT' && (type === 'text' || type === 'search' || type === 'number') && (direction === 'left' || direction === 'right') && e.target.value.length > 0) return;
       if (tag === 'TEXTAREA') return;
       if (tag === 'SELECT') return;
       // Range inputs: left/right control the slider, up/down navigate away
@@ -110,21 +111,10 @@ export default function useSpatialNav() {
       const candidates = all.filter((el) => el !== active);
       let next = bestCandidate(origin, candidates, direction);
 
-      // Circular wrap inside browse grids — if no candidate found in direction
-      // and we're inside a grid container, wrap to the opposite end
-      if (!next) {
-        const grid = active.closest('.browse-results-grid, .browse-results-grid--large, .pm-album-list--grid');
-        if (grid) {
-          const gridFocusables = candidates.filter((el) => grid.contains(el));
-          if (gridFocusables.length > 0) {
-            if (direction === 'right' || direction === 'down') {
-              next = gridFocusables[0]; // wrap to first
-            } else {
-              next = gridFocusables[gridFocusables.length - 1]; // wrap to last
-            }
-          }
-        }
-      }
+      // Skip grid wrap logic for virtualised browse grids — those are handled
+      // by BrowseDialog's state-based keyboard navigation.
+      const inVirtualGrid = active.closest?.('.browse-results-grid, .browse-results-grid--large');
+      if (inVirtualGrid) return;
 
       if (next) {
         e.preventDefault();

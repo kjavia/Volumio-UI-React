@@ -5803,6 +5803,9 @@ input[type=range]::-moz-range-thumb:active {
 .dialog-toolbar .browse-search__icon {
   color: var(--text-secondary);
 }
+.dialog-toolbar .browse-search__clear {
+  color: var(--text-secondary);
+}
 
 /* ── Body ── */
 .dialog-body {

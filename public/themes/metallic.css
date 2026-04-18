@@ -4489,6 +4489,9 @@ h2 {
 .dialog-toolbar .browse-search__icon {
   color: var(--text-light);
 }
+.dialog-toolbar .browse-search__clear {
+  color: var(--text-light);
+}
 
 /* ── Body ─────────────────────────────────────────────────────────────── */
 .dialog-body {

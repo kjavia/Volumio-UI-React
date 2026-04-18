@@ -77,6 +77,8 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   const browseBodyRef = useRef(null);
   const searchInputRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const [focusedGridIndex, setFocusedGridIndex] = useState(-1);
+  const pendingFocusIndex = useRef(-1);
 
   const { data: browseData, isLoading, isError, refetch: refetchBrowse } = useBrowse(currentNav?.uri ?? null);
   const { data: searchData, isLoading: isSearchLoading } = useSearch(debouncedSearch);
@@ -267,6 +269,118 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     enabled: useVirtual,
   });
 
+  // ── State-based grid keyboard navigation ──
+  // When focusedGridIndex changes, scroll the virtualizer to the target row
+  // and focus the rendered element after layout.
+  useEffect(() => {
+    if (focusedGridIndex < 0 || !useVirtual) return;
+    const rowIndex = viewMode === 'grid'
+      ? Math.floor(focusedGridIndex / numCols)
+      : focusedGridIndex;
+    browseVirtualizer.scrollToIndex(rowIndex, { align: 'auto' });
+    // Store the index so we can focus after the virtualizer renders
+    pendingFocusIndex.current = focusedGridIndex;
+    // Use rAF to let the virtualizer commit the new rows to the DOM
+    const raf = requestAnimationFrame(() => {
+      const body = browseBodyRef.current;
+      if (!body) return;
+      const cards = body.querySelectorAll('.browse-result-card, .browse-result-row');
+      // Map flat item index to the rendered card — virtualised rows may skip
+      // earlier items, so use data-item-index attributes if available,
+      // otherwise fall back to the nth visible card.
+      let target = null;
+      for (const card of cards) {
+        if (card.dataset.itemIndex === String(pendingFocusIndex.current)) {
+          target = card;
+          break;
+        }
+      }
+      if (target) {
+        target.focus({ preventScroll: true });
+        target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+      }
+      pendingFocusIndex.current = -1;
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [focusedGridIndex, useVirtual, viewMode, numCols, browseVirtualizer]);
+
+  // Keyboard handler for grid items — intercepts arrow keys on browse-result cards
+  // and navigates by item index so it works across virtualised row boundaries.
+  useEffect(() => {
+    if (!open || !useVirtual) return;
+    function gridKeyHandler(e) {
+      const card = e.target.closest?.('.browse-result-card, .browse-result-row');
+      if (!card) return;
+      const body = browseBodyRef.current;
+      if (!body || !body.contains(card)) return;
+
+      const idx = parseInt(card.dataset.itemIndex, 10);
+      if (isNaN(idx)) return;
+
+      let nextIdx = -1;
+      const total = filteredItems.length;
+
+      if (viewMode === 'grid') {
+        switch (e.key) {
+          case 'ArrowRight':
+            nextIdx = idx + 1 < total ? idx + 1 : 0;
+            break;
+          case 'ArrowLeft':
+            nextIdx = idx - 1 >= 0 ? idx - 1 : total - 1;
+            break;
+          case 'ArrowDown':
+            nextIdx = idx + numCols < total ? idx + numCols : idx;
+            break;
+          case 'ArrowUp':
+            if (idx - numCols >= 0) {
+              nextIdx = idx - numCols;
+            } else {
+              // First row — move focus up to the search bar
+              e.preventDefault();
+              e.stopPropagation();
+              searchInputRef.current?.focus();
+              return;
+            }
+            break;
+          default:
+            return;
+        }
+      } else {
+        switch (e.key) {
+          case 'ArrowDown':
+            nextIdx = idx + 1 < total ? idx + 1 : 0;
+            break;
+          case 'ArrowUp':
+            if (idx > 0) {
+              nextIdx = idx - 1;
+            } else {
+              // First item — move focus up to the search bar
+              e.preventDefault();
+              e.stopPropagation();
+              searchInputRef.current?.focus();
+              return;
+            }
+            break;
+          default:
+            return;
+        }
+      }
+
+      if (nextIdx >= 0 && nextIdx !== idx) {
+        e.preventDefault();
+        e.stopPropagation();
+        setFocusedGridIndex(nextIdx);
+      }
+    }
+    document.addEventListener('keydown', gridKeyHandler, true);
+    return () => document.removeEventListener('keydown', gridKeyHandler, true);
+  }, [open, useVirtual, viewMode, numCols, filteredItems.length]);
+
+  // Reset focused index when navigating to a new folder
+  useEffect(() => {
+    setFocusedGridIndex(-1);
+  }, [currentNav]);
+
   // Search result sections (each list from the API has a title like "Artists", "Albums", etc.)
   const searchSections = isSearching ? (searchData?.lists ?? []) : null;
 
@@ -346,8 +460,15 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
 
   const toolbar = (
     <div className="browse-toolbar">
-      <div className="browse-toolbar__left">
-        <Button classNames="btn-icon" label="Home" onClick={goHome}>
+      <div className="browse-toolbar__left" onKeyDown={(e) => {
+        if (e.key === 'ArrowRight' && e.target.tagName === 'BUTTON') {
+          const btns = [...e.currentTarget.querySelectorAll('button:not(:disabled)')];
+          if (btns.length && e.target === btns[btns.length - 1]) {
+            e.preventDefault(); e.stopPropagation(); searchInputRef.current?.focus();
+          }
+        }
+      }}>
+        <Button classNames="btn-icon" label="Home" onClick={goHome} disabled={!currentNav}>
           <span className="material-icons">home</span>
         </Button>
         <Button
@@ -362,6 +483,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
           classNames={`btn-icon${viewMode === 'grid' ? ' active' : ''}`}
           label="Grid view"
           onClick={() => setViewMode('grid')}
+          disabled={!currentNav}
         >
           <span className="material-icons">grid_view</span>
         </Button>
@@ -369,6 +491,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
           classNames={`btn-icon${viewMode === 'list' ? ' active' : ''}`}
           label="List view"
           onClick={() => setViewMode('list')}
+          disabled={!currentNav}
         >
           <span className="material-icons">view_list</span>
         </Button>
@@ -377,6 +500,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
             classNames={`btn-icon${largeGrid ? ' active' : ''}`}
             label={largeGrid ? 'Normal size' : 'Large tiles'}
             onClick={() => setLargeGrid((v) => !v)}
+            disabled={!currentNav}
           >
             <span className="material-icons">{largeGrid ? 'zoom_out' : 'zoom_in'}</span>
           </Button>
@@ -392,6 +516,18 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
             placeholder="Search…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowLeft' && !search) {
+                const left = e.target.closest('.browse-toolbar')?.querySelector('.browse-toolbar__left');
+                const btns = left ? [...left.querySelectorAll('button:not(:disabled)')] : [];
+                if (btns.length) { e.preventDefault(); e.stopPropagation(); btns[btns.length - 1].focus(); }
+              }
+              if (e.key === 'ArrowRight' && !search) {
+                const body = e.target.closest('.dialog, .browse-dialog')?.querySelector('.dialog-body');
+                const first = body?.querySelector('a, button:not(:disabled), [tabindex="0"]');
+                if (first) { e.preventDefault(); e.stopPropagation(); first.focus(); }
+              }
+            }}
             aria-label="Search"
           />
           {search && (
@@ -399,6 +535,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
               type="button"
               className="browse-search__clear"
               onClick={() => { setSearch(''); setDebouncedSearch(''); }}
+              onKeyDown={(e) => { if (e.key === 'ArrowLeft') { e.preventDefault(); e.stopPropagation(); searchInputRef.current?.focus(); } }}
               aria-label="Clear search"
             >
               <span className="material-icons">close</span>
@@ -536,6 +673,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
                       onFavouriteToggled={isFavouritesView ? refetchBrowse : undefined}
                       isPlaylistItem={isPlaylistsView}
                       onPlaylistDeleted={isPlaylistsView ? refetchBrowse : undefined}
+                      itemIndex={startIdx + colIdx}
                     />
                   ) : (
                     <div key={`empty-${colIdx}`} />
@@ -571,6 +709,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
                   onFavouriteToggled={isFavouritesView ? refetchBrowse : undefined}
                   isPlaylistItem={isPlaylistsView}
                   onPlaylistDeleted={isPlaylistsView ? refetchBrowse : undefined}
+                  itemIndex={virtualItem.index}
                 />
               </div>
             );

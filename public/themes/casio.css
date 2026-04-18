@@ -4664,6 +4664,9 @@ input[type=range]::-webkit-slider-thumb {
 .dialog-toolbar .browse-search__icon {
   color: var(--casio-on-dark-dim);
 }
+.dialog-toolbar .browse-search__clear {
+  color: var(--casio-on-dark-dim);
+}
 
 /* Body — dark panel */
 .dialog-body {
