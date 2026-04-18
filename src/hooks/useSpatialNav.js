@@ -111,10 +111,9 @@ export default function useSpatialNav() {
       const candidates = all.filter((el) => el !== active);
       let next = bestCandidate(origin, candidates, direction);
 
-      // Skip grid wrap logic for virtualised browse grids — those are handled
-      // by BrowseDialog's state-based keyboard navigation.
-      const inVirtualGrid = active.closest?.('.browse-results-grid, .browse-results-grid--large');
-      if (inVirtualGrid) return;
+      // Skip for browse-result items — handled by BrowseDialog's state-based navigation.
+      const inBrowseResult = active.closest?.('.browse-result-card, .browse-result-row');
+      if (inBrowseResult) return;
 
       if (next) {
         e.preventDefault();

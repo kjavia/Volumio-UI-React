@@ -260,7 +260,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     ? (viewMode === 'grid' ? Math.ceil(filteredItems.length / numCols) : filteredItems.length)
     : 0;
 
-  // eslint-disable-next-line react-hooks/incompatible-library
+
   const browseVirtualizer = useVirtualizer({
     count: virtCount,
     getScrollElement: () => browseBodyRef.current,
@@ -273,11 +273,13 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   // When focusedGridIndex changes, scroll the virtualizer to the target row
   // and focus the rendered element after layout.
   useEffect(() => {
-    if (focusedGridIndex < 0 || !useVirtual) return;
-    const rowIndex = viewMode === 'grid'
-      ? Math.floor(focusedGridIndex / numCols)
-      : focusedGridIndex;
-    browseVirtualizer.scrollToIndex(rowIndex, { align: 'auto' });
+    if (focusedGridIndex < 0) return;
+    if (useVirtual) {
+      const rowIndex = viewMode === 'grid'
+        ? Math.floor(focusedGridIndex / numCols)
+        : focusedGridIndex;
+      browseVirtualizer.scrollToIndex(rowIndex, { align: 'auto' });
+    }
     // Store the index so we can focus after the virtualizer renders
     pendingFocusIndex.current = focusedGridIndex;
     // Use rAF to let the virtualizer commit the new rows to the DOM
@@ -304,10 +306,10 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     return () => cancelAnimationFrame(raf);
   }, [focusedGridIndex, useVirtual, viewMode, numCols, browseVirtualizer]);
 
-  // Keyboard handler for grid items — intercepts arrow keys on browse-result cards
-  // and navigates by item index so it works across virtualised row boundaries.
+  // Keyboard handler for grid/list items — intercepts arrow keys on browse-result cards
+  // and navigates by item index. Works for both virtualised and non-virtualised lists.
   useEffect(() => {
-    if (!open || !useVirtual) return;
+    if (!open) return;
     function gridKeyHandler(e) {
       const card = e.target.closest?.('.browse-result-card, .browse-result-row');
       if (!card) return;
@@ -374,7 +376,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     }
     document.addEventListener('keydown', gridKeyHandler, true);
     return () => document.removeEventListener('keydown', gridKeyHandler, true);
-  }, [open, useVirtual, viewMode, numCols, filteredItems.length]);
+  }, [open, viewMode, numCols, filteredItems.length]);
 
   // Reset focused index when navigating to a new folder
   useEffect(() => {
@@ -602,6 +604,8 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
 
     // When searching, render results grouped by section (Artists, Albums, Songs, etc.)
     if (isSearching && searchSections?.length > 0) {
+      // Build a flat index counter across all sections so each item gets a unique itemIndex
+      let flatIdx = 0;
       return (
         <div className="browse-search-results">
           {searchSections.map((section, si) => {
@@ -612,15 +616,19 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
                   <h6 className="browse-search-section__title">{section.title}</h6>
                 )}
                 <div className={containerClass}>
-                  {section.items.map((item, i) => (
-                    <TrackItem
-                      key={item.uri ?? `${si}-${i}`}
-                      item={item}
-                      viewMode={viewMode}
-                      onNavigate={navigate}
-                      queueUris={queueUris}
-                    />
-                  ))}
+                  {section.items.map((item, i) => {
+                    const idx = flatIdx++;
+                    return (
+                      <TrackItem
+                        key={item.uri ?? `${si}-${i}`}
+                        item={item}
+                        viewMode={viewMode}
+                        onNavigate={navigate}
+                        queueUris={queueUris}
+                        itemIndex={idx}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             );
@@ -742,6 +750,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
             onFavouriteToggled={isFavouritesView ? refetchBrowse : undefined}
             isPlaylistItem={isPlaylistsView}
             onPlaylistDeleted={isPlaylistsView ? refetchBrowse : undefined}
+            itemIndex={i}
           />
         ))}
       </div>
