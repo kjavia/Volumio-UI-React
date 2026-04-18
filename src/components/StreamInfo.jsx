@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const LOGO_MAP = {
   flac: '/assets/logos/flac.svg',
   mp3: '/assets/logos/mp3.svg',
+  ogg: '/assets/logos/ogg.svg',
   wav: '/assets/logos/wav.svg',
   aiff: '/assets/logos/aiff.svg',
   dsd: '/assets/logos/dsd.svg',
@@ -18,15 +19,17 @@ const STREAMING_SERVICES = new Set([
   'napster', 'webradio', 'radio',
 ]);
 
-const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate, className }) => {
+const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className }) => {
   // Don't render if we have nothing to show
-  if (!trackType && !samplerate && !bitdepth && !bitrate) {
+  if (!trackType && !codec && !samplerate && !bitdepth && !bitrate) {
     return null;
   }
 
   // Don't treat streaming service names as audio format labels
   const formatType = trackType && !STREAMING_SERVICES.has(trackType.toLowerCase()) ? trackType : null;
-  const logoSrc = formatType ? LOGO_MAP[formatType.toLowerCase()] : null;
+  // Use trackType for logo first, fall back to codec from the API
+  const logoSrc = (formatType ? LOGO_MAP[formatType.toLowerCase()] : null)
+    || (codec ? LOGO_MAP[codec.toLowerCase()] : null);
 
   const samplerateKhz = samplerate ? parseFloat(samplerate) : 0;
   const bitdepthNum = bitdepth ? parseInt(bitdepth, 10) : 0;
@@ -51,7 +54,7 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate, className }) => 
           aria-label={formatType}
           style={{
             display: 'inline-block',
-            aspectRatio: '2.5 / 1',
+            aspectRatio: '1',
             WebkitMaskImage: `url(${logoSrc})`,
             maskImage: `url(${logoSrc})`,
             WebkitMaskSize: 'contain',
@@ -102,6 +105,7 @@ const StreamInfo = ({ trackType, samplerate, bitdepth, bitrate, className }) => 
 
 StreamInfo.propTypes = {
   trackType: PropTypes.string,
+  codec: PropTypes.string,
   samplerate: PropTypes.string,
   bitdepth: PropTypes.string,
   bitrate: PropTypes.string,

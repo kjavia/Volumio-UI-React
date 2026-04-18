@@ -38,6 +38,7 @@ const formatTotalDuration = (totalSecs) => {
 const FORMAT_LOGO_MAP = {
   flac: '/assets/logos/flac.svg',
   mp3: '/assets/logos/mp3.svg',
+  ogg: '/assets/logos/ogg.svg',
   wav: '/assets/logos/wav.svg',
   aiff: '/assets/logos/aiff.svg',
   aif: '/assets/logos/aiff.svg',

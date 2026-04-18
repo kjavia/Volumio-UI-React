@@ -62,12 +62,12 @@ const getPlayerTypeForSource = (service, trackType) => {
     return 'globe';
   }
 
-  if (['mp3', 'flac', 'dsd'].includes(t)) {
+  if (['mp3', 'flac', 'ogg', 'dsd'].includes(t)) {
     return 'cdCover';
   }
 
   // Service might also identify formats directly
-  if (s.includes('mp3') || s.includes('flac') || s.includes('dsd')) {
+  if (s.includes('mp3') || s.includes('flac') || s.includes('ogg') || s.includes('dsd')) {
     return 'cdCover';
   }
 
@@ -111,6 +111,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     samplerate,
     bitdepth,
     trackType,
+    codec,
     bitrate,
     service,
     position,
@@ -281,6 +282,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               <ServiceLogo service={service} />
               <StreamInfo
                 trackType={trackType}
+                codec={codec}
                 samplerate={samplerate}
                 bitdepth={bitdepth}
                 bitrate={bitrate}

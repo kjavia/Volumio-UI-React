@@ -157,6 +157,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
     samplerate,
     bitdepth,
     trackType,
+    codec,
     bitrate,
     service,
     position,
@@ -310,6 +311,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
         <div className="lsp-top__row3">
           <StreamInfo
             trackType={/radio|internet/i.test(trackType || service || '') ? null : trackType}
+            codec={codec}
             samplerate={samplerate}
             bitdepth={bitdepth}
             bitrate={bitrate}
@@ -446,6 +448,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
             <div className="lsp-top__row3">
               <StreamInfo
                 trackType={/radio|internet/i.test(trackType || service || '') ? null : trackType}
+                codec={codec}
                 samplerate={samplerate}
                 bitdepth={bitdepth}
                 bitrate={bitrate}

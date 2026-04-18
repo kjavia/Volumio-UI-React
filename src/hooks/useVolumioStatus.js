@@ -77,6 +77,7 @@ const useVolumioStatus = () => {
   const [samplerate, setSamplerate] = useState('');
   const [bitdepth, setBitdepth] = useState('');
   const [trackType, setTrackType] = useState('');
+  const [codec, setCodec] = useState('');
   const [bitrate, setBitrate] = useState('');
   const [service, setService] = useState('');
   const [position, setPosition] = useState(0);
@@ -102,6 +103,7 @@ const useVolumioStatus = () => {
       setSamplerate(data.samplerate);
       setBitdepth(data.bitdepth);
       setTrackType(data.trackType || '');
+      setCodec(data.codec || '');
       setBitrate(data.bitrate || '');
       setService(data.service || '');
       setStreamUri(data.uri || '');
@@ -219,6 +221,7 @@ const useVolumioStatus = () => {
     samplerate,
     bitdepth,
     trackType,
+    codec,
     bitrate,
     service,
     position,
