@@ -12,6 +12,7 @@ import LargeScreenPlayer from './LargeScreenPlayer';
 import useIdleScreen from '@/hooks/useIdleScreen';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import usePluginConfig from '@/hooks/usePluginConfig';
+import useMenuKeyboard from '@/hooks/useMenuKeyboard';
 import { VOLUMIO_BASE_URL } from '@/config';
 
 const CLOCK_SCREENS = {
@@ -31,6 +32,7 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz, i
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const ctxMenuRef = useMenuKeyboard(isOpen, () => setIsOpen(false));
 
   const close = (fn) => () => { setIsOpen(false); fn?.(); };
 
@@ -79,7 +81,7 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz, i
       {isOpen && (
         <>
           <div className="context-menu-backdrop" onClick={() => setIsOpen(false)} />
-          <div className="context-menu open">
+          <div ref={ctxMenuRef} className="context-menu open" role="menu">
             <button className="context-menu-item" onClick={close(() => navigate('/playlist-manager'))}>
               <span className="material-icons">queue_music</span>
               Playlist Manager

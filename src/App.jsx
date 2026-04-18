@@ -6,11 +6,13 @@ import Home from './pages/Home';
 import Player from './pages/Player';
 import PlaylistManager from './pages/PlaylistManager';
 import useLanguageSync from './hooks/useLanguageSync';
+import useSpatialNav from './hooks/useSpatialNav';
 // import './App.scss'; // Assuming you might have app-specific styles or use index.scss
 
 // Inner component — rendered inside SocketProvider so hooks can access context.
 const AppInner = () => {
   useLanguageSync();
+  useSpatialNav();
   return (
     <Router>
       <div className="d-flex flex-column h-100 bg-dark">

@@ -1336,7 +1336,8 @@ code, pre {
   padding-right: 15px;
 }
 .btn:focus-visible, .form-select:focus-visible {
-  outline: 1px dotted var(--text-primary);
+  background: var(--win95-light);
+  outline: 2px dotted #000000;
   outline-offset: -4px;
 }
 
@@ -1477,7 +1478,7 @@ code, pre {
   transition: background 0.1s, border-color 0.1s;
   box-shadow: none;
 }
-.btn-icon:hover {
+.btn-icon:hover, .btn-icon:focus-visible {
   background: rgba(0, 0, 128, 0.08);
   border-color: var(--win95-shadow);
   color: var(--win95-shadow);
@@ -4891,6 +4892,7 @@ input[type=range]::-webkit-slider-runnable-track {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  color: #ffffff;
   background: rgba(192, 192, 192, 0.2);
   border-top: 2px solid var(--win95-highlight);
   border-left: 2px solid var(--win95-highlight);
@@ -4907,12 +4909,9 @@ input[type=range]::-webkit-slider-runnable-track {
   background: rgba(192, 192, 192, 0.2);
   border: 2px solid var(--win95-shadow);
 }
-.context-menu-toggle--no-shadow .material-icons {
-  color: var(--text-primary);
-}
 .context-menu-toggle .material-icons {
   font-size: 18px;
-  color: var(--text-primary);
+  color: #ffffff;
 }
 
 .context-menu {
@@ -5347,6 +5346,17 @@ input[type=range]::-webkit-slider-runnable-track {
 .browse-tile .browse-tile__label {
   font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
   font-weight: 600;
+}
+
+/* ── Focus ring — navy on silver Win95 background ── */
+.dialog :focus-visible,
+.slide-panel :focus-visible {
+  outline: 5px solid #000080;
+  outline-offset: 1px;
+}
+.dialog [tabindex="-1"]:focus-visible,
+.slide-panel [tabindex="-1"]:focus-visible {
+  outline: none;
 }
 
 /* ── Digital Clock — Windows 95 Theme ──────────────────────────────────────

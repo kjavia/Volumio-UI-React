@@ -10,6 +10,7 @@ import useBrowse from '@/hooks/useBrowse';
 import useSearch from '@/hooks/useSearch';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import { useSocket } from '@/contexts/SocketContext';
+import useMenuKeyboard from '@/hooks/useMenuKeyboard';
 
 const BROWSE_TILES = [
   { id: 'favourites', label: 'Favorites', icon: 'favorite', uri: 'favourites' },
@@ -74,6 +75,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   const albumMenuBtnRef = useRef(null);
   const albumMenuRef = useRef(null);
   const browseBodyRef = useRef(null);
+  const searchInputRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
 
   const { data: browseData, isLoading, isError, refetch: refetchBrowse } = useBrowse(currentNav?.uri ?? null);
@@ -87,6 +89,26 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     const t = setTimeout(() => setDebouncedSearch(search.trim()), 400);
     return () => clearTimeout(t);
   }, [search]);
+
+  // Forward alphanumeric keystrokes to the search bar when it isn't focused
+  useEffect(() => {
+    if (!open) return;
+    function handleKey(e) {
+      // Only single printable characters (letters, digits, common punctuation)
+      if (e.key.length !== 1) return;
+      // Skip if already typing in an input/textarea
+      const tag = document.activeElement?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      // Skip modifier combos (Ctrl+C, etc.)
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+      e.preventDefault();
+      setSearch((prev) => prev + e.key);
+      searchInputRef.current?.focus();
+    }
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [open]);
 
   // Observe dialog-body width for grid column calculation — useLayoutEffect so the
   // measurement is committed before the first paint, preventing a 0-width flash.
@@ -155,6 +177,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   }, []);
 
   const closeAlbumMenu = useCallback(() => setAlbumMenuOpen(false), []);
+  const albumMenuKbRef = useMenuKeyboard(albumMenuOpen, closeAlbumMenu);
 
   const handleAlbumPlay = useCallback(() => {
     socket?.emit('replaceAndPlay', albumPayload);
@@ -363,6 +386,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
         <div className="browse-search">
           <span className="material-icons browse-search__icon">search</span>
           <input
+            ref={searchInputRef}
             className="browse-search__input"
             type="text"
             placeholder="Search…"
@@ -602,8 +626,9 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
       </Dialog>
       {albumMenuOpen && createPortal(
         <div
-          ref={albumMenuRef}
+          ref={(node) => { albumMenuRef.current = node; albumMenuKbRef.current = node; }}
           className="track-menu"
+          role="menu"
           style={{ position: 'fixed', top: albumMenuPos.top, left: albumMenuPos.left }}
           onClick={(e) => e.stopPropagation()}
         >

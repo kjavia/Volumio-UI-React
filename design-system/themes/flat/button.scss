@@ -41,6 +41,7 @@
     }
 
     &:focus-visible {
+        background: var(--color-primary-light);
         outline: 2px solid var(--color-primary);
         outline-offset: 2px;
     }
@@ -231,7 +232,8 @@
         color 0.15s;
     box-shadow: none;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
         background: rgba(255, 255, 255, 0.07);
         color: var(--text-primary);
     }

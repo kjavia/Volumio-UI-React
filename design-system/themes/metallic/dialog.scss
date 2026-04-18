@@ -385,3 +385,16 @@
     font-weight: 600;
   }
 }
+
+/* ── Focus ring — bright cyan on dark brushed-metal background ── */
+.dialog,
+.slide-panel {
+  :focus-visible {
+    outline: 5px solid #00e1ff;
+    outline-offset: 2px;
+  }
+
+  [tabindex="-1"]:focus-visible {
+    outline: none;
+  }
+}

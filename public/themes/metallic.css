@@ -1085,6 +1085,14 @@ pre {
   border-color: rgba(0, 0, 0, 0.8);
 }
 
+.btn:focus-visible, .form-select:focus-visible {
+  color: var(--color-white);
+  background: linear-gradient(180deg, #444444 0%, #2a2a2a 50%, #222222 51%, #2a2a2a 100%);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 5px rgba(255, 255, 255, 0.05);
+  outline: 2px solid var(--color-primary, #00e1ff);
+  outline-offset: 2px;
+}
+
 /* ─── Button Color Variants ───────────────────────────────────────────── */
 .btn-black {
   background: linear-gradient(180deg, #222 0%, #050505 100%);
@@ -1256,7 +1264,7 @@ pre {
 .btn-icon .material-icons {
   font-size: 20px;
 }
-.btn-icon:hover {
+.btn-icon:hover, .btn-icon:focus-visible {
   background: rgba(255, 255, 255, 0.08);
   color: var(--text-light);
   box-shadow: none;
@@ -4696,6 +4704,17 @@ h2 {
 .browse-tile .browse-tile__label {
   font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
   font-weight: 600;
+}
+
+/* ── Focus ring — bright cyan on dark brushed-metal background ── */
+.dialog :focus-visible,
+.slide-panel :focus-visible {
+  outline: 5px solid #00e1ff;
+  outline-offset: 2px;
+}
+.dialog [tabindex="-1"]:focus-visible,
+.slide-panel [tabindex="-1"]:focus-visible {
+  outline: none;
 }
 
 /* ── Digital LCD Clock — Metallic Chrome Variant ───────────────────────────

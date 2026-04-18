@@ -1125,6 +1125,7 @@ p {
   transform: translateY(2px);
 }
 .btn:focus-visible, .form-select:focus-visible {
+  background: radial-gradient(ellipse 80% 55% at 50% 20%, #4a5260 0%, #323848 50%, #242c3a 100%);
   outline: 2px solid var(--casio-red);
   outline-offset: 2px;
 }
@@ -1293,7 +1294,7 @@ p {
   cursor: pointer;
   transition: background 0.1s, color 0.1s;
 }
-.btn-icon:hover {
+.btn-icon:hover, .btn-icon:focus-visible {
   background: rgba(68, 221, 168, 0.18);
   color: var(--casio-lcd-bg-alt);
 }
@@ -4684,6 +4685,17 @@ input[type=range]::-webkit-slider-thumb {
   border-top: 2px solid var(--casio-edge);
   box-shadow: 0 -1px 0 var(--casio-sheen);
   flex-shrink: 0;
+}
+
+/* ── Focus ring — bright red on dark Casio background ── */
+.dialog :focus-visible,
+.slide-panel :focus-visible {
+  outline: 5px solid #ff4444;
+  outline-offset: 2px;
+}
+.dialog [tabindex="-1"]:focus-visible,
+.slide-panel [tabindex="-1"]:focus-visible {
+  outline: none;
 }
 
 /* ── Digital Clock — 80s Casio Theme ──────────────────────────────────────

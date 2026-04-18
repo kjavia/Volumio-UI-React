@@ -112,3 +112,16 @@
   box-shadow: 0 -1px 0 var(--casio-sheen);
   flex-shrink: 0;
 }
+
+/* ── Focus ring — bright red on dark Casio background ── */
+.dialog,
+.slide-panel {
+  :focus-visible {
+    outline: 5px solid #ff4444;
+    outline-offset: 2px;
+  }
+
+  [tabindex="-1"]:focus-visible {
+    outline: none;
+  }
+}

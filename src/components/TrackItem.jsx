@@ -5,6 +5,7 @@ import Marquee from './Marquee';
 import AddToPlaylistDialog from './AddToPlaylistDialog';
 import { useSocket } from '@/contexts/SocketContext';
 import useFavourites from '@/hooks/useFavourites';
+import useMenuKeyboard from '@/hooks/useMenuKeyboard';
 import { VOLUMIO_BASE_URL } from '@/config';
 import { CgPiano } from "react-icons/cg";
 import { FaGlobeAmericas, FaCross } from "react-icons/fa";
@@ -81,6 +82,13 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
   const [addToPlaylistOpen, setAddToPlaylistOpen] = useState(false);
   const btnRef = useRef(null);
   const menuRef = useRef(null);
+  const menuKbRef = useMenuKeyboard(menuOpen, () => setMenuOpen(false));
+
+  // Merge menuRef (positioning) and menuKbRef (keyboard nav)
+  const setMenuRefs = useCallback((node) => {
+    menuRef.current = node;
+    menuKbRef.current = node;
+  }, [menuKbRef]);
 
   const { socket } = useSocket();
   const { favouritesUris, addFavouriteOptimistic, removeFavouriteOptimistic } = useFavourites();
@@ -247,8 +255,9 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
 
   const menuPortal = menuOpen && !isPlaylistItem && !isAlbumItem && createPortal(
     <div
-      ref={menuRef}
+      ref={setMenuRefs}
       className="track-menu"
+      role="menu"
       style={{ position: 'fixed', top: menuPos.top, left: menuPos.left }}
       onClick={(e) => e.stopPropagation()}
     >
@@ -285,8 +294,9 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
 
   const playlistMenuPortal = menuOpen && isPlaylistItem && createPortal(
     <div
-      ref={menuRef}
+      ref={setMenuRefs}
       className="track-menu"
+      role="menu"
       style={{ position: 'fixed', top: menuPos.top, left: menuPos.left }}
       onClick={(e) => e.stopPropagation()}
     >
@@ -313,8 +323,9 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
 
   const albumMenuPortal = menuOpen && isAlbumItem && createPortal(
     <div
-      ref={menuRef}
+      ref={setMenuRefs}
       className="track-menu"
+      role="menu"
       style={{ position: 'fixed', top: menuPos.top, left: menuPos.left }}
       onClick={(e) => e.stopPropagation()}
     >
@@ -348,6 +359,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
       ref={btnRef}
       className="track-menu-btn"
       type="button"
+      tabIndex={-1}
       aria-label="Track options"
       onClick={openMenu}
     >
@@ -359,13 +371,12 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
   if (viewMode === 'grid') {
     return (
       <>
-        <div className="browse-result-card">
+        <div className="browse-result-card" role="button" tabIndex={0}
+          onClick={handleItemClick}
+          onKeyDown={(e) => e.key === 'Enter' && handleItemClick()}
+        >
           <div
             className="browse-result-card__art"
-            onClick={handleItemClick}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && handleItemClick()}
           >
             {isGenre
               ? <span className="browse-result-card__genre-icon">{genreIcon(item.title)}</span>
@@ -376,6 +387,7 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
             <button
               className="browse-result-card__play"
               type="button"
+              tabIndex={-1}
               aria-label="Play"
               onClick={(e) => { e.stopPropagation(); socket?.emit('replaceAndPlay', trackPayload); }}
             >

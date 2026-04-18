@@ -220,7 +220,13 @@ const SpectrumAnalyzer = forwardRef(({ streamUrl, gradient = 'prism', initialMod
         userSelect: 'none',
         touchAction: 'none', // Prevent scrolling while holding
       }}
+      role="button"
+      tabIndex={0}
+      aria-label={enabled ? 'Spectrum analyzer — press Enter to cycle mode' : 'Click to enable spectrum analyzer'}
       onClick={handleEnable}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleEnable(); }
+      }}
       onDoubleClick={() => {
         if (enabled) cycleMode();
       }}

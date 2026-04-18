@@ -163,3 +163,16 @@
     font-weight: 600;
   }
 }
+
+/* ── Focus ring — navy on silver Win95 background ── */
+.dialog,
+.slide-panel {
+  :focus-visible {
+    outline: 5px solid #000080;
+    outline-offset: 1px;
+  }
+
+  [tabindex="-1"]:focus-visible {
+    outline: none;
+  }
+}

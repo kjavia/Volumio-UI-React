@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import useFocusTrap from '@/hooks/useFocusTrap';
 
 /**
  * Dialog Component
@@ -55,6 +56,7 @@ const Dialog = ({
   bodyRef,
 }) => {
   const dialogRef = useRef(null);
+  const trapRef = useFocusTrap(open);
 
   // Close on Escape key
   useEffect(() => {
@@ -66,13 +68,6 @@ const Dialog = ({
     document.addEventListener('keydown', handleKey);
     return () => document.removeEventListener('keydown', handleKey);
   }, [open, closeOnEscape, onClose]);
-
-  // Focus trap: return focus to dialog when it opens
-  useEffect(() => {
-    if (open && dialogRef.current) {
-      dialogRef.current.focus();
-    }
-  }, [open]);
 
   // Prevent body scroll when dialog is open
   useEffect(() => {
@@ -114,7 +109,10 @@ const Dialog = ({
       {/* Dialog Container */}
       <div className="dialog-container">
         <div
-          ref={dialogRef}
+          ref={(node) => {
+            dialogRef.current = node;
+            trapRef.current = node;
+          }}
           className={cn('dialog', sizeClasses[size], className)}
           role="dialog"
           aria-modal="true"

@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import useFocusTrap from '@/hooks/useFocusTrap';
 
 const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px', headerActions }) => {
   const panelRef = useRef(null);
+  const trapRef = useFocusTrap(open);
 
   // Close on Escape key
   useEffect(() => {
@@ -15,13 +17,6 @@ const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px',
     return () => document.removeEventListener('keydown', handleKey);
   }, [open, onClose]);
 
-  // Trap focus: return focus to panel when it opens
-  useEffect(() => {
-    if (open && panelRef.current) {
-      panelRef.current.focus();
-    }
-  }, [open]);
-
   return (
     <>
       {/* Backdrop */}
@@ -33,7 +28,10 @@ const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px',
 
       {/* Panel */}
       <div
-        ref={panelRef}
+        ref={(node) => {
+          panelRef.current = node;
+          trapRef.current = node;
+        }}
         className={`slide-panel ${open ? 'open' : ''}`}
         style={{ width }}
         role="dialog"

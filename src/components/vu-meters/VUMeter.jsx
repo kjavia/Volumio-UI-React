@@ -300,7 +300,11 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
     <div
       className={`vu-meter ${variantClass}${enabled ? ' vu-meter--enabled' : ''}`}
       style={{ '--needle-color': resolvedNeedleColor }}
+      role="button"
+      tabIndex={0}
+      aria-label={enabled ? 'VU meter' : 'Click to enable VU meter'}
       onClick={handleEnable}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleEnable(); } }}
       title={enabled ? undefined : 'Click to enable VU meter'}
     >
       <div ref={displayRef} className="vu-meter__display">

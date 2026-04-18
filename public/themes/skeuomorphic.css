@@ -1538,6 +1538,13 @@ ol li {
   /* Pressed in shadow */
 }
 
+.btn:focus-visible, .form-select:focus-visible {
+  filter: brightness(1.08);
+  box-shadow: 0 6px 10px var(--shadow-30), inset 0 1px 0 var(--highlight-30), inset 1px 0 0 var(--highlight-15), inset -1px 0 0 var(--shadow-10);
+  outline: 2px solid var(--color-primary, #ff6622);
+  outline-offset: 2px;
+}
+
 /* Button Colors */
 .btn-black {
   background: linear-gradient(180deg, var(--btn-black-top, #333) 0%, var(--btn-black-btm, #222) 100%);
@@ -1776,7 +1783,8 @@ ol li {
   box-shadow: none;
 }
 
-.btn-icon:hover {
+.btn-icon:hover,
+.btn-icon:focus-visible {
   background: rgba(255, 255, 255, 0.08);
   color: var(--color-gray-100, #eee);
 }
@@ -5545,6 +5553,17 @@ h2 {
 .browse-tile .browse-tile__label {
   font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
   font-weight: 600;
+}
+
+/* ── Focus ring — dark on light device-surface background ── */
+.dialog :focus-visible,
+.slide-panel :focus-visible {
+  outline: 5px solid #c04400;
+  outline-offset: 2px;
+}
+.dialog [tabindex="-1"]:focus-visible,
+.slide-panel [tabindex="-1"]:focus-visible {
+  outline: none;
 }
 
 /* ── Digital LCD Clock ─────────────────────────────────────────────────────── */

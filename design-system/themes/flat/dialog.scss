@@ -316,3 +316,16 @@
     font-weight: 600;
   }
 }
+
+/* ── Focus ring — vivid indigo on dark background ── */
+.dialog,
+.slide-panel {
+  :focus-visible {
+    outline: 5px solid #818cf8;
+    outline-offset: 2px;
+  }
+
+  [tabindex="-1"]:focus-visible {
+    outline: none;
+  }
+}

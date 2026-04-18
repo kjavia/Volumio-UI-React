@@ -25,6 +25,7 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
           max="100"
           value={getVolume() || 0}
           onChange={(e) => onVolumeChange(Number(e.target.value))}
+          aria-label="Volume"
           style={{ cursor: 'pointer', margin: 0 }}
         />
         <div className="slider-fill position-relative" style={{ width: `${getVolume()}%` }}>

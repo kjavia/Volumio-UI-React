@@ -453,3 +453,16 @@
     font-weight: 600;
   }
 }
+
+/* ── Focus ring — dark on light frosted-glass background ── */
+.dialog,
+.slide-panel {
+  :focus-visible {
+    outline: 5px solid #0a5dc2;
+    outline-offset: 2px;
+  }
+
+  [tabindex="-1"]:focus-visible {
+    outline: none;
+  }
+}

@@ -29,6 +29,7 @@ const PlayerSeekbar = ({ readOnly }) => {
             max={durationSeconds}
             value={currentSeconds}
             onChange={handleSeek}
+            aria-label="Seek"
             style={{ cursor: 'pointer', margin: 0 }}
           />
         )}

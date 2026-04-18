@@ -73,7 +73,8 @@
     }
 
     &:focus-visible {
-        outline: 1px dotted var(--text-primary);
+        background: var(--win95-light);
+        outline: 2px dotted #000000;
         outline-offset: -4px;
     }
 }
@@ -232,7 +233,8 @@
     transition: background 0.1s, border-color 0.1s;
     box-shadow: none;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
         background: rgba(0, 0, 128, 0.08);
         border-color: var(--win95-shadow);
         color: var(--win95-shadow);

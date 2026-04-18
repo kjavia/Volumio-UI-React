@@ -12,3 +12,31 @@
 }
 
 @import './styles/home-responsive.scss';
+
+/* ── Global keyboard focus indicator ──
+   Provides a visible focus ring for all interactive elements when
+   navigated via keyboard (:focus-visible).  Theme-specific rules can
+   override this with their own styling. */
+:focus-visible {
+  outline: 5x solid rgba(255, 255, 255, 0.85);
+  outline-offset: 2px;
+}
+
+/* Suppress the ring on containers that receive programmatic focus */
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
+/* ── Slider focus feedback ──
+   The real <input type="range"> is invisible (opacity-0) over the custom
+   track.  When it receives keyboard focus, highlight the visual knob via
+   :focus-within on the shared parent. */
+.slider-track:focus-within .slider-cap {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.7);
+  outline: none;
+}
+
+/* The hidden range itself doesn't need a visible outline */
+.slider-track input[type="range"]:focus-visible {
+  outline: none;
+}

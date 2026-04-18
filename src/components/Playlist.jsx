@@ -57,7 +57,10 @@ const Playlist = ({ open, onClose, queue, currentPosition, isPlaying, onPlay, on
                 ref={isCurrent ? activeRef : null}
                 className={`playlist-item d-flex align-items-center gap-2 ${isCurrent ? 'playlist-item--active' : ''
                   }`}
+                role="button"
+                tabIndex={0}
                 onClick={() => onPlay(index)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onPlay(index); } }}
               >
                 {/* Album art with play overlay */}
                 <div className="playlist-art-wrap">

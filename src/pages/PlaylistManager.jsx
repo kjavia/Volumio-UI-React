@@ -144,7 +144,10 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
                     width: '100%',
                     transform: `translateY(${virtualItem.start}px)`,
                   }}
+                  role="button"
+                  tabIndex={0}
                   onClick={() => onSelect(album.uri)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect(album.uri); } }}
                 >
                   <img
                     className="pm-album-item__thumb"
@@ -170,7 +173,10 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
                 key={album.uri}
                 className={`pm-album-item${album.uri === selectedAlbumUri ? ' pm-album-item--active' : ''}`}
                 title={`${album.title}${album.artist ? ` — ${album.artist}` : ''}${album.year ? ` (${album.year})` : ''}`}
+                role="button"
+                tabIndex={0}
                 onClick={() => onSelect(album.uri)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect(album.uri); } }}
               >
                 <img
                   className="pm-album-item__thumb"

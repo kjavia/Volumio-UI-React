@@ -1564,8 +1564,10 @@ pre {
   border-color: #888888;
 }
 .btn:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(118, 178, 240, 0.6), 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  background: linear-gradient(to bottom, #ffffff 0%, #ebebeb 50%, #dddddd 51%, #f9f9f9 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgb(255, 255, 255);
+  outline: 2px solid rgba(118, 178, 240, 0.8);
+  outline-offset: 2px;
 }
 
 .btn {
@@ -1735,7 +1737,7 @@ pre {
 .btn-icon .material-icons {
   font-size: 16px !important;
 }
-.btn-icon:hover {
+.btn-icon:hover, .btn-icon:focus-visible {
   background: rgba(0, 0, 0, 0.06);
   box-shadow: none;
 }
@@ -6959,6 +6961,17 @@ input[type=range]::-moz-range-thumb:active {
 .browse-tile .browse-tile__label {
   font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
   font-weight: 600;
+}
+
+/* ── Focus ring — dark on light frosted-glass background ── */
+.dialog :focus-visible,
+.slide-panel :focus-visible {
+  outline: 5px solid #0a5dc2;
+  outline-offset: 2px;
+}
+.dialog [tabindex="-1"]:focus-visible,
+.slide-panel [tabindex="-1"]:focus-visible {
+  outline: none;
 }
 
 /* ── Digital LCD Clock — Aqua / Brushed Aluminum Variant ───────────────────
