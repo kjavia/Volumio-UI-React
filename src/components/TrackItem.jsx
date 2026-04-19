@@ -156,7 +156,8 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
     // Clamp left edge
     if (left < 4) left = 4;
     if (top !== menuPos.top || left !== menuPos.left) {
-      setMenuPos({ top, left });
+      el.style.top = `${top}px`;
+      el.style.left = `${left}px`;
     }
   }, [menuOpen]); // eslint-disable-line react-hooks/exhaustive-deps
 
