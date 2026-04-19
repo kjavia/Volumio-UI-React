@@ -56,7 +56,6 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  overflow: hidden;
 }
 
 .lsp-top__title {
@@ -66,8 +65,11 @@
   font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 700;
   color: #fff;
-  line-height: 1.2;
-  overflow: visible;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-bottom: 0.15em;
   text-align: left;
 }
 
@@ -614,7 +616,7 @@
 
   .lsp-top__title {
     font-size: clamp(1.4rem, 2.2vw, 2.2rem);
-    line-height: 1.2;
+    line-height: 1.35;
   }
 
   .lsp-top__row3 {
@@ -949,7 +951,7 @@
 
     .lsp-top__title {
       font-size: clamp(1.2rem, 2vw, 2.2rem);
-      line-height: 1.15;
+      line-height: 1.35;
     }
 
     .lsp-top__row2 {
