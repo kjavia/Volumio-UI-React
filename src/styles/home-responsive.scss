@@ -1236,7 +1236,7 @@ body,
 /* ── Album Art Max Space: expand controls panel ── */
 .album-art-max-space .area-controls {
 
-  /* Width overrides: remove hard caps from inline styles */
+  /* Width overrides: remove hard caps from inline styles (all screen sizes) */
   .track-info-group {
     width: 95% !important;
     margin-top: 1.5em !important;
@@ -1253,65 +1253,74 @@ body,
     max-width: 100% !important;
     width: 100% !important;
   }
+}
 
-  /* Larger fonts: raise clamp max values */
-  .responsive-title {
-    font-size: clamp(3rem, 10cqw, 10rem) !important;
-  }
+/* ── Album Art Max Space: enlarged fonts/buttons only for mid-range screens ──
+   These are the in-between resolutions (800×480, 800×600, etc.) where the
+   extra space warrants bigger UI elements. On mobile and large desktops
+   the normal theme sizes are used instead. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .album-art-max-space .area-controls {
 
-  .responsive-artist {
-    font-size: clamp(2rem, 7.6cqw, 8rem) !important;
-  }
+    /* Larger fonts: raise clamp max values */
+    .responsive-title {
+      font-size: clamp(3rem, 10cqw, 10rem) !important;
+    }
 
-  .responsive-album {
-    font-size: clamp(1.7rem, 4.4cqw, 4rem) !important;
-  }
+    .responsive-artist {
+      font-size: clamp(2rem, 7.6cqw, 8rem) !important;
+    }
 
-  .responsive-stream-info {
-    font-size: clamp(1.5rem, 5cqw, 5rem) !important;
-  }
+    .responsive-album {
+      font-size: clamp(1.7rem, 4.4cqw, 4rem) !important;
+    }
 
-  /* Bigger format / hi-res logos */
-  .format-logo-responsive {
-    height: clamp(2rem, 5cqw, 5.5rem) !important;
-  }
+    .responsive-stream-info {
+      font-size: clamp(1.5rem, 5cqw, 5rem) !important;
+    }
 
-  /* Larger transport buttons */
-  .btn-round {
-    width: clamp(60px, 8cqw, 90px) !important;
-    height: clamp(60px, 8cqw, 90px) !important;
-  }
+    /* Bigger format / hi-res logos */
+    .format-logo-responsive {
+      height: clamp(2rem, 5cqw, 5.5rem) !important;
+    }
 
-  .btn-round.btn-sm {
-    width: clamp(43px, 5.7cqw, 64px) !important;
-    height: clamp(43px, 5.7cqw, 64px) !important;
-  }
+    /* Larger transport buttons */
+    .btn-round {
+      width: clamp(60px, 8cqw, 90px) !important;
+      height: clamp(60px, 8cqw, 90px) !important;
+    }
 
-  .btn-round.btn-sm .material-icons {
-    font-size: clamp(1.33rem, 3.2cqw, 2.13rem) !important;
-  }
+    .btn-round.btn-sm {
+      width: clamp(43px, 5.7cqw, 64px) !important;
+      height: clamp(43px, 5.7cqw, 64px) !important;
+    }
 
-  .btn-round .material-icons {
-    font-size: clamp(1.875rem, 4.5cqw, 3rem) !important;
-  }
+    .btn-round.btn-sm .material-icons {
+      font-size: clamp(1.33rem, 3.2cqw, 2.13rem) !important;
+    }
 
-  /* Larger secondary icon buttons */
-  .btn-icon {
-    width: clamp(54px, 7.5cqw, 84px) !important;
-    height: clamp(54px, 7.5cqw, 84px) !important;
-  }
+    .btn-round .material-icons {
+      font-size: clamp(1.875rem, 4.5cqw, 3rem) !important;
+    }
 
-  .btn-icon .material-icons {
-    font-size: clamp(1.875rem, 4.5cqw, 3rem) !important;
-  }
+    /* Larger secondary icon buttons */
+    .btn-icon {
+      width: clamp(54px, 7.5cqw, 84px) !important;
+      height: clamp(54px, 7.5cqw, 84px) !important;
+    }
 
-  /* Seekbar time labels: 2x */
-  .time-label {
-    font-size: 1.6rem !important;
-  }
+    .btn-icon .material-icons {
+      font-size: clamp(1.875rem, 4.5cqw, 3rem) !important;
+    }
 
-  /* Seekbar track: taller to match larger labels */
-  .seekbar-container-wrap .slider-track {
-    height: clamp(14px, 2cqh, 24px) !important;
+    /* Seekbar time labels: 2x */
+    .time-label {
+      font-size: 1.6rem !important;
+    }
+
+    /* Seekbar track: taller to match larger labels */
+    .seekbar-container-wrap .slider-track {
+      height: clamp(14px, 2cqh, 24px) !important;
+    }
   }
 }
