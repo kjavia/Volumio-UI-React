@@ -171,6 +171,35 @@ body,
 
 /* ── No player: expand controls content to fill available space ── */
 .no-player .area-controls {
+  /* Override .home-panel centering so content starts from top and isn't clipped */
+  align-items: flex-start !important;
+  overflow: hidden !important;
+
+  .player-controls-container {
+    justify-content: flex-start !important;
+    padding-top: clamp(0.25rem, 1.5cqh, 3rem) !important;
+  }
+
+  /* Allow controls to shrink on short screens */
+  .player-controls,
+  .seekbar-container-wrap,
+  .volume-manager-wrap {
+    flex-shrink: 1 !important;
+  }
+
+  /* Reduce spacing that eats vertical space */
+  .player-controls {
+    margin-block: clamp(2px, 1.5cqh, 28px) !important;
+  }
+
+  .controls-transport-row {
+    margin-bottom: clamp(2px, 1.5cqh, 32px) !important;
+  }
+
+  .controls-spacer {
+    max-height: clamp(2px, 0.5cqh, 20px) !important;
+  }
+
   .track-info-group {
     width: 95% !important;
   }
@@ -186,51 +215,52 @@ body,
     width: 100% !important;
   }
 
+  /* Scale fonts using min(cqw, cqh) so they shrink on short screens too */
   .responsive-title {
-    font-size: clamp(2.5rem, 8cqw, 8rem) !important;
+    font-size: clamp(1.4rem, min(8cqw, 10cqh), 8rem) !important;
   }
 
   .responsive-artist {
-    font-size: clamp(1.8rem, 6cqw, 6rem) !important;
+    font-size: clamp(1rem, min(6cqw, 7cqh), 6rem) !important;
   }
 
   .responsive-album {
-    font-size: clamp(1.4rem, 4cqw, 4rem) !important;
+    font-size: clamp(0.9rem, min(4cqw, 5cqh), 4rem) !important;
   }
 
   .responsive-stream-info {
-    font-size: clamp(1.2rem, 3.5cqw, 4rem) !important;
+    font-size: clamp(0.8rem, min(3.5cqw, 4cqh), 4rem) !important;
   }
 
   .format-logo-responsive {
-    height: clamp(1.8rem, 4cqw, 4.5rem) !important;
+    height: clamp(1.2rem, min(4cqw, 4.5cqh), 4.5rem) !important;
   }
 
   .btn-round {
-    width: clamp(56px, 7cqw, 84px) !important;
-    height: clamp(56px, 7cqw, 84px) !important;
+    width: clamp(36px, min(7cqw, 9cqh), 84px) !important;
+    height: clamp(36px, min(7cqw, 9cqh), 84px) !important;
   }
 
   .btn-round.btn-sm {
-    width: clamp(40px, 5cqw, 60px) !important;
-    height: clamp(40px, 5cqw, 60px) !important;
+    width: clamp(28px, min(5cqw, 7cqh), 60px) !important;
+    height: clamp(28px, min(5cqw, 7cqh), 60px) !important;
   }
 
   .btn-round .material-icons {
-    font-size: clamp(1.75rem, 4cqw, 2.8rem) !important;
+    font-size: clamp(1.2rem, min(4cqw, 5cqh), 2.8rem) !important;
   }
 
   .btn-round.btn-sm .material-icons {
-    font-size: clamp(1.25rem, 3cqw, 2rem) !important;
+    font-size: clamp(0.9rem, min(3cqw, 4cqh), 2rem) !important;
   }
 
   .btn-icon {
-    width: clamp(48px, 6.5cqw, 78px) !important;
-    height: clamp(48px, 6.5cqw, 78px) !important;
+    width: clamp(32px, min(6.5cqw, 8cqh), 78px) !important;
+    height: clamp(32px, min(6.5cqw, 8cqh), 78px) !important;
   }
 
   .btn-icon .material-icons {
-    font-size: clamp(1.75rem, 4cqw, 2.8rem) !important;
+    font-size: clamp(1.2rem, min(4cqw, 5cqh), 2.8rem) !important;
   }
 
   .time-label {

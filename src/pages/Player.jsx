@@ -25,6 +25,7 @@ import DisconnectedScreen from '@/components/DisconnectedScreen';
 import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
 import VUMeter from '@/components/vu-meters/VUMeter';
+import PeppyMeter from '@/components/PeppyMeter';
 
 const PLAYER_MAP = {
   albumArt: AlbumArtPlayer,
@@ -82,6 +83,8 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
   const backgroundColor = pluginConfig?.backgroundColor || '';
+  const peppyMeterWidth = pluginConfig?.peppyMeterWidth || 480;
+  const peppyMeterHeight = pluginConfig?.peppyMeterHeight || 320;
 
   const spectrumOptions = useMemo(() => {
     const raw = pluginConfig?.spectrumOptions;
@@ -266,6 +269,11 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
             />
           </div>
         )}
+        {showViz && vizType === 'peppyMeter' && (
+          <div className="home-panel area-mobile-viz">
+            <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} />
+          </div>
+        )}
 
         {/* CONTROLS SECTION */}
         <div className="home-panel area-controls text-white">
@@ -377,6 +385,9 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
                 onResumed={onVizResumed}
                 streamUrl={SPECTRUM_STREAM_URL}
               />
+            )}
+            {vizType === 'peppyMeter' && (
+              <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} />
             )}
           </div>
         )}

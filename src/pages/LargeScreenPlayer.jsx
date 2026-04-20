@@ -17,6 +17,7 @@ import GlobePlayer from '@/components/animated-players/GlobePlayer';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
 import SpectrumAnalyzer from '@/components/spectrum-analyzers/SpectrumAnalyzer';
 import VUMeter from '@/components/vu-meters/VUMeter';
+import PeppyMeter from '@/components/PeppyMeter';
 import Playlist from '@/components/Playlist';
 import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
@@ -124,6 +125,8 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
   const showViz = vizType !== 'none';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
   const backgroundColor = pluginConfig?.backgroundColor || '';
+  const peppyMeterWidth = pluginConfig?.peppyMeterWidth || 480;
+  const peppyMeterHeight = pluginConfig?.peppyMeterHeight || 320;
 
   // Ultrawide landscape short — 3-column layout (player | meta | viz)
   // Targets screens like 2650×700 or 1920×515 where width >> height
@@ -264,6 +267,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
       {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
       {vizType === 'vuMeter3' && <VUMeter variant={3} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
       {vizType === 'vuMeter4' && <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+      {vizType === 'peppyMeter' && <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} />}
     </div>
   );
 
@@ -482,6 +486,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
                   {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
                   {vizType === 'vuMeter3' && <VUMeter variant={3} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
                   {vizType === 'vuMeter4' && <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+                  {vizType === 'peppyMeter' && <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} />}
                 </div>
               )}
             </div>
