@@ -1,0 +1,67 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   COLOR UTILITIES - OLED Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.bg-dark {
+    background-color: #000000 !important;
+}
+
+.bg-surface {
+    background-color: var(--device-surface) !important;
+}
+
+.bg-app {
+    background-color: var(--bg-color) !important;
+}
+
+.bg-list-item {
+    background-color: var(--list-item-bg) !important;
+}
+
+.bg-orange {
+    background: var(--color-primary) !important;
+}
+
+.bg-metallic {
+    background: var(--color-gray-800) !important;
+}
+
+/* ─── Border Utilities ────────────────────────────────────────────────── */
+.border-dark {
+    border-color: var(--border-dark) !important;
+}
+
+.border-light {
+    border-color: var(--border-light) !important;
+}
+
+.border-orange {
+    border-color: var(--color-primary) !important;
+}
+
+/* ─── Surface Patterns — pure black with subtle borders ───────────────── */
+.panel {
+    background: #000000;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-dark);
+}
+
+.surface {
+    background: var(--color-gray-800);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-dark);
+}
+
+.device-chrome {
+    background: #000000;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-xl);
+}
+
+.inset-well {
+    background-color: #000000;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-dark);
+}

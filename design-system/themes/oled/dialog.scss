@@ -1,0 +1,335 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DIALOG - OLED Theme
+   Pure black backgrounds with orange accents
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Backdrop ── */
+.dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* ── Dialog Box ── */
+.dialog {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    width: 100%;
+    pointer-events: auto;
+    outline: none;
+    background: #050505;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+/* ── Header ── */
+.dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: #000000;
+    flex-shrink: 0;
+    gap: 12px;
+}
+
+.dialog-title {
+    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: var(--tracking-tight);
+    font-family: var(--font-label);
+}
+
+/* ── Toolbar ── */
+.dialog-toolbar {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.5rem 1rem;
+    flex-shrink: 0;
+
+    .browse-search__input {
+        color: var(--text-secondary);
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.03);
+
+        &:focus {
+            border-color: var(--color-primary);
+        }
+    }
+
+    .browse-search__icon {
+        color: var(--text-secondary);
+    }
+
+    .browse-search__clear {
+        color: var(--color-primary);
+    }
+}
+
+/* ── Body ── */
+.dialog-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 1em;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--color-gray-700);
+        border-radius: 4px;
+    }
+}
+
+/* ── Footer ── */
+.dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: #000000;
+    flex-shrink: 0;
+}
+
+/* ── List Items ── */
+.dialog-list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    background: transparent;
+    border: 1px solid transparent;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 6px;
+    font-family: var(--font-label);
+
+    .material-icons {
+        font-size: 18px;
+        color: var(--text-secondary);
+    }
+
+    &:hover:not(:disabled) {
+        background: rgba(255, 102, 0, 0.12);
+        color: var(--color-primary);
+
+        .material-icons {
+            color: var(--color-primary);
+        }
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &.active {
+        background: rgba(255, 102, 0, 0.15);
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+        font-weight: 600;
+
+        .material-icons {
+            color: var(--color-primary);
+        }
+    }
+}
+
+/* ── Alerts ── */
+.dialog-alert {
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    margin-bottom: 1rem;
+    border: 1px solid;
+
+    &.error {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--color-danger);
+        border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    &.success {
+        background: rgba(34, 197, 94, 0.1);
+        color: var(--color-success);
+        border-color: rgba(34, 197, 94, 0.3);
+    }
+}
+
+/* ── Section / Label / Input ── */
+.dialog-section-title {
+    font-family: var(--font-label);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-gray-500);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.dialog-label {
+    display: block;
+    font-family: var(--font-label);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-gray-500);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.dialog-input {
+    width: 100%;
+    padding: 8px 12px;
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+
+    &:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.25);
+    }
+
+    &::placeholder {
+        color: var(--color-gray-600);
+    }
+}
+
+/* ── Track Info ── */
+.dialog-track-info {
+    padding: 12px 14px;
+    margin-bottom: 1rem;
+    border-radius: var(--radius-md);
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dialog-track-title {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+    line-height: 1.4;
+}
+
+.dialog-track-meta {
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.modal-dialog,
+.dialog-box {
+    background: #050505;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dialog-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: var(--tracking-tight);
+    margin: 0;
+}
+
+.dialog-body {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: var(--leading-relaxed);
+}
+
+.dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* ─── Add to Playlist list ─────────────────────────────────────────────── */
+.modal-list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background 0.12s;
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    font-weight: 500;
+
+    .material-icons {
+        font-size: 18px;
+        color: var(--text-secondary);
+    }
+
+    &:hover {
+        background: rgba(255, 102, 0, 0.12);
+        color: var(--color-primary-light);
+
+        .material-icons {
+            color: var(--color-primary-light);
+        }
+    }
+}
+
+/* ── Browse Tiles ── */
+.browse-tile {
+    .browse-tile__icon {
+        font-size: clamp(18px, 3cqi, 30px) !important;
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .browse-tile__label {
+        font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
+        font-weight: 600;
+    }
+}
+
+/* ── Focus ring — orange on black background ── */
+.dialog :focus-visible,
+.slide-panel :focus-visible {
+    outline: 3px solid #ff6600 !important;
+    outline-offset: 2px !important;
+}
+
+.dialog [tabindex="-1"]:focus-visible,
+.slide-panel [tabindex="-1"]:focus-visible {
+    outline: none !important;
+}

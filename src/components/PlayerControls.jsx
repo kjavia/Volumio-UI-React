@@ -29,7 +29,7 @@ const PlayerControls = ({
           onClick={onPlayPause}
           label={isPlaying ? 'Pause' : 'Play'}
         >
-          <span className="material-icons play-icon">{isPlaying ? 'pause' : 'play_arrow'}</span>
+          <span className={`material-icons play-icon ${isPlaying ? 'is-pause' : 'is-play'}`}>{isPlaying ? 'pause' : 'play_arrow'}</span>
         </Button>
 
         <Button classNames="btn-round btn-sm" onClick={onNext} label="Next">

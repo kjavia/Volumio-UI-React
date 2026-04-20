@@ -1,0 +1,631 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MEDIA PLAYER - OLED Theme
+   Pure black with orange accents, responsive typography
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.player-casing {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  background-color: transparent;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  transition: max-width 0.3s ease;
+}
+
+/* ─── Layout wrappers ─────────────────────────────────────────────────── */
+.media-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.controls-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ─── Screen Area ─────────────────────────────────────────────────────── */
+.screen-frame {
+  background: #000000;
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  justify-content: center;
+}
+
+/* Force pure black player background — hide blurred album art wallpaper */
+.container-fluid.bg-dark>.position-absolute {
+  background-image: none !important;
+  background-color: #000000 !important;
+  filter: none !important;
+}
+
+/* ─── Album Art ────────────────────────────────────────────────────────── */
+.album-art-container,
+.vinyl-container,
+.cd-container {
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* ─── Track Info ───────────────────────────────────────────────────────── */
+.track-info {
+  font-family: var(--font-display);
+  color: var(--color-primary);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.track-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 4vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: var(--tracking-tight);
+  white-space: nowrap;
+  color: var(--color-primary);
+}
+
+.artist-name,
+.album-name {
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 2.2vw, 1.1rem);
+  color: var(--color-primary);
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+/* ─── Responsive Typography (container-query based) ────────────────────── */
+.responsive-title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 4.5cqw, 3rem);
+  color: var(--color-primary);
+}
+
+.responsive-artist {
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 3.5cqw, 2.5rem);
+  color: var(--color-primary);
+}
+
+.responsive-album {
+  font-family: var(--font-display);
+  font-size: clamp(0.7rem, 1.8cqw, 0.95rem);
+  color: var(--color-primary);
+}
+
+.responsive-stream-info {
+  font-family: var(--font-display);
+  font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
+  color: var(--color-primary);
+}
+
+.format-logo-responsive {
+  height: clamp(1.3rem, 3.8cqw, 4.2rem);
+  display: block;
+}
+
+/* Invert format logos to white for visibility on black bg */
+.album-footer__format-logo {
+  filter: brightness(0) invert(1);
+}
+
+/* ─── Seekbar ──────────────────────────────────────────────────────────── */
+.seekbar-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.time-display {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+  min-width: 38px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Playback Control Buttons ─────────────────────────────────────────── */
+.controls-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.control-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color-primary);
+  font-size: 20px;
+  transition: background 0.15s;
+
+  &.play-btn {
+    width: 54px;
+    height: 54px;
+    background: #000000;
+    color: var(--color-primary);
+  }
+
+  &:hover {
+    background: rgba(255, 102, 0, 0.12);
+  }
+
+  &.play-btn:hover {
+    background: rgba(255, 102, 0, 0.12);
+  }
+
+  &:active {
+    background: rgba(255, 102, 0, 0.08);
+    transform: scale(0.95);
+  }
+}
+
+/* ── OLED: All player buttons → black bg + orange text ─────────────────── */
+.controls-transport-row .btn,
+.controls-transport-row .btn-round,
+.controls-transport-row .btn-primary,
+.lsp-btn-group--center .btn-round,
+.lsp-btn-group--center .btn-primary {
+  background: #000000 !important;
+  color: var(--color-primary) !important;
+  border: 1px dotted rgba(255, 102, 0, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls-transport-row .btn:hover,
+.controls-transport-row .btn-round:hover,
+.controls-transport-row .btn-primary:hover,
+.lsp-btn-group--center .btn-round:hover,
+.lsp-btn-group--center .btn-primary:hover {
+  background: rgba(255, 102, 0, 0.1) !important;
+}
+
+.controls-transport-row .btn:active,
+.controls-transport-row .btn-primary:active,
+.lsp-btn-group--center .btn-round:active,
+.lsp-btn-group--center .btn-primary:active {
+  background: rgba(255, 102, 0, 0.05) !important;
+}
+
+/* Secondary player controls (shuffle, repeat, playlist, etc.) */
+.player-controls .btn-icon,
+.lsp-btn-group .btn-icon {
+  background: #000000 !important;
+  color: var(--color-primary) !important;
+  border: 1px dotted rgba(255, 102, 0, 0.2);
+}
+
+.player-controls .btn-icon:hover,
+.lsp-btn-group .btn-icon:hover {
+  background: rgba(255, 102, 0, 0.1) !important;
+}
+
+.player-controls .btn-icon.active,
+.lsp-btn-group .btn-icon.active {
+  background: #000000 !important;
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary);
+}
+
+/* ── LSP: Force orange on ALL button icons (left, center, right groups) ── */
+.lsp-btn .material-icons {
+  color: var(--color-primary) !important;
+}
+
+/* ── LSP: Replace material icons in left/right groups with text ────────── */
+.lsp-btn-group--left .btn-icon .material-icons,
+.lsp-btn-group--right .btn-icon .material-icons {
+  font-size: 0 !important;
+  color: transparent !important;
+  text-indent: -9999px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &::after {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    text-indent: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ─── Progress Sliders ──────────────────────────────────────────────────── */
+.slider-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 1em;
+}
+
+.slider-track {
+  position: relative;
+  flex-grow: 1;
+  height: 4px;
+  background: var(--color-gray-700);
+  border-radius: 2px;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.slider-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 2px;
+  position: relative;
+}
+
+.slider-cap {
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+
+  &::after {
+    content: '#';
+  }
+}
+
+/* ─── Volume Slider ────────────────────────────────────────────────────── */
+.volume-manager {
+
+  /* Ensure the value label never collapses flush against the slider */
+  .small {
+    min-width: 3.5ch;
+    padding-left: 0.4rem;
+  }
+
+}
+
+/* ─── Player Controls Container ────────────────────────────────────────── */
+.player-controls-container {
+  gap: 12px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   OLED: All player text → Doto + Orange, full brightness (no dim)
+   Covers standard player, LSP, seekbar labels, stream info, etc.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Seekbar time labels ───────────────────────────────────────────────── */
+.seekbar-labels,
+.time-label {
+  font-family: var(--font-display) !important;
+  color: var(--color-primary) !important;
+  opacity: 1 !important;
+}
+
+/* ── Stream info text & separators — full brightness ───────────────────── */
+.stream-info,
+.stream-info span,
+.stream-info .text-white-50 {
+  font-family: var(--font-display);
+  color: var(--color-primary) !important;
+  opacity: 1 !important;
+}
+
+/* ── Large Screen Player overrides ─────────────────────────────────────── */
+.lsp-top__title {
+  font-family: var(--font-display);
+  color: var(--color-primary);
+}
+
+.lsp-top__artist,
+.lsp-top__album,
+.lsp-top__row2 {
+  font-family: var(--font-display);
+  color: var(--color-primary);
+  opacity: 1 !important;
+}
+
+.lsp-stream-info,
+.lsp-stream-info span {
+  font-family: var(--font-display);
+  color: var(--color-primary) !important;
+  opacity: 1 !important;
+}
+
+.lsp-bottom__row2 .seekbar-labels,
+.lsp-bottom__row2 .time-label {
+  font-family: var(--font-display) !important;
+  color: var(--color-primary) !important;
+  opacity: 1 !important;
+}
+
+/* ── Service logo — full brightness ────────────────────────────────────── */
+.service-logo-img {
+  opacity: 1 !important;
+}
+
+.service-logo-icon {
+  opacity: 1 !important;
+  color: var(--color-primary) !important;
+}
+
+/* ── Service logo badge (text fallback) ────────────────────────────────── */
+.service-logo-badge {
+  font-family: var(--font-display);
+  color: var(--color-primary);
+  opacity: 1 !important;
+  border-color: var(--color-primary);
+}
+
+/* ── Volume label ──────────────────────────────────────────────────────── */
+.volume-manager .small,
+.volume-manager .text-white {
+  font-family: var(--font-display) !important;
+  color: var(--color-primary) !important;
+  opacity: 1 !important;
+}
+
+.volume-manager .material-icons {
+  color: var(--color-primary) !important;
+}
+
+/* ── Force pure black on Large Screen Player background ────────────────── */
+.lsp-root {
+  background: #000000;
+}
+
+.lsp-bg {
+  background-image: none !important;
+  background-color: #000000 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   OLED: Text-character transport icons  >  <<  >>
+   Replace Material Icons with Doto-font text glyphs
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Shared: hide icon ligature, show ::after content instead */
+.controls-transport-row .btn-round .material-icons,
+.lsp-btn-group--center .btn-round .material-icons {
+  font-size: 0 !important;
+  color: transparent !important;
+  text-indent: -9999px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &::after {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.08em;
+    line-height: 1;
+    color: var(--color-primary);
+    text-indent: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Play/Pause button text color: orange on black bg */
+.controls-transport-row .btn-primary .material-icons::after,
+.lsp-btn-group--center .btn-primary .material-icons::after {
+  color: var(--color-primary);
+}
+
+/* Previous  =  « */
+.controls-transport-row .btn-round:first-child .material-icons::after,
+[title="Previous"] .material-icons::after {
+  content: '«';
+}
+
+/* Play */
+.controls-transport-row .btn-primary .material-icons.is-play::after,
+.lsp-btn-group--center .btn-primary .material-icons.is-play::after {
+  content: '>';
+  font-size: 1.8rem;
+}
+
+/* Pause */
+.controls-transport-row .btn-primary .material-icons.is-pause::after,
+.lsp-btn-group--center .btn-primary .material-icons.is-pause::after {
+  content: '||';
+  font-size: 1.4rem;
+}
+
+/* Next  =  » */
+.controls-transport-row .btn-round:last-child .material-icons::after,
+[title="Next"] .material-icons::after {
+  content: '»';
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   OLED: Replace secondary control Material Icons with text glyphs
+   Uses [title] attribute set by Button component to target each icon
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Shared: hide icon ligature in all player btn-icon buttons */
+.player-controls .btn-icon .material-icons,
+.lsp-btn-group .btn-icon .material-icons {
+  font-size: 0 !important;
+  color: transparent !important;
+  text-indent: -9999px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &::after {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    text-indent: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Shuffle */
+[title="Shuffle Off"] .material-icons::after,
+[title="Shuffle On"] .material-icons::after {
+  content: 'SHFL';
+}
+
+/* Repeat */
+[title="Repeat Off"] .material-icons::after,
+[title="Repeat On"] .material-icons::after {
+  content: 'RPT';
+}
+
+/* Add to Playlist */
+[title="Add to Playlist"] .material-icons::after {
+  content: '+LIST';
+}
+
+/* Favourite */
+[title="Add to Favourites"] .material-icons::after {
+  content: 'FAV';
+}
+
+[title="Remove from Favourites"] .material-icons::after {
+  content: 'FAV';
+}
+
+/* Show Playlist / Queue */
+[title="Show Playlist"] .material-icons::after,
+[title="Current Playlist"] .material-icons::after {
+  content: 'LIST';
+}
+
+/* Browse */
+[title="Browse"] .material-icons::after {
+  content: 'LIB';
+}
+
+/* Volume */
+[title="Volume"] .material-icons::after {
+  content: 'VOL';
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   OLED: LSP Volume Popup — black bg, orange slider, Doto font
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.lsp-volume-popup {
+  background: #000000 !important;
+  backdrop-filter: none !important;
+  border: 1px dotted rgba(255, 102, 0, 0.3) !important;
+  box-shadow: none !important;
+}
+
+.lsp-volume-popup__value {
+  font-family: var(--font-display) !important;
+  color: var(--color-primary) !important;
+  font-size: 0.9rem !important;
+}
+
+.lsp-volume-popup__range {
+  background: var(--color-gray-700) !important;
+  accent-color: var(--color-primary) !important;
+
+  &::-webkit-slider-thumb {
+    background: var(--color-primary) !important;
+    border-radius: 0 !important;
+    width: 16px !important;
+    height: 16px !important;
+    box-shadow: none !important;
+  }
+
+  &::-moz-range-thumb {
+    background: var(--color-primary) !important;
+    border-radius: 0 !important;
+    width: 16px !important;
+    height: 16px !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Mute button inside popup */
+.lsp-volume-popup__mute {
+  background: #000000 !important;
+  color: var(--color-primary) !important;
+  border: 1px dotted rgba(255, 102, 0, 0.2) !important;
+}
+
+.lsp-volume-popup__mute .material-icons {
+  color: var(--color-primary) !important;
+}

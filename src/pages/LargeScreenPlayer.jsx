@@ -353,7 +353,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
           <span className="material-icons">skip_previous</span>
         </Button>
         <Button classNames="btn-round btn-primary lsp-btn lsp-btn--lg" onClick={handlePlayPause} label={isPlaying ? 'Pause' : 'Play'}>
-          <span className="material-icons play-icon">{isPlaying ? 'pause' : 'play_arrow'}</span>
+          <span className={`material-icons play-icon ${isPlaying ? 'is-pause' : 'is-play'}`}>{isPlaying ? 'pause' : 'play_arrow'}</span>
         </Button>
         <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={next} label="Next">
           <span className="material-icons">skip_next</span>
@@ -507,7 +507,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
                   <span className="material-icons">skip_previous</span>
                 </Button>
                 <Button classNames="btn-round btn-primary lsp-btn lsp-btn--lg" onClick={handlePlayPause} label={isPlaying ? 'Pause' : 'Play'}>
-                  <span className="material-icons play-icon">{isPlaying ? 'pause' : 'play_arrow'}</span>
+                  <span className={`material-icons play-icon ${isPlaying ? 'is-pause' : 'is-play'}`}>{isPlaying ? 'pause' : 'play_arrow'}</span>
                 </Button>
                 <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={next} label="Next">
                   <span className="material-icons">skip_next</span>

@@ -44,6 +44,58 @@ body,
   color: var(--sp-stream-info-color) !important;
 }
 
+/* ── Control color — buttons, sliders, labels next to sliders ── */
+:root.sp-has-control-color .controls-transport-row .btn,
+:root.sp-has-control-color .controls-transport-row .btn-round,
+:root.sp-has-control-color .controls-transport-row .btn-primary,
+:root.sp-has-control-color .player-controls .btn-icon,
+:root.sp-has-control-color .lsp-btn-group .btn-round,
+:root.sp-has-control-color .lsp-btn-group .btn-primary,
+:root.sp-has-control-color .lsp-btn-group .btn-icon {
+  color: var(--sp-control-color) !important;
+  border-color: var(--sp-control-color) !important;
+}
+
+:root.sp-has-control-color .controls-transport-row .material-icons,
+:root.sp-has-control-color .player-controls .btn-icon .material-icons,
+:root.sp-has-control-color .lsp-btn-group .material-icons {
+  color: var(--sp-control-color) !important;
+}
+
+:root.sp-has-control-color .slider-fill {
+  background: var(--sp-control-color) !important;
+}
+
+:root.sp-has-control-color .slider-cap {
+  color: var(--sp-control-color) !important;
+}
+
+:root.sp-has-control-color .seekbar-labels,
+:root.sp-has-control-color .time-label {
+  color: var(--sp-control-color) !important;
+}
+
+:root.sp-has-control-color .volume-manager .material-icons {
+  color: var(--sp-control-color) !important;
+}
+
+:root.sp-has-control-color .volume-manager .small,
+:root.sp-has-control-color .volume-manager .text-white {
+  color: var(--sp-control-color) !important;
+}
+
+:root.sp-has-control-color .lsp-volume-popup__value {
+  color: var(--sp-control-color) !important;
+}
+
+:root.sp-has-control-color .lsp-volume-popup__range::-webkit-slider-thumb {
+  background: var(--sp-control-color) !important;
+}
+
+:root.sp-has-control-color .lsp-volume-popup__range::-moz-range-thumb {
+  background: var(--sp-control-color) !important;
+}
+
 /* ── Grid Container ── */
 .home-grid {
   display: grid;

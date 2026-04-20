@@ -1,0 +1,50 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   OLED THEME - Main Index
+   Pure black OLED display with orange accent
+   Typography: Doto (display) + Inter (body)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@import './variables.scss';
+@import './typography.scss';
+@import './colors.scss';
+@import '../common/analog-clock';
+@import '../common/dialog';
+@import './button.scss';
+@import './forms.scss';
+@import './progressbar.scss';
+@import './sliders.scss';
+@import './knobs.scss';
+@import './tabs.scss';
+@import './media-player.scss';
+@import './album-browser.scss';
+@import './playlist.scss';
+@import './sidepanel.scss';
+@import './context-menu.scss';
+@import './dialog.scss';
+@import './digital-clock.scss';
+@import './analog-clock.scss';
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+// ─── Global Scrollbar ──────────────────────────────────────────────────────
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-gray-700);
+    border-radius: 4px;
+
+    &:hover {
+        background: var(--color-gray-600);
+    }
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}

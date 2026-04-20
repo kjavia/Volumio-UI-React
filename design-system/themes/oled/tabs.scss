@@ -1,0 +1,78 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TABS - OLED Theme
+   Minimal tabs with orange active indicator
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.nav-tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0 4px;
+}
+
+.nav-item {
+    list-style: none;
+}
+
+.nav-link {
+    display: block;
+    padding: 8px 16px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-secondary);
+    border: none;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    background: transparent;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+    text-decoration: none;
+    margin-bottom: -1px;
+
+    &:hover {
+        color: var(--text-primary);
+        background: rgba(255, 102, 0, 0.08);
+    }
+
+    &.active {
+        color: var(--color-primary);
+        border-bottom: 2px solid var(--color-primary);
+        background: transparent;
+    }
+}
+
+.tab-pane {
+    display: none;
+    padding: 16px 0;
+
+    &.active {
+        display: block;
+    }
+}
+
+/* ─── Pill-style tabs ────────────────────────────────────────────────── */
+.nav-pills {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: #0a0a0a;
+    border-radius: var(--radius-md);
+
+    .nav-link {
+        padding: 6px 14px;
+        border-radius: var(--radius-sm);
+        margin-bottom: 0;
+        color: var(--text-secondary);
+
+        &.active {
+            background: var(--color-primary);
+            color: #000000;
+            border-bottom: none;
+        }
+
+        &:hover:not(.active) {
+            background: rgba(255, 102, 0, 0.08);
+        }
+    }
+}

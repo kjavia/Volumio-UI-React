@@ -204,6 +204,7 @@ const Home = () => {
       '--sp-artist-color': { val: pluginConfig?.artistColor, cls: 'sp-has-artist-color' },
       '--sp-album-color': { val: pluginConfig?.albumColor, cls: 'sp-has-album-color' },
       '--sp-stream-info-color': { val: pluginConfig?.streamInfoColor, cls: 'sp-has-stream-info-color' },
+      '--sp-control-color': { val: pluginConfig?.controlColor, cls: 'sp-has-control-color' },
     };
     Object.entries(colorMap).forEach(([prop, { val, cls }]) => {
       if (val) {
@@ -214,7 +215,7 @@ const Home = () => {
         root.classList.remove(cls);
       }
     });
-  }, [pluginConfig?.trackColor, pluginConfig?.artistColor, pluginConfig?.albumColor, pluginConfig?.streamInfoColor]);
+  }, [pluginConfig?.trackColor, pluginConfig?.artistColor, pluginConfig?.albumColor, pluginConfig?.streamInfoColor, pluginConfig?.controlColor]);
 
   const showPlayer = !idle || forcePlayer;
 

@@ -1,0 +1,148 @@
+/* ── Analog Clock — OLED Theme ─────────────────────────────────────────────
+ * Pure black face, orange hands and accents, Inter font for digits
+ * ──────────────────────────────────────────────────────────────────────── */
+
+/* Bezel — subtle orange-tinted ring on black */
+.clock-bezel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 3%;
+    background: #000000;
+    border: 2px solid rgba(255, 102, 0, 0.2);
+    box-shadow: none;
+}
+
+/* Face — pure black dial */
+.clock-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #000000;
+    border: 1px solid rgba(255, 102, 0, 0.1);
+}
+
+/* ── Tick marks ─────────────────────────────────────────────────────────── */
+
+.clock-tick::before {
+    content: '';
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 4%;
+    border-radius: 1px;
+}
+
+/* Hour ticks — orange-tinted, prominent */
+.clock-tick--hour::before {
+    height: 10%;
+    background: rgba(255, 133, 51, 0.8);
+    width: 3px;
+    margin-left: -0.5px;
+}
+
+/* Minute ticks — orange dim */
+.clock-tick--minute::before {
+    height: 5%;
+    background: rgba(255, 102, 0, 0.3);
+    width: 1px;
+}
+
+/* ── Hour digits ────────────────────────────────────────────────────────── */
+.clock-hour-digit {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+/* ── Hands ──────────────────────────────────────────────────────────────── */
+.clock-hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 2px;
+}
+
+/* Hour hand */
+.clock-hand--hour {
+    width: 5px;
+    height: 25%;
+    margin-left: -2.5px;
+    background: var(--color-primary);
+    border-radius: 3px 3px 1px 1px;
+    z-index: 3;
+}
+
+/* Minute hand */
+.clock-hand--minute {
+    width: 3px;
+    height: 35%;
+    margin-left: -1.5px;
+    background: var(--color-primary-light);
+    border-radius: 1.5px 1.5px 1px 1px;
+    z-index: 4;
+}
+
+/* Second hand — orange */
+.clock-hand--second {
+    width: 1.5px;
+    height: 38%;
+    margin-left: -0.75px;
+    background: #ff6600;
+    box-shadow: none;
+    border-radius: 1px;
+    z-index: 5;
+    transition: none;
+}
+
+/* Center cap — orange pivot dot */
+.clock-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5%;
+    height: 5%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: #ff6600;
+    box-shadow: none;
+    z-index: 6;
+}
+
+.clock-face-day {
+    font-family: var(--font-display);
+    font-size: clamp(0.6rem, 3cqi, 1rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.clock-face-date {
+    font-family: var(--font-display);
+    font-size: clamp(0.6rem, 3cqi, 1rem);
+    font-weight: 500;
+    color: var(--color-primary);
+    white-space: nowrap;
+}
+
+/* ── Weather on face ────────────────────────────────────────────────────── */
+
+.clock-face-weather-icon {
+    font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+    color: #ff6600;
+}
+
+.clock-face-weather-temp {
+    font-family: var(--font-display);
+    font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    white-space: nowrap;
+}
