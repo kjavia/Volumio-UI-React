@@ -267,7 +267,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
     </div>
   );
 
-  const playerBlock = (
+  const playerBlock = effectivePlayerType !== 'none' ? (
     <div
       className="lsp-player-area"
       onDoubleClick={cyclePlayer}
@@ -279,7 +279,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
     >
       <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
     </div>
-  );
+  ) : null;
 
   const metaBlock = (
     <div className="lsp-meta-area">

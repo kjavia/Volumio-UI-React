@@ -237,19 +237,21 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
       {/* Main Grid Layout */}
       <div className={`home-grid position-relative ${!showViz ? 'no-viz' : ''} ${albumArtMaxSpace && effectivePlayerType === 'albumArt' ? 'album-art-max-space' : ''}`} style={{ zIndex: 1 }}>
         {/* PLAYER SECTION */}
-        <div className="home-panel area-player">
-          <div
-            className="player-responsive"
-            onDoubleClick={cyclePlayer}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-            onMouseDown={handleTouchStart}
-            onMouseUp={handleTouchEnd}
-            onMouseLeave={handleTouchEnd}
-          >
-            <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} maxSpace={albumArtMaxSpace && effectivePlayerType === 'albumArt'} />
+        {effectivePlayerType !== 'none' && (
+          <div className="home-panel area-player">
+            <div
+              className="player-responsive"
+              onDoubleClick={cyclePlayer}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onMouseDown={handleTouchStart}
+              onMouseUp={handleTouchEnd}
+              onMouseLeave={handleTouchEnd}
+            >
+              <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} maxSpace={albumArtMaxSpace && effectivePlayerType === 'albumArt'} />
+            </div>
           </div>
-        </div>
+        )}
 
         {/* MOBILE VISUALIZER — between player and controls on mobile only */}
         {showViz && vizType === 'spectrum' && (
