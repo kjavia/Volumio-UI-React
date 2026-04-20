@@ -192,6 +192,16 @@
   /* pushes row1 + row2 + row3 to the bottom of lsp-bottom */
 }
 
+/* When player type is "none", viz takes full width */
+.lsp-bottom__row1--no-player {
+  justify-content: center;
+
+  .lsp-bottom__viz {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+}
+
 /* Mini animated player — 400 × 400 px, left edge */
 .lsp-bottom__player {
   flex: 0 0 400px;

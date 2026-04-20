@@ -235,7 +235,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
       ) : null}
 
       {/* Main Grid Layout */}
-      <div className={`home-grid position-relative ${!showViz ? 'no-viz' : ''} ${albumArtMaxSpace && effectivePlayerType === 'albumArt' ? 'album-art-max-space' : ''}`} style={{ zIndex: 1 }}>
+      <div className={`home-grid position-relative ${!showViz ? 'no-viz' : ''} ${albumArtMaxSpace && effectivePlayerType === 'albumArt' ? 'album-art-max-space' : ''} ${effectivePlayerType === 'none' ? 'no-player' : ''}`} style={{ zIndex: 1 }}>
         {/* PLAYER SECTION */}
         {effectivePlayerType !== 'none' && (
           <div className="home-panel area-player">

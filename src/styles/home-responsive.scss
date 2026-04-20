@@ -155,6 +155,93 @@ body,
   display: none;
 }
 
+/* ── No player: controls fill the space the player would occupy ── */
+.home-grid.no-player {
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 1fr;
+  grid-template-areas:
+    'mobile-viz'
+    'controls';
+
+  &.no-viz {
+    grid-template-rows: 1fr;
+    grid-template-areas: 'controls';
+  }
+}
+
+/* ── No player: expand controls content to fill available space ── */
+.no-player .area-controls {
+  .track-info-group {
+    width: 95% !important;
+  }
+
+  .seekbar-container-wrap,
+  .volume-manager-wrap {
+    width: 92% !important;
+    max-width: 100% !important;
+  }
+
+  .slider-container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .responsive-title {
+    font-size: clamp(2.5rem, 8cqw, 8rem) !important;
+  }
+
+  .responsive-artist {
+    font-size: clamp(1.8rem, 6cqw, 6rem) !important;
+  }
+
+  .responsive-album {
+    font-size: clamp(1.4rem, 4cqw, 4rem) !important;
+  }
+
+  .responsive-stream-info {
+    font-size: clamp(1.2rem, 3.5cqw, 4rem) !important;
+  }
+
+  .format-logo-responsive {
+    height: clamp(1.8rem, 4cqw, 4.5rem) !important;
+  }
+
+  .btn-round {
+    width: clamp(56px, 7cqw, 84px) !important;
+    height: clamp(56px, 7cqw, 84px) !important;
+  }
+
+  .btn-round.btn-sm {
+    width: clamp(40px, 5cqw, 60px) !important;
+    height: clamp(40px, 5cqw, 60px) !important;
+  }
+
+  .btn-round .material-icons {
+    font-size: clamp(1.75rem, 4cqw, 2.8rem) !important;
+  }
+
+  .btn-round.btn-sm .material-icons {
+    font-size: clamp(1.25rem, 3cqw, 2rem) !important;
+  }
+
+  .btn-icon {
+    width: clamp(48px, 6.5cqw, 78px) !important;
+    height: clamp(48px, 6.5cqw, 78px) !important;
+  }
+
+  .btn-icon .material-icons {
+    font-size: clamp(1.75rem, 4cqw, 2.8rem) !important;
+  }
+
+  .time-label {
+    font-size: clamp(0.9rem, 2cqw, 1.6rem) !important;
+  }
+
+  .seekbar-container-wrap .slider-track {
+    height: clamp(6px, 1.2cqh, 16px) !important;
+  }
+}
+
 /* ── Panel base ──
    Every panel fills its grid cell, centers its child, and NEVER overflows.
    container-type: size  →  children can use cqw/cqh units (container-relative).
@@ -222,6 +309,19 @@ body,
         grid-template-columns: 2fr 3fr;
       }
     }
+
+    &.no-player {
+      grid-template-columns: 1fr;
+      grid-template-rows: 70fr 30fr;
+      grid-template-areas:
+        'controls'
+        'spectrum';
+
+      &.no-viz {
+        grid-template-rows: 1fr;
+        grid-template-areas: 'controls';
+      }
+    }
   }
 
   /* Mobile viz strip is not used on desktop — hide it entirely */
@@ -259,6 +359,17 @@ body,
 
       &.no-viz {
         grid-template-columns: 2fr 3fr;
+      }
+    }
+
+    &.no-player {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-template-areas: 'controls spectrum';
+
+      &.no-viz {
+        grid-template-columns: 1fr;
+        grid-template-areas: 'controls';
       }
     }
   }

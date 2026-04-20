@@ -460,17 +460,19 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
           {/* ════ BOTTOM SECTION ════ */}
           <div className="lsp-bottom">
             {/* Row 1: Mini player (left) + Visualization (right) */}
-            <div className="lsp-bottom__row1">
-              <div className="lsp-bottom__player"
-                onDoubleClick={cyclePlayer}
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-                onMouseDown={handleTouchStart}
-                onMouseUp={handleTouchEnd}
-                onMouseLeave={handleTouchEnd}
-              >
-                <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
-              </div>
+            <div className={`lsp-bottom__row1${effectivePlayerType === 'none' ? ' lsp-bottom__row1--no-player' : ''}`}>
+              {effectivePlayerType !== 'none' && (
+                <div className="lsp-bottom__player"
+                  onDoubleClick={cyclePlayer}
+                  onTouchStart={handleTouchStart}
+                  onTouchEnd={handleTouchEnd}
+                  onMouseDown={handleTouchStart}
+                  onMouseUp={handleTouchEnd}
+                  onMouseLeave={handleTouchEnd}
+                >
+                  <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
+                </div>
+              )}
               {showViz && (
                 <div className="lsp-bottom__viz">
                   {vizType === 'spectrum' && (
