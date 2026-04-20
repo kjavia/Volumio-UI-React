@@ -4250,7 +4250,7 @@ input[type=range]::-moz-range-thumb:active {
 /* Shuffle */
 [title="Shuffle Off"] .material-icons::after,
 [title="Shuffle On"] .material-icons::after {
-  content: "SHFL";
+  content: "SHF";
 }
 
 /* Repeat */
@@ -4261,7 +4261,8 @@ input[type=range]::-moz-range-thumb:active {
 
 /* Add to Playlist */
 [title="Add to Playlist"] .material-icons::after {
-  content: "+LIST";
+  content: "+";
+  font-size: 1.4rem;
 }
 
 /* Favourite */
@@ -4276,7 +4277,7 @@ input[type=range]::-moz-range-thumb:active {
 /* Show Playlist / Queue */
 [title="Show Playlist"] .material-icons::after,
 [title="Current Playlist"] .material-icons::after {
-  content: "LIST";
+  content: "LST";
 }
 
 /* Browse */

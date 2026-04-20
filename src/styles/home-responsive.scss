@@ -62,6 +62,14 @@ body,
   color: var(--sp-control-color) !important;
 }
 
+/* Override OLED text-replacement ::after pseudo-elements */
+:root.sp-has-control-color .controls-transport-row .btn-round .material-icons::after,
+:root.sp-has-control-color .player-controls .btn-icon .material-icons::after,
+:root.sp-has-control-color .lsp-btn-group .btn-round .material-icons::after,
+:root.sp-has-control-color .lsp-btn-group .btn-icon .material-icons::after {
+  color: var(--sp-control-color) !important;
+}
+
 :root.sp-has-control-color .slider-fill {
   background: var(--sp-control-color) !important;
 }
@@ -94,6 +102,16 @@ body,
 
 :root.sp-has-control-color .lsp-volume-popup__range::-moz-range-thumb {
   background: var(--sp-control-color) !important;
+}
+
+/* Service logo */
+:root.sp-has-control-color .service-logo-icon {
+  color: var(--sp-control-color) !important;
+}
+
+:root.sp-has-control-color .service-logo-badge {
+  color: var(--sp-control-color) !important;
+  border-color: var(--sp-control-color) !important;
 }
 
 /* ── Grid Container ── */
