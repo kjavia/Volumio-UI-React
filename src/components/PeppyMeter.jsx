@@ -12,21 +12,25 @@ const PeppyMeter = ({ width = 480, height = 320 }) => {
         setPos({ top: Math.round(rect.top), left: Math.round(rect.left) });
       }
     };
-    update();
+    setTimeout(update(), 200);
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
   }, []);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.style.setProperty('width', `${width}px`, 'important');
+      ref.current.style.setProperty('height', `${height}px`, 'important');
+    }
+  }, [width, height]);
 
   return (
     <div
       ref={ref}
       className="peppy-meter-placeholder"
       style={{
-        width: `${width}px`,
-        height: `${height}px`,
         background: '#444',
         border: '2px dashed #888',
-        borderRadius: '8px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -36,7 +40,8 @@ const PeppyMeter = ({ width = 480, height = 320 }) => {
         fontSize: '0.85rem',
         lineHeight: 1.6,
         textAlign: 'center',
-        flexShrink: 0,
+        flex: 'none',
+        alignSelf: 'center',
       }}
     >
       Peppy Meter Placeholder.

@@ -189,11 +189,11 @@ body,
 
   /* Reduce spacing that eats vertical space */
   .player-controls {
-    margin-block: clamp(2px, 1.5cqh, 28px) !important;
+    margin-block: clamp(6px, 2cqh, 28px) !important;
   }
 
   .controls-transport-row {
-    margin-bottom: clamp(2px, 1.5cqh, 32px) !important;
+    margin-bottom: clamp(8px, 2.5cqh, 32px) !important;
   }
 
   .controls-spacer {
@@ -236,22 +236,33 @@ body,
     height: clamp(1.2rem, min(4cqw, 4.5cqh), 4.5rem) !important;
   }
 
+  .btn-round,
+  .btn-round.btn-sm,
+  .btn-icon {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: hidden !important;
+  }
+
   .btn-round {
-    width: clamp(36px, min(7cqw, 9cqh), 84px) !important;
-    height: clamp(36px, min(7cqw, 9cqh), 84px) !important;
+    width: clamp(56px, min(10cqw, 13cqh), 84px) !important;
+    height: clamp(56px, min(10cqw, 13cqh), 84px) !important;
   }
 
   .btn-round.btn-sm {
-    width: clamp(28px, min(5cqw, 7cqh), 60px) !important;
-    height: clamp(28px, min(5cqw, 7cqh), 60px) !important;
+    width: clamp(46px, min(8cqw, 12cqh), 64px) !important;
+    height: clamp(46px, min(8cqw, 12cqh), 64px) !important;
   }
 
   .btn-round .material-icons {
-    font-size: clamp(1.2rem, min(4cqw, 5cqh), 2.8rem) !important;
+    font-size: clamp(1.8rem, min(6cqw, 7cqh), 2.8rem) !important;
+    line-height: 1 !important;
   }
 
   .btn-round.btn-sm .material-icons {
-    font-size: clamp(0.9rem, min(3cqw, 4cqh), 2rem) !important;
+    font-size: clamp(1.5rem, min(5cqw, 7cqh), 2.2rem) !important;
+    line-height: 1 !important;
   }
 
   .btn-icon {
