@@ -158,10 +158,10 @@ body,
 /* ── No player: controls fill the space the player would occupy ── */
 .home-grid.no-player {
   grid-template-columns: 1fr;
-  grid-template-rows: 80px 1fr;
+  grid-template-rows: 1fr 80px;
   grid-template-areas:
-    'mobile-viz'
-    'controls';
+    'controls'
+    'mobile-viz';
 
   &.no-viz {
     grid-template-rows: 1fr;
@@ -341,13 +341,12 @@ body,
     }
 
     &.no-player {
-      grid-template-columns: 1fr;
-      grid-template-rows: 70fr 30fr;
-      grid-template-areas:
-        'controls'
-        'spectrum';
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-template-areas: 'spectrum controls';
 
       &.no-viz {
+        grid-template-columns: 1fr;
         grid-template-rows: 1fr;
         grid-template-areas: 'controls';
       }
@@ -395,7 +394,7 @@ body,
     &.no-player {
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr;
-      grid-template-areas: 'controls spectrum';
+      grid-template-areas: 'spectrum controls';
 
       &.no-viz {
         grid-template-columns: 1fr;

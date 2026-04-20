@@ -41,7 +41,7 @@ const PeppyMeter = ({ width = 480, height = 320 }) => {
     >
       Peppy Meter Placeholder.
       Use this information to set up your Peppy Meter correctly.
-      <span>{width} × {height} px</span>
+      <span>width: {width} × height: {height} px</span>
       <span>top: {pos.top}px &nbsp; left: {pos.left}px</span>
     </div>
   );
