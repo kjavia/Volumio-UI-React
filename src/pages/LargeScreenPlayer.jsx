@@ -205,6 +205,8 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
   const handleTouchEnd = () => { if (touchTimer.current) clearTimeout(touchTimer.current); };
 
   const vizRef = useRef(null);
+  const peppyVizAreaRef = useRef(null);
+  const peppyBottomVizRef = useRef(null);
 
   // Wrap togglePlay so clicking play/pause (a user gesture) also enables the viz.
   const handlePlayPause = () => {
@@ -252,7 +254,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
   // ── Shared JSX blocks reused in both standard and UWLS layouts ──────────
 
   const vizBlock = showViz && (
-    <div className="lsp-viz-area">
+    <div className="lsp-viz-area" ref={peppyVizAreaRef}>
       {vizType === 'spectrum' && (
         <SpectrumAnalyzer
           ref={vizRef}
@@ -267,7 +269,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
       {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
       {vizType === 'vuMeter3' && <VUMeter variant={3} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
       {vizType === 'vuMeter4' && <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-      {vizType === 'peppyMeter' && <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} />}
+      {vizType === 'peppyMeter' && <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={peppyVizAreaRef} />}
     </div>
   );
 
@@ -478,7 +480,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
                 </div>
               )}
               {showViz && (
-                <div className="lsp-bottom__viz">
+                <div className="lsp-bottom__viz" ref={peppyBottomVizRef}>
                   {vizType === 'spectrum' && (
                     <SpectrumAnalyzer ref={vizRef} stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} options={spectrumOptions} isPlaying={isPlaying} />
                   )}
@@ -486,7 +488,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
                   {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
                   {vizType === 'vuMeter3' && <VUMeter variant={3} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
                   {vizType === 'vuMeter4' && <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-                  {vizType === 'peppyMeter' && <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} />}
+                  {vizType === 'peppyMeter' && <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={peppyBottomVizRef} />}
                 </div>
               )}
             </div>

@@ -133,6 +133,8 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const touchTimer = useRef(null);
   const vizRef = useRef(null);
   const mobileVizRef = useRef(null);
+  const peppyMobileRef = useRef(null);
+  const peppyDesktopRef = useRef(null);
 
   // Wrap togglePlay so that clicking play/pause (a user gesture) also enables
   // the visualization if it hasn't been enabled yet.
@@ -270,8 +272,8 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
           </div>
         )}
         {showViz && vizType === 'peppyMeter' && (
-          <div className="home-panel area-mobile-viz">
-            <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} />
+          <div className="home-panel area-mobile-viz" ref={peppyMobileRef}>
+            <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={peppyMobileRef} />
           </div>
         )}
 
@@ -387,7 +389,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               />
             )}
             {vizType === 'peppyMeter' && (
-              <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} />
+              <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={vizContainerRef} />
             )}
           </div>
         )}
