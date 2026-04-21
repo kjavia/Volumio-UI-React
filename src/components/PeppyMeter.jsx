@@ -12,7 +12,7 @@ const PeppyMeter = ({ width = 480, height = 320 }) => {
         setPos({ top: Math.round(rect.top), left: Math.round(rect.left) });
       }
     };
-    setTimeout(update(), 200);
+    setTimeout(update(), 2000);
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
   }, []);
@@ -47,7 +47,7 @@ const PeppyMeter = ({ width = 480, height = 320 }) => {
       Peppy Meter Placeholder.
       Use this information to set up your Peppy Meter correctly.
       <span>width: {width} × height: {height} px</span>
-      <span>top: {pos.top}px &nbsp; left: {pos.left}px</span>
+      <span>x: {pos.left}px &nbsp; y: {pos.top}px</span>
     </div>
   );
 };
