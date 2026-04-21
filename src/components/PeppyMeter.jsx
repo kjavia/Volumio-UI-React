@@ -1,8 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 const PeppyMeter = ({ width = 480, height = 320, containerRef }) => {
   const [pos, setPos] = useState({ top: 0, left: 0 });
+  const prevConfig = useRef({ width, height });
+
+  useEffect(() => {
+    if (prevConfig.current.width !== width || prevConfig.current.height !== height) {
+      window.location.reload();
+    }
+  }, [width, height]);
 
   useEffect(() => {
     const el = containerRef?.current;
