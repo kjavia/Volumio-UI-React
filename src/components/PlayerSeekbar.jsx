@@ -1,8 +1,11 @@
 import { Duration } from 'luxon';
 import { useSeek } from '@/contexts/SeekContext';
+import usePluginConfig from '@/hooks/usePluginConfig';
 
 const PlayerSeekbar = ({ readOnly }) => {
   const { seek, duration, seekTo } = useSeek();
+  const { data: pluginConfig } = usePluginConfig();
+  const showRemainingTime = pluginConfig?.showRemainingTime === true;
 
   const handleSeek = (e) => {
     if (readOnly) return;
@@ -48,7 +51,9 @@ const PlayerSeekbar = ({ readOnly }) => {
           className="time-label text-end text-white opacity-75"
           style={{ lineHeight: 1, fontSize: '0.9em', fontFamily: 'inherit' }}
         >
-          {formatTime(durationSeconds)}
+          {showRemainingTime
+            ? `-${formatTime(Math.max(durationSeconds - currentSeconds, 0))}`
+            : formatTime(durationSeconds)}
         </span>
       </div>
     </div>
