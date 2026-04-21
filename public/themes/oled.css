@@ -3900,7 +3900,7 @@ input[type=range]::-moz-range-thumb:active {
 .lsp-btn-group--center .btn-orange {
   background: #000000 !important;
   color: var(--color-primary) !important;
-  border: 1px dotted rgba(255, 102, 0, 0.3);
+  border: 1px solid rgba(255, 102, 0, 0.3);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3930,7 +3930,7 @@ input[type=range]::-moz-range-thumb:active {
 .lsp-btn-group .btn-icon {
   background: #000000 !important;
   color: var(--color-primary) !important;
-  border: 1px dotted rgba(255, 102, 0, 0.2);
+  border: 1px solid rgba(255, 102, 0, 0.2);
 }
 
 .player-controls .btn-icon:hover,
@@ -4284,7 +4284,7 @@ input[type=range]::-moz-range-thumb:active {
 .lsp-volume-popup {
   background: #000000 !important;
   backdrop-filter: none !important;
-  border: 1px dotted rgba(255, 102, 0, 0.3) !important;
+  border: 1px solid rgba(255, 102, 0, 0.3) !important;
   box-shadow: none !important;
 }
 
@@ -4317,7 +4317,7 @@ input[type=range]::-moz-range-thumb:active {
 .lsp-volume-popup__mute {
   background: #000000 !important;
   color: var(--color-primary) !important;
-  border: 1px dotted rgba(255, 102, 0, 0.2) !important;
+  border: 1px solid rgba(255, 102, 0, 0.2) !important;
 }
 
 .lsp-volume-popup__mute .material-icons {

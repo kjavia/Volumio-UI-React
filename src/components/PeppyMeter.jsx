@@ -9,11 +9,12 @@ const PeppyMeter = ({ width = 480, height = 320, containerRef }) => {
     if (el) {
       el.style.setProperty('width', `${width}px`, 'important');
       el.style.setProperty('height', `${height}px`, 'important');
-      el.style.setProperty('max-width', '100%', 'important');
-      el.style.setProperty('max-height', '100%', 'important');
+      el.style.setProperty('min-width', `${width}px`, 'important');
+      el.style.setProperty('min-height', `${height}px`, 'important');
       el.style.setProperty('overflow', 'hidden', 'important');
-      el.style.setProperty('flex', 'none', 'important');
-      el.style.setProperty('align-self', 'center', 'important');
+      el.style.setProperty('flex', `0 0 ${width}px`, 'important');
+      el.style.setProperty('align-self', 'flex-end', 'important');
+      el.style.setProperty('justify-self', 'end', 'important');
     }
   }, [width, height, containerRef]);
 
@@ -52,8 +53,10 @@ const PeppyMeter = ({ width = 480, height = 320, containerRef }) => {
     >
       <p>Peppy Meter Placeholder.</p>
       <p>Use this information to set up your Peppy Meter correctly.</p>
-      <p>width: {width} × height: {height} px</p>
-      <p>x: {pos.left}px &nbsp; y: {pos.top}px</p>
+      <h5>
+        <p>width: {width} × height: {height} px</p>
+        <p>x: {pos.left}px &nbsp; y: {pos.top}px</p>
+      </h5>
     </div>
   );
 };
