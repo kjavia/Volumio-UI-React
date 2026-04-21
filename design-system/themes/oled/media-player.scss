@@ -553,7 +553,7 @@
 
 /* Add to Playlist */
 [title="Add to Playlist"] .material-icons::after {
-  content: '+';
+  content: 'ADD';
   font-size: 1.4rem;
 }
 
@@ -605,7 +605,7 @@
 
   &::-webkit-slider-thumb {
     background: var(--color-primary) !important;
-    border-radius: 0 !important;
+    border-radius: 50% !important;
     width: 16px !important;
     height: 16px !important;
     box-shadow: none !important;
@@ -613,7 +613,7 @@
 
   &::-moz-range-thumb {
     background: var(--color-primary) !important;
-    border-radius: 0 !important;
+    border-radius: 50% !important;
     width: 16px !important;
     height: 16px !important;
     box-shadow: none !important;

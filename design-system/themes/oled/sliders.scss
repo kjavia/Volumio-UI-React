@@ -6,183 +6,164 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 .slider-group {
-    display: flex;
-    gap: 60px;
-    align-items: center;
+  display: flex;
+  gap: 60px;
+  align-items: center;
 }
 
 /* ─── Vertical Fader Track ─────────────────────────────────────────────── */
 .fader-track {
-    width: 6px;
-    height: 200px;
-    background: var(--color-gray-700);
-    border-radius: 3px;
-    border: none;
-    position: relative;
-    margin: 0 20px;
+  width: 6px;
+  height: 200px;
+  background: var(--color-gray-700);
+  border-radius: 3px;
+  border: none;
+  position: relative;
+  margin: 0 20px;
 }
 
 /* ─── Fader Cap ─────────────────────────────────────────────────────────── */
 .fader-cap {
-    width: 40px;
-    height: 24px;
-    background: #222222;
-    border-radius: var(--radius-sm);
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: none;
-    cursor: ns-resize;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background 0.15s;
+  width: 40px;
+  height: 24px;
+  background: #222222;
+  border-radius: var(--radius-sm);
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  cursor: ns-resize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.15s;
 
-    &::after {
-        content: '';
-        width: 50%;
-        height: 2px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 1px;
-    }
+  &::after {
+    content: '';
+    width: 50%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1px;
+  }
 
-    &:hover {
-        background: #2e2e2e;
-    }
+  &:hover {
+    background: #2e2e2e;
+  }
 
-    &:active {
-        background: var(--color-primary);
-    }
+  &:active {
+    background: var(--color-primary);
+  }
 }
 
 /* ─── Scale/Tick Marks ─────────────────────────────────────────────────── */
 .scale {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -22px;
-    width: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: var(--text-secondary);
-    font-size: 10px;
-    font-family: var(--font-mono);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -22px;
+  width: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-family: var(--font-mono);
 }
 
 .scale-mark {
-    width: 4px;
-    height: 1px;
-    background-color: var(--color-gray-600);
+  width: 4px;
+  height: 1px;
+  background-color: var(--color-gray-600);
 }
 
 .scale-mark.long {
-    width: 8px;
-    background-color: var(--color-gray-500);
+  width: 8px;
+  background-color: var(--color-gray-500);
 }
 
 /* ─── Horizontal Range Input ────────────────────────────────────────────── */
 input[type='range'] {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 4px;
-    border-radius: 2px;
-    background: var(--color-gray-700);
-    border: none;
-    outline: none;
-    width: 100%;
-    cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--color-gray-700);
+  border: none;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
 }
 
 input[type='range']::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 0;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    margin-top: -8px;
-    position: relative;
-    z-index: 2;
-    font-size: 0;
-    color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  margin-top: -4px;
+  position: relative;
+  z-index: 2;
 }
 
 input[type='range']::-webkit-slider-thumb:active {
-    background: var(--color-primary-dark);
-    transform: scale(0.95);
+  background: var(--color-primary-dark);
+  transform: scale(0.95);
 }
 
 input[type='range']::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
-    border: none;
-    border-radius: 50%;
-    background: var(--color-primary);
-    cursor: pointer;
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
 }
 
 input[type='range']::-moz-range-thumb:active {
-    background: var(--color-primary-dark);
+  background: var(--color-primary-dark);
 }
 
 /* ─── Seekbar/Progress Slider ────────────────────────────────────────── */
 .slider-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0 1em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 1em;
 }
 
 .slider-track {
-    flex: 1;
-    position: relative;
-    height: 4px;
-    background: var(--color-gray-700);
-    border-radius: 2px;
+  flex: 1;
+  position: relative;
+  height: 8px;
+  background: var(--color-gray-700);
+  border-radius: 4px;
 }
 
 .slider-fill {
-    height: 100%;
-    background: var(--color-primary);
-    border-radius: 2px;
-    position: relative;
-    transition: width 0.1s linear;
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 4px;
+  position: relative;
+  transition: width 0.1s linear;
 }
 
 .slider-cap {
-    position: absolute;
-    right: -6px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 12px;
-    border-radius: 0;
-    background: transparent;
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    overflow: visible;
-
-    &::after {
-        content: '#';
-    }
+  &::after {
+    display: none !important;
+    content: none !important;
+  }
 }
 
 .time-label {
-    font-family: var(--font-display);
-    font-size: var(--text-xs);
-    color: var(--color-primary);
-    min-width: 35px;
-    font-variant-numeric: tabular-nums;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+  min-width: 35px;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── OLED: Volume & seekbar text → orange ──────────────────────────────── */
@@ -190,12 +171,12 @@ input[type='range']::-moz-range-thumb:active {
 .volume-manager .text-white,
 .volume-manager .small,
 .volume-manager .material-icons {
-    color: var(--color-primary) !important;
-    opacity: 1 !important;
+  color: var(--color-primary) !important;
+  opacity: 1 !important;
 }
 
 .seekbar-labels .text-white,
 .seekbar-labels .time-label {
-    color: var(--color-primary) !important;
-    opacity: 1 !important;
+  color: var(--color-primary) !important;
+  opacity: 1 !important;
 }
