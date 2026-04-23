@@ -1493,8 +1493,9 @@ body,
     height: 100%;
     justify-content: flex-start !important;
     gap: clamp(2px, 1.5cqh, 22px) !important;
-    padding-top: clamp(4px, 1cqh, 12px);
+    padding-top: clamp(2px, 0.4cqh, 6px);
     padding-bottom: clamp(4px, 1cqh, 12px);
+    padding-inline: clamp(2px, 0.5cqw, 6px);
   }
 
   /* Hide flexible spacers — uniform gap handles spacing */
@@ -1523,15 +1524,37 @@ body,
     margin-bottom: clamp(2px, 1.5cqh, 32px) !important;
   }
 
-  /* Width overrides: remove hard caps from inline styles (all screen sizes) */
+  /* Width overrides: maximise title area, minimal margins */
   .track-info-group {
-    width: 95% !important;
-    margin-top: clamp(0.15em, 1cqh, 1.5em) !important;
+    width: 99% !important;
+    margin-top: clamp(2px, 0.4cqh, 6px) !important;
+    margin-inline: auto !important;
   }
 
-  /* Tighten track-info panel padding on short screens */
+  /* Minimal track-info padding — let text fill the space */
   .track-info {
-    padding: clamp(4px, 1.5cqh, 20px) clamp(8px, 2cqw, 20px) !important;
+    padding: clamp(2px, 0.6cqh, 8px) clamp(4px, 0.8cqw, 8px) !important;
+  }
+
+  /* Responsive title fonts — scale to fill available space */
+  .responsive-title {
+    font-size: clamp(2.2rem, min(14cqw, 12cqh), 16rem) !important;
+  }
+
+  .responsive-artist {
+    font-size: clamp(1.6rem, min(10cqw, 9cqh), 12rem) !important;
+  }
+
+  .responsive-album {
+    font-size: clamp(1.2rem, min(7cqw, 6cqh), 7rem) !important;
+  }
+
+  .responsive-stream-info {
+    font-size: clamp(0.8rem, min(4cqw, 3cqh), 4rem) !important;
+  }
+
+  .format-logo-responsive {
+    height: clamp(1.2rem, min(4cqw, 3.5cqh), 4.5rem) !important;
   }
 
   .seekbar-container-wrap,
@@ -1551,30 +1574,9 @@ body,
    These are the in-between resolutions (800×480, 800×600, etc.) where the
    extra space warrants bigger UI elements. On mobile and large desktops
    the normal theme sizes are used instead. */
+/* ── Album Art Max Space: enlarged buttons for mid-range screens ── */
 @media (min-width: 768px) and (max-width: 1199px) {
   .album-art-max-space .area-controls {
-
-    /* Larger fonts: use min(cqw, cqh) so text shrinks on short screens too */
-    .responsive-title {
-      font-size: clamp(1.6rem, min(10cqw, 8cqh), 10rem) !important;
-    }
-
-    .responsive-artist {
-      font-size: clamp(1.2rem, min(7.6cqw, 6cqh), 8rem) !important;
-    }
-
-    .responsive-album {
-      font-size: clamp(1rem, min(4.4cqw, 4cqh), 4rem) !important;
-    }
-
-    .responsive-stream-info {
-      font-size: clamp(0.9rem, min(5cqw, 3.5cqh), 5rem) !important;
-    }
-
-    /* Bigger format / hi-res logos */
-    .format-logo-responsive {
-      height: clamp(1.4rem, min(5cqw, 4cqh), 5.5rem) !important;
-    }
 
     /* Larger transport buttons — scale with both width and height */
     .btn-round {
@@ -1613,6 +1615,78 @@ body,
     /* Seekbar track: taller to match larger labels */
     .seekbar-container-wrap .slider-track {
       height: clamp(6px, 2cqh, 24px) !important;
+    }
+  }
+}
+
+/* ── Album Art Max Space: compact fonts for very short screens (≤480px height) ── */
+@media (max-height: 480px) {
+  .album-art-max-space .area-controls {
+    .responsive-title {
+      font-size: clamp(1rem, min(9cqw, 12cqh), 4rem) !important;
+    }
+
+    .responsive-artist {
+      font-size: clamp(0.8rem, min(6cqw, 6.5cqh), 3rem) !important;
+    }
+
+    .responsive-album {
+      font-size: clamp(0.7rem, min(4cqw, 4cqh), 2rem) !important;
+    }
+
+    .responsive-stream-info {
+      font-size: clamp(0.65rem, min(3cqw, 2.5cqh), 1.8rem) !important;
+    }
+
+    .format-logo-responsive {
+      height: clamp(0.9rem, min(3cqw, 2.5cqh), 2rem) !important;
+    }
+
+    /* Smaller transport buttons for short screens */
+    .btn-round {
+      width: clamp(36px, min(7cqw, 9cqh), 56px) !important;
+      height: clamp(36px, min(7cqw, 9cqh), 56px) !important;
+    }
+
+    .btn-round.btn-sm {
+      width: clamp(30px, min(5cqw, 7cqh), 44px) !important;
+      height: clamp(30px, min(5cqw, 7cqh), 44px) !important;
+    }
+
+    .btn-round.btn-sm .material-icons {
+      font-size: clamp(1rem, min(3cqw, 4cqh), 1.6rem) !important;
+    }
+
+    .btn-round .material-icons {
+      font-size: clamp(1.2rem, min(4cqw, 5cqh), 2rem) !important;
+    }
+
+    .btn-icon {
+      width: clamp(28px, min(5.5cqw, 6cqh), 48px) !important;
+      height: clamp(28px, min(5.5cqw, 6cqh), 48px) !important;
+    }
+
+    .btn-icon .material-icons {
+      font-size: clamp(1rem, min(3.5cqw, 4cqh), 1.8rem) !important;
+    }
+
+    /* Smaller seekbar / volume sliders */
+    .seekbar-container-wrap .slider-track,
+    .volume-manager-wrap .slider-track {
+      height: clamp(3px, 1cqh, 8px) !important;
+    }
+
+    .slider-cap {
+      width: 10px !important;
+      height: 14px !important;
+    }
+
+    .time-label {
+      font-size: clamp(0.6rem, min(2cqw, 2cqh), 0.85rem) !important;
+    }
+
+    .seekbar-labels {
+      margin-top: 0.25rem !important;
     }
   }
 }
