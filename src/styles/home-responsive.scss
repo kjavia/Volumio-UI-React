@@ -1690,3 +1690,42 @@ body,
     }
   }
 }
+
+/* ── Album Art Max Space: tighten track-info & add stream→seekbar gap (≤600px height) ── */
+@media (max-height: 600px) {
+  .album-art-max-space .area-controls {
+    .track-info {
+      padding: clamp(1px, 0.4cqh, 4px) clamp(4px, 0.8cqw, 8px) !important;
+      margin-bottom: 0 !important;
+    }
+
+    .track-info-group {
+      margin-top: clamp(1px, 0.3cqh, 4px) !important;
+      margin-bottom: clamp(1px, 0.3cqh, 4px) !important;
+    }
+
+    /* More breathing room between stream info and seekbar */
+    .seekbar-container-wrap {
+      margin-top: clamp(8px, 2cqh, 20px) !important;
+    }
+
+    /* Smaller sliders */
+    .seekbar-container-wrap .slider-track,
+    .volume-manager-wrap .slider-track {
+      height: clamp(3px, 1.2cqh, 10px) !important;
+    }
+
+    .slider-cap {
+      width: 11px !important;
+      height: 16px !important;
+    }
+
+    .time-label {
+      font-size: clamp(0.65rem, min(2.5cqw, 2.5cqh), 0.9rem) !important;
+    }
+
+    .seekbar-labels {
+      margin-top: 0.3rem !important;
+    }
+  }
+}
