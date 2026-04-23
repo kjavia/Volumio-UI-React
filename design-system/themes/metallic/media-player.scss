@@ -374,6 +374,59 @@
   }
 }
 
+/* ── Very short screens (800×480, 800×400 etc.): aggressively compact ──── */
+@media (max-height: 600px) {
+  .track-info {
+    padding: 4px 8px 6px !important;
+  }
+
+  .track-info-group {
+    width: calc(100% - 0.5rem) !important;
+    margin-inline: 0.25rem;
+  }
+
+  .player-controls {
+    padding: 4px 8px;
+    gap: 4px;
+  }
+
+  .transport-controls {
+    gap: 6px;
+    margin-top: 2px;
+    padding: 4px;
+  }
+
+  .volume-control {
+    padding: 4px 8px;
+  }
+
+  .slider-cap {
+    width: 10px;
+    height: 14px;
+    right: -5px;
+  }
+
+  .responsive-title {
+    font-size: clamp(0.9rem, min(4.5cqw, 8cqh), 3rem) !important;
+  }
+
+  .responsive-artist {
+    font-size: clamp(0.7rem, min(3.5cqw, 6cqh), 2.5rem) !important;
+  }
+
+  .responsive-album {
+    font-size: clamp(0.65rem, min(1.8cqw, 3.5cqh), 0.95rem) !important;
+  }
+
+  .responsive-stream-info {
+    font-size: clamp(0.65rem, min(2.1cqw, 3cqh), 1.96rem) !important;
+  }
+
+  .format-logo-responsive {
+    height: clamp(1rem, min(3cqw, 3.5cqh), 4.2rem) !important;
+  }
+}
+
 /* ── UWLS (ultrawide + short): boost Rajdhani to match Michroma optical size ── */
 @media (max-height: 700px) and (min-width: 1440px) and (min-aspect-ratio: 2/1) {
   .lsp-top__title {

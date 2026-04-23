@@ -3304,6 +3304,27 @@ input[type=range]::-webkit-slider-thumb {
     padding-top: 8px;
   }
 }
+/* ── Very short screens (800×480, 800×400 etc.): compact the Casio player ── */
+@media (max-height: 600px) {
+  .track-info-group {
+    padding: 6px 10px 6px !important;
+  }
+  .track-info {
+    margin-bottom: 2px;
+  }
+  .player-controls-container {
+    padding-top: 4px;
+  }
+  .responsive-title {
+    font-size: clamp(0.9rem, min(5cqw, 8cqh), 3.2rem) !important;
+  }
+  .responsive-artist {
+    font-size: clamp(0.7rem, min(3cqw, 6cqh), 2rem) !important;
+  }
+  .format-logo-responsive {
+    height: clamp(0.9rem, min(2.8cqw, 3cqh), 2.2rem) !important;
+  }
+}
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE — 80s Casio Theme

@@ -1803,7 +1803,7 @@ select::placeholder {
 input:focus,
 textarea:focus,
 select:focus {
-  outline: 1px dotted var(--text-primary);
+  outline: 2px solid var(--text-primary);
   outline-offset: -3px;
 }
 input:disabled,
@@ -1878,7 +1878,7 @@ label {
   display: block;
 }
 .form-check-input[type=checkbox]:focus-visible {
-  outline: 1px dotted var(--text-primary);
+  outline: 2px solid var(--text-primary);
 }
 
 .form-select {
@@ -1898,7 +1898,7 @@ label {
   background: var(--win95-face) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23000000'/%3E%3C/svg%3E") no-repeat right 8px center;
 }
 .form-select:focus {
-  outline: 1px dotted var(--text-primary);
+  outline: 2px solid var(--text-primary);
   outline-offset: -3px;
 }
 .form-select:disabled {
@@ -3609,6 +3609,104 @@ input[type=range]::-webkit-slider-runnable-track {
   gap: 12px;
 }
 
+/* ── Controls panel: flush the Win95 title bar to the panel edges ────── */
+.player-controls-container {
+  padding-top: 0 !important;
+}
+
+.track-info-group {
+  width: calc(100% - 16px) !important;
+  margin: 0 auto !important;
+}
+
+.track-info {
+  padding: 0 !important;
+}
+
+/* Same overrides scoped under album-art-max-space to beat home-responsive specificity */
+.album-art-max-space .area-controls .player-controls-container {
+  padding-top: 0 !important;
+}
+.album-art-max-space .area-controls .track-info-group {
+  width: calc(100% - 16px) !important;
+  margin: 0 auto !important;
+}
+.album-art-max-space .area-controls .track-info {
+  padding: 0 !important;
+}
+
+/* ── Album-art-max-space on short screens: aggressive compaction ──── */
+@media (max-height: 600px) {
+  .album-art-max-space .area-controls {
+    overflow: visible !important;
+  }
+  .album-art-max-space .area-controls .player-controls-container {
+    gap: clamp(1px, 0.8cqh, 8px) !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .album-art-max-space .area-controls .track-info {
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+  }
+  .album-art-max-space .area-controls .track-info::before {
+    padding: 1px 6px;
+    font-size: var(--text-sm, 12px);
+    height: 18px;
+  }
+  .album-art-max-space .area-controls .track-info > *:first-child {
+    padding-top: 2px;
+  }
+  .album-art-max-space .area-controls .track-info > *:last-child {
+    padding-bottom: 2px;
+  }
+  .album-art-max-space .area-controls .track-info > * {
+    padding: 0 4px;
+  }
+  .album-art-max-space .area-controls .player-controls {
+    margin-block: clamp(1px, 0.8cqh, 8px) !important;
+    gap: 2px !important;
+  }
+  .album-art-max-space .area-controls .controls-transport-row {
+    margin-bottom: clamp(1px, 0.8cqh, 8px) !important;
+  }
+  .album-art-max-space .area-controls .volume-manager-wrap {
+    padding-bottom: clamp(1px, 0.5cqh, 6px) !important;
+  }
+}
+/* ── Very short screens (800×480, 800×400 etc.): compact the Win95 player ── */
+@media (max-height: 600px) {
+  .track-info {
+    margin-bottom: 2px;
+  }
+  .track-info > *:first-child {
+    padding-top: 4px;
+  }
+  .track-info > *:last-child {
+    padding-bottom: 4px;
+  }
+  .track-info > * {
+    padding: 0 6px;
+  }
+  .player-controls {
+    gap: 4px;
+  }
+  .responsive-title {
+    font-size: clamp(0.9rem, min(4.5cqw, 8cqh), 3rem) !important;
+  }
+  .responsive-artist {
+    font-size: clamp(0.7rem, min(3.5cqw, 6cqh), 2.5rem) !important;
+  }
+  .responsive-album {
+    font-size: clamp(0.65rem, min(1.8cqw, 3.5cqh), 0.95rem) !important;
+  }
+  .responsive-stream-info {
+    font-size: clamp(0.65rem, min(2.1cqw, 3cqh), 1.96rem) !important;
+  }
+  .format-logo-responsive {
+    height: clamp(1rem, min(3cqw, 3.5cqh), 4.2rem) !important;
+  }
+}
 /* ═══════════════════════════════════════════════════════════════════════
    WEATHER - Windows 95 Overrides
    Replace dark-theme glass panels with Win95 silver bevel panels

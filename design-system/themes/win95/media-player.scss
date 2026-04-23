@@ -309,6 +309,128 @@
     gap: 12px;
 }
 
+/* ── Controls panel: flush the Win95 title bar to the panel edges ────── */
+.player-controls-container {
+    padding-top: 0 !important;
+}
+
+.track-info-group {
+    width: calc(100% - 16px) !important;
+    margin: 0 auto !important;
+}
+
+.track-info {
+    padding: 0 !important;
+}
+
+/* Same overrides scoped under album-art-max-space to beat home-responsive specificity */
+.album-art-max-space .area-controls {
+    .player-controls-container {
+        padding-top: 0 !important;
+    }
+
+    .track-info-group {
+        width: calc(100% - 16px) !important;
+        margin: 0 auto !important;
+    }
+
+    .track-info {
+        padding: 0 !important;
+    }
+}
+
+/* ── Album-art-max-space on short screens: aggressive compaction ──── */
+@media (max-height: 600px) {
+    .album-art-max-space .area-controls {
+        overflow: visible !important;
+
+        .player-controls-container {
+            gap: clamp(1px, 0.8cqh, 8px) !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .track-info {
+            margin-bottom: 0 !important;
+            padding: 0 !important;
+        }
+
+        .track-info::before {
+            padding: 1px 6px;
+            font-size: var(--text-sm, 12px);
+            height: 18px;
+        }
+
+        .track-info>*:first-child {
+            padding-top: 2px;
+        }
+
+        .track-info>*:last-child {
+            padding-bottom: 2px;
+        }
+
+        .track-info>* {
+            padding: 0 4px;
+        }
+
+        .player-controls {
+            margin-block: clamp(1px, 0.8cqh, 8px) !important;
+            gap: 2px !important;
+        }
+
+        .controls-transport-row {
+            margin-bottom: clamp(1px, 0.8cqh, 8px) !important;
+        }
+
+        .volume-manager-wrap {
+            padding-bottom: clamp(1px, 0.5cqh, 6px) !important;
+        }
+    }
+}
+
+/* ── Very short screens (800×480, 800×400 etc.): compact the Win95 player ── */
+@media (max-height: 600px) {
+    .track-info {
+        margin-bottom: 2px;
+    }
+
+    .track-info>*:first-child {
+        padding-top: 4px;
+    }
+
+    .track-info>*:last-child {
+        padding-bottom: 4px;
+    }
+
+    .track-info>* {
+        padding: 0 6px;
+    }
+
+    .player-controls {
+        gap: 4px;
+    }
+
+    .responsive-title {
+        font-size: clamp(0.9rem, min(4.5cqw, 8cqh), 3rem) !important;
+    }
+
+    .responsive-artist {
+        font-size: clamp(0.7rem, min(3.5cqw, 6cqh), 2.5rem) !important;
+    }
+
+    .responsive-album {
+        font-size: clamp(0.65rem, min(1.8cqw, 3.5cqh), 0.95rem) !important;
+    }
+
+    .responsive-stream-info {
+        font-size: clamp(0.65rem, min(2.1cqw, 3cqh), 1.96rem) !important;
+    }
+
+    .format-logo-responsive {
+        height: clamp(1rem, min(3cqw, 3.5cqh), 4.2rem) !important;
+    }
+}
+
 /* ═══════════════════════════════════════════════════════════════════════
    WEATHER - Windows 95 Overrides
    Replace dark-theme glass panels with Win95 silver bevel panels

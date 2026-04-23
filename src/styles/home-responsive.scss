@@ -719,6 +719,18 @@ body,
   }
 }
 
+/* ── Mid-large panel (controls area 500–699px): bridge between compact and large ── */
+@container (min-height: 500px) {
+  .btn-icon {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .btn-icon .material-icons {
+    font-size: 1.5rem !important;
+  }
+}
+
 /* ── Large panel (controls area ≥ 700px tall): enlarge buttons and volume icon ── */
 @container (min-height: 700px) {
   .btn-round {
@@ -804,6 +816,21 @@ body,
     }
 
     .volume-manager .material-icons {
+      font-size: 1.5rem !important;
+    }
+  }
+}
+
+/* ── Large screen (≥ 1200px): match tablet btn-icon sizing so laptop buttons
+   are never smaller than tablet buttons ── */
+@media (min-width: 1200px) {
+  @container (min-height: 500px) {
+    .btn-icon {
+      width: 48px !important;
+      height: 48px !important;
+    }
+
+    .btn-icon .material-icons {
       font-size: 1.5rem !important;
     }
   }
@@ -1457,10 +1484,54 @@ body,
 /* ── Album Art Max Space: expand controls panel ── */
 .album-art-max-space .area-controls {
 
+  /* Stretch so the inner column fills the full cell height;
+     prevents center-clipping on very short screens (800×400). */
+  align-items: stretch !important;
+  overflow: visible !important;
+
+  .player-controls-container {
+    height: 100%;
+    justify-content: flex-start !important;
+    gap: clamp(2px, 1.5cqh, 22px) !important;
+    padding-top: clamp(4px, 1cqh, 12px);
+    padding-bottom: clamp(4px, 1cqh, 12px);
+  }
+
+  /* Hide flexible spacers — uniform gap handles spacing */
+  .controls-spacer {
+    display: none;
+  }
+
+  /* Volume bar pinned to the bottom with breathing room */
+  .volume-manager-wrap {
+    margin-top: auto !important;
+    padding-bottom: clamp(4px, 1.5cqh, 14px);
+  }
+
+  /* Allow controls to shrink so nothing overflows */
+  .player-controls,
+  .seekbar-container-wrap,
+  .volume-manager-wrap {
+    flex-shrink: 1 !important;
+  }
+
+  .player-controls {
+    margin-block: clamp(2px, 1.5cqh, 28px) !important;
+  }
+
+  .controls-transport-row {
+    margin-bottom: clamp(2px, 1.5cqh, 32px) !important;
+  }
+
   /* Width overrides: remove hard caps from inline styles (all screen sizes) */
   .track-info-group {
     width: 95% !important;
-    margin-top: 1.5em !important;
+    margin-top: clamp(0.15em, 1cqh, 1.5em) !important;
+  }
+
+  /* Tighten track-info panel padding on short screens */
+  .track-info {
+    padding: clamp(4px, 1.5cqh, 20px) clamp(8px, 2cqw, 20px) !important;
   }
 
   .seekbar-container-wrap,
@@ -1483,65 +1554,65 @@ body,
 @media (min-width: 768px) and (max-width: 1199px) {
   .album-art-max-space .area-controls {
 
-    /* Larger fonts: raise clamp max values */
+    /* Larger fonts: use min(cqw, cqh) so text shrinks on short screens too */
     .responsive-title {
-      font-size: clamp(3rem, 10cqw, 10rem) !important;
+      font-size: clamp(1.6rem, min(10cqw, 8cqh), 10rem) !important;
     }
 
     .responsive-artist {
-      font-size: clamp(2rem, 7.6cqw, 8rem) !important;
+      font-size: clamp(1.2rem, min(7.6cqw, 6cqh), 8rem) !important;
     }
 
     .responsive-album {
-      font-size: clamp(1.7rem, 4.4cqw, 4rem) !important;
+      font-size: clamp(1rem, min(4.4cqw, 4cqh), 4rem) !important;
     }
 
     .responsive-stream-info {
-      font-size: clamp(1.5rem, 5cqw, 5rem) !important;
+      font-size: clamp(0.9rem, min(5cqw, 3.5cqh), 5rem) !important;
     }
 
     /* Bigger format / hi-res logos */
     .format-logo-responsive {
-      height: clamp(2rem, 5cqw, 5.5rem) !important;
+      height: clamp(1.4rem, min(5cqw, 4cqh), 5.5rem) !important;
     }
 
-    /* Larger transport buttons */
+    /* Larger transport buttons — scale with both width and height */
     .btn-round {
-      width: clamp(60px, 8cqw, 90px) !important;
-      height: clamp(60px, 8cqw, 90px) !important;
+      width: clamp(60px, min(10cqw, 14cqh), 100px) !important;
+      height: clamp(60px, min(10cqw, 14cqh), 100px) !important;
     }
 
     .btn-round.btn-sm {
-      width: clamp(43px, 5.7cqw, 64px) !important;
-      height: clamp(43px, 5.7cqw, 64px) !important;
+      width: clamp(48px, min(7cqw, 11cqh), 72px) !important;
+      height: clamp(48px, min(7cqw, 11cqh), 72px) !important;
     }
 
     .btn-round.btn-sm .material-icons {
-      font-size: clamp(1.33rem, 3.2cqw, 2.13rem) !important;
+      font-size: clamp(1.3rem, min(3.8cqw, 5cqh), 2.4rem) !important;
     }
 
     .btn-round .material-icons {
-      font-size: clamp(1.875rem, 4.5cqw, 3rem) !important;
+      font-size: clamp(1.7rem, min(5.5cqw, 7cqh), 3.4rem) !important;
     }
 
     /* Larger secondary icon buttons */
     .btn-icon {
-      width: clamp(54px, 7.5cqw, 84px) !important;
-      height: clamp(54px, 7.5cqw, 84px) !important;
+      width: clamp(40px, min(8cqw, 9cqh), 90px) !important;
+      height: clamp(40px, min(8cqw, 9cqh), 90px) !important;
     }
 
     .btn-icon .material-icons {
-      font-size: clamp(1.875rem, 4.5cqw, 3rem) !important;
+      font-size: clamp(1.4rem, min(5cqw, 5.5cqh), 3.2rem) !important;
     }
 
-    /* Seekbar time labels: 2x */
+    /* Seekbar time labels: scale with height */
     .time-label {
-      font-size: 1.6rem !important;
+      font-size: clamp(0.9rem, min(3cqw, 3.5cqh), 1.6rem) !important;
     }
 
     /* Seekbar track: taller to match larger labels */
     .seekbar-container-wrap .slider-track {
-      height: clamp(14px, 2cqh, 24px) !important;
+      height: clamp(6px, 2cqh, 24px) !important;
     }
   }
 }

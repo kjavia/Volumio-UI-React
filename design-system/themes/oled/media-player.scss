@@ -205,7 +205,7 @@
 .lsp-btn-group--center .btn-primary {
   background: #000000 !important;
   color: var(--color-primary) !important;
-  border: 1px dotted rgba(255, 102, 0, 0.3);
+  border: 2px solid rgba(255, 102, 0, 0.3);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -231,7 +231,7 @@
 .lsp-btn-group .btn-icon {
   background: #000000 !important;
   color: var(--color-primary) !important;
-  border: 1px dotted rgba(255, 102, 0, 0.2);
+  border: 2px solid rgba(255, 102, 0, 0.2);
 }
 
 .player-controls .btn-icon:hover,
@@ -449,7 +449,7 @@
   font-size: 0 !important;
   color: transparent !important;
   text-indent: -9999px;
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
   height: 100%;
   display: inline-flex;
@@ -459,7 +459,7 @@
 
   &::after {
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: -0.08em;
     line-height: 1;
@@ -470,6 +470,23 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+}
+
+/* Prevent home-responsive container queries from restoring font-size
+   on material-icons (which would un-hide the ligature text) or
+   clipping the ::after glyph via overflow:hidden on the button. */
+.controls-transport-row .btn-round,
+.controls-transport-row .btn-round.btn-sm,
+.lsp-btn-group--center .btn-round,
+.lsp-btn-group--center .btn-round.btn-sm {
+  overflow: visible !important;
+}
+
+.controls-transport-row .btn-round .material-icons,
+.controls-transport-row .btn-round.btn-sm .material-icons,
+.lsp-btn-group--center .btn-round .material-icons,
+.lsp-btn-group--center .btn-round.btn-sm .material-icons {
+  font-size: 0 !important;
 }
 
 /* Play/Pause button text color: orange on black bg */
@@ -488,20 +505,39 @@
 .controls-transport-row .btn-primary .material-icons.is-play::after,
 .lsp-btn-group--center .btn-primary .material-icons.is-play::after {
   content: '>';
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 /* Pause */
 .controls-transport-row .btn-primary .material-icons.is-pause::after,
 .lsp-btn-group--center .btn-primary .material-icons.is-pause::after {
   content: '||';
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 /* Next  =  » */
 .controls-transport-row .btn-round:last-child .material-icons::after,
 [title="Next"] .material-icons::after {
   content: '»';
+}
+
+/* ── Short screens (≤600px height): shrink transport glyph font sizes ── */
+@media (max-height: 600px) {
+
+  .controls-transport-row .btn-round .material-icons::after,
+  .lsp-btn-group--center .btn-round .material-icons::after {
+    font-size: 0.9rem;
+  }
+
+  .controls-transport-row .btn-primary .material-icons.is-play::after,
+  .lsp-btn-group--center .btn-primary .material-icons.is-play::after {
+    font-size: 1.3rem;
+  }
+
+  .controls-transport-row .btn-primary .material-icons.is-pause::after,
+  .lsp-btn-group--center .btn-primary .material-icons.is-pause::after {
+    font-size: 1.1rem;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -515,7 +551,7 @@
   font-size: 0 !important;
   color: transparent !important;
   text-indent: -9999px;
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
   height: 100%;
   display: inline-flex;
@@ -537,6 +573,18 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+}
+
+/* Prevent home-responsive container queries from restoring font-size
+   on btn-icon material-icons or clipping via overflow:hidden. */
+.player-controls .btn-icon,
+.lsp-btn-group .btn-icon {
+  overflow: visible !important;
+}
+
+.player-controls .btn-icon .material-icons,
+.lsp-btn-group .btn-icon .material-icons {
+  font-size: 0 !important;
 }
 
 /* Shuffle */
@@ -589,7 +637,7 @@
 .lsp-volume-popup {
   background: #000000 !important;
   backdrop-filter: none !important;
-  border: 1px dotted rgba(255, 102, 0, 0.3) !important;
+  border: 2px solid rgba(255, 102, 0, 0.3) !important;
   box-shadow: none !important;
 }
 
@@ -624,7 +672,7 @@
 .lsp-volume-popup__mute {
   background: #000000 !important;
   color: var(--color-primary) !important;
-  border: 1px dotted rgba(255, 102, 0, 0.2) !important;
+  border: 2px solid rgba(255, 102, 0, 0.2) !important;
 }
 
 .lsp-volume-popup__mute .material-icons {

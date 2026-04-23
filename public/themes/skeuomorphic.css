@@ -1714,9 +1714,8 @@ ol li {
 
 /* Round Button Style */
 .btn-round {
-  width: 56px;
-  height: 56px;
-  /* Standard round size — consistent across all themes */
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
@@ -1765,8 +1764,8 @@ ol li {
 /* Icon-only Button — ghost style for secondary actions (shuffle, repeat, playlist, etc.)
    Transparent background, subtle hover/active feedback, inherits icon color. */
 .btn-icon {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   min-height: unset;
   border-radius: 50%;
   background: transparent;
@@ -1849,8 +1848,8 @@ ol li {
 }
 
 .btn-round.btn-sm {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
 }
 
 .btn:disabled, .form-select:disabled,
