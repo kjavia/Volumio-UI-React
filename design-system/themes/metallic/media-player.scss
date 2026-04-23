@@ -243,6 +243,13 @@
   cursor: default;
 }
 
+/* ─── Seekbar labels — ensure visibility on dark backgrounds ──────────── */
+.seekbar-labels,
+.time-label {
+  color: var(--text-primary) !important;
+  opacity: 1 !important;
+}
+
 /* ─── Mobile compact (portrait ≤ 768px) ──────────────────────────────── */
 /* At 393×842 the controls panel is ~421px tall. The theme's generous padding
    on .track-info (20px), .volume-control (16px top/bottom), and the
@@ -299,6 +306,8 @@
   .seekbar-labels,
   .time-label {
     font-size: 1rem !important;
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
   }
 
   // Seekbar track height
@@ -453,6 +462,8 @@
   .seekbar-labels,
   .time-label {
     font-size: 1.2rem !important;
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
   }
 
   .lsp-btn {

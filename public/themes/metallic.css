@@ -5,8 +5,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Titillium+Web:wght@300;400;600;700&family=Share+Tech+Mono&display=swap");
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -39,7 +39,7 @@
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -62,11 +62,12 @@
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -93,21 +94,21 @@
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -116,18 +117,27 @@
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -142,8 +152,8 @@
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -176,7 +186,7 @@
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -199,11 +209,12 @@
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -230,21 +241,21 @@
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -253,18 +264,27 @@
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -434,8 +454,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -468,7 +488,7 @@ pre {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -491,11 +511,12 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -522,21 +543,21 @@ pre {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -545,18 +566,27 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -906,8 +936,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -940,7 +970,7 @@ pre {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -963,11 +993,12 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -994,21 +1025,21 @@ pre {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -1017,18 +1048,27 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -1306,8 +1346,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -1340,7 +1380,7 @@ pre {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -1363,11 +1403,12 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -1394,21 +1435,21 @@ pre {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -1417,18 +1458,27 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -1664,8 +1714,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -1698,7 +1748,7 @@ pre {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -1721,11 +1771,12 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -1752,21 +1803,21 @@ pre {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -1775,18 +1826,27 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -1867,8 +1927,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -1901,7 +1961,7 @@ pre {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -1924,11 +1984,12 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -1955,21 +2016,21 @@ pre {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -1978,18 +2039,27 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -2087,8 +2157,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -2121,7 +2191,7 @@ pre {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -2144,11 +2214,12 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -2175,21 +2246,21 @@ pre {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -2198,18 +2269,27 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -2303,8 +2383,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -2337,7 +2417,7 @@ pre {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -2360,11 +2440,12 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -2391,21 +2472,21 @@ pre {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -2414,18 +2495,27 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -2540,8 +2630,8 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -2574,7 +2664,7 @@ h2 {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -2597,11 +2687,12 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -2628,21 +2719,21 @@ h2 {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -2651,18 +2742,27 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -2891,6 +2991,13 @@ h2 {
   cursor: default;
 }
 
+/* ─── Seekbar labels — ensure visibility on dark backgrounds ──────────── */
+.seekbar-labels,
+.time-label {
+  color: var(--text-primary) !important;
+  opacity: 1 !important;
+}
+
 /* ─── Mobile compact (portrait ≤ 768px) ──────────────────────────────── */
 /* At 393×842 the controls panel is ~421px tall. The theme's generous padding
    on .track-info (20px), .volume-control (16px top/bottom), and the
@@ -2937,6 +3044,8 @@ h2 {
   .seekbar-labels,
   .time-label {
     font-size: 1rem !important;
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
   }
   .slider-track {
     height: clamp(12px, 1.4vw, 18px) !important;
@@ -3054,6 +3163,8 @@ h2 {
   .seekbar-labels,
   .time-label {
     font-size: 1.2rem !important;
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
   }
   .lsp-btn.btn-icon, .lsp-btn.lsp-btn--sm.btn-icon, .lsp-btn.lsp-btn--md.btn-round {
     width: 72px !important;
@@ -3238,8 +3349,8 @@ h2 {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -3272,7 +3383,7 @@ h2 {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -3295,11 +3406,12 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -3326,21 +3438,21 @@ h2 {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -3349,18 +3461,27 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -3453,8 +3574,8 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -3487,7 +3608,7 @@ h2 {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -3510,11 +3631,12 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -3541,21 +3663,21 @@ h2 {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -3564,18 +3686,27 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -3777,8 +3908,8 @@ h2 {
 /* padding and border-radius set directly on .playlist-item above */
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -3811,7 +3942,7 @@ h2 {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -3834,11 +3965,12 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -3865,21 +3997,21 @@ h2 {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -3888,18 +4020,27 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -3998,8 +4139,8 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -4032,7 +4173,7 @@ h2 {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -4055,11 +4196,12 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -4086,21 +4228,21 @@ h2 {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -4109,18 +4251,27 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;
@@ -4290,8 +4441,8 @@ h2 {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Dark Metallic / Black Chrome Theme
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Dark Metallic / Black Chrome Theme
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -4324,7 +4475,7 @@ h2 {
   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-  --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+  --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
   --color-secondary: #555555;
   --color-secondary-light: #777777;
@@ -4347,11 +4498,12 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
+  --text-dark: var(--text-primary);
   --text-accent: var(--color-primary);
   --text-success: var(--color-success);
   --text-warning: var(--color-warning);
@@ -4378,21 +4530,21 @@ h2 {
   --alert-bg-danger: rgba(255, 51, 51, 0.15);
   --alert-bg-info: rgba(0, 204, 255, 0.15);
   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-  --shadow-10: rgba(0,0,0,0.5);
-  --shadow-15: rgba(0,0,0,0.6);
-  --shadow-20: rgba(0,0,0,0.7);
-  --shadow-25: rgba(0,0,0,0.8);
-  --shadow-30: rgba(0,0,0,0.9);
+  --shadow-10: rgba(0, 0, 0, 0.5);
+  --shadow-15: rgba(0, 0, 0, 0.6);
+  --shadow-20: rgba(0, 0, 0, 0.7);
+  --shadow-25: rgba(0, 0, 0, 0.8);
+  --shadow-30: rgba(0, 0, 0, 0.9);
   --shadow-40: #000;
   --shadow-50: #000;
   --shadow-60: #000;
-  --highlight-05: rgba(255,255,255,0.05);
-  --highlight-10: rgba(255,255,255,0.1);
-  --highlight-15: rgba(255,255,255,0.15);
-  --highlight-20: rgba(255,255,255,0.2);
-  --highlight-30: rgba(255,255,255,0.3);
-  --highlight-40: rgba(255,255,255,0.4);
-  --highlight-50: rgba(255,255,255,0.5);
+  --highlight-05: rgba(255, 255, 255, 0.05);
+  --highlight-10: rgba(255, 255, 255, 0.1);
+  --highlight-15: rgba(255, 255, 255, 0.15);
+  --highlight-20: rgba(255, 255, 255, 0.2);
+  --highlight-30: rgba(255, 255, 255, 0.3);
+  --highlight-40: rgba(255, 255, 255, 0.4);
+  --highlight-50: rgba(255, 255, 255, 0.5);
   /* ─── Typography ─────────────────────────────────────────────────── */
   --font-display: 'Rajdhani', sans-serif;
   --font-body: 'Titillium Web', sans-serif;
@@ -4401,18 +4553,27 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   --leading-none: 1;
   --leading-tight: 1.1;
   --leading-normal: 1.4;

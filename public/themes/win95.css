@@ -3588,6 +3588,13 @@ input[type=range]::-webkit-slider-runnable-track {
   accent-color: var(--win95-titlebar);
 }
 
+/* ─── Seekbar labels — white on LSP dark backgrounds ───────────────────── */
+.seekbar-labels,
+.time-label {
+  color: var(--color-white) !important;
+  opacity: 1 !important;
+}
+
 /* ─── Audio info ────────────────────────────────────────────────────────── */
 .audio-meta {
   display: flex;

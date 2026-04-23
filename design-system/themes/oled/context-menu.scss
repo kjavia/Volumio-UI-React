@@ -6,195 +6,195 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 .context-menu-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 1rem;
-    z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  z-index: 100;
 }
 
 /* ─── Toggle Button ────────────────────────────────────────────────────── */
 .context-menu-toggle {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-dark);
-    transition: background 0.15s;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-dark);
+  transition: background 0.15s;
+
+  &:hover {
+    background: rgba(255, 102, 0, 0.12);
+  }
+
+  &:active,
+  &.active {
+    background: rgba(255, 102, 0, 0.08);
+  }
+
+  /* No-shadow variant (rendered on player) */
+  &--no-shadow {
+    background: rgba(0, 0, 0, 0.6);
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--color-primary-light);
 
     &:hover {
-        background: rgba(255, 102, 0, 0.12);
+      background: rgba(0, 0, 0, 0.75);
     }
 
     &:active,
     &.active {
-        background: rgba(255, 102, 0, 0.08);
-    }
-
-    /* No-shadow variant (rendered on player) */
-    &--no-shadow {
-        background: rgba(0, 0, 0, 0.6);
-        border: none !important;
-        box-shadow: none !important;
-        color: var(--color-primary-light);
-
-        &:hover {
-            background: rgba(0, 0, 0, 0.75);
-        }
-
-        &:active,
-        &.active {
-            background: rgba(0, 0, 0, 0.85);
-        }
-
-        .material-icons {
-            color: var(--color-primary-light);
-        }
+      background: rgba(0, 0, 0, 0.85);
     }
 
     .material-icons {
-        font-size: 22px;
-        color: var(--text-secondary);
+      color: var(--color-primary-light);
     }
+  }
+
+  .material-icons {
+    font-size: 22px;
+    color: var(--text-secondary);
+  }
 }
 
 /* ─── Dropdown Menu ────────────────────────────────────────────────────── */
 .context-menu {
-    position: absolute;
-    top: calc(100% + 4px);
-    left: 0;
-    min-width: 200px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    z-index: 101;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 200px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  z-index: 101;
 
-    background: #0a0a0a;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: none;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
 
-    opacity: 0;
-    transform: translateY(-8px) scale(0.96);
-    pointer-events: none;
-    transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(-8px) scale(0.96);
+  pointer-events: none;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
 
-    &.open {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        pointer-events: all;
-    }
+  &.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+  }
 }
 
 /* ─── Menu Items ───────────────────────────────────────────────────────── */
 .context-menu-item {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 16px;
-    cursor: pointer;
-    transition: background 0.1s;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.1s;
 
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    width: 100%;
-    text-align: left;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  width: 100%;
+  text-align: left;
 
-    font-family: var(--font-label);
-    font-size: var(--text-sm);
-    font-weight: 400;
-    color: var(--text-primary);
-    user-select: none;
+  font-family: var(--font-label);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--text-primary);
+  user-select: none;
+
+  .material-icons {
+    font-size: 18px;
+    color: var(--text-secondary);
+  }
+
+  &:hover {
+    background: rgba(255, 102, 0, 0.12);
+    color: var(--color-primary-light);
 
     .material-icons {
-        font-size: 18px;
-        color: var(--text-secondary);
+      color: var(--color-primary-light);
+    }
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  /* Danger item */
+  &.danger {
+    color: var(--color-danger);
+
+    .material-icons {
+      color: var(--color-danger);
     }
 
     &:hover {
-        background: rgba(255, 102, 0, 0.12);
-        color: var(--color-primary-light);
+      background: rgba(239, 68, 68, 0.12);
+      color: var(--color-danger-light);
 
-        .material-icons {
-            color: var(--color-primary-light);
-        }
+      .material-icons {
+        color: var(--color-danger-light);
+      }
     }
-
-    &:last-child {
-        border-bottom: none;
-    }
-
-    /* Danger item */
-    &.danger {
-        color: var(--color-danger);
-
-        .material-icons {
-            color: var(--color-danger);
-        }
-
-        &:hover {
-            background: rgba(239, 68, 68, 0.12);
-            color: var(--color-danger-light);
-
-            .material-icons {
-                color: var(--color-danger-light);
-            }
-        }
-    }
+  }
 }
 
 /* ─── Separator ────────────────────────────────────────────────────────── */
 .context-menu-separator {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.06);
-    margin: 2px 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 2px 0;
 }
 
 /* ─── Backdrop ─────────────────────────────────────────────────────────── */
 .context-menu-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99;
-    background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background: transparent;
 }
 
 /* ─── Focus ────────────────────────────────────────────────────────────── */
 .context-menu-toggle:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 /* ─── Responsive sizing at ≥1980px ───────────────────────────────────────── */
 @media (min-width: 1980px) {
-    .context-menu-toggle {
-        width: clamp(40px, 3vw, 72px);
-        height: clamp(40px, 3vw, 72px);
+  .context-menu-toggle {
+    width: clamp(40px, 3vw, 72px);
+    height: clamp(40px, 3vw, 72px);
 
-        .material-icons {
-            font-size: clamp(20px, 1.8vw, 34px);
-        }
+    .material-icons {
+      font-size: clamp(20px, 1.8vw, 34px);
     }
+  }
 
-    .context-menu {
-        min-width: clamp(180px, 16vw, 360px);
+  .context-menu {
+    min-width: clamp(180px, 16vw, 360px);
+  }
+
+  .context-menu-item {
+    font-size: clamp(13px, 1.1vw, 1.6rem);
+    gap: clamp(10px, 0.8vw, 18px);
+    padding: clamp(8px, 0.6vw, 14px) clamp(12px, 1vw, 22px);
+
+    .material-icons {
+      font-size: clamp(18px, 1.5vw, 2.2rem);
     }
-
-    .context-menu-item {
-        font-size: clamp(13px, 1.1vw, 1.6rem);
-        gap: clamp(10px, 0.8vw, 18px);
-        padding: clamp(8px, 0.6vw, 14px) clamp(12px, 1vw, 22px);
-
-        .material-icons {
-            font-size: clamp(18px, 1.5vw, 2.2rem);
-        }
-    }
+  }
 }

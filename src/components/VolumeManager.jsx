@@ -12,7 +12,7 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
         onClick={onMute}
         label={mute ? 'Unmute' : 'Mute'}
       >
-        <span className={`material-icons fs-5 fs-md-4 ${mute ? 'text-orange' : ''}`}>
+        <span className={`material-icons fs-5 fs-md-4 ${mute ? 'text-white' : ''}`}>
           {getVolume() === 0 ? 'volume_off' : getVolume() < 50 ? 'volume_down' : 'volume_up'}
         </span>
       </Button>
@@ -32,7 +32,7 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
           <div className="slider-cap"></div>
         </div>
       </div>
-      <div className="text-center text-white small opacity-75" style={{ fontSize: '0.75em' }}>
+      <div className="text-center small" style={{ fontSize: '0.75em' }}>
         {getVolume()} / 100
       </div>
     </div>

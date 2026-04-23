@@ -3580,7 +3580,7 @@ h2 {
 .time-label {
   font-family: var(--font-tech);
   font-size: clamp(0.6rem, 1.1vw, 0.85rem);
-  color: var(--color-gray-500, #555);
+  color: var(--text-secondary);
   min-width: clamp(28px, 3.5vw, 44px);
 }
 

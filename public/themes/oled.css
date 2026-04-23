@@ -2826,7 +2826,7 @@ input[type=range]::-moz-range-thumb:active {
 .time-label {
   font-family: var(--font-display);
   font-size: var(--text-xs);
-  color: var(--color-primary);
+  color: var(--text-secondary);
   min-width: 35px;
   font-variant-numeric: tabular-nums;
 }
@@ -2842,7 +2842,7 @@ input[type=range]::-moz-range-thumb:active {
 
 .seekbar-labels .text-white,
 .seekbar-labels .time-label {
-  color: var(--color-primary) !important;
+  color: var(--text-secondary);
   opacity: 1 !important;
 }
 
@@ -4050,7 +4050,7 @@ input[type=range]::-moz-range-thumb:active {
 .seekbar-labels,
 .time-label {
   font-family: var(--font-display) !important;
-  color: var(--color-primary) !important;
+  color: var(--text-secondary);
   opacity: 1 !important;
 }
 
@@ -4367,7 +4367,29 @@ input[type=range]::-moz-range-thumb:active {
 }
 
 .lsp-volume-popup__mute .material-icons {
-  color: var(--color-primary) !important;
+  font-size: 0 !important;
+  color: transparent !important;
+  text-indent: -9999px;
+  overflow: visible;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.lsp-volume-popup__mute .material-icons::after {
+  content: "MU";
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  text-indent: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 :root {

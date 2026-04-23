@@ -4477,7 +4477,7 @@ input[type=range]::-moz-range-thumb:active {
 .time-label {
   font-family: var(--font-mono);
   font-size: clamp(0.6rem, 1.1vw, 0.85rem);
-  color: var(--color-gray-500, #888);
+  color: var(--color-secondary);
   min-width: clamp(28px, 3.5vw, 44px);
 }
 

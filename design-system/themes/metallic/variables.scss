@@ -1,155 +1,165 @@
 :root {
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        COLOR PALETTE - Dark Metallic / Black Chrome Theme
        ═══════════════════════════════════════════════════════════════════════ */
 
-    /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
-    --color-primary: #00e1ff;
-    --color-primary-light: #66efff;
-    --color-primary-dark: #00b8cc;
-    --color-primary-deep: #008f99;
-    --glow-primary: rgba(0, 225, 255, 0.4);
+   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
+   --color-primary: #00e1ff;
+   --color-primary-light: #66efff;
+   --color-primary-dark: #00b8cc;
+   --color-primary-deep: #008f99;
+   --glow-primary: rgba(0, 225, 255, 0.4);
 
-    /* ─── Neutrals (Black/Dark Chrome) ────────────────────────────────── */
-    --color-black: #000000;
-    --color-gray-950: #080808;
-    --color-gray-900: #111111;
-    --color-gray-850: #1a1a1a;
-    --color-gray-800: #222222;
-    --color-gray-750: #2a2a2a;
-    --color-gray-700: #333333;
-    --color-gray-600: #444444;
-    --color-gray-550: #555555;
-    --color-gray-500: #666666;
-    --color-gray-400: #888888;
-    --color-gray-300: #aaaaaa;
-    --color-gray-250: #bbbbbb;
-    --color-gray-200: #cccccc;
-    --color-gray-150: #dddddd;
-    --color-gray-100: #eeeeee;
-    --color-gray-075: #f4f4f4;
-    --color-gray-050: #f9f9f9;
-    --color-gray-025: #fcfdfd;
-    --color-gray-010: #ffffff;
-    --color-white: #ffffff;
+   /* ─── Neutrals (Black/Dark Chrome) ────────────────────────────────── */
+   --color-black: #000000;
+   --color-gray-950: #080808;
+   --color-gray-900: #111111;
+   --color-gray-850: #1a1a1a;
+   --color-gray-800: #222222;
+   --color-gray-750: #2a2a2a;
+   --color-gray-700: #333333;
+   --color-gray-600: #444444;
+   --color-gray-550: #555555;
+   --color-gray-500: #666666;
+   --color-gray-400: #888888;
+   --color-gray-300: #aaaaaa;
+   --color-gray-250: #bbbbbb;
+   --color-gray-200: #cccccc;
+   --color-gray-150: #dddddd;
+   --color-gray-100: #eeeeee;
+   --color-gray-075: #f4f4f4;
+   --color-gray-050: #f9f9f9;
+   --color-gray-025: #fcfdfd;
+   --color-gray-010: #ffffff;
+   --color-white: #ffffff;
 
-    /* ─── Chrome/Steel Gradients ───────────────────────────────────────── */
-    --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
-    --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
-    --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
-    --gradient-btn-gloss: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 49%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.2) 100%);
+   /* ─── Chrome/Steel Gradients ───────────────────────────────────────── */
+   --gradient-chrome-dark: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 50%, #0a0a0a 51%, #1a1a1a 100%);
+   --gradient-chrome-light: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 50%, #a0a0a0 51%, #d0d0d0 100%);
+   --gradient-black-metal: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
+   --gradient-btn-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
 
-    /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
-    --color-secondary: #555555;
-    --color-secondary-light: #777777;
-    --color-secondary-dark: #333333;
+   /* ─── Secondary (Steel Grey) ──────────────────────────────────────── */
+   --color-secondary: #555555;
+   --color-secondary-light: #777777;
+   --color-secondary-dark: #333333;
 
-    /* ─── Success/Green (LED) ─────────────────────────────────────────── */
-    --color-success: #00ff88;
-    --color-success-dark: #00cc66;
-    --color-success-light: #66ffbb;
+   /* ─── Success/Green (LED) ─────────────────────────────────────────── */
+   --color-success: #00ff88;
+   --color-success-dark: #00cc66;
+   --color-success-light: #66ffbb;
 
-    /* ─── Warning/Amber (LED) ─────────────────────────────────────────── */
-    --color-warning: #ffaa00;
-    --color-warning-dark: #cc8800;
-    --color-warning-light: #ffcc66;
+   /* ─── Warning/Amber (LED) ─────────────────────────────────────────── */
+   --color-warning: #ffaa00;
+   --color-warning-dark: #cc8800;
+   --color-warning-light: #ffcc66;
 
-    /* ─── Danger/Red (LED) ────────────────────────────────────────────── */
-    --color-danger: #ff3333;
-    --color-danger-dark: #cc0000;
-    --color-danger-light: #ff6666;
-    --color-danger-muted: #4d0000;
+   /* ─── Danger/Red (LED) ────────────────────────────────────────────── */
+   --color-danger: #ff3333;
+   --color-danger-dark: #cc0000;
+   --color-danger-light: #ff6666;
+   --color-danger-muted: #4d0000;
 
-    /* ─── Info/Blue (LED) ─────────────────────────────────────────────── */
-    --color-info: #00ccff;
-    --color-info-dark: #0099cc;
-    --color-info-light: #66ddff;
+   /* ─── Info/Blue (LED) ─────────────────────────────────────────────── */
+   --color-info: #00ccff;
+   --color-info-dark: #0099cc;
+   --color-info-light: #66ddff;
 
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        SEMANTIC COLOR USAGE
        ═══════════════════════════════════════════════════════════════════════ */
 
-    /* ─── Text Colors ──────────────────────────────────────────────────── */
-    --text-primary: var(--color-gray-100);
-    --text-secondary: var(--color-gray-400);
-    --text-accent: var(--color-primary);
-    --text-success: var(--color-success);
-    --text-warning: var(--color-warning);
-    --text-danger: var(--color-danger);
-    --text-info: var(--color-info);
-    --text-light: var(--color-white);
-    --text-muted: var(--color-gray-500);
+   /* ─── Text Colors ──────────────────────────────────────────────────── */
+   --text-primary: var(--color-gray-100);
+   --text-secondary: var(--color-gray-400);
+   --text-dark: var(--text-primary);
+   --text-accent: var(--color-primary);
+   --text-success: var(--color-success);
+   --text-warning: var(--color-warning);
+   --text-danger: var(--color-danger);
+   --text-info: var(--color-info);
+   --text-light: var(--color-white);
+   --text-muted: var(--color-gray-500);
 
-    /* ─── Background Colors ────────────────────────────────────────────── */
-    --bg-color: #050505;
-    --panel-bg-dark: #0a0a0a;
-    --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
+   /* ─── Background Colors ────────────────────────────────────────────── */
+   --bg-color: #050505;
+   --panel-bg-dark: #0a0a0a;
+   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
 
-    /* ─── Button Colors ────────────────────────────────────────────────── */
-    --btn-bg-dark: linear-gradient(180deg, #2a2a2a 0%, #0a0a0a 100%);
-    --btn-bg-light: linear-gradient(180deg, #444444 0%, #222222 100%);
-    --btn-bg-primary: var(--color-primary);
-    --btn-bg-secondary: var(--color-secondary);
-    --btn-bg-success: var(--color-success);
-    --btn-bg-warning: var(--color-warning);
-    --btn-bg-danger: var(--color-danger);
-    --btn-bg-info: var(--color-info);
+   /* ─── Button Colors ────────────────────────────────────────────────── */
+   --btn-bg-dark: linear-gradient(180deg, #2a2a2a 0%, #0a0a0a 100%);
+   --btn-bg-light: linear-gradient(180deg, #444444 0%, #222222 100%);
+   --btn-bg-primary: var(--color-primary);
+   --btn-bg-secondary: var(--color-secondary);
+   --btn-bg-success: var(--color-success);
+   --btn-bg-warning: var(--color-warning);
+   --btn-bg-danger: var(--color-danger);
+   --btn-bg-info: var(--color-info);
 
-    /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
-    --alert-bg-success: rgba(0, 255, 136, 0.15);
-    --alert-bg-warning: rgba(255, 170, 0, 0.15);
-    --alert-bg-danger: rgba(255, 51, 51, 0.15);
-    --alert-bg-info: rgba(0, 204, 255, 0.15);
+   /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+   --alert-bg-success: rgba(0, 255, 136, 0.15);
+   --alert-bg-warning: rgba(255, 170, 0, 0.15);
+   --alert-bg-danger: rgba(255, 51, 51, 0.15);
+   --alert-bg-info: rgba(0, 204, 255, 0.15);
 
-    /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
-    --shadow-10: rgba(0,0,0,0.5);
-    --shadow-15: rgba(0,0,0,0.6);
-    --shadow-20: rgba(0,0,0,0.7);
-    --shadow-25: rgba(0,0,0,0.8);
-    --shadow-30: rgba(0,0,0,0.9);
-    --shadow-40: #000;
-    --shadow-50: #000;
-    --shadow-60: #000;
+   /* ─── Legacy Support / Fallbacks ──────────────────────────────────── */
+   --shadow-10: rgba(0, 0, 0, 0.5);
+   --shadow-15: rgba(0, 0, 0, 0.6);
+   --shadow-20: rgba(0, 0, 0, 0.7);
+   --shadow-25: rgba(0, 0, 0, 0.8);
+   --shadow-30: rgba(0, 0, 0, 0.9);
+   --shadow-40: #000;
+   --shadow-50: #000;
+   --shadow-60: #000;
 
-    --highlight-05: rgba(255,255,255,0.05);
-    --highlight-10: rgba(255,255,255,0.1);
-    --highlight-15: rgba(255,255,255,0.15);
-    --highlight-20: rgba(255,255,255,0.2);
-    --highlight-30: rgba(255,255,255,0.3);
-    --highlight-40: rgba(255,255,255,0.4);
-    --highlight-50: rgba(255,255,255,0.5);
+   --highlight-05: rgba(255, 255, 255, 0.05);
+   --highlight-10: rgba(255, 255, 255, 0.1);
+   --highlight-15: rgba(255, 255, 255, 0.15);
+   --highlight-20: rgba(255, 255, 255, 0.2);
+   --highlight-30: rgba(255, 255, 255, 0.3);
+   --highlight-40: rgba(255, 255, 255, 0.4);
+   --highlight-50: rgba(255, 255, 255, 0.5);
 
-    /* ─── Typography ─────────────────────────────────────────────────── */
-    --font-display: 'Rajdhani', sans-serif;
-    --font-body: 'Titillium Web', sans-serif;
-    --font-code: 'Share Tech Mono', monospace;
-    --font-tech: 'Share Tech Mono', monospace;
-    --font-mono: 'Share Tech Mono', monospace;
-    --font-label: 'Titillium Web', sans-serif;
+   /* ─── Typography ─────────────────────────────────────────────────── */
+   --font-display: 'Rajdhani', sans-serif;
+   --font-body: 'Titillium Web', sans-serif;
+   --font-code: 'Share Tech Mono', monospace;
+   --font-tech: 'Share Tech Mono', monospace;
+   --font-mono: 'Share Tech Mono', monospace;
+   --font-label: 'Titillium Web', sans-serif;
 
-    /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
        Formula: clamp(min, intercept + slope * 100vw, max)
        Generated via Utopia method: slope = (max−min)/(1440−320)
        ─────────────────────────────────────────────────────────────────── */
-    --text-xs:   clamp(0.625rem,  0.589rem + 0.179vw, 0.75rem);   /* 10→12px */
-    --text-sm:   clamp(0.75rem,   0.714rem + 0.179vw, 0.875rem);  /* 12→14px */
-    --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);      /* 13→16px */
-    --text-md:   clamp(0.875rem,  0.804rem + 0.357vw, 1.125rem);  /* 14→18px */
-    --text-lg:   clamp(1rem,      0.929rem + 0.357vw, 1.25rem);   /* 16→20px */
-    --text-xl:   clamp(1.125rem,  1.018rem + 0.536vw, 1.5rem);    /* 18→24px */
-    --text-2xl:  clamp(1.25rem,   1.071rem + 0.893vw, 1.875rem);  /* 20→30px */
-    --text-3xl:  clamp(1.5rem,    1.214rem + 1.429vw, 2.5rem);    /* 24→40px */
-    --text-4xl:  clamp(1.875rem,  1.482rem + 1.964vw, 3.25rem);   /* 30→52px */
+   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+   /* 10→12px */
+   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+   /* 12→14px */
+   --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+   /* 13→16px */
+   --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+   /* 14→18px */
+   --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+   /* 16→20px */
+   --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+   /* 18→24px */
+   --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+   /* 20→30px */
+   --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+   /* 24→40px */
+   --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+   /* 30→52px */
 
-    --leading-none: 1;
-    --leading-tight: 1.1;
-    --leading-normal: 1.4;
-    --leading-relaxed: 1.6;
+   --leading-none: 1;
+   --leading-tight: 1.1;
+   --leading-normal: 1.4;
+   --leading-relaxed: 1.6;
 
-    --tracking-tighter: -0.05em;
-    --tracking-tight: -0.025em;
-    --tracking-normal: 0em;
-    --tracking-wide: 0.05em;
-    --tracking-wider: 0.1em;
-    --tracking-widest: 0.25em;
+   --tracking-tighter: -0.05em;
+   --tracking-tight: -0.025em;
+   --tracking-normal: 0em;
+   --tracking-wide: 0.05em;
+   --tracking-wider: 0.1em;
+   --tracking-widest: 0.25em;
 }
