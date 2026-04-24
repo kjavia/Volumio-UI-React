@@ -565,6 +565,15 @@ body,
 /* ── Mobile-Specific Tweaks (Portrait) ── */
 @media (max-width: 768px) {
 
+  /* Give controls more room than the player on short phones */
+  .home-grid {
+    grid-template-rows: 2fr 80px 3fr;
+  }
+
+  .home-grid.no-viz {
+    grid-template-rows: 2fr 3fr;
+  }
+
   /* Reduce track info padding/margins */
   .cq-track-info {
     margin-bottom: 2px !important;
@@ -1635,22 +1644,22 @@ body,
     }
 
     .responsive-stream-info {
-      font-size: clamp(0.65rem, min(3cqw, 2.5cqh), 1.8rem) !important;
+      font-size: clamp(1.2rem, min(3cqw, 2.5cqh), 1.8rem) !important;
     }
 
     .format-logo-responsive {
-      height: clamp(0.9rem, min(3cqw, 2.5cqh), 2rem) !important;
+      height: clamp(1.2rem, min(3cqw, 2.5cqh), 2rem) !important;
     }
 
     /* Smaller transport buttons for short screens */
     .btn-round {
-      width: clamp(36px, min(7cqw, 9cqh), 56px) !important;
-      height: clamp(36px, min(7cqw, 9cqh), 56px) !important;
+      width: clamp(50px, min(7cqw, 9cqh), 56px) !important;
+      height: clamp(50px, min(7cqw, 9cqh), 56px) !important;
     }
 
     .btn-round.btn-sm {
-      width: clamp(30px, min(5cqw, 7cqh), 44px) !important;
-      height: clamp(30px, min(5cqw, 7cqh), 44px) !important;
+      width: clamp(40px, min(5cqw, 7cqh), 44px) !important;
+      height: clamp(40px, min(5cqw, 7cqh), 44px) !important;
     }
 
     .btn-round.btn-sm .material-icons {
@@ -1667,7 +1676,7 @@ body,
     }
 
     .btn-icon .material-icons {
-      font-size: clamp(1rem, min(3.5cqw, 4cqh), 1.8rem) !important;
+      font-size: clamp(1.4rem, min(3.5cqw, 4cqh), 1.8rem) !important;
     }
 
     /* Smaller seekbar / volume sliders */

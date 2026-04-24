@@ -54,7 +54,7 @@ const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className
           aria-label={formatType}
           style={{
             display: 'inline-block',
-            aspectRatio: '1',
+            aspectRatio: '2/1',
             WebkitMaskImage: `url(${logoSrc})`,
             maskImage: `url(${logoSrc})`,
             WebkitMaskSize: 'contain',
@@ -81,7 +81,7 @@ const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className
           src="/assets/logos/hires.svg"
           alt="Hi-Res"
           className="format-logo-responsive hires-logo"
-          style={{ width: 'auto' }}
+          style={{ width: 'auto', aspectRatio: '2/1' }}
         />
       )}
 
