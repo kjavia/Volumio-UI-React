@@ -283,25 +283,21 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
             className="d-flex flex-column align-items-center justify-content-center w-100 player-controls-container">
             {/* Track info — sized to content only */}
             <div className="track-info-group" style={{ width: 'clamp(300px, 95%, 99%)' }}>
-              <TrackInfo title={title} artist={artist} album={album} />
+              <TrackInfo title={title} artist={artist} album={album}>
+                <div className="stream-info-row d-flex align-items-center justify-content-center gap-3 w-100">
+                  <ServiceLogo service={service} />
+                  <StreamInfo
+                    trackType={trackType}
+                    codec={codec}
+                    samplerate={samplerate}
+                    bitdepth={bitdepth}
+                    bitrate={bitrate}
+                  />
+                </div>
+              </TrackInfo>
             </div>
 
-            {/* Top half of spacer — pushes stream info toward center */}
-            <div className="controls-spacer" />
-
-            {/* Stream info + service logo — floats centered between track info and seekbar */}
-            <div className="d-flex align-items-center justify-content-center gap-3">
-              <ServiceLogo service={service} />
-              <StreamInfo
-                trackType={trackType}
-                codec={codec}
-                samplerate={samplerate}
-                bitdepth={bitdepth}
-                bitrate={bitrate}
-              />
-            </div>
-
-            {/* Bottom half of spacer */}
+            {/* Spacer — pushes seekbar/controls down */}
             <div className="controls-spacer" />
 
             <div className="m-auto seekbar-container-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>

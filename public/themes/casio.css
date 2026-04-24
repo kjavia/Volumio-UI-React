@@ -3027,7 +3027,6 @@ input[type=range]::-webkit-slider-thumb {
 /* ─── Track Info Group — 80s watch face with glass cover ─────────────── */
 .track-info-group {
   border-radius: 6px;
-  padding: 14px 18px 12px;
   position: relative;
   /* needed for ::before glass sheen */
   overflow: hidden;
@@ -3072,8 +3071,8 @@ input[type=range]::-webkit-slider-thumb {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 4px;
   -webkit-font-smoothing: antialiased;
+  padding: 14px 18px 12px;
 }
 
 .track-title {
@@ -3081,7 +3080,6 @@ input[type=range]::-webkit-slider-thumb {
   font-style: italic;
   font-size: clamp(1.2rem, 4.5vw, 2.2rem);
   font-weight: 700;
-  margin-bottom: 2px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -3306,11 +3304,9 @@ input[type=range]::-webkit-slider-thumb {
 }
 /* ── Very short screens (800×480, 800×400 etc.): compact the Casio player ── */
 @media (max-height: 600px) {
-  .track-info-group {
-    padding: 6px 10px 6px !important;
-  }
   .track-info {
-    margin-bottom: 2px;
+    padding: 6px 10px 6px !important;
+    margin-bottom: 0;
   }
   .player-controls-container {
     padding-top: 4px;

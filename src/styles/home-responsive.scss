@@ -204,6 +204,11 @@ body,
     width: 95% !important;
   }
 
+  /* Uniform gap between all 4 rows in no-player mode */
+  .cq-track-info {
+    gap: clamp(2px, 1cqh, 12px) !important;
+  }
+
   .seekbar-container-wrap,
   .volume-manager-wrap {
     width: 92% !important;
@@ -225,7 +230,7 @@ body,
   }
 
   .responsive-album {
-    font-size: clamp(0.9rem, min(4cqw, 5cqh), 4rem) !important;
+    font-size: clamp(0.9rem, min(3.5cqw, 4cqh), 4rem) !important;
   }
 
   .responsive-stream-info {
@@ -440,13 +445,14 @@ body,
 .cq-track-info {
   flex: 0 0 auto;
   min-height: 0;
+  /* Uniform gap between title / artist / album / stream-info rows */
+  gap: clamp(4px, 1.2cqh, 14px);
 }
 
 /* ── Track info group (title + stream info together) ── */
 .track-info-group {
   flex: 0 0 auto;
   min-height: 0;
-  overflow: hidden;
   width: 100%;
 }
 
@@ -576,9 +582,8 @@ body,
 
   /* Reduce track info padding/margins */
   .cq-track-info {
-    margin-bottom: 2px !important;
-    padding-bottom: 4px !important;
-    /* prevent overflow-hidden clipping the album row */
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
   }
 
   /* Uniform row gap between Player / Viz strip / Controls grid areas */
@@ -695,6 +700,10 @@ body,
     font-size: 1.05rem !important;
   }
 
+  .responsive-album {
+    font-size: 1.05rem !important;
+  }
+
   .format-logo-responsive {
     height: 1.5rem !important;
   }
@@ -716,6 +725,10 @@ body,
   }
 
   .responsive-stream-info {
+    font-size: 1.4rem !important;
+  }
+
+  .responsive-album {
     font-size: 1.4rem !important;
   }
 
@@ -1540,9 +1553,14 @@ body,
     margin-inline: auto !important;
   }
 
-  /* Minimal track-info padding — let text fill the space */
+  /* Minimal track-info padding — let gap handle vertical spacing */
   .track-info {
-    padding: clamp(2px, 0.6cqh, 8px) clamp(4px, 0.8cqw, 8px) !important;
+    padding: 0 clamp(4px, 0.8cqw, 8px) !important;
+  }
+
+  /* Uniform gap between all 4 rows (title / artist / album / stream-info) */
+  .cq-track-info {
+    gap: clamp(2px, 1.2cqh, 14px) !important;
   }
 
   /* Responsive title fonts — scale to fill available space */
@@ -1631,6 +1649,10 @@ body,
 /* ── Album Art Max Space: compact fonts for very short screens (≤480px height) ── */
 @media (max-height: 480px) {
   .album-art-max-space .area-controls {
+    .cq-track-info {
+      gap: clamp(1px, 0.5cqh, 6px) !important;
+    }
+
     .responsive-title {
       font-size: clamp(1rem, min(9cqw, 12cqh), 4rem) !important;
     }
@@ -1700,22 +1722,20 @@ body,
   }
 }
 
-/* ── Album Art Max Space: tighten track-info & add stream→seekbar gap (≤600px height) ── */
+/* ── Album Art Max Space: tighten spacing (≤600px height) ── */
 @media (max-height: 600px) {
   .album-art-max-space .area-controls {
     .track-info {
-      padding: clamp(1px, 0.4cqh, 4px) clamp(4px, 0.8cqw, 8px) !important;
-      margin-bottom: 0 !important;
+      padding: 0 clamp(4px, 0.8cqw, 8px) !important;
+    }
+
+    .cq-track-info {
+      gap: clamp(1px, 0.8cqh, 8px) !important;
     }
 
     .track-info-group {
       margin-top: clamp(1px, 0.3cqh, 4px) !important;
       margin-bottom: clamp(1px, 0.3cqh, 4px) !important;
-    }
-
-    /* More breathing room between stream info and seekbar */
-    .seekbar-container-wrap {
-      margin-top: clamp(8px, 2cqh, 20px) !important;
     }
 
     /* Smaller sliders */

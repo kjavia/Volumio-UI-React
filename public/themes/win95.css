@@ -3443,7 +3443,6 @@ input[type=range]::-webkit-slider-runnable-track {
 .track-title {
   font-size: clamp(1.1rem, 4vw, 2rem);
   font-weight: 700;
-  margin-bottom: 2px;
   letter-spacing: var(--tracking-normal);
   white-space: nowrap;
   overflow: hidden;
@@ -3470,7 +3469,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .responsive-album {
-  font-size: clamp(0.7rem, 1.8cqw, 0.95rem);
+  font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
 }
 
 .responsive-stream-info {
@@ -3705,7 +3704,7 @@ input[type=range]::-webkit-slider-runnable-track {
     font-size: clamp(0.7rem, min(3.5cqw, 6cqh), 2.5rem) !important;
   }
   .responsive-album {
-    font-size: clamp(0.65rem, min(1.8cqw, 3.5cqh), 0.95rem) !important;
+    font-size: clamp(0.65rem, min(2.1cqw, 3cqh), 1.96rem) !important;
   }
   .responsive-stream-info {
     font-size: clamp(0.65rem, min(2.1cqw, 3cqh), 1.96rem) !important;

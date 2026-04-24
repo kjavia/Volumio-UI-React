@@ -2835,7 +2835,7 @@ h2 {
 
 .track-info {
   text-align: center;
-  padding: 20px;
+  padding: clamp(16px, 2.5cqh, 28px) 20px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 12px;
   width: 95%;
@@ -2843,12 +2843,27 @@ h2 {
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
+/* More padding & row spacing on tablet/desktop */
+@media (min-width: 768px) {
+  .track-info {
+    padding: clamp(12px, 2cqh, 24px) clamp(12px, 1.2cqw, 24px);
+  }
+  .track-info-group {
+    margin-bottom: clamp(4px, 1cqh, 12px) !important;
+  }
+  .controls-spacer {
+    min-height: clamp(4px, 1cqh, 16px) !important;
+    max-height: clamp(8px, 2cqh, 28px) !important;
+  }
+  .cq-track-info {
+    gap: clamp(4px, 1.2cqh, 12px) !important;
+  }
+}
 .track-title {
   font-family: var(--font-display);
   font-size: clamp(1.1rem, 4vw, 2rem);
   font-weight: 700;
   color: var(--color-white);
-  margin: 0 0 8px 0;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 2px 0 #000;
   letter-spacing: 0.5px;
   white-space: nowrap;
@@ -2898,7 +2913,7 @@ h2 {
 }
 
 .responsive-album {
-  font-size: clamp(0.7rem, 1.8cqw, 0.95rem);
+  font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
 }
 
 .responsive-stream-info {
@@ -2922,8 +2937,8 @@ h2 {
 
 /* ─── Track info group: use full panel width ───────────────────────────── */
 .track-info-group {
-  width: calc(100% - 2rem) !important;
-  margin-inline: 1rem;
+  width: 100% !important;
+  margin: clamp(0.25rem, 1.5cqh, 1rem) clamp(0.5rem, 2cqw, 2rem) 0;
 }
 
 /* ─── Progress Sliders ────────────────────────────────────────────────── */
@@ -3005,8 +3020,7 @@ h2 {
    Scale everything down so nothing gets clipped. */
 @media (max-width: 768px) {
   .track-info {
-    padding: 8px 12px 10px;
-    /* extra 2px bottom so album row isn't clipped */
+    padding: 14px 16px;
   }
   .player-controls {
     padding: 10px 16px;
@@ -3017,8 +3031,7 @@ h2 {
   }
   .track-info-group {
     width: calc(100% - 1rem) !important;
-    margin-inline: 0.5rem;
-    padding: 8px 10px;
+    margin: 0 0.5rem;
   }
 }
 /* ── Large-screen player: boost font sizes on short screens so Rajdhani
@@ -3076,7 +3089,7 @@ h2 {
 @media (max-height: 650px) and (max-width: 1023px) {
   /* Tighten the track-info panel */
   .track-info {
-    padding: 8px 12px 10px;
+    padding: 8px 12px;
   }
   /* Reduce player-controls padding & gap so buttons fit */
   .player-controls {
@@ -3103,11 +3116,11 @@ h2 {
 /* ── Very short screens (800×480, 800×400 etc.): aggressively compact ──── */
 @media (max-height: 600px) {
   .track-info {
-    padding: 4px 8px 6px !important;
+    padding: 0 8px !important;
   }
   .track-info-group {
     width: calc(100% - 0.5rem) !important;
-    margin-inline: 0.25rem;
+    margin: 0 0.25rem;
   }
   .player-controls {
     padding: 4px 8px;
@@ -3133,7 +3146,7 @@ h2 {
     font-size: clamp(0.7rem, min(3.5cqw, 6cqh), 2.5rem) !important;
   }
   .responsive-album {
-    font-size: clamp(0.65rem, min(1.8cqw, 3.5cqh), 0.95rem) !important;
+    font-size: clamp(0.65rem, min(2.1cqw, 3cqh), 1.96rem) !important;
   }
   .responsive-stream-info {
     font-size: clamp(0.65rem, min(2.1cqw, 3cqh), 1.96rem) !important;

@@ -78,7 +78,7 @@ const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className
   return (
     <div
       className={`stream-info d-flex align-items-center gap-4 responsive-stream-info flex-nowrap${className ? ` ${className}` : ' justify-content-center w-100'}`}
-      style={className ? { userSelect: 'none', fontFamily: 'var(--font-display)', lineHeight: 1 } : { opacity: 0.6, userSelect: 'none', fontFamily: 'var(--font-display)', lineHeight: 1 }}
+      style={className ? { userSelect: 'none', fontFamily: 'var(--font-display)', lineHeight: 1 } : { userSelect: 'none', fontFamily: 'var(--font-display)', lineHeight: 1 }}
     >
       {/* Format logo or text fallback */}
       {logoSrc ? (
@@ -100,7 +100,6 @@ const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className
             WebkitMaskPosition: 'center',
             maskPosition: 'center',
             backgroundColor: 'currentColor',
-            opacity: 0.8,
           }}
         />
       ) : (

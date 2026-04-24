@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Marquee from './Marquee';
 
-const TrackInfo = ({ title, artist, album, isInFooter }) => {
+const TrackInfo = ({ title, artist, album, isInFooter, children }) => {
   return (
     <div
       className={`track-info d-flex flex-column ${isInFooter
@@ -22,10 +22,11 @@ const TrackInfo = ({ title, artist, album, isInFooter }) => {
         <Marquee>{artist || 'Unknown Artist'}</Marquee>
       </div>
       {!isInFooter && album && (
-        <div className="album-name user-select-none mt-1 small w-100 responsive-album">
+        <div className="album-name user-select-none small w-100 responsive-album">
           <Marquee>{album}</Marquee>
         </div>
       )}
+      {children}
     </div>
   );
 };
@@ -35,6 +36,7 @@ TrackInfo.propTypes = {
   artist: PropTypes.string,
   album: PropTypes.string,
   isInFooter: PropTypes.bool,
+  children: PropTypes.node,
 };
 
 export default TrackInfo;

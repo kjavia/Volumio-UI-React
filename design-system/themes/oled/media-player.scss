@@ -81,14 +81,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 10px;
 }
 
 .track-title {
   font-family: var(--font-display);
   font-size: clamp(1.1rem, 4vw, 2rem);
   font-weight: 700;
-  margin-bottom: 4px;
   letter-spacing: var(--tracking-tight);
   white-space: nowrap;
   color: var(--color-primary);
@@ -118,7 +116,7 @@
 
 .responsive-album {
   font-family: var(--font-display);
-  font-size: clamp(0.7rem, 1.8cqw, 0.95rem);
+  font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
   color: var(--color-primary);
 }
 
