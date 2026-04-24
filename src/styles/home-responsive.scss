@@ -1559,11 +1559,11 @@ body,
   }
 
   .responsive-stream-info {
-    font-size: clamp(0.8rem, min(4cqw, 3cqh), 4rem) !important;
+    font-size: clamp(1.2rem, min(7cqw, 6cqh), 7rem) !important;
   }
 
   .format-logo-responsive {
-    height: clamp(1.2rem, min(4cqw, 3.5cqh), 4.5rem) !important;
+    height: clamp(1.2rem, min(7cqw, 6cqh), 7rem) !important;
   }
 
   .seekbar-container-wrap,
@@ -1644,11 +1644,11 @@ body,
     }
 
     .responsive-stream-info {
-      font-size: clamp(1.2rem, min(3cqw, 2.5cqh), 1.8rem) !important;
+      font-size: clamp(0.7rem, min(4cqw, 4cqh), 2rem) !important;
     }
 
     .format-logo-responsive {
-      height: clamp(1.2rem, min(3cqw, 2.5cqh), 2rem) !important;
+      height: clamp(0.7rem, min(4cqw, 4cqh), 2rem) !important;
     }
 
     /* Smaller transport buttons for short screens */

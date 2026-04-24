@@ -89,6 +89,7 @@ const useVolumioStatus = () => {
 
     const handlePushState = (data) => {
       if (!data) return;
+      console.log('[VolumioStatus] pushState received:', data);
       setStatus(data.status);
       setTitle(data.title);
       setArtist(data.artist);
@@ -100,11 +101,11 @@ const useVolumioStatus = () => {
       setRepeat(data.repeat);
       setRepeatSingle(data.repeatSingle);
       setDisableVolumeControl(data.disableVolumeControl);
-      setSamplerate(data.samplerate);
-      setBitdepth(data.bitdepth);
+      setSamplerate(data.samplerate != null ? String(data.samplerate) : '');
+      setBitdepth(data.bitdepth != null ? String(data.bitdepth) : '');
       setTrackType(data.trackType || '');
       setCodec(data.codec || '');
-      setBitrate(data.bitrate || '');
+      setBitrate(data.bitrate != null ? String(data.bitrate) : '');
       setService(data.service || '');
       setStreamUri(data.uri || '');
       if (data.position !== undefined) setPosition(data.position);

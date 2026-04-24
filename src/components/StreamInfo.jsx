@@ -19,6 +19,30 @@ const STREAMING_SERVICES = new Set([
   'napster', 'webradio', 'radio',
 ]);
 
+// DSD format types
+const DSD_TYPES = new Set(['dsd', 'dsf', 'dff']);
+
+/**
+ * Derive a DSD variant label (DSD64, DSD128, DSD256, DSD512) from the
+ * samplerate string that Volumio sends.  Volumio may report the native
+ * rate as "2.82 MHz", "5.64 MHz", etc. or as a raw Hz integer.
+ */
+function getDsdLabel(samplerate) {
+  const sr = String(samplerate || '');
+  let nativeHz = 0;
+  const mhzMatch = sr.match(/^(\d+\.?\d*)\s*[Mm][Hh][Zz]/);
+  if (mhzMatch) {
+    nativeHz = Math.round(parseFloat(mhzMatch[1]) * 1_000_000);
+  } else {
+    nativeHz = parseInt(sr, 10) || 0;
+  }
+  if (nativeHz >= 22_000_000) return 'DSD512';
+  if (nativeHz >= 10_000_000) return 'DSD256';
+  if (nativeHz >= 5_000_000) return 'DSD128';
+  if (nativeHz > 0) return 'DSD64';
+  return 'DSD';
+}
+
 const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className }) => {
   // Don't render if we have nothing to show
   if (!trackType && !codec && !samplerate && !bitdepth && !bitrate) {
@@ -31,20 +55,30 @@ const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className
   const logoSrc = (formatType ? LOGO_MAP[formatType.toLowerCase()] : null)
     || (codec ? LOGO_MAP[codec.toLowerCase()] : null);
 
+  // Detect DSD formats
+  const isDsd = formatType && DSD_TYPES.has(formatType.toLowerCase());
+
   const samplerateKhz = samplerate ? parseFloat(samplerate) : 0;
   const bitdepthNum = bitdepth ? parseInt(bitdepth, 10) : 0;
-  const isHighRes = bitdepthNum >= 24 && samplerateKhz >= 96;
+  const isHighRes = !isDsd && bitdepthNum >= 24 && samplerateKhz >= 96;
 
-  // Build quality string: e.g. "44.1 kHz / 16 bit" or "320 kbps"
-  const qualityParts = [];
-  if (samplerate) qualityParts.push(samplerate);
-  if (bitdepth) qualityParts.push(bitdepth);
-  const qualityStr = qualityParts.join(' / ');
+  // Build quality string
+  let qualityStr;
+  if (isDsd) {
+    // DSD: just show the samplerate if available — logo already identifies the format
+    qualityStr = samplerate ? String(samplerate) : '';
+  } else {
+    // PCM: e.g. "44.1 kHz / 16 bit"
+    const qualityParts = [];
+    if (samplerate) qualityParts.push(String(samplerate));
+    if (bitdepth) qualityParts.push(String(bitdepth));
+    qualityStr = qualityParts.join(' / ');
+  }
 
   return (
     <div
-      className={`stream-info d-flex align-items-center gap-3 responsive-stream-info overflow-hidden${className ? ` ${className}` : ' justify-content-center w-100'}`}
-      style={className ? { userSelect: 'none' } : { opacity: 0.6, userSelect: 'none' }}
+      className={`stream-info d-flex align-items-center gap-4 responsive-stream-info flex-nowrap${className ? ` ${className}` : ' justify-content-center w-100'}`}
+      style={className ? { userSelect: 'none', fontFamily: 'var(--font-display)', lineHeight: 1 } : { opacity: 0.6, userSelect: 'none', fontFamily: 'var(--font-display)', lineHeight: 1 }}
     >
       {/* Format logo or text fallback */}
       {logoSrc ? (
@@ -53,7 +87,9 @@ const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className
           role="img"
           aria-label={formatType}
           style={{
-            display: 'inline-block',
+            display: 'flex',
+            alignItems: 'center',
+            flexShrink: 0,
             aspectRatio: '2/1',
             WebkitMaskImage: `url(${logoSrc})`,
             maskImage: `url(${logoSrc})`,
