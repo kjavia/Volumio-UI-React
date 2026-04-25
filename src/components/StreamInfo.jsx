@@ -58,9 +58,12 @@ const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className
   // Detect DSD formats
   const isDsd = formatType && DSD_TYPES.has(formatType.toLowerCase());
 
-  const samplerateKhz = samplerate ? parseFloat(samplerate) : 0;
+  // Normalize samplerate to kHz — Volumio may send "96 kHz", "44.1 KHz",
+  // or raw Hz integers like 96000.
+  const srNum = samplerate ? parseFloat(samplerate) : 0;
+  const samplerateKhz = srNum >= 1000 ? srNum / 1000 : srNum;
   const bitdepthNum = bitdepth ? parseInt(bitdepth, 10) : 0;
-  const isHighRes = !isDsd && bitdepthNum >= 24 && samplerateKhz >= 96;
+  const isHighRes = !isDsd && bitdepthNum >= 24 && samplerateKhz >= 88.2;
 
   // Build quality string
   let qualityStr;
@@ -115,7 +118,7 @@ const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className
           src="/assets/logos/hires.svg"
           alt="Hi-Res"
           className="format-logo-responsive hires-logo"
-          style={{ width: 'auto', aspectRatio: '2/1' }}
+          style={{ width: 'auto', flexShrink: 0, aspectRatio: '2/1' }}
         />
       )}
 

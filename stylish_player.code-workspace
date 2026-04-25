@@ -7,5 +7,12 @@
       "path": "."
     }
   ],
-  "settings": {},
+  "settings": {
+    "chat.tools.terminal.autoApprove": {
+      "/^diff /Volumes/Data/projects/Volumio-UI-React/public/assets/logos/hires\\.svg /Volumes/Data/projects/volumio-plugins-sources-bookworm/stylish_player/app/assets/logos/hires\\.svg$/": {
+        "approve": true,
+        "matchCommandLine": true
+      }
+    }
+  },
 }
