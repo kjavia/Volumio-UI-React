@@ -3621,9 +3621,134 @@ h2 {
   color: var(--color-gray-400, #666);
 }
 
+/* 15% bigger track-info fonts on large mobile (excludes ≤654px height) */
+@media (max-width: 768px) and (min-height: 655px) {
+  .responsive-title {
+    font-size: clamp(1.84rem, 9.2vw, 3.45rem) !important;
+  }
+  .responsive-artist {
+    font-size: clamp(1.265rem, 6.325vw, 2.3rem) !important;
+  }
+  .responsive-album {
+    font-size: clamp(1.15rem, 4.6vw, 1.84rem) !important;
+  }
+  .responsive-stream-info {
+    font-size: clamp(1.15rem, 4.6vw, 1.84rem) !important;
+  }
+}
+/* 10% bigger track-info fonts on 654px height mobile */
+@media (max-width: 768px) and (max-height: 654px) {
+  .responsive-title {
+    font-size: clamp(1.76rem, 8.8vw, 3.3rem) !important;
+  }
+  .responsive-artist {
+    font-size: clamp(1.21rem, 6.05vw, 2.2rem) !important;
+  }
+  .responsive-album {
+    font-size: clamp(1.1rem, 4.4vw, 1.76rem) !important;
+  }
+  .responsive-stream-info {
+    font-size: clamp(1rem, 3.96vw, 1.58rem) !important;
+  }
+}
+/* 15% bigger track-info fonts + spacing on tablet/small desktop (~800px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .responsive-title {
+    font-size: clamp(1.15rem, 5.175cqw, 3.45rem) !important;
+  }
+  .responsive-artist {
+    font-size: clamp(0.86rem, 4.025cqw, 2.875rem) !important;
+  }
+  .responsive-album {
+    font-size: clamp(0.8rem, 2.415cqw, 2.25rem) !important;
+  }
+  .responsive-stream-info {
+    font-size: clamp(0.8rem, 2.415cqw, 2.25rem) !important;
+  }
+  .cq-track-info {
+    gap: clamp(2px, 1cqh, 12px) !important;
+  }
+  .track-info-group {
+    margin-bottom: clamp(4px, 1cqh, 12px) !important;
+  }
+  .tp-max-space .tp-right .responsive-title {
+    font-size: clamp(1.36rem, min(8.5cqw, 11.9cqh), 6.8rem) !important;
+  }
+  .tp-max-space .tp-right .responsive-artist {
+    font-size: clamp(1.02rem, min(5.95cqw, 9.35cqh), 4.25rem) !important;
+  }
+  .tp-max-space .tp-right .responsive-album {
+    font-size: clamp(1rem, min(4cqw, 6cqh), 3.5rem) !important;
+  }
+  /* Tighter controls spacing on tablet */
+  .tp-max-space .tp-controls .player-controls-container {
+    gap: clamp(1px, 0.5cqh, 8px) !important;
+    padding-top: clamp(1px, 0.3cqh, 4px) !important;
+    padding-bottom: clamp(2px, 0.5cqh, 6px) !important;
+  }
+  .tp-max-space .tp-controls .seekbar-container-wrap {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .tp-max-space .tp-controls .volume-manager-wrap {
+    padding-bottom: clamp(2px, 0.5cqh, 8px) !important;
+  }
+  .tp-max-space .tp-controls .player-controls {
+    margin-block: clamp(1px, 0.5cqh, 8px) !important;
+  }
+  .tp-max-space .tp-controls .controls-transport-row {
+    margin-bottom: clamp(1px, 0.5cqh, 8px) !important;
+  }
+}
+/* 15% smaller title & artist on 800×480 */
+@media (max-height: 480px) {
+  .tp-max-space .tp-right .responsive-title {
+    font-size: clamp(0.765rem, min(5.95cqw, 6.8cqh), 2.55rem) !important;
+  }
+  .tp-max-space .tp-right .responsive-artist {
+    font-size: clamp(0.64rem, min(4.25cqw, 4.25cqh), 1.7rem) !important;
+  }
+}
 .format-logo-responsive {
   height: clamp(1.3rem, 3.8cqw, 4.2rem);
   display: block;
+}
+
+/* ── Max space: higher line-heights for breathing room ──────────────── */
+.tp-max-space .responsive-title {
+  line-height: 1.35 !important;
+}
+
+/* Override ≥1200px title line-height for skeuomorphic */
+@media (min-width: 1200px) {
+  .tp-max-space .tp-right .responsive-title {
+    line-height: 1.35 !important;
+  }
+  .tp-max-space .tp-right .stream-info-row {
+    padding-top: clamp(4px, 1cqh, 14px) !important;
+    justify-content: flex-start !important;
+  }
+  .tp-max-space .tp-controls .time-label {
+    font-size: clamp(1.5rem, min(2.5cqw, 3cqh), 1.4rem) !important;
+  }
+  .tp-controls .volume-manager .small {
+    font-size: 1.5rem !important;
+  }
+}
+.tp-max-space .responsive-artist {
+  line-height: 1.35 !important;
+}
+
+.tp-max-space .responsive-album {
+  line-height: 1.35 !important;
+}
+
+.tp-max-space .tp-right .responsive-album {
+  font-size: clamp(1rem, min(5cqw, 6cqh), 3.5rem) !important;
+}
+
+.tp-max-space .responsive-stream-info {
+  line-height: 1.35 !important;
 }
 
 /* ── Icon Sizes ───────────────────────────────────────────────────────── */
@@ -5993,5 +6118,3 @@ h2 {
 body {
   background-color: var(--bg-color);
 }
-
-/*# sourceMappingURL=skeuomorphic.css.map */

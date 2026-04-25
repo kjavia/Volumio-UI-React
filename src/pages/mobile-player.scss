@@ -270,6 +270,32 @@
 }
 
 /* ═══════════════════════════════════════════════════
+   Short screens (≤ 654px height): hide viz row
+   ═══════════════════════════════════════════════════ */
+@media (max-height: 654px) {
+  .mobile-grid {
+    grid-template-rows: 30% 18% 12% 16% 12% 12%;
+    grid-template-areas:
+      'player'
+      'track-info'
+      'seekbar'
+      'transport'
+      'secondary'
+      'volume';
+  }
+
+  .mobile-row-viz {
+    display: none !important;
+  }
+
+  .cq-track-info {
+    flex: 0 0 auto;
+    min-height: 0;
+    gap: clamp(2px, 0.2cqh, 14px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════
    Very short screens (≤ 480px height)
    ═══════════════════════════════════════════════════ */
 @media (max-height: 480px) {

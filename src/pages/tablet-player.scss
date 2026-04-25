@@ -40,6 +40,12 @@
   grid-template-columns: 2fr 3fr;
 }
 
+/* Max-space: album art fills entire container, clips overflow */
+.tp-grid.tp-max-space .tp-player .player-responsive {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 /* ── No player: viz + controls ── */
 .tp-grid.tp-no-player {
   grid-template-columns: 1fr 1fr;
@@ -396,6 +402,114 @@
   }
 }
 
+/* ── Max space: enlarged buttons + tighter spacing for ≥1200px ── */
+@media (min-width: 1200px) {
+  .tp-max-space .tp-controls {
+
+    /* Minimal spacing — squeeze controls together */
+    .player-controls-container {
+      gap: clamp(1px, 0.4cqh, 6px) !important;
+      padding-top: clamp(1px, 0.2cqh, 4px);
+      padding-bottom: clamp(2px, 0.4cqh, 6px);
+    }
+
+    .player-controls {
+      margin-block: clamp(1px, 0.4cqh, 8px) !important;
+    }
+
+    .controls-transport-row {
+      margin-bottom: clamp(1px, 0.4cqh, 8px) !important;
+    }
+
+    .volume-manager-wrap {
+      padding-bottom: clamp(2px, 0.5cqh, 8px);
+    }
+
+    /* Bigger transport buttons */
+    .btn-round {
+      width: clamp(64px, min(9cqw, 12cqh), 88px) !important;
+      height: clamp(64px, min(9cqw, 12cqh), 88px) !important;
+    }
+
+    .btn-round.btn-sm {
+      width: clamp(50px, min(7cqw, 10cqh), 66px) !important;
+      height: clamp(50px, min(7cqw, 10cqh), 66px) !important;
+    }
+
+    .btn-round .material-icons,
+    .btn-round .play-icon {
+      font-size: clamp(1.8rem, min(5cqw, 6cqh), 3rem) !important;
+    }
+
+    .btn-round.btn-sm .material-icons {
+      font-size: clamp(1.4rem, min(4cqw, 5cqh), 2.2rem) !important;
+    }
+
+    /* Bigger secondary row buttons */
+    .btn-icon {
+      width: clamp(44px, min(7cqw, 8cqh), 64px) !important;
+      height: clamp(44px, min(7cqw, 8cqh), 64px) !important;
+    }
+
+    .btn-icon .material-icons {
+      font-size: clamp(1.4rem, min(4cqw, 4.5cqh), 2.4rem) !important;
+    }
+
+    .time-label {
+      font-size: clamp(1rem, min(2.5cqw, 3cqh), 1.4rem) !important;
+    }
+  }
+
+  /* Give track info more vertical room — content top-aligned */
+  .tp-max-space .tp-track-info {
+    flex: 0 0 55% !important;
+    padding-top: clamp(4px, 0.8cqh, 12px) !important;
+  }
+
+  /* Massive title — nearly edge-to-edge, everything else flows below */
+  .tp-max-space .tp-right {
+    .cq-track-info {
+      gap: clamp(4px, 1.2cqh, 16px) !important;
+    }
+
+    .stream-info-row {
+      padding-top: clamp(4px, 2cqh, 14px) !important;
+      justify-content: flex-start !important;
+    }
+
+    .stream-info-row .stream-info {
+      justify-content: flex-start !important;
+    }
+
+    .responsive-title {
+      font-size: clamp(3.5rem, min(22cqw, 19cqh), 10rem) !important;
+      line-height: 1.15 !important;
+    }
+
+    .responsive-artist {
+      font-size: clamp(1.4rem, min(10cqw, 8cqh), 6rem) !important;
+      line-height: 1.45 !important;
+    }
+
+    .responsive-album {
+      font-size: clamp(1rem, min(6cqw, 5cqh), 4rem) !important;
+      line-height: 1.35 !important;
+    }
+
+    .responsive-stream-info {
+      font-size: clamp(1rem, min(6cqw, 5cqh), 4rem) !important;
+    }
+
+    .format-logo-responsive {
+      height: clamp(1rem, min(6cqw, 5cqh), 4rem) !important;
+    }
+
+    .stream-info-row .service-logo-img {
+      max-height: clamp(1rem, min(5cqw, 4cqh), 3.5rem) !important;
+    }
+  }
+}
+
 /* ═══════════════════════════════════════════════════
    NO PLAYER variant — controls expand
    ═══════════════════════════════════════════════════ */
@@ -567,11 +681,18 @@
   }
 }
 
+/* Max space: top-align track info, no vertical centering */
+.tp-max-space .tp-track-info {
+  align-items: flex-start !important;
+  justify-content: center !important;
+  padding-top: clamp(4px, 1cqh, 16px) !important;
+}
+
 /* Max space: track info sizing */
 .tp-max-space .tp-right {
   .track-info-group {
     width: 99% !important;
-    margin-top: clamp(2px, 0.4cqh, 6px) !important;
+    margin-top: 0 !important;
     margin-inline: auto !important;
   }
 
@@ -580,15 +701,19 @@
   }
 
   .cq-track-info {
-    justify-content: center;
-    gap: clamp(2px, 0.8cqh, 10px) !important;
-    height: 100%;
+    justify-content: flex-start;
+    gap: clamp(4px, 1.5cqh, 18px) !important;
   }
 
-  /* Stream info row: more breathing room */
+  /* Stream info row: more breathing room, left-aligned */
   .stream-info-row {
-    padding-top: clamp(4px, 1cqh, 16px);
+    padding-top: clamp(4px, 1.2cqh, 18px);
     flex: 0 0 auto;
+    justify-content: flex-start !important;
+  }
+
+  .stream-info-row .stream-info {
+    justify-content: flex-start !important;
   }
 
   /* Service logo fills parent height */
@@ -602,15 +727,15 @@
   }
 
   .responsive-title {
-    font-size: clamp(1.6rem, min(10cqw, 8cqh), 8rem) !important;
+    font-size: clamp(1.6rem, min(11cqw, 14cqh), 8rem) !important;
   }
 
   .responsive-artist {
-    font-size: clamp(1.2rem, min(7cqw, 6cqh), 5rem) !important;
+    font-size: clamp(1.2rem, min(8cqw, 11cqh), 5rem) !important;
   }
 
   .responsive-album {
-    font-size: clamp(1rem, min(5cqw, 4cqh), 3.5rem) !important;
+    font-size: clamp(1rem, min(5cqw, 6cqh), 3.5rem) !important;
   }
 
   .responsive-stream-info {

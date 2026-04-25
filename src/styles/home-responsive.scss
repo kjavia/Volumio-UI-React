@@ -127,6 +127,24 @@ body,
   pointer-events: none;
 }
 
+/* ── Stream info base styles ── */
+.stream-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+  user-select: none;
+  font-family: var(--font-display);
+  line-height: 1;
+  justify-content: center;
+  width: 100%;
+}
+
+/* When stream-info sits beside a service logo, don't hog full width */
+.stream-info-row .stream-info {
+  width: auto;
+}
+
 /* ── Player responsive container ──
    A perfect square whose side = 90% of the SMALLER parent dimension.
    min(90cqw, 90cqh) adapts to whichever axis is tighter.

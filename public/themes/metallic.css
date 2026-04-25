@@ -936,31 +936,15 @@ pre {
 
 /* ── Mobile compact (≤ 768px) ─────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .dialog-container {
-    padding: 0;
-  }
   .dialog {
-    width: 100vw;
-    max-width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    margin: 0;
-    border-radius: 0;
-    display: flex;
-    flex-direction: column;
+    max-width: calc(100vw - 1rem);
+    max-height: calc(100vh - 1rem);
+    margin: 0.5rem;
   }
-  .dialog-header {
-    padding: 0.875rem 1rem;
-    border-radius: 0;
-  }
-  .dialog-body {
-    padding: 1rem;
-    flex: 1 1 auto;
-    overflow-y: auto;
-  }
+  .dialog-header,
+  .dialog-body,
   .dialog-footer {
     padding: 0.875rem 1rem;
-    border-radius: 0;
   }
   .dialog-title {
     font-size: 1rem;
@@ -2867,17 +2851,25 @@ h2 {
 
 .track-info {
   text-align: center;
+  width: 95%;
+}
+
+/* Track panel: recessed metallic panel behind track info */
+.track-panel {
+  border-radius: 12px;
+}
+
+.track-panel .track-info {
   padding: clamp(16px, 2.5cqh, 28px) 20px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 12px;
-  width: 95%;
   border: 1px solid rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
 /* More padding & row spacing on tablet/desktop */
 @media (min-width: 768px) {
-  .track-info {
+  .track-panel .track-info {
     padding: clamp(12px, 2cqh, 24px) clamp(12px, 1.2cqw, 24px);
   }
   .track-info-group {
@@ -2891,6 +2883,56 @@ h2 {
     gap: clamp(4px, 1.2cqh, 12px) !important;
   }
 }
+/* Tighter track info spacing in max-space mode */
+.tp-max-space .track-info-group {
+  margin-bottom: 0 !important;
+}
+
+.tp-max-space .cq-track-info {
+  gap: clamp(1px, 0.3cqh, 5px) !important;
+}
+
+@media (min-width: 1200px) {
+  .tp-max-space .tp-right .responsive-artist {
+    font-size: clamp(1.4rem, min(10cqw, 8cqh), 6rem) !important;
+    line-height: 1.15 !important;
+  }
+}
+@media (max-height: 600px) {
+  .tp-max-space .tp-right .responsive-title {
+    font-size: clamp(1.2rem, min(8.25cqw, 10.5cqh), 6rem) !important;
+  }
+  .tp-max-space .tp-right .responsive-artist {
+    font-size: clamp(1rem, min(6cqw, 7cqh), 3rem) !important;
+  }
+  .tp-max-space .tp-controls .time-label {
+    font-size: clamp(0.8rem, min(3cqw, 3cqh), 1.1rem) !important;
+  }
+}
+@media (max-height: 480px) {
+  .tp-max-space .tp-track-info {
+    flex: 0 0 55% !important;
+  }
+  .tp-max-space .tp-right .responsive-album {
+    font-size: clamp(1rem, min(7cqw, 6.5cqh), 3rem) !important;
+  }
+  .tp-max-space .tp-right .responsive-stream-info {
+    font-size: clamp(0.9rem, min(5.85cqw, 5.2cqh), 2.5rem) !important;
+  }
+  .tp-max-space .tp-right .format-logo-responsive {
+    height: clamp(0.9rem, min(5.85cqw, 5.2cqh), 2.5rem) !important;
+  }
+  .tp-max-space .tp-controls .player-controls-container {
+    padding-top: clamp(8px, 3.5cqh, 20px) !important;
+  }
+  .tp-max-space .tp-controls .time-label {
+    font-size: clamp(0.75rem, min(2.8cqw, 3cqh), 1rem) !important;
+  }
+}
+.tp-max-space .responsive-album {
+  line-height: 1.15 !important;
+}
+
 .track-title {
   font-family: var(--font-display);
   font-size: clamp(1.1rem, 4vw, 2rem);
@@ -2944,6 +2986,30 @@ h2 {
   font-size: clamp(0.75rem, 3.5cqw, 2.5rem);
 }
 
+/* 25% bigger track-info fonts on metallic mobile */
+@media (max-width: 768px) {
+  .responsive-title {
+    font-size: clamp(2rem, 10vw, 3.75rem) !important;
+  }
+  .responsive-artist {
+    font-size: clamp(1.375rem, 6.875vw, 2.5rem) !important;
+  }
+  .responsive-album {
+    font-size: clamp(1.25rem, 5vw, 2rem) !important;
+  }
+  .responsive-stream-info {
+    font-size: clamp(1.25rem, 5vw, 2rem) !important;
+  }
+}
+/* Very narrow mobile (≤375px, e.g. 361×654): push controls down */
+@media (max-width: 375px) {
+  .seekbar-container-wrap {
+    margin-top: clamp(14px, 3.5vh, 30px) !important;
+  }
+  .player-controls-container {
+    padding-top: clamp(8px, 2vh, 16px) !important;
+  }
+}
 .responsive-album {
   font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
 }

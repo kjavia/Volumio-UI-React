@@ -113,6 +113,7 @@
 
 /* Stream info variant for large screen: left-aligned, larger, always white */
 .lsp-stream-info {
+  justify-content: flex-start !important;
   opacity: 0.8;
   gap: 0.75rem;
   color: var(--sp-stream-info-color, #fff) !important;
