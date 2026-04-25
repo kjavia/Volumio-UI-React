@@ -77,11 +77,11 @@ export const ThemeProvider = ({ children }) => {
     // time as a query param to ensure updated files are always fetched fresh.
     // In dev, themes are in public/themes/
     // In prod, they are in /themes/ (relative to root)
-    link.href = `/themes/brushed-metal.css?v=${__THEME_VERSION__}`;
+    link.href = `/themes/${theme}.css?v=${__THEME_VERSION__}`;
 
   }, [theme]);
 
-  return <ThemeContext.Provider value={{ theme: 'brushed-metal' }}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>;
 };
 
 export const useTheme = () => {
