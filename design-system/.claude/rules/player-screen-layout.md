@@ -32,10 +32,15 @@
 - All areas should have responsive margins on all sides
 - Small Desktops (<1920 width) and Tablets (landscape only)
   - Divide into 2 rows
-    - Row 1 (divide into 2 columns equally)
-      - Player area on left
-      - Right
-    - Row 2
+    - Row 1 (divide into 2 columns equally, 75% height )
+      - Player area on left column
+      - Right column, 5 rows, equal vertical gap
+        - Track panel (40% height of parent)
+        - Seek bar (15% height of parent)
+        - Player control buttons (15%)
+        - Secondary button row (15%)
+        - Volume slider (15%)
+    - Row 2 (25% height)
       - Visualizations across the entire row
 - Mobile screens
   - Layout top to bottom, only 1 column (equal vertical gap)
@@ -79,6 +84,7 @@ When this setting is on, same rules apply as above ***except***
 
 - Album art should take all space in the parent container as it currently does
 - All fonts take up maximum width, without clipping, margins and padding minimized, but still readable
+- This setting only affects small desktop and tablet screens. It doesn't affect larger or mobile screens.
 
 ## General rules
 

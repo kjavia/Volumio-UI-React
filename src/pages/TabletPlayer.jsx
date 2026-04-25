@@ -13,20 +13,20 @@ import CassettePlayer from '@/components/animated-players/CassettePlayer';
 import ReelToReelPlayer from '@/components/animated-players/ReelToReelPlayer';
 import RadioPlayer from '@/components/animated-players/RadioPlayer';
 import GlobePlayer from '@/components/animated-players/GlobePlayer';
+import PlayerControls from '@/components/PlayerControls';
 import TrackInfo from '@/components/TrackInfo';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
 import VolumeManager from '@/components/VolumeManager';
-import Button from '@/components/Button';
 import SpectrumAnalyzer from '@/components/spectrum-analyzers/SpectrumAnalyzer';
-import mobileSpectrumOptions from '@/config/mobileSpectrumOptions';
 import StreamInfo from '@/components/StreamInfo';
 import ServiceLogo from '@/components/ServiceLogo';
 import Playlist from '@/components/Playlist';
 import DisconnectedScreen from '@/components/DisconnectedScreen';
 import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
+import VUMeter from '@/components/vu-meters/VUMeter';
 import PeppyMeter from '@/components/PeppyMeter';
-import './mobile-player.scss';
+import './tablet-player.scss';
 
 const PLAYER_MAP = {
   albumArt: AlbumArtPlayer,
@@ -56,18 +56,21 @@ const getPlayerTypeForSource = (service, trackType) => {
 };
 
 /**
- * MobilePlayer — optimised layout for screens ≤ 768 px wide.
+ * TabletPlayer — layout for small desktops (<1920px) and tablets (landscape).
  *
- * Layout (single column, top to bottom):
- *   Row 1 (30%) — Player (album art fills space without touching edges)
- *   Row 2 (10%) — Visualizations
- *   Row 3 (20%) — Track info
- *   Row 4 (40%) — Controls: seekbar / transport buttons / volume
+ * Grid:
+ *   ┌──────────┬──────────────┐
+ *   │  Player  │  Track Info  │
+ *   │          │  Controls    │
+ *   ├──────────┴──────────────┤
+ *   │     Visualization       │
+ *   └────────────────────────-┘
  */
-const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
+const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const { data: pluginConfig } = usePluginConfig();
   const playerType = pluginConfig?.playerType || 'radio';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
+  const albumArtMaxSpace = pluginConfig?.albumArtMaxSpace === true;
   const showTrackPanel = pluginConfig?.showTrackPanel === true;
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
@@ -75,6 +78,12 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
   const peppyMeterWidth = pluginConfig?.peppyMeterWidth || 480;
   const peppyMeterHeight = pluginConfig?.peppyMeterHeight || 320;
   const disableVolumeControl = pluginConfig?.disableVolumeControl === true;
+
+  const spectrumOptions = useMemo(() => {
+    const raw = pluginConfig?.spectrumOptions;
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch { return null; }
+  }, [pluginConfig?.spectrumOptions]);
 
   const {
     isConnected,
@@ -140,11 +149,11 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
     else { lastTapRef.current = now; }
   };
 
-  const mobileVizRef = useRef(null);
-  const peppyMobileRef = useRef(null);
+  const vizRef = useRef(null);
+  const peppyVizRef = useRef(null);
 
   const handlePlayPause = () => {
-    mobileVizRef.current?.enable();
+    vizRef.current?.enable();
     togglePlay();
   };
 
@@ -169,6 +178,8 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
         ? RANDOM_PLAYERS[randomIndex]
         : PLAYER_MAP[effectivePlayerType] || AlbumArtPlayer;
 
+  const isMaxSpace = albumArtMaxSpace && effectivePlayerType === 'albumArt';
+
   const [isRetrying, setIsRetrying] = useState(true);
   useEffect(() => {
     if (isConnected) { setIsRetrying(true); return; }
@@ -181,16 +192,14 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
   }
 
   const gridClasses = [
-    'mobile-grid',
-    'position-relative',
-    !showViz && 'no-viz',
-    effectivePlayerType === 'none' && 'no-player',
+    'tp-grid',
+    !showViz && 'tp-no-viz',
+    isMaxSpace && 'tp-max-space',
+    effectivePlayerType === 'none' && 'tp-no-player',
   ].filter(Boolean).join(' ');
 
   return (
-    <div
-      className="container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100"
-    >
+    <div className="h-100 overflow-hidden position-relative p-0 w-100">
       {/* Background */}
       {backgroundColor ? (
         <div
@@ -210,12 +219,11 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
         />
       ) : null}
 
-      {/* ── Mobile Grid ── */}
       <div className={gridClasses} style={{ zIndex: 1 }}>
 
-        {/* ROW 1 — Player (30%) */}
+        {/* LEFT — Player */}
         {effectivePlayerType !== 'none' && (
-          <div className="mobile-row-player">
+          <div className="tp-player">
             <div
               className="player-responsive"
               onDoubleClick={cyclePlayer}
@@ -224,114 +232,90 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
               <CurrentPlayerComponent
                 isPlaying={isPlaying}
                 albumArt={fullAlbumArt}
+                maxSpace={isMaxSpace}
               />
             </div>
           </div>
         )}
 
-        {/* ROW 2 — Visualizations (10%) */}
-        {showViz && vizType === 'spectrum' && (
-          <div className="mobile-row-viz">
-            {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
-            <SpectrumAnalyzer
-              ref={mobileVizRef}
-              stopped={vizStopped}
-              onResumed={onVizResumed}
-              streamUrl={SPECTRUM_STREAM_URL}
-              options={mobileSpectrumOptions}
-              isPlaying={isPlaying}
-            />
+        {/* RIGHT — Track Info + Controls */}
+        <div className="tp-right">
+          <div className="tp-track-info text-white">
+            <div className={`track-info-group ${showTrackPanel ? 'track-panel' : ''}`} style={{ width: 'clamp(300px, 95%, 99%)' }}>
+              <TrackInfo title={title} artist={artist} album={album}>
+                <div className="stream-info-row d-flex align-items-center justify-content-center gap-3">
+                  <ServiceLogo service={service} />
+                  <StreamInfo
+                    trackType={trackType}
+                    codec={codec}
+                    samplerate={samplerate}
+                    bitdepth={bitdepth}
+                    bitrate={bitrate}
+                  />
+                </div>
+              </TrackInfo>
+            </div>
           </div>
-        )}
-        {showViz && vizType === 'peppyMeter' && (
-          <div className="mobile-row-viz" ref={peppyMobileRef}>
-            {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
-            <PeppyMeter
-              width={peppyMeterWidth}
-              height={peppyMeterHeight}
-              containerRef={peppyMobileRef}
-            />
-          </div>
-        )}
 
-        {/* ROW 3 — Track Info (20%) */}
-        <div className="mobile-row-track-info text-white">
-          <div
-            className={`track-info-group ${showTrackPanel ? 'track-panel' : ''}`}
-            style={{ width: 'clamp(200px, 95%, 99%)' }}
-          >
-            <TrackInfo title={title} artist={artist} album={album}>
-              <div className="stream-info-row d-flex align-items-center justify-content-center gap-3 w-100">
-                <ServiceLogo service={service} />
-                <StreamInfo
-                  trackType={trackType}
-                  codec={codec}
-                  samplerate={samplerate}
-                  bitdepth={bitdepth}
-                  bitrate={bitrate}
-                />
+          <div className="tp-controls text-white">
+            <div className="d-flex flex-column align-items-center justify-content-center w-100 player-controls-container">
+              <div className="controls-spacer" />
+
+              <div className="m-auto seekbar-container-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
+                <PlayerSeekbar readOnly={!showPlayerControls} />
               </div>
-            </TrackInfo>
+
+              {showPlayerControls && (
+                <PlayerControls
+                  isPlaying={isPlaying}
+                  onPlayPause={handlePlayPause}
+                  onNext={next}
+                  onPrev={prev}
+                  shuffle={random}
+                  repeat={repeat}
+                  onShuffle={toggleRandom}
+                  onRepeat={toggleRepeat}
+                  onAddToPlaylist={() => setShowAddToPlaylist(true)}
+                  onShowPlaylist={() => setShowPlaylist(true)}
+                  onBrowse={() => setShowBrowse(true)}
+                  isFavourite={isFavourite}
+                  onToggleFavourite={toggleFavourite}
+                />
+              )}
+
+              {!disableVolumeControl && showPlayerControls && (
+                <div className="volume-manager-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
+                  <VolumeManager
+                    volume={volume}
+                    mute={mute}
+                    onVolumeChange={setVolume}
+                    onMute={toggleMute}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* ROW 4 — Seekbar */}
-        <div className="mobile-row-seekbar text-white">
-          <PlayerSeekbar readOnly={!showPlayerControls} />
-        </div>
-
-        {/* ROW 5 — Transport buttons */}
-        {showPlayerControls && (
-          <div className="mobile-row-transport text-white">
-            <div className="controls-transport-row d-flex gap-3 align-items-center justify-content-center">
-              <Button classNames="btn-round btn-sm" onClick={prev} label="Previous">
-                <span className="material-icons">skip_previous</span>
-              </Button>
-              <Button classNames="btn-round btn-primary" onClick={handlePlayPause} label={isPlaying ? 'Pause' : 'Play'}>
-                <span className={`material-icons play-icon ${isPlaying ? 'is-pause' : 'is-play'}`}>{isPlaying ? 'pause' : 'play_arrow'}</span>
-              </Button>
-              <Button classNames="btn-round btn-sm" onClick={next} label="Next">
-                <span className="material-icons">skip_next</span>
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {/* ROW 6 — Secondary controls */}
-        {showPlayerControls && (
-          <div className="mobile-row-secondary text-white">
-            <div className="d-flex gap-3 align-items-center justify-content-center">
-              <Button classNames={`btn-icon ${random ? 'active' : ''}`} onClick={toggleRandom} label={random ? 'Shuffle On' : 'Shuffle Off'}>
-                <span className="material-icons">shuffle</span>
-              </Button>
-              <Button classNames={`btn-icon ${repeat ? 'active' : ''}`} onClick={toggleRepeat} label={repeat ? 'Repeat On' : 'Repeat Off'}>
-                <span className="material-icons">repeat</span>
-              </Button>
-              <Button classNames="btn-icon" onClick={() => setShowAddToPlaylist(true)} label="Add to Playlist">
-                <span className="material-icons">playlist_add</span>
-              </Button>
-              <Button classNames={`btn-icon ${isFavourite ? 'active' : ''}`} onClick={toggleFavourite} label={isFavourite ? 'Remove from Favourites' : 'Add to Favourites'}>
-                <span className="material-icons">{isFavourite ? 'favorite' : 'favorite_border'}</span>
-              </Button>
-              <Button classNames="btn-icon btn-text" onClick={() => setShowPlaylist(true)} label="Show Playlist">
-                <span className="material-icons">queue_music</span>
-              </Button>
-              <Button classNames="btn-icon btn-text" onClick={() => setShowBrowse(true)} label="Browse">
-                <span className="material-icons">library_music</span>
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {/* ROW 7 — Volume */}
-        {!disableVolumeControl && showPlayerControls && (
-          <div className="mobile-row-volume text-white">
-            <VolumeManager
-              volume={volume}
-              mute={mute}
-              onVolumeChange={setVolume}
-              onMute={toggleMute}
-            />
+        {/* BOTTOM — Visualization */}
+        {showViz && (
+          <div className="tp-viz" ref={vizContainerRef || peppyVizRef}>
+            {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
+            {vizType === 'spectrum' && (
+              <SpectrumAnalyzer
+                ref={vizRef}
+                stopped={vizStopped}
+                onResumed={onVizResumed}
+                streamUrl={SPECTRUM_STREAM_URL}
+                options={spectrumOptions}
+                isPlaying={isPlaying}
+              />
+            )}
+            {vizType === 'vuMeter1' && <VUMeter variant={1} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+            {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+            {vizType === 'vuMeter3' && <VUMeter variant={3} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+            {vizType === 'vuMeter4' && <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
+            {vizType === 'peppyMeter' && <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={vizContainerRef || peppyVizRef} />}
           </div>
         )}
       </div>
@@ -365,9 +349,10 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
   );
 };
 
-MobilePlayer.propTypes = {
+TabletPlayer.propTypes = {
   vizStopped: PropTypes.bool,
   onVizResumed: PropTypes.func,
+  vizContainerRef: PropTypes.object,
 };
 
-export default MobilePlayer;
+export default TabletPlayer;

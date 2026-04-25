@@ -1,0 +1,786 @@
+/* ═══════════════════════════════════════════════════════════════════
+   TABLET-PLAYER.SCSS — Layout for TabletPlayer.jsx
+   ═══════════════════════════════════════════════════════════════════
+   Small desktops (769px–1919px) and tablets in landscape.
+
+   Grid:
+     ┌──────────┬──────────────┐
+     │  Player  │  Track Info  │  75%
+     │          │  Controls    │
+     ├──────────┴──────────────┤
+     │     Visualization       │  25%
+     └────────────────────────-┘
+
+   No-viz variant collapses to a single full-height row.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Grid container ── */
+.tp-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 75fr 25fr;
+  grid-template-areas:
+    'player  right'
+    'viz     viz';
+}
+
+/* ── No-viz: single row ── */
+.tp-grid.tp-no-viz {
+  grid-template-rows: 1fr;
+  grid-template-areas: 'player right';
+}
+
+/* ── Max-space album art: player gets more width ── */
+.tp-grid.tp-max-space {
+  grid-template-columns: 2fr 3fr;
+}
+
+/* ── No player: viz + controls ── */
+.tp-grid.tp-no-player {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'viz right';
+
+  &.tp-no-viz {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'right';
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   PLAYER AREA (left column)
+   ═══════════════════════════════════════════════════ */
+.tp-player {
+  grid-area: player;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  container-type: size;
+}
+
+/* ═══════════════════════════════════════════════════
+   RIGHT COLUMN (track info + controls)
+   ═══════════════════════════════════════════════════ */
+.tp-right {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  container-type: size;
+}
+
+/* Track info: 40% of the right column height */
+.tp-track-info {
+  flex: 0 0 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  padding-top: clamp(8px, 1.5cqh, 24px);
+  padding-right: clamp(12px, 2cqw, 32px);
+}
+
+/* Controls: fills remaining height */
+.tp-controls {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  container-type: size;
+}
+
+/* ═══════════════════════════════════════════════════
+   VISUALIZATION (bottom row, spans both columns)
+   ═══════════════════════════════════════════════════ */
+.tp-viz {
+  grid-area: viz;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  container-type: size;
+
+  >*:not(.viz-placeholder) {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   CONTROLS LAYOUT — fluid via container queries
+   ═══════════════════════════════════════════════════ */
+
+/* Flexible spacer above controls */
+.tp-controls .controls-spacer {
+  flex: 1 1 0;
+  max-height: clamp(8px, 1cqh, 40px);
+}
+
+/* Container: vertical spacing between children */
+.tp-controls .player-controls-container {
+  justify-content: safe center;
+  gap: clamp(4px, 1.8cqh, 22px) !important;
+}
+
+/* Transport row spacing */
+.tp-controls .controls-transport-row {
+  margin-block: 0;
+  margin-bottom: clamp(10px, 3.5cqh, 32px);
+}
+
+/* Keep controls compact (don't grow) */
+.tp-controls .player-controls,
+.tp-controls .seekbar-container-wrap,
+.tp-controls .volume-manager-wrap {
+  flex-shrink: 0;
+}
+
+.tp-controls .player-controls {
+  margin-block: clamp(8px, 3cqh, 28px);
+}
+
+.tp-controls .seekbar-container-wrap {
+  margin-block: 0;
+}
+
+.tp-controls .volume-manager-wrap {
+  margin-top: 0;
+}
+
+/* ── Medium-compact: ≤560px panel height ── */
+@container (max-height: 560px) {
+  .tp-controls .btn-round {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .tp-controls .btn-round.btn-sm {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .tp-controls .btn-round.btn-sm .material-icons {
+    font-size: 1.6rem !important;
+  }
+
+  .tp-controls .btn-icon {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .tp-controls .btn-icon .material-icons {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* ── Fully compact: ≤380px panel height ── */
+@container (max-height: 380px) {
+  .tp-controls .btn-round {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  .tp-controls .btn-round.btn-sm {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .tp-controls .btn-round .material-icons {
+    font-size: 1.5rem !important;
+  }
+
+  .tp-controls .btn-round.btn-sm .material-icons {
+    font-size: 1.15rem !important;
+  }
+
+  .tp-controls .btn-icon {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .tp-controls .btn-icon .material-icons {
+    font-size: 1.1rem !important;
+  }
+
+  .tp-controls .volume-manager .material-icons {
+    font-size: 1rem !important;
+  }
+
+  .tp-controls .volume-manager .small {
+    font-size: 0.7rem !important;
+  }
+}
+
+/* ── Mid-large: 500–699px ── */
+@container (min-height: 500px) {
+  .tp-controls .btn-icon {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .tp-controls .btn-icon .material-icons {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* ── Large panel: ≥700px ── */
+@container (min-height: 700px) {
+  .tp-controls .btn-round {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .tp-controls .btn-round.btn-sm {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  .tp-controls .btn-round .material-icons,
+  .tp-controls .btn-round .play-icon {
+    font-size: 2.5rem !important;
+  }
+
+  .tp-controls .btn-round.btn-sm .material-icons {
+    font-size: 1.75rem !important;
+  }
+
+  .tp-controls .controls-transport-row .btn-round .material-icons,
+  .tp-controls .controls-transport-row .btn-round .play-icon {
+    font-size: 3.125rem !important;
+  }
+
+  .tp-controls .controls-transport-row .btn-round.btn-sm .material-icons {
+    font-size: 2.2rem !important;
+  }
+
+  .tp-controls .btn-icon {
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  .tp-controls .btn-icon .material-icons {
+    font-size: 1.75rem !important;
+  }
+
+  .tp-controls .volume-manager .material-icons {
+    font-size: 1.75rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   TYPOGRAPHY — Screen-size responsive
+   ═══════════════════════════════════════════════════ */
+
+/* ── Medium screens (769px–1199px): 75% of large-screen values ── */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .tp-controls .time-label {
+    font-size: 0.9rem !important;
+  }
+
+  .tp-right .responsive-stream-info {
+    font-size: 1.05rem !important;
+  }
+
+  .tp-right .responsive-album {
+    font-size: 1.05rem !important;
+  }
+
+  .tp-right .format-logo-responsive {
+    height: 1.5rem !important;
+  }
+
+  .tp-controls .volume-manager .small {
+    font-size: 0.75rem !important;
+  }
+
+  .tp-controls .controls-transport-row .btn-round .material-icons,
+  .tp-controls .controls-transport-row .btn-round .play-icon {
+    font-size: 1.875rem !important;
+  }
+
+  /* Tablet button sizes at mid-height */
+  @container (min-height: 500px) {
+    .tp-controls .btn-round {
+      width: 70px !important;
+      height: 70px !important;
+    }
+
+    .tp-controls .btn-round.btn-sm {
+      width: 50px !important;
+      height: 50px !important;
+    }
+
+    .tp-controls .btn-round .material-icons,
+    .tp-controls .btn-round .play-icon {
+      font-size: 2rem !important;
+    }
+
+    .tp-controls .btn-round.btn-sm .material-icons {
+      font-size: 1.4rem !important;
+    }
+
+    .tp-controls .controls-transport-row .btn-round .material-icons,
+    .tp-controls .controls-transport-row .btn-round .play-icon {
+      font-size: 2.5rem !important;
+    }
+
+    .tp-controls .controls-transport-row .btn-round.btn-sm .material-icons {
+      font-size: 1.75rem !important;
+    }
+
+    .tp-controls .btn-icon {
+      width: 44px !important;
+      height: 44px !important;
+    }
+
+    .tp-controls .btn-icon .material-icons {
+      font-size: 1.5rem !important;
+    }
+
+    .tp-controls .volume-manager .material-icons {
+      font-size: 1.5rem !important;
+    }
+  }
+}
+
+/* ── Large screens (≥1200px) ── */
+@media (min-width: 1200px) {
+  .tp-controls .time-label {
+    font-size: 1.2rem !important;
+  }
+
+  .tp-right .responsive-stream-info {
+    font-size: 1.4rem !important;
+  }
+
+  .tp-right .responsive-album {
+    font-size: 1.4rem !important;
+  }
+
+  .tp-right .format-logo-responsive {
+    height: 2rem !important;
+  }
+
+  .tp-controls .volume-manager .small {
+    font-size: 1rem !important;
+  }
+
+  /* Match tablet btn-icon sizing */
+  @container (min-height: 500px) {
+    .tp-controls .btn-icon {
+      width: 48px !important;
+      height: 48px !important;
+    }
+
+    .tp-controls .btn-icon .material-icons {
+      font-size: 1.5rem !important;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   NO PLAYER variant — controls expand
+   ═══════════════════════════════════════════════════ */
+.tp-no-player .tp-controls {
+  align-items: flex-start !important;
+  overflow: hidden !important;
+
+  .player-controls-container {
+    justify-content: flex-start !important;
+    padding-top: clamp(0.25rem, 1.5cqh, 3rem) !important;
+  }
+
+  .player-controls,
+  .seekbar-container-wrap,
+  .volume-manager-wrap {
+    flex-shrink: 1 !important;
+  }
+
+  .player-controls {
+    margin-block: clamp(6px, 2cqh, 28px) !important;
+  }
+
+  .controls-transport-row {
+    margin-bottom: clamp(8px, 2.5cqh, 32px) !important;
+  }
+
+  .controls-spacer {
+    max-height: clamp(2px, 0.5cqh, 20px) !important;
+  }
+
+  .seekbar-container-wrap,
+  .volume-manager-wrap {
+    width: 92% !important;
+    max-width: 100% !important;
+  }
+
+  .slider-container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .btn-round,
+  .btn-round.btn-sm,
+  .btn-icon {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: hidden !important;
+  }
+
+  .btn-round {
+    width: clamp(56px, min(10cqw, 13cqh), 84px) !important;
+    height: clamp(56px, min(10cqw, 13cqh), 84px) !important;
+  }
+
+  .btn-round.btn-sm {
+    width: clamp(46px, min(8cqw, 12cqh), 64px) !important;
+    height: clamp(46px, min(8cqw, 12cqh), 64px) !important;
+  }
+
+  .btn-round .material-icons {
+    font-size: clamp(1.8rem, min(6cqw, 7cqh), 2.8rem) !important;
+    line-height: 1 !important;
+  }
+
+  .btn-round.btn-sm .material-icons {
+    font-size: clamp(1.5rem, min(5cqw, 7cqh), 2.2rem) !important;
+    line-height: 1 !important;
+  }
+
+  .btn-icon {
+    width: clamp(32px, min(6.5cqw, 8cqh), 78px) !important;
+    height: clamp(32px, min(6.5cqw, 8cqh), 78px) !important;
+  }
+
+  .btn-icon .material-icons {
+    font-size: clamp(1.2rem, min(4cqw, 5cqh), 2.8rem) !important;
+  }
+
+  .time-label {
+    font-size: clamp(0.9rem, 2cqw, 1.6rem) !important;
+  }
+
+  .seekbar-container-wrap .slider-track {
+    height: clamp(6px, 1.2cqh, 16px) !important;
+  }
+}
+
+/* No player: track-info sizing */
+.tp-no-player .tp-track-info .track-info-group {
+  width: 95% !important;
+}
+
+.tp-no-player .tp-track-info .cq-track-info {
+  gap: clamp(2px, 1cqh, 12px) !important;
+}
+
+/* No player: font scaling (uses tp-right container) */
+.tp-no-player .tp-right {
+  .responsive-title {
+    font-size: clamp(1.4rem, min(8cqw, 10cqh), 8rem) !important;
+  }
+
+  .responsive-artist {
+    font-size: clamp(1rem, min(6cqw, 7cqh), 6rem) !important;
+  }
+
+  .responsive-album {
+    font-size: clamp(0.9rem, min(3.5cqw, 4cqh), 4rem) !important;
+  }
+
+  .responsive-stream-info {
+    font-size: clamp(0.8rem, min(3.5cqw, 4cqh), 4rem) !important;
+  }
+
+  .format-logo-responsive {
+    height: clamp(1.2rem, min(4cqw, 4.5cqh), 4.5rem) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   ALBUM ART MAX SPACE variant
+   ═══════════════════════════════════════════════════ */
+.tp-max-space .tp-controls {
+  align-items: stretch !important;
+  overflow: visible !important;
+
+  .player-controls-container {
+    height: 100%;
+    justify-content: flex-start !important;
+    gap: clamp(2px, 1.5cqh, 22px) !important;
+    padding-top: clamp(2px, 0.4cqh, 6px);
+    padding-bottom: clamp(4px, 1cqh, 12px);
+    padding-inline: clamp(2px, 0.5cqw, 6px);
+  }
+
+  .controls-spacer {
+    display: none;
+  }
+
+  .volume-manager-wrap {
+    margin-top: auto !important;
+    padding-bottom: clamp(4px, 1.5cqh, 14px);
+  }
+
+  .player-controls,
+  .seekbar-container-wrap,
+  .volume-manager-wrap {
+    flex-shrink: 1 !important;
+  }
+
+  .player-controls {
+    margin-block: clamp(2px, 1.5cqh, 28px) !important;
+  }
+
+  .controls-transport-row {
+    margin-bottom: clamp(2px, 1.5cqh, 32px) !important;
+  }
+
+  .seekbar-container-wrap,
+  .volume-manager-wrap {
+    width: 92% !important;
+    max-width: 100% !important;
+  }
+
+  .slider-container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
+/* Max space: track info sizing */
+.tp-max-space .tp-right {
+  .track-info-group {
+    width: 99% !important;
+    margin-top: clamp(2px, 0.4cqh, 6px) !important;
+    margin-inline: auto !important;
+  }
+
+  .track-info {
+    padding: 0 clamp(4px, 0.8cqw, 8px) !important;
+  }
+
+  .cq-track-info {
+    justify-content: center;
+    gap: clamp(2px, 0.8cqh, 10px) !important;
+    height: 100%;
+  }
+
+  /* Stream info row: more breathing room */
+  .stream-info-row {
+    padding-top: clamp(4px, 1cqh, 16px);
+    flex: 0 0 auto;
+  }
+
+  /* Service logo fills parent height */
+  .stream-info-row .service-logo-img {
+    height: 100% !important;
+    max-height: clamp(1.2rem, min(5cqw, 4cqh), 3.5rem);
+  }
+
+  .stream-info-row .service-logo-icon {
+    font-size: clamp(1.2rem, min(5cqw, 4cqh), 3.5rem) !important;
+  }
+
+  .responsive-title {
+    font-size: clamp(1.6rem, min(10cqw, 8cqh), 8rem) !important;
+  }
+
+  .responsive-artist {
+    font-size: clamp(1.2rem, min(7cqw, 6cqh), 5rem) !important;
+  }
+
+  .responsive-album {
+    font-size: clamp(1rem, min(5cqw, 4cqh), 3.5rem) !important;
+  }
+
+  .responsive-stream-info {
+    font-size: clamp(1rem, min(5cqw, 4cqh), 3.5rem) !important;
+  }
+
+  .format-logo-responsive {
+    height: clamp(1rem, min(5cqw, 4cqh), 3.5rem) !important;
+  }
+}
+
+/* ── Max space: mid-range screens enlarged buttons ── */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .tp-max-space .tp-controls {
+    .btn-round {
+      width: clamp(60px, min(10cqw, 14cqh), 100px) !important;
+      height: clamp(60px, min(10cqw, 14cqh), 100px) !important;
+    }
+
+    .btn-round.btn-sm {
+      width: clamp(48px, min(7cqw, 11cqh), 72px) !important;
+      height: clamp(48px, min(7cqw, 11cqh), 72px) !important;
+    }
+
+    .btn-round.btn-sm .material-icons {
+      font-size: clamp(1.3rem, min(3.8cqw, 5cqh), 2.4rem) !important;
+    }
+
+    .btn-round .material-icons {
+      font-size: clamp(1.7rem, min(5.5cqw, 7cqh), 3.4rem) !important;
+    }
+
+    .btn-icon {
+      width: clamp(40px, min(8cqw, 9cqh), 90px) !important;
+      height: clamp(40px, min(8cqw, 9cqh), 90px) !important;
+    }
+
+    .btn-icon .material-icons {
+      font-size: clamp(1.4rem, min(5cqw, 5.5cqh), 3.2rem) !important;
+    }
+
+    .time-label {
+      font-size: clamp(0.9rem, min(3cqw, 3.5cqh), 1.6rem) !important;
+    }
+
+    .seekbar-container-wrap .slider-track {
+      height: clamp(6px, 2cqh, 24px) !important;
+    }
+  }
+}
+
+/* ── Max space: compact for short screens (≤480px height) ── */
+@media (max-height: 480px) {
+  .tp-max-space .tp-right {
+    .cq-track-info {
+      gap: clamp(1px, 0.3cqh, 4px) !important;
+    }
+
+    .stream-info-row {
+      padding-top: clamp(1px, 0.3cqh, 4px);
+    }
+
+    .responsive-title {
+      font-size: clamp(0.9rem, min(7cqw, 8cqh), 3rem) !important;
+    }
+
+    .responsive-artist {
+      font-size: clamp(0.75rem, min(5cqw, 5cqh), 2rem) !important;
+    }
+
+    .responsive-album {
+      font-size: clamp(0.65rem, min(3.5cqw, 3cqh), 1.5rem) !important;
+    }
+
+    .responsive-stream-info {
+      font-size: clamp(0.65rem, min(3.5cqw, 3cqh), 1.5rem) !important;
+    }
+
+    .format-logo-responsive {
+      height: clamp(0.65rem, min(3.5cqw, 3cqh), 1.5rem) !important;
+    }
+
+    .service-logo-img {
+      max-height: clamp(0.65rem, min(3.5cqw, 3cqh), 1.5rem) !important;
+    }
+  }
+
+  .tp-max-space .tp-controls {
+    .btn-round {
+      width: clamp(50px, min(7cqw, 9cqh), 56px) !important;
+      height: clamp(50px, min(7cqw, 9cqh), 56px) !important;
+    }
+
+    .btn-round.btn-sm {
+      width: clamp(40px, min(5cqw, 7cqh), 44px) !important;
+      height: clamp(40px, min(5cqw, 7cqh), 44px) !important;
+    }
+
+    .btn-round.btn-sm .material-icons {
+      font-size: clamp(1rem, min(3cqw, 4cqh), 1.6rem) !important;
+    }
+
+    .btn-round .material-icons {
+      font-size: clamp(1.2rem, min(4cqw, 5cqh), 2rem) !important;
+    }
+
+    .btn-icon {
+      width: clamp(28px, min(5.5cqw, 6cqh), 48px) !important;
+      height: clamp(28px, min(5.5cqw, 6cqh), 48px) !important;
+    }
+
+    .btn-icon .material-icons {
+      font-size: clamp(1.4rem, min(3.5cqw, 4cqh), 1.8rem) !important;
+    }
+
+    .seekbar-container-wrap .slider-track,
+    .volume-manager-wrap .slider-track {
+      height: clamp(3px, 1cqh, 8px) !important;
+    }
+
+    .slider-cap {
+      width: 12px !important;
+      height: 12px !important;
+    }
+
+    .time-label {
+      font-size: clamp(0.6rem, min(2cqw, 2cqh), 0.85rem) !important;
+    }
+
+    .seekbar-labels {
+      margin-top: 0.25rem !important;
+    }
+  }
+}
+
+/* ── Max space: tighten spacing (≤600px height) ── */
+@media (max-height: 600px) {
+  .tp-max-space .tp-right {
+    .track-info {
+      padding: 0 clamp(4px, 0.8cqw, 8px) !important;
+    }
+
+    .cq-track-info {
+      gap: clamp(1px, 0.8cqh, 8px) !important;
+    }
+
+    .track-info-group {
+      margin-top: clamp(1px, 0.3cqh, 4px) !important;
+      margin-bottom: clamp(1px, 0.3cqh, 4px) !important;
+    }
+  }
+
+  .tp-max-space .tp-controls {
+
+    .seekbar-container-wrap .slider-track,
+    .volume-manager-wrap .slider-track {
+      height: clamp(3px, 1.2cqh, 10px) !important;
+    }
+
+    .slider-cap {
+      width: 14px !important;
+      height: 14px !important;
+    }
+
+    .time-label {
+      font-size: clamp(0.65rem, min(2.5cqw, 2.5cqh), 0.9rem) !important;
+    }
+
+    .seekbar-labels {
+      margin-top: 0.3rem !important;
+    }
+  }
+}

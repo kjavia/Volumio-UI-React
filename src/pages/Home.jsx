@@ -6,7 +6,7 @@ import IframeScreen from '@/components/IframeScreen';
 import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
 import ContextMenu from '@/components/ContextMenu';
-import Player from './Player';
+import TabletPlayer from './TabletPlayer';
 import MobilePlayer from './MobilePlayer';
 import LargeScreenPlayer from './LargeScreenPlayer';
 import useIdleScreen from '@/hooks/useIdleScreen';
@@ -130,7 +130,7 @@ const Home = () => {
       />
       : isLargeScreen
         ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} />
-        : <Player vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
+        : <TabletPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
   } else if (idleScreen === 'wallpaper') {
     content = (
       <Wallpaper
