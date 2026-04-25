@@ -1,0 +1,254 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FORMS - Brushed Metal Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.settings-panel {
+    width: 100%;
+    max-width: 800px;
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-gray-400);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.panel-header {
+    border-bottom: 1px solid var(--color-gray-400);
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px solid var(--color-gray-300);
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-gray-700);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.form-control {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-400);
+    border-radius: 6px;
+    padding: 10px 15px;
+    color: var(--color-gray-900);
+    font-family: var(--font-body);
+    font-size: 14px;
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.08),
+        0 1px 0 rgba(255, 255, 255, 0.5);
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.08),
+        0 0 0 3px rgba(200, 117, 51, 0.2);
+    color: var(--color-gray-900);
+}
+
+.form-control::placeholder {
+    color: var(--color-gray-500);
+    opacity: 1;
+}
+
+/* Checkbox/Switch Styles */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-switch {
+    width: 48px;
+    height: 24px;
+    background: var(--color-gray-300);
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.15),
+        0 1px 0 rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--color-gray-400);
+}
+
+.form-switch::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed-light);
+    border-radius: 50%;
+    transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--color-gray-400);
+}
+
+.form-switch.checked {
+    background: rgba(200, 117, 51, 0.2);
+    border-color: var(--color-primary);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.12),
+        inset 0 0 6px rgba(200, 117, 51, 0.15);
+}
+
+.form-switch.checked::after {
+    left: 26px;
+    background: var(--color-primary);
+    box-shadow: 0 0 6px rgba(200, 117, 51, 0.4);
+    border-color: var(--color-primary-dark);
+}
+
+/* ─── Select / Dropdown ─────────────────────────────────────────────────────── */
+.form-select {
+    @extend .btn;
+    @extend .btn-white;
+    appearance: none;
+    display: block;
+    text-align: left;
+    padding: 8px 30px 8px 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555b65'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+
+    option {
+        background: var(--color-white);
+        color: var(--color-gray-900);
+    }
+
+    &:hover {
+        background-image:
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555b65'/%3E%3C/svg%3E"),
+            var(--brushed-texture),
+            var(--gradient-brushed-light);
+        background-repeat: no-repeat, repeat, no-repeat;
+        background-position: right 10px center, 0 0, 0 0;
+        background-size: auto, cover, cover;
+        box-shadow: none;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(200, 117, 51, 0.2);
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+/* ─── Input Group ──────────────────────────────────────────────────────── */
+.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: 100%;
+
+    >.form-control,
+    >.form-select {
+        border-radius: 0;
+        flex: 1 1 auto;
+        width: 1%;
+        min-width: 0;
+        position: relative;
+
+        &:first-child {
+            border-radius: 6px 0 0 6px;
+        }
+
+        &:last-child {
+            border-radius: 0 6px 6px 0;
+        }
+    }
+
+    >.btn {
+        border-radius: 0;
+        position: relative;
+        flex: 0 0 auto;
+
+        &:first-child {
+            border-radius: 6px 0 0 6px;
+        }
+
+        &:last-child {
+            border-radius: 0 6px 6px 0;
+        }
+    }
+
+    .input-group-text {
+        display: flex;
+        align-items: center;
+        padding: 0.375rem 0.75rem;
+        background:
+            var(--brushed-texture),
+            var(--gradient-brushed);
+        color: var(--color-gray-700);
+        border: 1px solid var(--color-gray-400);
+        border-radius: 0;
+        white-space: nowrap;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+
+        &:first-child {
+            border-radius: 6px 0 0 6px;
+        }
+
+        &:last-child {
+            border-radius: 0 6px 6px 0;
+        }
+    }
+
+    // Remove double borders between adjacent elements
+    > :not(:first-child) {
+        margin-left: -1px;
+    }
+}

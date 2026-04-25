@@ -1,0 +1,107 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SLIDERS - Brushed Metal Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.slider-group {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+/* Vertical Fader Track */
+.fader-track {
+    width: 16px;
+    height: 240px;
+    background-color: var(--color-gray-300);
+    border-radius: 8px;
+    box-shadow:
+        inset 0 2px 5px rgba(0, 0, 0, 0.2),
+        0 1px 0 rgba(255, 255, 255, 0.5);
+    position: relative;
+    margin: 0 20px;
+    border: 1px solid var(--color-gray-400);
+}
+
+/* Fader Knob/Cap */
+.fader-cap {
+    width: 40px;
+    height: 60px;
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed);
+    border-radius: 6px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+    cursor: ns-resize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s ease;
+    border: 1px solid var(--color-gray-500);
+}
+
+/* Grip lines on fader */
+.fader-cap::after {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--color-gray-500);
+    box-shadow:
+        0 4px 0 var(--color-gray-500),
+        0 -4px 0 var(--color-gray-500),
+        0 1px 0 rgba(255, 255, 255, 0.4),
+        0 5px 0 rgba(255, 255, 255, 0.4),
+        0 -3px 0 rgba(255, 255, 255, 0.4);
+}
+
+.fader-cap:active {
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed-dark);
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.15),
+        inset 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Horizontal Slider (General) */
+.range-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: var(--color-gray-300);
+    border-radius: 4px;
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--color-gray-400);
+}
+
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background:
+        var(--brushed-texture),
+        radial-gradient(circle at 40% 35%, #e8e8e8, #b0b0b0);
+    cursor: pointer;
+    box-shadow:
+        0 3px 6px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--color-gray-500);
+    margin-top: -8px;
+}
+
+.range-slider::-webkit-slider-thumb:active {
+    background:
+        var(--brushed-texture),
+        radial-gradient(circle at 50% 50%, #c8c8c8, #989898);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}

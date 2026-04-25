@@ -1,0 +1,30 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   BRUSHED METAL THEME - Main Index
+   Light aluminum surface with warm copper accents
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@import './variables.scss';
+@import './typography.scss';
+@import './colors.scss';
+@import '../common/analog-clock';
+@import '../common/dialog';
+@import './button.scss';
+@import './forms.scss';
+@import './progressbar.scss';
+@import './sliders.scss';
+@import './knobs.scss';
+@import './tabs.scss';
+@import './media-player.scss';
+@import './album-browser.scss';
+@import './playlist.scss';
+@import './sidepanel.scss';
+@import './context-menu.scss';
+@import './cd-player.scss';
+@import './dialog.scss';
+@import './digital-clock.scss';
+@import './analog-clock.scss';
+@import './flip-clock.scss';
+
+body {
+    background-color: var(--bg-color);
+}

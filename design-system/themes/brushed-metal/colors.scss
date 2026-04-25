@@ -1,0 +1,148 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   COLORS & UTILITY CLASSES - Brushed Metal Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Background Utilities ────────────────────────────────────────────── */
+.bg-dark {
+    background: var(--gradient-brushed-dark) !important;
+}
+
+.bg-surface {
+    background: var(--gradient-brushed) !important;
+}
+
+.bg-light {
+    background: var(--gradient-brushed-light) !important;
+}
+
+.bg-primary {
+    background-color: var(--color-primary) !important;
+}
+
+.bg-secondary {
+    background-color: var(--color-secondary) !important;
+}
+
+.bg-black {
+    background-color: var(--color-gray-900) !important;
+}
+
+.bg-success {
+    background-color: var(--color-success) !important;
+}
+
+.bg-warning {
+    background-color: var(--color-warning) !important;
+}
+
+.bg-danger {
+    background-color: var(--color-danger) !important;
+}
+
+.bg-info {
+    background-color: var(--color-info) !important;
+}
+
+/* ─── Text Color Utilities ────────────────────────────────────────────── */
+.text-white {
+    color: var(--color-white) !important;
+}
+
+.text-dark {
+    color: var(--text-dark) !important;
+}
+
+.text-primary {
+    color: var(--color-primary) !important;
+}
+
+.text-accent {
+    color: var(--text-accent) !important;
+}
+
+.text-success {
+    color: var(--text-success) !important;
+}
+
+.text-warning {
+    color: var(--text-warning) !important;
+}
+
+.text-danger {
+    color: var(--text-danger) !important;
+}
+
+.text-info {
+    color: var(--text-info) !important;
+}
+
+/* ─── Border Color Utilities ──────────────────────────────────────────── */
+.border-primary {
+    border-color: var(--color-primary) !important;
+}
+
+.border-light {
+    border-color: var(--color-gray-300) !important;
+}
+
+.border-dark {
+    border-color: var(--color-gray-700) !important;
+}
+
+.border-surface {
+    border-color: var(--color-gray-500) !important;
+}
+
+.border-success {
+    border-color: var(--color-success) !important;
+}
+
+.border-warning {
+    border-color: var(--color-warning) !important;
+}
+
+.border-danger {
+    border-color: var(--color-danger) !important;
+}
+
+.border-info {
+    border-color: var(--color-info) !important;
+}
+
+/* ─── Brushed Metal Surface Class ─────────────────────────────────────── */
+.brushed-surface {
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed);
+    box-shadow:
+        inset hsla(0, 0%, 15%, 0.5) 0 0 0 1px,
+        inset hsla(0, 0%, 100%, 0.6) 0 1px 0 0,
+        0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ─── Alert Variants ─────────────────────────────────────────────────── */
+.alert-success {
+    background-color: var(--alert-bg-success);
+    border-left: 3px solid var(--color-success);
+    color: var(--color-success-dark);
+}
+
+.alert-warning {
+    background-color: var(--alert-bg-warning);
+    border-left: 3px solid var(--color-warning);
+    color: var(--color-warning-dark);
+}
+
+.alert-danger {
+    background-color: var(--alert-bg-danger);
+    border-left: 3px solid var(--color-danger);
+    color: var(--color-danger-dark);
+}
+
+.alert-info {
+    background-color: var(--alert-bg-info);
+    border-left: 3px solid var(--color-info);
+    color: var(--color-info-dark);
+}

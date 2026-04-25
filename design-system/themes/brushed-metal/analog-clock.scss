@@ -1,0 +1,154 @@
+/* ── Analog Clock — Brushed Metal Variant ──────────────────────────────────
+ * Polished aluminum bezel, light metallic face, copper second hand
+ * ──────────────────────────────────────────────────────────────────────── */
+
+/* Bezel — brushed aluminum ring */
+.clock-bezel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 5%;
+    background:
+        var(--brushed-texture),
+        linear-gradient(145deg, #c8c8c8 0%, #909090 50%, #b8b8b8 100%);
+    box-shadow:
+        0 6px 28px rgba(0, 0, 0, 0.15),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5),
+        inset 0 -2px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #888;
+}
+
+/* Face — light recessed dial */
+.clock-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 40% 35%, #f0f0f0 0%, #e0e0e0 100%);
+    box-shadow:
+        inset 0 2px 12px rgba(0, 0, 0, 0.08),
+        inset 0 0 20px rgba(0, 0, 0, 0.04);
+    border: 1px solid #aaa;
+    position: absolute;
+    top: 4%;
+    border-radius: 1px;
+}
+
+/* Hour ticks — dark steel */
+.clock-tick--hour::before {
+    height: 10%;
+    background: var(--color-gray-700);
+    width: 3px;
+    margin-left: -0.5px;
+}
+
+/* Minute ticks — subtle gray */
+.clock-tick--minute::before {
+    height: 5%;
+    background: var(--color-gray-400);
+    width: 1px;
+}
+
+/* ── Hour digits ────────────────────────────────────────────────────────── */
+.clock-hour-digit {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+    font-weight: 700;
+    color: var(--color-gray-800);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    line-height: 1;
+}
+
+/* ── Hands ──────────────────────────────────────────────────────────────── */
+.clock-hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 2px;
+}
+
+/* Hour hand — dark gunmetal */
+.clock-hand--hour {
+    width: 7px;
+    height: 25%;
+    margin-left: -3.5px;
+    background: linear-gradient(180deg, var(--color-gray-700) 0%, var(--color-gray-900) 100%);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    border-radius: 3px 3px 1px 1px;
+    z-index: 3;
+}
+
+/* Minute hand — steel */
+.clock-hand--minute {
+    width: 3px;
+    height: 35%;
+    margin-left: -1.5px;
+    background: linear-gradient(180deg, var(--color-gray-600) 0%, var(--color-gray-800) 100%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    border-radius: 1.5px 1.5px 1px 1px;
+    z-index: 4;
+}
+
+/* Second hand — warm copper accent */
+.clock-hand--second {
+    width: 1.5px;
+    height: 38%;
+    margin-left: -0.75px;
+    background: var(--color-primary);
+    box-shadow: 0 0 6px rgba(200, 117, 51, 0.4);
+    border-radius: 1px;
+    z-index: 5;
+    transition: none;
+}
+
+/* Center cap — copper pivot */
+.clock-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5%;
+    height: 5%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow:
+        0 0 0 2px rgba(200, 117, 51, 0.25),
+        0 0 8px rgba(200, 117, 51, 0.4),
+        0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 6;
+}
+
+.clock-face-day {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.6rem, 3cqi, 1rem);
+    font-weight: 600;
+    color: var(--color-gray-500);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.clock-face-date {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.6rem, 3cqi, 1rem);
+    font-weight: 700;
+    color: var(--color-gray-800);
+}
+
+/* ── Weather on face ────────────────────────────────────────────────────── */
+
+.clock-face-weather-icon {
+    font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+    color: var(--color-primary);
+    filter: drop-shadow(0 0 3px rgba(200, 117, 51, 0.3));
+}
+
+.clock-face-weather-temp {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
+    font-weight: 700;
+    color: var(--color-gray-800);
+    white-space: nowrap;
+}

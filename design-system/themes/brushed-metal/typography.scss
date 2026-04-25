@@ -1,0 +1,159 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY - Brushed Metal Theme
+   Uses Outfit (display) + DM Sans (body) + JetBrains Mono (code)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    font-weight: 400;
+    line-height: var(--leading-normal);
+    color: var(--text-dark);
+    background-color: var(--bg-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-wide);
+    color: var(--text-dark);
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    text-shadow:
+        0 1px 0 var(--highlight-40),
+        0 -1px 0 var(--shadow-10);
+}
+
+h1 {
+    font-size: var(--text-4xl);
+    letter-spacing: var(--tracking-wider);
+}
+
+h2 {
+    font-size: var(--text-3xl);
+    letter-spacing: var(--tracking-wide);
+}
+
+h3 {
+    font-size: var(--text-2xl);
+}
+
+h4 {
+    font-size: var(--text-xl);
+}
+
+h5 {
+    font-size: var(--text-lg);
+}
+
+h6 {
+    font-size: var(--text-md);
+    font-weight: 500;
+    letter-spacing: var(--tracking-wide);
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0.75em;
+    line-height: var(--leading-normal);
+}
+
+small {
+    font-size: var(--text-sm);
+}
+
+strong {
+    font-weight: 700;
+}
+
+em {
+    font-style: italic;
+}
+
+code {
+    font-family: var(--font-mono);
+}
+
+.text-xs {
+    font-size: var(--text-xs);
+}
+
+.text-sm {
+    font-size: var(--text-sm);
+}
+
+.text-md {
+    font-size: var(--text-md);
+}
+
+.text-lg {
+    font-size: var(--text-lg);
+}
+
+.text-xl {
+    font-size: var(--text-xl);
+}
+
+.text-2xl {
+    font-size: var(--text-2xl);
+}
+
+.text-3xl {
+    font-size: var(--text-3xl);
+}
+
+.text-4xl {
+    font-size: var(--text-4xl);
+}
+
+.font-display {
+    font-family: var(--font-display);
+}
+
+.font-body {
+    font-family: var(--font-body);
+}
+
+.font-mono {
+    font-family: var(--font-mono);
+}
+
+.text-primary-color {
+    color: var(--color-primary) !important;
+}
+
+.text-secondary-color {
+    color: var(--text-secondary) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Engraved text on metal */
+.text-engraved {
+    color: var(--color-gray-600);
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 0.7),
+        0 -1px 1px rgba(0, 0, 0, 0.25);
+}
+
+/* Embossed/raised text on metal */
+.text-embossed {
+    color: var(--color-gray-400);
+    text-shadow:
+        0 -1px 1px rgba(0, 0, 0, 0.3),
+        0 1px 0 rgba(255, 255, 255, 0.8);
+}

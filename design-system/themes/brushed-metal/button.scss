@@ -1,0 +1,347 @@
+@use './variables.scss';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BUTTONS - Brushed Metal Theme
+   Machined aluminum buttons with gloss highlight and pressed insets
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Base Button Style ───────────────────────────────────────────────── */
+.btn {
+    border-radius: 6px;
+    border: 1px solid var(--color-gray-500);
+    position: relative;
+    cursor: pointer;
+    font-family: var(--font-label);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 8px 16px;
+    min-height: 32px;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    user-select: none;
+    transition: all 0.15s ease-out;
+    color: var(--color-gray-800);
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed);
+
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.btn:hover {
+    color: var(--color-gray-900);
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed-light);
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    border-color: var(--color-gray-600);
+}
+
+.btn:active,
+.btn.active {
+    transform: translateY(1px);
+    color: var(--color-primary);
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed-dark);
+    box-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.1),
+        inset 0 2px 6px rgba(0, 0, 0, 0.25),
+        inset 0 0 4px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-gray-700);
+}
+
+.btn:focus-visible {
+    color: var(--color-gray-900);
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed-light);
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ─── Button Color Variants ───────────────────────────────────────────── */
+.btn-black {
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed-dark);
+    color: var(--color-gray-200);
+    border: 1px solid var(--color-gray-700);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.btn-white {
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed-light);
+    color: var(--color-gray-800);
+    border: 1px solid var(--color-gray-300);
+}
+
+.btn-primary {
+    background:
+        var(--gradient-btn-gloss),
+        linear-gradient(180deg, #d9884a 0%, #c87533 50%, #a05e28 100%);
+    color: var(--color-white);
+    border: 1px solid var(--color-primary-dark);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    box-shadow:
+        0 2px 6px rgba(200, 117, 51, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary:hover {
+    color: var(--color-white);
+    background:
+        var(--gradient-btn-gloss),
+        linear-gradient(180deg, #e0994d 0%, #d9884a 50%, #c87533 100%);
+    box-shadow:
+        0 4px 12px rgba(200, 117, 51, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.btn-primary:active,
+.btn-primary.active {
+    background: linear-gradient(180deg, #a05e28 0%, #c87533 100%);
+    box-shadow:
+        inset 0 2px 6px rgba(0, 0, 0, 0.35),
+        0 0 4px rgba(200, 117, 51, 0.2);
+    color: var(--color-white);
+    border-color: var(--color-primary-deep);
+}
+
+/* Success */
+.btn-success {
+    background:
+        var(--gradient-btn-gloss),
+        linear-gradient(180deg, #4caf50 0%, #2d8a4e 50%, #1f6b3a 100%);
+    color: var(--color-white);
+    border: 1px solid var(--color-success-dark);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 6px rgba(45, 138, 78, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(45, 138, 78, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    &:active,
+    &.active {
+        box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Warning */
+.btn-warning {
+    background:
+        var(--gradient-btn-gloss),
+        linear-gradient(180deg, #f5a623 0%, #d4870e 50%, #b06f0a 100%);
+    color: var(--color-white);
+    border: 1px solid var(--color-warning-dark);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(212, 135, 14, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(212, 135, 14, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    &:active,
+    &.active {
+        box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Danger */
+.btn-danger {
+    background:
+        var(--gradient-btn-gloss),
+        linear-gradient(180deg, #ef5350 0%, #c62828 50%, #9b1b1b 100%);
+    color: var(--color-white);
+    border: 1px solid var(--color-danger-dark);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 6px rgba(198, 40, 40, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    &:active,
+    &.active {
+        box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
+}
+
+/* Info */
+.btn-info {
+    background:
+        var(--gradient-btn-gloss),
+        linear-gradient(180deg, #42a5f5 0%, #1976d2 50%, #1565c0 100%);
+    color: var(--color-white);
+    border: 1px solid var(--color-info-dark);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(25, 118, 210, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    &:active,
+    &.active {
+        box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Circular Buttons */
+.btn-circle,
+.btn-round {
+    border-radius: 50%;
+    width: 72px;
+    height: 72px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        var(--brushed-texture),
+        radial-gradient(circle at 50% 35%, #e8e8e8, #b0b0b0);
+    border: 1px solid var(--color-gray-500);
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.08);
+}
+
+.btn-circle:hover,
+.btn-round:hover {
+    background:
+        var(--brushed-texture),
+        radial-gradient(circle at 50% 35%, #f0f0f0, #c0c0c0);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.btn-circle:active,
+.btn-round:active,
+.btn-circle.active,
+.btn-round.active {
+    background:
+        var(--brushed-texture),
+        radial-gradient(circle at 50% 60%, #989898, #b8b8b8);
+    box-shadow:
+        inset 0 3px 8px rgba(0, 0, 0, 0.25),
+        inset 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-round .material-icons,
+.btn-circle .material-icons {
+    font-size: 1.4rem;
+    color: var(--color-gray-700);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ─── Icon Buttons ────────────────────────────────────────────────────── */
+.btn-icon {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 6px;
+    box-shadow: none;
+    transition: all 0.15s ease-out;
+}
+
+.btn-icon .material-icons {
+    font-size: 1.3rem;
+    background-image:
+        var(--brushed-texture-dark),
+        var(--gradient-brushed-black);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
+}
+
+.btn-icon:hover {
+    background-image:
+        var(--brushed-texture-dark),
+        var(--gradient-brushed-black);
+    border-color: #1a1a1a;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-icon:hover .material-icons {
+    background-image: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: var(--color-gray-200);
+    background-clip: unset;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+.btn-icon:active {
+    background-image:
+        var(--brushed-texture-dark),
+        var(--gradient-brushed-black);
+    border-color: #111;
+    box-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.1),
+        inset 0 2px 6px rgba(0, 0, 0, 0.35),
+        inset 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-icon:active .material-icons {
+    background-image: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: var(--color-primary);
+    background-clip: unset;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+/* ─── Small / Large Modifiers ──────────────────────────────────────────── */
+.btn-sm {
+    padding: 4px 10px;
+    min-height: 28px;
+    font-size: var(--text-xs);
+    border-radius: 4px;
+}
+
+.btn-lg {
+    padding: 12px 24px;
+    min-height: 44px;
+    font-size: var(--text-md);
+    border-radius: 8px;
+}
+
+/* ─── Outlined ─────────────────────────────────────────────────────────── */
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--color-gray-500);
+    color: var(--color-gray-700);
+    box-shadow: none;
+}
+
+.btn-outline:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: var(--color-gray-600);
+    color: var(--color-gray-800);
+}
+
+.btn-outline:active {
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.15);
+}
