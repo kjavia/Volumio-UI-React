@@ -85,6 +85,10 @@
 
 /* 15% bigger track-info fonts on large mobile (excludes ≤654px height) */
 @media (max-width: 768px) and (min-height: 655px) {
+  .area-track-info {
+    overflow: visible !important;
+  }
+
   .responsive-title {
     font-size: clamp(1.84rem, 9.2vw, 3.45rem) !important;
   }
@@ -184,20 +188,64 @@
   }
 }
 
-/* 15% smaller title & artist on 800×480 */
+/* Skeuomorphic overrides for 800×480 (doubled selector for specificity) */
 @media (max-height: 480px) {
   .tp-max-space .tp-right .responsive-title {
     font-size: clamp(0.765rem, min(5.95cqw, 6.8cqh), 2.55rem) !important;
   }
 
   .tp-max-space .tp-right .responsive-artist {
-    font-size: clamp(0.64rem, min(4.25cqw, 4.25cqh), 1.7rem) !important;
+    font-size: clamp(0.67rem, min(5cqw, 6cqh), 1.79rem) !important;
+  }
+
+  .tp-max-space .tp-right .responsive-album {
+    font-size: clamp(0.62rem, min(3.33cqw, 2.85cqh), 1.43rem) !important;
+  }
+
+  .tp-max-space .tp-right .responsive-stream-info {
+    font-size: clamp(1rem, min(5cqw, 6cqh), 3.5rem) !important;
+  }
+
+  .tp-max-space .tp-right .cq-track-info {
+    gap: clamp(4px, 0.8cqh, 14px) !important;
+  }
+
+  .tp-max-space .tp-right .track-info-group {
+    margin-bottom: clamp(4px, 0.8cqh, 12px) !important;
+  }
+
+  .tp-max-space .tp-right .stream-info-row {
+    padding-top: clamp(5px, 1cqh, 14px) !important;
+    padding-bottom: clamp(3px, 0.5cqh, 8px) !important;
+  }
+
+  .tp-max-space .tp-right .format-logo-responsive {
+    height: clamp(1rem, min(5cqw, 5cqh), 3.5rem) !important;
+  }
+
+  .tp-max-space .tp-right .stream-info-row .service-logo-icon {
+    font-size: clamp(1.2rem, min(5cqw, 6cqh), 3.5rem) !important;
   }
 }
 
 .format-logo-responsive {
   height: clamp(1.3rem, 3.8cqw, 4.2rem);
   display: block;
+}
+
+/* Service logo icon: bump cqh from 4→6 (doubled selector beats global) */
+.tp-max-space.tp-max-space .tp-right .stream-info-row .service-logo-icon {
+  font-size: clamp(1.2rem, min(5cqw, 6cqh), 3.5rem) !important;
+}
+
+/* Format logo: bump cqh from 4→6 (doubled selector beats global) */
+.tp-max-space.tp-max-space .tp-right .format-logo-responsive {
+  height: clamp(1rem, min(5cqw, 6cqh), 3.5rem) !important;
+}
+
+/* Prevent track-info clipping of stream row logos */
+.tp-max-space .tp-track-info {
+  overflow: visible !important;
 }
 
 /* ── Max space: higher line-heights for breathing room ──────────────── */
@@ -209,6 +257,11 @@
 @media (min-width: 1200px) {
   .tp-max-space .tp-right .responsive-title {
     line-height: 1.35 !important;
+  }
+
+  .tp-max-space .tp-track-info {
+    flex: 0 0 60% !important;
+    overflow: visible !important;
   }
 
   .tp-max-space .tp-right .stream-info-row {
