@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
+import { useMemo, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
@@ -26,7 +26,6 @@ import DisconnectedScreen from '@/components/DisconnectedScreen';
 import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
 import PeppyMeter from '@/components/PeppyMeter';
-import ContextMenu from '@/components/ContextMenu';
 import './mobile-player.scss';
 
 const PLAYER_MAP = {
@@ -65,7 +64,7 @@ const getPlayerTypeForSource = (service, trackType) => {
  *   Row 3 (20%) — Track info
  *   Row 4 (40%) — Controls: seekbar / transport buttons / volume
  */
-const MobilePlayer = ({ vizStopped = false, onVizResumed, contextMenuProps }) => {
+const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
   const { data: pluginConfig } = usePluginConfig();
   const playerType = pluginConfig?.playerType || 'radio';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
@@ -77,32 +76,6 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed, contextMenuProps }) =>
   const peppyMeterWidth = pluginConfig?.peppyMeterWidth || 480;
   const peppyMeterHeight = pluginConfig?.peppyMeterHeight || 320;
   const disableVolumeControl = pluginConfig?.disableVolumeControl === true;
-
-  // ── Drawer state + left-edge swipe ──
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const swipeRef = useRef({ startX: 0, startY: 0, tracking: false });
-
-  const onSwipeStart = useCallback((e) => {
-    const x = e.touches[0].clientX;
-    if (x <= 24) {
-      swipeRef.current = { startX: x, startY: e.touches[0].clientY, tracking: true };
-    }
-  }, []);
-
-  const onSwipeMove = useCallback((e) => {
-    if (!swipeRef.current.tracking) return;
-    const dx = e.touches[0].clientX - swipeRef.current.startX;
-    const dy = Math.abs(e.touches[0].clientY - swipeRef.current.startY);
-    if (dy > 50) { swipeRef.current.tracking = false; }
-    if (dx > 60 && dy < 50) {
-      swipeRef.current.tracking = false;
-      setDrawerOpen(true);
-    }
-  }, []);
-
-  const onSwipeEnd = useCallback(() => {
-    swipeRef.current.tracking = false;
-  }, []);
 
   const {
     isConnected,
@@ -161,9 +134,12 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed, contextMenuProps }) =>
     });
   };
 
-  const touchTimer = useRef(null);
-  const handleTouchStart = () => { touchTimer.current = setTimeout(cyclePlayer, 800); };
-  const handleTouchEnd = () => { if (touchTimer.current) clearTimeout(touchTimer.current); };
+  const lastTapRef = useRef(0);
+  const handleDoubleTap = () => {
+    const now = Date.now();
+    if (now - lastTapRef.current < 300) { cyclePlayer(); lastTapRef.current = 0; }
+    else { lastTapRef.current = now; }
+  };
 
   const mobileVizRef = useRef(null);
   const peppyMobileRef = useRef(null);
@@ -218,19 +194,7 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed, contextMenuProps }) =>
   return (
     <div
       className="container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100"
-      onTouchStart={onSwipeStart}
-      onTouchMove={onSwipeMove}
-      onTouchEnd={onSwipeEnd}
     >
-      {/* Drawer context menu */}
-      {contextMenuProps && (
-        <ContextMenu
-          {...contextMenuProps}
-          variant="drawer"
-          isOpen={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-        />
-      )}
       {/* Background */}
       {backgroundColor ? (
         <div
@@ -258,11 +222,8 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed, contextMenuProps }) =>
           <div className="mobile-row-player">
             <div
               className="player-responsive"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-              onMouseDown={handleTouchStart}
-              onMouseUp={handleTouchEnd}
-              onMouseLeave={handleTouchEnd}
+              onDoubleClick={cyclePlayer}
+              onTouchEnd={handleDoubleTap}
             >
               <CurrentPlayerComponent
                 isPlaying={isPlaying}
@@ -276,31 +237,25 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed, contextMenuProps }) =>
         {/* ROW 2 — Visualizations (10%) */}
         {showViz && vizType === 'spectrum' && (
           <div className="mobile-row-viz">
-            {isPlaying ? (
-              <SpectrumAnalyzer
-                ref={mobileVizRef}
-                stopped={vizStopped}
-                onResumed={onVizResumed}
-                streamUrl={SPECTRUM_STREAM_URL}
-                options={mobileSpectrumOptions}
-                isPlaying={isPlaying}
-              />
-            ) : (
-              <span className="material-icons viz-placeholder">equalizer</span>
-            )}
+            {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
+            <SpectrumAnalyzer
+              ref={mobileVizRef}
+              stopped={vizStopped}
+              onResumed={onVizResumed}
+              streamUrl={SPECTRUM_STREAM_URL}
+              options={mobileSpectrumOptions}
+              isPlaying={isPlaying}
+            />
           </div>
         )}
         {showViz && vizType === 'peppyMeter' && (
           <div className="mobile-row-viz" ref={peppyMobileRef}>
-            {isPlaying ? (
-              <PeppyMeter
-                width={peppyMeterWidth}
-                height={peppyMeterHeight}
-                containerRef={peppyMobileRef}
-              />
-            ) : (
-              <span className="material-icons viz-placeholder">equalizer</span>
-            )}
+            {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
+            <PeppyMeter
+              width={peppyMeterWidth}
+              height={peppyMeterHeight}
+              containerRef={peppyMobileRef}
+            />
           </div>
         )}
 
@@ -418,7 +373,6 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed, contextMenuProps }) =>
 MobilePlayer.propTypes = {
   vizStopped: PropTypes.bool,
   onVizResumed: PropTypes.func,
-  contextMenuProps: PropTypes.object,
 };
 
 export default MobilePlayer;

@@ -370,6 +370,8 @@ body,
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* Max-space album art: player panel fills its cell entirely */

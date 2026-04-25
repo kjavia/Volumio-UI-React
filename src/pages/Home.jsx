@@ -127,13 +127,6 @@ const Home = () => {
       ? <MobilePlayer
         vizStopped={vizStopped}
         onVizResumed={() => setVizStopped(false)}
-        contextMenuProps={{
-          vizStopped,
-          onStopViz: isSpectrumViz ? () => setVizStopped(true) : undefined,
-          onBackToPlayer: idle && !forcePlayer ? () => setForcePlayer(true) : undefined,
-          onFullscreenViz: isSpectrumViz ? handleFullscreenViz : undefined,
-          isVizFullscreen,
-        }}
       />
       : isLargeScreen
         ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} />
@@ -187,7 +180,7 @@ const Home = () => {
   // normally skip the floating overlay. However when the idle screen is active
   // the player (and its embedded menu) is not mounted, so we still need the
   // floating overlay as the only way for the user to get back to the player.
-  const floatingContextMenu = !isMobile && (!isLargeScreen || idle) && (
+  const floatingContextMenu = (!isLargeScreen || idle) && (
     <ContextMenu
       vizStopped={vizStopped}
       onStopViz={showPlayer && isSpectrumViz ? () => setVizStopped(true) : undefined}

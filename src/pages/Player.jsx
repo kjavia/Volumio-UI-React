@@ -131,7 +131,6 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const [showPlaylist, setShowPlaylist] = useState(false);
   const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
   const [showBrowse, setShowBrowse] = useState(false);
-  const touchTimer = useRef(null);
   const vizRef = useRef(null);
   const mobileVizRef = useRef(null);
   const peppyMobileRef = useRef(null);
@@ -175,16 +174,11 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     });
   };
 
-  const handleTouchStart = () => {
-    touchTimer.current = setTimeout(() => {
-      cyclePlayer();
-    }, 800);
-  };
-
-  const handleTouchEnd = () => {
-    if (touchTimer.current) {
-      clearTimeout(touchTimer.current);
-    }
+  const lastTapRef = useRef(0);
+  const handleDoubleTap = () => {
+    const now = Date.now();
+    if (now - lastTapRef.current < 300) { cyclePlayer(); lastTapRef.current = 0; }
+    else { lastTapRef.current = now; }
   };
 
   const effectivePlayerType =
@@ -248,11 +242,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
             <div
               className="player-responsive"
               onDoubleClick={cyclePlayer}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-              onMouseDown={handleTouchStart}
-              onMouseUp={handleTouchEnd}
-              onMouseLeave={handleTouchEnd}
+              onTouchEnd={handleDoubleTap}
             >
               <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} maxSpace={albumArtMaxSpace && effectivePlayerType === 'albumArt'} />
             </div>
@@ -262,27 +252,21 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
         {/* MOBILE VISUALIZER — between player and controls on mobile only */}
         {showViz && vizType === 'spectrum' && (
           <div className="home-panel area-mobile-viz">
-            {isPlaying ? (
-              <SpectrumAnalyzer
-                ref={mobileVizRef}
-                stopped={vizStopped}
-                onResumed={onVizResumed}
-                streamUrl={SPECTRUM_STREAM_URL}
-                options={mobileSpectrumOptions}
-                isPlaying={isPlaying}
-              />
-            ) : (
-              <span className="material-icons viz-placeholder">equalizer</span>
-            )}
+            {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
+            <SpectrumAnalyzer
+              ref={mobileVizRef}
+              stopped={vizStopped}
+              onResumed={onVizResumed}
+              streamUrl={SPECTRUM_STREAM_URL}
+              options={mobileSpectrumOptions}
+              isPlaying={isPlaying}
+            />
           </div>
         )}
         {showViz && vizType === 'peppyMeter' && (
           <div className="home-panel area-mobile-viz" ref={peppyMobileRef}>
-            {isPlaying ? (
-              <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={peppyMobileRef} />
-            ) : (
-              <span className="material-icons viz-placeholder">equalizer</span>
-            )}
+            {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
+            <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={peppyMobileRef} />
           </div>
         )}
 

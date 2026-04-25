@@ -200,9 +200,12 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
     });
   };
 
-  const touchTimer = useRef(null);
-  const handleTouchStart = () => { touchTimer.current = setTimeout(cyclePlayer, 800); };
-  const handleTouchEnd = () => { if (touchTimer.current) clearTimeout(touchTimer.current); };
+  const lastTapRef = useRef(0);
+  const handleDoubleTap = () => {
+    const now = Date.now();
+    if (now - lastTapRef.current < 300) { cyclePlayer(); lastTapRef.current = 0; }
+    else { lastTapRef.current = now; }
+  };
 
   const vizRef = useRef(null);
   const peppyVizAreaRef = useRef(null);
@@ -278,11 +281,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
     <div
       className="lsp-player-area"
       onDoubleClick={cyclePlayer}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      onMouseDown={handleTouchStart}
-      onMouseUp={handleTouchEnd}
-      onMouseLeave={handleTouchEnd}
+      onTouchEnd={handleDoubleTap}
     >
       <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
     </div>
@@ -471,11 +470,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
               {effectivePlayerType !== 'none' && (
                 <div className="lsp-bottom__player"
                   onDoubleClick={cyclePlayer}
-                  onTouchStart={handleTouchStart}
-                  onTouchEnd={handleTouchEnd}
-                  onMouseDown={handleTouchStart}
-                  onMouseUp={handleTouchEnd}
-                  onMouseLeave={handleTouchEnd}
+                  onTouchEnd={handleDoubleTap}
                 >
                   <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
                 </div>
