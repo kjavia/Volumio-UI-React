@@ -133,7 +133,6 @@ const VUMeter = ({ streamUrl, variant = 1, backgroundSrc, needleColor, stopped =
 
     if (retryTimer.current) clearTimeout(retryTimer.current);
 
-    console.log('Stream disconnected, retrying in 1s...');
     retryTimer.current = setTimeout(() => {
       // If we got disabled in the meantime, abort
       if (!enabled) return;

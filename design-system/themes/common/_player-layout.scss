@@ -1,0 +1,92 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   PLAYER LAYOUT — Common structural layout for all themes
+   ═══════════════════════════════════════════════════════════════════════
+   This file defines the base layout for shared player components.
+   Themes should only add typography and visual styling (colors,
+   backgrounds, borders, shadows, fonts) — NOT layout properties.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Media Containers (album art, vinyl, CD) ────────────────────────── */
+.album-art-container,
+.vinyl-container,
+.cd-container {
+    width: 100%;
+    max-width: 460px;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* ── Screen Frame (layout) ──────────────────────────────────────────── */
+.screen-frame {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+    justify-content: center;
+}
+
+/* ── Track Info ──────────────────────────────────────────────────────── */
+.track-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+/* ── Slider Components ──────────────────────────────────────────────── */
+.slider-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 1em;
+}
+
+.slider-track {
+    flex-grow: 1;
+    position: relative;
+    cursor: pointer;
+}
+
+.slider-fill {
+    height: 100%;
+    position: relative;
+}
+
+.slider-cap {
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-cap::after {
+    content: '';
+    position: absolute;
+}
+
+.read-only .slider-fill::after {
+    display: none;
+}
+
+.read-only .slider-track {
+    cursor: default;
+}
+
+/* ── Seekbar Labels ─────────────────────────────────────────────────── */
+.seekbar-labels {
+    padding-inline: 0;
+}
+
+/* ── Volume Label Spacing ───────────────────────────────────────────── */
+.volume-manager .small {
+    min-width: 3.5ch;
+    padding-left: 0.4rem;
+}

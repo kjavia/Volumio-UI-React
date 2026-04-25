@@ -60,8 +60,6 @@ const SpectrumAnalyzer = forwardRef(({ streamUrl, gradient = 'prism', initialMod
     if (!enabled) return;
 
     if (retryTimer.current) clearTimeout(retryTimer.current);
-
-    console.log('Stream disconnected, retrying in 1s...');
     retryTimer.current = setTimeout(() => {
       if (!enabled) return;
 

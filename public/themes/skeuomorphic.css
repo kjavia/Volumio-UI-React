@@ -1263,6 +1263,98 @@ ol li {
   border-color: rgba(34, 197, 94, 0.3);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════
+   PLAYER LAYOUT — Common structural layout for all themes
+   ═══════════════════════════════════════════════════════════════════════
+   This file defines the base layout for shared player components.
+   Themes should only add typography and visual styling (colors,
+   backgrounds, borders, shadows, fonts) — NOT layout properties.
+   ═══════════════════════════════════════════════════════════════════════ */
+/* ── Media Containers (album art, vinyl, CD) ────────────────────────── */
+.album-art-container,
+.vinyl-container,
+.cd-container {
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* ── Screen Frame (layout) ──────────────────────────────────────────── */
+.screen-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+  justify-content: center;
+}
+
+/* ── Track Info ──────────────────────────────────────────────────────── */
+.track-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* ── Slider Components ──────────────────────────────────────────────── */
+.slider-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 1em;
+}
+
+.slider-track {
+  flex-grow: 1;
+  position: relative;
+  cursor: pointer;
+}
+
+.slider-fill {
+  height: 100%;
+  position: relative;
+}
+
+.slider-cap {
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-cap::after {
+  content: "";
+  position: absolute;
+}
+
+.read-only .slider-fill::after {
+  display: none;
+}
+
+.read-only .slider-track {
+  cursor: default;
+}
+
+/* ── Seekbar Labels ─────────────────────────────────────────────────── */
+.seekbar-labels {
+  padding-inline: 0;
+}
+
+/* ── Volume Label Spacing ───────────────────────────────────────────── */
+.volume-manager .small {
+  min-width: 3.5ch;
+  padding-left: 0.4rem;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE
@@ -3360,86 +3452,33 @@ h2 {
   text-align: center;
 }
 
-/* Media Player Layout & Common Components */
-.player-casing {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  background-color: var(--device-surface);
-  border-radius: 30px;
-  padding: 30px;
-  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.25), -5px -5px 15px rgba(255, 255, 255, 0.6), inset 1px 1px 0 rgba(255, 255, 255, 0.4);
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  position: relative;
-  /* Texture */
-  background-image: linear-gradient(rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.03)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.03' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'/%3E%3C/svg%3E");
-  transition: max-width 0.3s ease;
-}
-
-/* Layout wrappers for RWD */
-.media-section {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.controls-section {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Screen Area */
+/* ═══════════════════════════════════════════════════════════════════════
+   MEDIA PLAYER — Skeuomorphic Theme
+   Typography and visual styling only. Layout is in common/_player-layout.
+   ═══════════════════════════════════════════════════════════════════════ */
+/* ── Screen Frame (visual) ────────────────────────────────────────────── */
 .screen-frame {
   background-color: var(--color-gray-800, #222);
   border-radius: 6px;
   padding: 15px;
   box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.6), inset -1px -1px 2px rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  height: 100%;
-  justify-content: center;
 }
 
-/* Common Media Container Base Styles */
-.album-art-container,
-.vinyl-container,
-.cd-container {
-  width: 100%;
-  max-width: 460px;
-  aspect-ratio: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  margin: 0 auto;
-}
-
-/* Track Info Typography */
+/* ── Track Info Typography ────────────────────────────────────────────── */
 .track-info {
   font-family: var(--font-label, "Roboto", sans-serif);
   color: var(--color-gray-600);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
-/* More breathing room between rows on tablet/desktop */
-@media (min-width: 768px) {
-  .cq-track-info {
-    gap: clamp(6px, 1.8cqh, 22px) !important;
-  }
+/* ── Track Panel — recessed inset display (enabled via setting) ───────── */
+.track-panel .track-info {
+  background-color: var(--color-gray-800, #222);
+  border-radius: 8px;
+  padding: clamp(10px, 2cqh, 20px) clamp(12px, 1.5cqw, 24px);
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.6), inset -1px -1px 2px rgba(255, 255, 255, 0.08), 0 1px 0 rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-gray-900, #111);
 }
+
 .track-title {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 4.5vw, 2.25rem);
@@ -3467,6 +3506,7 @@ h2 {
   color: var(--color-gray-400, #666);
 }
 
+/* ── Responsive Font Sizes (container-query based) ────────────────────── */
 .responsive-title {
   font-size: clamp(1rem, 4.5cqw, 3rem);
 }
@@ -3489,39 +3529,9 @@ h2 {
   display: block;
 }
 
-/* Audio Format & Bitrate Info */
-.audio-meta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 8px;
-  height: 20px;
-}
-
-.format-logo-icon {
-  height: clamp(0.85rem, 1.6vw, 1.4rem);
-  width: auto;
-  display: block;
-  opacity: 0.9;
-}
-
-.bitrate-info {
-  font-family: var(--font-tech, "Michroma", sans-serif);
-  font-size: clamp(0.55rem, 1vw, 0.75rem);
-  color: var(--color-gray-500, #555);
-  letter-spacing: 0.5px;
-}
-
+/* ── Icon Sizes ───────────────────────────────────────────────────────── */
 .material-icons {
   font-size: 24px;
-}
-
-.transport-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
 }
 
 .btn-primary .material-icons, .btn-orange .material-icons {
@@ -3529,31 +3539,17 @@ h2 {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Progress Sliders */
-.slider-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 0 1em;
-}
-
+/* ── Slider Visual Styling ────────────────────────────────────────────── */
 .slider-track {
-  flex-grow: 1;
   height: 6px;
   background-color: var(--color-gray-850, #1a1a1a);
   border-radius: 3px;
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.7), 0 1px 0 rgba(255, 255, 255, 0.1);
-  position: relative;
-  cursor: pointer;
 }
 
 .slider-fill {
-  height: 100%;
   background: linear-gradient(90deg, var(--color-orange-light, #ff7043), var(--color-orange-dark, #d84315));
   border-radius: 3px 0 0 3px;
-  width: 30%;
-  position: relative;
 }
 
 .slider-cap {
@@ -3561,19 +3557,10 @@ h2 {
   height: 24px;
   background: var(--grad-metallic, linear-gradient(180deg, #e0e0e0, #bdbdbd));
   border-radius: 2px;
-  position: absolute;
-  right: -7px;
-  top: 50%;
-  transform: translateY(-50%);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), inset 1px 1px 0 rgba(255, 255, 255, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .slider-cap::after {
-  content: "";
-  position: absolute;
   top: 25%;
   left: 3px;
   right: 3px;
@@ -3582,6 +3569,7 @@ h2 {
   border-bottom: 2px solid var(--color-gray-300, #888);
 }
 
+/* ── Time Labels ──────────────────────────────────────────────────────── */
 .time-label {
   font-family: var(--font-tech);
   font-size: clamp(0.6rem, 1.1vw, 0.85rem);
@@ -3589,214 +3577,6 @@ h2 {
   min-width: clamp(28px, 3.5vw, 44px);
 }
 
-/* Align time labels with the slider track edges */
-.seekbar-labels {
-  padding-inline: 0;
-}
-
-/* Utiltiy Controls */
-.controls-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-}
-
-.utility-row {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 5px;
-}
-
-.utility-btn {
-  width: 40px;
-  height: 40px;
-}
-
-.utility-btn .material-icons {
-  font-size: 18px;
-}
-
-/* ---------------------------------------------------- */
-/* RESPONSIVE MEDIA QUERIES                             */
-/* ---------------------------------------------------- */
-/* Landscape / Desktop / Ultrawide */
-@media (min-width: 768px) and (min-aspect-ratio: 4/3) {
-  .player-casing {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 60px;
-    gap: 60px;
-  }
-  .media-section {
-    flex: 1;
-    max-width: none;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-  .screen-frame {
-    width: 100%;
-    height: auto;
-    justify-content: center;
-  }
-  /* Common container size override */
-  .album-art-container,
-  .vinyl-container,
-  .cd-container {
-    max-width: 460px;
-    height: auto;
-    aspect-ratio: 1;
-    margin-bottom: 20px;
-  }
-  .controls-section {
-    flex: 1;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    max-width: none;
-    gap: 40px;
-  }
-  .controls-section > * {
-    width: 100%;
-    max-width: 500px;
-  }
-  .utility-row {
-    margin-top: 20px;
-  }
-}
-/* Ultrawide 2560x720 specific optimization */
-@media (min-aspect-ratio: 21/9) {
-  .player-casing {
-    max-width: none;
-  }
-  .transport-controls .btn-round {
-    transform: scale(1.1);
-  }
-  .transport-controls .btn-primary, .transport-controls .btn-orange {
-    transform: scale(1.1);
-  }
-}
-/* 4K Scaling / High DPI Large Screens */
-@media (min-width: 2500px) {
-  body {
-    zoom: 1.5;
-  }
-}
-/* ── UWLS (ultrawide + short screen): disable 4K zoom & compact overrides ── */
-@media (max-height: 700px) and (min-width: 1440px) and (min-aspect-ratio: 2/1) {
-  body {
-    zoom: 1 !important;
-  }
-  .lsp-top__title {
-    font-size: clamp(1rem, 1.8vw, 1.8rem) !important;
-  }
-  .lsp-top__row2 {
-    font-size: clamp(0.75rem, 1.1vw, 1.1rem) !important;
-  }
-  .lsp-stream-info span {
-    font-size: clamp(0.7rem, 0.9vw, 1rem) !important;
-  }
-  .seekbar-labels,
-  .time-label {
-    font-size: 0.9rem !important;
-  }
-  .context-menu-toggle {
-    width: 48px !important;
-    height: 48px !important;
-  }
-  .context-menu-toggle .material-icons {
-    font-size: 1.6rem !important;
-  }
-  .context-menu-item {
-    font-size: 1.25rem !important;
-    padding: 14px 20px !important;
-  }
-  .context-menu-item .material-icons {
-    font-size: 1.4rem !important;
-  }
-  .context-menu {
-    min-width: 220px !important;
-  }
-  .dialog-title {
-    font-size: 1.3rem !important;
-  }
-  .dialog-close {
-    width: 40px !important;
-    height: 40px !important;
-  }
-  .dialog-close .material-icons {
-    font-size: 1.4rem !important;
-  }
-  .dialog-body {
-    font-size: 1rem !important;
-  }
-  .dialog-list-item {
-    font-size: 1rem !important;
-    padding: 0.5rem 0.85rem !important;
-  }
-  .dialog-section-title {
-    font-size: 0.8rem !important;
-  }
-  .dialog-track-title {
-    font-size: 1.1rem !important;
-  }
-  .dialog-track-meta {
-    font-size: 0.9rem !important;
-  }
-  .dialog .btn, .dialog .form-select {
-    font-size: 1rem !important;
-    padding: 0.5rem 1rem !important;
-  }
-  .playlist-track-title {
-    font-size: 1.1rem !important;
-  }
-  .playlist-track-meta {
-    font-size: 0.9rem !important;
-  }
-  .slide-panel-header .btn-icon,
-  .slide-panel-header .btn-link,
-  .slide-panel-header .dialog-close {
-    width: 40px !important;
-    height: 40px !important;
-  }
-  .slide-panel-header .btn-icon .material-icons,
-  .slide-panel-header .btn-link .material-icons,
-  .slide-panel-header .dialog-close .material-icons {
-    font-size: 1.5rem !important;
-  }
-  .track-menu {
-    min-width: 200px !important;
-  }
-  .track-menu__item {
-    font-size: 1.2rem !important;
-    padding: 12px 18px !important;
-    gap: 10px !important;
-  }
-  .track-menu__item .material-icons {
-    font-size: 1.3rem !important;
-  }
-}
-.read-only .slider-track {
-  cursor: default;
-}
-
-/* ─── Volume label spacing ─────────────────────────────────────────────── */
-.volume-manager .small {
-  min-width: 3.5ch;
-  padding-left: 0.4rem;
-}
-
-/* ─── Album Art Max Space: smaller stream info on short screens ────────── */
-@media (max-height: 600px) {
-  .album-art-max-space .area-controls .responsive-stream-info {
-    font-size: clamp(1.2rem, min(3cqw, 3cqh), 1.4rem) !important;
-  }
-  .album-art-max-space .area-controls .format-logo-responsive {
-    height: clamp(1.2rem, min(3cqw, 3cqh), 1.4rem) !important;
-  }
-}
 /* Page-level wrapper — apply to the element that wraps the entire album browser */
 .album-browser-page {
   height: 100dvh;
@@ -6131,5 +5911,3 @@ h2 {
 body {
   background-color: var(--bg-color);
 }
-
-/*# sourceMappingURL=skeuomorphic.css.map */

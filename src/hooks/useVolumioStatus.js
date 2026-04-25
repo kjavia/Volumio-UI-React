@@ -89,7 +89,6 @@ const useVolumioStatus = () => {
 
     const handlePushState = (data) => {
       if (!data) return;
-      console.log('[VolumioStatus] pushState received:', data);
       setStatus(data.status);
       setTitle(data.title);
       setArtist(data.artist);
@@ -177,12 +176,6 @@ const useVolumioStatus = () => {
       // (not the queue URI) because they may have different prefixes
       const actualFavouriteUri = findMatchingFavouriteUri(uri, favouritesUris);
 
-      console.log('[Favourites] Removing from favourites:', {
-        queueUri: uri,
-        actualFavouriteUri,
-        service,
-      });
-
       if (actualFavouriteUri) {
         removeFavouriteOptimistic(actualFavouriteUri);
         socket.emit('removeFromFavourites', { uri: actualFavouriteUri, service });
@@ -190,11 +183,6 @@ const useVolumioStatus = () => {
         console.error('[Favourites] Could not find matching favourite URI to remove');
       }
     } else {
-      console.log('[Favourites] Adding to favourites:', {
-        uri,
-        service,
-      });
-
       addFavouriteOptimistic(uri);
       socket.emit('addToFavourites', { uri, title, artist, album, albumart, service });
     }

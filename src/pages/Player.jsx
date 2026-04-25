@@ -80,6 +80,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const playerType = pluginConfig?.playerType || 'radio';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
   const albumArtMaxSpace = pluginConfig?.albumArtMaxSpace === true;
+  const showTrackPanel = pluginConfig?.showTrackPanel === true;
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
   const backgroundColor = pluginConfig?.backgroundColor || '';
@@ -282,7 +283,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
           <div
             className="d-flex flex-column align-items-center justify-content-center w-100 player-controls-container">
             {/* Track info — sized to content only */}
-            <div className="track-info-group" style={{ width: 'clamp(300px, 95%, 99%)' }}>
+            <div className={`track-info-group ${showTrackPanel ? 'track-panel' : ''}`} style={{ width: 'clamp(300px, 95%, 99%)' }}>
               <TrackInfo title={title} artist={artist} album={album}>
                 <div className="stream-info-row d-flex align-items-center justify-content-center gap-3 w-100">
                   <ServiceLogo service={service} />

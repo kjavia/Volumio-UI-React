@@ -3,6 +3,7 @@
 @import './colors.scss';
 @import '../common/analog-clock';
 @import '../common/dialog';
+@import '../common/player-layout';
 @import './button.scss';
 @import './forms.scss';
 @import './progressbar.scss';
@@ -19,6 +20,7 @@
 @import './analog-clock.scss';
 @import './flip-clock.scss';
 @import './weather.scss';
+
 body {
   background-color: var(--bg-color);
 }
