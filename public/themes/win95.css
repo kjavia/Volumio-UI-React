@@ -3633,16 +3633,35 @@ input[type=range]::-webkit-slider-runnable-track {
 .album-art-max-space .area-controls .player-controls-container {
   padding-top: 0 !important;
 }
-.album-art-max-space .area-controls .track-info-group {
+
+.album-art-max-space .right-column .track-info-group {
   width: calc(100% - 16px) !important;
   margin: 0 auto !important;
 }
-.album-art-max-space .area-controls .track-info {
+.album-art-max-space .right-column .track-info {
   padding: 0 !important;
 }
 
 /* ── Album-art-max-space on short screens: aggressive compaction ──── */
 @media (max-height: 600px) {
+  .album-art-max-space .right-column .track-info {
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+  }
+  .album-art-max-space .right-column .track-info::before {
+    padding: 1px 6px;
+    font-size: var(--text-sm, 12px);
+    height: 18px;
+  }
+  .album-art-max-space .right-column .track-info > *:first-child {
+    padding-top: 2px;
+  }
+  .album-art-max-space .right-column .track-info > *:last-child {
+    padding-bottom: 2px;
+  }
+  .album-art-max-space .right-column .track-info > * {
+    padding: 0 4px;
+  }
   .album-art-max-space .area-controls {
     overflow: visible !important;
   }
@@ -3650,24 +3669,6 @@ input[type=range]::-webkit-slider-runnable-track {
     gap: clamp(1px, 0.8cqh, 8px) !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
-  }
-  .album-art-max-space .area-controls .track-info {
-    margin-bottom: 0 !important;
-    padding: 0 !important;
-  }
-  .album-art-max-space .area-controls .track-info::before {
-    padding: 1px 6px;
-    font-size: var(--text-sm, 12px);
-    height: 18px;
-  }
-  .album-art-max-space .area-controls .track-info > *:first-child {
-    padding-top: 2px;
-  }
-  .album-art-max-space .area-controls .track-info > *:last-child {
-    padding-bottom: 2px;
-  }
-  .album-art-max-space .area-controls .track-info > * {
-    padding: 0 4px;
   }
   .album-art-max-space .area-controls .player-controls {
     margin-block: clamp(1px, 0.8cqh, 8px) !important;

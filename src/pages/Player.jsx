@@ -262,27 +262,34 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
         {/* MOBILE VISUALIZER — between player and controls on mobile only */}
         {showViz && vizType === 'spectrum' && (
           <div className="home-panel area-mobile-viz">
-            <SpectrumAnalyzer
-              ref={mobileVizRef}
-              stopped={vizStopped}
-              onResumed={onVizResumed}
-              streamUrl={SPECTRUM_STREAM_URL}
-              options={mobileSpectrumOptions}
-              isPlaying={isPlaying}
-            />
+            {isPlaying ? (
+              <SpectrumAnalyzer
+                ref={mobileVizRef}
+                stopped={vizStopped}
+                onResumed={onVizResumed}
+                streamUrl={SPECTRUM_STREAM_URL}
+                options={mobileSpectrumOptions}
+                isPlaying={isPlaying}
+              />
+            ) : (
+              <span className="material-icons viz-placeholder">equalizer</span>
+            )}
           </div>
         )}
         {showViz && vizType === 'peppyMeter' && (
           <div className="home-panel area-mobile-viz" ref={peppyMobileRef}>
-            <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={peppyMobileRef} />
+            {isPlaying ? (
+              <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={peppyMobileRef} />
+            ) : (
+              <span className="material-icons viz-placeholder">equalizer</span>
+            )}
           </div>
         )}
 
-        {/* CONTROLS SECTION */}
-        <div className="home-panel area-controls text-white">
-          <div
-            className="d-flex flex-column align-items-center justify-content-center w-100 player-controls-container">
-            {/* Track info — sized to content only */}
+        {/* RIGHT COLUMN — dissolves on mobile so track-info gets its own grid row */}
+        <div className="right-column">
+          {/* TRACK INFO — own grid row on mobile, stacked above controls on desktop */}
+          <div className="area-track-info text-white">
             <div className={`track-info-group ${showTrackPanel ? 'track-panel' : ''}`} style={{ width: 'clamp(300px, 95%, 99%)' }}>
               <TrackInfo title={title} artist={artist} album={album}>
                 <div className="stream-info-row d-flex align-items-center justify-content-center gap-3 w-100">
@@ -297,48 +304,55 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
                 </div>
               </TrackInfo>
             </div>
+          </div>
 
-            {/* Spacer — pushes seekbar/controls down */}
-            <div className="controls-spacer" />
+          {/* CONTROLS SECTION */}
+          <div className="home-panel area-controls text-white">
+            <div
+              className="d-flex flex-column align-items-center justify-content-center w-100 player-controls-container">
+              {/* Spacer — pushes seekbar/controls down */}
+              <div className="controls-spacer" />
 
-            <div className="m-auto seekbar-container-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
-              <PlayerSeekbar readOnly={!showPlayerControls} />
-            </div>
-
-            {showPlayerControls && (
-              <PlayerControls
-                isPlaying={isPlaying}
-                onPlayPause={handlePlayPause}
-                onNext={next}
-                onPrev={prev}
-                shuffle={random}
-                repeat={repeat}
-                onShuffle={toggleRandom}
-                onRepeat={toggleRepeat}
-                onAddToPlaylist={() => setShowAddToPlaylist(true)}
-                onShowPlaylist={() => setShowPlaylist(true)}
-                onBrowse={() => setShowBrowse(true)}
-                isFavourite={isFavourite}
-                onToggleFavourite={toggleFavourite}
-              />
-            )}
-
-            {!disableVolumeControl && showPlayerControls && (
-              <div className="volume-manager-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
-                <VolumeManager
-                  volume={volume}
-                  mute={mute}
-                  onVolumeChange={setVolume}
-                  onMute={toggleMute}
-                />
+              <div className="m-auto seekbar-container-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
+                <PlayerSeekbar readOnly={!showPlayerControls} />
               </div>
-            )}
+
+              {showPlayerControls && (
+                <PlayerControls
+                  isPlaying={isPlaying}
+                  onPlayPause={handlePlayPause}
+                  onNext={next}
+                  onPrev={prev}
+                  shuffle={random}
+                  repeat={repeat}
+                  onShuffle={toggleRandom}
+                  onRepeat={toggleRepeat}
+                  onAddToPlaylist={() => setShowAddToPlaylist(true)}
+                  onShowPlaylist={() => setShowPlaylist(true)}
+                  onBrowse={() => setShowBrowse(true)}
+                  isFavourite={isFavourite}
+                  onToggleFavourite={toggleFavourite}
+                />
+              )}
+
+              {!disableVolumeControl && showPlayerControls && (
+                <div className="volume-manager-wrap px-3" style={{ width: 'clamp(300px, 500px, 90%)' }}>
+                  <VolumeManager
+                    volume={volume}
+                    mute={mute}
+                    onVolumeChange={setVolume}
+                    onMute={toggleMute}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         {/* VISUALIZATION SECTION */}
         {showViz && (
           <div className="spectrum-panel area-spectrum" ref={vizContainerRef}>
+            {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
             {vizType === 'spectrum' && (
               <SpectrumAnalyzer
                 ref={vizRef}

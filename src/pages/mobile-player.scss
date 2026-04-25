@@ -1,0 +1,420 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE-PLAYER.SCSS — Layout for MobilePlayer.jsx
+   ═══════════════════════════════════════════════════════════════════
+   Spec (player-screen-layout.md → Mobile screens):
+     Row 1 (30%) — Player: album art fills space, margins around it
+     Row 2 (10%) — Visualizations
+     Row 3 (20%) — Track info
+     Row 4 (40%) — Controls: seekbar / transport / volume
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Grid container ── */
+.mobile-grid {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 28% 8% 16% 10% 16% 10% 12%;
+  grid-template-areas:
+    'player'
+    'viz'
+    'track-info'
+    'seekbar'
+    'transport'
+    'secondary'
+    'volume';
+  overflow: hidden;
+}
+
+/* ── Grid variants ── */
+.mobile-grid.no-viz {
+  grid-template-rows: 30% 18% 12% 16% 12% 12%;
+  grid-template-areas:
+    'player'
+    'track-info'
+    'seekbar'
+    'transport'
+    'secondary'
+    'volume';
+}
+
+.mobile-grid.no-viz .mobile-row-viz {
+  display: none;
+}
+
+.mobile-grid.no-player {
+  grid-template-rows: 10% 22% 12% 22% 14% 20%;
+  grid-template-areas:
+    'viz'
+    'track-info'
+    'seekbar'
+    'transport'
+    'secondary'
+    'volume';
+}
+
+.mobile-grid.no-player.no-viz {
+  grid-template-rows: 24% 14% 24% 16% 22%;
+  grid-template-areas:
+    'track-info'
+    'seekbar'
+    'transport'
+    'secondary'
+    'volume';
+}
+
+/* ═══════════════════════════════════════════════════
+   ROW 1 — Player (30%)
+   ═══════════════════════════════════════════════════ */
+.mobile-row-player {
+  grid-area: player;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  container-type: size;
+  padding: clamp(4px, 2vw, 12px);
+  padding-top: clamp(12px, 3vh, 24px);
+}
+
+/* Let each player fill the available space using its own aspect ratio
+   instead of forcing a square. Constrain to parent so nothing clips. */
+.mobile-row-player .player-responsive {
+  width: 100cqw;
+  height: 100cqh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Lift the desktop max-width caps so players scale to fill the row.
+   Contain within the row: width driven by aspect-ratio, capped by height. */
+.mobile-row-player .album-art-container,
+.mobile-row-player .vinyl-container,
+.mobile-row-player .cd-container {
+  width: auto !important;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Album art player: fill the container, image uses max space without clipping */
+.mobile-row-player .album-art-player {
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-row-player .album-art-player .rainbow-border {
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-row-player .album-art-player .album-art-inner {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.mobile-row-player .album-art-player .album-art-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.mobile-row-player .cassette-container,
+.mobile-row-player .radio-container,
+.mobile-row-player .reel-deck-container,
+.mobile-row-player .cd-case-container,
+.mobile-row-player .vinyl-sleeve-container {
+  width: auto !important;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* ═══════════════════════════════════════════════════
+   ROW 2 — Visualizations (10%)
+   ═══════════════════════════════════════════════════ */
+.mobile-row-viz {
+  grid-area: viz;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  container-type: size;
+  padding: 0 clamp(4px, 2vw, 8px);
+}
+
+/* ═══════════════════════════════════════════════════
+   ROW 3 — Track Info (20%)
+   ═══════════════════════════════════════════════════ */
+.mobile-row-track-info {
+  grid-area: track-info;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 clamp(8px, 3vw, 16px);
+}
+
+/* ═══════════════════════════════════════════════════
+   ROW 4 — Seekbar (10%)
+   ═══════════════════════════════════════════════════ */
+.mobile-row-seekbar {
+  grid-area: seekbar;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  padding: clamp(8px, 2vh, 20px) clamp(8px, 3vw, 16px) 0;
+}
+
+.mobile-row-seekbar>* {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.mobile-row-seekbar .slider-container {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 6px !important;
+  padding: 0 0.25rem !important;
+}
+
+.mobile-row-seekbar .slider-container .slider-track {
+  flex-basis: auto !important;
+  width: 100%;
+}
+
+.mobile-row-seekbar .seekbar-labels {
+  margin-top: 0.5rem;
+  padding: 0 0.1rem;
+}
+
+.mobile-row-seekbar .time-label {
+  font-size: 0.85rem !important;
+  width: 50px;
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════
+   ROW 5 — Transport buttons (16%)
+   ═══════════════════════════════════════════════════ */
+.mobile-row-transport {
+  grid-area: transport;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+}
+
+.mobile-row-transport .controls-transport-row {
+  margin-bottom: 0 !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   ROW 6 — Secondary controls (10%)
+   ═══════════════════════════════════════════════════ */
+.mobile-row-secondary {
+  grid-area: secondary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* ═══════════════════════════════════════════════════
+   ROW 7 — Volume (12%)
+   ═══════════════════════════════════════════════════ */
+.mobile-row-volume {
+  grid-area: volume;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 clamp(8px, 3vw, 16px);
+  padding-bottom: 8px;
+}
+
+.mobile-row-volume .volume-manager {
+  width: 100%;
+}
+
+.mobile-row-volume .slider-container {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 4px !important;
+  padding: 0 0.5rem !important;
+}
+
+.mobile-row-volume .slider-container .slider-track {
+  flex-basis: auto !important;
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════
+   Album Art Max Space variant
+   ═══════════════════════════════════════════════════ */
+/* player-responsive already fills 100% — remove padding for max space */
+.mobile-grid.album-art-max-space .mobile-row-player {
+  padding: 0;
+}
+
+.mobile-grid.album-art-max-space .mobile-row-seekbar,
+.mobile-grid.album-art-max-space .mobile-row-volume {
+  width: 95%;
+  margin-inline: auto;
+}
+
+.mobile-grid.album-art-max-space .mobile-row-track-info {
+  .track-info-group {
+    width: 99% !important;
+    margin-inline: auto !important;
+  }
+
+  .track-info {
+    padding: 0 clamp(4px, 2vw, 8px) !important;
+  }
+
+  .cq-track-info {
+    gap: clamp(2px, 1vh, 8px) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   Very short screens (≤ 480px height)
+   ═══════════════════════════════════════════════════ */
+@media (max-height: 480px) {
+  .mobile-grid {
+    grid-template-rows: 24% 8% 14% 10% 18% 12% 14%;
+  }
+
+  .mobile-grid.no-viz {
+    grid-template-rows: 26% 16% 12% 18% 14% 14%;
+  }
+
+  .mobile-grid.album-art-max-space .mobile-row-track-info {
+    .cq-track-info {
+      gap: clamp(1px, 0.5vh, 4px) !important;
+    }
+
+    .responsive-title {
+      font-size: clamp(1rem, 6vw, 2rem) !important;
+    }
+
+    .responsive-artist {
+      font-size: clamp(0.8rem, 4.5vw, 1.4rem) !important;
+    }
+
+    .responsive-album,
+    .responsive-stream-info {
+      font-size: clamp(0.7rem, 3.5vw, 1.1rem) !important;
+    }
+  }
+
+  .mobile-grid.album-art-max-space .mobile-row-transport {
+    .btn-round {
+      width: clamp(40px, 10vw, 52px) !important;
+      height: clamp(40px, 10vw, 52px) !important;
+    }
+
+    .btn-round.btn-sm {
+      width: clamp(34px, 8vw, 42px) !important;
+      height: clamp(34px, 8vw, 42px) !important;
+    }
+
+    .btn-round .material-icons {
+      font-size: clamp(1.1rem, 5vw, 1.8rem) !important;
+    }
+
+    .btn-round.btn-sm .material-icons {
+      font-size: clamp(0.9rem, 4vw, 1.4rem) !important;
+    }
+  }
+
+  .mobile-grid.album-art-max-space .mobile-row-secondary {
+    .btn-icon {
+      width: clamp(28px, 7vw, 40px) !important;
+      height: clamp(28px, 7vw, 40px) !important;
+    }
+
+    .btn-icon .material-icons {
+      font-size: clamp(1.1rem, 4vw, 1.6rem) !important;
+    }
+  }
+
+  .mobile-grid.album-art-max-space .mobile-row-seekbar .slider-track,
+  .mobile-grid.album-art-max-space .mobile-row-volume .slider-track {
+    height: clamp(3px, 1vh, 6px) !important;
+  }
+
+  .mobile-grid.album-art-max-space .mobile-row-seekbar .slider-cap,
+  .mobile-grid.album-art-max-space .mobile-row-volume .slider-cap {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .mobile-grid.album-art-max-space .mobile-row-seekbar .time-label {
+    font-size: clamp(0.6rem, 2.5vw, 0.8rem) !important;
+  }
+
+  .mobile-grid.album-art-max-space .mobile-row-seekbar .seekbar-labels {
+    margin-top: 0.25rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   Short screens (≤ 600px height)
+   ═══════════════════════════════════════════════════ */
+@media (max-height: 600px) {
+  .mobile-grid.album-art-max-space .mobile-row-track-info {
+    .track-info {
+      padding: 0 clamp(4px, 2vw, 8px) !important;
+    }
+
+    .cq-track-info {
+      gap: clamp(1px, 0.6vh, 6px) !important;
+    }
+
+    .track-info-group {
+      margin-top: clamp(1px, 0.3vh, 4px) !important;
+      margin-bottom: clamp(1px, 0.3vh, 4px) !important;
+    }
+  }
+
+  .mobile-grid.album-art-max-space .mobile-row-seekbar .slider-track,
+  .mobile-grid.album-art-max-space .mobile-row-volume .slider-track {
+    height: clamp(3px, 1vh, 8px) !important;
+  }
+
+  .mobile-grid.album-art-max-space .mobile-row-seekbar .slider-cap,
+  .mobile-grid.album-art-max-space .mobile-row-volume .slider-cap {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .mobile-grid.album-art-max-space .mobile-row-seekbar .time-label {
+    font-size: clamp(0.65rem, 3vw, 0.85rem) !important;
+  }
+
+  .mobile-grid.album-art-max-space .mobile-row-seekbar .seekbar-labels {
+    margin-top: 0.3rem !important;
+  }
+}

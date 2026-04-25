@@ -123,18 +123,37 @@ body,
   justify-content: center;
   overflow: hidden;
 
-  /* MOBILE (default): three rows — player / compact viz / controls */
+  /* MOBILE (default): four rows — player / compact viz / track-info / controls */
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 80px 1fr;
+  grid-template-rows: 3fr 1fr 2fr 4fr;
   grid-template-areas:
     'player'
     'mobile-viz'
+    'track-info'
     'controls';
+}
+
+/* ── Right column wrapper ──
+   On mobile it dissolves (display: contents) so track-info and controls
+   become independent grid rows. On desktop it's a flex column occupying
+   the "controls" grid area with container-type for cqw/cqh context. */
+.right-column {
+  display: contents;
 }
 
 /* ── Grid area assignments ── */
 .area-player {
   grid-area: player;
+}
+
+.area-track-info {
+  grid-area: track-info;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
 }
 
 .area-controls {
@@ -155,17 +174,29 @@ body,
   display: none;
 }
 
+/* No-viz: collapse to 3 rows (mobile default) */
+.home-grid.no-viz {
+  grid-template-rows: 3fr 2fr 4fr;
+  grid-template-areas:
+    'player'
+    'track-info'
+    'controls';
+}
+
 /* ── No player: controls fill the space the player would occupy ── */
 .home-grid.no-player {
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 80px;
+  grid-template-rows: 80px 2fr 4fr;
   grid-template-areas:
-    'controls'
-    'mobile-viz';
+    'mobile-viz'
+    'track-info'
+    'controls';
 
   &.no-viz {
-    grid-template-rows: 1fr;
-    grid-template-areas: 'controls';
+    grid-template-rows: 2fr 4fr;
+    grid-template-areas:
+      'track-info'
+      'controls';
   }
 }
 
@@ -200,15 +231,6 @@ body,
     max-height: clamp(2px, 0.5cqh, 20px) !important;
   }
 
-  .track-info-group {
-    width: 95% !important;
-  }
-
-  /* Uniform gap between all 4 rows in no-player mode */
-  .cq-track-info {
-    gap: clamp(2px, 1cqh, 12px) !important;
-  }
-
   .seekbar-container-wrap,
   .volume-manager-wrap {
     width: 92% !important;
@@ -218,27 +240,6 @@ body,
   .slider-container {
     max-width: 100% !important;
     width: 100% !important;
-  }
-
-  /* Scale fonts using min(cqw, cqh) so they shrink on short screens too */
-  .responsive-title {
-    font-size: clamp(1.4rem, min(8cqw, 10cqh), 8rem) !important;
-  }
-
-  .responsive-artist {
-    font-size: clamp(1rem, min(6cqw, 7cqh), 6rem) !important;
-  }
-
-  .responsive-album {
-    font-size: clamp(0.9rem, min(3.5cqw, 4cqh), 4rem) !important;
-  }
-
-  .responsive-stream-info {
-    font-size: clamp(0.8rem, min(3.5cqw, 4cqh), 4rem) !important;
-  }
-
-  .format-logo-responsive {
-    height: clamp(1.2rem, min(4cqw, 4.5cqh), 4.5rem) !important;
   }
 
   .btn-round,
@@ -288,6 +289,38 @@ body,
   }
 }
 
+/* No player: track-info sizing — now in .area-track-info, not .area-controls */
+.no-player .area-track-info .track-info-group {
+  width: 95% !important;
+}
+
+.no-player .area-track-info .cq-track-info {
+  gap: clamp(2px, 1cqh, 12px) !important;
+}
+
+/* No player: track-info font scaling (uses right-column container on desktop) */
+.no-player .right-column {
+  .responsive-title {
+    font-size: clamp(1.4rem, min(8cqw, 10cqh), 8rem) !important;
+  }
+
+  .responsive-artist {
+    font-size: clamp(1rem, min(6cqw, 7cqh), 6rem) !important;
+  }
+
+  .responsive-album {
+    font-size: clamp(0.9rem, min(3.5cqw, 4cqh), 4rem) !important;
+  }
+
+  .responsive-stream-info {
+    font-size: clamp(0.8rem, min(3.5cqw, 4cqh), 4rem) !important;
+  }
+
+  .format-logo-responsive {
+    height: clamp(1.2rem, min(4cqw, 4.5cqh), 4.5rem) !important;
+  }
+}
+
 /* ── Panel base ──
    Every panel fills its grid cell, centers its child, and NEVER overflows.
    container-type: size  →  children can use cqw/cqh units (container-relative).
@@ -309,6 +342,19 @@ body,
    but display:none guarantees the element is removed from flow). */
 .spectrum-panel {
   display: none;
+}
+
+/* Muted placeholder icon shown in viz areas when nothing is playing */
+.viz-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1.5rem, 3cqh, 4rem);
+  opacity: 0.08;
+  color: currentColor;
+  user-select: none;
+  pointer-events: none;
 }
 
 /* ── Player responsive container ──
@@ -374,6 +420,29 @@ body,
     display: none;
   }
 
+  /* Right column becomes a flex container — occupies the "controls" grid area.
+     container-type: size provides cqw/cqh context for all descendants. */
+  .right-column {
+    display: flex;
+    flex-direction: column;
+    grid-area: controls;
+    overflow: hidden;
+    min-width: 0;
+    min-height: 0;
+    container-type: size;
+  }
+
+  /* Track info: sized to content, doesn't grow */
+  .area-track-info {
+    flex: 0 0 auto;
+  }
+
+  /* Controls: fills remaining space */
+  .area-controls {
+    flex: 1 1 0;
+    min-height: 0;
+  }
+
   .spectrum-panel {
     display: flex;
   }
@@ -422,6 +491,26 @@ body,
   /* Mobile viz strip not used on ultra-wide */
   .area-mobile-viz {
     display: none;
+  }
+
+  /* Right column: same as desktop — flex container in "controls" area */
+  .right-column {
+    display: flex;
+    flex-direction: column;
+    grid-area: controls;
+    overflow: hidden;
+    min-width: 0;
+    min-height: 0;
+    container-type: size;
+  }
+
+  .area-track-info {
+    flex: 0 0 auto;
+  }
+
+  .area-controls {
+    flex: 1 1 0;
+    min-height: 0;
   }
 
   .spectrum-panel {
@@ -568,78 +657,7 @@ body,
   }
 }
 
-/* ── Mobile-Specific Tweaks (Portrait) ── */
-@media (max-width: 768px) {
-
-  /* Give controls more room than the player on short phones */
-  .home-grid {
-    grid-template-rows: 2fr 80px 3fr;
-  }
-
-  .home-grid.no-viz {
-    grid-template-rows: 2fr 3fr;
-  }
-
-  /* Reduce track info padding/margins */
-  .cq-track-info {
-    padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
-  }
-
-  /* Uniform row gap between Player / Viz strip / Controls grid areas */
-  .home-grid {
-    row-gap: 8px;
-  }
-
-  /* Collapse the mobile-viz row when no viz is configured */
-  .home-grid.no-viz {
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-      'player'
-      'controls';
-  }
-
-  /* Stretch the controls panel so its inner column fills the full cell height */
-  .area-controls.home-panel {
-    align-items: stretch;
-  }
-
-  /* Controls column fills cell height; items stack from the top with equal gap.
-     Volume bar is pushed to the bottom via margin-top: auto on its wrapper. */
-  .player-controls-container {
-    height: 100%;
-    justify-content: flex-start !important;
-    gap: 8px !important;
-  }
-
-  /* Remove extra margin-block / margin-bottom – flex gap handles spacing */
-  .player-controls {
-    margin-block: 0 !important;
-    /* Match outer container gap inside the transport/secondary rows */
-    gap: 8px;
-  }
-
-  .controls-transport-row {
-    margin-bottom: 0 !important;
-  }
-
-  /* Seekbar: m-auto class adds auto margins that disrupt uniform spacing */
-  .seekbar-container-wrap {
-    margin: 0 auto !important;
-    /* horizontal centering only, no vertical auto */
-  }
-
-  /* Hide flexible spacers – uniform gap replaces them on mobile */
-  .controls-spacer {
-    display: none;
-  }
-
-  /* Volume bar pinned to the bottom with a small breathing margin */
-  .volume-manager-wrap {
-    margin-top: auto !important;
-    padding-bottom: 14px;
-  }
-}
+/* Mobile-specific layout rules are in home-mobile.scss */
 
 /* ── Typography Overrides for Mobile ── */
 
@@ -683,12 +701,7 @@ body,
   padding: 0;
 }
 
-@media (max-width: 768px) {
-  .time-label {
-    font-size: 0.65rem !important;
-    width: 45px;
-  }
-}
+/* Mobile time-label: see home-mobile.scss */
 
 /* ── Medium Screen (769px – 1199px): 75% of large-screen values ── */
 @media (min-width: 769px) and (max-width: 1199px) {
@@ -1546,6 +1559,23 @@ body,
     margin-bottom: clamp(2px, 1.5cqh, 32px) !important;
   }
 
+  .seekbar-container-wrap,
+  .volume-manager-wrap {
+    width: 92% !important;
+    max-width: 100% !important;
+  }
+
+  /* Seekbar inner track: remove its own maxWidth */
+  .slider-container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
+/* Track-info rules scoped to .right-column so cqw/cqh reference the full
+   right-column container (same dimensions as the old .area-controls). */
+.album-art-max-space .right-column {
+
   /* Width overrides: maximise title area, minimal margins */
   .track-info-group {
     width: 99% !important;
@@ -1582,18 +1612,6 @@ body,
 
   .format-logo-responsive {
     height: clamp(1.2rem, min(7cqw, 6cqh), 7rem) !important;
-  }
-
-  .seekbar-container-wrap,
-  .volume-manager-wrap {
-    width: 92% !important;
-    max-width: 100% !important;
-  }
-
-  /* Seekbar inner track: remove its own maxWidth */
-  .slider-container {
-    max-width: 100% !important;
-    width: 100% !important;
   }
 }
 
@@ -1648,7 +1666,7 @@ body,
 
 /* ── Album Art Max Space: compact fonts for very short screens (≤480px height) ── */
 @media (max-height: 480px) {
-  .album-art-max-space .area-controls {
+  .album-art-max-space .right-column {
     .cq-track-info {
       gap: clamp(1px, 0.5cqh, 6px) !important;
     }
@@ -1672,6 +1690,9 @@ body,
     .format-logo-responsive {
       height: clamp(0.7rem, min(4cqw, 4cqh), 2rem) !important;
     }
+  }
+
+  .album-art-max-space .area-controls {
 
     /* Smaller transport buttons for short screens */
     .btn-round {
@@ -1724,7 +1745,7 @@ body,
 
 /* ── Album Art Max Space: tighten spacing (≤600px height) ── */
 @media (max-height: 600px) {
-  .album-art-max-space .area-controls {
+  .album-art-max-space .right-column {
     .track-info {
       padding: 0 clamp(4px, 0.8cqw, 8px) !important;
     }
@@ -1737,6 +1758,9 @@ body,
       margin-top: clamp(1px, 0.3cqh, 4px) !important;
       margin-bottom: clamp(1px, 0.3cqh, 4px) !important;
     }
+  }
+
+  .album-art-max-space .area-controls {
 
     /* Smaller sliders */
     .seekbar-container-wrap .slider-track,

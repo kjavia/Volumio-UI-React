@@ -1,0 +1,335 @@
+/* ═══════════════════════════════════════════════════════════════════
+   HOME-MOBILE.SCSS — Mobile-only layout (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════
+   Based on player-screen-layout.md spec:
+   - Single column, 4 rows: Player (30%) / Viz (10%) / Track Info (20%) / Controls (40%)
+   - Equal vertical gap between rows
+   - Album art takes max space without touching edges
+   - Row 4 internals: seekbar, controls (most space), volume (least space)
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── Grid layout: 4-row single column ── */
+  .home-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 30% 10% 20% 40%;
+    grid-template-areas:
+      'player'
+      'mobile-viz'
+      'track-info'
+      'controls';
+    row-gap: 0;
+    padding: 0;
+  }
+
+  /* Right column dissolves — children become independent grid rows */
+  .right-column {
+    display: contents;
+  }
+
+  /* ── No-viz: collapse to 3 rows, redistribute space ── */
+  .home-grid.no-viz {
+    grid-template-rows: 33% 22% 45%;
+    grid-template-areas:
+      'player'
+      'track-info'
+      'controls';
+  }
+
+  .home-grid.no-viz .area-mobile-viz {
+    display: none;
+  }
+
+  /* ── No-player: viz + track-info + controls ── */
+  .home-grid.no-player {
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 30% 60%;
+    grid-template-areas:
+      'mobile-viz'
+      'track-info'
+      'controls';
+  }
+
+  .home-grid.no-player.no-viz {
+    grid-template-rows: 35% 65%;
+    grid-template-areas:
+      'track-info'
+      'controls';
+  }
+
+  /* ── Spectrum panel hidden on mobile (mobile-viz area used instead) ── */
+  .spectrum-panel {
+    display: none;
+  }
+
+  /* ── Player area (Row 1: 30%) ──
+     Album art takes max space without touching edges */
+  .area-player {
+    padding: clamp(4px, 2vw, 12px);
+  }
+
+  .player-responsive {
+    --p-size: 92;
+  }
+
+  /* ── Mobile viz area (Row 2: 10%) ── */
+  .area-mobile-viz {
+    padding: 0 clamp(4px, 2vw, 8px);
+  }
+
+  /* ── Track info area (Row 3: 20%) ── */
+  .area-track-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    min-width: 0;
+    min-height: 0;
+    padding: 0 clamp(8px, 3vw, 16px);
+  }
+
+  /* ── Controls area (Row 4: 40%) ── */
+  .area-controls.home-panel {
+    align-items: stretch;
+  }
+
+  /* Controls column: equal spacing between seekbar, buttons, volume */
+  .player-controls-container {
+    height: 100%;
+    justify-content: space-evenly !important;
+    gap: clamp(4px, 1.5vh, 12px) !important;
+  }
+
+  /* Hide flexible spacers — grid rows handle spacing */
+  .controls-spacer {
+    display: none;
+  }
+
+  /* ── Seekbar: content-sized, full width ── */
+  .seekbar-container-wrap {
+    flex: 0 0 auto !important;
+    margin: 0 auto !important;
+    margin-top: clamp(8px, 2vh, 24px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .slider-container {
+    gap: 6px !important;
+    padding: 0 0.25rem !important;
+  }
+
+  .seekbar-labels {
+    margin-top: 0.5rem !important;
+  }
+
+  .time-label {
+    font-size: 0.85rem !important;
+    width: 50px;
+  }
+
+  /* ── Player controls (buttons): gets the most vertical space ── */
+  .player-controls {
+    flex: 1 1 0 !important;
+    margin-block: 0 !important;
+    gap: clamp(4px, 1.5vh, 10px);
+    justify-content: center;
+  }
+
+  .controls-transport-row {
+    margin-bottom: 0 !important;
+  }
+
+  /* ── Volume: content-sized, pinned at bottom ── */
+  .volume-manager-wrap {
+    flex: 0 0 auto !important;
+    padding-bottom: 8px;
+  }
+
+  /* ── Track info spacing ── */
+  .cq-track-info {
+    margin-bottom: 0 !important;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     Album Art Max Space variant (mobile)
+     ═══════════════════════════════════════════════════ */
+
+  /* Expand album art to fill entire cell */
+  .album-art-max-space .area-player .player-responsive {
+    --p-size: 100;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Controls: compact layout for max-space mode */
+  .album-art-max-space .area-controls {
+    align-items: stretch !important;
+    overflow: visible !important;
+
+    .player-controls-container {
+      justify-content: space-evenly !important;
+      gap: clamp(2px, 1vh, 8px) !important;
+      padding-inline: clamp(2px, 1vw, 6px);
+    }
+
+    .controls-spacer {
+      display: none;
+    }
+
+    .volume-manager-wrap {
+      margin-top: auto !important;
+      padding-bottom: clamp(4px, 1vh, 10px);
+    }
+
+    .player-controls,
+    .seekbar-container-wrap,
+    .volume-manager-wrap {
+      flex-shrink: 1 !important;
+    }
+
+    .seekbar-container-wrap,
+    .volume-manager-wrap {
+      width: 95% !important;
+      max-width: 100% !important;
+    }
+
+    .slider-container {
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+  }
+
+  /* Track info: maximise width, minimal margins */
+  .album-art-max-space .right-column {
+    .track-info-group {
+      width: 99% !important;
+      margin-inline: auto !important;
+    }
+
+    .track-info {
+      padding: 0 clamp(4px, 2vw, 8px) !important;
+    }
+
+    .cq-track-info {
+      gap: clamp(2px, 1vh, 8px) !important;
+    }
+  }
+}
+
+/* ── Mobile portrait: very short screens (≤ 480px height) ── */
+@media (max-width: 768px) and (max-height: 480px) {
+  .home-grid {
+    grid-template-rows: 25% 10% 20% 45%;
+  }
+
+  .home-grid.no-viz {
+    grid-template-rows: 28% 22% 50%;
+  }
+
+  .album-art-max-space .right-column {
+    .cq-track-info {
+      gap: clamp(1px, 0.5vh, 4px) !important;
+    }
+
+    .responsive-title {
+      font-size: clamp(1rem, 6vw, 2rem) !important;
+    }
+
+    .responsive-artist {
+      font-size: clamp(0.8rem, 4.5vw, 1.4rem) !important;
+    }
+
+    .responsive-album,
+    .responsive-stream-info {
+      font-size: clamp(0.7rem, 3.5vw, 1.1rem) !important;
+    }
+  }
+
+  .album-art-max-space .area-controls {
+    .btn-round {
+      width: clamp(40px, 10vw, 52px) !important;
+      height: clamp(40px, 10vw, 52px) !important;
+    }
+
+    .btn-round.btn-sm {
+      width: clamp(34px, 8vw, 42px) !important;
+      height: clamp(34px, 8vw, 42px) !important;
+    }
+
+    .btn-round .material-icons {
+      font-size: clamp(1.1rem, 5vw, 1.8rem) !important;
+    }
+
+    .btn-round.btn-sm .material-icons {
+      font-size: clamp(0.9rem, 4vw, 1.4rem) !important;
+    }
+
+    .btn-icon {
+      width: clamp(28px, 7vw, 40px) !important;
+      height: clamp(28px, 7vw, 40px) !important;
+    }
+
+    .btn-icon .material-icons {
+      font-size: clamp(1.1rem, 4vw, 1.6rem) !important;
+    }
+
+    .seekbar-container-wrap .slider-track,
+    .volume-manager-wrap .slider-track {
+      height: clamp(3px, 1vh, 6px) !important;
+    }
+
+    .slider-cap {
+      width: 12px !important;
+      height: 12px !important;
+    }
+
+    .time-label {
+      font-size: clamp(0.6rem, 2.5vw, 0.8rem) !important;
+    }
+
+    .seekbar-labels {
+      margin-top: 0.25rem !important;
+    }
+  }
+}
+
+/* ── Mobile: short screens (≤ 600px height) ── */
+@media (max-width: 768px) and (max-height: 600px) {
+  .album-art-max-space .right-column {
+    .track-info {
+      padding: 0 clamp(4px, 2vw, 8px) !important;
+    }
+
+    .cq-track-info {
+      gap: clamp(1px, 0.6vh, 6px) !important;
+    }
+
+    .track-info-group {
+      margin-top: clamp(1px, 0.3vh, 4px) !important;
+      margin-bottom: clamp(1px, 0.3vh, 4px) !important;
+    }
+  }
+
+  .album-art-max-space .area-controls {
+
+    .seekbar-container-wrap .slider-track,
+    .volume-manager-wrap .slider-track {
+      height: clamp(3px, 1vh, 8px) !important;
+    }
+
+    .slider-cap {
+      width: 14px !important;
+      height: 14px !important;
+    }
+
+    .time-label {
+      font-size: clamp(0.65rem, 3vw, 0.85rem) !important;
+    }
+
+    .seekbar-labels {
+      margin-top: 0.3rem !important;
+    }
+  }
+}

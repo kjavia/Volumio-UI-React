@@ -334,7 +334,9 @@
     .player-controls-container {
         padding-top: 0 !important;
     }
+}
 
+.album-art-max-space .right-column {
     .track-info-group {
         width: calc(100% - 16px) !important;
         margin: 0 auto !important;
@@ -347,15 +349,7 @@
 
 /* ── Album-art-max-space on short screens: aggressive compaction ──── */
 @media (max-height: 600px) {
-    .album-art-max-space .area-controls {
-        overflow: visible !important;
-
-        .player-controls-container {
-            gap: clamp(1px, 0.8cqh, 8px) !important;
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-        }
-
+    .album-art-max-space .right-column {
         .track-info {
             margin-bottom: 0 !important;
             padding: 0 !important;
@@ -377,6 +371,16 @@
 
         .track-info>* {
             padding: 0 4px;
+        }
+    }
+
+    .album-art-max-space .area-controls {
+        overflow: visible !important;
+
+        .player-controls-container {
+            gap: clamp(1px, 0.8cqh, 8px) !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
         }
 
         .player-controls {

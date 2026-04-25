@@ -8,6 +8,7 @@ import IframeScreen from '@/components/IframeScreen';
 import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
 import Player from './Player';
+import MobilePlayer from './MobilePlayer';
 import LargeScreenPlayer from './LargeScreenPlayer';
 import useIdleScreen from '@/hooks/useIdleScreen';
 import useMediaQuery from '@/hooks/useMediaQuery';
@@ -137,6 +138,7 @@ const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz, i
 };
 
 const Home = () => {
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const isLargeScreen = useMediaQuery('(min-width: 1920px)');
   const [vizStopped, setVizStopped] = useState(false);
   const [forcePlayer, setForcePlayer] = useState(false);
@@ -231,9 +233,11 @@ const Home = () => {
         isVizFullscreen={isVizFullscreen}
       />
     );
-    content = isLargeScreen
-      ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} />
-      : <Player vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
+    content = isMobile
+      ? <MobilePlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} />
+      : isLargeScreen
+        ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} />
+        : <Player vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
   } else if (idleScreen === 'wallpaper') {
     content = (
       <Wallpaper

@@ -255,6 +255,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
 
   const vizBlock = showViz && (
     <div className="lsp-viz-area" ref={peppyVizAreaRef}>
+      {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
       {vizType === 'spectrum' && (
         <SpectrumAnalyzer
           ref={vizRef}
@@ -481,6 +482,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
               )}
               {showViz && (
                 <div className="lsp-bottom__viz" ref={peppyBottomVizRef}>
+                  {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
                   {vizType === 'spectrum' && (
                     <SpectrumAnalyzer ref={vizRef} stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} options={spectrumOptions} isPlaying={isPlaying} />
                   )}

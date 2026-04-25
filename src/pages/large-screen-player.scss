@@ -221,6 +221,7 @@
 
 /* Visualization area — 600 × 400 px, right edge */
 .lsp-bottom__viz {
+  position: relative;
   flex: 0 0 600px;
   width: 600px;
   height: 400px;
@@ -230,7 +231,7 @@
   overflow: hidden;
   /* background intentionally transparent — album art shows through */
 
-  >* {
+  >*:not(.viz-placeholder) {
     flex: 1 1 auto;
     width: 100%;
     height: 100%;
@@ -988,6 +989,7 @@
 
   .lsp-viz-area {
     grid-area: viz;
+    position: relative;
     display: flex;
     align-items: stretch;
     border-radius: 0.75rem;
@@ -998,7 +1000,7 @@
     align-self: stretch; // fill full row height
     flex-shrink: 0;
 
-    >* {
+    >*:not(.viz-placeholder) {
       flex: 1 1 auto;
       width: 100% !important;
       height: 100% !important;
