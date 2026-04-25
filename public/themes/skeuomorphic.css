@@ -1263,6 +1263,22 @@ ol li {
   border-color: rgba(34, 197, 94, 0.3);
 }
 
+/* ── Mobile compact (≤ 768px) ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .dialog {
+    max-width: calc(100vw - 1rem);
+    max-height: calc(100vh - 1rem);
+    margin: 0.5rem;
+  }
+  .dialog-header,
+  .dialog-body,
+  .dialog-footer {
+    padding: 0.875rem 1rem;
+  }
+  .dialog-title {
+    font-size: 1rem;
+  }
+}
 /* ═══════════════════════════════════════════════════════════════════════
    PLAYER LAYOUT — Common structural layout for all themes
    ═══════════════════════════════════════════════════════════════════════
@@ -1355,6 +1371,37 @@ ol li {
   padding-left: 0.4rem;
 }
 
+/* ── Mobile compact (≤ 768px) ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .player-controls-container {
+    padding-top: 8px;
+  }
+  .track-info {
+    padding: 14px 16px;
+  }
+  .player-controls {
+    padding: 10px 16px;
+    gap: 10px;
+  }
+  .volume-control {
+    padding: 10px 14px;
+  }
+  .track-info-group {
+    width: calc(100% - 1rem) !important;
+    margin: 0 0.5rem;
+  }
+}
+/* ── Mobile forms (≤ 600px) ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .form-group {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    align-items: start;
+  }
+  .settings-panel {
+    padding: 20px;
+  }
+}
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE
@@ -2523,17 +2570,6 @@ input:checked + .slider:after {
   margin-bottom: 2px;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 600px) {
-  .form-group {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    align-items: start;
-  }
-  .settings-panel {
-    padding: 20px;
-  }
-}
 /* ─── Select / Dropdown ─────────────────────────────────────────────────────── */
 .form-select {
   appearance: none;
@@ -5326,21 +5362,6 @@ h2 {
   line-height: 1.4;
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  .dialog {
-    max-width: calc(100vw - 1rem);
-    margin: 0.5rem;
-  }
-  .dialog-header,
-  .dialog-body,
-  .dialog-footer {
-    padding: 0.875rem 1rem;
-  }
-  .dialog-title {
-    font-size: 1rem;
-  }
-}
 /* ── Browse Tiles ── */
 .browse-tile .browse-tile__icon {
   font-size: clamp(18px, 3cqi, 30px) !important;

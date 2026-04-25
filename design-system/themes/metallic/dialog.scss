@@ -354,28 +354,6 @@
   line-height: 1.4;
 }
 
-/* ── Responsive ───────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .dialog {
-    max-width: calc(100vw - 1rem);
-    max-height: calc(100vh - 1rem);
-    margin: 0.5rem;
-  }
-
-  .dialog-header,
-  .dialog-footer {
-    padding: 0.875rem 1rem;
-  }
-
-  .dialog-body {
-    padding: 1rem;
-  }
-
-  .dialog-title {
-    font-size: 1rem;
-  }
-}
-
 /* ── Browse Tiles ── */
 .browse-tile {
   .browse-tile__icon {

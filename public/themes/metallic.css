@@ -934,6 +934,22 @@ pre {
   border-color: rgba(34, 197, 94, 0.3);
 }
 
+/* ── Mobile compact (≤ 768px) ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .dialog {
+    max-width: calc(100vw - 1rem);
+    max-height: calc(100vh - 1rem);
+    margin: 0.5rem;
+  }
+  .dialog-header,
+  .dialog-body,
+  .dialog-footer {
+    padding: 0.875rem 1rem;
+  }
+  .dialog-title {
+    font-size: 1rem;
+  }
+}
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
       COLOR PALETTE - Dark Metallic / Black Chrome Theme
@@ -3013,27 +3029,6 @@ h2 {
   opacity: 1 !important;
 }
 
-/* ─── Mobile compact (portrait ≤ 768px) ──────────────────────────────── */
-/* At 393×842 the controls panel is ~421px tall. The theme's generous padding
-   on .track-info (20px), .volume-control (16px top/bottom), and the
-   .player-controls (24px padding / 20px gap) push elements below the fold.
-   Scale everything down so nothing gets clipped. */
-@media (max-width: 768px) {
-  .track-info {
-    padding: 14px 16px;
-  }
-  .player-controls {
-    padding: 10px 16px;
-    gap: 10px;
-  }
-  .volume-control {
-    padding: 10px 14px;
-  }
-  .track-info-group {
-    width: calc(100% - 1rem) !important;
-    margin: 0 0.5rem;
-  }
-}
 /* ── Large-screen player: boost font sizes on short screens so Rajdhani
    (a condensed display font) reads at a similar optical size to Michroma.
    Requires min-width: 1024px so small screens (800×600) are excluded. ── */
@@ -4896,24 +4891,6 @@ h2 {
   line-height: 1.4;
 }
 
-/* ── Responsive ───────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .dialog {
-    max-width: calc(100vw - 1rem);
-    max-height: calc(100vh - 1rem);
-    margin: 0.5rem;
-  }
-  .dialog-header,
-  .dialog-footer {
-    padding: 0.875rem 1rem;
-  }
-  .dialog-body {
-    padding: 1rem;
-  }
-  .dialog-title {
-    font-size: 1rem;
-  }
-}
 /* ── Browse Tiles ── */
 .browse-tile .browse-tile__icon {
   font-size: clamp(18px, 3cqi, 30px) !important;

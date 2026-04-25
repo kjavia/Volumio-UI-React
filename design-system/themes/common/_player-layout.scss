@@ -90,3 +90,41 @@
     min-width: 3.5ch;
     padding-left: 0.4rem;
 }
+
+/* ── Mobile compact (≤ 768px) ───────────────────────────────────────── */
+@media (max-width: 768px) {
+    .player-controls-container {
+        padding-top: 8px;
+    }
+
+    .track-info {
+        padding: 14px 16px;
+    }
+
+    .player-controls {
+        padding: 10px 16px;
+        gap: 10px;
+    }
+
+    .volume-control {
+        padding: 10px 14px;
+    }
+
+    .track-info-group {
+        width: calc(100% - 1rem) !important;
+        margin: 0 0.5rem;
+    }
+}
+
+/* ── Mobile forms (≤ 600px) ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .form-group {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        align-items: start;
+    }
+
+    .settings-panel {
+        padding: 20px;
+    }
+}

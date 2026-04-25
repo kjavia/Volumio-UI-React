@@ -269,31 +269,6 @@
   opacity: 1 !important;
 }
 
-/* ─── Mobile compact (portrait ≤ 768px) ──────────────────────────────── */
-/* At 393×842 the controls panel is ~421px tall. The theme's generous padding
-   on .track-info (20px), .volume-control (16px top/bottom), and the
-   .player-controls (24px padding / 20px gap) push elements below the fold.
-   Scale everything down so nothing gets clipped. */
-@media (max-width: 768px) {
-  .track-info {
-    padding: 14px 16px;
-  }
-
-  .player-controls {
-    padding: 10px 16px;
-    gap: 10px;
-  }
-
-  .volume-control {
-    padding: 10px 14px;
-  }
-
-  .track-info-group {
-    width: calc(100% - 1rem) !important;
-    margin: 0 0.5rem;
-  }
-}
-
 /* ── Large-screen player: boost font sizes on short screens so Rajdhani
    (a condensed display font) reads at a similar optical size to Michroma.
    Requires min-width: 1024px so small screens (800×600) are excluded. ── */
