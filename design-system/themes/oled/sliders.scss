@@ -175,6 +175,26 @@ input[type='range']::-moz-range-thumb:active {
   opacity: 1 !important;
 }
 
+/* ── OLED: Show "X" for muted volume icon ──────────────────────────────── */
+.volume-manager .btn-icon.active .material-icons {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: "X";
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 .seekbar-labels .text-white,
 .seekbar-labels .time-label {
   color: var(--text-secondary);

@@ -1167,31 +1167,15 @@ pre {
 
 /* ── Mobile compact (≤ 768px) ─────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .dialog-container {
-    padding: 0;
-  }
   .dialog {
-    width: 100vw;
-    max-width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    margin: 0;
-    border-radius: 0;
-    display: flex;
-    flex-direction: column;
+    max-width: calc(100vw - 1rem);
+    max-height: calc(100vh - 1rem);
+    margin: 0.5rem;
   }
-  .dialog-header {
-    padding: 0.875rem 1rem;
-    border-radius: 0;
-  }
-  .dialog-body {
-    padding: 1rem;
-    flex: 1 1 auto;
-    overflow-y: auto;
-  }
+  .dialog-header,
+  .dialog-body,
   .dialog-footer {
     padding: 0.875rem 1rem;
-    border-radius: 0;
   }
   .dialog-title {
     font-size: 1rem;
@@ -2870,6 +2854,25 @@ input[type=range]::-moz-range-thumb:active {
 .volume-manager .material-icons {
   color: var(--color-primary) !important;
   opacity: 1 !important;
+}
+
+/* ── OLED: Show "X" for muted volume icon ──────────────────────────────── */
+.volume-manager .btn-icon.active .material-icons {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.volume-manager .btn-icon.active .material-icons::after {
+  content: "X";
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .seekbar-labels .text-white,

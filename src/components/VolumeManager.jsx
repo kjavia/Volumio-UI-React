@@ -1,8 +1,14 @@
 import PropTypes from 'prop-types';
 import Button from './Button';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => {
+  const { theme } = useTheme();
+  const isOled = theme === 'oled';
   const getVolume = () => (mute ? 0 : volume || 0);
+  const volumeIcon = getVolume() === 0
+    ? (isOled ? '\u00A0' : 'volume_off')
+    : getVolume() < 50 ? 'volume_down' : 'volume_up';
   return (
     <div
       className={`volume-manager d-flex align-items-center gap-2 gap-md-3 ${isOnFooter ? 'text-white' : 'text-white'}`}
@@ -13,7 +19,7 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter }) => 
         label={mute ? 'Unmute' : 'Mute'}
       >
         <span className={`material-icons fs-5 fs-md-4 ${mute ? 'text-white' : ''}`}>
-          {getVolume() === 0 ? 'volume_off' : getVolume() < 50 ? 'volume_down' : 'volume_up'}
+          {volumeIcon}
         </span>
       </Button>
 
