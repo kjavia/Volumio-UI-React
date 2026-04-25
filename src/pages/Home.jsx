@@ -1,19 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
-import { useNavigate } from 'react-router-dom';
 import FlipClock from '@/components/clocks/flip-clock';
 import DigitalClock from '@/components/clocks/digital-clock';
 import AnalogClock from '@/components/clocks/analog-clock';
 import IframeScreen from '@/components/IframeScreen';
 import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
+import ContextMenu from '@/components/ContextMenu';
 import Player from './Player';
 import MobilePlayer from './MobilePlayer';
 import LargeScreenPlayer from './LargeScreenPlayer';
 import useIdleScreen from '@/hooks/useIdleScreen';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import usePluginConfig from '@/hooks/usePluginConfig';
-import useMenuKeyboard from '@/hooks/useMenuKeyboard';
 import { VOLUMIO_BASE_URL } from '@/config';
 
 const CLOCK_SCREENS = {
@@ -27,114 +25,6 @@ const WEATHER_MODE_MAP = {
   weatherHourly: 'hourly',
   weatherDaily: 'daily',
   weatherFull: 'full',
-};
-
-const ContextMenu = ({ vizStopped, onStopViz, onBackToPlayer, onFullscreenViz, isVizFullscreen }) => {
-  const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const ctxMenuRef = useMenuKeyboard(isOpen, () => setIsOpen(false));
-
-  const close = (fn) => () => { setIsOpen(false); fn?.(); };
-
-  const toggleFullscreen = async () => {
-    try {
-      if (!document.fullscreenElement) {
-        await document.body.requestFullscreen();
-        setIsFullscreen(true);
-      } else {
-        await document.exitFullscreen();
-        setIsFullscreen(false);
-      }
-    } catch (err) {
-      console.warn('Fullscreen toggle failed:', err);
-    }
-    setIsOpen(false);
-  };
-
-  const handleRefresh = () => {
-    window.location.reload();
-  };
-
-  // Listen for fullscreen changes (e.g., user presses ESC)
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
-
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
-    };
-  }, []);
-
-  return (
-    <div className="context-menu-container">
-      <button
-        className="context-menu-toggle context-menu-toggle--no-shadow"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-expanded={isOpen}
-        aria-label="Menu"
-      >
-        <span className="material-icons">more_vert</span>
-      </button>
-
-      {isOpen && (
-        <>
-          <div className="context-menu-backdrop" onClick={() => setIsOpen(false)} />
-          <div ref={ctxMenuRef} className="context-menu open" role="menu">
-            <button className="context-menu-item" onClick={close(() => navigate('/playlist-manager'))}>
-              <span className="material-icons">queue_music</span>
-              Playlist Manager
-            </button>
-            {onBackToPlayer && (
-              <>
-                <button className="context-menu-item" onClick={close(onBackToPlayer)}>
-                  <span className="material-icons">arrow_back</span>
-                  Back to Player
-                </button>
-                <div className="context-menu-separator" />
-              </>
-            )}
-            <button className="context-menu-item" onClick={handleRefresh}>
-              <span className="material-icons">refresh</span>
-              Refresh
-            </button>
-            <button className="context-menu-item" onClick={toggleFullscreen}>
-              <span className="material-icons">
-                {isFullscreen ? 'fullscreen_exit' : 'fullscreen'}
-              </span>
-              {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
-            </button>
-            {!vizStopped && onStopViz && (
-              <>
-                <div className="context-menu-separator" />
-                <button className="context-menu-item" onClick={close(onFullscreenViz)}>
-                  <span className="material-icons">
-                    {isVizFullscreen ? 'fullscreen_exit' : 'fullscreen'}
-                  </span>
-                  {isVizFullscreen ? 'Exit Visualization Fullscreen' : 'Visualization Fullscreen'}
-                </button>
-                <button className="context-menu-item" onClick={close(onStopViz)}>
-                  <span className="material-icons">equalizer</span>
-                  Stop Visualization
-                </button>
-              </>
-            )}
-            <div className="context-menu-separator" />
-            <button className="context-menu-item" onClick={close(() => navigate(-1))}>
-              <span className="material-icons">arrow_back</span>
-              Back
-            </button>
-            <button className="context-menu-item danger" onClick={close(() => { window.location.assign(VOLUMIO_BASE_URL); })}>
-              <span className="material-icons">power_settings_new</span>
-              Exit
-            </button>
-          </div>
-        </>
-      )}
-    </div>
-  );
 };
 
 const Home = () => {
@@ -234,7 +124,17 @@ const Home = () => {
       />
     );
     content = isMobile
-      ? <MobilePlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} />
+      ? <MobilePlayer
+        vizStopped={vizStopped}
+        onVizResumed={() => setVizStopped(false)}
+        contextMenuProps={{
+          vizStopped,
+          onStopViz: isSpectrumViz ? () => setVizStopped(true) : undefined,
+          onBackToPlayer: idle && !forcePlayer ? () => setForcePlayer(true) : undefined,
+          onFullscreenViz: isSpectrumViz ? handleFullscreenViz : undefined,
+          isVizFullscreen,
+        }}
+      />
       : isLargeScreen
         ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} />
         : <Player vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
@@ -287,7 +187,7 @@ const Home = () => {
   // normally skip the floating overlay. However when the idle screen is active
   // the player (and its embedded menu) is not mounted, so we still need the
   // floating overlay as the only way for the user to get back to the player.
-  const floatingContextMenu = (!isLargeScreen || idle) && (
+  const floatingContextMenu = !isMobile && (!isLargeScreen || idle) && (
     <ContextMenu
       vizStopped={vizStopped}
       onStopViz={showPlayer && isSpectrumViz ? () => setVizStopped(true) : undefined}

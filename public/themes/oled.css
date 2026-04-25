@@ -1165,6 +1165,22 @@ pre {
   border-color: rgba(34, 197, 94, 0.3);
 }
 
+/* ── Mobile compact (≤ 768px) ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .dialog {
+    max-width: calc(100vw - 1rem);
+    max-height: calc(100vh - 1rem);
+    margin: 0.5rem;
+  }
+  .dialog-header,
+  .dialog-body,
+  .dialog-footer {
+    padding: 0.875rem 1rem;
+  }
+  .dialog-title {
+    font-size: 1rem;
+  }
+}
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
        COLOR PALETTE - OLED Theme
@@ -4239,7 +4255,8 @@ input[type=range]::-moz-range-thumb:active {
    ═══════════════════════════════════════════════════════════════════════ */
 /* Shared: hide icon ligature in all player btn-icon buttons */
 .player-controls .btn-icon .material-icons,
-.lsp-btn-group .btn-icon .material-icons {
+.lsp-btn-group .btn-icon .material-icons,
+.mobile-row-secondary .btn-icon .material-icons {
   font-size: 0 !important;
   color: transparent !important;
   text-indent: -9999px;
@@ -4252,7 +4269,8 @@ input[type=range]::-moz-range-thumb:active {
   position: relative;
 }
 .player-controls .btn-icon .material-icons::after,
-.lsp-btn-group .btn-icon .material-icons::after {
+.lsp-btn-group .btn-icon .material-icons::after,
+.mobile-row-secondary .btn-icon .material-icons::after {
   font-family: var(--font-display);
   font-size: 0.85rem;
   font-weight: 700;
@@ -4270,12 +4288,14 @@ input[type=range]::-moz-range-thumb:active {
 /* Prevent home-responsive container queries from restoring font-size
    on btn-icon material-icons or clipping via overflow:hidden. */
 .player-controls .btn-icon,
-.lsp-btn-group .btn-icon {
+.lsp-btn-group .btn-icon,
+.mobile-row-secondary .btn-icon {
   overflow: visible !important;
 }
 
 .player-controls .btn-icon .material-icons,
-.lsp-btn-group .btn-icon .material-icons {
+.lsp-btn-group .btn-icon .material-icons,
+.mobile-row-secondary .btn-icon .material-icons {
   font-size: 0 !important;
 }
 

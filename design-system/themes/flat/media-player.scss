@@ -66,6 +66,20 @@
 }
 
 /* ─── Track Info ───────────────────────────────────────────────────────── */
+
+/* ── Track Panel — flat inset display (enabled via setting) ─────────── */
+.track-panel {
+    border-radius: 8px;
+}
+
+.track-panel .track-info {
+    background-color: rgba(20, 20, 30, 0.85);
+    border-radius: 8px;
+    padding: clamp(10px, 2cqh, 20px) clamp(12px, 1.5cqw, 24px);
+    border: 1px solid rgba(69, 123, 157, 0.3);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
 .track-info {
     font-family: var(--font-body);
     color: var(--text-primary);

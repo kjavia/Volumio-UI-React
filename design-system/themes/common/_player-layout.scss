@@ -10,121 +10,166 @@
 .album-art-container,
 .vinyl-container,
 .cd-container {
-    width: 100%;
-    max-width: 460px;
-    aspect-ratio: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
 }
 
 /* ── Screen Frame (layout) ──────────────────────────────────────────── */
 .screen-frame {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    height: 100%;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+  justify-content: center;
 }
 
 /* ── Track Info ──────────────────────────────────────────────────────── */
 .track-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 /* ── Slider Components ──────────────────────────────────────────────── */
 .slider-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 0 1em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 1em;
 }
 
 .slider-track {
-    flex-grow: 1;
-    position: relative;
-    cursor: pointer;
+  flex-grow: 1;
+  position: relative;
+  cursor: pointer;
 }
 
 .slider-fill {
-    height: 100%;
-    position: relative;
+  height: 100%;
+  position: relative;
 }
 
 .slider-cap {
-    position: absolute;
-    right: -7px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .slider-cap::after {
-    content: '';
-    position: absolute;
+  content: '';
+  position: absolute;
 }
 
 .read-only .slider-fill::after {
-    display: none;
+  display: none;
 }
 
 .read-only .slider-track {
-    cursor: default;
+  cursor: default;
 }
 
 /* ── Seekbar Labels ─────────────────────────────────────────────────── */
 .seekbar-labels {
-    padding-inline: 0;
+  padding-inline: 0;
 }
 
 /* ── Volume Label Spacing ───────────────────────────────────────────── */
 .volume-manager .small {
-    min-width: 3.5ch;
-    padding-left: 0.4rem;
+  min-width: 3.5ch;
+  padding-left: 0.4rem;
 }
 
 /* ── Mobile compact (≤ 768px) ───────────────────────────────────────── */
 @media (max-width: 768px) {
-    .player-controls-container {
-        padding-top: 8px;
-    }
+  .player-controls-container {
+    padding-top: 8px;
+  }
 
-    .track-info {
-        padding: 14px 16px;
-    }
+  .track-info {
+    padding: 14px 16px;
+  }
 
-    .player-controls {
-        padding: 10px 16px;
-        gap: 10px;
-    }
+  .player-controls {
+    padding: 10px 16px;
+    gap: 10px;
+  }
 
-    .volume-control {
-        padding: 10px 14px;
-    }
+  .volume-control {
+    padding: 10px 14px;
+  }
 
-    .track-info-group {
-        width: calc(100% - 1rem) !important;
-        margin: 0 0.5rem;
-    }
+  .track-info-group {
+    width: calc(100% - 1rem) !important;
+    margin: 0 0.5rem;
+  }
 }
 
 /* ── Mobile forms (≤ 600px) ─────────────────────────────────────────── */
 @media (max-width: 600px) {
-    .form-group {
-        grid-template-columns: 1fr;
-        gap: 8px;
-        align-items: start;
-    }
+  .form-group {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    align-items: start;
+  }
 
-    .settings-panel {
-        padding: 20px;
-    }
+  .settings-panel {
+    padding: 20px;
+  }
+}
+
+/* ── Context Drawer (mobile slide-in menu) ──────────────────────────── */
+.context-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  transition: background 0.25s ease;
+
+  &.open {
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+  }
+}
+
+.context-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: min(280px, 75vw);
+  z-index: 2001;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  /* Inherit context-menu styling from the active theme */
+  background: var(--drawer-bg, var(--panel-bg, #1a1a1a));
+  border-right: 1px solid var(--border-dark, rgba(255, 255, 255, 0.08));
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  .context-menu-item {
+    width: 100%;
+    text-align: left;
+  }
 }

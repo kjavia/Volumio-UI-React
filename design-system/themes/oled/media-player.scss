@@ -545,7 +545,8 @@
 
 /* Shared: hide icon ligature in all player btn-icon buttons */
 .player-controls .btn-icon .material-icons,
-.lsp-btn-group .btn-icon .material-icons {
+.lsp-btn-group .btn-icon .material-icons,
+.mobile-row-secondary .btn-icon .material-icons {
   font-size: 0 !important;
   color: transparent !important;
   text-indent: -9999px;
@@ -576,12 +577,14 @@
 /* Prevent home-responsive container queries from restoring font-size
    on btn-icon material-icons or clipping via overflow:hidden. */
 .player-controls .btn-icon,
-.lsp-btn-group .btn-icon {
+.lsp-btn-group .btn-icon,
+.mobile-row-secondary .btn-icon {
   overflow: visible !important;
 }
 
 .player-controls .btn-icon .material-icons,
-.lsp-btn-group .btn-icon .material-icons {
+.lsp-btn-group .btn-icon .material-icons,
+.mobile-row-secondary .btn-icon .material-icons {
   font-size: 0 !important;
 }
 
