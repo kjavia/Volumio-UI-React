@@ -3763,6 +3763,11 @@ h2 {
     font-size: 1.5rem !important;
   }
 }
+@media (max-height: 600px) {
+  .tp-max-space .tp-controls .time-label {
+    font-size: clamp(0.65rem, min(4.5cqw, 6.5cqh), 3.9rem) !important;
+  }
+}
 .tp-max-space .responsive-artist {
   line-height: 1.35 !important;
 }
