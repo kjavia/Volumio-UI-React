@@ -273,14 +273,18 @@
     font-size: clamp(1.5rem, min(2.5cqw, 3cqh), 1.4rem) !important;
   }
 
-  .tp-controls .volume-manager .small {
+  .tp-max-space .tp-controls .volume-manager .small {
     font-size: 1.5rem !important;
+  }
+
+  .tp-grid:not(.tp-max-space) .tp-controls .volume-manager .small {
+    font-size: 1rem !important;
   }
 }
 
 @media (max-height: 600px) {
   .tp-max-space .tp-controls .time-label {
-    font-size: clamp(0.65rem, min(4.5cqw, 6.5cqh), 3.9rem) !important;
+    font-size: clamp(1rem, min(2.5cqw, 4.5cqh), 0.9rem) !important;
   }
 }
 
@@ -352,4 +356,9 @@
   font-size: clamp(0.6rem, 1.1vw, 0.85rem);
   color: var(--text-secondary);
   min-width: clamp(28px, 3.5vw, 44px);
+}
+
+/* ── Volume label — match seekbar time-label colour ──────────────────── */
+.volume-manager .small {
+  color: var(--text-secondary) !important;
 }

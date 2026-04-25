@@ -480,6 +480,37 @@
   overflow: visible !important;
 }
 
+/* Give transport buttons extra breathing room so text glyphs don't touch edges */
+@media (min-width: 769px) {
+
+  .controls-transport-row .btn-round,
+  .controls-transport-row .btn-round.btn-sm {
+    padding: 6px 10px !important;
+    min-width: 56px;
+    min-height: 56px;
+  }
+
+  .controls-transport-row .btn-primary {
+    padding: 8px 14px !important;
+    min-width: 64px;
+    min-height: 64px;
+  }
+
+  /* Secondary controls row: tighter gap, bigger buttons */
+  .player-controls>.d-flex.gap-3 {
+    gap: 0.25rem !important;
+  }
+
+  .player-controls .btn-icon {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .player-controls .btn-icon .material-icons::after {
+    font-size: 0.7rem !important;
+  }
+}
+
 .controls-transport-row .btn-round .material-icons,
 .controls-transport-row .btn-round.btn-sm .material-icons,
 .lsp-btn-group--center .btn-round .material-icons,

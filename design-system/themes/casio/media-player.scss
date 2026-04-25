@@ -172,8 +172,8 @@
     display: block;
 }
 
-/* ─── Track Info Group — 80s watch face with glass cover ─────────────── */
-.track-info-group {
+/* ─── Track Info Group — 80s watch face with glass cover (only when panel enabled) ── */
+.track-panel {
     border-radius: 6px;
     position: relative;
     /* needed for ::before glass sheen */
@@ -254,16 +254,21 @@
     }
 }
 
-/* ─── Track Info — dark digits on light panel ─────────────────────── */
+/* ─── Track Info — light text when panel off, dark digits when panel on ── */
 .track-info {
     font-family: var(--font-display);
-    color: var(--casio-lcd-panel);
+    color: rgba(255, 255, 255, 0.9);
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     -webkit-font-smoothing: antialiased;
     padding: 14px 18px 12px;
+}
+
+/* Restore dark LCD colours when panel is enabled */
+.track-panel .track-info {
+    color: var(--casio-lcd-panel);
 }
 
 .track-title {
@@ -276,6 +281,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: inherit;
+    text-shadow: none;
+}
+
+.track-panel .track-title {
     color: var(--casio-lcd-panel);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), 0 -1px 0 rgba(255, 255, 255, 0.60);
 }
@@ -283,12 +293,18 @@
 .artist-name,
 .album-name {
     font-size: clamp(1rem, 2.5vw, 1.3rem);
-    color: #3a5850;
+    color: rgba(255, 255, 255, 0.7);
     text-transform: uppercase;
     letter-spacing: 0.04em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-shadow: none;
+}
+
+.track-panel .artist-name,
+.track-panel .album-name {
+    color: #3a5850;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 -1px 0 rgba(255, 255, 255, 0.55);
 }
 
@@ -298,6 +314,10 @@
 
 .responsive-artist {
     font-size: clamp(1.05rem, 3cqw, 2rem);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.track-panel .responsive-artist {
     color: var(--casio-lcd-off);
 }
 

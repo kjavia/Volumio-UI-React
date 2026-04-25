@@ -90,17 +90,20 @@
 /* ─── Track Info ───────────────────────────────────────────────────────── */
 .track-info {
     font-family: var(--font-body);
-    color: var(--text-primary);
+    color: rgba(255, 255, 255, 0.9);
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 6px;
     width: 100%;
-
-    /* Win95 window panel */
-    background: var(--win95-face);
     padding: 0;
+}
+
+/* Win95 window panel — only shown when track panel setting is enabled */
+.track-panel .track-info {
+    color: var(--text-primary);
+    background: var(--win95-face);
     /* Raised outer bevel */
     border-top: 2px solid var(--win95-highlight);
     border-left: 2px solid var(--win95-highlight);
@@ -108,8 +111,8 @@
     border-right: 2px solid var(--win95-dark);
 }
 
-/* Navy title-bar header inside the panel */
-.track-info::before {
+/* Navy title-bar header inside the panel — only when panel enabled */
+.track-panel .track-info::before {
     content: '♪ Now Playing';
     display: block;
     background: linear-gradient(90deg, var(--win95-titlebar), #1084d0);
@@ -124,16 +127,16 @@
     width: 100%;
 }
 
-/* Inner content area */
-.track-info>* {
+/* Inner content area — only when panel enabled */
+.track-panel .track-info>* {
     padding: 0 10px;
 }
 
-.track-info>*:first-child {
+.track-panel .track-info>*:first-child {
     padding-top: 8px;
 }
 
-.track-info>*:last-child {
+.track-panel .track-info>*:last-child {
     padding-bottom: 8px;
 }
 
@@ -144,13 +147,13 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--text-primary);
+    color: inherit;
 }
 
 .artist-name,
 .album-name {
     font-size: clamp(0.8rem, 2.2vw, 1.1rem);
-    color: var(--text-primary);
+    color: inherit;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

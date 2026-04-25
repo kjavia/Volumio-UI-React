@@ -94,7 +94,7 @@
   overflow: hidden;
   min-width: 0;
   min-height: 0;
-  padding-top: clamp(8px, 1.5cqh, 24px);
+  padding-top: clamp(24px, 6cqh, 72px);
   padding-right: clamp(12px, 2cqw, 32px);
 }
 
@@ -288,6 +288,57 @@
 
   .tp-controls .volume-manager .material-icons {
     font-size: 1.75rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   NON-MAX-SPACE: bigger fonts + spacing on tablets/small desktops
+   ═══════════════════════════════════════════════════ */
+.tp-grid:not(.tp-max-space) .tp-track-info {
+  flex: 0 0 48% !important;
+  overflow: visible !important;
+}
+
+.tp-grid:not(.tp-max-space) .tp-right {
+  .cq-track-info {
+    gap: clamp(4px, 1.5cqh, 16px) !important;
+  }
+
+  .track-info-group {
+    margin-bottom: clamp(4px, 1cqh, 12px) !important;
+  }
+
+  .responsive-title {
+    font-size: clamp(1.4rem, min(7cqw, 9cqh), 5rem) !important;
+  }
+
+  .responsive-artist {
+    font-size: clamp(1rem, min(5.5cqw, 7cqh), 3.5rem) !important;
+  }
+
+  .responsive-album {
+    font-size: clamp(0.9rem, min(4cqw, 5cqh), 2.5rem) !important;
+  }
+
+  .responsive-stream-info {
+    font-size: clamp(0.9rem, min(4cqw, 5cqh), 2.5rem) !important;
+  }
+
+  .format-logo-responsive {
+    height: clamp(0.9rem, min(4cqw, 5cqh), 2.5rem) !important;
+  }
+
+  .stream-info-row {
+    padding-top: clamp(8px, 2cqh, 24px);
+    padding-bottom: clamp(8px, 2cqh, 24px);
+  }
+
+  .stream-info-row .service-logo-img {
+    max-height: clamp(1rem, min(4cqw, 5cqh), 2.5rem);
+  }
+
+  .stream-info-row .service-logo-icon {
+    font-size: clamp(1rem, min(4cqw, 5cqh), 2.5rem) !important;
   }
 }
 
@@ -787,8 +838,79 @@
   }
 }
 
+/* ── Mid-height screens (600–900px): tighter controls, bigger transport buttons ── */
+@media (min-height: 601px) and (max-height: 900px) {
+  .tp-controls {
+    padding-top: 0 !important;
+
+    .controls-spacer {
+      max-height: 2px !important;
+    }
+
+    .player-controls-container {
+      gap: clamp(2px, 1cqh, 12px) !important;
+    }
+
+    .player-controls {
+      margin-block: clamp(4px, 1.5cqh, 14px) !important;
+    }
+
+    .controls-transport-row {
+      margin-bottom: clamp(4px, 1.5cqh, 16px) !important;
+    }
+
+    .btn-round {
+      width: 70px !important;
+      height: 70px !important;
+    }
+
+    .btn-round.btn-sm {
+      width: 52px !important;
+      height: 52px !important;
+    }
+
+    .btn-round .material-icons,
+    .btn-round .play-icon {
+      font-size: 2.2rem !important;
+    }
+
+    .btn-round.btn-sm .material-icons {
+      font-size: 1.7rem !important;
+    }
+
+    .btn-icon {
+      width: 44px !important;
+      height: 44px !important;
+    }
+
+    .btn-icon .material-icons {
+      font-size: 1.5rem !important;
+    }
+  }
+}
+
 /* ── Max space: compact for short screens (≤480px height) ── */
 @media (max-height: 480px) {
+  .tp-controls {
+    padding-top: clamp(12px, 3cqh, 28px) !important;
+
+    .controls-spacer {
+      max-height: 2px !important;
+    }
+
+    .player-controls-container {
+      gap: clamp(2px, 0.8cqh, 8px) !important;
+    }
+
+    .player-controls {
+      margin-block: clamp(2px, 1cqh, 8px) !important;
+    }
+
+    .controls-transport-row {
+      margin-bottom: clamp(2px, 1cqh, 10px) !important;
+    }
+  }
+
   .tp-max-space .tp-right {
     .cq-track-info {
       gap: clamp(1px, 0.3cqh, 4px) !important;
