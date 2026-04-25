@@ -90,7 +90,7 @@
 /* More padding & row spacing on tablet/desktop */
 @media (min-width: 768px) {
   .track-panel .track-info {
-    padding: clamp(12px, 2cqh, 24px) clamp(12px, 1.2cqw, 24px);
+    padding: clamp(18px, 3cqh, 36px) clamp(12px, 1.2cqw, 24px);
   }
 
   .track-info-group {
@@ -104,6 +104,19 @@
 
   .cq-track-info {
     gap: clamp(4px, 1.2cqh, 12px) !important;
+  }
+}
+
+/* Non-max-space: tighter track info gap on mid-height screens (e.g. 1728×874) */
+@media (min-width: 768px) and (max-height: 900px) {
+  .tp-grid:not(.tp-max-space) .tp-right .cq-track-info {
+    gap: clamp(0px, 0cqh, 16px) !important;
+  }
+}
+
+@media (min-height: 601px) and (max-height: 900px) {
+  .tp-controls {
+    padding-top: 30px !important;
   }
 }
 
@@ -124,6 +137,10 @@
 }
 
 @media (max-height: 600px) {
+  .track-info {
+    padding: 10px 0px !important;
+  }
+
   .tp-max-space .tp-right .responsive-title {
     font-size: clamp(1.2rem, min(8.25cqw, 10.5cqh), 6rem) !important;
   }
@@ -475,9 +492,6 @@
 
 /* ── Very short screens (800×480, 800×400 etc.): aggressively compact ──── */
 @media (max-height: 600px) {
-  .track-info {
-    padding: 0 8px !important;
-  }
 
   .track-info-group {
     width: calc(100% - 0.5rem) !important;
