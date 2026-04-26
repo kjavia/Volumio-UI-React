@@ -105,7 +105,7 @@
     height: 38%;
     margin-left: -0.75px;
     background: var(--color-primary-light);
-    box-shadow: 0 0 6px rgba(200, 117, 51, 0.5);
+    box-shadow: 0 0 6px rgba(23, 12, 121, 0.5);
     border-radius: 1px;
     z-index: 5;
     transition: none;
@@ -122,8 +122,8 @@
     border-radius: 50%;
     background: var(--color-primary);
     box-shadow:
-        0 0 0 2px rgba(200, 117, 51, 0.25),
-        0 0 8px rgba(200, 117, 51, 0.5),
+        0 0 0 2px rgba(23, 12, 121, 0.25),
+        0 0 8px rgba(23, 12, 121, 0.5),
         0 2px 6px rgba(0, 0, 0, 0.3);
     z-index: 6;
 }
@@ -151,7 +151,7 @@
 .clock-face-weather-icon {
     font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
     color: var(--color-primary-light);
-    filter: drop-shadow(0 0 3px rgba(200, 117, 51, 0.4));
+    filter: drop-shadow(0 0 3px rgba(23, 12, 121, 0.4));
 }
 
 .clock-face-weather-temp {

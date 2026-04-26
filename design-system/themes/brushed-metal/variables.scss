@@ -1,220 +1,220 @@
 :root {
-    /* ═══════════════════════════════════════════════════════════════════════
+  /* ═══════════════════════════════════════════════════════════════════════
        COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
        Inspired by real brushed aluminum surfaces with warm undertones
        ═══════════════════════════════════════════════════════════════════════ */
 
-    /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-    --color-primary: #c87533;
-    --color-primary-light: #e0994d;
-    --color-primary-dark: #a05e28;
-    --color-primary-deep: #7a4820;
-    --glow-primary: rgba(200, 117, 51, 0.35);
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
 
-    /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
-    --color-black: #1a1d21;
-    --color-gray-950: #22262b;
-    --color-gray-900: #2c3036;
-    --color-gray-850: #363b42;
-    --color-gray-800: #3f444c;
-    --color-gray-750: #484e57;
-    --color-gray-700: #555b65;
-    --color-gray-600: #6b7280;
-    --color-gray-550: #7d8490;
-    --color-gray-500: #8e95a0;
-    --color-gray-400: #a3aab4;
-    --color-gray-300: #b8bec7;
-    --color-gray-250: #c4cad2;
-    --color-gray-200: #d1d5db;
-    --color-gray-150: #dde0e5;
-    --color-gray-100: #e8eaee;
-    --color-gray-075: #eff0f3;
-    --color-gray-050: #f5f6f8;
-    --color-gray-025: #fafbfc;
-    --color-gray-010: #ffffff;
-    --color-white: #ffffff;
+  /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
+  --color-black: #1a1d21;
+  --color-gray-950: #22262b;
+  --color-gray-900: #2c3036;
+  --color-gray-850: #363b42;
+  --color-gray-800: #3f444c;
+  --color-gray-750: #484e57;
+  --color-gray-700: #555b65;
+  --color-gray-600: #6b7280;
+  --color-gray-550: #7d8490;
+  --color-gray-500: #8e95a0;
+  --color-gray-400: #a3aab4;
+  --color-gray-300: #b8bec7;
+  --color-gray-250: #c4cad2;
+  --color-gray-200: #d1d5db;
+  --color-gray-150: #dde0e5;
+  --color-gray-100: #e8eaee;
+  --color-gray-075: #eff0f3;
+  --color-gray-050: #f5f6f8;
+  --color-gray-025: #fafbfc;
+  --color-gray-010: #ffffff;
+  --color-white: #ffffff;
 
-    /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
-    --gradient-brushed: linear-gradient(80deg,
-            #a6a6a6 0%,
-            #d9d9d9 45%,
-            #e0e0e0 55%,
-            #e0e0e0 65%,
-            #d9d9d9 75%,
-            #a6a6a6 100%);
-    --gradient-brushed-light: linear-gradient(80deg,
-            #c0c0c0 0%,
-            #e8e8e8 45%,
-            #efefef 55%,
-            #efefef 65%,
-            #e8e8e8 75%,
-            #c0c0c0 100%);
-    --gradient-brushed-dark: linear-gradient(80deg,
-            #505050 0%,
-            #787878 45%,
-            #838383 55%,
-            #838383 65%,
-            #787878 75%,
-            #505050 100%);
-    --gradient-btn-gloss: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.35) 0%,
-            rgba(255, 255, 255, 0.12) 49%,
-            rgba(0, 0, 0, 0.04) 50%,
-            rgba(0, 0, 0, 0.12) 100%);
+  /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
+  --gradient-brushed: linear-gradient(80deg,
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
+  --gradient-brushed-light: linear-gradient(80deg,
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
+  --gradient-brushed-dark: linear-gradient(80deg,
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
+  --gradient-btn-gloss: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
 
-    /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
-    --color-secondary: #6b7280;
-    --color-secondary-light: #8e95a0;
-    --color-secondary-dark: #484e57;
+  /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
+  --color-secondary: #6b7280;
+  --color-secondary-light: #8e95a0;
+  --color-secondary-dark: #484e57;
 
-    /* ─── Success ─────────────────────────────────────────────────────── */
-    --color-success: #2d8a4e;
-    --color-success-dark: #1f6b3a;
-    --color-success-light: #4caf50;
+  /* ─── Success ─────────────────────────────────────────────────────── */
+  --color-success: #2d8a4e;
+  --color-success-dark: #1f6b3a;
+  --color-success-light: #4caf50;
 
-    /* ─── Warning ─────────────────────────────────────────────────────── */
-    --color-warning: #d4870e;
-    --color-warning-dark: #b06f0a;
-    --color-warning-light: #f5a623;
+  /* ─── Warning ─────────────────────────────────────────────────────── */
+  --color-warning: #d4870e;
+  --color-warning-dark: #b06f0a;
+  --color-warning-light: #f5a623;
 
-    /* ─── Danger ──────────────────────────────────────────────────────── */
-    --color-danger: #c62828;
-    --color-danger-dark: #9b1b1b;
-    --color-danger-light: #ef5350;
-    --color-danger-muted: #7a1a1a;
+  /* ─── Danger ──────────────────────────────────────────────────────── */
+  --color-danger: #c62828;
+  --color-danger-dark: #9b1b1b;
+  --color-danger-light: #ef5350;
+  --color-danger-muted: #7a1a1a;
 
-    /* ─── Info ────────────────────────────────────────────────────────── */
-    --color-info: #1976d2;
-    --color-info-dark: #1565c0;
-    --color-info-light: #42a5f5;
+  /* ─── Info ────────────────────────────────────────────────────────── */
+  --color-info: #1976d2;
+  --color-info-dark: #1565c0;
+  --color-info-light: #42a5f5;
 
-    /* ═══════════════════════════════════════════════════════════════════════
+  /* ═══════════════════════════════════════════════════════════════════════
        SEMANTIC COLOR USAGE
        ═══════════════════════════════════════════════════════════════════════ */
 
-    /* ─── Text Colors ──────────────────────────────────────────────────── */
-    --text-primary: var(--color-gray-900);
-    --text-secondary: var(--color-gray-600);
-    --text-dark: var(--color-gray-900);
-    --text-accent: var(--color-primary);
-    --text-success: var(--color-success);
-    --text-warning: var(--color-warning);
-    --text-danger: var(--color-danger);
-    --text-info: var(--color-info);
-    --text-light: var(--color-white);
-    --text-muted: var(--color-gray-500);
+  /* ─── Text Colors ──────────────────────────────────────────────────── */
+  --text-primary: var(--color-gray-900);
+  --text-secondary: var(--color-gray-600);
+  --text-dark: var(--color-gray-900);
+  --text-accent: var(--color-primary);
+  --text-success: var(--color-success);
+  --text-warning: var(--color-warning);
+  --text-danger: var(--color-danger);
+  --text-info: var(--color-info);
+  --text-light: var(--color-white);
+  --text-muted: var(--color-gray-500);
 
-    /* ─── Background Colors ────────────────────────────────────────────── */
-    --bg-color: #d0d0d0;
-    --panel-bg: var(--color-gray-900);
-    --panel-bg-dark: #a8a8a8;
-    --panel-bg-subtle: rgba(0, 0, 0, 0.05);
-    --device-surface: var(--gradient-brushed);
+  /* ─── Background Colors ────────────────────────────────────────────── */
+  --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
+  --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
+  --device-surface: var(--gradient-brushed);
 
-    /* ─── Borders ──────────────────────────────────────────────────────── */
-    --border-dark: var(--color-gray-300);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
 
-    /* ─── List Items ──────────────────────────────────────────────────── */
-    --list-item-bg-hover: rgba(0, 0, 0, 0.06);
-    --list-item-text-hover: var(--color-gray-900);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
 
-    /* ─── Button Colors ────────────────────────────────────────────────── */
-    --btn-bg-dark: var(--gradient-brushed-dark);
-    --btn-bg-light: var(--gradient-brushed-light);
-    --btn-bg-primary: var(--color-primary);
-    --btn-bg-secondary: var(--color-secondary);
-    --btn-bg-success: var(--color-success);
-    --btn-bg-warning: var(--color-warning);
-    --btn-bg-danger: var(--color-danger);
-    --btn-bg-info: var(--color-info);
+  /* ─── Button Colors ────────────────────────────────────────────────── */
+  --btn-bg-dark: var(--gradient-brushed-dark);
+  --btn-bg-light: var(--gradient-brushed-light);
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-secondary: var(--color-secondary);
+  --btn-bg-success: var(--color-success);
+  --btn-bg-warning: var(--color-warning);
+  --btn-bg-danger: var(--color-danger);
+  --btn-bg-info: var(--color-info);
 
-    /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
-    --alert-bg-success: rgba(45, 138, 78, 0.15);
-    --alert-bg-warning: rgba(212, 135, 14, 0.15);
-    --alert-bg-danger: rgba(198, 40, 40, 0.15);
-    --alert-bg-info: rgba(25, 118, 210, 0.15);
+  /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+  --alert-bg-success: rgba(45, 138, 78, 0.15);
+  --alert-bg-warning: rgba(212, 135, 14, 0.15);
+  --alert-bg-danger: rgba(198, 40, 40, 0.15);
+  --alert-bg-info: rgba(25, 118, 210, 0.15);
 
-    /* ─── Shadow & Highlight Utilities ────────────────────────────────── */
-    --shadow-10: rgba(0, 0, 0, 0.10);
-    --shadow-15: rgba(0, 0, 0, 0.15);
-    --shadow-20: rgba(0, 0, 0, 0.20);
-    --shadow-25: rgba(0, 0, 0, 0.25);
-    --shadow-30: rgba(0, 0, 0, 0.30);
-    --shadow-40: rgba(0, 0, 0, 0.40);
-    --shadow-50: rgba(0, 0, 0, 0.50);
-    --shadow-60: rgba(0, 0, 0, 0.60);
+  /* ─── Shadow & Highlight Utilities ────────────────────────────────── */
+  --shadow-10: rgba(0, 0, 0, 0.10);
+  --shadow-15: rgba(0, 0, 0, 0.15);
+  --shadow-20: rgba(0, 0, 0, 0.20);
+  --shadow-25: rgba(0, 0, 0, 0.25);
+  --shadow-30: rgba(0, 0, 0, 0.30);
+  --shadow-40: rgba(0, 0, 0, 0.40);
+  --shadow-50: rgba(0, 0, 0, 0.50);
+  --shadow-60: rgba(0, 0, 0, 0.60);
 
-    --highlight-05: rgba(255, 255, 255, 0.10);
-    --highlight-10: rgba(255, 255, 255, 0.18);
-    --highlight-15: rgba(255, 255, 255, 0.25);
-    --highlight-20: rgba(255, 255, 255, 0.32);
-    --highlight-30: rgba(255, 255, 255, 0.40);
-    --highlight-40: rgba(255, 255, 255, 0.50);
-    --highlight-50: rgba(255, 255, 255, 0.60);
+  --highlight-05: rgba(255, 255, 255, 0.10);
+  --highlight-10: rgba(255, 255, 255, 0.18);
+  --highlight-15: rgba(255, 255, 255, 0.25);
+  --highlight-20: rgba(255, 255, 255, 0.32);
+  --highlight-30: rgba(255, 255, 255, 0.40);
+  --highlight-40: rgba(255, 255, 255, 0.50);
+  --highlight-50: rgba(255, 255, 255, 0.60);
 
-    /* ─── Typography ─────────────────────────────────────────────────── */
-    --font-display: 'Unica One', sans-serif;
-    --font-body: 'Quattrocento Sans', sans-serif;
-    --font-code: 'JetBrains Mono', monospace;
-    --font-tech: 'JetBrains Mono', monospace;
-    --font-mono: 'JetBrains Mono', monospace;
-    --font-label: 'Quattrocento Sans', sans-serif;
+  /* ─── Typography ─────────────────────────────────────────────────── */
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Quattrocento Sans', sans-serif;
+  --font-code: 'JetBrains Mono', monospace;
+  --font-tech: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-label: 'Quattrocento Sans', sans-serif;
 
-    /* ── Fluid Type Scale ─────────────────────────────────────────────── */
-    --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
-    --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
-    --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
-    --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
-    --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
-    --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
-    --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
-    --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
-    --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* ── Fluid Type Scale ─────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
 
-    --leading-none: 1;
-    --leading-tight: 1.1;
-    --leading-normal: 1.4;
-    --leading-relaxed: 1.6;
+  --leading-none: 1;
+  --leading-tight: 1.1;
+  --leading-normal: 1.4;
+  --leading-relaxed: 1.6;
 
-    --tracking-tighter: -0.05em;
-    --tracking-tight: -0.025em;
-    --tracking-normal: 0em;
-    --tracking-wide: 0.025em;
-    --tracking-wider: 0.05em;
-    --tracking-widest: 0.1em;
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
 
-    /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
-    --brushed-texture: repeating-linear-gradient(180deg,
-            hsla(0, 0%, 100%, 0) 0px,
-            hsla(0, 0%, 100%, 0) 3px,
-            hsla(0, 0%, 100%, 0.18) 4.5px),
-        repeating-linear-gradient(180deg,
-            hsla(0, 0%, 0%, 0) 0px,
-            hsla(0, 0%, 0%, 0) 2px,
-            hsla(0, 0%, 0%, 0.06) 2.5px),
-        repeating-linear-gradient(180deg,
-            hsla(0, 0%, 100%, 0) 0px,
-            hsla(0, 0%, 100%, 0) 0.6px,
-            hsla(0, 0%, 100%, 0.22) 1.2px);
+  /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
+  --brushed-texture: repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
 
-    /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
-    --brushed-texture-dark: repeating-linear-gradient(180deg,
-            hsla(0, 0%, 100%, 0) 0px,
-            hsla(0, 0%, 100%, 0) 3px,
-            hsla(0, 0%, 100%, 0.08) 4.5px),
-        repeating-linear-gradient(180deg,
-            hsla(0, 0%, 0%, 0) 0px,
-            hsla(0, 0%, 0%, 0) 2px,
-            hsla(0, 0%, 0%, 0.03) 2.5px),
-        repeating-linear-gradient(180deg,
-            hsla(0, 0%, 100%, 0) 0px,
-            hsla(0, 0%, 100%, 0) 0.6px,
-            hsla(0, 0%, 100%, 0.1) 1.2px);
-    --gradient-brushed-black: linear-gradient(80deg,
-            #151515 0%,
-            #484848 40%,
-            #585858 55%,
-            #585858 65%,
-            #484848 75%,
-            #151515 100%);
+  /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
+  --brushed-texture-dark: repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
+  --gradient-brushed-black: linear-gradient(80deg,
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }

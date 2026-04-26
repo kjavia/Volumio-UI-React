@@ -1616,7 +1616,7 @@ pre {
   width: 48px;
   height: 24px;
   background: #000;
-  border-radius: 12px;
+  border-radius: 2px;
   position: relative;
   cursor: pointer;
   box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -1631,7 +1631,7 @@ pre {
   width: 18px;
   height: 18px;
   background: linear-gradient(180deg, #555 0%, #222 100%);
-  border-radius: 50%;
+  border-radius: 2px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -1667,7 +1667,7 @@ pre {
   margin: 0;
   background-color: #000;
   background-image: none;
-  border-radius: 12px;
+  border-radius: 2px;
   border: 1px solid #111;
   cursor: pointer;
   position: relative;
@@ -1677,13 +1677,13 @@ pre {
 .form-check.form-switch .form-check-input::before {
   content: "";
   position: absolute;
-  left: 1px;
+  left: 2px;
   top: 50%;
   transform: translateY(-50%);
   width: 18px;
-  height: 18px;
+  height: 16px;
   background: linear-gradient(180deg, #555 0%, #222 100%);
-  border-radius: 50%;
+  border-radius: 2px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -1693,7 +1693,7 @@ pre {
   box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0, 225, 255, 0.1);
 }
 .form-check.form-switch .form-check-input:checked::before {
-  left: 25px;
+  left: 24px;
   background: var(--color-primary);
   box-shadow: 0 0 10px var(--color-primary);
 }

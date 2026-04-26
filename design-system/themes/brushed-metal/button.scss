@@ -95,12 +95,12 @@
 .btn-primary {
     background:
         var(--gradient-btn-gloss),
-        linear-gradient(180deg, #d9884a 0%, #c87533 50%, #a05e28 100%);
+        linear-gradient(180deg, #2418A0 0%, #170C79 50%, #100858 100%);
     color: var(--color-white);
     border: 1px solid var(--color-primary-dark);
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
     box-shadow:
-        0 2px 6px rgba(200, 117, 51, 0.3),
+        0 2px 6px rgba(23, 12, 121, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
@@ -108,18 +108,18 @@
     color: var(--color-white);
     background:
         var(--gradient-btn-gloss),
-        linear-gradient(180deg, #e0994d 0%, #d9884a 50%, #c87533 100%);
+        linear-gradient(180deg, #3322B0 0%, #2418A0 50%, #170C79 100%);
     box-shadow:
-        0 4px 12px rgba(200, 117, 51, 0.35),
+        0 4px 12px rgba(23, 12, 121, 0.35),
         inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .btn-primary:active,
 .btn-primary.active {
-    background: linear-gradient(180deg, #a05e28 0%, #c87533 100%);
+    background: linear-gradient(180deg, #100858 0%, #170C79 100%);
     box-shadow:
         inset 0 2px 6px rgba(0, 0, 0, 0.35),
-        0 0 4px rgba(200, 117, 51, 0.2);
+        0 0 4px rgba(23, 12, 121, 0.2);
     color: var(--color-white);
     border-color: var(--color-primary-deep);
 }
@@ -295,7 +295,7 @@
     color: var(--color-primary);
     text-shadow:
         0 1px 0 rgba(255, 255, 255, 0.4),
-        0 0 6px rgba(200, 117, 51, 0.3);
+        0 0 6px rgba(23, 12, 121, 0.3);
 }
 
 .btn-round.btn-primary:hover,
@@ -426,4 +426,70 @@
 .btn-outline:active {
     background: rgba(0, 0, 0, 0.1);
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* ─── Settings Radio Button Group — single brushed-aluminum strip ──────── */
+.settings-radio-group {
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed);
+    border: 1px solid var(--color-gray-500);
+    border-radius: 6px;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+
+    >.settings-radio.btn,
+    >.settings-radio.btn:hover,
+    >.settings-radio.btn:active,
+    >.settings-radio.btn:focus,
+    >.settings-radio.btn:focus-visible,
+    >.settings-radio.btn.btn-secondary,
+    >.settings-radio.btn.btn-primary {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        outline: none !important;
+        margin: 0 !important;
+        transform: none !important;
+        color: var(--color-gray-700);
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+        min-height: 30px;
+        padding: 6px 14px;
+        position: relative;
+    }
+
+    /* Machined groove between options */
+    >.settings-radio.btn+.settings-radio.btn::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 4px;
+        bottom: 4px;
+        width: 1px;
+        background: rgba(0, 0, 0, 0.15);
+        box-shadow: 1px 0 0 rgba(255, 255, 255, 0.4);
+        pointer-events: none;
+    }
+
+    >.settings-radio.btn:hover {
+        color: var(--color-gray-900) !important;
+    }
+
+    /* Selected — pressed into the surface with primary color fill */
+    >.settings-radio.btn.btn-primary,
+    >.settings-radio.btn.btn-primary:hover {
+        background:
+            var(--brushed-texture-dark),
+            var(--color-primary) !important;
+        box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.35),
+            inset 0 0 8px rgba(0, 0, 0, 0.2),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.1) !important;
+        color: #fff !important;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    }
 }

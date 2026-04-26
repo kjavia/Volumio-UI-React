@@ -94,7 +94,7 @@ $frame-highlight: rgba(255, 255, 255, 0.45);
 .lcd-weather-icon {
     font-size: clamp(0.9rem, 2cqw, 3rem);
     color: var(--color-primary);
-    filter: drop-shadow(0 0 0.3cqw rgba(200, 117, 51, 0.4));
+    filter: drop-shadow(0 0 0.3cqw rgba(23, 12, 121, 0.4));
 }
 
 .lcd-weather-temp {
@@ -140,8 +140,8 @@ $frame-highlight: rgba(255, 255, 255, 0.45);
         width: 100%;
         height: 55%;
         background: radial-gradient(ellipse 100% 100% at 50% 100%,
-                rgba(200, 117, 51, 0.2) 0%,
-                rgba(200, 117, 51, 0.1) 40%,
+                rgba(23, 12, 121, 0.2) 0%,
+                rgba(23, 12, 121, 0.1) 40%,
                 transparent 75%);
         pointer-events: none;
     }

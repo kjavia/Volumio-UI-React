@@ -56,7 +56,7 @@
 
 /* Active / current track */
 .playlist-item--active {
-    background: rgba(200, 117, 51, 0.1) !important;
+    background: rgba(23, 12, 121, 0.1) !important;
     border-left: 3px solid var(--color-primary);
 
     .playlist-track-title {
@@ -174,8 +174,8 @@
 
     &.active {
         background: linear-gradient(135deg,
-                rgba(200, 117, 51, 0.15),
-                rgba(200, 117, 51, 0.25));
+                rgba(23, 12, 121, 0.15),
+                rgba(23, 12, 121, 0.25));
         border-color: var(--color-primary);
         box-shadow: 0 2px 8px var(--glow-primary);
     }
@@ -275,7 +275,7 @@
 .pm-column__header .btn-primary {
     background:
         var(--gradient-btn-gloss),
-        linear-gradient(180deg, #d9884a 0%, #c87533 50%, #a05e28 100%);
+        linear-gradient(180deg, #2418A0 0%, #170C79 50%, #100858 100%);
     color: var(--color-white);
     border-color: var(--color-primary-dark);
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
@@ -359,7 +359,7 @@
 }
 
 .pm-album-item--active {
-    background: rgba(200, 117, 51, 0.1);
+    background: rgba(23, 12, 121, 0.1);
     border-left-color: var(--color-primary);
 }
 
@@ -378,11 +378,11 @@
 }
 
 .pm-track-item--selected {
-    background: rgba(200, 117, 51, 0.1);
+    background: rgba(23, 12, 121, 0.1);
 }
 
 .pm-track-item__disc-badge {
-    background: rgba(200, 117, 51, 0.15);
+    background: rgba(23, 12, 121, 0.15);
     color: var(--color-primary);
 }
 
@@ -412,7 +412,7 @@
 }
 
 .pm-playlist-item--dragover {
-    background: rgba(200, 117, 51, 0.12);
+    background: rgba(23, 12, 121, 0.12);
     border-left-color: var(--color-primary);
 }
 
@@ -436,8 +436,8 @@
 
 /* Drag hint */
 .pm-drag-hint {
-    background: rgba(200, 117, 51, 0.08);
-    border-color: rgba(200, 117, 51, 0.3);
+    background: rgba(23, 12, 121, 0.08);
+    border-color: rgba(23, 12, 121, 0.3);
     color: var(--color-gray-600);
 }
 
@@ -447,18 +447,18 @@
 
 /* Drop target */
 .pm-empty--drop {
-    border-color: rgba(200, 117, 51, 0.3);
+    border-color: rgba(23, 12, 121, 0.3);
     color: var(--color-gray-500);
 }
 
 .pm-empty--drop .material-icons {
-    color: rgba(200, 117, 51, 0.5);
+    color: rgba(23, 12, 121, 0.5);
 }
 
 /* Column dragover highlight */
 .pm-column--dragover {
-    background: rgba(200, 117, 51, 0.06);
-    outline-color: rgba(200, 117, 51, 0.4);
+    background: rgba(23, 12, 121, 0.06);
+    outline-color: rgba(23, 12, 121, 0.4);
 }
 
 /* Playlist track items */

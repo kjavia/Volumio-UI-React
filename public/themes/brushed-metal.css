@@ -6,15 +6,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Unica+One&display=swap");
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -39,31 +39,31 @@
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -86,8 +86,8 @@
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -169,50 +169,50 @@
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -237,31 +237,31 @@
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -284,8 +284,8 @@
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -367,37 +367,37 @@
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -551,15 +551,15 @@ code {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -584,31 +584,31 @@ code {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -631,8 +631,8 @@ code {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -714,37 +714,37 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1177,15 +1177,15 @@ code {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -1210,31 +1210,31 @@ code {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -1257,8 +1257,8 @@ code {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -1340,37 +1340,37 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1441,23 +1441,23 @@ code {
 }
 
 .btn-primary {
-  background: var(--gradient-btn-gloss), linear-gradient(180deg, #d9884a 0%, #c87533 50%, #a05e28 100%);
+  background: var(--gradient-btn-gloss), linear-gradient(180deg, #2418A0 0%, #170C79 50%, #100858 100%);
   color: var(--color-white);
   border: 1px solid var(--color-primary-dark);
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-  box-shadow: 0 2px 6px rgba(200, 117, 51, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 6px rgba(23, 12, 121, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .btn-primary:hover {
   color: var(--color-white);
-  background: var(--gradient-btn-gloss), linear-gradient(180deg, #e0994d 0%, #d9884a 50%, #c87533 100%);
-  box-shadow: 0 4px 12px rgba(200, 117, 51, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  background: var(--gradient-btn-gloss), linear-gradient(180deg, #3322B0 0%, #2418A0 50%, #170C79 100%);
+  box-shadow: 0 4px 12px rgba(23, 12, 121, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .btn-primary:active,
 .btn-primary.active {
-  background: linear-gradient(180deg, #a05e28 0%, #c87533 100%);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35), 0 0 4px rgba(200, 117, 51, 0.2);
+  background: linear-gradient(180deg, #100858 0%, #170C79 100%);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35), 0 0 4px rgba(23, 12, 121, 0.2);
   color: var(--color-white);
   border-color: var(--color-primary-deep);
 }
@@ -1572,7 +1572,7 @@ code {
 .btn-round.btn-primary .material-icons,
 .btn-circle.btn-primary .material-icons {
   color: var(--color-primary);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 6px rgba(200, 117, 51, 0.3);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 6px rgba(23, 12, 121, 0.3);
 }
 
 .btn-round.btn-primary:hover,
@@ -1676,17 +1676,73 @@ code {
   box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
+/* ─── Settings Radio Button Group — single brushed-aluminum strip ──────── */
+.settings-radio-group {
+  background: var(--brushed-texture), var(--gradient-brushed);
+  border: 1px solid var(--color-gray-500);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+.settings-radio-group > .settings-radio.btn, .settings-radio-group > .settings-radio.form-select,
+.settings-radio-group > .settings-radio.btn:hover,
+.settings-radio-group > .settings-radio.btn:active,
+.settings-radio-group > .settings-radio.btn:focus,
+.settings-radio-group > .settings-radio.btn:focus-visible,
+.settings-radio-group > .settings-radio.btn.btn-secondary,
+.settings-radio-group > .settings-radio.btn.btn-primary {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  margin: 0 !important;
+  transform: none !important;
+  color: var(--color-gray-700);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  min-height: 30px;
+  padding: 6px 14px;
+  position: relative;
+}
+.settings-radio-group {
+  /* Machined groove between options */
+}
+.settings-radio-group > .settings-radio.btn + .settings-radio.btn::before, .settings-radio-group > .settings-radio.form-select + .settings-radio.btn::before, .settings-radio-group > .settings-radio.btn + .settings-radio.form-select::before, .settings-radio-group > .settings-radio.form-select + .settings-radio.form-select::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
+.settings-radio-group > .settings-radio.btn:hover, .settings-radio-group > .settings-radio.form-select:hover {
+  color: var(--color-gray-900) !important;
+}
+.settings-radio-group {
+  /* Selected — pressed into the surface with primary color fill */
+}
+.settings-radio-group > .settings-radio.btn.btn-primary, .settings-radio-group > .settings-radio.btn-primary.form-select,
+.settings-radio-group > .settings-radio.btn.btn-primary:hover {
+  background: var(--brushed-texture-dark), var(--color-primary) !important;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.35), inset 0 0 8px rgba(0, 0, 0, 0.2), inset 0 -1px 0 rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -1711,31 +1767,31 @@ code {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -1758,8 +1814,8 @@ code {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -1841,37 +1897,37 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1948,7 +2004,7 @@ code {
 .form-control:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08), 0 0 0 3px rgba(200, 117, 51, 0.2);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08), 0 0 0 3px rgba(23, 12, 121, 0.2);
   color: var(--color-gray-900);
 }
 
@@ -1968,7 +2024,7 @@ code {
   width: 48px;
   height: 24px;
   background: var(--color-gray-300);
-  border-radius: 12px;
+  border-radius: 2px;
   position: relative;
   cursor: pointer;
   box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 0 3px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.4);
@@ -1983,22 +2039,22 @@ code {
   width: 18px;
   height: 18px;
   background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
-  border-radius: 50%;
+  border-radius: 2px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(180, 180, 180, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.4), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
   border: 1px solid transparent;
 }
 
 .form-switch.checked {
-  background: rgba(200, 117, 51, 0.2);
+  background: rgba(23, 12, 121, 0.2);
   border-color: var(--color-primary);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12), inset 0 0 6px rgba(200, 117, 51, 0.15);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12), inset 0 0 6px rgba(23, 12, 121, 0.15);
 }
 
 .form-switch.checked::after {
   left: 26px;
-  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%), linear-gradient(180deg, #d9884a 0%, #c87533 50%, #a05e28 100%);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(200, 117, 51, 0.3), 0 2px 6px rgba(200, 117, 51, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%), linear-gradient(180deg, #2418A0 0%, #170C79 50%, #100858 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(23, 12, 121, 0.3), 0 2px 6px rgba(23, 12, 121, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.3);
   border-color: var(--color-primary-dark);
 }
 
@@ -2022,7 +2078,7 @@ code {
   margin: 0;
   background-color: var(--color-gray-300);
   background-image: none;
-  border-radius: 12px;
+  border-radius: 2px;
   border: 1px solid var(--color-gray-400);
   cursor: pointer;
   position: relative;
@@ -2032,29 +2088,29 @@ code {
 .form-check.form-switch .form-check-input::before {
   content: "";
   position: absolute;
-  left: 1px;
+  left: 2px;
   top: 50%;
   transform: translateY(-50%);
   width: 18px;
-  height: 18px;
+  height: 16px;
   background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
-  border-radius: 50%;
+  border-radius: 2px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(180, 180, 180, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.4), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
 }
 .form-check.form-switch .form-check-input:checked {
-  background-color: rgba(200, 117, 51, 0.2);
+  background-color: rgba(23, 12, 121, 0.2);
   background-image: none;
   border-color: var(--color-primary);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12), inset 0 0 6px rgba(200, 117, 51, 0.15);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12), inset 0 0 6px rgba(23, 12, 121, 0.15);
 }
 .form-check.form-switch .form-check-input:checked::before {
-  left: 25px;
-  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%), linear-gradient(180deg, #d9884a 0%, #c87533 50%, #a05e28 100%);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(200, 117, 51, 0.3), 0 2px 6px rgba(200, 117, 51, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  left: 24px;
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%), linear-gradient(180deg, #2418A0 0%, #170C79 50%, #100858 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(23, 12, 121, 0.3), 0 2px 6px rgba(23, 12, 121, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 .form-check.form-switch .form-check-input:focus {
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(200, 117, 51, 0.2);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(23, 12, 121, 0.2);
 }
 
 /* ─── Select / Dropdown ─────────────────────────────────────────────────────── */
@@ -2083,7 +2139,7 @@ code {
 .form-select:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 1px rgba(200, 117, 51, 0.3), 0 0 0 3px rgba(200, 117, 51, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 1px rgba(23, 12, 121, 0.3), 0 0 0 3px rgba(23, 12, 121, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 .form-select:disabled {
   opacity: 0.4;
@@ -2148,15 +2204,15 @@ code {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -2181,31 +2237,31 @@ code {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -2228,8 +2284,8 @@ code {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -2311,37 +2367,37 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -2414,15 +2470,15 @@ code {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -2447,31 +2503,31 @@ code {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -2494,8 +2550,8 @@ code {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -2577,37 +2633,37 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -2695,15 +2751,15 @@ code {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -2728,31 +2784,31 @@ code {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -2775,8 +2831,8 @@ code {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -2858,37 +2914,37 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -2944,7 +3000,7 @@ code {
   left: 50%;
   transform: translateX(-50%);
   border-radius: 2px;
-  box-shadow: 0 0 6px rgba(200, 117, 51, 0.5);
+  box-shadow: 0 0 6px rgba(23, 12, 121, 0.5);
   z-index: 2;
 }
 
@@ -2962,15 +3018,15 @@ code {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -2995,31 +3051,31 @@ code {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -3042,8 +3098,8 @@ code {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -3125,37 +3181,37 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -3262,15 +3318,15 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -3295,31 +3351,31 @@ h2 {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -3342,8 +3398,8 @@ h2 {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -3425,37 +3481,37 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -4295,7 +4351,7 @@ h2 {
 
 .weather-full-hero-icon {
   color: var(--color-primary-light);
-  filter: drop-shadow(0 0 6px rgba(200, 117, 51, 0.4));
+  filter: drop-shadow(0 0 6px rgba(23, 12, 121, 0.4));
 }
 
 .weather-full-tenday-title {
@@ -4344,15 +4400,15 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -4377,31 +4433,31 @@ h2 {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -4424,8 +4480,8 @@ h2 {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -4507,37 +4563,37 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -4620,15 +4676,15 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -4653,31 +4709,31 @@ h2 {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -4700,8 +4756,8 @@ h2 {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -4783,37 +4839,37 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -4867,7 +4923,7 @@ h2 {
 
 /* Active / current track */
 .playlist-item--active {
-  background: rgba(200, 117, 51, 0.1) !important;
+  background: rgba(23, 12, 121, 0.1) !important;
   border-left: 3px solid var(--color-primary);
 }
 .playlist-item--active .playlist-track-title {
@@ -4978,7 +5034,7 @@ h2 {
   transform: translateX(4px);
 }
 .playlist-item.active {
-  background: linear-gradient(135deg, rgba(200, 117, 51, 0.15), rgba(200, 117, 51, 0.25));
+  background: linear-gradient(135deg, rgba(23, 12, 121, 0.15), rgba(23, 12, 121, 0.25));
   border-color: var(--color-primary);
   box-shadow: 0 2px 8px var(--glow-primary);
 }
@@ -5070,7 +5126,7 @@ h2 {
 
 .pm-topbar .btn-primary,
 .pm-column__header .btn-primary {
-  background: var(--gradient-btn-gloss), linear-gradient(180deg, #d9884a 0%, #c87533 50%, #a05e28 100%);
+  background: var(--gradient-btn-gloss), linear-gradient(180deg, #2418A0 0%, #170C79 50%, #100858 100%);
   color: var(--color-white);
   border-color: var(--color-primary-dark);
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
@@ -5148,7 +5204,7 @@ h2 {
 }
 
 .pm-album-item--active {
-  background: rgba(200, 117, 51, 0.1);
+  background: rgba(23, 12, 121, 0.1);
   border-left-color: var(--color-primary);
 }
 
@@ -5167,11 +5223,11 @@ h2 {
 }
 
 .pm-track-item--selected {
-  background: rgba(200, 117, 51, 0.1);
+  background: rgba(23, 12, 121, 0.1);
 }
 
 .pm-track-item__disc-badge {
-  background: rgba(200, 117, 51, 0.15);
+  background: rgba(23, 12, 121, 0.15);
   color: var(--color-primary);
 }
 
@@ -5201,7 +5257,7 @@ h2 {
 }
 
 .pm-playlist-item--dragover {
-  background: rgba(200, 117, 51, 0.12);
+  background: rgba(23, 12, 121, 0.12);
   border-left-color: var(--color-primary);
 }
 
@@ -5225,8 +5281,8 @@ h2 {
 
 /* Drag hint */
 .pm-drag-hint {
-  background: rgba(200, 117, 51, 0.08);
-  border-color: rgba(200, 117, 51, 0.3);
+  background: rgba(23, 12, 121, 0.08);
+  border-color: rgba(23, 12, 121, 0.3);
   color: var(--color-gray-600);
 }
 
@@ -5236,18 +5292,18 @@ h2 {
 
 /* Drop target */
 .pm-empty--drop {
-  border-color: rgba(200, 117, 51, 0.3);
+  border-color: rgba(23, 12, 121, 0.3);
   color: var(--color-gray-500);
 }
 
 .pm-empty--drop .material-icons {
-  color: rgba(200, 117, 51, 0.5);
+  color: rgba(23, 12, 121, 0.5);
 }
 
 /* Column dragover highlight */
 .pm-column--dragover {
-  background: rgba(200, 117, 51, 0.06);
-  outline-color: rgba(200, 117, 51, 0.4);
+  background: rgba(23, 12, 121, 0.06);
+  outline-color: rgba(23, 12, 121, 0.4);
 }
 
 /* Playlist track items */
@@ -5276,15 +5332,15 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -5309,31 +5365,31 @@ h2 {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -5356,8 +5412,8 @@ h2 {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -5439,37 +5495,37 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -5573,15 +5629,15 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -5606,31 +5662,31 @@ h2 {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -5653,8 +5709,8 @@ h2 {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -5736,37 +5792,37 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -5926,15 +5982,15 @@ h2 {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
-     Inspired by real brushed aluminum surfaces with warm undertones
-     ═══════════════════════════════════════════════════════════════════════ */
-  /* ─── Primary (Warm Copper/Bronze accent) ────────────────────────── */
-  --color-primary: #c87533;
-  --color-primary-light: #e0994d;
-  --color-primary-dark: #a05e28;
-  --color-primary-deep: #7a4820;
-  --glow-primary: rgba(200, 117, 51, 0.35);
+       COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
+       Inspired by real brushed aluminum surfaces with warm undertones
+       ═══════════════════════════════════════════════════════════════════════ */
+  /* ─── Primary (Deep Indigo accent) ──────────────────────────────── */
+  --color-primary: #170C79;
+  --color-primary-light: #3322B0;
+  --color-primary-dark: #100858;
+  --color-primary-deep: #0A0540;
+  --glow-primary: rgba(23, 12, 121, 0.35);
   /* ─── Neutrals (Aluminum / Brushed Steel) ─────────────────────────── */
   --color-black: #1a1d21;
   --color-gray-950: #22262b;
@@ -5959,31 +6015,31 @@ h2 {
   --color-white: #ffffff;
   /* ─── Brushed Metal Surface Gradients ──────────────────────────────── */
   --gradient-brushed: linear-gradient(80deg,
-          #a6a6a6 0%,
-          #d9d9d9 45%,
-          #e0e0e0 55%,
-          #e0e0e0 65%,
-          #d9d9d9 75%,
-          #a6a6a6 100%);
+      #a6a6a6 0%,
+      #d9d9d9 45%,
+      #e0e0e0 55%,
+      #e0e0e0 65%,
+      #d9d9d9 75%,
+      #a6a6a6 100%);
   --gradient-brushed-light: linear-gradient(80deg,
-          #c0c0c0 0%,
-          #e8e8e8 45%,
-          #efefef 55%,
-          #efefef 65%,
-          #e8e8e8 75%,
-          #c0c0c0 100%);
+      #c0c0c0 0%,
+      #e8e8e8 45%,
+      #efefef 55%,
+      #efefef 65%,
+      #e8e8e8 75%,
+      #c0c0c0 100%);
   --gradient-brushed-dark: linear-gradient(80deg,
-          #505050 0%,
-          #787878 45%,
-          #838383 55%,
-          #838383 65%,
-          #787878 75%,
-          #505050 100%);
+      #505050 0%,
+      #787878 45%,
+      #838383 55%,
+      #838383 65%,
+      #787878 75%,
+      #505050 100%);
   --gradient-btn-gloss: linear-gradient(180deg,
-          rgba(255, 255, 255, 0.35) 0%,
-          rgba(255, 255, 255, 0.12) 49%,
-          rgba(0, 0, 0, 0.04) 50%,
-          rgba(0, 0, 0, 0.12) 100%);
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 49%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.12) 100%);
   /* ─── Secondary (Steel Blue-Grey) ─────────────────────────────────── */
   --color-secondary: #6b7280;
   --color-secondary-light: #8e95a0;
@@ -6006,8 +6062,8 @@ h2 {
   --color-info-dark: #1565c0;
   --color-info-light: #42a5f5;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+       SEMANTIC COLOR USAGE
+       ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-900);
   --text-secondary: var(--color-gray-600);
@@ -6089,37 +6145,37 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.18) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.06) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.22) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.18) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.06) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 3px,
-          hsla(0, 0%, 100%, 0.08) 4.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0px,
-          hsla(0, 0%, 0%, 0) 2px,
-          hsla(0, 0%, 0%, 0.03) 2.5px),
-      repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0px,
-          hsla(0, 0%, 100%, 0) 0.6px,
-          hsla(0, 0%, 100%, 0.1) 1.2px);
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 3px,
+      hsla(0, 0%, 100%, 0.08) 4.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 0%, 0) 0px,
+      hsla(0, 0%, 0%, 0) 2px,
+      hsla(0, 0%, 0%, 0.03) 2.5px),
+    repeating-linear-gradient(180deg,
+      hsla(0, 0%, 100%, 0) 0px,
+      hsla(0, 0%, 100%, 0) 0.6px,
+      hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
-          #151515 0%,
-          #484848 40%,
-          #585858 55%,
-          #585858 65%,
-          #484848 75%,
-          #151515 100%);
+      #151515 0%,
+      #484848 40%,
+      #585858 55%,
+      #585858 65%,
+      #484848 75%,
+      #151515 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -6320,7 +6376,7 @@ h2 {
   background: rgba(0, 0, 0, 0.06);
 }
 .dialog-list-item.active {
-  background: rgba(200, 117, 51, 0.12);
+  background: rgba(23, 12, 121, 0.12);
   border-left: 3px solid var(--color-primary);
 }
 
@@ -6386,7 +6442,7 @@ h2 {
 .lcd-weather-icon {
   font-size: clamp(0.9rem, 2cqw, 3rem);
   color: var(--color-primary);
-  filter: drop-shadow(0 0 0.3cqw rgba(200, 117, 51, 0.4));
+  filter: drop-shadow(0 0 0.3cqw rgba(23, 12, 121, 0.4));
 }
 
 .lcd-weather-temp {
@@ -6419,7 +6475,7 @@ h2 {
   left: 0;
   width: 100%;
   height: 55%;
-  background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(200, 117, 51, 0.2) 0%, rgba(200, 117, 51, 0.1) 40%, transparent 75%);
+  background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(23, 12, 121, 0.2) 0%, rgba(23, 12, 121, 0.1) 40%, transparent 75%);
   pointer-events: none;
 }
 
@@ -6672,7 +6728,7 @@ h2 {
   height: 38%;
   margin-left: -0.75px;
   background: var(--color-primary-light);
-  box-shadow: 0 0 6px rgba(200, 117, 51, 0.5);
+  box-shadow: 0 0 6px rgba(23, 12, 121, 0.5);
   border-radius: 1px;
   z-index: 5;
   transition: none;
@@ -6688,7 +6744,7 @@ h2 {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(200, 117, 51, 0.25), 0 0 8px rgba(200, 117, 51, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 2px rgba(23, 12, 121, 0.25), 0 0 8px rgba(23, 12, 121, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
   z-index: 6;
 }
 
@@ -6714,7 +6770,7 @@ h2 {
 .clock-face-weather-icon {
   font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
   color: var(--color-primary-light);
-  filter: drop-shadow(0 0 3px rgba(200, 117, 51, 0.4));
+  filter: drop-shadow(0 0 3px rgba(23, 12, 121, 0.4));
 }
 
 .clock-face-weather-temp {

@@ -299,6 +299,9 @@ const JsonField = ({ field, value, onChange }) => {
       </label>
       {field.doc && <small className="settings-doc">{field.doc}</small>}
       <div className="settings-json-editor">
+        <button type="button" className="btn btn-sm btn-secondary settings-json-format" onClick={handleFormat} disabled={!!error}>
+          <span className="material-icons">auto_fix_high</span> Format
+        </button>
         <textarea
           className={`settings-json-textarea ${error ? 'settings-json-textarea--error' : ''}`}
           value={text}
@@ -306,12 +309,7 @@ const JsonField = ({ field, value, onChange }) => {
           spellCheck={false}
           rows={10}
         />
-        <div className="settings-json-footer">
-          {error && <small className="settings-json-error"><span className="material-icons">error_outline</span>{error}</small>}
-          <button type="button" className="btn btn-sm btn-secondary settings-json-format" onClick={handleFormat} disabled={!!error}>
-            <span className="material-icons">auto_fix_high</span> Format
-          </button>
-        </div>
+        {error && <small className="settings-json-error"><span className="material-icons">error_outline</span>{error}</small>}
       </div>
     </div>
   );
