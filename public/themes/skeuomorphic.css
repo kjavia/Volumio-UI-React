@@ -2658,6 +2658,17 @@ input:checked + .slider:after {
   cursor: not-allowed;
 }
 
+/* ─── Settings page title overrides ────────────────────────────────────── */
+.settings-topbar__title,
+.settings-section__title {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+.settings-label {
+  color: #ffffff !important;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE

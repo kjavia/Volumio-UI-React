@@ -1647,6 +1647,60 @@ pre {
   box-shadow: 0 0 10px var(--color-primary);
 }
 
+/* ─── Bootstrap form-check switch override ───────────────────────────────── */
+.form-check.form-switch {
+  padding-left: 0;
+  width: auto;
+  height: auto;
+  background: none;
+  border: none;
+  box-shadow: none;
+  position: static;
+}
+.form-check.form-switch::after {
+  display: none;
+}
+.form-check.form-switch .form-check-input {
+  appearance: none;
+  width: 48px;
+  height: 24px;
+  margin: 0;
+  background-color: #000;
+  background-image: none;
+  border-radius: 12px;
+  border: 1px solid #111;
+  cursor: pointer;
+  position: relative;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+.form-check.form-switch .form-check-input::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(180deg, #555 0%, #222 100%);
+  border-radius: 50%;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+.form-check.form-switch .form-check-input:checked {
+  background-color: rgba(0, 225, 255, 0.1);
+  background-image: none;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0, 225, 255, 0.1);
+}
+.form-check.form-switch .form-check-input:checked::before {
+  left: 25px;
+  background: var(--color-primary);
+  box-shadow: 0 0 10px var(--color-primary);
+}
+.form-check.form-switch .form-check-input:focus {
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8), 0 0 0 3px rgba(0, 225, 255, 0.2);
+}
+
 /* ─── Select / Dropdown ─────────────────────────────────────────────────────── */
 .form-select {
   appearance: none;
