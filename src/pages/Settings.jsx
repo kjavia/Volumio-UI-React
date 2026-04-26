@@ -69,7 +69,7 @@ const SECTIONS = [
           { value: 'none', label: 'None' },
         ],
       },
-      { id: 'spectrumOptions', element: 'input', type: 'text', label: 'Spectrum Options (JSON)', icon: 'data_object', doc: 'Override AudioMotion Analyzer options.', visibleIf: { field: 'vizType', value: 'spectrum' } },
+      { id: 'spectrumOptions', element: 'json', label: 'Spectrum Options (JSON)', icon: 'data_object', doc: 'Override AudioMotion Analyzer options.', visibleIf: { field: 'vizType', value: 'spectrum' } },
       { id: 'peppyMeterWidth', element: 'input', type: 'number', label: 'Peppy Meter Width (px)', icon: 'width', visibleIf: { field: 'vizType', value: 'peppyMeter' } },
       { id: 'peppyMeterHeight', element: 'input', type: 'number', label: 'Peppy Meter Height (px)', icon: 'height', visibleIf: { field: 'vizType', value: 'peppyMeter' } },
     ],
@@ -263,6 +263,61 @@ const InputField = ({ field, value, onChange }) => (
 );
 InputField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), onChange: PropTypes.func.isRequired };
 
+const JsonField = ({ field, value, onChange }) => {
+  const [text, setText] = useState(() => {
+    try { return JSON.stringify(JSON.parse(value || '{}'), null, 2); } catch { return value || '{}'; }
+  });
+  const [error, setError] = useState(null);
+
+  const handleChange = (e) => {
+    const v = e.target.value;
+    setText(v);
+    try {
+      JSON.parse(v);
+      setError(null);
+      onChange(field.id, v);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleFormat = () => {
+    try {
+      const parsed = JSON.parse(text);
+      const pretty = JSON.stringify(parsed, null, 2);
+      setText(pretty);
+      onChange(field.id, pretty);
+      setError(null);
+    } catch { /* keep current text */ }
+  };
+
+  return (
+    <div className="settings-field">
+      <label className="settings-label">
+        {field.icon && <span className="material-icons settings-field__icon">{field.icon}</span>}
+        {field.label}
+      </label>
+      {field.doc && <small className="settings-doc">{field.doc}</small>}
+      <div className="settings-json-editor">
+        <textarea
+          className={`settings-json-textarea ${error ? 'settings-json-textarea--error' : ''}`}
+          value={text}
+          onChange={handleChange}
+          spellCheck={false}
+          rows={10}
+        />
+        <div className="settings-json-footer">
+          {error && <small className="settings-json-error"><span className="material-icons">error_outline</span>{error}</small>}
+          <button type="button" className="btn btn-sm btn-secondary settings-json-format" onClick={handleFormat} disabled={!!error}>
+            <span className="material-icons">auto_fix_high</span> Format
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+JsonField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.string, onChange: PropTypes.func.isRequired };
+
 /* ─── Section Component ────────────────────────────────────────────────── */
 
 const SettingsSection = ({ section, values, onChange, onSave, saving }) => {
@@ -289,6 +344,8 @@ const SettingsSection = ({ section, values, onChange, onSave, saving }) => {
               return <ColorField key={field.id} field={field} value={values[field.id]} onChange={onChange} />;
             case 'input':
               return <InputField key={field.id} field={field} value={values[field.id]} onChange={onChange} />;
+            case 'json':
+              return <JsonField key={field.id} field={field} value={values[field.id]} onChange={onChange} />;
             default:
               return null;
           }

@@ -223,8 +223,8 @@ input:checked+.slider:before {
 input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   border-radius: 3px;
   border: 1px solid #a0a0a0;
 
@@ -250,8 +250,8 @@ input[type="checkbox"] {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 4px;
-      height: 8px;
+      width: 5px;
+      height: 10px;
       border: solid #fff;
       border-width: 0 2px 2px 0;
       transform: translate(-50%, -60%) rotate(45deg);
@@ -284,6 +284,11 @@ input[type="radio"] {
   display: inline-block;
   vertical-align: middle;
   flex-shrink: 0;
+
+  // Hidden inside settings radio-button groups
+  &.settings-radio__input {
+    display: none;
+  }
 
   &:checked {
     background: #ffffff;

@@ -1577,7 +1577,8 @@ p {
 .section-title {
   font-family: var(--font-label);
   font-size: var(--text-xs);
-  color: var(--casio-lcd-bg); /* LCD-green accent labels */
+  color: var(--casio-lcd-bg);
+  /* LCD-green accent labels */
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
   border-bottom: 1px solid var(--casio-ridge);
@@ -1665,10 +1666,99 @@ input[type=checkbox] {
 }
 
 input[type=radio] {
-  width: 14px;
-  height: 14px;
-  accent-color: var(--casio-red);
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--casio-key-face);
+  border-top: 2px solid var(--casio-key-hi);
+  border-left: 2px solid var(--casio-key-hi);
+  border-bottom: 2px solid var(--casio-key-sh);
+  border-right: 2px solid var(--casio-key-sh);
   cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+input[type=radio]:checked {
+  background: var(--casio-red);
+  border-top-color: var(--casio-red-hi);
+  border-left-color: var(--casio-red-hi);
+  border-bottom-color: var(--casio-red-sh);
+  border-right-color: var(--casio-red-sh);
+}
+input[type=radio]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+input[type=radio]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--casio-red);
+}
+
+/* ─── Toggle Switch (Bootstrap form-switch) ──────────────────────────── */
+.form-check.form-switch .form-check-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 44px;
+  height: 22px;
+  border-radius: 2px;
+  background-image: none;
+  background: #3a4560;
+  border-top: 2px solid #4d5a72;
+  border-left: 2px solid #4d5a72;
+  border-bottom: 2px solid var(--casio-key-sh);
+  border-right: 2px solid var(--casio-key-sh);
+  cursor: pointer;
+  position: relative;
+}
+.form-check.form-switch .form-check-input::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 14px;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 2px;
+  background: var(--casio-ridge);
+  border-top: 1px solid var(--casio-sheen);
+  border-left: 1px solid var(--casio-sheen);
+  border-bottom: 1px solid var(--casio-edge);
+  border-right: 1px solid var(--casio-edge);
+  transition: left 0.15s;
+}
+.form-check.form-switch .form-check-input:checked {
+  background: var(--casio-red);
+  border-top-color: var(--casio-red-sh);
+  border-left-color: var(--casio-red-sh);
+  border-bottom-color: var(--casio-red-hi);
+  border-right-color: var(--casio-red-hi);
+  background-image: none;
+}
+.form-check.form-switch .form-check-input:checked::before {
+  left: 22px;
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+.form-check.form-switch .form-check-input:focus {
+  box-shadow: none;
+  outline: none;
+}
+.form-check.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--casio-red);
+}
+.form-check.form-switch .form-check-input::after {
+  display: none;
 }
 
 /* ─── Range ──────────────────────────────────────────────────────────── */
