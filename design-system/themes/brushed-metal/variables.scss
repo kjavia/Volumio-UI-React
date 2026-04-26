@@ -50,12 +50,12 @@
             #e8e8e8 75%,
             #c0c0c0 100%);
     --gradient-brushed-dark: linear-gradient(80deg,
-            #707070 0%,
-            #a0a0a0 45%,
-            #ababab 55%,
-            #ababab 65%,
-            #a0a0a0 75%,
-            #707070 100%);
+            #505050 0%,
+            #787878 45%,
+            #838383 55%,
+            #838383 65%,
+            #787878 75%,
+            #505050 100%);
     --gradient-btn-gloss: linear-gradient(180deg,
             rgba(255, 255, 255, 0.35) 0%,
             rgba(255, 255, 255, 0.12) 49%,
@@ -154,11 +154,11 @@
 
     /* ─── Typography ─────────────────────────────────────────────────── */
     --font-display: 'Unica One', sans-serif;
-    --font-body: 'Crimson Text', serif;
+    --font-body: 'Quattrocento Sans', sans-serif;
     --font-code: 'JetBrains Mono', monospace;
     --font-tech: 'JetBrains Mono', monospace;
     --font-mono: 'JetBrains Mono', monospace;
-    --font-label: 'Crimson Text', serif;
+    --font-label: 'Quattrocento Sans', sans-serif;
 
     /* ── Fluid Type Scale ─────────────────────────────────────────────── */
     --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -211,10 +211,10 @@
             hsla(0, 0%, 100%, 0) 0.6px,
             hsla(0, 0%, 100%, 0.1) 1.2px);
     --gradient-brushed-black: linear-gradient(80deg,
-            #222222 0%,
-            #6f6f6f 40%,
-            #858585 55%,
-            #858585 65%,
-            #6f6f6f 75%,
-            #222222 100%);
+            #151515 0%,
+            #484848 40%,
+            #585858 55%,
+            #585858 65%,
+            #484848 75%,
+            #151515 100%);
 }

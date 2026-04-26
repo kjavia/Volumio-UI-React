@@ -1449,7 +1449,7 @@ pre {
   gap: 0.4rem;
   padding: 6px 20px;
   min-height: 32px;
-  background: var(--color-primary);
+  background-color: var(--color-primary);
   border: none;
   border-radius: var(--radius-md);
   font-family: var(--font-label);
@@ -1459,17 +1459,17 @@ pre {
   letter-spacing: var(--tracking-wide);
   cursor: pointer;
   user-select: none;
-  transition: background 0.15s ease, opacity 0.15s ease;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
 }
 .btn:hover, .form-select:hover {
-  background: var(--color-primary-light);
+  background-color: var(--color-primary-light);
 }
 .btn:active, .form-select:active, .btn.active, .active.form-select {
-  background: var(--color-primary-dark);
+  background-color: var(--color-primary-dark);
   opacity: 0.9;
 }
 .btn:focus-visible, .form-select:focus-visible {
-  background: var(--color-primary-light);
+  background-color: var(--color-primary-light);
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
@@ -1498,28 +1498,28 @@ pre {
 /* ─── Secondary / White button ─────────────────────────────────────────── */
 .btn-secondary, .form-select,
 .btn-white {
-  background: var(--color-gray-700);
+  background-color: var(--color-gray-700);
   color: var(--text-primary);
 }
 .btn-secondary:hover, .form-select:hover,
 .btn-white:hover {
-  background: var(--color-gray-600);
+  background-color: var(--color-gray-600);
 }
 .btn-secondary:active, .form-select:active,
 .btn-white:active {
-  background: var(--color-gray-750);
+  background-color: var(--color-gray-750);
 }
 
 /* ─── Primary ──────────────────────────────────────────────────────────── */
 .btn-primary, .btn-orange {
-  background: var(--color-primary);
+  background-color: var(--color-primary);
   color: #000000;
 }
 .btn-primary:hover, .btn-orange:hover {
-  background: var(--color-primary-light);
+  background-color: var(--color-primary-light);
 }
 .btn-primary:active, .btn-orange:active {
-  background: var(--color-primary-dark);
+  background-color: var(--color-primary-dark);
 }
 
 /* ─── Success ──────────────────────────────────────────────────────────── */

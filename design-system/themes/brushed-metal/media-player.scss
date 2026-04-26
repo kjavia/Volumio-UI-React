@@ -266,6 +266,44 @@
     .responsive-stream-info {
         font-size: clamp(1.25rem, 5vw, 2rem) !important;
     }
+
+    /* Smaller prev/next buttons relative to play on mobile */
+    .controls-transport-row .btn-round.btn-sm {
+        width: 40px !important;
+        height: 40px !important;
+
+        .material-icons {
+            font-size: 1.4rem !important;
+        }
+    }
+
+    /* Tighter track-info: less spacing between the 4 rows */
+    .cq-track-info {
+        gap: 0px !important;
+    }
+
+    .track-info-group {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .track-panel .track-info {
+        padding: 4px 12px !important;
+    }
+
+    .album-name {
+        margin-bottom: 0px !important;
+    }
+
+    .responsive-title {
+        line-height: 1.1 !important;
+    }
+
+    .responsive-artist,
+    .responsive-album,
+    .responsive-stream-info {
+        line-height: 1.15 !important;
+    }
 }
 
 /* Very narrow mobile */
@@ -901,55 +939,81 @@
     color: var(--color-primary-light);
 }
 
-/* Daily forecast cards */
-.weather-daily-card {
+/* Daily forecast – brushed metal container with dark cards inside (matches hourly) */
+.weather-daily {
     background-image:
         var(--brushed-texture),
         var(--gradient-brushed);
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 1rem;
     color: var(--color-gray-100);
     text-shadow: none;
-}
 
-.weather-daily-card--today {
-    border-color: var(--color-primary);
-}
+    .weather-daily-card {
+        background: var(--color-gray-900);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        color: var(--color-gray-100);
+    }
 
-.weather-daily-day {
-    color: var(--color-white);
-}
+    .weather-daily-card--today {
+        border-color: var(--color-primary);
+    }
 
-.weather-daily-date {
-    color: var(--color-gray-200);
-}
+    .weather-daily-day {
+        color: var(--color-white);
+    }
 
-.weather-daily-desc {
-    color: var(--color-gray-200);
-}
+    .weather-daily-date {
+        color: var(--color-gray-300);
+    }
 
-.weather-daily-icon {
-    color: var(--color-primary-light);
-}
+    .weather-daily-desc {
+        color: var(--color-gray-300);
+    }
 
-.weather-daily-temp {
-    color: var(--color-white);
-}
+    .weather-daily-icon {
+        color: var(--color-primary-light);
+    }
 
-.weather-daily-sun-item {
-    color: var(--color-gray-200);
+    .weather-daily-hi {
+        color: var(--color-white);
+    }
+
+    .weather-daily-lo {
+        color: var(--color-gray-400);
+    }
+
+    .weather-daily-meta {
+        color: var(--color-gray-300);
+    }
+
+    .weather-daily-meta-icon {
+        color: var(--color-primary-light);
+    }
+
+    .weather-daily-sun-item {
+        color: var(--color-gray-300);
+    }
 }
 
 /* Full dashboard */
 .weather-full {
-    background: var(--color-gray-900) !important;
-    color: var(--color-gray-100);
-    text-shadow: none;
+    background-image:
+        var(--brushed-texture-dark),
+        var(--gradient-brushed-dark) !important;
+    background-color: transparent !important;
+    color: var(--color-gray-200);
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 0.08),
+        0 -1px 1px rgba(0, 0, 0, 0.6);
 }
 
 .weather-full-hero-temp {
     color: var(--color-white);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 0.1),
+        0 -1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .weather-full-hero-desc {
@@ -974,8 +1038,8 @@
 }
 
 .weather-full-tenday-row {
-    color: var(--color-gray-100);
-    border-color: rgba(255, 255, 255, 0.08);
+    color: var(--color-gray-200);
+    border-color: rgba(255, 255, 255, 0.06);
 }
 
 .weather-full-tenday-day {
@@ -988,9 +1052,9 @@
 }
 
 .weather-full-tile {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.08);
-    color: var(--color-gray-100);
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.06);
+    color: var(--color-gray-200);
 }
 
 .weather-full-tile-label {

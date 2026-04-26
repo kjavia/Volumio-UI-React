@@ -14,7 +14,7 @@
     padding: 6px 20px;
     min-height: 32px;
 
-    background: var(--color-primary);
+    background-color: var(--color-primary);
     border: none;
     border-radius: var(--radius-md);
 
@@ -27,21 +27,21 @@
     cursor: pointer;
     user-select: none;
     transition:
-        background 0.15s ease,
+        background-color 0.15s ease,
         opacity 0.15s ease;
 
     &:hover {
-        background: var(--color-primary-light);
+        background-color: var(--color-primary-light);
     }
 
     &:active,
     &.active {
-        background: var(--color-primary-dark);
+        background-color: var(--color-primary-dark);
         opacity: 0.9;
     }
 
     &:focus-visible {
-        background: var(--color-primary-light);
+        background-color: var(--color-primary-light);
         outline: 2px solid var(--color-primary);
         outline-offset: 2px;
     }
@@ -73,29 +73,29 @@
 /* ─── Secondary / White button ─────────────────────────────────────────── */
 .btn-secondary,
 .btn-white {
-    background: var(--color-gray-700);
+    background-color: var(--color-gray-700);
     color: var(--text-primary);
 
     &:hover {
-        background: var(--color-gray-600);
+        background-color: var(--color-gray-600);
     }
 
     &:active {
-        background: var(--color-gray-750);
+        background-color: var(--color-gray-750);
     }
 }
 
 /* ─── Primary ──────────────────────────────────────────────────────────── */
 .btn-primary {
-    background: var(--color-primary);
+    background-color: var(--color-primary);
     color: #ffffff;
 
     &:hover {
-        background: var(--color-primary-light);
+        background-color: var(--color-primary-light);
     }
 
     &:active {
-        background: var(--color-primary-dark);
+        background-color: var(--color-primary-dark);
     }
 }
 
