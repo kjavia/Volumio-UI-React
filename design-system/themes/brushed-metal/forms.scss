@@ -360,3 +360,51 @@
         margin-left: -1px;
     }
 }
+
+/* ─── Settings Knob ──────────────────────────────────────────────────── */
+.settings-knob {
+    background:
+        var(--brushed-texture),
+        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.55) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
+    border: 3px solid transparent;
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.3),
+        0 0 0 3px rgba(180, 180, 180, 0.6),
+        0 0 0 4px rgba(0, 0, 0, 0.25),
+        0 6px 16px rgba(0, 0, 0, 0.35),
+        0 3px 6px rgba(0, 0, 0, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+
+    &:active {
+        background:
+            var(--brushed-texture),
+            radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, #999 0%, #a0a0a0 60%, #888 100%);
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.35),
+            0 0 0 3px rgba(160, 160, 160, 0.5),
+            0 0 0 4px rgba(0, 0, 0, 0.3),
+            0 2px 6px rgba(0, 0, 0, 0.2),
+            inset 0 3px 10px rgba(0, 0, 0, 0.3),
+            inset 0 1px 4px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.settings-knob__indicator {
+    background: var(--color-primary);
+    box-shadow: 0 0 6px rgba(23, 12, 121, 0.5);
+}
+
+.settings-knob-value {
+    color: var(--text-heading, #333);
+}
+
+.settings-knob-scale {
+    color: var(--text-body, #666);
+}
+
+.settings-doc {
+    color: #555;
+}

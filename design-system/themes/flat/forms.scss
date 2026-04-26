@@ -175,25 +175,35 @@ label {
     align-items: stretch;
     width: 100%;
 
-    > .form-control,
-    > .form-select {
+    >.form-control,
+    >.form-select {
         border-radius: 0;
         flex: 1 1 auto;
         width: 1%;
         min-width: 0;
         position: relative;
 
-        &:first-child { border-radius: var(--radius-md) 0 0 var(--radius-md); }
-        &:last-child  { border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+        &:first-child {
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+        }
+
+        &:last-child {
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
     }
 
-    > .btn {
+    >.btn {
         border-radius: 0;
         position: relative;
         flex: 0 0 auto;
 
-        &:first-child { border-radius: var(--radius-md) 0 0 var(--radius-md); }
-        &:last-child  { border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+        &:first-child {
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+        }
+
+        &:last-child {
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
     }
 
     .input-group-text {
@@ -206,10 +216,48 @@ label {
         border-radius: 0;
         white-space: nowrap;
 
-        &:first-child { border-radius: var(--radius-md) 0 0 var(--radius-md); }
-        &:last-child  { border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+        &:first-child {
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+        }
+
+        &:last-child {
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
     }
 
     // Remove double borders between adjacent elements
-    > :not(:first-child) { margin-left: -1px; }
+    > :not(:first-child) {
+        margin-left: -1px;
+    }
+}
+
+/* ─── Settings Knob ──────────────────────────────────────────────────── */
+.settings-knob {
+    background: var(--color-primary, #457b9d);
+    border: none;
+    border-radius: 50%;
+    box-shadow: none;
+
+    &:active {
+        background: var(--color-primary-dark, #2d627f);
+        box-shadow: none;
+    }
+
+    &:focus-visible {
+        box-shadow: 0 0 0 2px var(--color-primary-light, #6a9fbf);
+    }
+}
+
+.settings-knob__indicator {
+    background: #fff;
+    box-shadow: none;
+    border-radius: 2px;
+}
+
+.settings-knob-value {
+    color: var(--text-primary, #e0e0e0);
+}
+
+.settings-knob-scale {
+    color: var(--text-secondary, #999);
 }

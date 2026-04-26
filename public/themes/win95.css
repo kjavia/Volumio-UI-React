@@ -1963,6 +1963,48 @@ label {
   border-radius: 0;
 }
 
+/* ─── Settings Knob ──────────────────────────────────────────────────── */
+.settings-knob {
+  background: var(--win95-face, #c0c0c0);
+  border: none;
+  border-radius: 50%;
+  border-top: 2px solid var(--win95-highlight, #ffffff);
+  border-left: 2px solid var(--win95-highlight, #ffffff);
+  border-bottom: 2px solid var(--win95-dark, #000000);
+  border-right: 2px solid var(--win95-dark, #000000);
+  box-shadow: inset 1px 1px 0 var(--win95-highlight, #ffffff), inset -1px -1px 0 var(--win95-shadow, #808080);
+}
+.settings-knob:active {
+  border-top-color: var(--win95-dark, #000000);
+  border-left-color: var(--win95-dark, #000000);
+  border-bottom-color: var(--win95-highlight, #ffffff);
+  border-right-color: var(--win95-highlight, #ffffff);
+  box-shadow: inset 1px 1px 0 var(--win95-shadow, #808080), inset -1px -1px 0 var(--win95-highlight, #ffffff);
+}
+.settings-knob:focus-visible {
+  outline: 1px dotted #000;
+  outline-offset: -4px;
+  box-shadow: inset 1px 1px 0 var(--win95-highlight, #ffffff), inset -1px -1px 0 var(--win95-shadow, #808080);
+}
+
+.settings-knob__indicator {
+  background: var(--color-primary, #000080);
+  box-shadow: none;
+  border-radius: 0;
+  width: 4px;
+  height: 10px;
+  top: 8px;
+}
+
+.settings-knob-value {
+  color: var(--text-primary, #000);
+  font-family: "MS Sans Serif", "Trebuchet MS", sans-serif;
+}
+
+.settings-knob-scale {
+  color: var(--text-secondary, #808080);
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Windows 95 Theme

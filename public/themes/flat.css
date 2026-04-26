@@ -2166,6 +2166,35 @@ label {
   margin-left: -1px;
 }
 
+/* ─── Settings Knob ──────────────────────────────────────────────────── */
+.settings-knob {
+  background: var(--color-primary, #457b9d);
+  border: none;
+  border-radius: 50%;
+  box-shadow: none;
+}
+.settings-knob:active {
+  background: var(--color-primary-dark, #2d627f);
+  box-shadow: none;
+}
+.settings-knob:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-primary-light, #6a9fbf);
+}
+
+.settings-knob__indicator {
+  background: #fff;
+  box-shadow: none;
+  border-radius: 2px;
+}
+
+.settings-knob-value {
+  color: var(--text-primary, #e0e0e0);
+}
+
+.settings-knob-scale {
+  color: var(--text-secondary, #999);
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Flat Dark Theme

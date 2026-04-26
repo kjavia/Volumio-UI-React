@@ -2165,6 +2165,37 @@ label {
   margin-left: -1px;
 }
 
+/* ─── Settings Knob — OLED pixel-ring style ──────────────────────────── */
+.settings-knob {
+  background: #000;
+  border: 2px solid rgba(255, 102, 0, 0.15);
+  box-shadow: 0 0 12px rgba(255, 102, 0, 0.08), inset 0 0 20px rgb(0, 0, 0);
+}
+.settings-knob:active {
+  border-color: rgba(255, 102, 0, 0.3);
+  box-shadow: 0 0 16px rgba(255, 102, 0, 0.15), inset 0 0 20px rgb(0, 0, 0);
+}
+.settings-knob:focus-visible {
+  box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.5), 0 0 12px rgba(255, 102, 0, 0.15), inset 0 0 20px rgb(0, 0, 0);
+}
+
+.settings-knob__indicator {
+  background: var(--color-primary, #ff6600);
+  box-shadow: 0 0 8px var(--color-primary, #ff6600), 0 0 16px rgba(255, 102, 0, 0.3);
+  border-radius: 1px;
+}
+
+.settings-knob-value {
+  color: var(--color-primary, #ff6600);
+  text-shadow: 0 0 8px rgba(255, 102, 0, 0.5);
+  font-variant-numeric: tabular-nums;
+}
+
+.settings-knob-scale {
+  color: var(--color-primary, #ff6600);
+  opacity: 0.5;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
        COLOR PALETTE - OLED Theme

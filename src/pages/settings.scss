@@ -120,7 +120,7 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
+  gap: 1.25rem;
 }
 
 .settings-section__footer {
@@ -173,7 +173,7 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: var(--text-sm, 0.875rem);
+  font-size: 0.95rem;
   font-weight: 500;
   margin: 0;
 }
@@ -185,7 +185,7 @@
 
 .settings-doc {
   display: block;
-  font-size: var(--text-sm, 0.8125rem);
+  font-size: 0.78rem;
   color: var(--text-muted, #888);
   line-height: 1.3;
 }
@@ -286,6 +286,104 @@
 }
 
 /* ─── Radio button group ───────────────────────────────────────────────── */
+
+/* ─── Knob Input ───────────────────────────────────────────────────────── */
+.settings-knob-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.settings-knob-track {
+  position: relative;
+  width: 90px;
+  height: 90px;
+}
+
+.settings-knob-scale {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--text-secondary, #999);
+  pointer-events: none;
+}
+
+.settings-knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 50%;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  background:
+    radial-gradient(circle at 40% 35%, rgba(255, 255, 255, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, #444 0%, #1a1a1a 100%);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.15s;
+
+  &:active {
+    cursor: grabbing;
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.7),
+      inset 0 2px 6px rgba(0, 0, 0, 0.5);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.6),
+      0 0 0 2px var(--color-primary, #4a90d9);
+  }
+}
+
+.settings-knob__indicator {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--color-primary, #4a90d9);
+  box-shadow: 0 0 6px var(--color-primary, #4a90d9);
+}
+
+.settings-knob-value {
+  font-size: var(--text-lg, 1.1rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary, #e0e0e0);
+  width: 3.5rem;
+  text-align: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm, 4px);
+  padding: 0.2rem 0.25rem;
+  outline: none;
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &:focus {
+    border-color: var(--color-primary, #4a90d9);
+    background: var(--panel-bg-subtle, rgba(0, 0, 0, 0.15));
+  }
+}
 
 /* ─── JSON Editor ──────────────────────────────────────────────────────── */
 .settings-json-editor {
