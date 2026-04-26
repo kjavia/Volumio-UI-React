@@ -285,6 +285,20 @@
   }
 }
 
+.settings-color-info {
+  flex: 0 0 auto;
+  align-self: center;
+  margin-left: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--text-primary, currentColor);
+  opacity: 0.45;
+  cursor: help;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
 /* ─── Radio button group ───────────────────────────────────────────────── */
 
 /* ─── Knob Input ───────────────────────────────────────────────────────── */
@@ -367,7 +381,7 @@
   width: 3.5rem;
   text-align: center;
   background: transparent;
-  border: 1px solid transparent;
+  border: 1px solid var(--border-dark, rgba(255, 255, 255, 0.15));
   border-radius: var(--radius-sm, 4px);
   padding: 0.2rem 0.25rem;
   outline: none;

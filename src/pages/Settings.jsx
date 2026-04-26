@@ -237,6 +237,16 @@ const colorNameToHex = (name) => {
 };
 
 const ColorField = ({ field, value, onChange }) => {
+  const infoRef = useRef(null);
+
+  useEffect(() => {
+    let tip;
+    import('bootstrap/js/dist/tooltip').then(({ default: Tooltip }) => {
+      if (infoRef.current) tip = new Tooltip(infoRef.current);
+    });
+    return () => tip?.dispose();
+  }, []);
+
   const handleBlur = (e) => {
     const text = e.target.value.trim();
     if (!text || text.startsWith('#')) return;
@@ -272,6 +282,13 @@ const ColorField = ({ field, value, onChange }) => {
             <span className="material-icons">close</span>
           </button>
         )}
+        <span
+          ref={infoRef}
+          className="material-icons settings-color-info"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="Enter HTML hex code OR a valid HTML color name"
+        >info_outline</span>
       </div>
     </div>
   );
