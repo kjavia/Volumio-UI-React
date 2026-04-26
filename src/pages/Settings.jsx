@@ -1,11 +1,28 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { PLUGIN_BASE_URL } from '@/config';
 import { useSocket } from '@/contexts/SocketContext';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/Toast';
 import './settings.scss';
+
+const PLUGIN_ENDPOINT = 'user_interface/stylish_player';
+
+/* ─── Translation hook — fetches i18n strings from REST API ────────────── */
+const useSettingsTranslations = () => {
+  const [strings, setStrings] = useState({});
+
+  useEffect(() => {
+    axios.get(`${PLUGIN_BASE_URL}/api/translations`)
+      .then(({ data }) => { if (data && typeof data === 'object') setStrings(data); })
+      .catch(() => { });
+  }, []);
+
+  return useCallback((key, fallback) => strings[key] || fallback || key, [strings]);
+};
 
 /* ═══════════════════════════════════════════════════════════════════════
    UIConfig section definitions
@@ -13,16 +30,16 @@ import './settings.scss';
    Each section defines its fields, the save method, and which field IDs to send.
    ═══════════════════════════════════════════════════════════════════════ */
 
-const SECTIONS = [
+const getSections = (t) => [
   {
     id: 'section_player_config',
-    label: 'Player Configuration',
+    label: t('PLAYER_CONFIG', 'Player Configuration'),
     icon: 'tune',
     method: 'configSavePlayerConfig',
     fields: [
       {
-        id: 'theme', element: 'select', label: 'Theme', icon: 'palette',
-        doc: 'Select the UI theme for different visual styles.',
+        id: 'theme', element: 'select', label: t('THEME', 'Theme'), icon: 'palette',
+        doc: t('THEME_DESC', 'Select the UI theme for different visual styles.'),
         options: [
           { value: 'skeuomorphic', label: 'Skeuomorphic' },
           { value: 'metallic', label: 'Metallic' },
@@ -35,130 +52,128 @@ const SECTIONS = [
         ],
       },
       {
-        id: 'playerType', element: 'select', label: 'Player Type', icon: 'album',
-        doc: 'Select which player visual is displayed.',
+        id: 'playerType', element: 'select', label: t('PLAYER_TYPE', 'Player Type'), icon: 'album',
+        doc: t('PLAYER_TYPE_DESC', 'Select which player visual is displayed.'),
         options: [
-          { value: 'albumArt', label: 'Album Art' },
-          { value: 'vinyl', label: 'Vinyl' },
-          { value: 'vinylCover', label: 'Vinyl Cover' },
-          { value: 'cd', label: 'CD' },
-          { value: 'cdCover', label: 'CD Cover' },
-          { value: 'cassette', label: 'Cassette' },
-          { value: 'reelToReel', label: 'Reel to Reel' },
-          { value: 'radio', label: 'Radio' },
-          { value: 'globe', label: 'Globe' },
-          { value: 'matchSource', label: 'Match Source' },
-          { value: 'random', label: 'Random' },
-          { value: 'none', label: 'None' },
+          { value: 'albumArt', label: t('PLAYER_TYPE_ALBUM_ART', 'Album Art') },
+          { value: 'vinyl', label: t('PLAYER_TYPE_VINYL', 'Vinyl') },
+          { value: 'vinylCover', label: t('PLAYER_TYPE_VINYL_COVER', 'Vinyl Cover') },
+          { value: 'cd', label: t('PLAYER_TYPE_CD', 'CD') },
+          { value: 'cdCover', label: t('PLAYER_TYPE_CD_COVER', 'CD Cover') },
+          { value: 'cassette', label: t('PLAYER_TYPE_CASSETTE', 'Cassette') },
+          { value: 'reelToReel', label: t('PLAYER_TYPE_REEL_TO_REEL', 'Reel to Reel') },
+          { value: 'radio', label: t('PLAYER_TYPE_RADIO', 'Radio') },
+          { value: 'globe', label: t('PLAYER_TYPE_GLOBE', 'Globe') },
+          { value: 'matchSource', label: t('PLAYER_TYPE_MATCH_SOURCE', 'Match Source') },
+          { value: 'random', label: t('PLAYER_TYPE_RANDOM', 'Random') },
+          { value: 'none', label: t('NONE', 'None') },
         ],
       },
-      { id: 'showPlayerControls', element: 'switch', label: 'Show Player Controls', icon: 'gamepad', doc: 'When disabled, player buttons are hidden.' },
-      { id: 'showRemainingTime', element: 'switch', label: 'Show Remaining Time', icon: 'timer', doc: 'Show remaining time instead of total duration.' },
-      { id: 'albumArtMaxSpace', element: 'switch', label: 'Use Maximum Space', icon: 'aspect_ratio', doc: 'Expand album art to fill the panel.', visibleIf: { field: 'playerType', value: 'albumArt' } },
-      { id: 'showTrackPanel', element: 'switch', label: 'Show Track Info Panel', icon: 'info', doc: 'Display a themed panel behind track info.' },
+      { id: 'showPlayerControls', element: 'switch', label: t('SHOW_PLAYER_CONTROLS', 'Show Player Controls'), icon: 'gamepad', doc: t('SHOW_PLAYER_CONTROLS_DESC', 'When disabled, player buttons are hidden.') },
+      { id: 'showRemainingTime', element: 'switch', label: t('SHOW_REMAINING_TIME', 'Show Remaining Time'), icon: 'timer', doc: t('SHOW_REMAINING_TIME_DESC', 'Show remaining time instead of total duration.') },
+      { id: 'albumArtMaxSpace', element: 'switch', label: t('ALBUM_ART_MAX_SPACE', 'Use Maximum Space'), icon: 'aspect_ratio', doc: t('ALBUM_ART_MAX_SPACE_DESC', 'Expand album art to fill the panel.'), visibleIf: { field: 'playerType', value: 'albumArt' } },
+      { id: 'showTrackPanel', element: 'switch', label: t('SHOW_TRACK_PANEL', 'Show Track Info Panel'), icon: 'info', doc: t('SHOW_TRACK_PANEL_DESC', 'Display a themed panel behind track info.') },
       {
-        id: 'vizType', element: 'select', label: 'Visualization', icon: 'equalizer',
-        doc: 'Select the visualization displayed on the player screen.',
+        id: 'vizType', element: 'select', label: t('VIZ_TYPE', 'Visualization'), icon: 'equalizer',
+        doc: t('VIZ_TYPE_DESC', 'Select the visualization displayed on the player screen.'),
         options: [
-          { value: 'spectrum', label: 'Spectrum Analyzer' },
-          { value: 'vuMeter1', label: 'VU Meter 1 (Orange)' },
-          { value: 'vuMeter2', label: 'VU Meter 2 (Blue)' },
-          { value: 'vuMeter3', label: 'VU Meter 3 (Yellow)' },
-          { value: 'vuMeter4', label: 'VU Meter 4 (Black)' },
-          { value: 'peppyMeter', label: 'Peppy Meter' },
-          { value: 'none', label: 'None' },
+          { value: 'spectrum', label: t('VIZ_TYPE_SPECTRUM', 'Spectrum Analyzer') },
+          { value: 'vuMeter1', label: t('VIZ_TYPE_VU_METER_1', 'VU Meter 1 (Orange)') },
+          { value: 'vuMeter2', label: t('VIZ_TYPE_VU_METER_2', 'VU Meter 2 (Blue)') },
+          { value: 'vuMeter3', label: t('VIZ_TYPE_VU_METER_3', 'VU Meter 3 (Yellow)') },
+          { value: 'vuMeter4', label: t('VIZ_TYPE_VU_METER_4', 'VU Meter 4 (Black)') },
+          { value: 'peppyMeter', label: t('VIZ_TYPE_PEPPY_METER', 'Peppy Meter') },
+          { value: 'none', label: t('NONE', 'None') },
         ],
       },
-      { id: 'spectrumOptions', element: 'json', label: 'Spectrum Options (JSON)', icon: 'data_object', doc: 'Override AudioMotion Analyzer options.', visibleIf: { field: 'vizType', value: 'spectrum' } },
-      { id: 'peppyMeterWidth', element: 'input', type: 'number', label: 'Peppy Meter Width (px)', icon: 'width', visibleIf: { field: 'vizType', value: 'peppyMeter' } },
-      { id: 'peppyMeterHeight', element: 'input', type: 'number', label: 'Peppy Meter Height (px)', icon: 'height', visibleIf: { field: 'vizType', value: 'peppyMeter' } },
+      { id: 'spectrumOptions', element: 'json', label: t('SPECTRUM_OPTIONS', 'Spectrum Options (JSON)'), icon: 'data_object', doc: t('SPECTRUM_OPTIONS_DESC', 'Override AudioMotion Analyzer options.'), visibleIf: { field: 'vizType', value: 'spectrum' } },
+      { id: 'peppyMeterWidth', element: 'input', type: 'number', label: t('PEPPY_METER_WIDTH', 'Peppy Meter Width (px)'), icon: 'width', visibleIf: { field: 'vizType', value: 'peppyMeter' } },
+      { id: 'peppyMeterHeight', element: 'input', type: 'number', label: t('PEPPY_METER_HEIGHT', 'Peppy Meter Height (px)'), icon: 'height', visibleIf: { field: 'vizType', value: 'peppyMeter' } },
     ],
   },
   {
     id: 'section_colors',
-    label: 'Colors',
+    label: t('COLORS', 'Colors'),
     icon: 'palette',
     method: 'configSaveColors',
     fields: [
-      { id: 'backgroundColor', element: 'color', label: 'Background Color', icon: 'format_color_fill', doc: 'Leave empty for album art background.' },
-      { id: 'trackColor', element: 'color', label: 'Track Title Color', icon: 'title', doc: 'Leave empty for theme default.' },
-      { id: 'artistColor', element: 'color', label: 'Artist Name Color', icon: 'person' },
-      { id: 'albumColor', element: 'color', label: 'Album Name Color', icon: 'album' },
-      { id: 'streamInfoColor', element: 'color', label: 'Stream Info Color', icon: 'stream' },
-      { id: 'controlColor', element: 'color', label: 'Control Color', icon: 'touch_app', doc: 'Color of player buttons, sliders, and labels.' },
+      { id: 'backgroundColor', element: 'color', label: t('BACKGROUND_COLOR', 'Background Color'), icon: 'format_color_fill', doc: t('BACKGROUND_COLOR_DESC', 'Leave empty for album art background.') },
+      { id: 'trackColor', element: 'color', label: t('TRACK_COLOR', 'Track Title Color'), icon: 'title', doc: t('TRACK_COLOR_DESC', 'Leave empty for theme default.') },
+      { id: 'artistColor', element: 'color', label: t('ARTIST_COLOR', 'Artist Name Color'), icon: 'person' },
+      { id: 'albumColor', element: 'color', label: t('ALBUM_COLOR', 'Album Name Color'), icon: 'album' },
+      { id: 'streamInfoColor', element: 'color', label: t('STREAM_INFO_COLOR', 'Stream Info Color'), icon: 'stream' },
+      { id: 'controlColor', element: 'color', label: t('CONTROL_COLOR', 'Control Color'), icon: 'touch_app', doc: t('CONTROL_COLOR_DESC', 'Color of player buttons, sliders, and labels.') },
     ],
   },
   {
     id: 'section_idle_screen',
-    label: 'Idle Screen',
+    label: t('IDLE_SCREEN', 'Idle Screen'),
     icon: 'pause_circle',
     method: 'configSaveIdleScreen',
     fields: [
       {
-        id: 'idleScreen', element: 'select', label: 'Idle Screen Type', icon: 'tv',
-        doc: 'Which screen to display when playback is idle.',
+        id: 'idleScreen', element: 'select', label: t('IDLE_SCREEN_TYPE', 'Idle Screen Type'), icon: 'tv',
+        doc: t('IDLE_SCREEN_TYPE_DESC', 'Which screen to display when playback is idle.'),
         options: [
-          { value: 'analogClock', label: 'Analog Clock' },
-          { value: 'digitalClock', label: 'Digital Clock' },
-          { value: 'flipClock', label: 'Flip Clock' },
-          { value: 'weatherCurrent', label: 'Weather (Current)' },
-          { value: 'weatherHourly', label: 'Weather (Hourly)' },
-          { value: 'weatherDaily', label: 'Weather (Daily)' },
-          { value: 'weatherFull', label: 'Weather (Full)' },
-          { value: 'wallpaper', label: 'Wallpaper' },
-          { value: 'externalUrl', label: 'External URL' },
+          { value: 'analogClock', label: t('IDLE_SCREEN_ANALOG_CLOCK', 'Analog Clock') },
+          { value: 'digitalClock', label: t('IDLE_SCREEN_DIGITAL_CLOCK', 'Digital Clock') },
+          { value: 'flipClock', label: t('IDLE_SCREEN_FLIP_CLOCK', 'Flip Clock') },
+          { value: 'weatherCurrent', label: t('IDLE_SCREEN_WEATHER_CURRENT', 'Weather (Current)') },
+          { value: 'weatherHourly', label: t('IDLE_SCREEN_WEATHER_HOURLY', 'Weather (Hourly)') },
+          { value: 'weatherDaily', label: t('IDLE_SCREEN_WEATHER_DAILY', 'Weather (Daily)') },
+          { value: 'weatherFull', label: t('IDLE_SCREEN_WEATHER_FULL', 'Weather (Full)') },
+          { value: 'wallpaper', label: t('IDLE_SCREEN_WALLPAPER', 'Wallpaper') },
+          { value: 'externalUrl', label: t('IDLE_SCREEN_EXTERNAL_URL', 'External URL') },
         ],
       },
-      { id: 'externalUrl', element: 'input', type: 'text', label: 'External URL', icon: 'link', doc: 'Full URL to load in an iframe.', visibleIf: { field: 'idleScreen', value: 'externalUrl' } },
-      { id: 'idleTimeout', element: 'knob', label: 'Idle Timeout (minutes)', icon: 'hourglass_empty', doc: 'Minutes of inactivity before switching.', min: 1, max: 60 },
+      { id: 'externalUrl', element: 'input', type: 'text', label: t('EXTERNAL_URL', 'External URL'), icon: 'link', doc: t('EXTERNAL_URL_DESC', 'Full URL to load in an iframe.'), visibleIf: { field: 'idleScreen', value: 'externalUrl' } },
+      { id: 'idleTimeout', element: 'knob', label: t('IDLE_TIMEOUT', 'Idle Timeout (minutes)'), icon: 'hourglass_empty', doc: t('IDLE_TIMEOUT_DESC', 'Minutes of inactivity before switching.'), min: 1, max: 60 },
     ],
   },
   {
     id: 'section_clock',
-    label: 'Clock',
+    label: t('CLOCK', 'Clock'),
     icon: 'schedule',
     method: 'configSaveClock',
     fields: [
-      { id: 'use24Hour', element: 'switch', label: '24-Hour Time', icon: 'access_time' },
-      { id: 'showWeatherInClock', element: 'switch', label: 'Show Weather in Clock', icon: 'cloud', doc: 'Display weather on the clock face.' },
-      { id: 'analogClockShowDate', element: 'switch', label: 'Show Date on Analog Clock', icon: 'event' },
+      { id: 'use24Hour', element: 'switch', label: t('USE_24_HOUR', '24-Hour Time'), icon: 'access_time' },
+      { id: 'showWeatherInClock', element: 'switch', label: t('SHOW_WEATHER_IN_CLOCK', 'Show Weather in Clock'), icon: 'cloud', doc: t('SHOW_WEATHER_IN_CLOCK_DESC', 'Display weather on the clock face.') },
+      { id: 'analogClockShowDate', element: 'switch', label: t('ANALOG_CLOCK_SHOW_DATE', 'Show Date on Analog Clock'), icon: 'event' },
     ],
   },
   {
     id: 'section_weather',
-    label: 'Weather',
+    label: t('WEATHER', 'Weather'),
     icon: 'cloud',
     method: 'configSaveWeather',
     fields: [
-      { id: 'latitude', element: 'input', type: 'text', label: 'Latitude', icon: 'explore', doc: 'e.g. 51.5074 for London' },
-      { id: 'longitude', element: 'input', type: 'text', label: 'Longitude', icon: 'explore', doc: 'e.g. -0.1278 for London' },
-      { id: 'weatherApiKey', element: 'input', type: 'text', label: 'API Key (Optional)', icon: 'vpn_key', doc: 'Open-Meteo API key. Free tier does not require one.' },
+      { id: 'latitude', element: 'input', type: 'text', label: t('LATITUDE', 'Latitude'), icon: 'explore', doc: t('LATITUDE_DESC', 'e.g. 51.5074 for London') },
+      { id: 'longitude', element: 'input', type: 'text', label: t('LONGITUDE', 'Longitude'), icon: 'explore', doc: t('LONGITUDE_DESC', 'e.g. -0.1278 for London') },
+      { id: 'weatherApiKey', element: 'input', type: 'text', label: t('WEATHER_API_KEY', 'API Key (Optional)'), icon: 'vpn_key', doc: t('WEATHER_API_KEY_DESC', 'Open-Meteo API key. Free tier does not require one.') },
       {
-        id: 'unitSystem', element: 'select', label: 'Unit System', icon: 'straighten',
+        id: 'unitSystem', element: 'select', label: t('UNIT_SYSTEM', 'Unit System'), icon: 'straighten',
         options: [
-          { value: 'metric', label: 'Metric (°C, km/h)' },
-          { value: 'imperial', label: 'Imperial (°F, mph)' },
+          { value: 'metric', label: t('UNIT_METRIC', 'Metric (°C, km/h)') },
+          { value: 'imperial', label: t('UNIT_IMPERIAL', 'Imperial (°F, mph)') },
         ],
       },
     ],
   },
   {
     id: 'section_wallpaper',
-    label: 'Wallpaper',
+    label: t('WALLPAPER', 'Wallpaper'),
     icon: 'wallpaper',
     method: 'configSaveWallpaper',
     fields: [
-      { id: 'unsplashApiKey', element: 'input', type: 'text', label: 'Unsplash API Key', icon: 'vpn_key' },
-      { id: 'wallpaperUrl', element: 'input', type: 'text', label: 'Wallpaper URL', icon: 'wallpaper' },
-      { id: 'wallpaperShowTime', element: 'switch', label: 'Show Time on Wallpaper', icon: 'schedule' },
-      { id: 'wallpaperShowSeconds', element: 'switch', label: 'Show Seconds on Wallpaper', icon: 'update' },
-      { id: 'wallpaperShowWeather', element: 'switch', label: 'Show Weather on Wallpaper', icon: 'thermostat' },
-      { id: 'slideshowInterval', element: 'knob', label: 'Slideshow Interval (seconds)', icon: 'slideshow', doc: 'Time between wallpaper transitions.', min: 5, max: 120 },
+      { id: 'unsplashApiKey', element: 'input', type: 'text', label: t('UNSPLASH_API_KEY', 'Unsplash API Key'), icon: 'vpn_key' },
+      { id: 'wallpaperUrl', element: 'input', type: 'text', label: t('WALLPAPER_URL', 'Wallpaper URL'), icon: 'wallpaper' },
+      { id: 'wallpaperShowTime', element: 'switch', label: t('WALLPAPER_SHOW_TIME', 'Show Time on Wallpaper'), icon: 'schedule' },
+      { id: 'wallpaperShowSeconds', element: 'switch', label: t('WALLPAPER_SHOW_SECONDS', 'Show Seconds on Wallpaper'), icon: 'update' },
+      { id: 'wallpaperShowWeather', element: 'switch', label: t('WALLPAPER_SHOW_WEATHER', 'Show Weather on Wallpaper'), icon: 'thermostat' },
+      { id: 'slideshowInterval', element: 'knob', label: t('SLIDESHOW_INTERVAL', 'Slideshow Interval (seconds)'), icon: 'slideshow', doc: t('SLIDESHOW_INTERVAL_DESC', 'Time between wallpaper transitions.'), min: 5, max: 120 },
     ],
   },
 ];
-
-const PLUGIN_ENDPOINT = 'user_interface/stylish_player';
 
 /* ─── Field Components ─────────────────────────────────────────────────── */
 
@@ -562,7 +577,9 @@ const Settings = () => {
   const { toasts, showToast } = useToast();
   const [values, setValues] = useState({});
   const [saving, setSaving] = useState(false);
-  const [activeTab, setActiveTab] = useState(SECTIONS[0].id);
+  const t = useSettingsTranslations();
+  const sections = getSections(t);
+  const [activeTab, setActiveTab] = useState(sections[0].id);
 
   // Populate form values from plugin config
   useEffect(() => {
@@ -638,7 +655,7 @@ const Settings = () => {
     );
   }
 
-  const activeSection = SECTIONS.find((s) => s.id === activeTab);
+  const activeSection = sections.find((s) => s.id === activeTab);
 
   return (
     <div className="settings-page">
@@ -649,7 +666,7 @@ const Settings = () => {
         <h2 className="settings-topbar__title">Settings</h2>
       </div>
       <div className="settings-tabs" role="tablist">
-        {SECTIONS.map((section) => (
+        {sections.map((section) => (
           <button
             key={section.id}
             className={`settings-tab ${activeTab === section.id ? 'settings-tab--active' : ''}`}
