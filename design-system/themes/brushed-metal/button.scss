@@ -204,7 +204,7 @@
     }
 }
 
-/* Circular Buttons */
+/* Circular Buttons — metallic push-button with beveled rim */
 .btn-circle,
 .btn-round {
     border-radius: 50%;
@@ -215,35 +215,55 @@
     justify-content: center;
     align-items: center;
     background:
-        var(--brushed-texture),
-        radial-gradient(circle at 50% 35%, #e8e8e8, #b0b0b0);
-    border: 1px solid var(--color-gray-500);
+        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
+    border: 3px solid transparent;
+    border-image: none;
     box-shadow:
-        0 3px 8px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5),
-        inset 0 -2px 0 rgba(0, 0, 0, 0.08);
+        /* outer rim highlight */
+        0 0 0 1px rgba(0, 0, 0, 0.3),
+        0 0 0 3px rgba(180, 180, 180, 0.6),
+        0 0 0 4px rgba(0, 0, 0, 0.25),
+        /* drop shadow */
+        0 4px 10px rgba(0, 0, 0, 0.35),
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        /* top inner highlight */
+        inset 0 2px 4px rgba(255, 255, 255, 0.5),
+        /* bottom inner shadow */
+        inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.12s ease-out;
 }
 
 .btn-circle:hover,
 .btn-round:hover {
     background:
-        var(--brushed-texture),
-        radial-gradient(circle at 50% 35%, #f0f0f0, #c0c0c0);
+        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.7) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #e4e4e4 0%, #b8b8b8 60%, #999 100%);
     box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        0 0 0 1px rgba(0, 0, 0, 0.3),
+        0 0 0 3px rgba(190, 190, 190, 0.7),
+        0 0 0 4px rgba(0, 0, 0, 0.25),
+        0 6px 14px rgba(0, 0, 0, 0.4),
+        0 3px 6px rgba(0, 0, 0, 0.25),
+        inset 0 2px 4px rgba(255, 255, 255, 0.6),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.15);
 }
 
 .btn-circle:active,
 .btn-round:active,
 .btn-circle.active,
 .btn-round.active {
+    transform: translateY(1px);
     background:
-        var(--brushed-texture),
-        radial-gradient(circle at 50% 60%, #989898, #b8b8b8);
+        radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #999 0%, #a0a0a0 60%, #888 100%);
     box-shadow:
-        inset 0 3px 8px rgba(0, 0, 0, 0.25),
-        inset 0 0 4px rgba(0, 0, 0, 0.1);
+        0 0 0 1px rgba(0, 0, 0, 0.35),
+        0 0 0 3px rgba(160, 160, 160, 0.5),
+        0 0 0 4px rgba(0, 0, 0, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.2),
+        inset 0 3px 8px rgba(0, 0, 0, 0.35),
+        inset 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .btn-round .material-icons,
@@ -251,6 +271,63 @@
     font-size: 1.4rem;
     color: var(--color-gray-700);
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Play/Pause — metallic push-button with primary icon */
+.btn-round.btn-primary,
+.btn-circle.btn-primary {
+    background:
+        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
+    border: 3px solid transparent;
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.3),
+        0 0 0 3px rgba(180, 180, 180, 0.6),
+        0 0 0 4px rgba(0, 0, 0, 0.25),
+        0 4px 10px rgba(0, 0, 0, 0.35),
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-round.btn-primary .material-icons,
+.btn-circle.btn-primary .material-icons {
+    color: var(--color-primary);
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.4),
+        0 0 6px rgba(200, 117, 51, 0.3);
+}
+
+.btn-round.btn-primary:hover,
+.btn-circle.btn-primary:hover {
+    background:
+        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.7) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #e4e4e4 0%, #b8b8b8 60%, #999 100%);
+    border-color: transparent;
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.3),
+        0 0 0 3px rgba(190, 190, 190, 0.7),
+        0 0 0 4px rgba(0, 0, 0, 0.25),
+        0 6px 14px rgba(0, 0, 0, 0.4),
+        0 3px 6px rgba(0, 0, 0, 0.25),
+        inset 0 2px 4px rgba(255, 255, 255, 0.6),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-round.btn-primary:active,
+.btn-circle.btn-primary:active {
+    transform: translateY(1px);
+    background:
+        radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #999 0%, #a0a0a0 60%, #888 100%);
+    border-color: transparent;
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.35),
+        0 0 0 3px rgba(160, 160, 160, 0.5),
+        0 0 0 4px rgba(0, 0, 0, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.2),
+        inset 0 3px 8px rgba(0, 0, 0, 0.35),
+        inset 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* ─── Icon Buttons ────────────────────────────────────────────────────── */
@@ -318,6 +395,11 @@
     min-height: 28px;
     font-size: var(--text-xs);
     border-radius: 4px;
+}
+
+.btn-sm.btn-round,
+.btn-sm.btn-circle {
+    border-radius: 50%;
 }
 
 .btn-lg {

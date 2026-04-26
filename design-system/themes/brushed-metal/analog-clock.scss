@@ -1,51 +1,58 @@
 /* ── Analog Clock — Brushed Metal Variant ──────────────────────────────────
- * Polished aluminum bezel, light metallic face, copper second hand
+ * Dark brushed metal face with light fonts and copper accents
  * ──────────────────────────────────────────────────────────────────────── */
 
-/* Bezel — brushed aluminum ring */
+/* Bezel — dark brushed aluminum ring */
 .clock-bezel {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     padding: 5%;
-    background:
-        var(--brushed-texture),
-        linear-gradient(145deg, #c8c8c8 0%, #909090 50%, #b8b8b8 100%);
+    background-image:
+        var(--brushed-texture-dark),
+        var(--gradient-brushed-black);
     box-shadow:
-        0 6px 28px rgba(0, 0, 0, 0.15),
-        inset 0 2px 4px rgba(255, 255, 255, 0.5),
-        inset 0 -2px 6px rgba(0, 0, 0, 0.1);
-    border: 2px solid #888;
+        0 6px 28px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.08),
+        inset 0 -2px 6px rgba(0, 0, 0, 0.3);
+    border: 2px solid #111;
 }
 
-/* Face — light recessed dial */
+/* Face — dark recessed dial */
 .clock-face {
     position: relative;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: radial-gradient(ellipse at 40% 35%, #f0f0f0 0%, #e0e0e0 100%);
+    background: radial-gradient(ellipse at 40% 35%, #3a3a3a 0%, #222222 100%);
     box-shadow:
-        inset 0 2px 12px rgba(0, 0, 0, 0.08),
-        inset 0 0 20px rgba(0, 0, 0, 0.04);
-    border: 1px solid #aaa;
+        inset 0 2px 12px rgba(0, 0, 0, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid #1a1a1a;
+}
+
+/* Tick marks base */
+.clock-tick::before {
+    content: '';
+    display: block;
+    width: 100%;
     position: absolute;
     top: 4%;
     border-radius: 1px;
 }
 
-/* Hour ticks — dark steel */
+/* Hour ticks — light silver */
 .clock-tick--hour::before {
     height: 10%;
-    background: var(--color-gray-700);
+    background: var(--color-gray-200);
     width: 3px;
     margin-left: -0.5px;
 }
 
-/* Minute ticks — subtle gray */
+/* Minute ticks — subtle light gray */
 .clock-tick--minute::before {
     height: 5%;
-    background: var(--color-gray-400);
+    background: var(--color-gray-500);
     width: 1px;
 }
 
@@ -53,11 +60,11 @@
 .clock-hour-digit {
     position: absolute;
     transform: translate(-50%, -50%);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-display);
     font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
     font-weight: 700;
-    color: var(--color-gray-800);
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    color: var(--color-gray-100);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
     line-height: 1;
 }
 
@@ -70,24 +77,24 @@
     border-radius: 2px;
 }
 
-/* Hour hand — dark gunmetal */
+/* Hour hand — bright silver */
 .clock-hand--hour {
     width: 7px;
     height: 25%;
     margin-left: -3.5px;
-    background: linear-gradient(180deg, var(--color-gray-700) 0%, var(--color-gray-900) 100%);
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(180deg, var(--color-gray-200) 0%, var(--color-gray-400) 100%);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
     border-radius: 3px 3px 1px 1px;
     z-index: 3;
 }
 
-/* Minute hand — steel */
+/* Minute hand — silver */
 .clock-hand--minute {
     width: 3px;
     height: 35%;
     margin-left: -1.5px;
-    background: linear-gradient(180deg, var(--color-gray-600) 0%, var(--color-gray-800) 100%);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(180deg, var(--color-gray-200) 0%, var(--color-gray-300) 100%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     border-radius: 1.5px 1.5px 1px 1px;
     z-index: 4;
 }
@@ -97,8 +104,8 @@
     width: 1.5px;
     height: 38%;
     margin-left: -0.75px;
-    background: var(--color-primary);
-    box-shadow: 0 0 6px rgba(200, 117, 51, 0.4);
+    background: var(--color-primary-light);
+    box-shadow: 0 0 6px rgba(200, 117, 51, 0.5);
     border-radius: 1px;
     z-index: 5;
     transition: none;
@@ -116,39 +123,42 @@
     background: var(--color-primary);
     box-shadow:
         0 0 0 2px rgba(200, 117, 51, 0.25),
-        0 0 8px rgba(200, 117, 51, 0.4),
-        0 2px 6px rgba(0, 0, 0, 0.2);
+        0 0 8px rgba(200, 117, 51, 0.5),
+        0 2px 6px rgba(0, 0, 0, 0.3);
     z-index: 6;
 }
 
 .clock-face-day {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: clamp(0.6rem, 3cqi, 1rem);
     font-weight: 600;
-    color: var(--color-gray-500);
+    color: var(--color-gray-400);
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .clock-face-date {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: clamp(0.6rem, 3cqi, 1rem);
     font-weight: 700;
-    color: var(--color-gray-800);
+    color: var(--color-gray-200);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* ── Weather on face ────────────────────────────────────────────────────── */
 
 .clock-face-weather-icon {
     font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
-    color: var(--color-primary);
-    filter: drop-shadow(0 0 3px rgba(200, 117, 51, 0.3));
+    color: var(--color-primary-light);
+    filter: drop-shadow(0 0 3px rgba(200, 117, 51, 0.4));
 }
 
 .clock-face-weather-temp {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
     font-weight: 700;
-    color: var(--color-gray-800);
+    color: var(--color-gray-200);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
 }

@@ -3,7 +3,7 @@
    BRUSHED METAL THEME - Main Index
    Light aluminum surface with warm copper accents
    ═══════════════════════════════════════════════════════════════════════ */
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Unica+One&display=swap");
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
@@ -134,12 +134,12 @@
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -162,30 +162,30 @@
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -325,12 +325,12 @@
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -353,30 +353,30 @@
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -388,7 +388,7 @@
 
 /* ═══════════════════════════════════════════════════════════════════════
    TYPOGRAPHY - Brushed Metal Theme
-   Uses Outfit (display) + DM Sans (body) + JetBrains Mono (code)
+   Uses Unica One (display) + Crimson Text (body) + JetBrains Mono (code)
    ═══════════════════════════════════════════════════════════════════════ */
 body {
   font-family: var(--font-body);
@@ -665,12 +665,12 @@ code {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -693,30 +693,30 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -1284,12 +1284,12 @@ code {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -1312,30 +1312,30 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -1494,7 +1494,7 @@ code {
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Circular Buttons */
+/* Circular Buttons — metallic push-button with beveled rim */
 .btn-circle,
 .btn-round {
   border-radius: 50%;
@@ -1504,23 +1504,26 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--brushed-texture), radial-gradient(circle at 50% 35%, #e8e8e8, #b0b0b0);
-  border: 1px solid var(--color-gray-500);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -2px 0 rgba(0, 0, 0, 0.08);
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
+  border: 3px solid transparent;
+  border-image: none;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(180, 180, 180, 0.6), 0 0 0 4px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.12s ease-out;
 }
 
 .btn-circle:hover,
 .btn-round:hover {
-  background: var(--brushed-texture), radial-gradient(circle at 50% 35%, #f0f0f0, #c0c0c0);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.7) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #e4e4e4 0%, #b8b8b8 60%, #999 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(190, 190, 190, 0.7), 0 0 0 4px rgba(0, 0, 0, 0.25), 0 6px 14px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.6), inset 0 -3px 6px rgba(0, 0, 0, 0.15);
 }
 
 .btn-circle:active,
 .btn-round:active,
 .btn-circle.active,
 .btn-round.active {
-  background: var(--brushed-texture), radial-gradient(circle at 50% 60%, #989898, #b8b8b8);
-  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.25), inset 0 0 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(1px);
+  background: radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #999 0%, #a0a0a0 60%, #888 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(160, 160, 160, 0.5), 0 0 0 4px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 3px 8px rgba(0, 0, 0, 0.35), inset 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .btn-round .material-icons,
@@ -1528,6 +1531,35 @@ code {
   font-size: 1.4rem;
   color: var(--color-gray-700);
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Play/Pause — metallic push-button with primary icon */
+.btn-round.btn-primary,
+.btn-circle.btn-primary {
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
+  border: 3px solid transparent;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(180, 180, 180, 0.6), 0 0 0 4px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-round.btn-primary .material-icons,
+.btn-circle.btn-primary .material-icons {
+  color: var(--color-primary);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 6px rgba(200, 117, 51, 0.3);
+}
+
+.btn-round.btn-primary:hover,
+.btn-circle.btn-primary:hover {
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.7) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #e4e4e4 0%, #b8b8b8 60%, #999 100%);
+  border-color: transparent;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(190, 190, 190, 0.7), 0 0 0 4px rgba(0, 0, 0, 0.25), 0 6px 14px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.6), inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-round.btn-primary:active,
+.btn-circle.btn-primary:active {
+  transform: translateY(1px);
+  background: radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #999 0%, #a0a0a0 60%, #888 100%);
+  border-color: transparent;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(160, 160, 160, 0.5), 0 0 0 4px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 3px 8px rgba(0, 0, 0, 0.35), inset 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* ─── Icon Buttons ────────────────────────────────────────────────────── */
@@ -1583,6 +1615,11 @@ code {
   min-height: 28px;
   font-size: var(--text-xs);
   border-radius: 4px;
+}
+
+.btn-sm.btn-round,
+.btn-sm.btn-circle {
+  border-radius: 50%;
 }
 
 .btn-lg {
@@ -1741,12 +1778,12 @@ code {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -1769,30 +1806,30 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -2147,12 +2184,12 @@ code {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -2175,30 +2212,30 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -2404,12 +2441,12 @@ code {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -2432,30 +2469,30 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -2678,12 +2715,12 @@ code {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -2706,30 +2743,30 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -2938,12 +2975,12 @@ code {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -2966,30 +3003,30 @@ code {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -3230,12 +3267,12 @@ h2 {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -3258,30 +3295,30 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -3449,8 +3486,8 @@ h2 {
   font-family: var(--font-display);
   font-size: clamp(1.1rem, 4vw, 2rem);
   font-weight: 700;
-  color: var(--color-white);
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2), 0 2px 0 rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.7);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.15), 0 -1px 1px rgba(0, 0, 0, 0.8);
   letter-spacing: 0.3px;
   white-space: nowrap;
   overflow: hidden;
@@ -3460,11 +3497,11 @@ h2 {
 .artist-name {
   font-family: var(--font-body);
   font-size: clamp(0.75rem, 2vw, 1.1rem);
-  color: var(--color-primary-light);
+  color: rgba(0, 0, 0, 0.55);
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 1px;
-  text-shadow: 0 0 8px rgba(200, 117, 51, 0.4);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.12), 0 -1px 1px rgba(0, 0, 0, 0.6);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3473,17 +3510,18 @@ h2 {
 .track-artist {
   font-family: var(--font-body);
   font-size: clamp(0.75rem, 2vw, 1.1rem);
-  color: var(--color-primary-light);
+  color: rgba(0, 0, 0, 0.55);
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 1px;
-  text-shadow: 0 0 8px rgba(200, 117, 51, 0.4);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.12), 0 -1px 1px rgba(0, 0, 0, 0.6);
 }
 
 .album-name {
   font-size: clamp(0.7rem, 1.8vw, 1rem);
-  color: var(--color-gray-400);
+  color: rgba(0, 0, 0, 0.45);
   font-style: italic;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.1), 0 -1px 1px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3528,6 +3566,8 @@ h2 {
 
 .responsive-stream-info {
   font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
+  color: rgba(0, 0, 0, 0.55);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.12), 0 -1px 1px rgba(0, 0, 0, 0.6);
 }
 
 .format-logo-responsive {
@@ -3940,6 +3980,199 @@ h2 {
     font-size: 1.9rem !important;
   }
 }
+/* ═══════════════════════════════════════════════════════════════════════
+   WEATHER SCREENS - Light brushed metal background with dark inset fonts
+   ═══════════════════════════════════════════════════════════════════════ */
+/* Current weather page background - plain dark */
+.weather-container {
+  background: var(--color-gray-900);
+}
+
+/* Current weather panel */
+.weather-current {
+  background-image: var(--brushed-texture), var(--gradient-brushed);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: rgba(0, 0, 0, 0.7);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.25), 0 -1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.weather-current-temp {
+  color: rgba(0, 0, 0, 0.75);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3), 0 -1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.weather-current-desc {
+  color: rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.25), 0 -1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.weather-current-unit {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.weather-current-icon {
+  color: var(--color-primary-dark);
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.3));
+}
+
+/* Weather details row */
+.weather-details {
+  color: rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.25), 0 -1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.weather-detail-label {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.weather-detail-value {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.weather-detail-icon {
+  color: var(--color-primary-dark);
+}
+
+/* Hourly forecast */
+.weather-hourly {
+  background-image: var(--brushed-texture), var(--gradient-brushed);
+  border-radius: 12px;
+  padding: 1rem;
+  color: var(--color-gray-100);
+  text-shadow: none;
+}
+
+.weather-hourly-time {
+  color: var(--color-gray-200);
+}
+
+.weather-hourly-temp {
+  color: var(--color-white);
+}
+
+.weather-hourly-icon {
+  color: var(--color-primary-light);
+}
+
+.weather-hourly-wind {
+  color: var(--color-gray-200);
+}
+
+.weather-hourly-wind-icon {
+  color: var(--color-primary-light);
+}
+
+/* Daily forecast cards */
+.weather-daily-card {
+  background-image: var(--brushed-texture), var(--gradient-brushed);
+  border-radius: 10px;
+  padding: 1rem;
+  color: var(--color-gray-100);
+  text-shadow: none;
+}
+
+.weather-daily-card--today {
+  border-color: var(--color-primary);
+}
+
+.weather-daily-day {
+  color: var(--color-white);
+}
+
+.weather-daily-date {
+  color: var(--color-gray-200);
+}
+
+.weather-daily-desc {
+  color: var(--color-gray-200);
+}
+
+.weather-daily-icon {
+  color: var(--color-primary-light);
+}
+
+.weather-daily-temp {
+  color: var(--color-white);
+}
+
+.weather-daily-sun-item {
+  color: var(--color-gray-200);
+}
+
+/* Full dashboard */
+.weather-full {
+  background: var(--color-gray-900) !important;
+  color: var(--color-gray-100);
+  text-shadow: none;
+}
+
+.weather-full-hero-temp {
+  color: var(--color-white);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.weather-full-hero-desc {
+  color: var(--color-gray-200);
+}
+
+.weather-full-hero-location {
+  color: var(--color-gray-300);
+}
+
+.weather-full-hero-hilow {
+  color: var(--color-gray-300);
+}
+
+.weather-full-hero-icon {
+  color: var(--color-primary-light);
+  filter: drop-shadow(0 0 6px rgba(200, 117, 51, 0.4));
+}
+
+.weather-full-tenday-title {
+  color: var(--color-gray-400);
+}
+
+.weather-full-tenday-row {
+  color: var(--color-gray-100);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.weather-full-tenday-day {
+  color: var(--color-gray-200);
+}
+
+.weather-full-tenday-lo,
+.weather-full-tenday-hi {
+  color: var(--color-gray-300);
+}
+
+.weather-full-tile {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-gray-100);
+}
+
+.weather-full-tile-label {
+  color: var(--color-gray-400);
+}
+
+.weather-full-tile-value {
+  color: var(--color-white);
+}
+
+.weather-full-tile-sub {
+  color: var(--color-gray-300);
+}
+
+.weather-location-badge {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.weather-location-icon {
+  color: rgba(255, 255, 255, 0.4);
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme
@@ -4070,12 +4303,12 @@ h2 {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -4098,30 +4331,30 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -4339,12 +4572,12 @@ h2 {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -4367,30 +4600,30 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -4715,12 +4948,12 @@ h2 {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -4743,30 +4976,30 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -4833,8 +5066,10 @@ h2 {
 
 .slide-panel-subtitle {
   font-size: 0.53rem;
-  color: var(--color-gray-600);
+  color: var(--color-gray-900);
   font-family: var(--font-label);
+  font-weight: 600;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .slide-panel-title {
@@ -4990,12 +5225,12 @@ h2 {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -5018,30 +5253,30 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -5336,12 +5571,12 @@ h2 {
   --highlight-40: rgba(255, 255, 255, 0.50);
   --highlight-50: rgba(255, 255, 255, 0.60);
   /* ─── Typography ─────────────────────────────────────────────────── */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Unica One', sans-serif;
+  --font-body: 'Crimson Text', serif;
   --font-code: 'JetBrains Mono', monospace;
   --font-tech: 'JetBrains Mono', monospace;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-label: 'DM Sans', sans-serif;
+  --font-label: 'Crimson Text', serif;
   /* ── Fluid Type Scale ─────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -5364,30 +5599,30 @@ h2 {
   --tracking-widest: 0.1em;
   /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
   --brushed-texture: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.1) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.18) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.03) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.06) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.15) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.22) 1.2px);
   /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
   --brushed-texture-dark: repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 3%,
-          hsla(0, 0%, 100%, 0.04) 4.5%),
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 3px,
+          hsla(0, 0%, 100%, 0.08) 4.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 0%, 0) 0%,
-          hsla(0, 0%, 0%, 0) 2%,
-          hsla(0, 0%, 0%, 0.01) 2.5%),
+          hsla(0, 0%, 0%, 0) 0px,
+          hsla(0, 0%, 0%, 0) 2px,
+          hsla(0, 0%, 0%, 0.03) 2.5px),
       repeating-linear-gradient(180deg,
-          hsla(0, 0%, 100%, 0) 0%,
-          hsla(0, 0%, 100%, 0) 0.6%,
-          hsla(0, 0%, 100%, 0.05) 1.2%);
+          hsla(0, 0%, 100%, 0) 0px,
+          hsla(0, 0%, 100%, 0) 0.6px,
+          hsla(0, 0%, 100%, 0.1) 1.2px);
   --gradient-brushed-black: linear-gradient(80deg,
           #222222 0%,
           #6f6f6f 40%,
@@ -5613,7 +5848,7 @@ h2 {
   max-width: 180dvh;
   margin: 0 auto;
   container-type: size;
-  background-image: var(--brushed-texture), var(--gradient-brushed-light);
+  background-image: repeating-linear-gradient(180deg, hsla(0, 0%, 100%, 0) 0%, hsla(0, 0%, 100%, 0) 1.2%, hsla(0, 0%, 100%, 0.08) 1.8%), repeating-linear-gradient(180deg, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0) 0.8%, hsla(0, 0%, 0%, 0.02) 1%), repeating-linear-gradient(180deg, hsla(0, 0%, 100%, 0) 0%, hsla(0, 0%, 100%, 0) 0.25%, hsla(0, 0%, 100%, 0.1) 0.5%), var(--gradient-brushed-light);
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
@@ -5849,45 +6084,52 @@ h2 {
 }
 
 /* ── Analog Clock — Brushed Metal Variant ──────────────────────────────────
- * Polished aluminum bezel, light metallic face, copper second hand
+ * Dark brushed metal face with light fonts and copper accents
  * ──────────────────────────────────────────────────────────────────────── */
-/* Bezel — brushed aluminum ring */
+/* Bezel — dark brushed aluminum ring */
 .clock-bezel {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   padding: 5%;
-  background: var(--brushed-texture), linear-gradient(145deg, #c8c8c8 0%, #909090 50%, #b8b8b8 100%);
-  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -2px 6px rgba(0, 0, 0, 0.1);
-  border: 2px solid #888;
+  background-image: var(--brushed-texture-dark), var(--gradient-brushed-black);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.08), inset 0 -2px 6px rgba(0, 0, 0, 0.3);
+  border: 2px solid #111;
 }
 
-/* Face — light recessed dial */
+/* Face — dark recessed dial */
 .clock-face {
   position: relative;
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(ellipse at 40% 35%, #f0f0f0 0%, #e0e0e0 100%);
-  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.08), inset 0 0 20px rgba(0, 0, 0, 0.04);
-  border: 1px solid #aaa;
+  background: radial-gradient(ellipse at 40% 35%, #3a3a3a 0%, #222222 100%);
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid #1a1a1a;
+}
+
+/* Tick marks base */
+.clock-tick::before {
+  content: "";
+  display: block;
+  width: 100%;
   position: absolute;
   top: 4%;
   border-radius: 1px;
 }
 
-/* Hour ticks — dark steel */
+/* Hour ticks — light silver */
 .clock-tick--hour::before {
   height: 10%;
-  background: var(--color-gray-700);
+  background: var(--color-gray-200);
   width: 3px;
   margin-left: -0.5px;
 }
 
-/* Minute ticks — subtle gray */
+/* Minute ticks — subtle light gray */
 .clock-tick--minute::before {
   height: 5%;
-  background: var(--color-gray-400);
+  background: var(--color-gray-500);
   width: 1px;
 }
 
@@ -5895,11 +6137,11 @@ h2 {
 .clock-hour-digit {
   position: absolute;
   transform: translate(-50%, -50%);
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
   font-weight: 700;
-  color: var(--color-gray-800);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: var(--color-gray-100);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   line-height: 1;
 }
 
@@ -5912,24 +6154,24 @@ h2 {
   border-radius: 2px;
 }
 
-/* Hour hand — dark gunmetal */
+/* Hour hand — bright silver */
 .clock-hand--hour {
   width: 7px;
   height: 25%;
   margin-left: -3.5px;
-  background: linear-gradient(180deg, var(--color-gray-700) 0%, var(--color-gray-900) 100%);
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(180deg, var(--color-gray-200) 0%, var(--color-gray-400) 100%);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   border-radius: 3px 3px 1px 1px;
   z-index: 3;
 }
 
-/* Minute hand — steel */
+/* Minute hand — silver */
 .clock-hand--minute {
   width: 3px;
   height: 35%;
   margin-left: -1.5px;
-  background: linear-gradient(180deg, var(--color-gray-600) 0%, var(--color-gray-800) 100%);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(180deg, var(--color-gray-200) 0%, var(--color-gray-300) 100%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   border-radius: 1.5px 1.5px 1px 1px;
   z-index: 4;
 }
@@ -5939,8 +6181,8 @@ h2 {
   width: 1.5px;
   height: 38%;
   margin-left: -0.75px;
-  background: var(--color-primary);
-  box-shadow: 0 0 6px rgba(200, 117, 51, 0.4);
+  background: var(--color-primary-light);
+  box-shadow: 0 0 6px rgba(200, 117, 51, 0.5);
   border-radius: 1px;
   z-index: 5;
   transition: none;
@@ -5956,38 +6198,41 @@ h2 {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(200, 117, 51, 0.25), 0 0 8px rgba(200, 117, 51, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 2px rgba(200, 117, 51, 0.25), 0 0 8px rgba(200, 117, 51, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
   z-index: 6;
 }
 
 .clock-face-day {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.6rem, 3cqi, 1rem);
   font-weight: 600;
-  color: var(--color-gray-500);
+  color: var(--color-gray-400);
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .clock-face-date {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.6rem, 3cqi, 1rem);
   font-weight: 700;
-  color: var(--color-gray-800);
+  color: var(--color-gray-200);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* ── Weather on face ────────────────────────────────────────────────────── */
 .clock-face-weather-icon {
   font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
-  color: var(--color-primary);
-  filter: drop-shadow(0 0 3px rgba(200, 117, 51, 0.3));
+  color: var(--color-primary-light);
+  filter: drop-shadow(0 0 3px rgba(200, 117, 51, 0.4));
 }
 
 .clock-face-weather-temp {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.7rem, 3.5cqi, 1.4rem);
   font-weight: 700;
-  color: var(--color-gray-800);
+  color: var(--color-gray-200);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
 }
 

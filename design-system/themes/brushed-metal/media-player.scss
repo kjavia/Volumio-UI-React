@@ -191,10 +191,10 @@
     font-family: var(--font-display);
     font-size: clamp(1.1rem, 4vw, 2rem);
     font-weight: 700;
-    color: var(--color-white);
+    color: rgba(0, 0, 0, 0.7);
     text-shadow:
-        0 0 10px rgba(255, 255, 255, 0.2),
-        0 2px 0 rgba(0, 0, 0, 0.6);
+        0 1px 1px rgba(255, 255, 255, 0.15),
+        0 -1px 1px rgba(0, 0, 0, 0.8);
     letter-spacing: 0.3px;
     white-space: nowrap;
     overflow: hidden;
@@ -204,11 +204,13 @@
 .artist-name {
     font-family: var(--font-body);
     font-size: clamp(0.75rem, 2vw, 1.1rem);
-    color: var(--color-primary-light);
+    color: rgba(0, 0, 0, 0.55);
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 0 0 8px rgba(200, 117, 51, 0.4);
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 0.12),
+        0 -1px 1px rgba(0, 0, 0, 0.6);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -217,17 +219,22 @@
 .track-artist {
     font-family: var(--font-body);
     font-size: clamp(0.75rem, 2vw, 1.1rem);
-    color: var(--color-primary-light);
+    color: rgba(0, 0, 0, 0.55);
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 0 0 8px rgba(200, 117, 51, 0.4);
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 0.12),
+        0 -1px 1px rgba(0, 0, 0, 0.6);
 }
 
 .album-name {
     font-size: clamp(0.7rem, 1.8vw, 1rem);
-    color: var(--color-gray-400);
+    color: rgba(0, 0, 0, 0.45);
     font-style: italic;
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 0.1),
+        0 -1px 1px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -278,6 +285,10 @@
 
 .responsive-stream-info {
     font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
+    color: rgba(0, 0, 0, 0.55);
+    text-shadow:
+        0 1px 1px rgba(255, 255, 255, 0.12),
+        0 -1px 1px rgba(0, 0, 0, 0.6);
 }
 
 .format-logo-responsive {
@@ -800,4 +811,204 @@
     .track-menu__item .material-icons {
         font-size: 1.9rem !important;
     }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   WEATHER SCREENS - Light brushed metal background with dark inset fonts
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Current weather page background - plain dark */
+.weather-container {
+    background: var(--color-gray-900);
+}
+
+/* Current weather panel */
+.weather-current {
+    background-image:
+        var(--brushed-texture),
+        var(--gradient-brushed);
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: rgba(0, 0, 0, 0.7);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.25), 0 -1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.weather-current-temp {
+    color: rgba(0, 0, 0, 0.75);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3), 0 -1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.weather-current-desc {
+    color: rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.25), 0 -1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.weather-current-unit {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.weather-current-icon {
+    color: var(--color-primary-dark);
+    filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.3));
+}
+
+/* Weather details row */
+.weather-details {
+    color: rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.25), 0 -1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.weather-detail-label {
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.weather-detail-value {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.weather-detail-icon {
+    color: var(--color-primary-dark);
+}
+
+/* Hourly forecast */
+.weather-hourly {
+    background-image:
+        var(--brushed-texture),
+        var(--gradient-brushed);
+    border-radius: 12px;
+    padding: 1rem;
+    color: var(--color-gray-100);
+    text-shadow: none;
+}
+
+.weather-hourly-time {
+    color: var(--color-gray-200);
+}
+
+.weather-hourly-temp {
+    color: var(--color-white);
+}
+
+.weather-hourly-icon {
+    color: var(--color-primary-light);
+}
+
+.weather-hourly-wind {
+    color: var(--color-gray-200);
+}
+
+.weather-hourly-wind-icon {
+    color: var(--color-primary-light);
+}
+
+/* Daily forecast cards */
+.weather-daily-card {
+    background-image:
+        var(--brushed-texture),
+        var(--gradient-brushed);
+    border-radius: 10px;
+    padding: 1rem;
+    color: var(--color-gray-100);
+    text-shadow: none;
+}
+
+.weather-daily-card--today {
+    border-color: var(--color-primary);
+}
+
+.weather-daily-day {
+    color: var(--color-white);
+}
+
+.weather-daily-date {
+    color: var(--color-gray-200);
+}
+
+.weather-daily-desc {
+    color: var(--color-gray-200);
+}
+
+.weather-daily-icon {
+    color: var(--color-primary-light);
+}
+
+.weather-daily-temp {
+    color: var(--color-white);
+}
+
+.weather-daily-sun-item {
+    color: var(--color-gray-200);
+}
+
+/* Full dashboard */
+.weather-full {
+    background: var(--color-gray-900) !important;
+    color: var(--color-gray-100);
+    text-shadow: none;
+}
+
+.weather-full-hero-temp {
+    color: var(--color-white);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.weather-full-hero-desc {
+    color: var(--color-gray-200);
+}
+
+.weather-full-hero-location {
+    color: var(--color-gray-300);
+}
+
+.weather-full-hero-hilow {
+    color: var(--color-gray-300);
+}
+
+.weather-full-hero-icon {
+    color: var(--color-primary-light);
+    filter: drop-shadow(0 0 6px rgba(200, 117, 51, 0.4));
+}
+
+.weather-full-tenday-title {
+    color: var(--color-gray-400);
+}
+
+.weather-full-tenday-row {
+    color: var(--color-gray-100);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.weather-full-tenday-day {
+    color: var(--color-gray-200);
+}
+
+.weather-full-tenday-lo,
+.weather-full-tenday-hi {
+    color: var(--color-gray-300);
+}
+
+.weather-full-tile {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: var(--color-gray-100);
+}
+
+.weather-full-tile-label {
+    color: var(--color-gray-400);
+}
+
+.weather-full-tile-value {
+    color: var(--color-white);
+}
+
+.weather-full-tile-sub {
+    color: var(--color-gray-300);
+}
+
+.weather-location-badge {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.weather-location-icon {
+    color: rgba(255, 255, 255, 0.4);
 }

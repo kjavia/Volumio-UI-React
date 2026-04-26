@@ -64,8 +64,10 @@
 
 .slide-panel-subtitle {
     font-size: 0.53rem;
-    color: var(--color-gray-600);
+    color: var(--color-gray-900);
     font-family: var(--font-label);
+    font-weight: 600;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .slide-panel-title {

@@ -27,7 +27,18 @@ $frame-highlight: rgba(255, 255, 255, 0.45);
     margin: 0 auto;
     container-type: size;
     background-image:
-        var(--brushed-texture),
+        repeating-linear-gradient(180deg,
+            hsla(0, 0%, 100%, 0) 0%,
+            hsla(0, 0%, 100%, 0) 1.2%,
+            hsla(0, 0%, 100%, 0.08) 1.8%),
+        repeating-linear-gradient(180deg,
+            hsla(0, 0%, 0%, 0) 0%,
+            hsla(0, 0%, 0%, 0) 0.8%,
+            hsla(0, 0%, 0%, 0.02) 1%),
+        repeating-linear-gradient(180deg,
+            hsla(0, 0%, 100%, 0) 0%,
+            hsla(0, 0%, 100%, 0) 0.25%,
+            hsla(0, 0%, 100%, 0.1) 0.5%),
         var(--gradient-brushed-light);
     border-radius: 10px;
     box-shadow:

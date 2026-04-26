@@ -144,12 +144,12 @@
     --highlight-50: rgba(255, 255, 255, 0.60);
 
     /* ─── Typography ─────────────────────────────────────────────────── */
-    --font-display: 'Outfit', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
+    --font-display: 'Unica One', sans-serif;
+    --font-body: 'Crimson Text', serif;
     --font-code: 'JetBrains Mono', monospace;
     --font-tech: 'JetBrains Mono', monospace;
     --font-mono: 'JetBrains Mono', monospace;
-    --font-label: 'DM Sans', sans-serif;
+    --font-label: 'Crimson Text', serif;
 
     /* ── Fluid Type Scale ─────────────────────────────────────────────── */
     --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
@@ -176,31 +176,31 @@
 
     /* ─── Brushed metal texture (vertical stripes → horizontal brush) ── */
     --brushed-texture: repeating-linear-gradient(180deg,
-            hsla(0, 0%, 100%, 0) 0%,
-            hsla(0, 0%, 100%, 0) 3%,
-            hsla(0, 0%, 100%, 0.1) 4.5%),
+            hsla(0, 0%, 100%, 0) 0px,
+            hsla(0, 0%, 100%, 0) 3px,
+            hsla(0, 0%, 100%, 0.18) 4.5px),
         repeating-linear-gradient(180deg,
-            hsla(0, 0%, 0%, 0) 0%,
-            hsla(0, 0%, 0%, 0) 2%,
-            hsla(0, 0%, 0%, 0.03) 2.5%),
+            hsla(0, 0%, 0%, 0) 0px,
+            hsla(0, 0%, 0%, 0) 2px,
+            hsla(0, 0%, 0%, 0.06) 2.5px),
         repeating-linear-gradient(180deg,
-            hsla(0, 0%, 100%, 0) 0%,
-            hsla(0, 0%, 100%, 0) 0.6%,
-            hsla(0, 0%, 100%, 0.15) 1.2%);
+            hsla(0, 0%, 100%, 0) 0px,
+            hsla(0, 0%, 100%, 0) 0.6px,
+            hsla(0, 0%, 100%, 0.22) 1.2px);
 
     /* ─── Dark brushed texture (CodePen .black variant) ───────────────── */
     --brushed-texture-dark: repeating-linear-gradient(180deg,
-            hsla(0, 0%, 100%, 0) 0%,
-            hsla(0, 0%, 100%, 0) 3%,
-            hsla(0, 0%, 100%, 0.04) 4.5%),
+            hsla(0, 0%, 100%, 0) 0px,
+            hsla(0, 0%, 100%, 0) 3px,
+            hsla(0, 0%, 100%, 0.08) 4.5px),
         repeating-linear-gradient(180deg,
-            hsla(0, 0%, 0%, 0) 0%,
-            hsla(0, 0%, 0%, 0) 2%,
-            hsla(0, 0%, 0%, 0.01) 2.5%),
+            hsla(0, 0%, 0%, 0) 0px,
+            hsla(0, 0%, 0%, 0) 2px,
+            hsla(0, 0%, 0%, 0.03) 2.5px),
         repeating-linear-gradient(180deg,
-            hsla(0, 0%, 100%, 0) 0%,
-            hsla(0, 0%, 100%, 0) 0.6%,
-            hsla(0, 0%, 100%, 0.05) 1.2%);
+            hsla(0, 0%, 100%, 0) 0px,
+            hsla(0, 0%, 100%, 0) 0.6px,
+            hsla(0, 0%, 100%, 0.1) 1.2px);
     --gradient-brushed-black: linear-gradient(80deg,
             #222222 0%,
             #6f6f6f 40%,
