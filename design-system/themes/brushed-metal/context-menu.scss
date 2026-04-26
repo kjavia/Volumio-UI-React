@@ -52,7 +52,7 @@
     background: rgba(0, 0, 0, 0.2);
     border: none !important;
     box-shadow: none !important;
-    color: var(--color-primary);
+    color: var(--color-gray-300);
 
     &:hover {
         background: rgba(0, 0, 0, 0.3);
@@ -66,7 +66,7 @@
     }
 
     .material-icons {
-        color: var(--color-primary);
+        color: var(--color-gray-300);
         filter: none;
     }
 }

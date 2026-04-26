@@ -5894,7 +5894,7 @@ h2 {
   background: rgba(0, 0, 0, 0.2);
   border: none !important;
   box-shadow: none !important;
-  color: var(--color-primary);
+  color: var(--color-gray-300);
 }
 .context-menu-toggle--no-shadow:hover {
   background: rgba(0, 0, 0, 0.3);
@@ -5906,7 +5906,7 @@ h2 {
   transform: none;
 }
 .context-menu-toggle--no-shadow .material-icons {
-  color: var(--color-primary);
+  color: var(--color-gray-300);
   filter: none;
 }
 
@@ -6812,14 +6812,16 @@ h2 {
 
 /* ── Flip Clock – Brushed Metal Theme ──────────────────────────────────── */
 .flip-clock {
-  background-image: var(--brushed-texture), var(--gradient-brushed-light);
+  background: var(--color-gray-950, #22262b);
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: none;
 }
 
 .tick-flip-panel {
   color: #3a3a3a;
   background-color: #d8d8d8;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono), monospace;
 }
 
 .tick-flip-panel-front {
@@ -6828,7 +6830,7 @@ h2 {
 }
 
 .tick-flip-panel-back {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 40%), linear-gradient(180deg, #b0b0b0 0%, #c0c0c0 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 40%), linear-gradient(180deg, #d0d0d0 0%, #dcdcdc 100%);
 }
 
 .flip-clock-body {
@@ -6839,14 +6841,14 @@ h2 {
 }
 
 .flip-clock-stand {
-  background: var(--brushed-texture-dark), linear-gradient(180deg, #3a3a3a 0%, #222222 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--brushed-texture), var(--gradient-brushed);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .flip-clock-date,
 .flip-clock-weather {
-  color: var(--color-primary-light);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  color: var(--color-primary);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 body {

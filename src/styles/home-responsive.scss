@@ -53,7 +53,6 @@ body,
 :root.sp-has-control-color .lsp-btn-group .btn-primary,
 :root.sp-has-control-color .lsp-btn-group .btn-icon {
   color: var(--sp-control-color) !important;
-  border-color: var(--sp-control-color) !important;
 }
 
 :root.sp-has-control-color .controls-transport-row .material-icons,
@@ -112,6 +111,14 @@ body,
 :root.sp-has-control-color .service-logo-badge {
   color: var(--sp-control-color) !important;
   border-color: var(--sp-control-color) !important;
+}
+
+/* Context menu toggle button */
+:root.sp-has-control-color .context-menu-toggle,
+:root.sp-has-control-color .context-menu-toggle.context-menu-toggle--no-shadow,
+:root.sp-has-control-color .context-menu-toggle .material-icons,
+:root.sp-has-control-color .context-menu-toggle--no-shadow .material-icons {
+  color: var(--sp-control-color) !important;
 }
 
 /* Muted placeholder icon shown in viz areas when nothing is playing */
