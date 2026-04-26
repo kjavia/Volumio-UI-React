@@ -108,7 +108,8 @@
     position: relative;
     cursor: pointer;
     box-shadow:
-        inset 0 2px 4px rgba(0, 0, 0, 0.15),
+        inset 0 2px 5px rgba(0, 0, 0, 0.2),
+        inset 0 0 3px rgba(0, 0, 0, 0.08),
         0 1px 0 rgba(255, 255, 255, 0.4);
     border: 1px solid var(--color-gray-400);
 }
@@ -121,14 +122,17 @@
     width: 18px;
     height: 18px;
     background:
-        var(--brushed-texture),
-        var(--gradient-brushed-light);
+        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
     border-radius: 50%;
     transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
     box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    border: 1px solid var(--color-gray-400);
+        0 0 0 1px rgba(0, 0, 0, 0.2),
+        0 0 0 2px rgba(180, 180, 180, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.25),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    border: 1px solid transparent;
 }
 
 .form-switch.checked {
@@ -141,8 +145,14 @@
 
 .form-switch.checked::after {
     left: 26px;
-    background: var(--color-primary);
-    box-shadow: 0 0 6px rgba(200, 117, 51, 0.4);
+    background:
+        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+        linear-gradient(180deg, #d9884a 0%, #c87533 50%, #a05e28 100%);
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.25),
+        0 0 0 2px rgba(200, 117, 51, 0.3),
+        0 2px 6px rgba(200, 117, 51, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
     border-color: var(--color-primary-dark);
 }
 
@@ -157,6 +167,14 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555b65'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
+    border: 2px solid transparent;
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.2),
+        0 0 0 2px rgba(180, 180, 180, 0.4),
+        0 0 0 3px rgba(0, 0, 0, 0.15),
+        0 3px 6px rgba(0, 0, 0, 0.2),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.08);
 
     option {
         background: var(--color-white);
@@ -171,13 +189,22 @@
         background-repeat: no-repeat, repeat, no-repeat;
         background-position: right 10px center, 0 0, 0 0;
         background-size: auto, cover, cover;
-        box-shadow: none;
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.2),
+            0 0 0 2px rgba(190, 190, 190, 0.5),
+            0 0 0 3px rgba(0, 0, 0, 0.15),
+            0 4px 10px rgba(0, 0, 0, 0.25),
+            inset 0 1px 2px rgba(255, 255, 255, 0.5),
+            inset 0 -1px 2px rgba(0, 0, 0, 0.06);
     }
 
     &:focus {
         outline: none;
         border-color: var(--color-primary);
-        box-shadow: 0 0 0 3px rgba(200, 117, 51, 0.2);
+        box-shadow:
+            0 0 0 1px rgba(200, 117, 51, 0.3),
+            0 0 0 3px rgba(200, 117, 51, 0.2),
+            0 3px 6px rgba(0, 0, 0, 0.2);
     }
 
     &:disabled {

@@ -47,10 +47,8 @@
 
 /* ── Header ── */
 .slide-panel-header {
-    background:
-        var(--brushed-texture),
-        var(--gradient-brushed-dark);
-    border-bottom: 1px solid var(--color-gray-500);
+    background: var(--color-gray-900);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     flex-shrink: 0;
 }
 
@@ -64,16 +62,29 @@
 
 .slide-panel-subtitle {
     font-size: 0.53rem;
-    color: var(--color-gray-900);
+    color: var(--color-gray-300);
     font-family: var(--font-label);
     font-weight: 600;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    text-shadow: none;
 }
 
 .slide-panel-title {
     font-family: var(--font-display);
     font-size: clamp(0.75rem, 0.975vw, 0.86rem);
-    color: var(--color-gray-900);
+    color: var(--color-white);
+}
+
+/* ── Header buttons (light icons on dark bg) ── */
+.slide-panel-header .btn-icon .material-icons {
+    background-image: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: var(--color-gray-300);
+    background-clip: unset;
+    filter: none;
+}
+
+.slide-panel-header .btn-icon:hover .material-icons {
+    -webkit-text-fill-color: var(--color-white);
 }
 
 /* ── Body ── */

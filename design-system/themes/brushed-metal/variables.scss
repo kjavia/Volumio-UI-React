@@ -106,8 +106,17 @@
 
     /* ─── Background Colors ────────────────────────────────────────────── */
     --bg-color: #d0d0d0;
+    --panel-bg: var(--color-gray-900);
     --panel-bg-dark: #a8a8a8;
+    --panel-bg-subtle: rgba(0, 0, 0, 0.05);
     --device-surface: var(--gradient-brushed);
+
+    /* ─── Borders ──────────────────────────────────────────────────────── */
+    --border-dark: var(--color-gray-300);
+
+    /* ─── List Items ──────────────────────────────────────────────────── */
+    --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+    --list-item-text-hover: var(--color-gray-900);
 
     /* ─── Button Colors ────────────────────────────────────────────────── */
     --btn-bg-dark: var(--gradient-brushed-dark);

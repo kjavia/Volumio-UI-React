@@ -101,8 +101,15 @@
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -292,8 +299,15 @@
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -632,8 +646,15 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -1251,8 +1272,15 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -1745,8 +1773,15 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -1936,7 +1971,7 @@ code {
   border-radius: 12px;
   position: relative;
   cursor: pointer;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 0 3px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.4);
   border: 1px solid var(--color-gray-400);
 }
 
@@ -1947,11 +1982,11 @@ code {
   top: 2px;
   width: 18px;
   height: 18px;
-  background: var(--brushed-texture), var(--gradient-brushed-light);
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
   border-radius: 50%;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--color-gray-400);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(180, 180, 180, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.4), inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid transparent;
 }
 
 .form-switch.checked {
@@ -1962,8 +1997,8 @@ code {
 
 .form-switch.checked::after {
   left: 26px;
-  background: var(--color-primary);
-  box-shadow: 0 0 6px rgba(200, 117, 51, 0.4);
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%), linear-gradient(180deg, #d9884a 0%, #c87533 50%, #a05e28 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(200, 117, 51, 0.3), 0 2px 6px rgba(200, 117, 51, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.3);
   border-color: var(--color-primary-dark);
 }
 
@@ -1976,6 +2011,8 @@ code {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555b65'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
+  border: 2px solid transparent;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(180, 180, 180, 0.4), 0 0 0 3px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.4), inset 0 -1px 2px rgba(0, 0, 0, 0.08);
 }
 .form-select option {
   background: var(--color-white);
@@ -1986,12 +2023,12 @@ code {
   background-repeat: no-repeat, repeat, no-repeat;
   background-position: right 10px center, 0 0, 0 0;
   background-size: auto, cover, cover;
-  box-shadow: none;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(190, 190, 190, 0.5), 0 0 0 3px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.5), inset 0 -1px 2px rgba(0, 0, 0, 0.06);
 }
 .form-select:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(200, 117, 51, 0.2);
+  box-shadow: 0 0 0 1px rgba(200, 117, 51, 0.3), 0 0 0 3px rgba(200, 117, 51, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 .form-select:disabled {
   opacity: 0.4;
@@ -2151,8 +2188,15 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -2259,24 +2303,25 @@ code {
 .led-bar-container {
   display: flex;
   gap: 4px;
-  background: var(--brushed-texture), var(--gradient-brushed-dark);
-  padding: 4px;
+  background: radial-gradient(ellipse at 50% 40%, #555 0%, #333 60%, #222 100%);
+  padding: 5px;
   border-radius: 6px;
-  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 2px solid transparent;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(180, 180, 180, 0.4), 0 0 0 3px rgba(0, 0, 0, 0.2), inset 2px 2px 6px rgba(0, 0, 0, 0.4), inset 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
 .led-segment {
   flex: 1;
   height: 10px;
-  background-color: var(--color-gray-400);
+  background-color: rgba(255, 255, 255, 0.08);
   border-radius: 2px;
-  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
   transition: all 0.2s;
 }
 
 .led-segment.on {
   background-color: var(--color-primary);
-  box-shadow: 0 0 6px var(--glow-primary);
+  box-shadow: 0 0 6px var(--glow-primary), 0 0 2px var(--glow-primary);
 }
 
 /* Smooth recessed bar */
@@ -2285,9 +2330,10 @@ code {
   width: 100%;
   background-color: var(--color-gray-300);
   border-radius: 6px;
-  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.15), 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), inset 0 0 3px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5);
   overflow: hidden;
   position: relative;
+  border: 1px solid var(--color-gray-400);
 }
 
 .smooth-bar-fill {
@@ -2408,8 +2454,15 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -2517,28 +2570,28 @@ code {
   height: 240px;
   background-color: var(--color-gray-300);
   border-radius: 8px;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.25), inset 0 0 3px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5);
   position: relative;
   margin: 0 20px;
   border: 1px solid var(--color-gray-400);
 }
 
-/* Fader Knob/Cap */
+/* Fader Knob/Cap — metallic push-button style */
 .fader-cap {
   width: 40px;
   height: 60px;
-  background: var(--brushed-texture), var(--gradient-brushed);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, transparent 40%), linear-gradient(180deg, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
   border-radius: 6px;
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(180, 180, 180, 0.5), 0 0 0 3px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 2px 3px rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(0, 0, 0, 0.15);
   cursor: ns-resize;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.1s ease;
-  border: 1px solid var(--color-gray-500);
+  border: 2px solid transparent;
 }
 
 /* Grip lines on fader */
@@ -2546,13 +2599,13 @@ code {
   content: "";
   width: 24px;
   height: 2px;
-  background: var(--color-gray-500);
-  box-shadow: 0 4px 0 var(--color-gray-500), 0 -4px 0 var(--color-gray-500), 0 1px 0 rgba(255, 255, 255, 0.4), 0 5px 0 rgba(255, 255, 255, 0.4), 0 -3px 0 rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2), 0 -4px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.4), 0 5px 0 rgba(255, 255, 255, 0.4), 0 -3px 0 rgba(255, 255, 255, 0.4);
 }
 
 .fader-cap:active {
-  background: var(--brushed-texture), var(--gradient-brushed-dark);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 2px 6px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 40%), linear-gradient(180deg, #999 0%, #a0a0a0 60%, #888 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(160, 160, 160, 0.4), 0 0 0 3px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15), inset 0 3px 8px rgba(0, 0, 0, 0.25), inset 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* Horizontal Slider (General) */
@@ -2563,7 +2616,7 @@ code {
   background: var(--color-gray-300);
   border-radius: 4px;
   outline: none;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.5);
   border: 1px solid var(--color-gray-400);
 }
 
@@ -2573,16 +2626,16 @@ code {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--brushed-texture), radial-gradient(circle at 40% 35%, #e8e8e8, #b0b0b0);
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
   cursor: pointer;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--color-gray-500);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(180, 180, 180, 0.5), 0 0 0 3px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.5), inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+  border: 2px solid transparent;
   margin-top: -8px;
 }
 
 .range-slider::-webkit-slider-thumb:active {
-  background: var(--brushed-texture), radial-gradient(circle at 50% 50%, #c8c8c8, #989898);
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+  background: radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #999 0%, #a0a0a0 60%, #888 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(160, 160, 160, 0.4), 0 0 0 3px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15), inset 0 2px 5px rgba(0, 0, 0, 0.25);
 }
 
 :root {
@@ -2682,8 +2735,15 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -2793,17 +2853,17 @@ code {
   position: relative;
   cursor: grab;
   user-select: none;
-  border: 1px solid var(--color-gray-500);
-  /* Brushed Metal Knob */
-  background: repeating-conic-gradient(rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.06) 2%, transparent 2%, transparent 4%), radial-gradient(circle at 50% 40%, #e8e8e8 0%, #bfbfbf 40%, #a0a0a0 100%);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  border: 3px solid transparent;
+  /* Metallic push-button knob with radial highlight */
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.55) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #d8d8d8 0%, #a8a8a8 60%, #888 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(180, 180, 180, 0.6), 0 0 0 4px rgba(0, 0, 0, 0.25), 0 6px 16px rgba(0, 0, 0, 0.35), 0 3px 6px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -3px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.1s ease;
 }
 
 .knob:active {
   cursor: grabbing;
-  background: repeating-conic-gradient(rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.04) 2%, transparent 2%, transparent 4%), radial-gradient(circle at 50% 50%, #c8c8c8 0%, #989898 100%);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), inset 0 3px 10px rgba(0, 0, 0, 0.12);
+  background: radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 50% 50%, #999 0%, #a0a0a0 60%, #888 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(160, 160, 160, 0.5), 0 0 0 4px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2), inset 0 3px 10px rgba(0, 0, 0, 0.3), inset 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* Texture ring */
@@ -2815,7 +2875,7 @@ code {
   right: 5px;
   bottom: 5px;
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
 /* Indicator line on knob */
@@ -2942,8 +3002,15 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -3106,9 +3173,9 @@ h2 {
   flex: 1;
   min-width: 0;
   height: 70px;
-  border-radius: 8px;
+  border-radius: 10px;
   background: transparent;
-  border: none;
+  border: 2px solid transparent;
   cursor: pointer;
   color: var(--color-gray-600);
   font-family: var(--font-label);
@@ -3116,20 +3183,21 @@ h2 {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease-out;
   position: relative;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .tab-btn:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
   color: var(--color-gray-800);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 .tab-btn.active {
-  background: rgba(0, 0, 0, 0.08);
+  background: radial-gradient(ellipse at 50% 55%, rgba(255, 255, 255, 0.1) 0%, transparent 60%), rgba(0, 0, 0, 0.06);
   color: var(--color-primary);
-  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.12), 0 0 6px var(--glow-primary);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12), 0 0 0 2px rgba(180, 180, 180, 0.3), inset 0 2px 6px rgba(0, 0, 0, 0.15), inset 0 0 4px rgba(0, 0, 0, 0.08), 0 0 8px var(--glow-primary);
 }
 
 .tab-btn .material-icons {
@@ -3234,8 +3302,15 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -4270,8 +4345,15 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -4539,8 +4621,15 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -4639,9 +4728,11 @@ h2 {
 /* ── Queue Info Bar ── */
 .playlist-info {
   font-size: 0.72rem;
-  border-bottom: 1px solid var(--color-gray-400);
+  border-bottom: 1px solid var(--color-gray-300);
   padding-bottom: 0.5rem;
   margin-bottom: 0.25rem;
+  background: var(--color-gray-100);
+  padding: 0.5rem 1rem;
 }
 
 .playlist-info-count {
@@ -4661,7 +4752,7 @@ h2 {
 }
 
 .playlist-item {
-  border-bottom: 1px solid var(--color-gray-300);
+  border-bottom: 1px solid var(--color-gray-250);
   cursor: pointer;
   border-radius: 0;
   transition: background 0.15s ease;
@@ -4671,12 +4762,19 @@ h2 {
   border-bottom: none;
 }
 .playlist-item:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(0, 0, 0, 0.06);
+}
+.playlist-item:nth-child(even) {
+  background: rgba(0, 0, 0, 0.02);
+}
+.playlist-item:nth-child(even):hover {
+  background: rgba(0, 0, 0, 0.06);
 }
 
 /* Active / current track */
 .playlist-item--active {
-  background: rgba(200, 117, 51, 0.08);
+  background: rgba(200, 117, 51, 0.1) !important;
+  border-left: 3px solid var(--color-primary);
 }
 .playlist-item--active .playlist-track-title {
   color: var(--color-primary);
@@ -4692,6 +4790,7 @@ h2 {
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid var(--color-gray-400);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .playlist-art {
@@ -4724,15 +4823,17 @@ h2 {
 /* ── Track Text ── */
 .playlist-track-title {
   font-size: 0.85rem;
-  color: var(--color-gray-900);
+  color: var(--color-gray-850);
   line-height: 1.3;
   font-family: var(--font-label);
+  font-weight: 500;
   transition: color 0.15s ease;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .playlist-track-meta {
   font-size: 0.72rem;
-  color: var(--color-gray-600);
+  color: var(--color-gray-550);
   line-height: 1.3;
   font-family: var(--font-label);
 }
@@ -4816,6 +4917,267 @@ h2 {
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PLAYLIST MANAGER PAGE - Brushed Metal Overrides
+   ═══════════════════════════════════════════════════════════════════════ */
+/* Page container — light brushed metal */
+.playlist-manager {
+  background-image: var(--brushed-texture), var(--gradient-brushed);
+  color: var(--color-gray-900);
+}
+
+/* Top bar — dark header with light text */
+.pm-topbar {
+  background: var(--color-gray-900);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pm-topbar__title {
+  color: var(--color-white);
+}
+
+.pm-back-btn,
+.pm-back-btn .material-icons {
+  color: var(--color-gray-300);
+}
+
+.pm-back-btn:hover .material-icons {
+  color: var(--color-white);
+}
+
+/* Column headers — dark bg with light text */
+.pm-column__header {
+  background: var(--color-gray-850);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pm-column__title {
+  color: var(--color-gray-200);
+}
+
+/* Buttons & controls on dark backgrounds — light brushed metal */
+.pm-topbar .btn, .pm-topbar .form-select,
+.pm-column__header .btn,
+.pm-column__header .form-select {
+  background: var(--brushed-texture), var(--gradient-brushed-light);
+  color: var(--color-gray-800);
+  border-color: var(--color-gray-400);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.pm-topbar .btn:hover, .pm-topbar .form-select:hover,
+.pm-column__header .btn:hover,
+.pm-column__header .form-select:hover {
+  background: var(--brushed-texture), var(--gradient-brushed);
+  color: var(--color-gray-900);
+}
+
+.pm-topbar .btn-primary,
+.pm-column__header .btn-primary {
+  background: var(--gradient-btn-gloss), linear-gradient(180deg, #d9884a 0%, #c87533 50%, #a05e28 100%);
+  color: var(--color-white);
+  border-color: var(--color-primary-dark);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.pm-topbar .btn-icon .material-icons,
+.pm-column__header .btn-icon .material-icons {
+  background-image: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: var(--color-gray-200);
+  background-clip: unset;
+  filter: none;
+}
+
+.pm-topbar .btn-icon:hover .material-icons,
+.pm-column__header .btn-icon:hover .material-icons {
+  -webkit-text-fill-color: var(--color-white);
+}
+
+/* Select/dropdown on dark headers */
+.pm-column__header .form-select,
+.pm-column__header select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555b65'/%3E%3C/svg%3E"), var(--brushed-texture), var(--gradient-brushed-light);
+  background-repeat: no-repeat, repeat, no-repeat;
+  background-position: right 10px center, 0 0, 0 0;
+  background-size: auto, cover, cover;
+  color: var(--color-gray-800);
+  border-color: var(--color-gray-400);
+}
+
+.pm-column__header .form-select:hover,
+.pm-column__header select:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555b65'/%3E%3C/svg%3E"), var(--brushed-texture), var(--gradient-brushed);
+  background-repeat: no-repeat, repeat, no-repeat;
+  background-position: right 10px center, 0 0, 0 0;
+  background-size: auto, cover, cover;
+}
+
+/* Search input on dark headers */
+.pm-column__header .pm-search__input,
+.pm-column__header input {
+  background: var(--color-white);
+  color: var(--color-gray-900);
+  border-color: var(--color-gray-400);
+}
+
+/* Column borders */
+.pm-column {
+  border-right-color: var(--color-gray-300);
+}
+
+/* Resize handles */
+.pm-resize-handle:hover,
+.pm-resize-handle:active {
+  background: var(--color-primary);
+}
+
+/* Search inputs */
+.pm-search__icon {
+  color: var(--color-gray-500);
+}
+
+/* Album items */
+.pm-album-item__title {
+  color: var(--color-gray-850);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.pm-album-item__meta {
+  color: var(--color-gray-550);
+}
+
+.pm-album-item:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.pm-album-item--active {
+  background: rgba(200, 117, 51, 0.1);
+  border-left-color: var(--color-primary);
+}
+
+/* Track items */
+.pm-track-item__title {
+  color: var(--color-gray-850);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.pm-track-item__artist {
+  color: var(--color-gray-550);
+}
+
+.pm-track-item__drag {
+  color: var(--color-gray-400);
+}
+
+.pm-track-item--selected {
+  background: rgba(200, 117, 51, 0.1);
+}
+
+.pm-track-item__disc-badge {
+  background: rgba(200, 117, 51, 0.15);
+  color: var(--color-primary);
+}
+
+/* Track select-all bar */
+.pm-track-selectall {
+  background: rgba(0, 0, 0, 0.04);
+  border-bottom-color: var(--color-gray-300);
+}
+
+/* Playlist items (right column) */
+.pm-playlist-item__name {
+  color: var(--color-gray-850);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.pm-playlist-item__icon {
+  color: var(--color-gray-500);
+}
+
+.pm-playlist-item__count {
+  color: var(--color-gray-600);
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.pm-playlist-item:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.pm-playlist-item--dragover {
+  background: rgba(200, 117, 51, 0.12);
+  border-left-color: var(--color-primary);
+}
+
+/* New playlist form */
+.pm-new-playlist {
+  background: rgba(0, 0, 0, 0.04);
+  border-bottom-color: var(--color-gray-300);
+}
+
+/* Count badges */
+.pm-count {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--color-gray-600);
+}
+
+/* Loading / empty states */
+.pm-loading,
+.pm-empty {
+  color: var(--color-gray-500);
+}
+
+/* Drag hint */
+.pm-drag-hint {
+  background: rgba(200, 117, 51, 0.08);
+  border-color: rgba(200, 117, 51, 0.3);
+  color: var(--color-gray-600);
+}
+
+.pm-drag-hint .material-icons {
+  color: var(--color-primary);
+}
+
+/* Drop target */
+.pm-empty--drop {
+  border-color: rgba(200, 117, 51, 0.3);
+  color: var(--color-gray-500);
+}
+
+.pm-empty--drop .material-icons {
+  color: rgba(200, 117, 51, 0.5);
+}
+
+/* Column dragover highlight */
+.pm-column--dragover {
+  background: rgba(200, 117, 51, 0.06);
+  outline-color: rgba(200, 117, 51, 0.4);
+}
+
+/* Playlist track items */
+.pm-playlist-track-item__num {
+  color: var(--color-gray-500);
+}
+
+.pm-playlist-track-item__playing-icon {
+  color: var(--color-primary);
+}
+
+.pm-playlist-track-item:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Favourite count badge */
+.pm-fav-count {
+  background: rgba(255, 255, 255, 0.9);
+  color: #b91c1c;
+}
+
+/* Checkbox accent */
+.pm-checkbox-label input[type=checkbox] {
+  accent-color: var(--color-primary);
 }
 
 :root {
@@ -4915,8 +5277,15 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -5051,8 +5420,8 @@ h2 {
 
 /* ── Header ── */
 .slide-panel-header {
-  background: var(--brushed-texture), var(--gradient-brushed-dark);
-  border-bottom: 1px solid var(--color-gray-500);
+  background: var(--color-gray-900);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
 }
 
@@ -5066,16 +5435,29 @@ h2 {
 
 .slide-panel-subtitle {
   font-size: 0.53rem;
-  color: var(--color-gray-900);
+  color: var(--color-gray-300);
   font-family: var(--font-label);
   font-weight: 600;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-shadow: none;
 }
 
 .slide-panel-title {
   font-family: var(--font-display);
   font-size: clamp(0.75rem, 0.975vw, 0.86rem);
-  color: var(--color-gray-900);
+  color: var(--color-white);
+}
+
+/* ── Header buttons (light icons on dark bg) ── */
+.slide-panel-header .btn-icon .material-icons {
+  background-image: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: var(--color-gray-300);
+  background-clip: unset;
+  filter: none;
+}
+
+.slide-panel-header .btn-icon:hover .material-icons {
+  -webkit-text-fill-color: var(--color-white);
 }
 
 /* ── Body ── */
@@ -5192,8 +5574,15 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);
@@ -5538,8 +5927,15 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
+  --panel-bg-subtle: rgba(0, 0, 0, 0.05);
   --device-surface: var(--gradient-brushed);
+  /* ─── Borders ──────────────────────────────────────────────────────── */
+  --border-dark: var(--color-gray-300);
+  /* ─── List Items ──────────────────────────────────────────────────── */
+  --list-item-bg-hover: rgba(0, 0, 0, 0.06);
+  --list-item-text-hover: var(--color-gray-900);
   /* ─── Button Colors ────────────────────────────────────────────────── */
   --btn-bg-dark: var(--gradient-brushed-dark);
   --btn-bg-light: var(--gradient-brushed-light);

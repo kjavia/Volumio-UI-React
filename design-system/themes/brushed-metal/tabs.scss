@@ -77,9 +77,9 @@ h2 {
     flex: 1;
     min-width: 0;
     height: 70px;
-    border-radius: 8px;
+    border-radius: 10px;
     background: transparent;
-    border: none;
+    border: 2px solid transparent;
     cursor: pointer;
     color: var(--color-gray-600);
     font-family: var(--font-label);
@@ -87,22 +87,31 @@ h2 {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease-out;
     position: relative;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .tab-btn:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
     color: var(--color-gray-800);
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.08),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 .tab-btn.active {
-    background: rgba(0, 0, 0, 0.08);
+    background:
+        radial-gradient(ellipse at 50% 55%, rgba(255, 255, 255, 0.1) 0%, transparent 60%),
+        rgba(0, 0, 0, 0.06);
     color: var(--color-primary);
     box-shadow:
-        inset 2px 2px 6px rgba(0, 0, 0, 0.12),
-        0 0 6px var(--glow-primary);
+        0 0 0 1px rgba(0, 0, 0, 0.12),
+        0 0 0 2px rgba(180, 180, 180, 0.3),
+        inset 0 2px 6px rgba(0, 0, 0, 0.15),
+        inset 0 0 4px rgba(0, 0, 0, 0.08),
+        0 0 8px var(--glow-primary);
 }
 
 .tab-btn .material-icons {

@@ -7,9 +7,11 @@
 /* ── Queue Info Bar ── */
 .playlist-info {
     font-size: 0.72rem;
-    border-bottom: 1px solid var(--color-gray-400);
+    border-bottom: 1px solid var(--color-gray-300);
     padding-bottom: 0.5rem;
     margin-bottom: 0.25rem;
+    background: var(--color-gray-100);
+    padding: 0.5rem 1rem;
 }
 
 .playlist-info-count {
@@ -29,7 +31,7 @@
 }
 
 .playlist-item {
-    border-bottom: 1px solid var(--color-gray-300);
+    border-bottom: 1px solid var(--color-gray-250);
     cursor: pointer;
     border-radius: 0;
     transition: background 0.15s ease;
@@ -40,13 +42,22 @@
     }
 
     &:hover {
-        background: rgba(0, 0, 0, 0.04);
+        background: rgba(0, 0, 0, 0.06);
+    }
+
+    &:nth-child(even) {
+        background: rgba(0, 0, 0, 0.02);
+    }
+
+    &:nth-child(even):hover {
+        background: rgba(0, 0, 0, 0.06);
     }
 }
 
 /* Active / current track */
 .playlist-item--active {
-    background: rgba(200, 117, 51, 0.08);
+    background: rgba(200, 117, 51, 0.1) !important;
+    border-left: 3px solid var(--color-primary);
 
     .playlist-track-title {
         color: var(--color-primary);
@@ -63,6 +74,7 @@
     border-radius: 4px;
     overflow: hidden;
     border: 1px solid var(--color-gray-400);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .playlist-art {
@@ -95,15 +107,17 @@
 /* ── Track Text ── */
 .playlist-track-title {
     font-size: 0.85rem;
-    color: var(--color-gray-900);
+    color: var(--color-gray-850);
     line-height: 1.3;
     font-family: var(--font-label);
+    font-weight: 500;
     transition: color 0.15s ease;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .playlist-track-meta {
     font-size: 0.72rem;
-    color: var(--color-gray-600);
+    color: var(--color-gray-550);
     line-height: 1.3;
     font-family: var(--font-label);
 }
@@ -195,4 +209,278 @@
     font-family: var(--font-mono);
     font-size: 12px;
     color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PLAYLIST MANAGER PAGE - Brushed Metal Overrides
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Page container — light brushed metal */
+.playlist-manager {
+    background-image:
+        var(--brushed-texture),
+        var(--gradient-brushed);
+    color: var(--color-gray-900);
+}
+
+/* Top bar — dark header with light text */
+.pm-topbar {
+    background: var(--color-gray-900);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pm-topbar__title {
+    color: var(--color-white);
+}
+
+.pm-back-btn,
+.pm-back-btn .material-icons {
+    color: var(--color-gray-300);
+}
+
+.pm-back-btn:hover .material-icons {
+    color: var(--color-white);
+}
+
+/* Column headers — dark bg with light text */
+.pm-column__header {
+    background: var(--color-gray-850);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pm-column__title {
+    color: var(--color-gray-200);
+}
+
+/* Buttons & controls on dark backgrounds — light brushed metal */
+.pm-topbar .btn,
+.pm-column__header .btn {
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed-light);
+    color: var(--color-gray-800);
+    border-color: var(--color-gray-400);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.pm-topbar .btn:hover,
+.pm-column__header .btn:hover {
+    background:
+        var(--brushed-texture),
+        var(--gradient-brushed);
+    color: var(--color-gray-900);
+}
+
+.pm-topbar .btn-primary,
+.pm-column__header .btn-primary {
+    background:
+        var(--gradient-btn-gloss),
+        linear-gradient(180deg, #d9884a 0%, #c87533 50%, #a05e28 100%);
+    color: var(--color-white);
+    border-color: var(--color-primary-dark);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.pm-topbar .btn-icon .material-icons,
+.pm-column__header .btn-icon .material-icons {
+    background-image: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: var(--color-gray-200);
+    background-clip: unset;
+    filter: none;
+}
+
+.pm-topbar .btn-icon:hover .material-icons,
+.pm-column__header .btn-icon:hover .material-icons {
+    -webkit-text-fill-color: var(--color-white);
+}
+
+/* Select/dropdown on dark headers */
+.pm-column__header .form-select,
+.pm-column__header select {
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555b65'/%3E%3C/svg%3E"),
+        var(--brushed-texture),
+        var(--gradient-brushed-light);
+    background-repeat: no-repeat, repeat, no-repeat;
+    background-position: right 10px center, 0 0, 0 0;
+    background-size: auto, cover, cover;
+    color: var(--color-gray-800);
+    border-color: var(--color-gray-400);
+}
+
+.pm-column__header .form-select:hover,
+.pm-column__header select:hover {
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555b65'/%3E%3C/svg%3E"),
+        var(--brushed-texture),
+        var(--gradient-brushed);
+    background-repeat: no-repeat, repeat, no-repeat;
+    background-position: right 10px center, 0 0, 0 0;
+    background-size: auto, cover, cover;
+}
+
+/* Search input on dark headers */
+.pm-column__header .pm-search__input,
+.pm-column__header input {
+    background: var(--color-white);
+    color: var(--color-gray-900);
+    border-color: var(--color-gray-400);
+}
+
+/* Column borders */
+.pm-column {
+    border-right-color: var(--color-gray-300);
+}
+
+/* Resize handles */
+.pm-resize-handle:hover,
+.pm-resize-handle:active {
+    background: var(--color-primary);
+}
+
+/* Search inputs */
+.pm-search__icon {
+    color: var(--color-gray-500);
+}
+
+/* Album items */
+.pm-album-item__title {
+    color: var(--color-gray-850);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.pm-album-item__meta {
+    color: var(--color-gray-550);
+}
+
+.pm-album-item:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.pm-album-item--active {
+    background: rgba(200, 117, 51, 0.1);
+    border-left-color: var(--color-primary);
+}
+
+/* Track items */
+.pm-track-item__title {
+    color: var(--color-gray-850);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.pm-track-item__artist {
+    color: var(--color-gray-550);
+}
+
+.pm-track-item__drag {
+    color: var(--color-gray-400);
+}
+
+.pm-track-item--selected {
+    background: rgba(200, 117, 51, 0.1);
+}
+
+.pm-track-item__disc-badge {
+    background: rgba(200, 117, 51, 0.15);
+    color: var(--color-primary);
+}
+
+/* Track select-all bar */
+.pm-track-selectall {
+    background: rgba(0, 0, 0, 0.04);
+    border-bottom-color: var(--color-gray-300);
+}
+
+/* Playlist items (right column) */
+.pm-playlist-item__name {
+    color: var(--color-gray-850);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.pm-playlist-item__icon {
+    color: var(--color-gray-500);
+}
+
+.pm-playlist-item__count {
+    color: var(--color-gray-600);
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.pm-playlist-item:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.pm-playlist-item--dragover {
+    background: rgba(200, 117, 51, 0.12);
+    border-left-color: var(--color-primary);
+}
+
+/* New playlist form */
+.pm-new-playlist {
+    background: rgba(0, 0, 0, 0.04);
+    border-bottom-color: var(--color-gray-300);
+}
+
+/* Count badges */
+.pm-count {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--color-gray-600);
+}
+
+/* Loading / empty states */
+.pm-loading,
+.pm-empty {
+    color: var(--color-gray-500);
+}
+
+/* Drag hint */
+.pm-drag-hint {
+    background: rgba(200, 117, 51, 0.08);
+    border-color: rgba(200, 117, 51, 0.3);
+    color: var(--color-gray-600);
+}
+
+.pm-drag-hint .material-icons {
+    color: var(--color-primary);
+}
+
+/* Drop target */
+.pm-empty--drop {
+    border-color: rgba(200, 117, 51, 0.3);
+    color: var(--color-gray-500);
+}
+
+.pm-empty--drop .material-icons {
+    color: rgba(200, 117, 51, 0.5);
+}
+
+/* Column dragover highlight */
+.pm-column--dragover {
+    background: rgba(200, 117, 51, 0.06);
+    outline-color: rgba(200, 117, 51, 0.4);
+}
+
+/* Playlist track items */
+.pm-playlist-track-item__num {
+    color: var(--color-gray-500);
+}
+
+.pm-playlist-track-item__playing-icon {
+    color: var(--color-primary);
+}
+
+.pm-playlist-track-item:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* Favourite count badge */
+.pm-fav-count {
+    background: rgba(255, 255, 255, 0.9);
+    color: #b91c1c;
+}
+
+/* Checkbox accent */
+.pm-checkbox-label input[type='checkbox'] {
+    accent-color: var(--color-primary);
 }
