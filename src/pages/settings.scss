@@ -26,6 +26,17 @@
   font-size: var(--text-lg, 1.25rem);
   font-weight: 600;
   margin: 0;
+  flex: 1;
+}
+
+.settings-close-btn {
+  margin-left: auto;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 /* ─── Scrollable content ───────────────────────────────────────────────── */

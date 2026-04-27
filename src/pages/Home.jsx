@@ -28,6 +28,7 @@ const WEATHER_MODE_MAP = {
 };
 
 const Home = () => {
+  useEffect(() => { document.title = 'Volumio - Stylish Player | Now Playing'; }, []);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const isLargeScreen = useMediaQuery('(min-width: 1920px)');
   const [vizStopped, setVizStopped] = useState(false);

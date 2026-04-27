@@ -3316,7 +3316,7 @@ h2 {
   background: transparent;
   border: 2px solid transparent;
   cursor: pointer;
-  color: var(--color-gray-600);
+  color: var(--color-gray-800);
   font-family: var(--font-label);
   font-size: 12px;
   font-weight: 500;

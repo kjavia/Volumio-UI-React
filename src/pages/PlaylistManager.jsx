@@ -601,6 +601,7 @@ PlaylistColumn.propTypes = {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 const PlaylistManager = () => {
+  useEffect(() => { document.title = 'Volumio - Stylish Player | Playlist Manager'; }, []);
   const navigate = useNavigate();
   const { socket } = useSocket();
   const { refetchFavourites, favouritesUris } = useFavourites();
@@ -709,10 +710,10 @@ const PlaylistManager = () => {
   return (
     <div className="playlist-manager">
       <div className="pm-topbar">
-        <button className="btn btn-link pm-back-btn" onClick={() => navigate(-1)}>
-          <span className="material-icons">arrow_back</span>
-        </button>
         <h1 className="pm-topbar__title">Playlist Manager</h1>
+        <button className="btn btn-sm btn-primary pm-close-btn" onClick={() => navigate(-1)} aria-label="Close">
+          <span className="material-icons">close</span>
+        </button>
       </div>
 
       <div className="pm-grid" ref={gridRef} style={{ gridTemplateColumns }}>

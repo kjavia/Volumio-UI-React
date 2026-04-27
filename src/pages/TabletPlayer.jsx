@@ -77,8 +77,6 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
   const backgroundColor = pluginConfig?.backgroundColor || '';
   const peppyMeterWidth = pluginConfig?.peppyMeterWidth || 480;
   const peppyMeterHeight = pluginConfig?.peppyMeterHeight || 320;
-  const disableVolumeControl = pluginConfig?.disableVolumeControl === true;
-
   const spectrumOptions = useMemo(() => {
     const raw = pluginConfig?.spectrumOptions;
     if (!raw) return null;
@@ -103,6 +101,7 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
     repeat,
     toggleRandom,
     toggleRepeat,
+    disableVolumeControl: volumioDisableVolume,
     samplerate,
     bitdepth,
     trackType,
@@ -117,6 +116,8 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
     isFavourite,
     toggleFavourite,
   } = useVolumioStatus();
+
+  const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
 
   const { refreshState } = useSeek();
   useEffect(() => { refreshState(); }, []); // eslint-disable-line react-hooks/exhaustive-deps

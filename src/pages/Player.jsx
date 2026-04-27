@@ -76,6 +76,7 @@ const getPlayerTypeForSource = (service, trackType) => {
 };
 
 const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
+  useEffect(() => { document.title = 'Volumio - Stylish Player | Player'; }, []);
   const { data: pluginConfig } = usePluginConfig();
   const playerType = pluginConfig?.playerType || 'radio';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
@@ -111,7 +112,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     repeat,
     toggleRandom,
     toggleRepeat,
-    disableVolumeControl,
+    disableVolumeControl: volumioDisableVolume,
     samplerate,
     bitdepth,
     trackType,
@@ -126,6 +127,8 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     isFavourite,
     toggleFavourite,
   } = useVolumioStatus();
+
+  const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
 
   const [cycleIndex, setCycleIndex] = useState(null);
   const [showPlaylist, setShowPlaylist] = useState(false);

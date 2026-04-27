@@ -588,6 +588,7 @@ SettingsSection.propTypes = {
    ═══════════════════════════════════════════════════════════════════════ */
 
 const Settings = () => {
+  useEffect(() => { document.title = 'Volumio - Stylish Player | Settings'; }, []);
   const navigate = useNavigate();
   const { socket } = useSocket();
   const { data: pluginConfig, isLoading } = usePluginConfig();
@@ -677,10 +678,10 @@ const Settings = () => {
   return (
     <div className="settings-page">
       <div className="settings-topbar">
-        <button className="btn btn-icon" onClick={() => navigate(-1)} aria-label="Back">
-          <span className="material-icons">arrow_back</span>
-        </button>
         <h2 className="settings-topbar__title">Settings</h2>
+        <button className="btn btn-sm btn-primary settings-close-btn" onClick={() => navigate(-1)} aria-label="Close">
+          <span className="material-icons">close</span>
+        </button>
       </div>
       <div className="settings-tabs" role="tablist">
         {sections.map((section) => (

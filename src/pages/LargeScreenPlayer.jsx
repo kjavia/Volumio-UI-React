@@ -156,7 +156,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
     repeat,
     toggleRandom,
     toggleRepeat,
-    disableVolumeControl,
+    disableVolumeControl: volumioDisableVolume,
     samplerate,
     bitdepth,
     trackType,
@@ -171,6 +171,8 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
     isFavourite,
     toggleFavourite,
   } = useVolumioStatus();
+
+  const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
 
   const { refreshState } = useSeek();
   useEffect(() => { refreshState(); }, []); // eslint-disable-line react-hooks/exhaustive-deps

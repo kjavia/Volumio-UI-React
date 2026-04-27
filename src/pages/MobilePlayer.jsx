@@ -74,8 +74,6 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
   const backgroundColor = pluginConfig?.backgroundColor || '';
   const peppyMeterWidth = pluginConfig?.peppyMeterWidth || 480;
   const peppyMeterHeight = pluginConfig?.peppyMeterHeight || 320;
-  const disableVolumeControl = pluginConfig?.disableVolumeControl === true;
-
   const {
     isConnected,
     isPlaying,
@@ -94,6 +92,7 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
     repeat,
     toggleRandom,
     toggleRepeat,
+    disableVolumeControl: volumioDisableVolume,
     samplerate,
     bitdepth,
     trackType,
@@ -108,6 +107,8 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
     isFavourite,
     toggleFavourite,
   } = useVolumioStatus();
+
+  const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
 
   const { refreshState } = useSeek();
   useEffect(() => { refreshState(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -185,6 +186,7 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
     'position-relative',
     !showViz && 'no-viz',
     effectivePlayerType === 'none' && 'no-player',
+    (disableVolumeControl || !showPlayerControls) && 'no-volume',
   ].filter(Boolean).join(' ');
 
   return (

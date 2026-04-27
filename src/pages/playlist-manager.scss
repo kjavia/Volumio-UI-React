@@ -28,11 +28,18 @@
     text-transform: uppercase;
     color: var(--text-primary, #f1f5f9);
     margin: 0;
+    flex: 1;
   }
 }
 
-.pm-back-btn {
-  padding: 4px;
+.pm-close-btn {
+  margin-left: auto;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+
+  &:hover {
+    opacity: 1;
+  }
 
   .material-icons {
     font-size: 20px;

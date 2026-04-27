@@ -63,6 +63,51 @@
     'volume';
 }
 
+/* ── No-volume: collapse volume row, redistribute space ── */
+.mobile-grid.no-volume {
+  grid-template-rows: 32% 8% 18% 12% 18% 12%;
+  grid-template-areas:
+    'player'
+    'viz'
+    'track-info'
+    'seekbar'
+    'transport'
+    'secondary';
+}
+
+.mobile-grid.no-volume .mobile-row-volume {
+  display: none;
+}
+
+.mobile-grid.no-viz.no-volume {
+  grid-template-rows: 34% 20% 14% 18% 14%;
+  grid-template-areas:
+    'player'
+    'track-info'
+    'seekbar'
+    'transport'
+    'secondary';
+}
+
+.mobile-grid.no-player.no-volume {
+  grid-template-rows: 10% 26% 14% 26% 24%;
+  grid-template-areas:
+    'viz'
+    'track-info'
+    'seekbar'
+    'transport'
+    'secondary';
+}
+
+.mobile-grid.no-player.no-viz.no-volume {
+  grid-template-rows: 28% 16% 28% 28%;
+  grid-template-areas:
+    'track-info'
+    'seekbar'
+    'transport'
+    'secondary';
+}
+
 /* ═══════════════════════════════════════════════════
    ROW 1 — Player (30%)
    ═══════════════════════════════════════════════════ */
