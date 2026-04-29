@@ -2230,6 +2230,46 @@ code {
   color: #555;
 }
 
+/* ─── Settings page tab overrides (Brushed Metal) ──────────────────────── */
+.settings-tabs {
+  background: var(--brushed-texture), var(--gradient-brushed);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.settings-tab {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: none;
+  border-bottom: none;
+  border-radius: 0;
+  margin-left: -1px;
+}
+.settings-tab:first-child {
+  margin-left: 0;
+  border-left: none;
+}
+.settings-tab:last-child {
+  border-right: none;
+}
+.settings-tab {
+  box-shadow: none;
+  color: var(--color-gray-700);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+.settings-tab:hover:not(.settings-tab--active) {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-primary);
+}
+
+.settings-tab--active {
+  background: var(--brushed-texture-dark), var(--gradient-brushed-dark);
+  color: var(--color-primary);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 0 4px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
        COLOR PALETTE - Brushed Metal / Industrial Aluminum Theme

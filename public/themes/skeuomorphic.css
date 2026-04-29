@@ -2729,14 +2729,78 @@ input:checked + .slider:after {
 }
 
 /* ─── Settings page title overrides ────────────────────────────────────── */
-.settings-topbar__title,
+.settings-topbar__title {
+  color: var(--color-gray-800) !important;
+  text-shadow: none !important;
+}
+
 .settings-section__title {
-  color: #ffffff !important;
+  color: var(--color-gray-050) !important;
   text-shadow: none !important;
 }
 
 .settings-label {
-  color: #ffffff !important;
+  color: var(--color-gray-050) !important;
+}
+
+/* ─── Settings page tab overrides (Skeuomorphic) ───────────────────────── */
+.settings-tabs {
+  background-color: var(--device-surface);
+  border-bottom: 1px solid var(--highlight-40);
+  box-shadow: 0 2px 6px var(--shadow-10), inset 0 -1px 0 var(--shadow-05);
+  background-image: linear-gradient(var(--highlight-03), var(--shadow-03)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.03' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'/%3E%3C/svg%3E");
+}
+
+.settings-tab {
+  border: 1px solid var(--shadow-05);
+  border-radius: 0;
+  margin-left: -1px;
+  background: linear-gradient(180deg, var(--highlight-10) 0%, var(--shadow-05) 100%);
+  box-shadow: 2px 2px 4px var(--shadow-10), inset 1px 1px 0 var(--highlight-20);
+  color: var(--color-gray-600);
+  font-family: var(--font-label);
+}
+.settings-tab:first-child {
+  margin-left: 0;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.settings-tab:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.settings-tab:hover:not(.settings-tab--active) {
+  background: linear-gradient(180deg, var(--highlight-20) 0%, var(--shadow-02) 100%);
+  color: var(--text-orange);
+}
+.settings-tab {
+  /* LED indicator dot */
+}
+.settings-tab::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-gray-500);
+  box-shadow: inset 0 1px 1px var(--shadow-50);
+  transition: all 0.3s;
+}
+
+.settings-tab--active {
+  background-color: var(--device-surface);
+  box-shadow: inset 2px 2px 5px var(--shadow-30), inset -1px -1px 2px var(--highlight-60);
+  border: 1px solid transparent;
+  color: var(--text-orange);
+}
+.settings-tab--active .settings-tab__icon {
+  text-shadow: 0 0 10px var(--glow-orange-40);
+}
+.settings-tab--active {
+  /* Active LED dot */
+}
+.settings-tab--active::after {
+  background-color: var(--led-red-on);
+  box-shadow: 0 0 5px var(--led-red-on);
 }
 
 :root {
