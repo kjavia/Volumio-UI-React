@@ -125,8 +125,8 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
   const showViz = vizType !== 'none';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
   const backgroundColor = pluginConfig?.backgroundColor || '';
-  const peppyMeterWidth = pluginConfig?.peppyMeterWidth || 480;
-  const peppyMeterHeight = pluginConfig?.peppyMeterHeight || 320;
+  const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
+  const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
 
   // Ultrawide landscape short — 3-column layout (player | meta | viz)
   // Targets screens like 2650×700 or 1920×515 where width >> height
@@ -170,6 +170,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
     playFromQueue,
     isFavourite,
     toggleFavourite,
+    streamUri,
   } = useVolumioStatus();
 
   const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
@@ -275,7 +276,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
       {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
       {vizType === 'vuMeter3' && <VUMeter variant={3} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
       {vizType === 'vuMeter4' && <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-      {vizType === 'peppyMeter' && <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={peppyVizAreaRef} />}
+      {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} />}
     </div>
   );
 
@@ -487,7 +488,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
                   {vizType === 'vuMeter2' && <VUMeter variant={2} needleColor="lightblue" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
                   {vizType === 'vuMeter3' && <VUMeter variant={3} needleColor="#0d0d0d" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
                   {vizType === 'vuMeter4' && <VUMeter variant={4} needleColor="silver" stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} />}
-                  {vizType === 'peppyMeter' && <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={peppyBottomVizRef} />}
+                  {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} />}
                 </div>
               )}
             </div>

@@ -1,0 +1,56 @@
+.peppy-meter {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 0;
+    overflow: hidden;
+    border-radius: var(--radius-md, 8px);
+
+    &--active {
+        cursor: default;
+    }
+
+    &--error {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #ff6b6b;
+        padding: 1rem;
+    }
+
+    &__canvas {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.35);
+        transition: background 0.2s ease;
+
+        .peppy-meter:hover & {
+            background: rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    &__play-hint {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.85);
+        padding: 0.35em 0.75em;
+        border-radius: 4px;
+        background: rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+    }
+
+    &__error {
+        margin: 0;
+        font-size: 0.8rem;
+    }
+}

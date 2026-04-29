@@ -85,8 +85,8 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
   const backgroundColor = pluginConfig?.backgroundColor || '';
-  const peppyMeterWidth = pluginConfig?.peppyMeterWidth || 480;
-  const peppyMeterHeight = pluginConfig?.peppyMeterHeight || 320;
+  const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
+  const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
 
   const spectrumOptions = useMemo(() => {
     const raw = pluginConfig?.spectrumOptions;
@@ -126,6 +126,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     playFromQueue,
     isFavourite,
     toggleFavourite,
+    streamUri,
   } = useVolumioStatus();
 
   const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
@@ -137,7 +138,6 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const vizRef = useRef(null);
   const mobileVizRef = useRef(null);
   const peppyMobileRef = useRef(null);
-  const peppyDesktopRef = useRef(null);
 
   // Wrap togglePlay so that clicking play/pause (a user gesture) also enables
   // the visualization if it hasn't been enabled yet.
@@ -269,7 +269,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
         {showViz && vizType === 'peppyMeter' && (
           <div className="home-panel area-mobile-viz" ref={peppyMobileRef}>
             {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
-            <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={peppyMobileRef} />
+            <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} />
           </div>
         )}
 
@@ -387,7 +387,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               />
             )}
             {vizType === 'peppyMeter' && (
-              <PeppyMeter width={peppyMeterWidth} height={peppyMeterHeight} containerRef={vizContainerRef} />
+              <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} />
             )}
           </div>
         )}

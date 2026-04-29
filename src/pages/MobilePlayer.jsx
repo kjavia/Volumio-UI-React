@@ -72,8 +72,8 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
   const backgroundColor = pluginConfig?.backgroundColor || '';
-  const peppyMeterWidth = pluginConfig?.peppyMeterWidth || 480;
-  const peppyMeterHeight = pluginConfig?.peppyMeterHeight || 320;
+  const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
+  const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
   const {
     isConnected,
     isPlaying,
@@ -106,6 +106,7 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
     playFromQueue,
     isFavourite,
     toggleFavourite,
+    streamUri,
   } = useVolumioStatus();
 
   const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
@@ -249,9 +250,9 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
           <div className="mobile-row-viz" ref={peppyMobileRef}>
             {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
             <PeppyMeter
-              width={peppyMeterWidth}
-              height={peppyMeterHeight}
-              containerRef={peppyMobileRef}
+              folder={peppyMeterFolder}
+              model={peppyMeterModel}
+              trackUri={streamUri}
             />
           </div>
         )}
