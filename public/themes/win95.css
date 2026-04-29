@@ -2005,6 +2005,60 @@ label {
   color: var(--text-secondary, #808080);
 }
 
+/* ─── Settings page tab overrides (Windows 95) ─────────────────────────── */
+.settings-tabs {
+  background: var(--win95-face);
+  border-bottom: 2px solid var(--win95-shadow);
+  box-shadow: none;
+  background-image: none;
+  padding: 0 0.5rem;
+  padding-bottom: 0;
+  gap: 2px;
+  align-items: flex-end;
+}
+
+.settings-tab {
+  background: var(--win95-face);
+  border: none;
+  border-radius: 3px 3px 0 0;
+  margin-left: 0;
+  box-shadow: none;
+  color: var(--text-primary);
+  font-family: "MS Sans Serif", "Trebuchet MS", sans-serif;
+  text-shadow: none;
+  position: relative;
+  margin-bottom: -2px;
+  padding: 0.35rem 0.75rem;
+  /* Win95 double 3D bevel — raised tab */
+  border-top: 2px solid var(--win95-highlight);
+  border-left: 2px solid var(--win95-highlight);
+  border-right: 1px solid var(--win95-shadow);
+  border-bottom: none;
+  box-shadow: inset -1px 0 0 var(--win95-light), 1px 0 0 var(--win95-dark);
+}
+.settings-tab:first-child {
+  border-radius: 3px 3px 0 0;
+}
+.settings-tab:last-child {
+  border-radius: 3px 3px 0 0;
+}
+.settings-tab:hover:not(.settings-tab--active) {
+  background: var(--win95-light);
+  color: var(--text-primary);
+}
+
+.settings-tab--active {
+  background: var(--win95-face);
+  border-top: 2px solid var(--win95-highlight);
+  border-left: 2px solid var(--win95-highlight);
+  border-right: 1px solid var(--win95-shadow);
+  border-bottom: 2px solid var(--win95-face);
+  box-shadow: inset -1px 0 0 var(--win95-light), 1px 0 0 var(--win95-dark);
+  z-index: 2;
+  color: var(--win95-titlebar);
+  padding: 0.45rem 0.75rem 0.35rem;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
      COLOR PALETTE - Windows 95 Theme
