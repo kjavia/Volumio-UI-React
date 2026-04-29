@@ -203,7 +203,7 @@
   }
 }
 
-/* Mini animated player — 400 × 400 px, left edge */
+/* Mini animated player — fixed size, left edge */
 .lsp-bottom__player {
   flex: 0 0 400px;
   width: 400px;
@@ -220,11 +220,11 @@
   height: 100% !important;
 }
 
-/* Visualization area — 600 × 400 px, right edge */
+/* Visualization area — fills remaining space, up to 50% of row */
 .lsp-bottom__viz {
   position: relative;
-  flex: 0 0 600px;
-  width: 600px;
+  flex: 1 1 auto;
+  max-width: 50%;
   height: 400px;
   display: flex;
   align-items: stretch;

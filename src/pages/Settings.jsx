@@ -85,10 +85,6 @@ const getSections = (t, peppyFolders = []) => {
           doc: t('VIZ_TYPE_DESC', 'Select the visualization displayed on the player screen.'),
           options: [
             { value: 'spectrum', label: t('VIZ_TYPE_SPECTRUM', 'Spectrum Analyzer') },
-            { value: 'vuMeter1', label: t('VIZ_TYPE_VU_METER_1', 'VU Meter 1 (Orange)') },
-            { value: 'vuMeter2', label: t('VIZ_TYPE_VU_METER_2', 'VU Meter 2 (Blue)') },
-            { value: 'vuMeter3', label: t('VIZ_TYPE_VU_METER_3', 'VU Meter 3 (Yellow)') },
-            { value: 'vuMeter4', label: t('VIZ_TYPE_VU_METER_4', 'VU Meter 4 (Black)') },
             { value: 'peppyMeter', label: t('VIZ_TYPE_PEPPY_METER', 'Peppy Meter') },
             { value: 'none', label: t('NONE', 'None') },
           ],

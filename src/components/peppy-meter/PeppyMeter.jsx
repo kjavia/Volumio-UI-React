@@ -6,7 +6,7 @@ import { loadMeterImages, renderMeterFrame } from './meterRenderer';
 import './PeppyMeter.scss';
 
 // MediaElementSourceNode can only be created ONCE per HTMLMediaElement.
-// Shared module-level cache (same pattern as VUMeter).
+// Shared module-level cache to reuse existing source nodes across remounts.
 const mediaSourceCache = new WeakMap();
 
 const FFT_SIZE = 1024;
