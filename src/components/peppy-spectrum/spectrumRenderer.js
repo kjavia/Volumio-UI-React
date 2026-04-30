@@ -80,27 +80,33 @@ export function renderSpectrumFrame(
   const originX = config.originX * scaleX;
   const originY = config.originY * scaleY;
   const isExtended = config.barType === 'image.extended';
+  const steps = config.steps || 20;
+  const stepSize = barH / steps;
 
   // Draw bars
   for (let i = 0; i < numBars; i++) {
     const value = fftData[i] !== undefined ? fftData[i] / 255 : 0;
     const x = originX + i * (barW + gap);
-    const fillH = value * barH;
+
+    // Quantize to steps (matching PeppySpectrum behavior)
+    const numSteps = Math.ceil(value * steps);
+    const fillH = numSteps * stepSize;
 
     if (fillH <= 0) continue;
 
     if (images.bar) {
       if (isExtended) {
-        // image.extended: reveal from bottom proportional to level
-        const srcY = images.bar.height - (value * images.bar.height);
-        const srcH = value * images.bar.height;
+        // image.extended: reveal from bottom proportional to quantized level
+        const ratio = fillH / barH;
+        const srcH = ratio * images.bar.height;
+        const srcY = images.bar.height - srcH;
         ctx.drawImage(
           images.bar,
           0, srcY, images.bar.width, srcH,
           x, originY - fillH, barW, fillH,
         );
       } else {
-        // image: tile/stretch the bar image to fill height
+        // image: stretch the bar image to fill height
         ctx.drawImage(images.bar, x, originY - fillH, barW, fillH);
       }
     } else if (config.barColor) {
@@ -108,14 +114,15 @@ export function renderSpectrumFrame(
       ctx.fillRect(x, originY - fillH, barW, fillH);
     }
 
-    // Reflection
+    // Reflection (same height as bar, drawn below origin)
     if (images.reflection && config.reflectionType) {
-      const refGap = config.reflectionGap * scaleY;
+      const refGap = (config.reflectionGap || 0) * scaleY;
       const refY = originY + refGap;
-      const refH = fillH * 0.5; // reflection is typically half height
+      const refH = fillH;
 
       if (config.reflectionType === 'image.extended') {
-        const srcH = value * 0.5 * images.reflection.height;
+        const ratio = fillH / barH;
+        const srcH = ratio * images.reflection.height;
         ctx.drawImage(
           images.reflection,
           0, 0, images.reflection.width, srcH,
