@@ -565,9 +565,79 @@ const KnobField = ({ field, value, onChange }) => {
 };
 KnobField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), onChange: PropTypes.func.isRequired };
 
+/* ─── Pack Upload Component ────────────────────────────────────────────── */
+
+const PackUpload = ({ packType, onUploaded }) => {
+  const fileRef = useRef(null);
+  const [uploading, setUploading] = useState(false);
+  const [status, setStatus] = useState(null);
+
+  const handleUpload = useCallback(async () => {
+    const file = fileRef.current?.files?.[0];
+    if (!file) return;
+
+    if (!file.name.toLowerCase().endsWith('.zip')) {
+      setStatus({ type: 'error', message: 'Only .zip files are accepted.' });
+      return;
+    }
+
+    setUploading(true);
+    setStatus(null);
+
+    try {
+      const buffer = await file.arrayBuffer();
+      const response = await axios.post(
+        `${PLUGIN_BASE_URL}/api/upload-peppy-pack?type=${packType}`,
+        buffer,
+        { headers: { 'Content-Type': 'application/octet-stream' }, timeout: 60000 }
+      );
+      setStatus({ type: 'success', message: response.data?.message || 'Upload successful.' });
+      if (fileRef.current) fileRef.current.value = '';
+      if (onUploaded) onUploaded();
+    } catch (err) {
+      const msg = err.response?.data?.error || err.message || 'Upload failed.';
+      setStatus({ type: 'error', message: msg });
+    } finally {
+      setUploading(false);
+    }
+  }, [packType, onUploaded]);
+
+  return (
+    <div className="settings-field pack-upload">
+      <div className="settings-field__label">
+        <span className="material-icons settings-field__icon">upload_file</span>
+        <span>Upload {packType === 'meter' ? 'Meter' : 'Spectrum'} Pack (.zip)</span>
+      </div>
+      <div className="pack-upload__row">
+        <input
+          ref={fileRef}
+          type="file"
+          accept=".zip,application/zip"
+          className="form-control form-control-sm"
+          disabled={uploading}
+        />
+        <button
+          className="btn btn-sm btn-outline-primary"
+          onClick={handleUpload}
+          disabled={uploading}
+        >
+          <span className="material-icons">{uploading ? 'hourglass_top' : 'cloud_upload'}</span>
+          {uploading ? 'Uploading…' : 'Upload'}
+        </button>
+      </div>
+      {status && (
+        <div className={`pack-upload__status pack-upload__status--${status.type}`}>
+          {status.message}
+        </div>
+      )}
+    </div>
+  );
+};
+PackUpload.propTypes = { packType: PropTypes.string.isRequired, onUploaded: PropTypes.func };
+
 /* ─── Section Component ────────────────────────────────────────────────── */
 
-const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolders, peppySpectrumFolders }) => {
+const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolders, peppySpectrumFolders, onPackUploaded }) => {
   const isFieldVisible = (field) => {
     if (!field.visibleIf) return true;
     return values[field.visibleIf.field] === field.visibleIf.value;
@@ -617,6 +687,10 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
               return null;
           }
         })}
+        {/* Upload section for peppy packs */}
+        {section.id === 'section_player_config' && (values.vizType === 'peppyMeter' || values.vizType === 'peppySpectrum') && (
+          <PackUpload packType={values.vizType === 'peppyMeter' ? 'meter' : 'spectrum'} onUploaded={onPackUploaded} />
+        )}
       </div>
       <div className="settings-section__footer">
         <button className="btn btn-primary" onClick={() => onSave(section)} disabled={saving}>
@@ -635,6 +709,7 @@ SettingsSection.propTypes = {
   saving: PropTypes.bool,
   peppyFolders: PropTypes.array,
   peppySpectrumFolders: PropTypes.array,
+  onPackUploaded: PropTypes.func,
 };
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -657,6 +732,16 @@ const Settings = () => {
 
   // Fetch peppy meter and spectrum folders from the API
   useEffect(() => {
+    axios.get(`${PLUGIN_BASE_URL}/api/peppy-folders`)
+      .then(({ data }) => { if (Array.isArray(data)) setPeppyFolders(data); })
+      .catch(() => { });
+    axios.get(`${PLUGIN_BASE_URL}/api/peppy-spectrum-folders`)
+      .then(({ data }) => { if (Array.isArray(data)) setPeppySpectrumFolders(data); })
+      .catch(() => { });
+  }, []);
+
+  // Re-fetch folder lists after a pack upload
+  const handlePackUploaded = useCallback(() => {
     axios.get(`${PLUGIN_BASE_URL}/api/peppy-folders`)
       .then(({ data }) => { if (Array.isArray(data)) setPeppyFolders(data); })
       .catch(() => { });
@@ -789,6 +874,7 @@ const Settings = () => {
             saving={saving}
             peppyFolders={peppyFolders}
             peppySpectrumFolders={peppySpectrumFolders}
+            onPackUploaded={handlePackUploaded}
           />
         )}
       </div>
