@@ -55,4 +55,25 @@
         margin: 0;
         font-size: 0.8rem;
     }
+
+    &__embedded-spectrum {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        border-radius: 0;
+        overflow: visible;
+
+        // Hide the PeppySpectrum overlay/hint and audio element
+        .peppy-spectrum__overlay,
+        .peppy-spectrum__play-hint,
+        audio {
+            display: none;
+        }
+
+        .peppy-spectrum__canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+    }
 }

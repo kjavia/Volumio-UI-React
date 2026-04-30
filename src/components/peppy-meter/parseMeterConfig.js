@@ -147,6 +147,11 @@ export function normalizeMeterConfig(raw) {
 
   const meterVisible = str('meter.visible', 'True') === 'True';
 
+  // Embedded spectrum config (rendered on top of meter)
+  const spectrumVisible = str('spectrum.visible', 'False') === 'True';
+  const spectrumName = str('spectrum.name') || null;
+  const spectrumSize = parseDimension(raw['spectrum.size']);
+
   const base = {
     type,
     channels: num('channels', 2),
@@ -159,6 +164,9 @@ export function normalizeMeterConfig(raw) {
     screenBgr: str('screen.bgr'),
     configExtend,
     meterVisible,
+    spectrumVisible,
+    spectrumName,
+    spectrumSize,
     playinfo,
     albumart,
     timeRemaining,

@@ -65,20 +65,31 @@ export function renderSpectrumFrame(
   const scaleX = canvasW / nativeW;
   const scaleY = canvasH / nativeH;
 
+  // Spectrum area offset (for embedded use, or full-screen packs)
+  const specX = (config.spectrumX || 0) * scaleX;
+  const specY = (config.spectrumY || 0) * scaleY;
+  const hasOffset = config.spectrumX > 0 || config.spectrumY > 0;
+
   // Clear
   ctx.clearRect(0, 0, canvasW, canvasH);
 
   // Layer 1: Background image
   if (images.bgr) {
-    ctx.drawImage(images.bgr, 0, 0, canvasW, canvasH);
+    if (hasOffset) {
+      // Embedded: draw bgr at spectrum area position with natural dimensions
+      ctx.drawImage(images.bgr, specX, specY, images.bgr.width * scaleX, images.bgr.height * scaleY);
+    } else {
+      // Standalone: stretch to fill canvas (original behavior)
+      ctx.drawImage(images.bgr, 0, 0, canvasW, canvasH);
+    }
   }
 
   // Bar rendering parameters
   const barW = config.barWidth * scaleX;
   const barH = config.barHeight * scaleY;
   const gap = config.barGap * scaleX;
-  const originX = config.originX * scaleX;
-  const originY = config.originY * scaleY;
+  const originX = specX + config.originX * scaleX;
+  const originY = specY + config.originY * scaleY;
   const isExtended = config.barType === 'image.extended';
   const steps = config.steps || 20;
   const stepSize = barH / steps;
@@ -153,6 +164,10 @@ export function renderSpectrumFrame(
 
   // Layer: Foreground overlay
   if (images.fgr) {
-    ctx.drawImage(images.fgr, 0, 0, canvasW, canvasH);
+    if (hasOffset) {
+      ctx.drawImage(images.fgr, specX, specY, images.fgr.width * scaleX, images.fgr.height * scaleY);
+    } else {
+      ctx.drawImage(images.fgr, 0, 0, canvasW, canvasH);
+    }
   }
 }

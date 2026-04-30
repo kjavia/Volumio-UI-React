@@ -36,6 +36,7 @@ const PeppySpectrum = ({
   streamUrl = SPECTRUM_STREAM_URL,
   stopped = false,
   className = '',
+  autoEnable = false,
 }) => {
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
@@ -269,6 +270,14 @@ const PeppySpectrum = ({
     setEnabled(true);
   }, [enabled, setupAudio, startAnimation]);
 
+  // ── Auto-enable (for embedded use inside PeppyMeter) ──────────────────
+
+  useEffect(() => {
+    if (autoEnable && !enabled) {
+      handleEnable();
+    }
+  }, [autoEnable, enabled, handleEnable]);
+
   // ── Stopped prop ────────────────────────────────────────────────────────
 
   useEffect(() => {
@@ -348,6 +357,7 @@ PeppySpectrum.propTypes = {
   streamUrl: PropTypes.string,
   stopped: PropTypes.bool,
   className: PropTypes.string,
+  autoEnable: PropTypes.bool,
 };
 
 export default PeppySpectrum;

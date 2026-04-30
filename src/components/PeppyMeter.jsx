@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { SPECTRUM_STREAM_URL, PLUGIN_BASE_URL } from '@/config';
 import { fetchMeterConfigs } from './peppy-meter/parseMeterConfig';
 import { loadMeterImages, renderMeterFrame } from './peppy-meter/meterRenderer';
+import PeppySpectrum from './peppy-spectrum/PeppySpectrum';
 import './peppy-meter/PeppyMeter.scss';
 
 // MediaElementSourceNode can only be created ONCE per HTMLMediaElement.
@@ -273,6 +274,12 @@ const PeppyMeter = ({
     };
   }, []);
 
+  // Determine if embedded spectrum should be shown
+  const activeConfig = allConfigs && activeModel ? allConfigs[activeModel] : null;
+  const embeddedSpectrum = activeConfig?.spectrumVisible && activeConfig?.spectrumName
+    ? { name: activeConfig.spectrumName, size: activeConfig.spectrumSize }
+    : null;
+
   // ── Render ──────────────────────────────────────────────────────────────
 
   if (!folder) {
@@ -310,6 +317,17 @@ const PeppyMeter = ({
         width={nativeW}
         height={nativeH}
       />
+
+      {embeddedSpectrum && enabled && (
+        <PeppySpectrum
+          folder={folder}
+          model={embeddedSpectrum.name}
+          trackUri={trackUri}
+          streamUrl={streamUrl}
+          autoEnable
+          className="peppy-meter__embedded-spectrum"
+        />
+      )}
 
       {!enabled && (
         <div className="peppy-meter__overlay">
