@@ -52,17 +52,17 @@ const PeppySpectrum = ({
   const [activeModel, setActiveModel] = useState(null);
   const prevRandomRef = useRef(null);
 
-  // Parse width, height, and numBars from folder name (e.g. "1280x400+30-Gelo5")
+  // Parse width, height, and optionally numBars from folder name (e.g. "1280x400+30-Gelo5")
   const { nativeW, nativeH, numBars } = useMemo(() => {
-    const m = folder?.match(/^(\d+)x(\d+)\+(\d+)-/);
+    const m = folder?.match(/^(\d+)x(\d+)(?:\+(\d+))?/);
     if (m) {
-      return { nativeW: parseInt(m[1], 10), nativeH: parseInt(m[2], 10), numBars: parseInt(m[3], 10) };
+      return {
+        nativeW: parseInt(m[1], 10),
+        nativeH: parseInt(m[2], 10),
+        numBars: m[3] ? parseInt(m[3], 10) : 30,
+      };
     }
-    // Fallback: try without numBars
-    const m2 = folder?.match(/^(\d+)x(\d+)-/);
-    return m2
-      ? { nativeW: parseInt(m2[1], 10), nativeH: parseInt(m2[2], 10), numBars: 30 }
-      : { nativeW: 1280, nativeH: 400, numBars: 30 };
+    return { nativeW: 1280, nativeH: 400, numBars: 30 };
   }, [folder]);
 
   // Use large FFT for good frequency resolution

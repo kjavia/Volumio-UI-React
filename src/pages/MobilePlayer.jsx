@@ -111,7 +111,7 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
 
   const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
 
-  const { refreshState } = useSeek();
+  const { seek, duration, refreshState } = useSeek();
   useEffect(() => { refreshState(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Player cycling
@@ -159,6 +159,21 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
     if (albumart.startsWith('http')) return albumart;
     return `${VOLUMIO_BASE_URL}${albumart}`;
   }, [albumart]);
+
+  // Track info for PeppyMeter playinfo overlays
+  const peppyTrackInfo = useMemo(() => {
+    const remaining = duration > 0 ? Math.max(0, duration - seek / 1000) : 0;
+    const mins = Math.floor(remaining / 60);
+    const secs = Math.floor(remaining % 60);
+    return {
+      title: title || '',
+      artist: artist || '',
+      album: album || '',
+      albumart: fullAlbumArt,
+      samplerate: samplerate || '',
+      remaining: duration > 0 ? `${mins}:${secs.toString().padStart(2, '0')}` : '',
+    };
+  }, [title, artist, album, fullAlbumArt, samplerate, duration, seek]);
 
   const effectivePlayerType = playerType === 'matchSource'
     ? getPlayerTypeForSource(service, trackType)
@@ -253,6 +268,7 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
               folder={peppyMeterFolder}
               model={peppyMeterModel}
               trackUri={streamUri}
+              trackInfo={peppyTrackInfo}
             />
           </div>
         )}

@@ -43,6 +43,39 @@ export function parseMeterConfig(text) {
 }
 
 /**
+ * Parse a position string like "132,418,bold" → { x, y, fontWeight }
+ */
+function parsePos(val) {
+  if (!val) return null;
+  const parts = val.split(',').map((s) => s.trim());
+  if (parts.length < 2) return null;
+  const x = parseInt(parts[0], 10);
+  const y = parseInt(parts[1], 10);
+  if (Number.isNaN(x) || Number.isNaN(y)) return null;
+  return { x, y, fontWeight: parts[2] || 'regular' };
+}
+
+/**
+ * Parse a color string like "0,0,0" → "rgb(0,0,0)"
+ */
+function parseColor(val) {
+  if (!val) return null;
+  const parts = val.split(',').map((s) => parseInt(s.trim(), 10));
+  if (parts.length < 3 || parts.some(Number.isNaN)) return null;
+  return `rgb(${parts[0]},${parts[1]},${parts[2]})`;
+}
+
+/**
+ * Parse a dimension string like "95,95" → { w, h }
+ */
+function parseDimension(val) {
+  if (!val) return null;
+  const parts = val.split(',').map((s) => parseInt(s.trim(), 10));
+  if (parts.length < 2 || parts.some(Number.isNaN)) return null;
+  return { w: parts[0], h: parts[1] };
+}
+
+/**
  * Convert a raw parsed meter config object into a typed config
  * with numeric values and sensible defaults.
  *
@@ -61,6 +94,59 @@ export function normalizeMeterConfig(raw) {
 
   const type = str('meter.type', 'circular');
 
+  // Parse extended playinfo overlay config
+  const configExtend = str('config.extend', 'False') === 'True';
+  const playinfo = configExtend ? {
+    textCenter: str('playinfo.text.center', 'False') === 'True',
+    center: str('playinfo.center', 'False') === 'True',
+    title: {
+      pos: parsePos(raw['playinfo.title.pos']),
+      maxwidth: num('playinfo.title.maxwidth', 0),
+      color: parseColor(raw['playinfo.title.color']),
+    },
+    artist: {
+      pos: parsePos(raw['playinfo.artist.pos']),
+      maxwidth: num('playinfo.artist.maxwidth', 0),
+      color: parseColor(raw['playinfo.artist.color']),
+    },
+    album: {
+      pos: parsePos(raw['playinfo.album.pos']),
+      maxwidth: num('playinfo.album.maxwidth', 0),
+      color: parseColor(raw['playinfo.album.color']),
+    },
+    type: {
+      pos: parsePos(raw['playinfo.type.pos']),
+      color: parseColor(raw['playinfo.type.color']),
+      dimension: parseDimension(raw['playinfo.type.dimension']),
+    },
+    samplerate: {
+      pos: parsePos(raw['playinfo.samplerate.pos']),
+      maxwidth: num('playinfo.samplerate.maxwidth', 0),
+      color: parseColor(raw['playinfo.samplerate.color']),
+    },
+  } : null;
+
+  const albumart = configExtend ? {
+    pos: parsePos(raw['albumart.pos']),
+    dimension: parseDimension(raw['albumart.dimension']),
+    mask: str('albumart.mask') || null,
+  } : null;
+
+  const timeRemaining = configExtend ? {
+    pos: parsePos(raw['time.remaining.pos']),
+    color: parseColor(raw['time.remaining.color']),
+  } : null;
+
+  const fonts = configExtend ? {
+    sizeDigi: num('font.size.digi', 18),
+    sizeLight: num('font.size.light', 12),
+    sizeRegular: num('font.size.regular', 14),
+    sizeBold: num('font.size.bold', 18),
+    color: parseColor(raw['font.color']),
+  } : null;
+
+  const meterVisible = str('meter.visible', 'True') === 'True';
+
   const base = {
     type,
     channels: num('channels', 2),
@@ -71,6 +157,12 @@ export function normalizeMeterConfig(raw) {
     meterX: num('meter.x', 0),
     meterY: num('meter.y', 0),
     screenBgr: str('screen.bgr'),
+    configExtend,
+    meterVisible,
+    playinfo,
+    albumart,
+    timeRemaining,
+    fonts,
   };
 
   if (type === 'circular') {

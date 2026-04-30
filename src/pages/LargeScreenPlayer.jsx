@@ -177,7 +177,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
 
   const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
 
-  const { refreshState } = useSeek();
+  const { seek, duration, refreshState } = useSeek();
   useEffect(() => { refreshState(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Player cycling (same logic as Player.jsx)
@@ -234,6 +234,21 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
     return `${VOLUMIO_BASE_URL}${albumart}`;
   }, [albumart]);
 
+  // Track info for PeppyMeter playinfo overlays
+  const peppyTrackInfo = useMemo(() => {
+    const remaining = duration > 0 ? Math.max(0, duration - seek / 1000) : 0;
+    const mins = Math.floor(remaining / 60);
+    const secs = Math.floor(remaining % 60);
+    return {
+      title: title || '',
+      artist: artist || '',
+      album: album || '',
+      albumart: fullAlbumArt,
+      samplerate: samplerate || '',
+      remaining: duration > 0 ? `${mins}:${secs.toString().padStart(2, '0')}` : '',
+    };
+  }, [title, artist, album, fullAlbumArt, samplerate, duration, seek]);
+
   const effectivePlayerType = playerType === 'matchSource'
     ? getPlayerTypeForSource(service, trackType)
     : playerType;
@@ -274,7 +289,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
           isPlaying={isPlaying}
         />
       )}
-      {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} />}
+      {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} />}
       {vizType === 'peppySpectrum' && <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />}
     </div>
   );
@@ -483,7 +498,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
                   {vizType === 'spectrum' && (
                     <SpectrumAnalyzer ref={vizRef} stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} options={spectrumOptions} isPlaying={isPlaying} />
                   )}
-                  {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} />}
+                  {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} />}
                   {vizType === 'peppySpectrum' && <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />}
                 </div>
               )}
