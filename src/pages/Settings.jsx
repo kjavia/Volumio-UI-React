@@ -30,11 +30,16 @@ const useSettingsTranslations = () => {
    Each section defines its fields, the save method, and which field IDs to send.
    ═══════════════════════════════════════════════════════════════════════ */
 
-const getSections = (t, peppyFolders = []) => {
+const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
   // Build folder options from the API response
   const peppyFolderOptions = peppyFolders.map((f) => ({
     value: f.folder,
     label: `${f.name} (${f.width}×${f.height})`,
+  }));
+
+  const peppySpectrumFolderOptions = peppySpectrumFolders.map((f) => ({
+    value: f.folder,
+    label: `${f.name} (${f.width}×${f.height}, ${f.bars} bars)`,
   }));
 
   return [
@@ -86,6 +91,7 @@ const getSections = (t, peppyFolders = []) => {
           options: [
             { value: 'spectrum', label: t('VIZ_TYPE_SPECTRUM', 'Spectrum Analyzer') },
             { value: 'peppyMeter', label: t('VIZ_TYPE_PEPPY_METER', 'Peppy Meter') },
+            { value: 'peppySpectrum', label: t('VIZ_TYPE_PEPPY_SPECTRUM', 'Peppy Spectrum') },
             { value: 'none', label: t('NONE', 'None') },
           ],
         },
@@ -102,6 +108,19 @@ const getSections = (t, peppyFolders = []) => {
           options: [], // Populated dynamically by SettingsSection based on selected folder
           dynamicOptionsFrom: 'peppyMeterFolder', // marker for dynamic options
           visibleIf: { field: 'vizType', value: 'peppyMeter' },
+        },
+        {
+          id: 'peppySpectrumFolder', element: 'select', label: t('PEPPY_SPECTRUM_FOLDER', 'Peppy Spectrum Pack'), icon: 'folder',
+          doc: t('PEPPY_SPECTRUM_FOLDER_DESC', 'Select the spectrum asset pack.'),
+          options: peppySpectrumFolderOptions,
+          visibleIf: { field: 'vizType', value: 'peppySpectrum' },
+        },
+        {
+          id: 'peppySpectrumModel', element: 'select', label: t('PEPPY_SPECTRUM_MODEL', 'Peppy Spectrum Model'), icon: 'graphic_eq',
+          doc: t('PEPPY_SPECTRUM_MODEL_DESC', 'Select a specific spectrum design, or Random to cycle on each track change.'),
+          options: [], // Populated dynamically
+          dynamicOptionsFrom: 'peppySpectrumFolder',
+          visibleIf: { field: 'vizType', value: 'peppySpectrum' },
         },
       ],
     },
@@ -548,17 +567,18 @@ KnobField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.one
 
 /* ─── Section Component ────────────────────────────────────────────────── */
 
-const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolders }) => {
+const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolders, peppySpectrumFolders }) => {
   const isFieldVisible = (field) => {
     if (!field.visibleIf) return true;
     return values[field.visibleIf.field] === field.visibleIf.value;
   };
 
-  // Resolve dynamic options for peppyMeterModel based on selected folder
+  // Resolve dynamic options for model fields based on selected folder
   const resolveField = (field) => {
-    if (field.dynamicOptionsFrom && peppyFolders?.length) {
+    if (field.dynamicOptionsFrom) {
       const selectedFolder = values[field.dynamicOptionsFrom];
-      const folderData = peppyFolders.find((f) => f.folder === selectedFolder);
+      const allFolders = [...(peppyFolders || []), ...(peppySpectrumFolders || [])];
+      const folderData = allFolders.find((f) => f.folder === selectedFolder);
       const modelOptions = [{ value: 'random', label: 'Random (changes each track)' }];
       if (folderData) {
         for (const model of folderData.models) {
@@ -614,6 +634,7 @@ SettingsSection.propTypes = {
   onSave: PropTypes.func.isRequired,
   saving: PropTypes.bool,
   peppyFolders: PropTypes.array,
+  peppySpectrumFolders: PropTypes.array,
 };
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -629,14 +650,18 @@ const Settings = () => {
   const [values, setValues] = useState({});
   const [saving, setSaving] = useState(false);
   const [peppyFolders, setPeppyFolders] = useState([]);
+  const [peppySpectrumFolders, setPeppySpectrumFolders] = useState([]);
   const t = useSettingsTranslations();
-  const sections = getSections(t, peppyFolders);
+  const sections = getSections(t, peppyFolders, peppySpectrumFolders);
   const [activeTab, setActiveTab] = useState(sections[0].id);
 
-  // Fetch peppy meter folders from the API
+  // Fetch peppy meter and spectrum folders from the API
   useEffect(() => {
     axios.get(`${PLUGIN_BASE_URL}/api/peppy-folders`)
       .then(({ data }) => { if (Array.isArray(data)) setPeppyFolders(data); })
+      .catch(() => { });
+    axios.get(`${PLUGIN_BASE_URL}/api/peppy-spectrum-folders`)
+      .then(({ data }) => { if (Array.isArray(data)) setPeppySpectrumFolders(data); })
       .catch(() => { });
   }, []);
 
@@ -667,9 +692,10 @@ const Settings = () => {
 
       // Resolve dynamic options (e.g. peppyMeterModel options depend on selected folder)
       let options = field.options || [];
-      if (field.dynamicOptionsFrom && peppyFolders?.length) {
+      if (field.dynamicOptionsFrom) {
         const selectedFolder = values[field.dynamicOptionsFrom];
-        const folderData = peppyFolders.find((f) => f.folder === selectedFolder);
+        const allFolders = [...(peppyFolders || []), ...(peppySpectrumFolders || [])];
+        const folderData = allFolders.find((f) => f.folder === selectedFolder);
         options = [{ value: 'random', label: 'Random' }];
         if (folderData) {
           for (const model of folderData.models) {
@@ -718,7 +744,7 @@ const Settings = () => {
       socket.off('pushStylishPlayerConfig', handleConfigPush);
       setSaving(false);
     }, 5000);
-  }, [socket, values, showToast, peppyFolders]);
+  }, [socket, values, showToast, peppyFolders, peppySpectrumFolders]);
 
   if (isLoading) {
     return (
@@ -762,6 +788,7 @@ const Settings = () => {
             onSave={handleSave}
             saving={saving}
             peppyFolders={peppyFolders}
+            peppySpectrumFolders={peppySpectrumFolders}
           />
         )}
       </div>

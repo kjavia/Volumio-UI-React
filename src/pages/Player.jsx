@@ -25,6 +25,7 @@ import DisconnectedScreen from '@/components/DisconnectedScreen';
 import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
 import PeppyMeter from '@/components/PeppyMeter';
+import PeppySpectrum from '@/components/peppy-spectrum/PeppySpectrum';
 
 const PLAYER_MAP = {
   albumArt: AlbumArtPlayer,
@@ -86,6 +87,8 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const backgroundColor = pluginConfig?.backgroundColor || '';
   const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
   const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
+  const peppySpectrumFolder = pluginConfig?.peppySpectrumFolder || '';
+  const peppySpectrumModel = pluginConfig?.peppySpectrumModel || 'random';
 
   const spectrumOptions = useMemo(() => {
     const raw = pluginConfig?.spectrumOptions;
@@ -271,6 +274,12 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
             <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} />
           </div>
         )}
+        {showViz && vizType === 'peppySpectrum' && (
+          <div className="home-panel area-mobile-viz" ref={peppyMobileRef}>
+            {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
+            <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />
+          </div>
+        )}
 
         {/* RIGHT COLUMN — dissolves on mobile so track-info gets its own grid row */}
         <div className="right-column">
@@ -351,6 +360,9 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
             )}
             {vizType === 'peppyMeter' && (
               <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} />
+            )}
+            {vizType === 'peppySpectrum' && (
+              <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />
             )}
           </div>
         )}

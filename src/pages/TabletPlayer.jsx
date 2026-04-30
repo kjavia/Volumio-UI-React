@@ -25,6 +25,7 @@ import DisconnectedScreen from '@/components/DisconnectedScreen';
 import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
 import PeppyMeter from '@/components/PeppyMeter';
+import PeppySpectrum from '@/components/peppy-spectrum/PeppySpectrum';
 import './tablet-player.scss';
 
 const PLAYER_MAP = {
@@ -76,6 +77,8 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
   const backgroundColor = pluginConfig?.backgroundColor || '';
   const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
   const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
+  const peppySpectrumFolder = pluginConfig?.peppySpectrumFolder || '';
+  const peppySpectrumModel = pluginConfig?.peppySpectrumModel || 'random';
   const spectrumOptions = useMemo(() => {
     const raw = pluginConfig?.spectrumOptions;
     if (!raw) return null;
@@ -313,6 +316,7 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
               />
             )}
             {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} />}
+            {vizType === 'peppySpectrum' && <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />}
           </div>
         )}
       </div>

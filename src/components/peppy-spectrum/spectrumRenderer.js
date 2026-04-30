@@ -1,0 +1,151 @@
+/**
+ * PeppySpectrum canvas rendering engine.
+ *
+ * Renders frequency spectrum bars using PeppyMeter-style image assets.
+ * Layers: screen background → meter background → bars → reflections → toppings → foreground.
+ */
+
+/**
+ * Load an image and return a promise. Returns null for empty filenames.
+ */
+export function loadImage(src) {
+  if (!src) return Promise.resolve(null);
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = src;
+  });
+}
+
+/**
+ * Load all images needed for a spectrum config.
+ *
+ * @param {Object} config — normalized spectrum config
+ * @param {string} basePath — URL prefix for image files
+ * @returns {Promise<Object>} { bgr, bar, reflection, fgr }
+ */
+export async function loadSpectrumImages(config, basePath) {
+  const prefix = basePath.endsWith('/') ? basePath : `${basePath}/`;
+  const [bgr, bar, reflection, fgr] = await Promise.all([
+    loadImage(config.bgrFilename ? `${prefix}${config.bgrFilename}` : ''),
+    loadImage(config.barFilename ? `${prefix}${config.barFilename}` : ''),
+    loadImage(config.reflectionFilename ? `${prefix}${config.reflectionFilename}` : ''),
+    loadImage(config.fgrFilename ? `${prefix}${config.fgrFilename}` : ''),
+  ]);
+  return { bgr, bar, reflection, fgr };
+}
+
+/**
+ * Render a complete PeppySpectrum frame onto a canvas.
+ *
+ * @param {CanvasRenderingContext2D} ctx
+ * @param {Object} config — normalized spectrum config
+ * @param {Object} images — { bgr, bar, reflection, fgr }
+ * @param {Float32Array|Uint8Array} fftData — frequency bin magnitudes (0–255 Uint8 or 0–1 float)
+ * @param {Float32Array|null} toppings — current topping (peak) positions per bar (0–1)
+ * @param {number} canvasW — canvas pixel width
+ * @param {number} canvasH — canvas pixel height
+ * @param {number} nativeW — native width from folder name
+ * @param {number} nativeH — native height from folder name
+ * @param {number} numBars — number of frequency bars to render
+ */
+export function renderSpectrumFrame(
+  ctx,
+  config,
+  images,
+  fftData,
+  toppings,
+  canvasW,
+  canvasH,
+  nativeW,
+  nativeH,
+  numBars,
+) {
+  const scaleX = canvasW / nativeW;
+  const scaleY = canvasH / nativeH;
+
+  // Clear
+  ctx.clearRect(0, 0, canvasW, canvasH);
+
+  // Layer 1: Background image
+  if (images.bgr) {
+    ctx.drawImage(images.bgr, 0, 0, canvasW, canvasH);
+  }
+
+  // Bar rendering parameters
+  const barW = config.barWidth * scaleX;
+  const barH = config.barHeight * scaleY;
+  const gap = config.barGap * scaleX;
+  const originX = config.originX * scaleX;
+  const originY = config.originY * scaleY;
+  const isExtended = config.barType === 'image.extended';
+
+  // Draw bars
+  for (let i = 0; i < numBars; i++) {
+    const value = fftData[i] !== undefined ? fftData[i] / 255 : 0;
+    const x = originX + i * (barW + gap);
+    const fillH = value * barH;
+
+    if (fillH <= 0) continue;
+
+    if (images.bar) {
+      if (isExtended) {
+        // image.extended: reveal from bottom proportional to level
+        const srcY = images.bar.height - (value * images.bar.height);
+        const srcH = value * images.bar.height;
+        ctx.drawImage(
+          images.bar,
+          0, srcY, images.bar.width, srcH,
+          x, originY - fillH, barW, fillH,
+        );
+      } else {
+        // image: tile/stretch the bar image to fill height
+        ctx.drawImage(images.bar, x, originY - fillH, barW, fillH);
+      }
+    } else if (config.barColor) {
+      ctx.fillStyle = config.barColor;
+      ctx.fillRect(x, originY - fillH, barW, fillH);
+    }
+
+    // Reflection
+    if (images.reflection && config.reflectionType) {
+      const refGap = config.reflectionGap * scaleY;
+      const refY = originY + refGap;
+      const refH = fillH * 0.5; // reflection is typically half height
+
+      if (config.reflectionType === 'image.extended') {
+        const srcH = value * 0.5 * images.reflection.height;
+        ctx.drawImage(
+          images.reflection,
+          0, 0, images.reflection.width, srcH,
+          x, refY, barW, refH,
+        );
+      } else if (config.reflectionType === 'image') {
+        ctx.drawImage(images.reflection, x, refY, barW, refH);
+      }
+    }
+
+    // Topping (peak indicator)
+    if (toppings && toppings[i] > 0) {
+      const toppingY = originY - (toppings[i] * barH);
+      const toppingH = config.toppingHeight * scaleY;
+      if (images.bar) {
+        // Use a slice of the bar image for the topping
+        ctx.drawImage(
+          images.bar,
+          0, 0, images.bar.width, config.toppingHeight,
+          x, toppingY - toppingH, barW, toppingH,
+        );
+      } else {
+        ctx.fillStyle = config.barColor || '#ffffff';
+        ctx.fillRect(x, toppingY - toppingH, barW, toppingH);
+      }
+    }
+  }
+
+  // Layer: Foreground overlay
+  if (images.fgr) {
+    ctx.drawImage(images.fgr, 0, 0, canvasW, canvasH);
+  }
+}

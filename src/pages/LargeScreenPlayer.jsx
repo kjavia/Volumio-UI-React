@@ -17,6 +17,7 @@ import GlobePlayer from '@/components/animated-players/GlobePlayer';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
 import SpectrumAnalyzer from '@/components/spectrum-analyzers/SpectrumAnalyzer';
 import PeppyMeter from '@/components/PeppyMeter';
+import PeppySpectrum from '@/components/peppy-spectrum/PeppySpectrum';
 import Playlist from '@/components/Playlist';
 import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
@@ -126,6 +127,8 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
   const backgroundColor = pluginConfig?.backgroundColor || '';
   const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
   const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
+  const peppySpectrumFolder = pluginConfig?.peppySpectrumFolder || '';
+  const peppySpectrumModel = pluginConfig?.peppySpectrumModel || 'random';
 
   // Ultrawide landscape short — 3-column layout (player | meta | viz)
   // Targets screens like 2650×700 or 1920×515 where width >> height
@@ -272,6 +275,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
         />
       )}
       {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} />}
+      {vizType === 'peppySpectrum' && <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />}
     </div>
   );
 
@@ -480,6 +484,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
                     <SpectrumAnalyzer ref={vizRef} stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} options={spectrumOptions} isPlaying={isPlaying} />
                   )}
                   {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} />}
+                  {vizType === 'peppySpectrum' && <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />}
                 </div>
               )}
             </div>
