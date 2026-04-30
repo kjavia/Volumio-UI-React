@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { SPECTRUM_STREAM_URL } from '@/config';
+import { SPECTRUM_STREAM_URL, PLUGIN_BASE_URL } from '@/config';
 import { fetchMeterConfigs } from './peppy-meter/parseMeterConfig';
 import { loadMeterImages, renderMeterFrame } from './peppy-meter/meterRenderer';
 import './peppy-meter/PeppyMeter.scss';
@@ -76,7 +76,7 @@ const PeppyMeter = ({
     return m ? { nativeW: parseInt(m[1], 10), nativeH: parseInt(m[2], 10) } : { nativeW: 1280, nativeH: 400 };
   }, [folder]);
 
-  const assetPath = useMemo(() => `/peppy_meter/${folder}`, [folder]);
+  const assetPath = useMemo(() => `${PLUGIN_BASE_URL}/peppy_meter/${folder}`, [folder]);
 
   // ── Load all meter configs from the folder ────────────────────────────
 
@@ -84,7 +84,7 @@ const PeppyMeter = ({
     if (!folder) return;
     let cancelled = false;
 
-    fetchMeterConfigs(`${assetPath}/meters.txt`)
+    fetchMeterConfigs(`${assetPath}/meters.txt?_t=${Date.now()}`)
       .then((configs) => {
         if (cancelled) return;
         setAllConfigs(configs);

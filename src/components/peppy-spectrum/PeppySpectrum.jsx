@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { SPECTRUM_STREAM_URL } from '@/config';
+import { SPECTRUM_STREAM_URL, PLUGIN_BASE_URL } from '@/config';
 import { fetchSpectrumConfigs } from './parseSpectrumConfig';
 import { loadSpectrumImages, renderSpectrumFrame } from './spectrumRenderer';
 import './PeppySpectrum.scss';
@@ -87,7 +87,7 @@ const PeppySpectrum = ({
     return ranges;
   }, [numBars]);
 
-  const assetPath = useMemo(() => `/peppy_spectrum/${folder}`, [folder]);
+  const assetPath = useMemo(() => `${PLUGIN_BASE_URL}/peppy_spectrum/${folder}`, [folder]);
 
   // ── Load all spectrum configs from the folder ─────────────────────────
 
@@ -95,7 +95,7 @@ const PeppySpectrum = ({
     if (!folder) return;
     let cancelled = false;
 
-    fetchSpectrumConfigs(`${assetPath}/spectrum.txt`)
+    fetchSpectrumConfigs(`${assetPath}/spectrum.txt?_t=${Date.now()}`)
       .then((configs) => {
         if (cancelled) return;
         setAllConfigs(configs);
