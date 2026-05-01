@@ -286,13 +286,13 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
         {showViz && vizType === 'peppyMeter' && (
           <div className="home-panel area-mobile-viz" ref={peppyMobileRef}>
             {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
-            <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} />
+            <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} stopped={!isPlaying} />
           </div>
         )}
         {showViz && vizType === 'peppySpectrum' && (
           <div className="home-panel area-mobile-viz" ref={peppyMobileRef}>
             {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
-            <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />
+            <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} stopped={!isPlaying} />
           </div>
         )}
 
@@ -374,10 +374,10 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               />
             )}
             {vizType === 'peppyMeter' && (
-              <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} />
+              <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} stopped={!isPlaying} />
             )}
             {vizType === 'peppySpectrum' && (
-              <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />
+              <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} stopped={!isPlaying} />
             )}
           </div>
         )}

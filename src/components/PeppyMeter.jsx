@@ -324,6 +324,7 @@ const PeppyMeter = ({
           model={embeddedSpectrum.name}
           trackUri={trackUri}
           streamUrl={streamUrl}
+          stopped={stopped}
           autoEnable
           className="peppy-meter__embedded-spectrum"
         />

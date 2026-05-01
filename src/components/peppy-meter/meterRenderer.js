@@ -384,6 +384,38 @@ function drawTextField(ctx, text, fieldCfg, fonts, defaultColor, scaleX, scaleY,
 }
 
 /**
+ * Calculate default text positions from meter needle geometry.
+ * When explicit positions aren't defined, derive them from the needle origins.
+ */
+function calcDefaultTextPositions(config, fonts) {
+  // Determine center X and top Y from needle positions
+  let centerX, topY;
+  if (config.type === 'circular') {
+    centerX = ((config.leftOriginX || 0) + (config.rightOriginX || 0)) / 2;
+    topY = Math.max(10, (config.leftOriginY || 0) - (config.distance || 200) - 40);
+  } else {
+    centerX = ((config.leftX || 0) + (config.rightX || 0)) / 2;
+    topY = Math.max(10, (config.leftY || 0) - 40);
+  }
+
+  const boldSize = fonts?.sizeBold || 18;
+  const regularSize = fonts?.sizeRegular || 14;
+  const lightSize = fonts?.sizeLight || 12;
+  const lineSpacing = 1.4;
+
+  let y = topY;
+  const titlePos = { x: centerX, y, fontWeight: 'bold' };
+  y += boldSize * lineSpacing;
+  const artistPos = { x: centerX, y, fontWeight: 'regular' };
+  y += regularSize * lineSpacing;
+  const albumPos = { x: centerX, y, fontWeight: 'light' };
+  y += lightSize * lineSpacing;
+  const sampleratePos = { x: centerX, y, fontWeight: 'light' };
+
+  return { titlePos, artistPos, albumPos, sampleratePos };
+}
+
+/**
  * Render playinfo overlays (album art, title, artist, album, samplerate, time remaining).
  */
 function renderPlayinfo(ctx, config, images, trackInfo, scaleX, scaleY) {
@@ -393,6 +425,14 @@ function renderPlayinfo(ctx, config, images, trackInfo, scaleX, scaleY) {
   const defaultColor = fonts?.color || 'rgb(220,220,220)';
   const textCenter = playinfo.textCenter || playinfo.center;
   const globalMaxwidth = playinfo.maxwidth || 0;
+
+  // Calculate fallback positions from needle geometry for fields without explicit pos
+  const defaults = calcDefaultTextPositions(config, fonts);
+
+  const ensurePos = (field, fallbackPos) => {
+    if (field?.pos) return field;
+    return { ...field, pos: fallbackPos };
+  };
 
   // Album art
   if (albumart?.pos && albumart?.dimension && images.albumArt) {
@@ -415,16 +455,16 @@ function renderPlayinfo(ctx, config, images, trackInfo, scaleX, scaleY) {
   }
 
   // Title
-  drawTextField(ctx, trackInfo.title, playinfo.title, fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
+  drawTextField(ctx, trackInfo.title, ensurePos(playinfo.title, defaults.titlePos), fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
 
   // Artist
-  drawTextField(ctx, trackInfo.artist, playinfo.artist, fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
+  drawTextField(ctx, trackInfo.artist, ensurePos(playinfo.artist, defaults.artistPos), fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
 
   // Album
-  drawTextField(ctx, trackInfo.album, playinfo.album, fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
+  drawTextField(ctx, trackInfo.album, ensurePos(playinfo.album, defaults.albumPos), fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
 
   // Sample rate
-  drawTextField(ctx, trackInfo.samplerate, playinfo.samplerate, fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
+  drawTextField(ctx, trackInfo.samplerate, ensurePos(playinfo.samplerate, defaults.sampleratePos), fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
 
   // Time remaining
   if (timeRemaining?.pos && trackInfo.remaining) {
