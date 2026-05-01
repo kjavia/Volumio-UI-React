@@ -6,6 +6,24 @@
  * needle/indicator → meter foreground → playinfo overlays.
  */
 
+import { PLUGIN_BASE_URL } from '@/config';
+
+// ── LCD font for "digi" weight (time remaining counter) ─────────────────────
+const LCD_FONT_FAMILY = 'DS Digital';
+let lcdFontLoaded = false;
+
+(async function loadLcdFont() {
+  if (lcdFontLoaded) return;
+  try {
+    const font = new FontFace(LCD_FONT_FAMILY, `url(${PLUGIN_BASE_URL}/assets/fonts/DS-DIGI.TTF)`);
+    await font.load();
+    document.fonts.add(font);
+    lcdFontLoaded = true;
+  } catch (e) {
+    console.warn('[PeppyMeter] Failed to load LCD font:', e);
+  }
+})();
+
 /**
  * Load an image and return a promise that resolves to the HTMLImageElement.
  * Returns null for empty/missing filenames.
@@ -325,6 +343,9 @@ function getFontSize(fontWeight, fonts) {
  * Get CSS font string for the given weight/size.
  */
 function getFontString(fontWeight, fontSize) {
+  if (fontWeight === 'digi') {
+    return `normal ${fontSize}px "${LCD_FONT_FAMILY}", monospace`;
+  }
   const weight = fontWeight === 'bold' ? 'bold' : 'normal';
   return `${weight} ${fontSize}px sans-serif`;
 }
@@ -405,7 +426,7 @@ function renderPlayinfo(ctx, config, images, trackInfo, scaleX, scaleY) {
     const fontSize = getFontSize('digi', fonts) * scaleY;
     const color = timeRemaining.color || defaultColor;
     ctx.save();
-    ctx.font = getFontString('regular', fontSize);
+    ctx.font = getFontString('digi', fontSize);
     ctx.fillStyle = color;
     ctx.fillText(trackInfo.remaining, timeRemaining.pos.x * scaleX, timeRemaining.pos.y * scaleY + fontSize);
     ctx.restore();
