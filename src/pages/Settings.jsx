@@ -101,6 +101,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
           doc: t('PEPPY_METER_FOLDER_DESC', 'Select the meter asset pack.'),
           options: peppyFolderOptions,
           visibleIf: { field: 'vizType', value: 'peppyMeter' },
+          deletable: true,
         },
         {
           id: 'peppyMeterModel', element: 'select', label: t('PEPPY_METER_MODEL', 'Peppy Meter Model'), icon: 'speed',
@@ -114,6 +115,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
           doc: t('PEPPY_SPECTRUM_FOLDER_DESC', 'Select the spectrum asset pack.'),
           options: peppySpectrumFolderOptions,
           visibleIf: { field: 'vizType', value: 'peppySpectrum' },
+          deletable: true,
         },
         {
           id: 'peppySpectrumModel', element: 'select', label: t('PEPPY_SPECTRUM_MODEL', 'Peppy Spectrum Model'), icon: 'graphic_eq',
@@ -211,7 +213,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
 
 /* ─── Field Components ─────────────────────────────────────────────────── */
 
-const SelectField = ({ field, value, onChange }) => (
+const SelectField = ({ field, value, onChange, onDelete }) => (
   <div className="settings-field settings-field--select">
     <label className="settings-label">
       {field.icon && <span className="material-icons settings-field__icon">{field.icon}</span>}
@@ -220,22 +222,34 @@ const SelectField = ({ field, value, onChange }) => (
     {field.doc && <small className="settings-doc">{field.doc}</small>}
     <div className="settings-radio-group">
       {field.options.map((opt) => (
-        <label key={opt.value} className={`btn ${value === opt.value ? 'btn-primary' : 'btn-secondary'} settings-radio`}>
-          <input
-            type="radio"
-            name={field.id}
-            value={opt.value}
-            checked={value === opt.value}
-            onChange={() => onChange(field.id, opt.value)}
-            className="settings-radio__input"
-          />
-          {opt.label}
-        </label>
+        <div key={opt.value} className="settings-radio-wrapper">
+          <label className={`btn ${value === opt.value ? 'btn-primary' : 'btn-secondary'} settings-radio`}>
+            <input
+              type="radio"
+              name={field.id}
+              value={opt.value}
+              checked={value === opt.value}
+              onChange={() => onChange(field.id, opt.value)}
+              className="settings-radio__input"
+            />
+            {opt.label}
+          </label>
+          {field.deletable && onDelete && (
+            <button
+              type="button"
+              className="settings-radio-delete"
+              title="Delete pack"
+              onClick={() => onDelete(opt.value, opt.label)}
+            >
+              <span className="material-icons">close</span>
+            </button>
+          )}
+        </div>
       ))}
     </div>
   </div>
 );
-SelectField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.string, onChange: PropTypes.func.isRequired };
+SelectField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.string, onChange: PropTypes.func.isRequired, onDelete: PropTypes.func };
 
 const SwitchField = ({ field, value, onChange }) => (
   <div className="settings-field settings-field--switch">
@@ -638,6 +652,8 @@ PackUpload.propTypes = { packType: PropTypes.string.isRequired, onUploaded: Prop
 /* ─── Section Component ────────────────────────────────────────────────── */
 
 const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolders, peppySpectrumFolders, onPackUploaded }) => {
+  const [deleting, setDeleting] = useState(null);
+
   const isFieldVisible = (field) => {
     if (!field.visibleIf) return true;
     return values[field.visibleIf.field] === field.visibleIf.value;
@@ -660,6 +676,19 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
     return field;
   };
 
+  const handleDeletePack = useCallback(async (folder, label) => {
+    if (!window.confirm(`Delete "${label}"?\nThis will permanently remove the pack from the server.`)) return;
+    setDeleting(folder);
+    try {
+      await axios.post(`${PLUGIN_BASE_URL}/api/delete-peppy-pack?folder=${encodeURIComponent(folder)}`);
+      if (onPackUploaded) onPackUploaded(); // re-fetch folder lists
+    } catch (err) {
+      alert(err.response?.data?.error || 'Failed to delete pack.');
+    } finally {
+      setDeleting(null);
+    }
+  }, [onPackUploaded]);
+
   return (
     <div className="settings-section">
       <div className="settings-section__header">
@@ -672,7 +701,7 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
           const field = resolveField(rawField);
           switch (field.element) {
             case 'select':
-              return <SelectField key={field.id} field={field} value={values[field.id]} onChange={onChange} />;
+              return <SelectField key={field.id} field={field} value={values[field.id]} onChange={onChange} onDelete={field.deletable ? handleDeletePack : undefined} />;
             case 'switch':
               return <SwitchField key={field.id} field={field} value={values[field.id]} onChange={onChange} />;
             case 'color':

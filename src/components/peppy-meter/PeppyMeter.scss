@@ -1,82 +1,94 @@
 .peppy-meter {
-    position: relative;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md, 8px);
+  width: 100%;
+  height: 100%;
+
+  &--active {
+    cursor: default;
+  }
+
+  &--error {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    line-height: 0;
+    min-height: 100px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #ff6b6b;
+    padding: 1rem;
+  }
+
+  &__canvas {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    margin: auto;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+  }
+
+  &__play-hint {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 0.35em 0.75em;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+  }
+
+  &__error {
+    margin: 0;
+    font-size: 0.8rem;
+  }
+
+  &__embedded-spectrum {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
     overflow: hidden;
-    border-radius: var(--radius-md, 8px);
-    width: 100%;
-    height: 100%;
 
-    &--active {
-        cursor: default;
+    // Remove border-radius and cursor from the nested PeppySpectrum wrapper
+    &.peppy-spectrum {
+      position: absolute;
+      border-radius: 0;
+      cursor: inherit;
     }
 
-    &--error {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100px;
-        background: rgba(0, 0, 0, 0.8);
-        color: #ff6b6b;
-        padding: 1rem;
+    // Hide the PeppySpectrum overlay/hint and audio element
+    .peppy-spectrum__overlay,
+    .peppy-spectrum__play-hint,
+    audio {
+      display: none;
     }
 
-    &__canvas {
-        display: block;
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-        margin: auto;
+    // The spectrum canvas must occupy the exact same rectangle as the
+    // meter canvas. Both share the same native aspect ratio (same folder),
+    // so identical max-width/max-height + flex-center rules keep them aligned.
+    .peppy-spectrum__canvas {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      margin: auto;
     }
-
-    &__overlay {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
-    }
-
-    &__play-hint {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.85);
-        padding: 0.35em 0.75em;
-        border-radius: 4px;
-        background: rgba(0, 0, 0, 0.5);
-        pointer-events: none;
-    }
-
-    &__error {
-        margin: 0;
-        font-size: 0.8rem;
-    }
-
-    &__embedded-spectrum {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        overflow: hidden;
-
-        // Remove border-radius and cursor from the nested PeppySpectrum wrapper
-        .peppy-spectrum {
-            border-radius: 0;
-            cursor: inherit;
-        }
-
-        // Hide the PeppySpectrum overlay/hint and audio element
-        .peppy-spectrum__overlay,
-        .peppy-spectrum__play-hint,
-        audio {
-            display: none;
-        }
-
-        // Do NOT override .peppy-spectrum__canvas sizing —
-        // let it use the default max-width/max-height rules so it
-        // scales identically to the meter canvas and stays aligned.
-    }
+  }
 }

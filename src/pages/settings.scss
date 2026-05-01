@@ -526,6 +526,54 @@
   display: inline-flex;
   flex-wrap: wrap;
 
+  >.settings-radio-wrapper {
+    display: inline-flex;
+    align-items: center;
+
+    .settings-radio {
+      border-radius: 0;
+      margin: 0;
+    }
+
+    .settings-radio-delete {
+      background: none;
+      border: none;
+      padding: 0 0.2rem;
+      margin-left: 0.15rem;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: #dc3545;
+      font-weight: bold;
+      opacity: 0.7;
+      transition: opacity 0.15s;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      .material-icons {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+    }
+
+    &:first-child .settings-radio {
+      border-top-left-radius: var(--radius-md, 6px);
+      border-bottom-left-radius: var(--radius-md, 6px);
+    }
+
+    &:last-child .settings-radio {
+      border-top-right-radius: var(--radius-md, 6px);
+      border-bottom-right-radius: var(--radius-md, 6px);
+    }
+
+    +.settings-radio-wrapper {
+      margin-left: -1px;
+    }
+  }
+
+  // Fallback: direct .settings-radio children (non-deletable selects)
   >.settings-radio {
     border-radius: 0;
     margin: 0;

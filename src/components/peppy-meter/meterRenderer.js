@@ -225,97 +225,100 @@ export function renderMeterFrame(
     ctx.drawImage(images.screenBgr, 0, 0, canvasW, canvasH);
   }
 
-  // Layer 2: Meter background
-  if (images.bgr) {
-    ctx.drawImage(
-      images.bgr,
-      config.meterX * scaleX,
-      config.meterY * scaleY,
-      images.bgr.width * scaleX,
-      images.bgr.height * scaleY,
-    );
-  }
+  // Layers 2-4 only if meter is visible (meter.visible = True)
+  if (config.meterVisible !== false) {
+    // Layer 2: Meter background
+    if (images.bgr) {
+      ctx.drawImage(
+        images.bgr,
+        config.meterX * scaleX,
+        config.meterY * scaleY,
+        images.bgr.width * scaleX,
+        images.bgr.height * scaleY,
+      );
+    }
 
-  // Layer 3: Needle / indicator
-  if (config.type === 'circular') {
-    const leftStart = Number.isNaN(config.leftStartAngle)
-      ? config.startAngle
-      : config.leftStartAngle;
-    const leftStop = Number.isNaN(config.leftStopAngle)
-      ? config.stopAngle
-      : config.leftStopAngle;
-    const rightStart = Number.isNaN(config.rightStartAngle)
-      ? config.startAngle
-      : config.rightStartAngle;
-    const rightStop = Number.isNaN(config.rightStopAngle)
-      ? config.stopAngle
-      : config.rightStopAngle;
+    // Layer 3: Needle / indicator
+    if (config.type === 'circular') {
+      const leftStart = Number.isNaN(config.leftStartAngle)
+        ? config.startAngle
+        : config.leftStartAngle;
+      const leftStop = Number.isNaN(config.leftStopAngle)
+        ? config.stopAngle
+        : config.leftStopAngle;
+      const rightStart = Number.isNaN(config.rightStartAngle)
+        ? config.startAngle
+        : config.rightStartAngle;
+      const rightStop = Number.isNaN(config.rightStopAngle)
+        ? config.stopAngle
+        : config.rightStopAngle;
 
-    // Left channel needle
-    const angleL = volumeToAngle(volumeL, leftStart, leftStop);
-    drawCircularNeedle(
-      ctx,
-      images.indicator,
-      config.leftOriginX * scaleX,
-      config.leftOriginY * scaleY,
-      angleL,
-      config.distance,
-      config.leftNeedleFlip,
-      scaleX,
-      scaleY,
-    );
-
-    // Right channel needle (if stereo)
-    if (config.channels >= 2) {
-      const angleR = volumeToAngle(volumeR, rightStart, rightStop);
+      // Left channel needle
+      const angleL = volumeToAngle(volumeL, leftStart, leftStop);
       drawCircularNeedle(
         ctx,
         images.indicator,
-        config.rightOriginX * scaleX,
-        config.rightOriginY * scaleY,
-        angleR,
+        config.leftOriginX * scaleX,
+        config.leftOriginY * scaleY,
+        angleL,
         config.distance,
-        config.rightNeedleFlip,
+        config.leftNeedleFlip,
         scaleX,
         scaleY,
       );
-    }
-  } else {
-    // Linear meter
-    drawLinearIndicator(
-      ctx,
-      images.indicator,
-      volumeL,
-      config,
-      config.leftX,
-      config.leftY,
-      scaleX,
-      scaleY,
-    );
 
-    if (config.channels >= 2) {
+      // Right channel needle (if stereo)
+      if (config.channels >= 2) {
+        const angleR = volumeToAngle(volumeR, rightStart, rightStop);
+        drawCircularNeedle(
+          ctx,
+          images.indicator,
+          config.rightOriginX * scaleX,
+          config.rightOriginY * scaleY,
+          angleR,
+          config.distance,
+          config.rightNeedleFlip,
+          scaleX,
+          scaleY,
+        );
+      }
+    } else {
+      // Linear meter
       drawLinearIndicator(
         ctx,
         images.indicator,
-        volumeR,
+        volumeL,
         config,
-        config.rightX,
-        config.rightY,
+        config.leftX,
+        config.leftY,
         scaleX,
         scaleY,
       );
-    }
-  }
 
-  // Layer 4: Foreground overlay
-  if (images.fgr) {
-    ctx.drawImage(
-      images.fgr,
-      config.meterX * scaleX,
-      config.meterY * scaleY,
-      images.fgr.width * scaleX,
-      images.fgr.height * scaleY,
-    );
+      if (config.channels >= 2) {
+        drawLinearIndicator(
+          ctx,
+          images.indicator,
+          volumeR,
+          config,
+          config.rightX,
+          config.rightY,
+          scaleX,
+          scaleY,
+        );
+      }
+    }
+
+    // Layer 4: Foreground overlay
+    if (images.fgr) {
+      ctx.drawImage(
+        images.fgr,
+        config.meterX * scaleX,
+        config.meterY * scaleY,
+        images.fgr.width * scaleX,
+        images.fgr.height * scaleY,
+      );
+    }
   }
 
   // Layer 5: Playinfo overlays (text + album art)
