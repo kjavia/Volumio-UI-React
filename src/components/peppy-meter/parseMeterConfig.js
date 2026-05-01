@@ -99,6 +99,7 @@ export function normalizeMeterConfig(raw) {
   const playinfo = configExtend ? {
     textCenter: str('playinfo.text.center', 'False') === 'True',
     center: str('playinfo.center', 'False') === 'True',
+    maxwidth: num('playinfo.maxwidth', 0),
     title: {
       pos: parsePos(raw['playinfo.title.pos']),
       maxwidth: num('playinfo.title.maxwidth', 0),

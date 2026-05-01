@@ -356,7 +356,7 @@ function getFontString(fontWeight, fontSize) {
 /**
  * Draw a text field on the canvas, respecting position, color, maxwidth, and centering.
  */
-function drawTextField(ctx, text, fieldCfg, fonts, defaultColor, scaleX, scaleY, textCenter) {
+function drawTextField(ctx, text, fieldCfg, fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth) {
   if (!fieldCfg?.pos || !text) return;
   const { x, y, fontWeight } = fieldCfg.pos;
   const fontSize = getFontSize(fontWeight, fonts) * scaleY;
@@ -368,7 +368,8 @@ function drawTextField(ctx, text, fieldCfg, fonts, defaultColor, scaleX, scaleY,
 
   const drawX = x * scaleX;
   const drawY = y * scaleY + fontSize; // baseline offset
-  const maxW = fieldCfg.maxwidth ? fieldCfg.maxwidth * scaleX : undefined;
+  const mw = fieldCfg.maxwidth || globalMaxwidth || 0;
+  const maxW = mw ? mw * scaleX : undefined;
 
   if (textCenter) {
     ctx.textAlign = 'center';
@@ -391,6 +392,7 @@ function renderPlayinfo(ctx, config, images, trackInfo, scaleX, scaleY) {
 
   const defaultColor = fonts?.color || 'rgb(220,220,220)';
   const textCenter = playinfo.textCenter || playinfo.center;
+  const globalMaxwidth = playinfo.maxwidth || 0;
 
   // Album art
   if (albumart?.pos && albumart?.dimension && images.albumArt) {
@@ -413,16 +415,16 @@ function renderPlayinfo(ctx, config, images, trackInfo, scaleX, scaleY) {
   }
 
   // Title
-  drawTextField(ctx, trackInfo.title, playinfo.title, fonts, defaultColor, scaleX, scaleY, textCenter);
+  drawTextField(ctx, trackInfo.title, playinfo.title, fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
 
   // Artist
-  drawTextField(ctx, trackInfo.artist, playinfo.artist, fonts, defaultColor, scaleX, scaleY, textCenter);
+  drawTextField(ctx, trackInfo.artist, playinfo.artist, fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
 
   // Album
-  drawTextField(ctx, trackInfo.album, playinfo.album, fonts, defaultColor, scaleX, scaleY, textCenter);
+  drawTextField(ctx, trackInfo.album, playinfo.album, fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
 
   // Sample rate
-  drawTextField(ctx, trackInfo.samplerate, playinfo.samplerate, fonts, defaultColor, scaleX, scaleY, false);
+  drawTextField(ctx, trackInfo.samplerate, playinfo.samplerate, fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
 
   // Time remaining
   if (timeRemaining?.pos && trackInfo.remaining) {
@@ -431,6 +433,9 @@ function renderPlayinfo(ctx, config, images, trackInfo, scaleX, scaleY) {
     ctx.save();
     ctx.font = getFontString('digi', fontSize);
     ctx.fillStyle = color;
+    if (textCenter) {
+      ctx.textAlign = 'center';
+    }
     ctx.fillText(trackInfo.remaining, timeRemaining.pos.x * scaleX, timeRemaining.pos.y * scaleY + fontSize);
     ctx.restore();
   }
