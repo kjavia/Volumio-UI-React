@@ -172,6 +172,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
       method: 'configSaveClock',
       fields: [
         { id: 'use24Hour', element: 'switch', label: t('USE_24_HOUR', '24-Hour Time'), icon: 'access_time' },
+        { id: 'wallpaperShowSeconds', element: 'switch', label: t('WALLPAPER_SHOW_SECONDS', 'Show Seconds'), icon: 'update' },
         { id: 'showWeatherInClock', element: 'switch', label: t('SHOW_WEATHER_IN_CLOCK', 'Show Weather in Clock'), icon: 'cloud', doc: t('SHOW_WEATHER_IN_CLOCK_DESC', 'Display weather on the clock face.') },
         { id: 'analogClockShowDate', element: 'switch', label: t('ANALOG_CLOCK_SHOW_DATE', 'Show Date on Analog Clock'), icon: 'event' },
       ],
@@ -203,7 +204,6 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
         { id: 'unsplashApiKey', element: 'input', type: 'text', label: t('UNSPLASH_API_KEY', 'Unsplash API Key'), icon: 'vpn_key' },
         { id: 'wallpaperUrl', element: 'input', type: 'text', label: t('WALLPAPER_URL', 'Wallpaper URL'), icon: 'wallpaper' },
         { id: 'wallpaperShowTime', element: 'switch', label: t('WALLPAPER_SHOW_TIME', 'Show Time on Wallpaper'), icon: 'schedule' },
-        { id: 'wallpaperShowSeconds', element: 'switch', label: t('WALLPAPER_SHOW_SECONDS', 'Show Seconds on Wallpaper'), icon: 'update' },
         { id: 'wallpaperShowWeather', element: 'switch', label: t('WALLPAPER_SHOW_WEATHER', 'Show Weather on Wallpaper'), icon: 'thermostat' },
         { id: 'slideshowInterval', element: 'knob', label: t('SLIDESHOW_INTERVAL', 'Slideshow Interval (seconds)'), icon: 'slideshow', doc: t('SLIDESHOW_INTERVAL_DESC', 'Time between wallpaper transitions.'), min: 5, max: 120 },
       ],
