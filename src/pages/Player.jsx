@@ -203,20 +203,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     return `${VOLUMIO_BASE_URL}${albumart}`;
   }, [albumart]);
 
-  // Track info for PeppyMeter playinfo overlays
-  const peppyTrackInfo = useMemo(() => {
-    const remaining = duration > 0 ? Math.max(0, duration - seek / 1000) : 0;
-    const mins = Math.floor(remaining / 60);
-    const secs = Math.floor(remaining % 60);
-    return {
-      title: title || '',
-      artist: artist || '',
-      album: album || '',
-      albumart: fullAlbumArt,
-      samplerate: samplerate || '',
-      remaining: duration > 0 ? `${mins}:${secs.toString().padStart(2, '0')}` : '',
-    };
-  }, [title, artist, album, fullAlbumArt, samplerate, duration, seek]);
+
 
   // After 5 minutes of no connection, stop showing the retrying state
   const [isRetrying, setIsRetrying] = useState(true);
@@ -286,7 +273,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
         {showViz && vizType === 'peppyMeter' && (
           <div className="home-panel area-mobile-viz" ref={peppyMobileRef}>
             {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
-            <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} stopped={!isPlaying} />
+            <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} stopped={!isPlaying} />
           </div>
         )}
         {showViz && vizType === 'peppySpectrum' && (
@@ -374,7 +361,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               />
             )}
             {vizType === 'peppyMeter' && (
-              <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} stopped={!isPlaying} />
+              <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} stopped={!isPlaying} />
             )}
             {vizType === 'peppySpectrum' && (
               <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} stopped={!isPlaying} />

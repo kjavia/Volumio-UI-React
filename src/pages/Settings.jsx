@@ -639,6 +639,17 @@ const PackUpload = ({ packType, onUploaded }) => {
           {uploading ? 'Uploading…' : 'Upload'}
         </button>
       </div>
+      <div className="pack-upload__link">
+        {packType === 'meter' ? (
+          <a href="https://github.com/foonerd/peppy_templates/blob/main/catalog/README.md" target="_blank" rel="noopener noreferrer">
+            <span className="material-icons">open_in_new</span> Browse Peppy Templates
+          </a>
+        ) : (
+          <a href="https://github.com/balbuze/Spectrum-peppyspectrum/tree/main/Zipped-folders" target="_blank" rel="noopener noreferrer">
+            <span className="material-icons">open_in_new</span> Browse Spectrum Packs
+          </a>
+        )}
+      </div>
       {status && (
         <div className={`pack-upload__status pack-upload__status--${status.type}`}>
           {status.message}

@@ -94,57 +94,7 @@ export function normalizeMeterConfig(raw) {
 
   const type = str('meter.type', 'circular');
 
-  // Parse extended playinfo overlay config
   const configExtend = str('config.extend', 'False') === 'True';
-  const playinfo = configExtend ? {
-    textCenter: str('playinfo.text.center', 'False') === 'True',
-    center: str('playinfo.center', 'False') === 'True',
-    maxwidth: num('playinfo.maxwidth', 0),
-    title: {
-      pos: parsePos(raw['playinfo.title.pos']),
-      maxwidth: num('playinfo.title.maxwidth', 0),
-      color: parseColor(raw['playinfo.title.color']),
-    },
-    artist: {
-      pos: parsePos(raw['playinfo.artist.pos']),
-      maxwidth: num('playinfo.artist.maxwidth', 0),
-      color: parseColor(raw['playinfo.artist.color']),
-    },
-    album: {
-      pos: parsePos(raw['playinfo.album.pos']),
-      maxwidth: num('playinfo.album.maxwidth', 0),
-      color: parseColor(raw['playinfo.album.color']),
-    },
-    type: {
-      pos: parsePos(raw['playinfo.type.pos']),
-      color: parseColor(raw['playinfo.type.color']),
-      dimension: parseDimension(raw['playinfo.type.dimension']),
-    },
-    samplerate: {
-      pos: parsePos(raw['playinfo.samplerate.pos']),
-      maxwidth: num('playinfo.samplerate.maxwidth', 0),
-      color: parseColor(raw['playinfo.samplerate.color']),
-    },
-  } : null;
-
-  const albumart = configExtend ? {
-    pos: parsePos(raw['albumart.pos']),
-    dimension: parseDimension(raw['albumart.dimension']),
-    mask: str('albumart.mask') || null,
-  } : null;
-
-  const timeRemaining = configExtend ? {
-    pos: parsePos(raw['time.remaining.pos']),
-    color: parseColor(raw['time.remaining.color']),
-  } : null;
-
-  const fonts = configExtend ? {
-    sizeDigi: num('font.size.digi', 18),
-    sizeLight: num('font.size.light', 12),
-    sizeRegular: num('font.size.regular', 14),
-    sizeBold: num('font.size.bold', 18),
-    color: parseColor(raw['font.color']),
-  } : null;
 
   const meterVisible = str('meter.visible', 'True') === 'True';
 
@@ -168,10 +118,6 @@ export function normalizeMeterConfig(raw) {
     spectrumVisible,
     spectrumName,
     spectrumSize,
-    playinfo,
-    albumart,
-    timeRemaining,
-    fonts,
   };
 
   if (type === 'circular') {

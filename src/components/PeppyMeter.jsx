@@ -46,7 +46,6 @@ const pickRandom = (arr, prev) => {
  * @param {string} [props.streamUrl] — audio stream URL
  * @param {boolean} [props.stopped] — pause animation & audio
  * @param {string} [props.className] — additional CSS class names
- * @param {Object} [props.trackInfo] — { title, artist, album, albumart, samplerate, remaining }
  */
 const PeppyMeter = ({
   folder,
@@ -55,7 +54,6 @@ const PeppyMeter = ({
   streamUrl = SPECTRUM_STREAM_URL,
   stopped = false,
   className = '',
-  trackInfo = null,
 }) => {
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
@@ -72,7 +70,6 @@ const PeppyMeter = ({
   const [allConfigs, setAllConfigs] = useState(null);
   const [activeModel, setActiveModel] = useState(null);
   const prevRandomRef = useRef(null);
-  const trackInfoRef = useRef(trackInfo);
 
   // Parse width/height from folder name (e.g. "1280x400-Gelo5-BASIC_221")
   const { nativeW, nativeH } = useMemo(() => {
@@ -81,9 +78,6 @@ const PeppyMeter = ({
   }, [folder]);
 
   const assetPath = useMemo(() => `${PLUGIN_BASE_URL}/peppy_meter/${folder}`, [folder]);
-
-  // Keep trackInfoRef in sync
-  useEffect(() => { trackInfoRef.current = trackInfo; }, [trackInfo]);
 
   // ── Load all meter configs from the folder ────────────────────────────
 
@@ -134,19 +128,19 @@ const PeppyMeter = ({
     configRef.current = cfg;
     imagesRef.current = null; // clear while loading
 
-    loadMeterImages(cfg, assetPath, trackInfo?.albumart || '').then((imgs) => {
+    loadMeterImages(cfg, assetPath).then((imgs) => {
       if (cancelled) return;
       imagesRef.current = imgs;
       // Draw initial static frame
       const canvas = canvasRef.current;
       if (canvas && !enabled) {
         const ctx = canvas.getContext('2d');
-        renderMeterFrame(ctx, cfg, imgs, 0, 0, canvas.width, canvas.height, nativeW, nativeH, trackInfoRef.current);
+        renderMeterFrame(ctx, cfg, imgs, 0, 0, canvas.width, canvas.height, nativeW, nativeH);
       }
     });
 
     return () => { cancelled = true; };
-  }, [allConfigs, activeModel, assetPath, nativeW, nativeH, enabled, trackInfo?.albumart]);
+  }, [allConfigs, activeModel, assetPath, nativeW, nativeH, enabled]);
 
   // ── Audio setup ─────────────────────────────────────────────────────────
 
@@ -234,7 +228,7 @@ const PeppyMeter = ({
       s.left += (rawL - s.left) * (rawL > s.left ? ATTACK : RELEASE);
       s.right += (rawR - s.right) * (rawR > s.right ? ATTACK : RELEASE);
 
-      renderMeterFrame(ctx, cfg, imgs, dbToVolume(s.left), dbToVolume(s.right), canvas.width, canvas.height, nativeW, nativeH, trackInfoRef.current);
+      renderMeterFrame(ctx, cfg, imgs, dbToVolume(s.left), dbToVolume(s.right), canvas.width, canvas.height, nativeW, nativeH);
     };
 
     tick();
@@ -346,14 +340,6 @@ PeppyMeter.propTypes = {
   streamUrl: PropTypes.string,
   stopped: PropTypes.bool,
   className: PropTypes.string,
-  trackInfo: PropTypes.shape({
-    title: PropTypes.string,
-    artist: PropTypes.string,
-    album: PropTypes.string,
-    albumart: PropTypes.string,
-    samplerate: PropTypes.string,
-    remaining: PropTypes.string,
-  }),
 };
 
 export default PeppyMeter;

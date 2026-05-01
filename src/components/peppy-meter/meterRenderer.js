@@ -3,26 +3,8 @@
  *
  * Handles both circular (needle) and linear (indicator) meter types.
  * Images are composited in layers: screen background → meter background →
- * needle/indicator → meter foreground → playinfo overlays.
+ * needle/indicator → meter foreground.
  */
-
-import { PLUGIN_BASE_URL } from '@/config';
-
-// ── LCD font for "digi" weight (time remaining counter) ─────────────────────
-const LCD_FONT_FAMILY = 'DS Digital';
-let lcdFontLoaded = false;
-
-(async function loadLcdFont() {
-  if (lcdFontLoaded) return;
-  try {
-    const font = new FontFace(LCD_FONT_FAMILY, `url(${PLUGIN_BASE_URL}/assets/fonts/DS-DIGI.TTF)`);
-    await font.load();
-    document.fonts.add(font);
-    lcdFontLoaded = true;
-  } catch (e) {
-    console.warn('[PeppyMeter] Failed to load LCD font:', e);
-  }
-})();
 
 /**
  * Load an image and return a promise that resolves to the HTMLImageElement.
@@ -47,17 +29,15 @@ export function loadImage(src) {
  * @param {string} [albumArtUrl] — URL for current track's album art
  * @returns {Promise<Object>} { bgr, fgr, indicator, screenBgr, albumArt, albumArtMask }
  */
-export async function loadMeterImages(config, basePath, albumArtUrl = '') {
+export async function loadMeterImages(config, basePath) {
   const prefix = basePath.endsWith('/') ? basePath : `${basePath}/`;
-  const [bgr, fgr, indicator, screenBgr, albumArt, albumArtMask] = await Promise.all([
+  const [bgr, fgr, indicator, screenBgr] = await Promise.all([
     loadImage(config.bgrFilename ? `${prefix}${config.bgrFilename}` : ''),
     loadImage(config.fgrFilename ? `${prefix}${config.fgrFilename}` : ''),
     loadImage(config.indicatorFilename ? `${prefix}${config.indicatorFilename}` : ''),
     loadImage(config.screenBgr ? `${prefix}${config.screenBgr}` : ''),
-    loadImage(albumArtUrl || ''),
-    loadImage(config.albumart?.mask ? `${prefix}${config.albumart.mask}` : ''),
   ]);
-  return { bgr, fgr, indicator, screenBgr, albumArt, albumArtMask };
+  return { bgr, fgr, indicator, screenBgr };
 }
 
 // ── Circular meter rendering ────────────────────────────────────────────────
@@ -200,7 +180,6 @@ export function drawLinearIndicator(
  * @param {number} canvasH — canvas pixel height
  * @param {number} nativeW — native meter width (from folder name)
  * @param {number} nativeH — native meter height (from folder name)
- * @param {Object|null} trackInfo — { title, artist, album, samplerate, remaining }
  */
 export function renderMeterFrame(
   ctx,
@@ -212,7 +191,6 @@ export function renderMeterFrame(
   canvasH,
   nativeW,
   nativeH,
-  trackInfo = null,
 ) {
   const scaleX = canvasW / nativeW;
   const scaleY = canvasH / nativeH;
@@ -319,164 +297,5 @@ export function renderMeterFrame(
         images.fgr.height * scaleY,
       );
     }
-  }
-
-  // Layer 5: Playinfo overlays (text + album art)
-  if (config.configExtend && trackInfo) {
-    renderPlayinfo(ctx, config, images, trackInfo, scaleX, scaleY);
-  }
-}
-
-// ── Playinfo overlay rendering ──────────────────────────────────────────────
-
-/**
- * Resolve font size from a fontWeight string and the fonts config.
- */
-function getFontSize(fontWeight, fonts) {
-  if (!fonts) return 16;
-  switch (fontWeight) {
-    case 'bold': return fonts.sizeBold;
-    case 'light': return fonts.sizeLight;
-    case 'digi': return fonts.sizeDigi;
-    default: return fonts.sizeRegular;
-  }
-}
-
-/**
- * Get CSS font string for the given weight/size.
- */
-function getFontString(fontWeight, fontSize) {
-  if (fontWeight === 'digi') {
-    return `normal ${fontSize}px "${LCD_FONT_FAMILY}", monospace`;
-  }
-  const weight = fontWeight === 'bold' ? 'bold' : 'normal';
-  return `${weight} ${fontSize}px sans-serif`;
-}
-
-/**
- * Draw a text field on the canvas, respecting position, color, maxwidth, and centering.
- */
-function drawTextField(ctx, text, fieldCfg, fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth) {
-  if (!fieldCfg?.pos || !text) return;
-  const { x, y, fontWeight } = fieldCfg.pos;
-  const fontSize = getFontSize(fontWeight, fonts) * scaleY;
-  const color = fieldCfg.color || defaultColor || 'rgb(220,220,220)';
-
-  ctx.save();
-  ctx.font = getFontString(fontWeight, fontSize);
-  ctx.fillStyle = color;
-
-  const drawX = x * scaleX;
-  const drawY = y * scaleY + fontSize; // baseline offset
-  const mw = fieldCfg.maxwidth || globalMaxwidth || 0;
-  const maxW = mw ? mw * scaleX : undefined;
-
-  if (textCenter) {
-    ctx.textAlign = 'center';
-    // Center within maxwidth region, or at the given x
-    const centerX = maxW ? drawX + maxW / 2 : drawX;
-    ctx.fillText(text, centerX, drawY, maxW);
-  } else {
-    ctx.textAlign = 'left';
-    ctx.fillText(text, drawX, drawY, maxW);
-  }
-  ctx.restore();
-}
-
-/**
- * Calculate default text positions from meter needle geometry.
- * When explicit positions aren't defined, derive them from the needle origins.
- */
-function calcDefaultTextPositions(config, fonts) {
-  // Determine center X and top Y from needle positions
-  let centerX, topY;
-  if (config.type === 'circular') {
-    centerX = ((config.leftOriginX || 0) + (config.rightOriginX || 0)) / 2;
-    topY = Math.max(10, (config.leftOriginY || 0) - (config.distance || 200) - 40);
-  } else {
-    centerX = ((config.leftX || 0) + (config.rightX || 0)) / 2;
-    topY = Math.max(10, (config.leftY || 0) - 40);
-  }
-
-  const boldSize = fonts?.sizeBold || 18;
-  const regularSize = fonts?.sizeRegular || 14;
-  const lightSize = fonts?.sizeLight || 12;
-  const lineSpacing = 1.4;
-
-  let y = topY;
-  const titlePos = { x: centerX, y, fontWeight: 'bold' };
-  y += boldSize * lineSpacing;
-  const artistPos = { x: centerX, y, fontWeight: 'regular' };
-  y += regularSize * lineSpacing;
-  const albumPos = { x: centerX, y, fontWeight: 'light' };
-  y += lightSize * lineSpacing;
-  const sampleratePos = { x: centerX, y, fontWeight: 'light' };
-
-  return { titlePos, artistPos, albumPos, sampleratePos };
-}
-
-/**
- * Render playinfo overlays (album art, title, artist, album, samplerate, time remaining).
- */
-function renderPlayinfo(ctx, config, images, trackInfo, scaleX, scaleY) {
-  const { playinfo, albumart, timeRemaining, fonts } = config;
-  if (!playinfo) return;
-
-  const defaultColor = fonts?.color || 'rgb(220,220,220)';
-  const textCenter = playinfo.textCenter || playinfo.center;
-  const globalMaxwidth = playinfo.maxwidth || 0;
-
-  // Calculate fallback positions from needle geometry for fields without explicit pos
-  const defaults = calcDefaultTextPositions(config, fonts);
-
-  const ensurePos = (field, fallbackPos) => {
-    if (field?.pos) return field;
-    return { ...field, pos: fallbackPos };
-  };
-
-  // Album art
-  if (albumart?.pos && albumart?.dimension && images.albumArt) {
-    const ax = albumart.pos.x * scaleX;
-    const ay = albumart.pos.y * scaleY;
-    const aw = albumart.dimension.w * scaleX;
-    const ah = albumart.dimension.h * scaleY;
-
-    if (images.albumArtMask) {
-      // Apply circular/custom mask using composite
-      ctx.save();
-      ctx.drawImage(images.albumArtMask, ax, ay, aw, ah);
-      ctx.globalCompositeOperation = 'source-in';
-      ctx.drawImage(images.albumArt, ax, ay, aw, ah);
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.restore();
-    } else {
-      ctx.drawImage(images.albumArt, ax, ay, aw, ah);
-    }
-  }
-
-  // Title
-  drawTextField(ctx, trackInfo.title, ensurePos(playinfo.title, defaults.titlePos), fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
-
-  // Artist
-  drawTextField(ctx, trackInfo.artist, ensurePos(playinfo.artist, defaults.artistPos), fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
-
-  // Album
-  drawTextField(ctx, trackInfo.album, ensurePos(playinfo.album, defaults.albumPos), fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
-
-  // Sample rate
-  drawTextField(ctx, trackInfo.samplerate, ensurePos(playinfo.samplerate, defaults.sampleratePos), fonts, defaultColor, scaleX, scaleY, textCenter, globalMaxwidth);
-
-  // Time remaining
-  if (timeRemaining?.pos && trackInfo.remaining) {
-    const fontSize = getFontSize('digi', fonts) * scaleY;
-    const color = timeRemaining.color || defaultColor;
-    ctx.save();
-    ctx.font = getFontString('digi', fontSize);
-    ctx.fillStyle = color;
-    if (textCenter) {
-      ctx.textAlign = 'center';
-    }
-    ctx.fillText(trackInfo.remaining, timeRemaining.pos.x * scaleX, timeRemaining.pos.y * scaleY + fontSize);
-    ctx.restore();
   }
 }
