@@ -606,6 +606,39 @@
   display: none;
 }
 
+/* ─── Model preview tooltip on hover ───────────────────────────────────── */
+.settings-radio-wrapper--has-preview {
+  position: relative;
+
+  .settings-radio-preview {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #111;
+
+    img {
+      display: block;
+      max-width: 320px;
+      max-height: 180px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+
+  &:hover .settings-radio-preview {
+    display: block;
+  }
+}
+
 /* ─── Loading spinner ──────────────────────────────────────────────────── */
 @keyframes spin {
   to {

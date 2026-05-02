@@ -222,7 +222,7 @@ const SelectField = ({ field, value, onChange, onDelete }) => (
     {field.doc && <small className="settings-doc">{field.doc}</small>}
     <div className="settings-radio-group">
       {field.options.map((opt) => (
-        <div key={opt.value} className="settings-radio-wrapper">
+        <div key={opt.value} className={`settings-radio-wrapper${opt.preview ? ' settings-radio-wrapper--has-preview' : ''}`}>
           <label className={`btn ${value === opt.value ? 'btn-primary' : 'btn-secondary'} settings-radio`}>
             <input
               type="radio"
@@ -234,6 +234,11 @@ const SelectField = ({ field, value, onChange, onDelete }) => (
             />
             {opt.label}
           </label>
+          {opt.preview && (
+            <div className="settings-radio-preview">
+              <img src={opt.preview} alt={opt.label} />
+            </div>
+          )}
           {field.deletable && onDelete && (
             <button
               type="button"
@@ -677,11 +682,15 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
       const sourceFolders = field.dynamicOptionsFrom === 'peppySpectrumFolder'
         ? (peppySpectrumFolders || [])
         : (peppyFolders || []);
+      const peppyType = field.dynamicOptionsFrom === 'peppySpectrumFolder' ? 'peppy_spectrum' : 'peppy_meter';
       const folderData = sourceFolders.find((f) => f.folder === selectedFolder);
       const modelOptions = [{ value: 'random', label: 'Random (changes each track)' }];
       if (folderData) {
         for (const model of folderData.models) {
-          modelOptions.push({ value: model, label: model });
+          const m = typeof model === 'string' ? { name: model, bgr: '' } : model;
+          const opt = { value: m.name, label: m.name };
+          if (m.bgr) opt.preview = `${PLUGIN_BASE_URL}/${peppyType}/${selectedFolder}/${m.bgr}`;
+          modelOptions.push(opt);
         }
       }
       return { ...field, options: modelOptions };
@@ -829,7 +838,8 @@ const Settings = () => {
         options = [{ value: 'random', label: 'Random' }];
         if (folderData) {
           for (const model of folderData.models) {
-            options.push({ value: model, label: model });
+            const m = typeof model === 'string' ? { name: model } : model;
+            options.push({ value: m.name, label: m.name });
           }
         }
       }
