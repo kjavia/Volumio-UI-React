@@ -581,7 +581,7 @@ KnobField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.one
 
 /* ─── Pack Upload Component ────────────────────────────────────────────── */
 
-const PackUpload = ({ packType, onUploaded }) => {
+const PackUpload = ({ packType, onUploaded, t }) => {
   const fileRef = useRef(null);
   const [uploading, setUploading] = useState(false);
   const [status, setStatus] = useState(null);
@@ -591,7 +591,7 @@ const PackUpload = ({ packType, onUploaded }) => {
     if (!file) return;
 
     if (!file.name.toLowerCase().endsWith('.zip')) {
-      setStatus({ type: 'error', message: 'Only .zip files are accepted.' });
+      setStatus({ type: 'error', message: t('UPLOAD_ZIP_ONLY', 'Only .zip files are accepted.') });
       return;
     }
 
@@ -605,22 +605,22 @@ const PackUpload = ({ packType, onUploaded }) => {
         buffer,
         { headers: { 'Content-Type': 'application/octet-stream' }, timeout: 60000 }
       );
-      setStatus({ type: 'success', message: response.data?.message || 'Upload successful.' });
+      setStatus({ type: 'success', message: response.data?.message || t('UPLOAD_SUCCESS', 'Upload successful.') });
       if (fileRef.current) fileRef.current.value = '';
       if (onUploaded) onUploaded();
     } catch (err) {
-      const msg = err.response?.data?.error || err.message || 'Upload failed.';
+      const msg = err.response?.data?.error || err.message || t('UPLOAD_FAILED', 'Upload failed.');
       setStatus({ type: 'error', message: msg });
     } finally {
       setUploading(false);
     }
-  }, [packType, onUploaded]);
+  }, [packType, onUploaded, t]);
 
   return (
     <div className="settings-field pack-upload">
       <div className="settings-field__label">
         <span className="material-icons settings-field__icon">upload_file</span>
-        <span>Upload {packType === 'meter' ? 'Meter' : 'Spectrum'} Pack (.zip)</span>
+        <span>{packType === 'meter' ? t('UPLOAD_METER_PACK', 'Upload Meter Pack (.zip)') : t('UPLOAD_SPECTRUM_PACK', 'Upload Spectrum Pack (.zip)')}</span>
       </div>
       <div className="pack-upload__row">
         <input
@@ -636,17 +636,17 @@ const PackUpload = ({ packType, onUploaded }) => {
           disabled={uploading}
         >
           <span className="material-icons">{uploading ? 'hourglass_top' : 'cloud_upload'}</span>
-          {uploading ? 'Uploading…' : 'Upload'}
+          {uploading ? t('UPLOAD_BTN_UPLOADING', 'Uploading…') : t('UPLOAD_BTN', 'Upload')}
         </button>
       </div>
       <div className="pack-upload__link">
         {packType === 'meter' ? (
           <a href="https://github.com/foonerd/peppy_templates/blob/main/catalog/README.md" target="_blank" rel="noopener noreferrer">
-            <span className="material-icons">open_in_new</span> Browse Peppy Templates
+            <span className="material-icons">open_in_new</span> {t('BROWSE_PEPPY_TEMPLATES', 'Browse Peppy Templates')}
           </a>
         ) : (
           <a href="https://github.com/balbuze/Spectrum-peppyspectrum/tree/main/Zipped-folders" target="_blank" rel="noopener noreferrer">
-            <span className="material-icons">open_in_new</span> Browse Spectrum Packs
+            <span className="material-icons">open_in_new</span> {t('BROWSE_SPECTRUM_PACKS', 'Browse Spectrum Packs')}
           </a>
         )}
       </div>
@@ -658,11 +658,11 @@ const PackUpload = ({ packType, onUploaded }) => {
     </div>
   );
 };
-PackUpload.propTypes = { packType: PropTypes.string.isRequired, onUploaded: PropTypes.func };
+PackUpload.propTypes = { packType: PropTypes.string.isRequired, onUploaded: PropTypes.func, t: PropTypes.func.isRequired };
 
 /* ─── Section Component ────────────────────────────────────────────────── */
 
-const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolders, peppySpectrumFolders, onPackUploaded }) => {
+const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolders, peppySpectrumFolders, onPackUploaded, t }) => {
   const [deleting, setDeleting] = useState(null);
 
   const isFieldVisible = (field) => {
@@ -688,17 +688,17 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
   };
 
   const handleDeletePack = useCallback(async (folder, label) => {
-    if (!window.confirm(`Delete "${label}"?\nThis will permanently remove the pack from the server.`)) return;
+    if (!window.confirm(t('DELETE_PACK_CONFIRM', 'Delete "{name}"?\nThis will permanently remove the pack from the server.').replace('{name}', label))) return;
     setDeleting(folder);
     try {
       await axios.post(`${PLUGIN_BASE_URL}/api/delete-peppy-pack?folder=${encodeURIComponent(folder)}`);
       if (onPackUploaded) onPackUploaded(); // re-fetch folder lists
     } catch (err) {
-      alert(err.response?.data?.error || 'Failed to delete pack.');
+      alert(err.response?.data?.error || t('DELETE_PACK_FAILED', 'Failed to delete pack.'));
     } finally {
       setDeleting(null);
     }
-  }, [onPackUploaded]);
+  }, [onPackUploaded, t]);
 
   return (
     <div className="settings-section">
@@ -729,7 +729,7 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
         })}
         {/* Upload section for peppy packs */}
         {section.id === 'section_player_config' && (values.vizType === 'peppyMeter' || values.vizType === 'peppySpectrum') && (
-          <PackUpload packType={values.vizType === 'peppyMeter' ? 'meter' : 'spectrum'} onUploaded={onPackUploaded} />
+          <PackUpload packType={values.vizType === 'peppyMeter' ? 'meter' : 'spectrum'} onUploaded={onPackUploaded} t={t} />
         )}
       </div>
       <div className="settings-section__footer">
@@ -750,6 +750,7 @@ SettingsSection.propTypes = {
   peppyFolders: PropTypes.array,
   peppySpectrumFolders: PropTypes.array,
   onPackUploaded: PropTypes.func,
+  t: PropTypes.func.isRequired,
 };
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -915,6 +916,7 @@ const Settings = () => {
             peppyFolders={peppyFolders}
             peppySpectrumFolders={peppySpectrumFolders}
             onPackUploaded={handlePackUploaded}
+            t={t}
           />
         )}
       </div>

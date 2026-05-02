@@ -85,8 +85,16 @@
 
 /* react-icons brand icon — scale with viewport, inherit brand colour */
 .service-logo-icon {
-  font-size: clamp(2rem, 2.5vw, 3.5rem) !important;
+  font-size: clamp(2rem, 2.8vw, 4rem) !important;
   opacity: 0.85;
+}
+
+/* Responsive sizing for the service logo in the top row */
+.lsp-top__service-logo {
+  &.service-logo-img {
+    height: clamp(1.6rem, 2.2vw, 3rem) !important;
+    width: auto !important;
+  }
 }
 
 .service-logo-badge {
@@ -598,6 +606,18 @@
 // Portaled to document.body (position: fixed) so it can't use container
 // queries — use a viewport media query instead.
 @media (min-width: 1980px) {
+  .service-logo-img {
+    height: clamp(2.2rem, 3vw, 4rem) !important;
+  }
+
+  .service-logo-icon {
+    font-size: clamp(2.8rem, 3.5vw, 5rem) !important;
+  }
+
+  .service-logo-badge {
+    font-size: clamp(0.9rem, 1.3vw, 1.5rem);
+  }
+
   .track-menu {
     min-width: clamp(200px, 18vw, 420px);
   }
