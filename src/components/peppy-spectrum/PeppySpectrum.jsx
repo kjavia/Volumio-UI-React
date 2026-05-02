@@ -97,7 +97,6 @@ const PeppySpectrum = ({
     let cancelled = false;
 
     fetchSpectrumConfigs(`${assetPath}/spectrum.txt?_t=${Date.now()}`)
-      .catch(() => fetchSpectrumConfigs(`${assetPath}/meters.txt?_t=${Date.now()}`))
       .then((configs) => {
         if (cancelled) return;
         setAllConfigs(configs);
