@@ -37,6 +37,7 @@ const PeppySpectrum = ({
   stopped = false,
   className = '',
   autoEnable = false,
+  clipSize = null,
 }) => {
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
@@ -54,17 +55,19 @@ const PeppySpectrum = ({
   const prevRandomRef = useRef(null);
 
   // Parse width, height, and optionally numBars from folder name (e.g. "1280x400+30-Gelo5")
+  // Embedded spectrums (clipSize provided) default to 20 bars; standalone defaults to 30
   const { nativeW, nativeH, numBars } = useMemo(() => {
+    const defaultBars = clipSize ? 20 : 30;
     const m = folder?.match(/^(\d+)x(\d+)(?:\+(\d+))?/);
     if (m) {
       return {
         nativeW: parseInt(m[1], 10),
         nativeH: parseInt(m[2], 10),
-        numBars: m[3] ? parseInt(m[3], 10) : 30,
+        numBars: m[3] ? parseInt(m[3], 10) : defaultBars,
       };
     }
-    return { nativeW: 1280, nativeH: 400, numBars: 30 };
-  }, [folder]);
+    return { nativeW: 1280, nativeH: 400, numBars: defaultBars };
+  }, [folder, clipSize]);
 
   // Use large FFT for good frequency resolution
   const FFT_SIZE = 8192;
@@ -147,12 +150,12 @@ const PeppySpectrum = ({
       if (canvas && !enabled) {
         const ctx = canvas.getContext('2d');
         const emptyData = new Uint8Array(numBars);
-        renderSpectrumFrame(ctx, cfg, imgs, emptyData, null, canvas.width, canvas.height, nativeW, nativeH, numBars);
+        renderSpectrumFrame(ctx, cfg, imgs, emptyData, null, canvas.width, canvas.height, nativeW, nativeH, numBars, clipSize);
       }
     });
 
     return () => { cancelled = true; };
-  }, [allConfigs, activeModel, assetPath, nativeW, nativeH, numBars, enabled]);
+  }, [allConfigs, activeModel, assetPath, nativeW, nativeH, numBars, enabled, clipSize]);
 
   // ── Audio setup ─────────────────────────────────────────────────────────
 
@@ -255,11 +258,11 @@ const PeppySpectrum = ({
         }
       }
 
-      renderSpectrumFrame(ctx, cfg, imgs, barData, tops, canvas.width, canvas.height, nativeW, nativeH, numBars);
+      renderSpectrumFrame(ctx, cfg, imgs, barData, tops, canvas.width, canvas.height, nativeW, nativeH, numBars, clipSize);
     };
 
     tick();
-  }, [barBinRanges, nativeW, nativeH, numBars]);
+  }, [barBinRanges, nativeW, nativeH, numBars, clipSize]);
 
   // ── Enable on click ─────────────────────────────────────────────────────
 
@@ -277,6 +280,16 @@ const PeppySpectrum = ({
       handleEnable();
     }
   }, [autoEnable, enabled, handleEnable]);
+
+  // ── Restart animation when model/config changes while already active ────
+
+  useEffect(() => {
+    if (!enabled || stopped) return;
+    // Cancel previous loop and start fresh with new startAnimation closure
+    if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    animFrameRef.current = null;
+    startAnimation();
+  }, [startAnimation]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Stopped prop ────────────────────────────────────────────────────────
 
@@ -358,6 +371,7 @@ PeppySpectrum.propTypes = {
   stopped: PropTypes.bool,
   className: PropTypes.string,
   autoEnable: PropTypes.bool,
+  clipSize: PropTypes.shape({ w: PropTypes.number, h: PropTypes.number }),
 };
 
 export default PeppySpectrum;

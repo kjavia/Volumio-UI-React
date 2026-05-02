@@ -594,23 +594,22 @@ export function renderMeterFrame(
         const tc = pi.type.color || fc;
         const dim = pi.type.dimension;
         if (formatIcon && dim) {
-          // Draw icon proportionally at 50% of dimension box, centered
+          // Draw icon proportionally within dimension box, centered
           const bx = pi.type.pos.x * scaleX;
           const by = pi.type.pos.y * scaleY;
-          const boxW = dim.w * scaleX * 0.5;
-          const boxH = dim.h * scaleY * 0.5;
-          const natW = formatIcon.naturalWidth || formatIcon.width;
-          const natH = formatIcon.naturalHeight || formatIcon.height;
-          const ratio = Math.min(boxW / natW, boxH / natH);
-          const dw = natW * ratio;
-          const dh = natH * ratio;
           const fullW = dim.w * scaleX;
           const fullH = dim.h * scaleY;
+          const natW = formatIcon.naturalWidth || formatIcon.width;
+          const natH = formatIcon.naturalHeight || formatIcon.height;
+          const ratio = Math.min(fullW / natW, fullH / natH) * 0.85;
+          const dw = natW * ratio;
+          const dh = natH * ratio;
           ctx.drawImage(formatIcon, bx + (fullW - dw) / 2, by + (fullH - dh) / 2, dw, dh);
-        } else if (trackInfo.trackType) {
-          // Text fallback when no icon available
-          const fs = config.font?.sizeDigi || 30;
-          drawText(trackInfo.trackType.toUpperCase(), pi.type.pos, fs, tc, 0, 'left', digiFontFallback);
+        } else if (trackInfo.trackType || trackInfo.service) {
+          // Text fallback — size to fit within the dimension box
+          const label = (trackInfo.trackType || trackInfo.service || '').toUpperCase();
+          const fs = dim ? Math.min(dim.w * 0.4, dim.h * 0.8) : (config.font?.sizeRegular || 23);
+          drawText(label, pi.type.pos, fs, tc, dim?.w || 0, 'left');
         }
       }
       // Samplerate / bitrate — digital font at style size, uses type_color
@@ -628,8 +627,8 @@ export function renderMeterFrame(
     // Time displays — digital font at sizeDigi * 1.8 (DS Digital renders smaller than DSEG7Classic), adjusted position
     if (config.time) {
       const DIGI_SCALE = 1.8;
-      const Y_OFFSET = -0.15; // shift up by 15% of font size
-      const X_OFFSET = 0.10;  // shift right by 10% of font size
+      const Y_OFFSET = -0.25; // shift up by 25% of font size
+      const X_OFFSET = 0.15;  // shift right by 15% of font size
       if (trackInfo.remaining && config.time.remaining?.pos) {
         const tc = config.time.remaining.color || fc;
         const fs = (config.time.remaining.fontSize || config.font?.sizeDigi || 30) * DIGI_SCALE;

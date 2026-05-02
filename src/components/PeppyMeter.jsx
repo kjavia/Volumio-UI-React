@@ -176,6 +176,12 @@ const PeppyMeter = ({
 
   // ── Load format/service icon when track type changes ────────────────────
 
+  const SERVICE_LOGO_MAP = useMemo(() => ({
+    spop: 'spotify', volspotconnect: 'spotify', volspotconnect2: 'spotify', spotify: 'spotify',
+    tidal: 'tidal', tidalconnect: 'tidal', tidalsession: 'tidal',
+    qobuz: 'qobuz', deezer: 'deezer',
+  }), []);
+
   const formatIconRef = useRef(null);
   useEffect(() => {
     const cfg = configRef.current;
@@ -191,7 +197,8 @@ const PeppyMeter = ({
       candidates.push(`/assets/logos/${fmt}.svg`);
     }
     if (service && service !== 'mpd') {
-      candidates.push(`/assets/logos/services/${service}.svg`);
+      const mapped = SERVICE_LOGO_MAP[service] || service;
+      candidates.push(`/assets/logos/services/${mapped}.svg`);
     }
 
     let cancelled = false;
@@ -409,6 +416,16 @@ const PeppyMeter = ({
     setEnabled(true);
   }, [enabled, setupAudio, startAnimation]);
 
+  // ── Restart animation when model/config changes while already active ────
+
+  useEffect(() => {
+    if (!enabled || stopped) return;
+    // Cancel previous loop and start fresh with new startAnimation closure
+    if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    animFrameRef.current = null;
+    startAnimation();
+  }, [startAnimation]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // ── Stopped prop ────────────────────────────────────────────────────────
 
   useEffect(() => {
@@ -486,6 +503,7 @@ const PeppyMeter = ({
           streamUrl={streamUrl}
           stopped={stopped}
           autoEnable
+          clipSize={embeddedSpectrum.size}
           className="peppy-meter__embedded-spectrum"
         />
       )}

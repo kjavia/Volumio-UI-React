@@ -49,6 +49,7 @@ export async function loadSpectrumImages(config, basePath) {
  * @param {number} nativeW — native width from folder name
  * @param {number} nativeH — native height from folder name
  * @param {number} numBars — number of frequency bars to render
+ * @param {{ w: number, h: number }|null} [clipSize] — optional clip dimensions for embedded use
  */
 export function renderSpectrumFrame(
   ctx,
@@ -61,6 +62,7 @@ export function renderSpectrumFrame(
   nativeW,
   nativeH,
   numBars,
+  clipSize,
 ) {
   const scaleX = canvasW / nativeW;
   const scaleY = canvasH / nativeH;
@@ -72,6 +74,22 @@ export function renderSpectrumFrame(
 
   // Clear
   ctx.clearRect(0, 0, canvasW, canvasH);
+
+  // Determine clip area for embedded spectrum to prevent overflow
+  let clipped = false;
+  if (clipSize) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(specX, specY, clipSize.w * scaleX, clipSize.h * scaleY);
+    ctx.clip();
+    clipped = true;
+  } else if (hasOffset && images.bgr) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(specX, specY, images.bgr.width * scaleX, images.bgr.height * scaleY);
+    ctx.clip();
+    clipped = true;
+  }
 
   // Layer 1: Background image
   if (images.bgr) {
@@ -169,5 +187,10 @@ export function renderSpectrumFrame(
     } else {
       ctx.drawImage(images.fgr, 0, 0, canvasW, canvasH);
     }
+  }
+
+  // Restore clip state
+  if (clipped) {
+    ctx.restore();
   }
 }
