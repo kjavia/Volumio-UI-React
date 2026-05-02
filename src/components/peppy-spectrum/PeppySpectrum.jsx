@@ -97,6 +97,7 @@ const PeppySpectrum = ({
     let cancelled = false;
 
     fetchSpectrumConfigs(`${assetPath}/spectrum.txt?_t=${Date.now()}`)
+      .catch(() => fetchSpectrumConfigs(`${assetPath}/meters.txt?_t=${Date.now()}`))
       .then((configs) => {
         if (cancelled) return;
         setAllConfigs(configs);
@@ -114,7 +115,7 @@ const PeppySpectrum = ({
   useEffect(() => {
     if (!allConfigs) return;
     const names = Object.keys(allConfigs);
-    if (!names.length) { setError('No spectrums found in spectrum.txt'); return; }
+    if (!names.length) { setError('No spectrums found in config'); return; }
 
     if (model === 'random') {
       const picked = pickRandom(names, prevRandomRef.current);
