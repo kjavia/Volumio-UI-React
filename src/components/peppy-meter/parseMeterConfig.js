@@ -143,6 +143,30 @@ export function normalizeMeterConfig(raw) {
       pos: parsePos(raw['albumart.pos']),
       dimension: parseDimension(raw['albumart.dimension']),
       border: num('albumart.border', 0),
+      rotation: str('albumart.rotation', 'False').toLowerCase() === 'true',
+      rotationSpeed: num('albumart.rotation.speed', 33),
+      mask: str('albumart.mask'),
+    };
+
+    // Vinyl disc
+    base.vinyl = {
+      filename: str('vinyl.filename'),
+      pos: parsePos(raw['vinyl.pos']),
+      center: parsePos(raw['vinyl.center']),
+      dimension: parseDimension(raw['vinyl.dimension']),
+      direction: str('vinyl.direction', 'cw'),
+    };
+
+    // Tonearm
+    base.tonearm = {
+      filename: str('tonearm.filename'),
+      pivotScreen: parsePos(raw['tonearm.pivot.screen']),
+      pivotImage: parsePos(raw['tonearm.pivot.image']),
+      angleRest: num('tonearm.angle.rest', 0),
+      angleStart: num('tonearm.angle.start', -15),
+      angleEnd: num('tonearm.angle.end', -40),
+      dropDuration: num('tonearm.drop.duration', 1.5),
+      liftDuration: num('tonearm.lift.duration', 1.0),
     };
 
     // Play info
@@ -214,6 +238,8 @@ export function normalizeMeterConfig(raw) {
       arcWidth: num('progress.arc.width', 6),
       arcAngleStart: num('progress.arc.angle.start', 90),
       arcAngleEnd: num('progress.arc.angle.end', -270),
+      headImage: str('progress.head.image'),
+      headOffset: parsePos(raw['progress.head.offset']),
     };
 
     // Volume indicator

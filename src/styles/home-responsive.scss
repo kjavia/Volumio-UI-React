@@ -479,6 +479,15 @@ body,
   }
 }
 
+/* ── Viz fullscreen ── */
+.tp-viz:fullscreen,
+.lsp-viz-area:fullscreen,
+.lsp-bottom__viz:fullscreen {
+  overflow: visible;
+  background: #000;
+  cursor: pointer;
+}
+
 /* ── Browse Toolbar ── */
 .browse-toolbar {
   display: flex;

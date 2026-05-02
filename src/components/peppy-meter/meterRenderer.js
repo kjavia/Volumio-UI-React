@@ -88,7 +88,27 @@ export async function loadMeterImages(config, basePath) {
     loads.push(Promise.resolve(null));
   }
 
-  const [bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons] = await Promise.all(loads);
+  // Extended: vinyl disc images (may be comma-separated: "cdart.png,vinyl.png")
+  if (config.vinyl?.filename) {
+    const files = config.vinyl.filename.split(',').map((f) => loadImage(f.trim() ? `${prefix}${f.trim()}` : ''));
+    loads.push(Promise.all(files));
+  } else {
+    loads.push(Promise.resolve(null));
+  }
+
+  // Extended: tonearm image
+  loads.push(loadImage(config.tonearm?.filename ? `${prefix}${config.tonearm.filename}` : ''));
+
+  // Extended: album art mask
+  loads.push(loadImage(config.albumArt?.mask ? `${prefix}${config.albumArt.mask}` : ''));
+
+  // Extended: progress head image
+  loads.push(loadImage(config.progress?.headImage ? `${prefix}${config.progress.headImage}` : ''));
+
+  // Extended: volume slider tip image
+  loads.push(loadImage(config.volume?.sliderTip ? `${prefix}${config.volume.sliderTip}` : ''));
+
+  const [bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons, vinylImages, tonearmImg, albumArtMask, progressHead, volumeSliderTip] = await Promise.all(loads);
 
   // Load custom fonts from the pack (e.g. fonts/MyDigi.ttf)
   const fonts = {};
@@ -108,7 +128,7 @@ export async function loadMeterImages(config, basePath) {
     }
   }
 
-  return { bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons, fonts };
+  return { bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons, vinylImages, tonearmImg, albumArtMask, progressHead, volumeSliderTip, fonts };
 }
 
 // ── Circular meter rendering ────────────────────────────────────────────────
@@ -269,6 +289,7 @@ export function renderMeterFrame(
   trackInfo = null,
   albumArt = null,
   formatIcon = null,
+  turntableState = null,
 ) {
   const scaleX = canvasW / nativeW;
   const scaleY = canvasH / nativeH;
@@ -292,6 +313,101 @@ export function renderMeterFrame(
         images.bgr.width * scaleX,
         images.bgr.height * scaleY,
       );
+    }
+
+    // Layer 2.1: Vinyl disc rotation (turntable meters — drawn above bgr)
+    if (config.vinyl?.filename && images.vinylImages && turntableState) {
+      const vinylAngle = turntableState.vinylAngle || 0;
+      const vinylPos = config.vinyl.pos;
+      const vinylCenter = config.vinyl.center;
+      const vinylDir = config.vinyl.direction === 'ccw' ? -1 : 1;
+      const angleRad = (vinylAngle * vinylDir * Math.PI) / 180;
+
+      // Vinyl images array: may be [cdart, vinyl_overlay] or [single_vinyl]
+      const vinylImgs = images.vinylImages.filter(Boolean);
+      if (vinylImgs.length > 0) {
+        // Use explicit dimension from config, or image native size
+        const baseVinyl = vinylImgs[vinylImgs.length - 1]; // last is the vinyl plate
+        const dim = config.vinyl.dimension || { w: baseVinyl.width, h: baseVinyl.height };
+        const vw = dim.w * scaleX;
+        const vh = dim.h * scaleY;
+
+        // Center of rotation (vinyl.center is in native screen coords)
+        const cx = vinylCenter ? vinylCenter.x * scaleX : (vinylPos ? vinylPos.x * scaleX + vw / 2 : vw / 2);
+        const cy = vinylCenter ? vinylCenter.y * scaleY : (vinylPos ? vinylPos.y * scaleY + vh / 2 : vh / 2);
+
+        // Draw position (top-left of vinyl image in native coords)
+        const dx = vinylPos ? vinylPos.x * scaleX : cx - vw / 2;
+        const dy = vinylPos ? vinylPos.y * scaleY : cy - vh / 2;
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angleRad);
+
+        if (vinylImgs.length >= 2 && albumArt) {
+          // Two images: first is "cdart" template, second is vinyl plate
+          // Draw vinyl plate first (the disc texture)
+          const vinyl = vinylImgs[1];
+          ctx.drawImage(vinyl, dx - cx, dy - cy, vw, vh);
+          // Composite album art using cdart as mask via offscreen canvas
+          const cdart = vinylImgs[0];
+          const offscreen = document.createElement('canvas');
+          offscreen.width = Math.round(vw);
+          offscreen.height = Math.round(vh);
+          const offCtx = offscreen.getContext('2d');
+          // Draw cdart as the mask shape
+          offCtx.drawImage(cdart, 0, 0, offscreen.width, offscreen.height);
+          // Draw album art only where cdart has pixels
+          offCtx.globalCompositeOperation = 'source-in';
+          offCtx.drawImage(albumArt, 0, 0, offscreen.width, offscreen.height);
+          // Composite onto main canvas
+          ctx.drawImage(offscreen, dx - cx, dy - cy, vw, vh);
+        } else {
+          // Single vinyl image or vinyl plate without album art
+          const plate = vinylImgs[vinylImgs.length - 1];
+          ctx.drawImage(plate, dx - cx, dy - cy, vw, vh);
+        }
+
+        ctx.restore();
+      }
+    }
+
+    // Layer 2.2: Rotating album art (turntable style with albumart.rotation = True)
+    if (config.albumArt?.rotation && albumArt && config.albumArt?.pos && config.albumArt?.dimension && turntableState) {
+      const artAngle = turntableState.vinylAngle || 0;
+      const ax = config.albumArt.pos.x * scaleX;
+      const ay = config.albumArt.pos.y * scaleY;
+      const aw = config.albumArt.dimension.w * scaleX;
+      const ah = config.albumArt.dimension.h * scaleY;
+      const cx = ax + aw / 2;
+      const cy = ay + ah / 2;
+      const angleRad = (artAngle * Math.PI) / 180;
+
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(angleRad);
+
+      if (images.albumArtMask) {
+        // Use mask image for compositing (e.g. circular vinyl cutout)
+        const offscreen = document.createElement('canvas');
+        offscreen.width = Math.round(aw);
+        offscreen.height = Math.round(ah);
+        const offCtx = offscreen.getContext('2d');
+        // Draw mask shape
+        offCtx.drawImage(images.albumArtMask, 0, 0, offscreen.width, offscreen.height);
+        // Draw album art only where mask has pixels
+        offCtx.globalCompositeOperation = 'source-in';
+        offCtx.drawImage(albumArt, 0, 0, offscreen.width, offscreen.height);
+        ctx.drawImage(offscreen, -aw / 2, -ah / 2, aw, ah);
+      } else {
+        // No mask — clip to circle
+        ctx.beginPath();
+        ctx.arc(0, 0, Math.min(aw, ah) / 2, 0, Math.PI * 2);
+        ctx.clip();
+        ctx.drawImage(albumArt, -aw / 2, -ah / 2, aw, ah);
+      }
+
+      ctx.restore();
     }
 
     // Layer 2.5: Rotating reels (between background and needles)
@@ -396,11 +512,31 @@ export function renderMeterFrame(
     }
   }
 
+  // Layer 5: Tonearm (drawn above foreground, animated by progress)
+  if (config.tonearm?.filename && images.tonearmImg && turntableState) {
+    const arm = config.tonearm;
+    const tonearmAngle = turntableState.tonearmAngle != null ? turntableState.tonearmAngle : arm.angleRest;
+    const pivotX = arm.pivotScreen.x * scaleX;
+    const pivotY = arm.pivotScreen.y * scaleY;
+    const imgPivotX = arm.pivotImage.x * scaleX;
+    const imgPivotY = arm.pivotImage.y * scaleY;
+    const angleRad = (tonearmAngle * Math.PI) / 180;
+    const armW = images.tonearmImg.width * scaleX;
+    const armH = images.tonearmImg.height * scaleY;
+
+    ctx.save();
+    ctx.translate(pivotX, pivotY);
+    ctx.rotate(-angleRad); // PeppyMeter uses positive = CCW (pygame convention)
+    // Draw arm image with pivot point at the image's pivot offset
+    ctx.drawImage(images.tonearmImg, -imgPivotX, -imgPivotY, armW, armH);
+    ctx.restore();
+  }
+
   // ── Extended overlays (config.extend = True) ────────────────────────────
 
   if (config.configExtend && trackInfo) {
-    // Album art
-    if (albumArt && config.albumArt?.pos && config.albumArt?.dimension) {
+    // Album art (static — skip if rotation is handled in turntable layer)
+    if (albumArt && config.albumArt?.pos && config.albumArt?.dimension && !config.albumArt?.rotation) {
       const ax = config.albumArt.pos.x * scaleX;
       const ay = config.albumArt.pos.y * scaleY;
       const aw = config.albumArt.dimension.w * scaleX;
@@ -562,6 +698,23 @@ export function renderMeterFrame(
           ctx.lineWidth = config.progress.border * scaleX;
           ctx.strokeRect(px, py, pw, ph);
         }
+        // Progress head (slider knob image)
+        if (images.progressHead) {
+          const headW = images.progressHead.width * scaleX;
+          const headH = images.progressHead.height * scaleY;
+          const ho = config.progress.headOffset || { x: 0, y: 0 };
+          if (isVertical) {
+            const fillH = trackInfo.progress * ph;
+            const hx = px + pw / 2 - headW / 2 + ho.x * scaleX;
+            const hy = py + ph - fillH - headH / 2 + ho.y * scaleY;
+            ctx.drawImage(images.progressHead, hx, hy, headW, headH);
+          } else {
+            const fillW = trackInfo.progress * pw;
+            const hx = px + fillW - headW / 2 + ho.x * scaleX;
+            const hy = py + ph / 2 - headH / 2 + ho.y * scaleY;
+            ctx.drawImage(images.progressHead, hx, hy, headW, headH);
+          }
+        }
       }
     }
 
@@ -578,12 +731,32 @@ export function renderMeterFrame(
         ctx.fillStyle = config.volume.bgColor;
         ctx.fillRect(vx, vy, vw, vh);
       }
-      ctx.fillStyle = config.volume.color || 'rgb(142,142,142)';
-      if (isVertical) {
-        const fillH = vol * vh;
-        ctx.fillRect(vx, vy + vh - fillH, vw, fillH);
-      } else {
-        ctx.fillRect(vx, vy, vol * vw, vh);
+      if (config.volume.color) {
+        ctx.fillStyle = config.volume.color;
+        if (isVertical) {
+          const fillH = vol * vh;
+          ctx.fillRect(vx, vy + vh - fillH, vw, fillH);
+        } else {
+          ctx.fillRect(vx, vy, vol * vw, vh);
+        }
+      }
+      // Volume slider tip image
+      if (images.volumeSliderTip) {
+        const tipW = images.volumeSliderTip.width * scaleX;
+        const tipH = images.volumeSliderTip.height * scaleY;
+        const travel = config.volume.sliderTravel ? config.volume.sliderTravel.split(',').map(Number) : [0, 0];
+        const tipOffset = config.volume.sliderTipOffset ? config.volume.sliderTipOffset.split(',').map(Number) : [0, 0];
+        if (isVertical) {
+          const travelDist = (travel[1] || vh / scaleY) * scaleY;
+          const tipX = vx + tipOffset[0] * scaleX;
+          const tipY = vy + travelDist - vol * travelDist + tipOffset[1] * scaleY;
+          ctx.drawImage(images.volumeSliderTip, tipX, tipY, tipW, tipH);
+        } else {
+          const travelDist = (travel[1] || vw / scaleX) * scaleX;
+          const tipX = vx + vol * travelDist + tipOffset[0] * scaleX;
+          const tipY = vy + tipOffset[1] * scaleY;
+          ctx.drawImage(images.volumeSliderTip, tipX, tipY, tipW, tipH);
+        }
       }
     }
 

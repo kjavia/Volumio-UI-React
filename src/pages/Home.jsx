@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import FlipClock from '@/components/clocks/flip-clock';
 import DigitalClock from '@/components/clocks/digital-clock';
 import AnalogClock from '@/components/clocks/analog-clock';
@@ -49,7 +49,7 @@ const Home = () => {
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
 
-  const handleFullscreenViz = async () => {
+  const handleFullscreenViz = useCallback(async () => {
     const el = vizContainerRef.current;
     if (!el) return;
     try {
@@ -61,7 +61,7 @@ const Home = () => {
     } catch (err) {
       console.warn('Viz fullscreen failed:', err);
     }
-  };
+  }, []);
   const {
     idle,
     idleScreen,
@@ -178,11 +178,23 @@ const Home = () => {
 
   const vizFullscreen = isVizFullscreen && !!vizPortalTarget;
 
+  // Double-click/tap on viz container toggles fullscreen
+  useEffect(() => {
+    const handler = (e) => {
+      const el = vizContainerRef.current;
+      if (!el || !el.contains(e.target)) return;
+      e.preventDefault();
+      handleFullscreenViz();
+    };
+    document.addEventListener('dblclick', handler);
+    return () => document.removeEventListener('dblclick', handler);
+  }, [handleFullscreenViz]);
+
   // On the large-screen layout the menu is embedded in the bottom row, so we
   // normally skip the floating overlay. However when the idle screen is active
   // the player (and its embedded menu) is not mounted, so we still need the
   // floating overlay as the only way for the user to get back to the player.
-  const floatingContextMenu = (!isLargeScreen || idle) && (
+  const floatingContextMenu = !vizFullscreen && (!isLargeScreen || idle) && (
     <ContextMenu
       vizStopped={vizStopped}
       onStopViz={showPlayer && isSpectrumViz ? () => setVizStopped(true) : undefined}
@@ -194,9 +206,7 @@ const Home = () => {
 
   return (
     <div className="position-relative h-100">
-      {vizFullscreen && floatingContextMenu
-        ? createPortal(floatingContextMenu, vizPortalTarget)
-        : floatingContextMenu}
+      {floatingContextMenu}
       {content}
     </div>
   );

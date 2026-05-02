@@ -138,7 +138,20 @@ const PeppyMeter = ({
       const canvas = canvasRef.current;
       if (canvas && !enabled) {
         const ctx = canvas.getContext('2d');
-        renderMeterFrame(ctx, cfg, imgs, 0, 0, canvas.width, canvas.height, nativeW, nativeH, 0, trackInfoRef.current, albumArtRef.current, formatIconRef.current);
+        // Compute initial turntable state for static render
+        const hasTT = cfg.vinyl?.filename || cfg.tonearm?.filename || cfg.albumArt?.rotation;
+        const ti = trackInfoRef.current;
+        let initTurntable = null;
+        if (hasTT) {
+          const arm = cfg.tonearm;
+          let armAngle = arm ? arm.angleRest : 0;
+          if (arm && ti?.isPlaying) {
+            const progress = ti.progress || 0;
+            armAngle = arm.angleStart + progress * (arm.angleEnd - arm.angleStart);
+          }
+          initTurntable = { vinylAngle: 0, tonearmAngle: armAngle };
+        }
+        renderMeterFrame(ctx, cfg, imgs, 0, 0, canvas.width, canvas.height, nativeW, nativeH, 0, null, null, null, initTurntable);
       }
     });
 
@@ -150,7 +163,8 @@ const PeppyMeter = ({
   const albumArtRef = useRef(null);
   useEffect(() => {
     const cfg = configRef.current;
-    if (!cfg?.albumArt?.pos || !trackInfo?.albumart) { albumArtRef.current = null; return; }
+    const needsArt = cfg?.albumArt?.pos || cfg?.vinyl?.filename || cfg?.albumArt?.rotation;
+    if (!needsArt || !trackInfo?.albumart) { albumArtRef.current = null; return; }
     let cancelled = false;
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -262,6 +276,10 @@ const PeppyMeter = ({
     const dataR = new Uint8Array(FFT_SIZE);
     let lastTime = performance.now();
     let reelAngle = 0;
+    let vinylAngle = 0;
+    let tonearmAngle = null; // null = needs initialization from config
+    let tonearmTarget = null;
+    let tonearmState = null; // null = needs initialization, then 'rest' | 'dropping' | 'playing' | 'lifting'
 
     const tick = () => {
       animFrameRef.current = requestAnimationFrame(tick);
@@ -294,11 +312,93 @@ const PeppyMeter = ({
         if (reelAngle >= 360) reelAngle -= 360;
       }
 
-      renderMeterFrame(ctx, cfg, imgs, dbToVolume(s.left), dbToVolume(s.right), canvas.width, canvas.height, nativeW, nativeH, reelAngle, trackInfoRef.current, albumArtRef.current, formatIconRef.current);
+      // ── Turntable animation ────────────────────────────────────────────
+      let turntableState = null;
+      const hasTurntable = cfg.vinyl?.filename || cfg.tonearm?.filename || cfg.albumArt?.rotation;
+
+      if (hasTurntable) {
+        const ti = trackInfoRef.current;
+        const isPlaying = ti?.isPlaying;
+        const progress = ti?.progress || 0;
+
+        // Vinyl/albumart rotation — spin when playing
+        const rotSpeed = cfg.albumArt?.rotationSpeed || 33;
+        if (isPlaying) {
+          vinylAngle += rotSpeed * dt * 2; // gentle visual spin
+          if (vinylAngle >= 360) vinylAngle -= 360;
+        }
+
+        // Tonearm state machine
+        if (cfg.tonearm?.filename) {
+          const arm = cfg.tonearm;
+          const dropSpeed = Math.abs(arm.angleStart - arm.angleRest) / arm.dropDuration;
+          const liftSpeed = Math.abs(arm.angleStart - arm.angleRest) / arm.liftDuration;
+          // Target angle based on progress (interpolate start→end)
+          const progressAngle = arm.angleStart + progress * (arm.angleEnd - arm.angleStart);
+
+          // First-frame initialization: snap to correct position
+          if (tonearmState === null) {
+            if (isPlaying) {
+              // Already playing when viz loaded — snap directly to playing position
+              tonearmAngle = progressAngle;
+              tonearmState = 'playing';
+            } else {
+              tonearmAngle = arm.angleRest;
+              tonearmState = 'rest';
+            }
+          }
+
+          // State transitions
+          if (isPlaying && (tonearmState === 'rest' || tonearmState === 'lifting')) {
+            tonearmState = 'dropping';
+            tonearmTarget = progressAngle;
+          } else if (!isPlaying && (tonearmState === 'playing' || tonearmState === 'dropping')) {
+            tonearmState = 'lifting';
+            tonearmTarget = arm.angleRest;
+          }
+
+          // Animate
+          if (tonearmState === 'dropping') {
+            const diff = tonearmTarget - tonearmAngle;
+            const step = dropSpeed * dt;
+            if (Math.abs(diff) <= step) {
+              tonearmAngle = tonearmTarget;
+              tonearmState = 'playing';
+            } else {
+              tonearmAngle += Math.sign(diff) * step;
+            }
+          } else if (tonearmState === 'playing') {
+            // Follow progress smoothly
+            tonearmAngle = progressAngle;
+          } else if (tonearmState === 'lifting') {
+            const diff = tonearmTarget - tonearmAngle;
+            const step = liftSpeed * dt;
+            if (Math.abs(diff) <= step) {
+              tonearmAngle = tonearmTarget;
+              tonearmState = 'rest';
+            } else {
+              tonearmAngle += Math.sign(diff) * step;
+            }
+          }
+        }
+
+        turntableState = { vinylAngle, tonearmAngle: tonearmAngle != null ? tonearmAngle : 0 };
+      }
+
+      renderMeterFrame(ctx, cfg, imgs, dbToVolume(s.left), dbToVolume(s.right), canvas.width, canvas.height, nativeW, nativeH, reelAngle, trackInfoRef.current, albumArtRef.current, formatIconRef.current, turntableState);
     };
 
     tick();
   }, [nativeW, nativeH]);
+
+  // ── Auto-enable when playback starts ─────────────────────────────────────
+
+  useEffect(() => {
+    if (enabled || !trackInfo?.isPlaying || !imagesRef.current) return;
+    setupAudio();
+    startAnimation();
+    setEnabled(true);
+  }, [enabled, trackInfo?.isPlaying, setupAudio, startAnimation]);
 
   // ── Enable on click ─────────────────────────────────────────────────────
 
