@@ -674,8 +674,10 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
   const resolveField = (field) => {
     if (field.dynamicOptionsFrom) {
       const selectedFolder = values[field.dynamicOptionsFrom];
-      const allFolders = [...(peppyFolders || []), ...(peppySpectrumFolders || [])];
-      const folderData = allFolders.find((f) => f.folder === selectedFolder);
+      const sourceFolders = field.dynamicOptionsFrom === 'peppySpectrumFolder'
+        ? (peppySpectrumFolders || [])
+        : (peppyFolders || []);
+      const folderData = sourceFolders.find((f) => f.folder === selectedFolder);
       const modelOptions = [{ value: 'random', label: 'Random (changes each track)' }];
       if (folderData) {
         for (const model of folderData.models) {
@@ -820,8 +822,10 @@ const Settings = () => {
       let options = field.options || [];
       if (field.dynamicOptionsFrom) {
         const selectedFolder = values[field.dynamicOptionsFrom];
-        const allFolders = [...(peppyFolders || []), ...(peppySpectrumFolders || [])];
-        const folderData = allFolders.find((f) => f.folder === selectedFolder);
+        const sourceFolders = field.dynamicOptionsFrom === 'peppySpectrumFolder'
+          ? (peppySpectrumFolders || [])
+          : (peppyFolders || []);
+        const folderData = sourceFolders.find((f) => f.folder === selectedFolder);
         options = [{ value: 'random', label: 'Random' }];
         if (folderData) {
           for (const model of folderData.models) {
