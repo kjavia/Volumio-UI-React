@@ -120,6 +120,159 @@ export function normalizeMeterConfig(raw) {
     spectrumSize,
   };
 
+  // ── Extended config (reel, playinfo, progress, volume, icons, etc.) ──
+
+  if (configExtend) {
+    // Reel-to-reel
+    base.reel = {
+      left: {
+        filename: str('reel.left.filename'),
+        pos: parsePos(raw['reel.left.pos']),
+        center: parsePos(raw['reel.left.center']),
+      },
+      right: {
+        filename: str('reel.right.filename'),
+        pos: parsePos(raw['reel.right.pos']),
+        center: parsePos(raw['reel.right.center']),
+      },
+      rotationSpeed: num('reel.rotation.speed', 25),
+    };
+
+    // Album art
+    base.albumArt = {
+      pos: parsePos(raw['albumart.pos']),
+      dimension: parseDimension(raw['albumart.dimension']),
+      border: num('albumart.border', 0),
+    };
+
+    // Play info
+    base.playInfo = {
+      title: { pos: parsePos(raw['playinfo.title.pos']), maxWidth: num('playinfo.title.maxwidth', 0), color: parseColor(raw['playinfo.title.color']) },
+      artist: { pos: parsePos(raw['playinfo.artist.pos']), maxWidth: num('playinfo.artist.maxwidth', 0), color: parseColor(raw['playinfo.artist.color']) },
+      album: { pos: parsePos(raw['playinfo.album.pos']), maxWidth: num('playinfo.album.maxwidth', 0), color: parseColor(raw['playinfo.album.color']) },
+      center: str('playinfo.center', 'False') === 'True',
+      type: {
+        pos: parsePos(raw['playinfo.type.pos']),
+        color: parseColor(raw['playinfo.type.color']),
+        dimension: parseDimension(raw['playinfo.type.dimension']),
+      },
+      samplerate: { pos: parsePos(raw['playinfo.samplerate.pos']), maxWidth: num('playinfo.samplerate.maxwidth', 0) },
+      next: {
+        title: { pos: parsePos(raw['playinfo.next.title.pos']), maxWidth: num('playinfo.next.title.maxwidth', 0), color: parseColor(raw['playinfo.next.title.color']) },
+        artist: { pos: parsePos(raw['playinfo.next.artist.pos']), maxWidth: num('playinfo.next.artist.maxwidth', 0), color: parseColor(raw['playinfo.next.artist.color']) },
+        album: { pos: parsePos(raw['playinfo.next.album.pos']), maxWidth: num('playinfo.next.album.maxwidth', 0), color: parseColor(raw['playinfo.next.album.color']) },
+      },
+    };
+
+    // Ticker (scrolling text)
+    base.ticker = {
+      enabled: str('playinfo.ticker', 'False') === 'True',
+      replace: str('playinfo.ticker.replace', 'False') === 'True',
+      direction: str('playinfo.ticker.direction', 'ltr'),
+      appendNext: str('playinfo.ticker.append_next', 'False') === 'True',
+      pos: parsePos(raw['playinfo.ticker.pos']),
+      color: parseColor(raw['playinfo.ticker.color']),
+      maxWidth: num('playinfo.ticker.maxwidth', 0),
+      speed: num('playinfo.ticker.speed', 40),
+      separator: str('playinfo.ticker.separator', ' • '),
+      spaceBetween: num('playinfo.ticker.space_between', 4),
+      endSpaces: num('playinfo.ticker.end_spaces', 6),
+    };
+
+    // Time displays
+    base.time = {
+      remaining: {
+        pos: parsePos(raw['time.remaining.pos']),
+        color: parseColor(raw['time.remaining.color']),
+        font: str('time.remaining.font'),
+        fontSize: num('time.remaining.fontsize', 0),
+      },
+      elapsed: {
+        pos: parsePos(raw['time.elapsed.pos']),
+        color: parseColor(raw['time.elapsed.color']),
+        font: str('time.elapsed.font'),
+        fontSize: num('time.elapsed.fontsize', 0),
+      },
+      total: {
+        pos: parsePos(raw['time.total.pos']),
+        color: parseColor(raw['time.total.color']),
+        font: str('time.total.font'),
+        fontSize: num('time.total.fontsize', 0),
+      },
+    };
+
+    // Progress bar
+    base.progress = {
+      pos: parsePos(raw['progress.pos']),
+      dim: parseDimension(raw['progress.dim']),
+      color: parseColor(raw['progress.color']),
+      bgColor: parseColor(raw['progress.bg.color']),
+      border: num('progress.border', 0),
+      borderColor: parseColor(raw['progress.border.color']),
+      style: str('progress.style', 'bar'),
+      sliderOrientation: str('progress.slider.orientation', 'horizontal'),
+      arcWidth: num('progress.arc.width', 6),
+      arcAngleStart: num('progress.arc.angle.start', 90),
+      arcAngleEnd: num('progress.arc.angle.end', -270),
+    };
+
+    // Volume indicator
+    base.volume = {
+      pos: parsePos(raw['volume.pos']),
+      dim: parseDimension(raw['volume.dim']),
+      color: parseColor(raw['volume.color']),
+      bgColor: parseColor(raw['volume.bg.color']),
+      style: str('volume.style', 'slider'),
+      sliderOrientation: str('volume.slider.orientation', 'horizontal'),
+      sliderTrack: str('volume.slider.track'),
+      sliderTip: str('volume.slider.tip'),
+      sliderTravel: str('volume.slider.travel'),
+      sliderTipOffset: str('volume.slider.tip.offset'),
+    };
+
+    // Playback state icons (stop, pause, play)
+    base.playstate = {
+      pos: parsePos(raw['playstate.pos']),
+      icon: str('playstate.icon'),
+      glow: num('playstate.icon.glow', 0),
+      glowIntensity: num('playstate.icon.glow.intensity', 0),
+    };
+
+    // Mute icon
+    base.mute = {
+      pos: parsePos(raw['mute.pos']),
+      icon: str('mute.icon'),
+      glow: num('mute.icon.glow', 0),
+      glowIntensity: num('mute.icon.glow.intensity', 0),
+      glowColor: str('mute.icon.glow.color'),
+    };
+
+    // Repeat icon
+    base.repeat = {
+      pos: parsePos(raw['repeat.pos']),
+      icon: str('repeat.icon'),
+      glow: num('repeat.icon.glow', 0),
+      glowIntensity: num('repeat.icon.glow.intensity', 0),
+    };
+
+    // Shuffle icon
+    base.shuffle = {
+      pos: parsePos(raw['shuffle.pos']),
+      icon: str('shuffle.icon'),
+      glow: num('shuffle.icon.glow', 0),
+      glowIntensity: num('shuffle.icon.glow.intensity', 0),
+    };
+
+    // Font settings
+    base.font = {
+      sizeDigi: num('font.size.digi', 30),
+      sizeLight: num('font.size.light', 16),
+      sizeRegular: num('font.size.regular', 23),
+      sizeBold: num('font.size.bold', 37),
+      color: parseColor(raw['font.color']),
+    };
+  }
+
   if (type === 'circular') {
     return {
       ...base,

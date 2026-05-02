@@ -173,18 +173,29 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
 
   // Track info for PeppyMeter playinfo overlays
   const peppyTrackInfo = useMemo(() => {
-    const remaining = duration > 0 ? Math.max(0, duration - seek / 1000) : 0;
-    const mins = Math.floor(remaining / 60);
-    const secs = Math.floor(remaining % 60);
+    const elapsedSec = seek / 1000;
+    const remainingSec = duration > 0 ? Math.max(0, duration - elapsedSec) : 0;
+    const fmtTime = (s) => `${Math.floor(s / 60)}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
     return {
       title: title || '',
       artist: artist || '',
       album: album || '',
       albumart: fullAlbumArt,
-      samplerate: samplerate || '',
-      remaining: duration > 0 ? `${mins}:${secs.toString().padStart(2, '0')}` : '',
+      samplerate: [samplerate, bitdepth].filter(Boolean).join(' ') || '',
+      trackType: trackType || '',
+      bitrate: bitrate || '',
+      service: service || '',
+      remaining: duration > 0 ? fmtTime(remainingSec) : '',
+      elapsed: fmtTime(elapsedSec),
+      total: duration > 0 ? fmtTime(duration) : '',
+      progress: duration > 0 ? elapsedSec / duration : 0,
+      volume: volume || 0,
+      mute: !!mute,
+      isPlaying: !!isPlaying,
+      repeat: repeat || false,
+      random: random || false,
     };
-  }, [title, artist, album, fullAlbumArt, samplerate, duration, seek]);
+  }, [title, artist, album, fullAlbumArt, samplerate, bitdepth, trackType, bitrate, service, duration, seek, volume, mute, isPlaying, repeat, random]);
 
   const effectivePlayerType = playerType === 'matchSource'
     ? getPlayerTypeForSource(service, trackType)

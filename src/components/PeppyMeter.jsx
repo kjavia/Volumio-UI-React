@@ -51,6 +51,7 @@ const PeppyMeter = ({
   folder,
   model = 'random',
   trackUri,
+  trackInfo,
   streamUrl = SPECTRUM_STREAM_URL,
   stopped = false,
   className = '',
@@ -64,6 +65,8 @@ const PeppyMeter = ({
   const retryTimerRef = useRef(null);
   const imagesRef = useRef(null);
   const configRef = useRef(null);
+  const trackInfoRef = useRef(trackInfo);
+  trackInfoRef.current = trackInfo;
 
   const [enabled, setEnabled] = useState(false);
   const [error, setError] = useState(null);
@@ -135,12 +138,63 @@ const PeppyMeter = ({
       const canvas = canvasRef.current;
       if (canvas && !enabled) {
         const ctx = canvas.getContext('2d');
-        renderMeterFrame(ctx, cfg, imgs, 0, 0, canvas.width, canvas.height, nativeW, nativeH);
+        renderMeterFrame(ctx, cfg, imgs, 0, 0, canvas.width, canvas.height, nativeW, nativeH, 0, trackInfoRef.current, albumArtRef.current, formatIconRef.current);
       }
     });
 
     return () => { cancelled = true; };
   }, [allConfigs, activeModel, assetPath, nativeW, nativeH, enabled]);
+
+  // ── Load album art when track changes ─────────────────────────────────
+
+  const albumArtRef = useRef(null);
+  useEffect(() => {
+    const cfg = configRef.current;
+    if (!cfg?.albumArt?.pos || !trackInfo?.albumart) { albumArtRef.current = null; return; }
+    let cancelled = false;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => { if (!cancelled) albumArtRef.current = img; };
+    img.onerror = () => { if (!cancelled) albumArtRef.current = null; };
+    img.src = trackInfo.albumart;
+    return () => { cancelled = true; };
+  }, [trackInfo?.albumart, activeModel]);
+
+  // ── Load format/service icon when track type changes ────────────────────
+
+  const formatIconRef = useRef(null);
+  useEffect(() => {
+    const cfg = configRef.current;
+    if (!cfg?.playInfo?.type?.pos) { formatIconRef.current = null; return; }
+    const trackType = (trackInfo?.trackType || '').toLowerCase().replace(/\s+/g, '');
+    const service = (trackInfo?.service || '').toLowerCase().replace(/[_\s-]+/g, '');
+    if (!trackType && !service) { formatIconRef.current = null; return; }
+
+    // Try format icon first (flac, mp3, dsd, etc.), then service logo
+    const candidates = [];
+    if (trackType) {
+      const fmt = trackType === 'dsf' ? 'dsd' : trackType;
+      candidates.push(`/assets/logos/${fmt}.svg`);
+    }
+    if (service && service !== 'mpd') {
+      candidates.push(`/assets/logos/services/${service}.svg`);
+    }
+
+    let cancelled = false;
+    let loaded = false;
+    for (const src of candidates) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        if (!cancelled && !loaded) { loaded = true; formatIconRef.current = img; }
+      };
+      img.onerror = () => { };
+      img.src = src;
+    }
+    // If nothing loads, clear after a short delay
+    const timer = setTimeout(() => { if (!loaded && !cancelled) formatIconRef.current = null; }, 500);
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, [trackInfo?.trackType, trackInfo?.service, activeModel]);
 
   // ── Audio setup ─────────────────────────────────────────────────────────
 
@@ -206,6 +260,8 @@ const PeppyMeter = ({
     const RELEASE = 0.07;
     const dataL = new Uint8Array(FFT_SIZE);
     const dataR = new Uint8Array(FFT_SIZE);
+    let lastTime = performance.now();
+    let reelAngle = 0;
 
     const tick = () => {
       animFrameRef.current = requestAnimationFrame(tick);
@@ -215,6 +271,10 @@ const PeppyMeter = ({
       const canvas = canvasRef.current;
       if (!cfg || !imgs || !canvas) return;
       if (!analyserLRef.current || !analyserRRef.current) return;
+
+      const now = performance.now();
+      const dt = (now - lastTime) / 1000; // seconds
+      lastTime = now;
 
       const ctx = canvas.getContext('2d');
 
@@ -228,7 +288,13 @@ const PeppyMeter = ({
       s.left += (rawL - s.left) * (rawL > s.left ? ATTACK : RELEASE);
       s.right += (rawR - s.right) * (rawR > s.right ? ATTACK : RELEASE);
 
-      renderMeterFrame(ctx, cfg, imgs, dbToVolume(s.left), dbToVolume(s.right), canvas.width, canvas.height, nativeW, nativeH);
+      // Accumulate reel rotation only when audio is playing (signal detected)
+      if (cfg.reel && (rawL > -80 || rawR > -80)) {
+        reelAngle += cfg.reel.rotationSpeed * dt * 6;
+        if (reelAngle >= 360) reelAngle -= 360;
+      }
+
+      renderMeterFrame(ctx, cfg, imgs, dbToVolume(s.left), dbToVolume(s.right), canvas.width, canvas.height, nativeW, nativeH, reelAngle, trackInfoRef.current, albumArtRef.current, formatIconRef.current);
     };
 
     tick();
