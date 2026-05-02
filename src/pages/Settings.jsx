@@ -608,7 +608,7 @@ const PackUpload = ({ packType, onUploaded, t }) => {
       const response = await axios.post(
         `${PLUGIN_BASE_URL}/api/upload-peppy-pack?type=${packType}`,
         buffer,
-        { headers: { 'Content-Type': 'application/octet-stream' }, timeout: 60000 }
+        { headers: { 'Content-Type': 'application/octet-stream' }, timeout: 120000 }
       );
       setStatus({ type: 'success', message: response.data?.message || t('UPLOAD_SUCCESS', 'Upload successful.') });
       if (fileRef.current) fileRef.current.value = '';

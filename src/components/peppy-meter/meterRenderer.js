@@ -333,8 +333,8 @@ export function renderMeterFrame(
       drawCircularNeedle(
         ctx,
         images.indicator,
-        config.leftOriginX * scaleX,
-        config.leftOriginY * scaleY,
+        (config.leftOriginX + config.meterX) * scaleX,
+        (config.leftOriginY + config.meterY) * scaleY,
         angleL,
         config.distance,
         config.leftNeedleFlip,
@@ -348,8 +348,8 @@ export function renderMeterFrame(
         drawCircularNeedle(
           ctx,
           images.indicator,
-          config.rightOriginX * scaleX,
-          config.rightOriginY * scaleY,
+          (config.rightOriginX + config.meterX) * scaleX,
+          (config.rightOriginY + config.meterY) * scaleY,
           angleR,
           config.distance,
           config.rightNeedleFlip,

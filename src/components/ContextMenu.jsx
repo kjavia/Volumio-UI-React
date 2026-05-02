@@ -83,7 +83,7 @@ const ContextMenu = ({
         </span>
         {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
       </button>
-      {!vizStopped && onStopViz && (
+      {!vizStopped && onFullscreenViz && (
         <>
           <div className="context-menu-separator" />
           <button className="context-menu-item" onClick={close(onFullscreenViz)}>
@@ -92,6 +92,11 @@ const ContextMenu = ({
             </span>
             {isVizFullscreen ? 'Exit Visualization Fullscreen' : 'Visualization Fullscreen'}
           </button>
+        </>
+      )}
+      {!vizStopped && onStopViz && (
+        <>
+          {!onFullscreenViz && <div className="context-menu-separator" />}
           <button className="context-menu-item" onClick={close(onStopViz)}>
             <span className="material-icons">equalizer</span>
             Stop Visualization

@@ -88,6 +88,7 @@ const Home = () => {
   const { data: pluginConfig } = usePluginConfig();
   const vizType = pluginConfig?.vizType || 'spectrum';
   const isSpectrumViz = vizType === 'spectrum';
+  const hasViz = vizType !== 'none';
 
   // Apply user color overrides as CSS custom properties on :root
   useEffect(() => {
@@ -120,7 +121,7 @@ const Home = () => {
         vizStopped={vizStopped}
         onStopViz={isSpectrumViz ? () => setVizStopped(true) : undefined}
         onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
-        onFullscreenViz={isSpectrumViz ? handleFullscreenViz : undefined}
+        onFullscreenViz={hasViz ? handleFullscreenViz : undefined}
         isVizFullscreen={isVizFullscreen}
       />
     );
@@ -130,7 +131,7 @@ const Home = () => {
         onVizResumed={() => setVizStopped(false)}
       />
       : isLargeScreen
-        ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} />
+        ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} vizContainerRef={vizContainerRef} />
         : <TabletPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
   } else if (idleScreen === 'wallpaper') {
     content = (
@@ -186,7 +187,7 @@ const Home = () => {
       vizStopped={vizStopped}
       onStopViz={showPlayer && isSpectrumViz ? () => setVizStopped(true) : undefined}
       onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
-      onFullscreenViz={showPlayer && isSpectrumViz ? handleFullscreenViz : undefined}
+      onFullscreenViz={showPlayer && hasViz ? handleFullscreenViz : undefined}
       isVizFullscreen={isVizFullscreen}
     />
   );

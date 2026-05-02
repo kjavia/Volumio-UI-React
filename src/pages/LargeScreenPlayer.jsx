@@ -118,7 +118,7 @@ VolumePopup.propTypes = {
  *       row 2 — seekbar with timestamps
  *       row 3 — three button groups: left edge / centre transport / right edge
  */
-const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
+const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizContainerRef }) => {
   const { data: pluginConfig } = usePluginConfig();
   const playerType = pluginConfig?.playerType || 'radio';
   const vizType = pluginConfig?.vizType || 'spectrum';
@@ -288,7 +288,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
   // ── Shared JSX blocks reused in both standard and UWLS layouts ──────────
 
   const vizBlock = showViz && (
-    <div className="lsp-viz-area" ref={peppyVizAreaRef}>
+    <div className="lsp-viz-area" ref={(el) => { peppyVizAreaRef.current = el; if (vizContainerRef) vizContainerRef.current = el; }}>
       {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
       {vizType === 'spectrum' && (
         <SpectrumAnalyzer
@@ -504,7 +504,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot }) => {
                 </div>
               )}
               {showViz && (
-                <div className="lsp-bottom__viz" ref={peppyBottomVizRef}>
+                <div className="lsp-bottom__viz" ref={(el) => { peppyBottomVizRef.current = el; if (vizContainerRef) vizContainerRef.current = el; }}>
                   {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
                   {vizType === 'spectrum' && (
                     <SpectrumAnalyzer ref={vizRef} stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} options={spectrumOptions} isPlaying={isPlaying} />
@@ -601,6 +601,7 @@ LargeScreenPlayer.propTypes = {
   vizStopped: PropTypes.bool,
   onVizResumed: PropTypes.func,
   menuSlot: PropTypes.node,
+  vizContainerRef: PropTypes.object,
 };
 
 export default LargeScreenPlayer;
