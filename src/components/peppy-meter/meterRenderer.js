@@ -6,6 +6,32 @@
  * needle/indicator → meter foreground.
  */
 
+/**
+ * Convert a fully-opaque mask image to a proper alpha mask.
+ * JPEG and alpha-less PNG masks have alpha=255 everywhere, so canvas
+ * `source-in` compositing lets everything through. This detects that case
+ * and converts inverted luminance → alpha (black = opaque, white = transparent).
+ * PNGs with genuine transparency are left untouched.
+ */
+function ensureAlphaMask(offCtx, w, h) {
+  const imgData = offCtx.getImageData(0, 0, w, h);
+  const d = imgData.data;
+  // Quick scan: if any pixel has alpha < 250, the image already has transparency
+  let hasAlpha = false;
+  for (let i = 3; i < d.length; i += 4) {
+    if (d[i] < 250) { hasAlpha = true; break; }
+  }
+  if (!hasAlpha) {
+    // All pixels opaque — convert inverted luminance to alpha
+    for (let i = 0; i < d.length; i += 4) {
+      const lum = d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114;
+      d[i] = d[i + 1] = d[i + 2] = 255;
+      d[i + 3] = 255 - lum;
+    }
+    offCtx.putImageData(imgData, 0, 0);
+  }
+}
+
 // Ensure the bundled DS Digital font is always available for time displays
 let _dsDigitalLoaded = false;
 function ensureDigitalFont() {
@@ -357,7 +383,9 @@ export function renderMeterFrame(
           const offCtx = offscreen.getContext('2d');
           // Draw cdart as the mask shape
           offCtx.drawImage(cdart, 0, 0, offscreen.width, offscreen.height);
-          // Draw album art only where cdart has pixels
+          // Ensure cdart has proper alpha (handles JPEG / alpha-less PNG masks)
+          ensureAlphaMask(offCtx, offscreen.width, offscreen.height);
+          // Draw album art only where cdart has alpha
           offCtx.globalCompositeOperation = 'source-in';
           offCtx.drawImage(albumArt, 0, 0, offscreen.width, offscreen.height);
           // Composite onto main canvas
@@ -393,9 +421,10 @@ export function renderMeterFrame(
         offscreen.width = Math.round(aw);
         offscreen.height = Math.round(ah);
         const offCtx = offscreen.getContext('2d');
-        // Draw mask shape
+        // Draw mask and ensure it has proper alpha (handles JPEG / alpha-less PNG)
         offCtx.drawImage(images.albumArtMask, 0, 0, offscreen.width, offscreen.height);
-        // Draw album art only where mask has pixels
+        ensureAlphaMask(offCtx, offscreen.width, offscreen.height);
+        // Draw album art only where mask has alpha
         offCtx.globalCompositeOperation = 'source-in';
         offCtx.drawImage(albumArt, 0, 0, offscreen.width, offscreen.height);
         ctx.drawImage(offscreen, -aw / 2, -ah / 2, aw, ah);
@@ -474,14 +503,14 @@ export function renderMeterFrame(
         );
       }
     } else {
-      // Linear meter
+      // Linear meter — add meter.x/y offset (matching PeppyMeter: origin_x + left.x)
       drawLinearIndicator(
         ctx,
         images.indicator,
         volumeL,
         config,
-        config.leftX,
-        config.leftY,
+        config.leftX + config.meterX,
+        config.leftY + config.meterY,
         scaleX,
         scaleY,
       );
@@ -492,8 +521,8 @@ export function renderMeterFrame(
           images.indicator,
           volumeR,
           config,
-          config.rightX,
-          config.rightY,
+          config.rightX + config.meterX,
+          config.rightY + config.meterY,
           scaleX,
           scaleY,
         );
