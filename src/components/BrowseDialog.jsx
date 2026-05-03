@@ -1,4 +1,5 @@
 import { useState, useCallback, useMemo, useRef, useEffect, useLayoutEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
@@ -11,6 +12,8 @@ import useSearch from '@/hooks/useSearch';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import { useSocket } from '@/contexts/SocketContext';
 import useMenuKeyboard from '@/hooks/useMenuKeyboard';
+import axios from 'axios';
+import { VOLUMIO_BASE_URL } from '@/config';
 
 const BROWSE_TILES = [
   { id: 'favourites', label: 'Favorites', icon: 'favorite', uri: 'favourites' },
@@ -22,6 +25,18 @@ const BROWSE_TILES = [
   { id: 'last-100', label: 'Last 100', icon: 'history', uri: 'Last_100' },
   { id: 'web-radio', label: 'Web Radio', icon: 'radio', uri: 'radio' },
 ];
+
+// URIs already covered by the hardcoded tiles (normalised to lowercase)
+const STATIC_URIS = new Set(BROWSE_TILES.map((t) => t.uri.toLowerCase().replace(/:?\/\/$/, '')));
+
+// Map service name (lowercase) to local no-text SVG logo
+const SERVICE_LOGO_MAP = {
+  spotify: '/assets/logos/services/spotify-no-text.svg',
+  qobuz: '/assets/logos/services/qobuz-no-text.svg',
+  tidal: '/assets/logos/services/tidal-no-text.svg',
+  deezer: '/assets/logos/services/deezer-no-text.svg',
+  youtube: '/assets/logos/services/youtube-no-text.svg',
+};
 
 // Formats total seconds into a human-readable duration string, e.g. "1h 23m" or "45m 12s"
 const formatTotalDuration = (totalSecs) => {
@@ -86,6 +101,31 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   const isSearching = debouncedSearch.length >= 2;
   const { queue } = useVolumioStatus();
   const { socket } = useSocket();
+
+  // Fetch root browse sources to discover installed music services (Spotify, Qobuz, etc.)
+  const { data: rootSources } = useQuery({
+    queryKey: ['browse-sources'],
+    queryFn: async () => {
+      const { data } = await axios.get(`${VOLUMIO_BASE_URL}/api/v1/browse`);
+      return data?.navigation?.lists ?? [];
+    },
+    staleTime: 60_000,
+    retry: 1,
+  });
+
+  // Dynamic tiles: sources from Volumio not already in BROWSE_TILES
+  const dynamicTiles = useMemo(() => {
+    if (!rootSources?.length) return [];
+    return rootSources
+      .filter((s) => s.uri && !STATIC_URIS.has(s.uri.toLowerCase().replace(/:?\/\/$/, '')))
+      .map((s) => ({
+        id: s.uri,
+        label: s.name,
+        uri: s.uri,
+        albumart: s.albumart,
+        icon: s.icon,
+      }));
+  }, [rootSources]);
 
   // Debounce search input — fire API call 400ms after user stops typing
   useEffect(() => {
@@ -185,7 +225,8 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   const handleAlbumPlay = useCallback(() => {
     socket?.emit('replaceAndPlay', albumPayload);
     closeAlbumMenu();
-  }, [socket, albumPayload, closeAlbumMenu]);
+    onClose?.();
+  }, [socket, albumPayload, closeAlbumMenu, onClose]);
 
   const handleAlbumAddToQueue = useCallback(() => {
     socket?.emit('addToQueue', albumPayload);
@@ -575,6 +616,19 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
           <span className="browse-tile__label">{label}</span>
         </Button>
       ))}
+      {dynamicTiles.map(({ id, label, uri, albumart }) => {
+        const localLogo = SERVICE_LOGO_MAP[label.toLowerCase()] || SERVICE_LOGO_MAP[uri.replace(/:?\/\/$/, '').toLowerCase()];
+        const imgSrc = localLogo || (albumart ? `${VOLUMIO_BASE_URL}${albumart}` : null);
+        return (
+          <Button key={id} label={label} classNames="btn-secondary browse-tile" onClick={() => navigate(uri, label)}>
+            {imgSrc
+              ? <img src={imgSrc} alt="" className="browse-tile__art" />
+              : <span className="material-icons browse-tile__icon">extension</span>
+            }
+            <span className="browse-tile__label">{label}</span>
+          </Button>
+        );
+      })}
     </div>
   );
 
