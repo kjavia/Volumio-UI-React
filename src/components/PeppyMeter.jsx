@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { SPECTRUM_STREAM_URL, PLUGIN_BASE_URL } from '@/config';
+import { getServiceLogoUrl } from './ServiceLogo';
 import { fetchMeterConfigs } from './peppy-meter/parseMeterConfig';
 import { loadMeterImages, renderMeterFrame } from './peppy-meter/meterRenderer';
 import PeppySpectrum from './peppy-spectrum/PeppySpectrum';
@@ -176,12 +177,6 @@ const PeppyMeter = ({
 
   // ── Load format/service icon when track type changes ────────────────────
 
-  const SERVICE_LOGO_MAP = useMemo(() => ({
-    spop: 'spotify', volspotconnect: 'spotify', volspotconnect2: 'spotify', spotify: 'spotify',
-    tidal: 'tidal', tidalconnect: 'tidal', tidalsession: 'tidal',
-    qobuz: 'qobuz', deezer: 'deezer',
-  }), []);
-
   const formatIconRef = useRef(null);
   useEffect(() => {
     const cfg = configRef.current;
@@ -190,15 +185,23 @@ const PeppyMeter = ({
     const service = (trackInfo?.service || '').toLowerCase().replace(/[_\s-]+/g, '');
     if (!trackType && !service) { formatIconRef.current = null; return; }
 
-    // Try format icon first (flac, mp3, dsd, etc.), then service logo
+    // Try format icon first (flac, mp3, dsd, etc.), then service logo via ServiceLogo
     const candidates = [];
     if (trackType) {
       const fmt = trackType === 'dsf' ? 'dsd' : trackType;
-      candidates.push(`/assets/logos/${fmt}.svg`);
+      // If trackType matches a known service, use its logo URL
+      const serviceUrl = getServiceLogoUrl(fmt);
+      if (serviceUrl) {
+        candidates.push(serviceUrl);
+      } else {
+        candidates.push(`/assets/logos/${fmt}.svg`);
+      }
     }
     if (service && service !== 'mpd') {
-      const mapped = SERVICE_LOGO_MAP[service] || service;
-      candidates.push(`/assets/logos/services/${mapped}.svg`);
+      const serviceUrl = getServiceLogoUrl(service);
+      if (serviceUrl) {
+        candidates.push(serviceUrl);
+      }
     }
 
     let cancelled = false;

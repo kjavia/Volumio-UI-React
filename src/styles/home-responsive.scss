@@ -1035,6 +1035,8 @@ body,
   height: clamp(1.5rem, 3cqi, 3rem);
   object-fit: contain;
   border-radius: 6px;
+  font-size: clamp(1.5rem, 3cqi, 3rem) !important;
+  flex-shrink: 0;
 }
 
 .browse-tile__label {

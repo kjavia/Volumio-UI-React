@@ -7,6 +7,7 @@ import Dialog from './Dialog';
 import Button from './Button';
 import TrackItem from './TrackItem';
 import AddToPlaylistDialog from './AddToPlaylistDialog';
+import ServiceLogo, { hasServiceLogo } from './ServiceLogo';
 import useBrowse from '@/hooks/useBrowse';
 import useSearch from '@/hooks/useSearch';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
@@ -24,20 +25,11 @@ const BROWSE_TILES = [
   { id: 'genres', label: 'Genres', icon: 'category', uri: 'genres://' },
   { id: 'last-100', label: 'Last 100', icon: 'history', uri: 'Last_100' },
   { id: 'web-radio', label: 'Web Radio', icon: 'radio', uri: 'radio' },
-  { id: 'upnp', label: 'Media Servers', art: '/assets/logos/services/dlna.svg', uri: 'upnp' },
+  { id: 'upnp', label: 'Media Servers', service: 'upnp', uri: 'upnp' },
 ];
 
 // URIs already covered by the hardcoded tiles (normalised to lowercase)
 const STATIC_URIS = new Set(BROWSE_TILES.map((t) => t.uri.toLowerCase().replace(/:?\/\/$/, '')));
-
-// Map service name (lowercase) to local no-text SVG logo
-const SERVICE_LOGO_MAP = {
-  spotify: '/assets/logos/services/spotify-no-text.svg',
-  qobuz: '/assets/logos/services/qobuz-no-text.svg',
-  tidal: '/assets/logos/services/tidal-no-text.svg',
-  deezer: '/assets/logos/services/deezer-no-text.svg',
-  youtube: '/assets/logos/services/youtube-no-text.svg',
-};
 
 // Formats total seconds into a human-readable duration string, e.g. "1h 23m" or "45m 12s"
 const formatTotalDuration = (totalSecs) => {
@@ -611,24 +603,27 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
 
   const renderHome = () => (
     <div className={viewMode === 'grid' ? 'browse-grid' : 'browse-list'}>
-      {BROWSE_TILES.map(({ id, label, icon, art, uri }) => (
+      {BROWSE_TILES.map(({ id, label, icon, service, uri }) => (
         <Button key={id} label={label} classNames="btn-secondary browse-tile" onClick={() => navigate(uri, label)}>
-          {art
-            ? <img src={art} alt="" className="browse-tile__art" />
+          {service
+            ? <ServiceLogo service={service} noText className="browse-tile__art" />
             : <span className="material-icons browse-tile__icon">{icon}</span>
           }
           <span className="browse-tile__label">{label}</span>
         </Button>
       ))}
       {dynamicTiles.map(({ id, label, uri, albumart }) => {
-        const localLogo = SERVICE_LOGO_MAP[label.toLowerCase()] || SERVICE_LOGO_MAP[uri.replace(/:?\/\/$/, '').toLowerCase()];
-        const imgSrc = localLogo || (albumart ? `${VOLUMIO_BASE_URL}${albumart}` : null);
+        const serviceName = label.toLowerCase();
+        const uriName = uri.replace(/:?\/\/$/, '').toLowerCase();
+        const serviceKey = serviceName || uriName;
+        const fallbackImg = albumart ? `${VOLUMIO_BASE_URL}${albumart}` : null;
         return (
           <Button key={id} label={label} classNames="btn-secondary browse-tile" onClick={() => navigate(uri, label)}>
-            {imgSrc
-              ? <img src={imgSrc} alt="" className="browse-tile__art" />
-              : <span className="material-icons browse-tile__icon">extension</span>
-            }
+            {hasServiceLogo(serviceKey)
+              ? <ServiceLogo service={serviceKey} noText className="browse-tile__art" />
+              : fallbackImg
+                ? <img src={fallbackImg} alt="" className="browse-tile__art" />
+                : <span className="material-icons browse-tile__icon">extension</span>}
             <span className="browse-tile__label">{label}</span>
           </Button>
         );
