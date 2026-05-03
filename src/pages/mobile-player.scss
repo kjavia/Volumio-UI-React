@@ -43,7 +43,7 @@
 }
 
 .mobile-grid.no-player {
-  grid-template-rows: 10% 22% 12% 22% 14% 20%;
+  grid-template-rows: 1fr 16% 8% 16% 10% 14%;
   grid-template-areas:
     'viz'
     'track-info'
@@ -90,7 +90,7 @@
 }
 
 .mobile-grid.no-player.no-volume {
-  grid-template-rows: 10% 26% 14% 26% 24%;
+  grid-template-rows: 1fr 20% 10% 20% 16%;
   grid-template-areas:
     'viz'
     'track-info'
@@ -329,8 +329,19 @@
       'volume';
   }
 
-  .mobile-row-viz {
+  .mobile-grid:not(.no-player) .mobile-row-viz {
     display: none !important;
+  }
+
+  .mobile-grid.no-player {
+    grid-template-rows: 1fr 16% 8% 16% 10% 14%;
+    grid-template-areas:
+      'viz'
+      'track-info'
+      'seekbar'
+      'transport'
+      'secondary'
+      'volume';
   }
 
   .cq-track-info {

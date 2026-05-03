@@ -24,6 +24,7 @@ const BROWSE_TILES = [
   { id: 'genres', label: 'Genres', icon: 'category', uri: 'genres://' },
   { id: 'last-100', label: 'Last 100', icon: 'history', uri: 'Last_100' },
   { id: 'web-radio', label: 'Web Radio', icon: 'radio', uri: 'radio' },
+  { id: 'upnp', label: 'Media Servers', art: '/assets/logos/services/dlna.svg', uri: 'upnp' },
 ];
 
 // URIs already covered by the hardcoded tiles (normalised to lowercase)
@@ -610,9 +611,12 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
 
   const renderHome = () => (
     <div className={viewMode === 'grid' ? 'browse-grid' : 'browse-list'}>
-      {BROWSE_TILES.map(({ id, label, icon, uri }) => (
+      {BROWSE_TILES.map(({ id, label, icon, art, uri }) => (
         <Button key={id} label={label} classNames="btn-secondary browse-tile" onClick={() => navigate(uri, label)}>
-          <span className="material-icons browse-tile__icon">{icon}</span>
+          {art
+            ? <img src={art} alt="" className="browse-tile__art" />
+            : <span className="material-icons browse-tile__icon">{icon}</span>
+          }
           <span className="browse-tile__label">{label}</span>
         </Button>
       ))}
