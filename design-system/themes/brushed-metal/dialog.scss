@@ -80,31 +80,29 @@
 
 .dialog-close {
   border-radius: 6px;
-  color: var(--color-gray-700);
+  color: rgba(255, 255, 255, 0.85);
   transition: all 0.15s ease;
 
   .material-icons {
-    -webkit-text-fill-color: var(--color-gray-800);
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.85);
     background-image: none;
     -webkit-background-clip: unset;
     background-clip: unset;
     filter: none;
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.5),
-      0 -1px 0 rgba(0, 0, 0, 0.08);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
 
   &:hover {
-    background: rgba(0, 0, 0, 0.08);
-    color: var(--color-gray-900);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
 
     .material-icons {
-      -webkit-text-fill-color: var(--color-gray-900);
+      -webkit-text-fill-color: #fff;
     }
   }
 
   &:active {
-    background: rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.05);
     transform: scale(0.95);
   }
 }
@@ -118,6 +116,17 @@
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.5),
     0 -1px 0 rgba(0, 0, 0, 0.08);
+}
+
+.dialog-header .dialog-close .material-icons,
+.dialog-header__actions .btn-icon .material-icons {
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.85) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.dialog-header .dialog-close:hover .material-icons,
+.dialog-header__actions .btn-icon:hover .material-icons {
+  -webkit-text-fill-color: #fff !important;
 }
 
 /* ── Toolbar ─────────────────────────────────────────────────────────── */
@@ -163,6 +172,20 @@
   .browse-search__clear {
     color: var(--color-gray-600);
   }
+}
+
+/* ── Browse toolbar (inside dialog body, dark background) ────────────── */
+.browse-toolbar .btn-icon {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.browse-toolbar .btn-icon:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.browse-toolbar .btn-icon.active {
+  color: var(--color-primary-light);
 }
 
 /* ── Body ─────────────────────────────────────────────────────────────── */

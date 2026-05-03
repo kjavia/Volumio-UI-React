@@ -780,6 +780,16 @@
     .browse-dialog--lsp .browse-toolbar .btn-icon {
         width: clamp(44px, 3.5cqi, 60px) !important;
         height: clamp(44px, 3.5cqi, 60px) !important;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    .browse-dialog--lsp .browse-toolbar .btn-icon:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .browse-dialog--lsp .browse-toolbar .btn-icon.active {
+        color: var(--color-primary-light);
     }
 
     .browse-dialog--lsp .browse-toolbar .btn-icon .material-icons,
@@ -836,6 +846,10 @@
         font-size: clamp(0.85rem, 1cqi, 1.3rem) !important;
     }
 
+    .browse-dialog--lsp .album-footer__format-logo {
+        filter: brightness(0) invert(0);
+    }
+
     .track-menu {
         min-width: 280px !important;
     }
@@ -849,6 +863,10 @@
     .track-menu__item .material-icons {
         font-size: 1.9rem !important;
     }
+}
+
+.album-footer__format-logo {
+    filter: brightness(0) invert(0);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════

@@ -1047,6 +1047,18 @@ body,
   width: 100%;
 }
 
+.album-footer__play {
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px;
+  min-height: 30px !important;
+  margin-left: auto;
+
+  .material-icons {
+    font-size: 1.15rem !important;
+  }
+}
+
 .album-footer__chip {
   display: inline-flex;
   align-items: center;
@@ -1076,7 +1088,7 @@ body,
   height: 14px;
   width: auto;
   display: block;
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(var(--format-logo-invert, 1));
   opacity: 0.75;
 }
 

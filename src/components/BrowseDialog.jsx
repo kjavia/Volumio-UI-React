@@ -445,6 +445,13 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
             || qualitySample.bitrate}
         </span>
       )}
+      <Button
+        classNames="btn-round btn-primary album-footer__play"
+        label="Play album"
+        onClick={handleAlbumPlay}
+      >
+        <span className="material-icons">play_arrow</span>
+      </Button>
     </div>
   ) : null;
 
@@ -471,39 +478,39 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
           }
         }
       }}>
-        <Button classNames="btn-icon" label="Home" onClick={goHome} disabled={!currentNav}>
-          <span className="material-icons">home</span>
-        </Button>
-        <Button
-          classNames={`btn-icon${!currentNav ? ' disabled' : ''}`}
-          label="Back"
-          onClick={goBack}
-          disabled={!currentNav}
-        >
-          <span className="material-icons">arrow_back</span>
-        </Button>
-        <Button
-          classNames={`btn-icon${viewMode === 'grid' ? ' active' : ''}`}
-          label="Grid view"
-          onClick={() => setViewMode('grid')}
-          disabled={!currentNav}
-        >
-          <span className="material-icons">grid_view</span>
-        </Button>
-        <Button
-          classNames={`btn-icon${viewMode === 'list' ? ' active' : ''}`}
-          label="List view"
-          onClick={() => setViewMode('list')}
-          disabled={!currentNav}
-        >
-          <span className="material-icons">view_list</span>
-        </Button>
-        {viewMode === 'grid' && (
+        {currentNav && (
+          <Button classNames="btn-icon" label="Home" onClick={goHome}>
+            <span className="material-icons">home</span>
+          </Button>
+        )}
+        {currentNav && (
+          <Button classNames="btn-icon" label="Back" onClick={goBack}>
+            <span className="material-icons">arrow_back</span>
+          </Button>
+        )}
+        {currentNav && (
+          <Button
+            classNames={`btn-icon${viewMode === 'grid' ? ' active' : ''}`}
+            label="Grid view"
+            onClick={() => setViewMode('grid')}
+          >
+            <span className="material-icons">grid_view</span>
+          </Button>
+        )}
+        {currentNav && (
+          <Button
+            classNames={`btn-icon${viewMode === 'list' ? ' active' : ''}`}
+            label="List view"
+            onClick={() => setViewMode('list')}
+          >
+            <span className="material-icons">view_list</span>
+          </Button>
+        )}
+        {currentNav && viewMode === 'grid' && (
           <Button
             classNames={`btn-icon${largeGrid ? ' active' : ''}`}
             label={largeGrid ? 'Normal size' : 'Large tiles'}
             onClick={() => setLargeGrid((v) => !v)}
-            disabled={!currentNav}
           >
             <span className="material-icons">{largeGrid ? 'zoom_out' : 'zoom_in'}</span>
           </Button>
