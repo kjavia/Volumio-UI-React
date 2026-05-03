@@ -686,6 +686,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
                         viewMode={viewMode}
                         onNavigate={navigate}
                         queueUris={queueUris}
+                        onPlayAndClose={onClose}
                         itemIndex={idx}
                       />
                     );
@@ -742,6 +743,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
                       onFavouriteToggled={isFavouritesView ? refetchBrowse : undefined}
                       isPlaylistItem={isPlaylistsView}
                       onPlaylistDeleted={isPlaylistsView ? refetchBrowse : undefined}
+                      onPlayAndClose={onClose}
                       itemIndex={startIdx + colIdx}
                     />
                   ) : (
@@ -778,6 +780,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
                   onFavouriteToggled={isFavouritesView ? refetchBrowse : undefined}
                   isPlaylistItem={isPlaylistsView}
                   onPlaylistDeleted={isPlaylistsView ? refetchBrowse : undefined}
+                  onPlayAndClose={onClose}
                   itemIndex={virtualItem.index}
                 />
               </div>
@@ -811,6 +814,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
             onFavouriteToggled={isFavouritesView ? refetchBrowse : undefined}
             isPlaylistItem={isPlaylistsView}
             onPlaylistDeleted={isPlaylistsView ? refetchBrowse : undefined}
+            onPlayAndClose={onClose}
             itemIndex={i}
           />
         ))}

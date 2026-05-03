@@ -76,7 +76,7 @@ const albumartUrl = (url) => {
  * @param {Set}     queueUris    - Optional set of URIs currently in the queue,
  *                                 used to disable "Add to Queue" when already queued
  */
-const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavouriteToggled, isPlaylistItem = false, onPlaylistDeleted, itemIndex }) => {
+const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavouriteToggled, isPlaylistItem = false, onPlaylistDeleted, itemIndex, onPlayAndClose }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPos, setMenuPos] = useState({ top: 0, left: 0 });
   const [addToPlaylistOpen, setAddToPlaylistOpen] = useState(false);
@@ -387,11 +387,11 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
                 : <span className="material-icons">music_note</span>
             }
             <button
-              className="browse-result-card__play"
+              className="btn btn-round btn-primary browse-result-card__play"
               type="button"
               tabIndex={-1}
               aria-label="Play"
-              onClick={(e) => { e.stopPropagation(); socket?.emit('replaceAndPlay', trackPayload); }}
+              onClick={(e) => { e.stopPropagation(); socket?.emit('replaceAndPlay', trackPayload); onPlayAndClose?.(); }}
             >
               <span className="material-icons">play_arrow</span>
             </button>
@@ -489,6 +489,7 @@ TrackItem.propTypes = {
   isPlaylistItem: PropTypes.bool,
   onPlaylistDeleted: PropTypes.func,
   itemIndex: PropTypes.number,
+  onPlayAndClose: PropTypes.func,
 };
 
 export default TrackItem;
