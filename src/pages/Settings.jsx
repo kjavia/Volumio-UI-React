@@ -82,6 +82,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
           ],
         },
         { id: 'showPlayerControls', element: 'switch', label: t('SHOW_PLAYER_CONTROLS', 'Show Player Controls'), icon: 'gamepad', doc: t('SHOW_PLAYER_CONTROLS_DESC', 'When disabled, player buttons are hidden.') },
+        { id: 'hideSeekHandle', element: 'switch', label: t('HIDE_SEEK_HANDLE', 'Hide Seek Bar Handle'), icon: 'drag_handle', doc: t('HIDE_SEEK_HANDLE_DESC', 'Hide the draggable handle on the seek bar for a cleaner look.') },
         { id: 'showRemainingTime', element: 'switch', label: t('SHOW_REMAINING_TIME', 'Show Remaining Time'), icon: 'timer', doc: t('SHOW_REMAINING_TIME_DESC', 'Show remaining time instead of total duration.') },
         { id: 'albumArtMaxSpace', element: 'switch', label: t('ALBUM_ART_MAX_SPACE', 'Use Maximum Space'), icon: 'aspect_ratio', doc: t('ALBUM_ART_MAX_SPACE_DESC', 'Expand album art to fill the panel.'), visibleIf: { field: 'playerType', value: 'albumArt' } },
         { id: 'showTrackPanel', element: 'switch', label: t('SHOW_TRACK_PANEL', 'Show Track Info Panel'), icon: 'info', doc: t('SHOW_TRACK_PANEL_DESC', 'Display a themed panel behind track info.') },
