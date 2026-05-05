@@ -14,7 +14,7 @@ const ALPHABET = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L
  * @param {string[]} props.availableLetters — labels that exist in the list (others appear dimmed)
  * @param {function} props.onSelect — called with the label when the user drags over it
  */
-const AlphabetScroller = ({ labels = ALPHABET, availableLetters, onSelect }) => {
+const AlphabetScroller = ({ labels = ALPHABET, availableLetters, currentLetter, onSelect }) => {
   const displayLabels = labels;
   const containerRef = useRef(null);
   const [activeLetter, setActiveLetter] = useState(null);
@@ -96,6 +96,7 @@ const AlphabetScroller = ({ labels = ALPHABET, availableLetters, onSelect }) => 
     >
       {displayLabels.map((letter) => {
         const isActive = activeLetter === letter;
+        const isCurrent = !dragging && currentLetter === letter;
         const isAvailable = availableSet.has(letter);
         return (
           <div
@@ -103,6 +104,7 @@ const AlphabetScroller = ({ labels = ALPHABET, availableLetters, onSelect }) => 
             className={[
               'alphabet-scroller__letter',
               isActive ? 'alphabet-scroller__letter--active' : '',
+              isCurrent ? 'alphabet-scroller__letter--current' : '',
               !isAvailable ? 'alphabet-scroller__letter--dim' : '',
             ].join(' ')}
           >
@@ -122,6 +124,7 @@ const AlphabetScroller = ({ labels = ALPHABET, availableLetters, onSelect }) => 
 AlphabetScroller.propTypes = {
   labels: PropTypes.arrayOf(PropTypes.string),
   availableLetters: PropTypes.arrayOf(PropTypes.string),
+  currentLetter: PropTypes.string,
   onSelect: PropTypes.func.isRequired,
 };
 

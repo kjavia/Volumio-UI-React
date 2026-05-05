@@ -385,6 +385,54 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     browseVirtualizer.scrollToIndex(rowIndex, { align: 'start' });
   }, [letterToIndex, viewMode, numCols, browseVirtualizer]);
 
+  // Derive the current letter from the first visible item in the viewport
+  const [currentScrollLetter, setCurrentScrollLetter] = useState(null);
+
+  useEffect(() => {
+    const el = browseBodyRef.current;
+    if (!el || !showAlphabetScroller) {
+      setCurrentScrollLetter(null);
+      return;
+    }
+
+    const rowHeight = viewMode === 'grid' ? (largeGrid ? 330 : 200) : 56;
+
+    const getLetterFromScroll = () => {
+      const scrollTop = el.scrollTop;
+      const firstRowIndex = Math.floor(scrollTop / rowHeight);
+      const itemIndex = viewMode === 'grid' ? firstRowIndex * numCols : firstRowIndex;
+      const item = filteredItems[Math.min(itemIndex, filteredItems.length - 1)];
+      if (!item) return null;
+
+      if (sortBy === 'year') {
+        const yr = parseInt(item.year, 10);
+        if (!yr) return null;
+        return `${Math.floor(yr / 10) * 10 % 100}`.padStart(2, '0');
+      }
+      const field = sortBy === 'artist' ? (item.artist || '') : (item.title || '');
+      const firstChar = field.charAt(0).toUpperCase();
+      return /[A-Z]/.test(firstChar) ? firstChar : '#';
+    };
+
+    let rafId = null;
+    const handleScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        setCurrentScrollLetter(getLetterFromScroll());
+      });
+    };
+
+    el.addEventListener('scroll', handleScroll, { passive: true });
+    // Set initial value
+    setCurrentScrollLetter(getLetterFromScroll());
+
+    return () => {
+      el.removeEventListener('scroll', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [showAlphabetScroller, filteredItems, viewMode, numCols, sortBy, largeGrid]);
+
   // ── State-based grid keyboard navigation ──
   // When focusedGridIndex changes, scroll the virtualizer to the target row
   // and focus the rendered element after layout.
@@ -905,6 +953,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
             <AlphabetScroller
               labels={scrollerLabels || undefined}
               availableLetters={availableLetters}
+              currentLetter={currentScrollLetter}
               onSelect={handleAlphabetSelect}
             />
           )}

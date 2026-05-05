@@ -34,6 +34,12 @@
       font-weight: 700;
     }
 
+    &--current {
+      color: var(--accent-color, #1db954);
+      font-weight: 700;
+      opacity: 1;
+    }
+
     &--dim {
       opacity: 0.3;
     }
