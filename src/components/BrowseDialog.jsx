@@ -7,6 +7,7 @@ import Dialog from './Dialog';
 import Button from './Button';
 import TrackItem from './TrackItem';
 import AddToPlaylistDialog from './AddToPlaylistDialog';
+import AlphabetScroller from './AlphabetScroller';
 import ServiceLogo, { hasServiceLogo } from './ServiceLogo';
 import useBrowse from '@/hooks/useBrowse';
 import useSearch from '@/hooks/useSearch';
@@ -81,6 +82,8 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   const [albumMenuOpen, setAlbumMenuOpen] = useState(false);
   const [albumMenuPos, setAlbumMenuPos] = useState({ top: 0, left: 0 });
   const [albumAddToPlaylistOpen, setAlbumAddToPlaylistOpen] = useState(false);
+  const [sortBy, setSortBy] = useState('name');
+  const [sortDir, setSortDir] = useState('asc');
   const albumMenuBtnRef = useRef(null);
   const albumMenuRef = useRef(null);
   const browseBodyRef = useRef(null);
@@ -284,7 +287,35 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     setDebouncedSearch('');
   }, []);
 
-  const filteredItems = browseItems;
+  const isSortableList = !isSearching && browseItems.length > 1 && !browseItems.every((i) => i.type === 'song');
+
+  const toggleSort = useCallback((field) => {
+    if (sortBy === field) {
+      setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+    } else {
+      setSortBy(field);
+      setSortDir(field === 'year' ? 'desc' : 'asc');
+    }
+  }, [sortBy]);
+
+  const filteredItems = useMemo(() => {
+    if (!isSortableList || !sortBy) return browseItems;
+    const dir = sortDir === 'asc' ? 1 : -1;
+    return [...browseItems].sort((a, b) => {
+      if (sortBy === 'name') {
+        return dir * (a.title || '').localeCompare(b.title || '', undefined, { sensitivity: 'base' });
+      }
+      if (sortBy === 'artist') {
+        return dir * (a.artist || '').localeCompare(b.artist || '', undefined, { sensitivity: 'base' });
+      }
+      if (sortBy === 'year') {
+        const ya = parseInt(a.year, 10) || 0;
+        const yb = parseInt(b.year, 10) || 0;
+        return dir * (ya - yb);
+      }
+      return 0;
+    });
+  }, [browseItems, isSearching, isSortableList, sortBy, sortDir]);
 
   const useVirtual = !isSearching && !isFavouritesView;
   const gridItemMin = largeGrid ? 260 : 130;
@@ -303,6 +334,56 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     overscan: 10,
     enabled: useVirtual,
   });
+
+  // ── Alphabet quick-scroll ──
+  // Show only for virtualised lists with enough items to benefit
+  const showAlphabetScroller = useVirtual && filteredItems.length > 30;
+
+  // Compute scroller labels and index map
+  // When sorting by year, show decades (50s, 60s, 70s…); otherwise A-Z letters
+  const { scrollerLabels, availableLetters, letterToIndex } = useMemo(() => {
+    if (!showAlphabetScroller) return { scrollerLabels: null, availableLetters: [], letterToIndex: {} };
+
+    if (sortBy === 'year') {
+      // Build decade labels from items — use full decade for correct ordering
+      const decadeMap = new Map(); // fullDecade (e.g. 1970) → 2-digit label (e.g. "70")
+      const firstIndex = {};
+      for (let i = 0; i < filteredItems.length; i++) {
+        const yr = parseInt(filteredItems[i].year, 10);
+        if (!yr) continue;
+        const fullDecade = Math.floor(yr / 10) * 10;
+        const label = `${fullDecade % 100}`.padStart(2, '0');
+        decadeMap.set(fullDecade, label);
+        if (firstIndex[label] === undefined) firstIndex[label] = i;
+      }
+      // Sort by full decade value to handle century boundaries correctly
+      const sorted = [...decadeMap.entries()]
+        .sort((a, b) => sortDir === 'asc' ? a[0] - b[0] : b[0] - a[0])
+        .map(([, label]) => label);
+      return { scrollerLabels: sorted, availableLetters: sorted, letterToIndex: firstIndex };
+    }
+
+    // Default: alphabet letters based on title or artist
+    const letters = new Set();
+    const firstIndex = {};
+    for (let i = 0; i < filteredItems.length; i++) {
+      const field = sortBy === 'artist' ? (filteredItems[i].artist || '') : (filteredItems[i].title || '');
+      const firstChar = field.charAt(0).toUpperCase();
+      const letter = /[A-Z]/.test(firstChar) ? firstChar : '#';
+      letters.add(letter);
+      if (firstIndex[letter] === undefined) firstIndex[letter] = i;
+    }
+    return { scrollerLabels: null, availableLetters: [...letters], letterToIndex: firstIndex };
+  }, [showAlphabetScroller, filteredItems, sortBy, sortDir]);
+
+  const handleAlphabetSelect = useCallback((letter) => {
+    const itemIndex = letterToIndex[letter];
+    if (itemIndex === undefined) return;
+    const rowIndex = viewMode === 'grid'
+      ? Math.floor(itemIndex / numCols)
+      : itemIndex;
+    browseVirtualizer.scrollToIndex(rowIndex, { align: 'start' });
+  }, [letterToIndex, viewMode, numCols, browseVirtualizer]);
 
   // ── State-based grid keyboard navigation ──
   // When focusedGridIndex changes, scroll the virtualizer to the target row
@@ -549,6 +630,34 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
             <span className="material-icons">{largeGrid ? 'zoom_out' : 'zoom_in'}</span>
           </Button>
         )}
+        {currentNav && isSortableList && (
+          <div className="browse-sort-group">
+            <Button
+              classNames={`btn-icon btn-sort${sortBy === 'name' ? ' active' : ''}`}
+              label="Sort by name"
+              onClick={() => toggleSort('name')}
+            >
+              <span className="material-icons">sort_by_alpha</span>
+              {sortBy === 'name' && <span className="material-icons browse-sort-arrow">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}
+            </Button>
+            <Button
+              classNames={`btn-icon btn-sort${sortBy === 'artist' ? ' active' : ''}`}
+              label="Sort by artist"
+              onClick={() => toggleSort('artist')}
+            >
+              <span className="material-icons">person</span>
+              {sortBy === 'artist' && <span className="material-icons browse-sort-arrow">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}
+            </Button>
+            <Button
+              classNames={`btn-icon btn-sort${sortBy === 'year' ? ' active' : ''}`}
+              label="Sort by year"
+              onClick={() => toggleSort('year')}
+            >
+              <span className="material-icons">calendar_today</span>
+              {sortBy === 'year' && <span className="material-icons browse-sort-arrow">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}
+            </Button>
+          </div>
+        )}
       </div>
       <div className="browse-toolbar__right">
         <div className="browse-search">
@@ -792,6 +901,13 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
       return (
         <>
           {scrollContent}
+          {showAlphabetScroller && (
+            <AlphabetScroller
+              labels={scrollerLabels || undefined}
+              availableLetters={availableLetters}
+              onSelect={handleAlphabetSelect}
+            />
+          )}
         </>
       );
     }

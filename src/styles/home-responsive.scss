@@ -505,6 +505,38 @@ body,
   gap: 0.25rem;
 }
 
+.browse-sort-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  margin-left: 0.25rem;
+  border-left: 1px solid rgba(128, 128, 128, 0.25);
+  padding-left: 0.25rem;
+
+  .btn-sort {
+    opacity: 0.5;
+    transition: opacity 0.15s;
+    position: relative;
+
+    &.active {
+      opacity: 1;
+    }
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}
+
+.browse-sort-arrow {
+  font-size: 0.65rem !important;
+  position: absolute;
+  bottom: 2px;
+  right: 0;
+  line-height: 1;
+  opacity: 0.8;
+}
+
 .browse-search {
   position: relative;
   display: flex;
