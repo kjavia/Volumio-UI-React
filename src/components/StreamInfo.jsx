@@ -16,7 +16,7 @@ const LOGO_MAP = {
 const STREAMING_SERVICES = new Set([
   'spotify', 'spop', 'tidal', 'qobuz', 'deezer', 'soundcloud',
   'youtube', 'youtubemusic', 'applemusic', 'pandora', 'bandcamp',
-  'napster', 'webradio', 'radio',
+  'napster', 'webradio', 'radio', 'airplay', 'shairportsync',
 ]);
 
 // DSD format types

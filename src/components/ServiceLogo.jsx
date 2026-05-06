@@ -53,6 +53,10 @@ const SERVICE_MAP = {
   napster: { label: 'Napster', icon: SiNapster, color: '#000000' },
   radio: { label: 'Web Radio' },
   webradio: { label: 'Web Radio' },
+  // ── AirPlay ──────────────────────────────────────────────────────────────
+  airplay: { label: 'AirPlay', materialIcon: 'airplay', color: '#ffffff' },
+  shairportsync: { label: 'AirPlay', materialIcon: 'airplay', color: '#ffffff' },
+  airplay_emulation: { label: 'AirPlay', materialIcon: 'airplay', color: '#ffffff' },
   mpd: null, // local — don't show a badge
 };
 
@@ -73,9 +77,9 @@ const ServiceLogo = ({ service, noText = false, className = '' }) => {
   // Null entry → local/unknown service, render nothing
   if (entry === null || entry === undefined) return null;
 
-  const { label, icon: Icon, img, noTextImg, color } = entry;
+  const { label, icon: Icon, img, noTextImg, color, materialIcon } = entry;
 
-  // noText mode: prefer no-text SVG, then react-icon, then fall through
+  // noText mode: prefer no-text SVG, then material icon, then react-icon, then fall through
   if (noText && noTextImg) {
     return (
       <img
@@ -83,6 +87,18 @@ const ServiceLogo = ({ service, noText = false, className = '' }) => {
         alt={label}
         className={`service-logo-img ${className}`}
       />
+    );
+  }
+
+  if (noText && materialIcon) {
+    return (
+      <span
+        className={`material-icons service-logo-icon ${className}`}
+        aria-label={label}
+        style={{ color: color || 'currentColor' }}
+      >
+        {materialIcon}
+      </span>
     );
   }
 
@@ -124,6 +140,19 @@ const ServiceLogo = ({ service, noText = false, className = '' }) => {
         className={`service-logo-icon ${className}`}
         style={{ fontSize: '1.8rem', color: color || 'currentColor', flexShrink: 0 }}
       />
+    );
+  }
+
+  // Material icon (e.g. AirPlay)
+  if (materialIcon) {
+    return (
+      <span
+        className={`material-icons service-logo-icon ${className}`}
+        aria-label={label}
+        style={{ fontSize: '1.8rem', color: color || 'currentColor', flexShrink: 0 }}
+      >
+        {materialIcon}
+      </span>
     );
   }
 

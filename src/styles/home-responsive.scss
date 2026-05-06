@@ -495,7 +495,14 @@ body,
   justify-content: space-between;
   gap: 0.5rem;
   padding: 0.25rem 0.5rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .browse-toolbar__left,
@@ -503,6 +510,7 @@ body,
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  flex-shrink: 0;
 }
 
 .browse-sort-group {
