@@ -162,7 +162,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     Math.floor(Math.random() * RANDOM_PLAYERS.length)
   );
   useEffect(() => {
-    if (playerType === 'random') {
+    if (playerType === 'random' && title) {
       setRandomIndex(Math.floor(Math.random() * RANDOM_PLAYERS.length));
     }
   }, [title, playerType]);

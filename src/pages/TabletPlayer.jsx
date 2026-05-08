@@ -132,7 +132,7 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
   );
 
   useEffect(() => {
-    if (playerType === 'random') {
+    if (playerType === 'random' && title) {
       setRandomIndex(Math.floor(Math.random() * RANDOM_PLAYERS.length));
     }
   }, [title, playerType]);

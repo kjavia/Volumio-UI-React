@@ -193,7 +193,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
 
   // Pick a new random index when title or playerType changes (async setState to satisfy lint rules)
   useEffect(() => {
-    if (playerType !== 'random') return;
+    if (playerType !== 'random' && title) return;
     const id = setTimeout(() => setRandomIndex(Math.floor(Math.random() * RANDOM_PLAYERS.length)), 0);
     return () => clearTimeout(id);
   }, [title, playerType]);

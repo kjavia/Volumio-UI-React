@@ -105,7 +105,7 @@ const PeppyMeter = ({
   // ── Resolve active model (handle "random" + track changes) ────────────
 
   useEffect(() => {
-    if (!allConfigs) return;
+    if (!allConfigs || !trackUri) return;
     const names = Object.keys(allConfigs);
     if (!names.length) { setError('No meters found in meters.txt'); return; }
 
