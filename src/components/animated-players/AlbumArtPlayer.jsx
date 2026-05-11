@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import './album-art.scss';
 
-const AlbumArtPlayer = ({ isPlaying, albumArt, maxSpace }) => {
+const AlbumArtPlayer = ({ isPlaying, albumArt, maxSpace, animated = true }) => {
   return (
     <div className={`album-art-player ${maxSpace ? 'album-art-player--max-space' : ''}`}>
-      <div className={`rainbow-border ${isPlaying ? 'playing' : ''}`}>
+      <div className={`rainbow-border ${animated && isPlaying ? 'playing' : ''} ${!animated ? 'rainbow-border--no-animation' : ''}`}>
         <div className="album-art-inner">
           {albumArt ? (
             <img src={albumArt} alt="Album Art" className="album-art-image" />
@@ -31,6 +31,7 @@ AlbumArtPlayer.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   albumArt: PropTypes.string,
   maxSpace: PropTypes.bool,
+  animated: PropTypes.bool,
 };
 
 export default AlbumArtPlayer;

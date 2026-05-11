@@ -71,6 +71,7 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
   const playerType = pluginConfig?.playerType || 'radio';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
   const albumArtMaxSpace = pluginConfig?.albumArtMaxSpace === true;
+  const albumArtAnimated = pluginConfig?.albumArtAnimated !== false;
   const showTrackPanel = pluginConfig?.showTrackPanel === true;
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
@@ -263,6 +264,7 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
                 isPlaying={isPlaying}
                 albumArt={fullAlbumArt}
                 maxSpace={isMaxSpace}
+                animated={albumArtAnimated && effectivePlayerType === 'albumArt'}
               />
             </div>
           </div>

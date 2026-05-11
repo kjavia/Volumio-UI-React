@@ -71,6 +71,7 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
   const showTrackPanel = pluginConfig?.showTrackPanel === true;
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
+  const albumArtAnimated = pluginConfig?.albumArtAnimated !== false;
   const backgroundColor = pluginConfig?.backgroundColor || '';
   const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
   const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
@@ -253,6 +254,7 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
               <CurrentPlayerComponent
                 isPlaying={isPlaying}
                 albumArt={fullAlbumArt}
+                animated={albumArtAnimated && effectivePlayerType === 'albumArt'}
               />
             </div>
           </div>

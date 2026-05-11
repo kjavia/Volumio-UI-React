@@ -81,6 +81,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const playerType = pluginConfig?.playerType || 'radio';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
   const albumArtMaxSpace = pluginConfig?.albumArtMaxSpace === true;
+  const albumArtAnimated = pluginConfig?.albumArtAnimated !== false;
   const showTrackPanel = pluginConfig?.showTrackPanel === true;
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
@@ -251,7 +252,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               onDoubleClick={cyclePlayer}
               onTouchEnd={handleDoubleTap}
             >
-              <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} maxSpace={albumArtMaxSpace && effectivePlayerType === 'albumArt'} />
+              <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} maxSpace={albumArtMaxSpace && effectivePlayerType === 'albumArt'} animated={albumArtAnimated && effectivePlayerType === 'albumArt'} />
             </div>
           </div>
         )}

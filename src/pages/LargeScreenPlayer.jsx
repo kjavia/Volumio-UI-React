@@ -124,6 +124,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
   const vizType = pluginConfig?.vizType || 'spectrum';
   const showViz = vizType !== 'none';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
+  const albumArtAnimated = pluginConfig?.albumArtAnimated !== false;
   const backgroundColor = pluginConfig?.backgroundColor || '';
   const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
   const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
@@ -311,7 +312,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
       onDoubleClick={cyclePlayer}
       onTouchEnd={handleDoubleTap}
     >
-      <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
+      <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} animated={albumArtAnimated && effectivePlayerType === 'albumArt'} />
     </div>
   ) : null;
 
@@ -500,7 +501,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
                   onDoubleClick={cyclePlayer}
                   onTouchEnd={handleDoubleTap}
                 >
-                  <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} />
+                  <CurrentPlayerComponent isPlaying={isPlaying} albumArt={fullAlbumArt} animated={albumArtAnimated && effectivePlayerType === 'albumArt'} />
                 </div>
               )}
               {showViz && (
