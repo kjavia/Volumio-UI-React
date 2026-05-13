@@ -60,6 +60,10 @@ const ContextMenu = ({
         <span className="material-icons">queue_music</span>
         Playlist Manager
       </button>
+      <button className="context-menu-item" onClick={close(() => navigate('/layout-designer'))}>
+        <span className="material-icons">grid_view</span>
+        Layout Designer
+      </button>
       <button className="context-menu-item" onClick={close(() => navigate('/settings'))}>
         <span className="material-icons">settings</span>
         Settings
