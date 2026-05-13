@@ -87,6 +87,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
         { id: 'albumArtMaxSpace', element: 'switch', label: t('ALBUM_ART_MAX_SPACE', 'Use Maximum Space'), icon: 'aspect_ratio', doc: t('ALBUM_ART_MAX_SPACE_DESC', 'Expand album art to fill the panel.'), visibleIf: { field: 'playerType', value: 'albumArt' } },
         { id: 'albumArtAnimated', element: 'switch', label: t('ALBUM_ART_ANIMATED', 'Animated Album Art'), icon: 'animation', doc: t('ALBUM_ART_ANIMATED_DESC', 'Enable rainbow border animation when playing.'), visibleIf: { field: 'playerType', value: 'albumArt' } },
         { id: 'showTrackPanel', element: 'switch', label: t('SHOW_TRACK_PANEL', 'Show Track Info Panel'), icon: 'info', doc: t('SHOW_TRACK_PANEL_DESC', 'Display a themed panel behind track info.') },
+        { id: 'useCustomLayout', element: 'switch', label: t('USE_CUSTOM_LAYOUT', 'Use Custom Layouts'), icon: 'grid_view', doc: t('USE_CUSTOM_LAYOUT_DESC', 'When enabled, the player will use a saved custom layout for the current screen resolution if one exists.') },
         {
           id: 'vizType', element: 'select', label: t('VIZ_TYPE', 'Visualization'), icon: 'equalizer',
           doc: t('VIZ_TYPE_DESC', 'Select the visualization displayed on the player screen.'),
@@ -900,11 +901,19 @@ const Settings = () => {
 
   return (
     <div className="settings-page">
-      <div className="settings-topbar">
-        <h2 className="settings-topbar__title">Settings</h2>
-        <button className="btn btn-sm btn-primary settings-close-btn" onClick={() => navigate(-1)} aria-label="Close">
-          <span className="material-icons">close</span>
-        </button>
+      <div className="settings-topbar d-flex align-items-center justify-content-between">
+        <div>
+          <h2 className="settings-topbar__title">Settings</h2>
+        </div>
+        <div className="d-flex gap-2 align-items-center">
+          <button className="btn btn-sm btn-outline-secondary" onClick={() => navigate('/layout-designer')}>
+            <span className="material-icons">grid_view</span>
+            Layout Designer
+          </button>
+          <button className="btn btn-sm btn-primary settings-close-btn" onClick={() => navigate(-1)} aria-label="Close">
+            <span className="material-icons">close</span>
+          </button>
+        </div>
       </div>
       <div className="settings-tabs" role="tablist">
         {sections.map((section) => (
