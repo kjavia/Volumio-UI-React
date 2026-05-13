@@ -1,14 +1,20 @@
 .layout-designer-page {
   color: white;
+  padding: 1.25rem;
 }
 
 .layout-designer-topbar {
   gap: 1rem;
+  padding: 1rem;
 }
 
 .layout-designer-title {
   margin: 0;
   font-size: 1.75rem;
+}
+
+.layout-designer-panel .card-body {
+  padding: 1.25rem;
 }
 
 .layout-designer-subtitle {

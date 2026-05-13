@@ -4,7 +4,6 @@ import { useSocket } from '@/contexts/SocketContext';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/Toast';
-import { PLUGIN_BASE_URL } from '@/config';
 import './layout-designer.scss';
 
 const PLUGIN_ENDPOINT = 'user_interface/stylish_player';
@@ -37,6 +36,21 @@ const parseLayoutDesigner = (value) => {
 
 const makeEmptyCells = (rows, cols) => Array.from({ length: rows }, () => Array.from({ length: cols }, () => null));
 
+const getNextLayoutName = (existingLayouts) => {
+  let index = 1;
+  while (existingLayouts.some((layout) => layout.name?.toLowerCase() === `layout${index}`.toLowerCase())) {
+    index += 1;
+  }
+  return `Layout${index}`;
+};
+
+const isDuplicateLayoutName = (name, layouts, excludeId = null) => {
+  if (!name) return false;
+  return layouts.some(
+    (layout) => layout.id !== excludeId && layout.name?.toLowerCase() === name.trim().toLowerCase()
+  );
+};
+
 const LayoutDesigner = () => {
   const navigate = useNavigate();
   const { socket } = useSocket();
@@ -44,8 +58,10 @@ const LayoutDesigner = () => {
   const { toasts, showToast } = useToast();
   const [layouts, setLayouts] = useState([]);
   const [activeLayoutId, setActiveLayoutId] = useState(null);
+  const [isCreatingLayout, setIsCreatingLayout] = useState(false);
   const [widthInput, setWidthInput] = useState('');
   const [heightInput, setHeightInput] = useState('');
+  const [nameInput, setNameInput] = useState('Layout1');
   const [saving, setSaving] = useState(false);
   const [contextMenu, setContextMenu] = useState(null);
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -112,9 +128,34 @@ const LayoutDesigner = () => {
     setLayouts((prev) => prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout)));
   }, []);
 
+  const persistLayouts = useCallback((layoutsToPersist) => {
+    if (!socket) {
+      showToast('Unable to save layout. Connection not available.', 'error');
+      return;
+    }
+
+    socket.emit('callMethod', {
+      endpoint: PLUGIN_ENDPOINT,
+      method: 'configSaveLayoutDesigner',
+      data: { layoutDesigner: JSON.stringify({ layouts: layoutsToPersist }) },
+    });
+  }, [socket, showToast]);
+
   const handleAddLayout = () => {
+    const name = nameInput.trim();
     const width = parseInt(widthInput, 10);
     const height = parseInt(heightInput, 10);
+
+    if (!name || !widthInput.trim() || !heightInput.trim()) {
+      showToast('Please fill in layout name, width, and height.', 'error');
+      return;
+    }
+
+    if (isDuplicateLayoutName(name, layouts)) {
+      showToast('Duplicate layout names are not allowed.', 'error');
+      return;
+    }
+
     if (Number.isNaN(width) || width <= 0 || Number.isNaN(height) || height <= 0) {
       showToast('Enter valid width and height in pixels.', 'error');
       return;
@@ -122,74 +163,32 @@ const LayoutDesigner = () => {
 
     const newLayout = {
       id: `layout-${Date.now()}`,
+      name,
       width,
       height,
       rows: 1,
       cols: 1,
       cells: makeEmptyCells(1, 1),
     };
-    setLayouts((prev) => [...prev, newLayout]);
+
+    const updatedLayouts = [...layouts, newLayout];
+    setLayouts(updatedLayouts);
     setActiveLayoutId(newLayout.id);
+    setIsCreatingLayout(false);
+    setNameInput(getNextLayoutName(updatedLayouts));
     setWidthInput('');
     setHeightInput('');
-  };
 
-  const handleDeleteLayout = () => {
-    if (!activeLayout) return;
-    if (!window.confirm('Delete this layout?')) return;
-    setLayouts((prev) => prev.filter((layout) => layout.id !== activeLayout.id));
-    setContextMenu(null);
-  };
-
-  const handleAddRow = () => {
-    if (!activeLayout) return;
-    const cells = activeLayout.cells.map((row) => [...row]);
-    cells.push(Array(activeLayout.cols).fill(null));
-    updateLayout({ ...activeLayout, rows: activeLayout.rows + 1, cells });
-    setContextMenu(null);
-  };
-
-  const handleAddColumn = () => {
-    if (!activeLayout) return;
-    const cells = activeLayout.cells.map((row) => [...row, null]);
-    updateLayout({ ...activeLayout, cols: activeLayout.cols + 1, cells });
-    setContextMenu(null);
-  };
-
-  const handleAssignItem = (itemKey) => {
-    if (!activeLayout || !contextMenu) return;
-    const { row, col } = contextMenu;
-    const cells = activeLayout.cells.map((rowCells, rowIndex) =>
-      rowCells.map((cell, colIndex) => (rowIndex === row && colIndex === col ? itemKey : cell))
-    );
-    updateLayout({ ...activeLayout, cells });
-    setContextMenu(null);
-  };
-
-  const handleClearCell = (row, col) => {
-    if (!activeLayout) return;
-    const cells = activeLayout.cells.map((rowCells, rowIndex) =>
-      rowCells.map((cell, colIndex) => (rowIndex === row && colIndex === col ? null : cell))
-    );
-    updateLayout({ ...activeLayout, cells });
-    setContextMenu(null);
-  };
-
-  const handleSave = () => {
     if (!socket) {
       showToast('Unable to save layout. Connection not available.', 'error');
       return;
     }
+
     setSaving(true);
-
-    const payload = {
-      layoutDesigner: JSON.stringify({ layouts }),
-    };
-
     socket.emit('callMethod', {
       endpoint: PLUGIN_ENDPOINT,
       method: 'configSaveLayoutDesigner',
-      data: payload,
+      data: { layoutDesigner: JSON.stringify({ layouts: updatedLayouts }) },
     });
 
     const handleToast = (payload) => {
@@ -215,6 +214,121 @@ const LayoutDesigner = () => {
       setSaving(false);
     }, 5000);
   };
+
+  const handleDeleteLayout = () => {
+    if (!activeLayout) return;
+    const confirmed = window.confirm(`Delete layout "${activeLayout.name}"?`);
+    if (!confirmed) return;
+    const updatedLayouts = layouts.filter((layout) => layout.id !== activeLayout.id);
+    setLayouts(updatedLayouts);
+    setContextMenu(null);
+    persistLayouts(updatedLayouts);
+  };
+
+  const handleStartCreatingLayout = () => {
+    setIsCreatingLayout(true);
+    setNameInput(getNextLayoutName(layouts));
+    setWidthInput('');
+    setHeightInput('');
+  };
+
+  const handleCancelCreatingLayout = () => {
+    setIsCreatingLayout(false);
+    setNameInput(getNextLayoutName(layouts));
+    setWidthInput('');
+    setHeightInput('');
+  };
+
+  const handleInsertRow = (rowIndex, direction) => {
+    if (!activeLayout) return;
+    const newRow = Array(activeLayout.cols).fill(null);
+    const cells = [...activeLayout.cells];
+    const insertAt = direction === 'above' ? rowIndex : rowIndex + 1;
+    cells.splice(insertAt, 0, newRow);
+    const updatedLayout = { ...activeLayout, rows: activeLayout.rows + 1, cells };
+    setLayouts((prev) => {
+      const updated = prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout));
+      persistLayouts(updated);
+      return updated;
+    });
+    setContextMenu(null);
+  };
+
+  const handleInsertColumn = (colIndex, direction) => {
+    if (!activeLayout) return;
+    const cells = activeLayout.cells.map((row) => {
+      const newRow = [...row];
+      const insertAt = direction === 'left' ? colIndex : colIndex + 1;
+      newRow.splice(insertAt, 0, null);
+      return newRow;
+    });
+    const updatedLayout = { ...activeLayout, cols: activeLayout.cols + 1, cells };
+    setLayouts((prev) => {
+      const updated = prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout));
+      persistLayouts(updated);
+      return updated;
+    });
+    setContextMenu(null);
+  };
+
+  const handleRemoveCell = (row, col) => {
+    if (!activeLayout) return;
+    const cells = activeLayout.cells.map((rowCells, rowIndex) =>
+      rowCells.map((cell, colIndex) => (rowIndex === row && colIndex === col ? null : cell))
+    );
+    const updatedLayout = { ...activeLayout, cells };
+    setLayouts((prev) => {
+      const updated = prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout));
+      persistLayouts(updated);
+      return updated;
+    });
+    setContextMenu(null);
+  };
+
+  const handleUpdateLayoutName = (name) => {
+    if (!activeLayout) return;
+    if (isDuplicateLayoutName(name, layouts, activeLayout.id)) {
+      showToast('Duplicate layout names are not allowed.', 'error');
+      return;
+    }
+    const updatedLayout = { ...activeLayout, name };
+    updateLayout(updatedLayout);
+    setLayouts((prev) => {
+      const updated = prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout));
+      persistLayouts(updated);
+      return updated;
+    });
+  };
+
+  const handleAssignItem = (itemKey) => {
+    if (!activeLayout || !contextMenu) return;
+    const { row, col } = contextMenu;
+    const cells = activeLayout.cells.map((rowCells, rowIndex) =>
+      rowCells.map((cell, colIndex) => (rowIndex === row && colIndex === col ? itemKey : cell))
+    );
+    const updatedLayout = { ...activeLayout, cells };
+    setLayouts((prev) => {
+      const updated = prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout));
+      persistLayouts(updated);
+      return updated;
+    });
+    setContextMenu(null);
+  };
+
+  const handleClearCell = (row, col) => {
+    if (!activeLayout) return;
+    const cells = activeLayout.cells.map((rowCells, rowIndex) =>
+      rowCells.map((cell, colIndex) => (rowIndex === row && colIndex === col ? null : cell))
+    );
+    const updatedLayout = { ...activeLayout, cells };
+    setLayouts((prev) => {
+      const updated = prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout));
+      persistLayouts(updated);
+      return updated;
+    });
+    setContextMenu(null);
+  };
+
 
   const hasLayout = !!activeLayout;
   const matchedLayout = useMemo(() => {
@@ -244,155 +358,223 @@ const LayoutDesigner = () => {
           <button type="button" className="btn btn-outline-secondary" onClick={() => navigate(-1)}>
             <span className="material-icons">arrow_back</span> Back
           </button>
-          <button type="button" className="btn btn-primary" onClick={handleSave} disabled={saving || !layouts.length}>
-            <span className="material-icons">save</span>
-            {saving ? 'Saving…' : 'Save Layouts'}
-          </button>
+        </div>
+      </div>
+
+      <div className="row gx-4 mb-4">
+        <div className="col-12">
+          <div className="card layout-designer-panel">
+            <div className="card-body">
+              <div className="row g-3 align-items-end">
+                {!isCreatingLayout && layouts.length > 0 && (
+                  <>
+                    <div className="col-md-5">
+                      <label className="form-label">Select layout</label>
+                      <select
+                        className="form-select"
+                        value={activeLayoutId || ''}
+                        onChange={(e) => handleChangeLayout(e.target.value)}
+                      >
+                        {layouts.map((layout) => (
+                          <option key={layout.id} value={layout.id}>
+                            {layout.name || `${layout.width}×${layout.height}`} — {layout.width}×{layout.height} ({layout.rows}×{layout.cols})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-auto">
+                      <button type="button" className="btn btn-primary" onClick={handleStartCreatingLayout}>
+                        Add new layout
+                      </button>
+                    </div>
+                    <div className="col-auto">
+                      <button type="button" className="btn btn-outline-danger" onClick={handleDeleteLayout} disabled={!activeLayout}>
+                        Delete layout
+                      </button>
+                    </div>
+                    <div className="col-md-4 text-end">
+                      <div><strong>Current screen:</strong> {screenSize.width}×{screenSize.height}</div>
+                      <div className="mt-2">
+                        {matchedLayout ? (
+                          <span className="text-success">Matching layout exists for this screen.</span>
+                        ) : (
+                          <span className="text-muted">No matching layout for current screen.</span>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {isCreatingLayout && (
+                  <>
+                    <div className="col-md-3">
+                      <label className="form-label">Layout name</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Layout name"
+                        value={nameInput}
+                        onChange={(e) => setNameInput(e.target.value)}
+                      />
+                      {isDuplicateLayoutName(nameInput, layouts) && (
+                        <div className="form-text text-danger">Duplicate layout names are not allowed.</div>
+                      )}
+                    </div>
+                    <div className="col-md-2">
+                      <label className="form-label">Width</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Width"
+                        value={widthInput}
+                        onChange={(e) => setWidthInput(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-md-2">
+                      <label className="form-label">Height</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Height"
+                        value={heightInput}
+                        onChange={(e) => setHeightInput(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-auto">
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={handleAddLayout}
+                        disabled={saving || !nameInput.trim() || !widthInput.trim() || !heightInput.trim() || isDuplicateLayoutName(nameInput, layouts)}
+                      >
+                        {saving ? 'Saving…' : 'Save Layout'}
+                      </button>
+                    </div>
+                    <div className="col-auto">
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        onClick={handleCancelCreatingLayout}
+                        disabled={saving}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </>
+                )}
+
+                {!isCreatingLayout && layouts.length === 0 && (
+                  <>
+                    <div className="col-md-3">
+                      <label className="form-label">Layout name</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Layout name"
+                        value={nameInput}
+                        onChange={(e) => setNameInput(e.target.value)}
+                      />
+                      {isDuplicateLayoutName(nameInput, layouts) && (
+                        <div className="form-text text-danger">Duplicate layout names are not allowed.</div>
+                      )}
+                    </div>
+                    <div className="col-md-2">
+                      <label className="form-label">Width</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Width"
+                        value={widthInput}
+                        onChange={(e) => setWidthInput(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-md-2">
+                      <label className="form-label">Height</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Height"
+                        value={heightInput}
+                        onChange={(e) => setHeightInput(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-auto">
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={handleAddLayout}
+                        disabled={saving || !nameInput.trim() || !widthInput.trim() || !heightInput.trim() || isDuplicateLayoutName(nameInput, layouts)}
+                      >
+                        {saving ? 'Saving…' : 'Save Layout'}
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="row gx-4">
-        <div className="col-xl-4">
-          <div className="card layout-designer-panel mb-4">
-            <div className="card-body">
-              <h3 className="card-title">Layouts</h3>
-              <div className="mb-3">
-                <label className="form-label">Select layout</label>
-                <select
-                  className="form-select"
-                  value={activeLayoutId || ''}
-                  onChange={(e) => handleChangeLayout(e.target.value)}
-                >
-                  {layouts.map((layout) => (
-                    <option key={layout.id} value={layout.id}>
-                      {layout.width}×{layout.height} ({layout.rows}×{layout.cols})
-                    </option>
-                  ))}
-                  {!layouts.length && <option value="">No layouts defined</option>}
-                </select>
-              </div>
-              <div className="row g-2 mb-3">
-                <div className="col-6">
-                  <input
-                    type="number"
-                    className="form-control"
-                    placeholder="Width"
-                    value={widthInput}
-                    onChange={(e) => setWidthInput(e.target.value)}
-                  />
-                </div>
-                <div className="col-6">
-                  <input
-                    type="number"
-                    className="form-control"
-                    placeholder="Height"
-                    value={heightInput}
-                    onChange={(e) => setHeightInput(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="d-flex gap-2 mb-3">
-                <button type="button" className="btn btn-outline-primary flex-grow-1" onClick={handleAddLayout}>
-                  Add Layout
-                </button>
-                <button type="button" className="btn btn-outline-danger" onClick={handleDeleteLayout} disabled={!activeLayout}>
-                  Delete
-                </button>
-              </div>
-              <div className="card mt-3 bg-dark text-white p-3">
-                <strong>Current screen:</strong>
-                <div>{screenSize.width}×{screenSize.height}</div>
-                <div className="mt-2">
-                  {matchedLayout ? (
-                    <span className="text-success">Matching layout exists for this screen.</span>
-                  ) : (
-                    <span className="text-muted">No matching layout for current screen.</span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="card layout-designer-panel mb-4">
-            <div className="card-body">
-              <h3 className="card-title">Layout controls</h3>
-              <button type="button" className="btn btn-outline-secondary w-100 mb-2" onClick={handleAddRow} disabled={!activeLayout}>
-                Add Row
-              </button>
-              <button type="button" className="btn btn-outline-secondary w-100" onClick={handleAddColumn} disabled={!activeLayout}>
-                Add Column
-              </button>
-            </div>
-          </div>
-
-          <div className="card layout-designer-panel">
-            <div className="card-body">
-              <h3 className="card-title">Items</h3>
-              <ul className="layout-designer-item-list list-unstyled mb-0">
-                {LAYOUT_ITEMS.map((item) => (
-                  <li
-                    key={item.key}
-                    className={`layout-designer-item${activeItemKeys.includes(item.key) ? ' layout-designer-item--used' : ''}`}
-                  >
-                    {item.label}
-                    {activeItemKeys.includes(item.key) && <span className="badge bg-secondary ms-2">Used</span>}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-xl-8">
+        <div className="col-12">
           <div className="card layout-designer-panel h-100">
             <div className="card-body">
               <div className="d-flex align-items-center justify-content-between mb-3">
                 <div>
-                  <h3 className="card-title mb-1">{hasLayout ? `Editing ${activeLayout.width}×${activeLayout.height}` : 'Create your first layout'}</h3>
-                  <small className="text-muted">Right click an empty cell to assign an item.</small>
+                  <h3 className="card-title mb-1">{hasLayout ? `Editing ${activeLayout.name || `${activeLayout.width}×${activeLayout.height}`}` : 'Create your first layout'}</h3>
+                  <small className="text-muted">Right click any cell to add an item or adjust the grid.</small>
                 </div>
                 <div className="text-muted text-end">
                   {hasLayout ? `${activeLayout.rows} rows × ${activeLayout.cols} columns` : null}
                 </div>
               </div>
               {hasLayout ? (
-                <div
-                  className="layout-designer-grid"
-                  style={{
-                    gridTemplateColumns: `repeat(${activeLayout.cols}, minmax(100px, 1fr))`,
-                    gridTemplateRows: `repeat(${activeLayout.rows}, minmax(100px, 1fr))`,
-                  }}
-                >
-                  {activeLayout.cells.map((rowCells, rowIndex) =>
-                    rowCells.map((cell, colIndex) => (
-                      <div
-                        key={`${rowIndex}-${colIndex}`}
-                        className={`layout-designer-cell${cell ? ' layout-designer-cell--filled' : ''}`}
-                        onContextMenu={(e) => {
-                          if (cell) return;
-                          e.preventDefault();
-                          setContextMenu({ x: e.clientX, y: e.clientY, row: rowIndex, col: colIndex });
-                        }}
-                      >
-                        {cell ? (
-                          <>
-                            <div className="layout-designer-cell__content">{LAYOUT_ITEMS.find((item) => item.key === cell)?.label || cell}</div>
-                            <button
-                              type="button"
-                              className="layout-designer-cell__remove"
-                              onClick={() => handleClearCell(rowIndex, colIndex)}
-                              aria-label="Clear cell"
-                            >
-                              <span className="material-icons">close</span>
-                            </button>
-                          </>
-                        ) : (
-                          <div className="layout-designer-cell__placeholder">Right click to add</div>
-                        )}
-                      </div>
-                    ))
-                  )}
-                </div>
+                <>
+                  <div className="mb-3">
+                    <label className="form-label">Layout name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={activeLayout.name || ''}
+                      onChange={(e) => handleUpdateLayoutName(e.target.value)}
+                    />
+                  </div>
+                  <div
+                    className="layout-designer-grid"
+                    style={{
+                      gridTemplateColumns: `repeat(${activeLayout.cols}, minmax(100px, 1fr))`,
+                      gridTemplateRows: `repeat(${activeLayout.rows}, minmax(100px, 1fr))`,
+                    }}
+                  >
+                    {activeLayout.cells.map((rowCells, rowIndex) =>
+                      rowCells.map((cell, colIndex) => (
+                        <div
+                          key={`${rowIndex}-${colIndex}`}
+                          className={`layout-designer-cell${cell ? ' layout-designer-cell--filled' : ''}`}
+                          onContextMenu={(e) => {
+                            e.preventDefault();
+                            setContextMenu({
+                              x: e.clientX,
+                              y: e.clientY,
+                              row: rowIndex,
+                              col: colIndex,
+                              cell,
+                            });
+                          }}
+                        >
+                          {cell ? (
+                            <>
+                              <div className="layout-designer-cell__content">{LAYOUT_ITEMS.find((item) => item.key === cell)?.label || cell}</div>
+                            </>
+                          ) : (
+                            <div className="layout-designer-cell__placeholder">Right click to add</div>
+                          )}
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </>
               ) : (
                 <div className="alert alert-secondary">Add a new layout using the width/height controls to begin designing.</div>
               )}
@@ -407,20 +589,68 @@ const LayoutDesigner = () => {
           className="layout-designer-context-menu"
           style={{ top: contextMenu.y, left: contextMenu.x }}
         >
-          {availableItems.length ? (
-            availableItems.map((item) => (
-              <button
-                key={item.key}
-                type="button"
-                className="layout-designer-context-menu__item"
-                onClick={() => handleAssignItem(item.key)}
-              >
-                {item.label}
-              </button>
-            ))
+          <button
+            type="button"
+            className="layout-designer-context-menu__item"
+            onClick={() => handleInsertRow(contextMenu.row, 'above')}
+          >
+            Add row above
+          </button>
+          <button
+            type="button"
+            className="layout-designer-context-menu__item"
+            onClick={() => handleInsertRow(contextMenu.row, 'below')}
+          >
+            Add row below
+          </button>
+          <button
+            type="button"
+            className="layout-designer-context-menu__item"
+            onClick={() => handleInsertColumn(contextMenu.col, 'left')}
+          >
+            Add column left
+          </button>
+          <button
+            type="button"
+            className="layout-designer-context-menu__item"
+            onClick={() => handleInsertColumn(contextMenu.col, 'right')}
+          >
+            Add column right
+          </button>
+          {contextMenu.cell ? (
+            <button
+              type="button"
+              className="layout-designer-context-menu__item"
+              onClick={() => handleClearCell(contextMenu.row, contextMenu.col)}
+            >
+              Remove item
+            </button>
           ) : (
-            <div className="layout-designer-context-menu__empty">All items have been assigned.</div>
+            <>
+              <div className="layout-designer-context-menu__section">Add item</div>
+              {availableItems.length ? (
+                availableItems.map((item) => (
+                  <button
+                    key={item.key}
+                    type="button"
+                    className="layout-designer-context-menu__item"
+                    onClick={() => handleAssignItem(item.key)}
+                  >
+                    {item.label}
+                  </button>
+                ))
+              ) : (
+                <div className="layout-designer-context-menu__empty">All items have been assigned.</div>
+              )}
+            </>
           )}
+          <button
+            type="button"
+            className="layout-designer-context-menu__item"
+            onClick={() => handleRemoveCell(contextMenu.row, contextMenu.col)}
+          >
+            Remove cell
+          </button>
         </div>
       )}
 
