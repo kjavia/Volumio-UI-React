@@ -5,7 +5,10 @@ import usePluginConfig from '@/hooks/usePluginConfig';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/Toast';
 import ContextMenu from '@/components/ContextMenu';
+import { ReactGridLayout } from 'react-grid-layout';
 import './layout-designer.scss';
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
 
 const PLUGIN_ENDPOINT = 'user_interface/stylish_player';
 const LAYOUT_ITEMS = [
@@ -21,6 +24,11 @@ const LAYOUT_ITEMS = [
   { key: 'volumeSlider', label: 'Volume Slider', icon: 'volume_up' },
 ];
 
+const getCellKeyDisplay = (itemKey) => {
+  const item = LAYOUT_ITEMS.find(item => item.key === itemKey);
+  return item ? item.label : itemKey;
+};
+
 const parseLayoutDesigner = (value) => {
   if (!value) {
     return { layouts: [] };
@@ -35,7 +43,25 @@ const parseLayoutDesigner = (value) => {
   }
 };
 
-const makeEmptyCells = (rows, cols) => Array.from({ length: rows }, () => Array.from({ length: cols }, () => null));
+const makeEmptyCells = (rows, cols) => Array.from({ length: rows }, () => Array.from({ length: cols }, () => ({ id: `cell-${Date.now()}-${Math.random()}`, itemKey: null, subdivisions: null })));
+
+const updateCellById = (cells, cellId, updates) => {
+  if (!cells) return cells;
+  return cells.map((row) => {
+    if (!row) return row;
+    return row.map((cell) => {
+      if (!cell) return cell;
+      if (cell.id === cellId) return { ...cell, ...updates };
+      if (cell.subdivisions) {
+        return {
+          ...cell,
+          subdivisions: { ...cell.subdivisions, cells: updateCellById(cell.subdivisions.cells, cellId, updates) },
+        };
+      }
+      return cell;
+    });
+  });
+};
 
 const getNextLayoutName = (existingLayouts) => {
   let index = 1;
@@ -52,6 +78,38 @@ const isDuplicateLayoutName = (name, layouts, excludeId = null) => {
   );
 };
 
+const getItemKeysFromCells = (cells) => {
+  const keys = [];
+  if (!cells) return keys;
+  for (let row of cells) {
+    if (!row) continue;
+    for (let cell of row) {
+      if (!cell) continue;
+      if (cell.itemKey) keys.push(cell.itemKey);
+      if (cell.subdivisions) keys.push(...getItemKeysFromCells(cell.subdivisions.cells));
+    }
+  }
+  return keys;
+};
+
+const findCellCoordinates = (cells, cellId) => {
+  for (let rowIndex = 0; rowIndex < cells.length; rowIndex++) {
+    const row = cells[rowIndex];
+    if (!row) continue;
+    for (let colIndex = 0; colIndex < row.length; colIndex++) {
+      const cell = row[colIndex];
+      if (!cell) continue;
+      if (cell.id === cellId) return { row: rowIndex, col: colIndex };
+      // Check subdivisions
+      if (cell.subdivisions) {
+        const found = findCellCoordinates(cell.subdivisions.cells, cellId);
+        if (found) return null; // Don't split subdivided cells
+      }
+    }
+  }
+  return null;
+};
+
 const LayoutDesigner = () => {
   const navigate = useNavigate();
   const { socket } = useSocket();
@@ -66,16 +124,193 @@ const LayoutDesigner = () => {
   const [saving, setSaving] = useState(false);
   const [contextMenu, setContextMenu] = useState(null);
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-  const closeContextMenu = () => setContextMenu(null);
+  const [selectedCells, setSelectedCells] = useState([]);
+  const closeContextMenu = () => {
+    setContextMenu(null);
+    setSelectedCells([]);
+  };
+
+  const handleCellClick = useCallback((cellId, event) => {
+    if (event.ctrlKey || event.metaKey) {
+      // Toggle selection
+      setSelectedCells(prev =>
+        prev.includes(cellId)
+          ? prev.filter(id => id !== cellId)
+          : [...prev, cellId]
+      );
+    } else {
+      // Single selection
+      setSelectedCells([cellId]);
+    }
+  }, []);
+
+  const clearSelection = useCallback(() => setSelectedCells([]), []);
+
+  const activeLayout = useMemo(
+    () => layouts.find((layout) => layout.id === activeLayoutId) || layouts[0] || null,
+    [layouts, activeLayoutId]
+  );
+
+  const cellMap = useMemo(() => {
+    const map = {};
+    if (!activeLayout) return map;
+    activeLayout.cells.forEach((row, r) => {
+      if (!row) return;
+      row.forEach((cell, c) => {
+        if (!cell) return;
+        map[cell.id] = { cell, row: r, col: c };
+      });
+    });
+    return map;
+  }, [activeLayout]);
+
+  const gridLayout = useMemo(() => {
+    if (!activeLayout) return [];
+    const items = [];
+    activeLayout.cells.forEach((row, r) => {
+      if (!row) return;
+      row.forEach((cell, c) => {
+        if (!cell) return;
+        items.push({ i: cell.id, x: c, y: r, w: 1, h: 1 });
+      });
+    });
+    return items;
+  }, [activeLayout]);
+
+  const layoutBaseWidth = useMemo(() => {
+    if (!activeLayout) return 0;
+    return Number.isFinite(activeLayout.width) ? activeLayout.width : 0;
+  }, [activeLayout]);
+
+  const layoutBaseHeight = useMemo(() => {
+    if (!activeLayout) return 0;
+    return Number.isFinite(activeLayout.height) ? activeLayout.height : 0;
+  }, [activeLayout]);
+
+  const layoutScale = useMemo(() => {
+    if (!activeLayout || !layoutBaseWidth || !layoutBaseHeight) return 1;
+    const availableWidth = Math.max(0, screenSize.width - 96);
+    const availableHeight = Math.max(0, screenSize.height - 320);
+    return Math.min(1, availableWidth / layoutBaseWidth, availableHeight / layoutBaseHeight);
+  }, [activeLayout, layoutBaseWidth, layoutBaseHeight, screenSize]);
+
+  const createEmptyCell = () => ({
+    id: `cell-${Date.now()}-${Math.random()}`,
+    itemKey: null,
+    subdivisions: null,
+  });
+
+  const persistLayouts = useCallback((layoutsToPersist) => {
+    if (!socket) {
+      showToast('Unable to save layout. Connection not available.', 'error');
+      return;
+    }
+
+    socket.emit('callMethod', {
+      endpoint: PLUGIN_ENDPOINT,
+      method: 'configSaveLayoutDesigner',
+      data: { layoutDesigner: JSON.stringify({ layouts: layoutsToPersist }) },
+    });
+  }, [socket, showToast]);
+
+  const handleAddSection = useCallback(() => {
+    if (!activeLayout) return;
+
+    const cells = activeLayout.cells.map((row) => row.slice());
+    let added = false;
+
+    for (let rowIndex = 0; rowIndex < cells.length && !added; rowIndex += 1) {
+      for (let colIndex = 0; colIndex < cells[rowIndex].length; colIndex += 1) {
+        if (cells[rowIndex][colIndex] === null) {
+          cells[rowIndex][colIndex] = createEmptyCell();
+          added = true;
+          break;
+        }
+      }
+    }
+
+    if (!added) {
+      const cols = Math.max(1, activeLayout.cols || (cells[0]?.length || 1));
+      const newRow = Array.from({ length: cols }, () => null);
+      newRow[0] = createEmptyCell();
+      cells.push(newRow);
+    }
+
+    const updatedLayout = {
+      ...activeLayout,
+      rows: cells.length,
+      cols: Math.max(activeLayout.cols || 1, cells[0]?.length || 1),
+      cells,
+    };
+
+    setLayouts((prev) => {
+      const updated = prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout));
+      persistLayouts(updated);
+      return updated;
+    });
+  }, [activeLayout, persistLayouts]);
+
+  const handlePersistLayoutChange = useCallback((layoutArr) => {
+    if (!activeLayout || !layoutArr) return;
+
+    // Determine new grid size based on item positions and sizes
+    let maxRow = 0;
+    let maxCol = 0;
+    layoutArr.forEach((it) => {
+      const x = Number.isFinite(it.x) ? it.x : 0;
+      const y = Number.isFinite(it.y) ? it.y : 0;
+      const w = Number.isFinite(it.w) ? it.w : 1;
+      const h = Number.isFinite(it.h) ? it.h : 1;
+      maxCol = Math.max(maxCol, x + w);
+      maxRow = Math.max(maxRow, y + h);
+    });
+
+    const rows = Math.max(1, maxRow);
+    const cols = Math.max(1, maxCol);
+
+    // Create empty grid filled with nulls
+    const newCells = Array.from({ length: rows }, () => Array.from({ length: cols }, () => null));
+
+    // Place each cell object at its top-left coordinate; mark spanned cells as null
+    layoutArr.forEach((it) => {
+      const id = it.i;
+      const x = Number.isFinite(it.x) ? it.x : 0;
+      const y = Number.isFinite(it.y) ? it.y : 0;
+      const w = Number.isFinite(it.w) ? it.w : 1;
+      const h = Number.isFinite(it.h) ? it.h : 1;
+      const mapEntry = cellMap[id];
+      const cellObj = mapEntry ? mapEntry.cell : null;
+      if (!cellObj) return;
+
+      if (y < rows && x < cols) newCells[y][x] = cellObj;
+
+      for (let ry = y; ry < y + h; ry++) {
+        for (let cx = x; cx < x + w; cx++) {
+          if (ry === y && cx === x) continue;
+          if (ry < rows && cx < cols) newCells[ry][cx] = null;
+        }
+      }
+    });
+
+    const updatedLayout = { ...activeLayout, rows, cols, cells: newCells };
+    const updatedLayouts = layouts.map((l) => (l.id === updatedLayout.id ? updatedLayout : l));
+    setLayouts(updatedLayouts);
+    persistLayouts(updatedLayouts);
+  }, [activeLayout, cellMap, layouts, persistLayouts]);
+
+  const handleLayoutStop = useCallback((layoutArr) => {
+    handlePersistLayoutChange(layoutArr);
+  }, [handlePersistLayoutChange]);
+
+  const updateSize = useCallback(() => {
+    setScreenSize({ width: window.innerWidth, height: window.innerHeight });
+  }, []);
 
   useEffect(() => {
-    const updateSize = () => {
-      setScreenSize({ width: window.innerWidth, height: window.innerHeight });
-    };
     updateSize();
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
-  }, []);
+  }, [updateSize]);
 
   useEffect(() => {
     if (!pluginConfig) return;
@@ -95,14 +330,42 @@ const LayoutDesigner = () => {
     }
   }, [activeLayoutId, layouts]);
 
-  const activeLayout = useMemo(
-    () => layouts.find((layout) => layout.id === activeLayoutId) || layouts[0] || null,
-    [layouts, activeLayoutId]
-  );
+  const areCellsNeighboring = useCallback((cellIds) => {
+    if (cellIds.length < 2) return false;
+
+    // Find positions of all selected cells
+    const positions = [];
+    activeLayout.cells.forEach((rowCells, rowIndex) => {
+      if (!rowCells) return;
+      rowCells.forEach((cell, colIndex) => {
+        if (cell && cellIds.includes(cell.id)) {
+          positions.push({ row: rowIndex, col: colIndex, id: cell.id });
+        }
+      });
+    });
+
+    if (positions.length !== cellIds.length) return false;
+
+    // Check if all in same row and consecutive columns
+    const sameRow = positions.every(pos => pos.row === positions[0].row);
+    if (sameRow) {
+      const cols = positions.map(p => p.col).sort((a, b) => a - b);
+      return cols.every((col, i) => i === 0 || col === cols[i - 1] + 1);
+    }
+
+    // Check if all in same column and consecutive rows
+    const sameCol = positions.every(pos => pos.col === positions[0].col);
+    if (sameCol) {
+      const rows = positions.map(p => p.row).sort((a, b) => a - b);
+      return rows.every((row, i) => i === 0 || row === rows[i - 1] + 1);
+    }
+
+    return false;
+  }, [activeLayout]);
 
   const activeItemKeys = useMemo(() => {
     if (!activeLayout) return [];
-    return activeLayout.cells.flat().filter(Boolean);
+    return getItemKeysFromCells(activeLayout.cells);
   }, [activeLayout]);
 
   const availableItems = useMemo(
@@ -118,19 +381,6 @@ const LayoutDesigner = () => {
   const updateLayout = useCallback((updatedLayout) => {
     setLayouts((prev) => prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout)));
   }, []);
-
-  const persistLayouts = useCallback((layoutsToPersist) => {
-    if (!socket) {
-      showToast('Unable to save layout. Connection not available.', 'error');
-      return;
-    }
-
-    socket.emit('callMethod', {
-      endpoint: PLUGIN_ENDPOINT,
-      method: 'configSaveLayoutDesigner',
-      data: { layoutDesigner: JSON.stringify({ layouts: layoutsToPersist }) },
-    });
-  }, [socket, showToast]);
 
   const handleAddLayout = () => {
     const name = nameInput.trim();
@@ -206,6 +456,64 @@ const LayoutDesigner = () => {
     }, 5000);
   };
 
+  const handleMergeCells = useCallback(() => {
+    if (!activeLayout || selectedCells.length < 2 || !areCellsNeighboring(selectedCells)) return;
+
+    // Find positions
+    const positions = [];
+    activeLayout.cells.forEach((rowCells, rowIndex) => {
+      if (!rowCells) return;
+      rowCells.forEach((cell, colIndex) => {
+        if (cell && selectedCells.includes(cell.id)) {
+          positions.push({ row: rowIndex, col: colIndex, cell });
+        }
+      });
+    });
+
+    // Check if any cell has subdivisions or items - don't merge those for now
+    if (positions.some(p => p.cell.subdivisions || p.cell.itemKey)) {
+      // For now, just clear selection if cells have content
+      setSelectedCells([]);
+      return;
+    }
+
+    const sameRow = positions.every(pos => pos.row === positions[0].row);
+    const sameCol = positions.every(pos => pos.col === positions[0].col);
+
+    if (sameRow) {
+      // Merge horizontally in same row
+      const rowIndex = positions[0].row;
+      const cols = positions.map(p => p.col).sort((a, b) => a - b);
+      const startCol = cols[0];
+      const endCol = cols[cols.length - 1];
+
+      const newCells = [...activeLayout.cells[rowIndex]];
+      // Create merged cell
+      const mergedCell = {
+        id: `merged-${Date.now()}-${Math.random()}`,
+        itemKey: null,
+        subdivisions: null,
+      };
+
+      // Replace the range with merged cell
+      newCells.splice(startCol, endCol - startCol + 1, mergedCell);
+
+      const newLayout = {
+        ...activeLayout,
+        cells: activeLayout.cells.map((row, i) => i === rowIndex ? newCells : row),
+      };
+
+      setLayouts(prev => prev.map(l => l.id === activeLayoutId ? newLayout : l));
+      persistLayouts([newLayout]);
+      setSelectedCells([]);
+    } else if (sameCol) {
+      // For vertical merge, we need to remove cells from multiple rows and create a taller cell
+      // This is more complex and would require restructuring the grid
+      // For now, just clear selection
+      setSelectedCells([]);
+    }
+  }, [activeLayout, selectedCells, areCellsNeighboring, activeLayoutId, persistLayouts]);
+
   const handleDeleteLayout = () => {
     if (!activeLayout) return;
     const confirmed = window.confirm(`Delete layout "${activeLayout.name}"?`);
@@ -232,7 +540,13 @@ const LayoutDesigner = () => {
 
   const handleInsertRow = useCallback((rowIndex, direction) => {
     if (!activeLayout) return;
-    const newRow = Array(activeLayout.cols).fill(null);
+    const sourceRow = activeLayout.cells[rowIndex];
+    const numCells = sourceRow ? sourceRow.length : 1;
+    const newRow = Array.from({ length: numCells }, () => ({
+      id: `cell-${Date.now()}-${Math.random()}`,
+      itemKey: null,
+      subdivisions: null,
+    }));
     const cells = [...activeLayout.cells];
     const insertAt = direction === 'above' ? rowIndex : rowIndex + 1;
     cells.splice(insertAt, 0, newRow);
@@ -291,11 +605,9 @@ const LayoutDesigner = () => {
     });
   };
 
-  const handleAssignItem = useCallback((itemKey, row, col) => {
+  const handleAssignItem = useCallback((itemKey, cellId) => {
     if (!activeLayout) return;
-    const cells = activeLayout.cells.map((rowCells, rowIndex) =>
-      rowCells.map((cell, colIndex) => (rowIndex === row && colIndex === col ? itemKey : cell))
-    );
+    const cells = updateCellById(activeLayout.cells, cellId, { itemKey });
     const updatedLayout = { ...activeLayout, cells };
     setLayouts((prev) => {
       const updated = prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout));
@@ -305,11 +617,79 @@ const LayoutDesigner = () => {
     setContextMenu(null);
   }, [activeLayout, persistLayouts]);
 
-  const handleClearCell = useCallback((row, col) => {
+  const handleClearCell = useCallback((cellId) => {
     if (!activeLayout) return;
-    const cells = activeLayout.cells.map((rowCells, rowIndex) =>
-      rowCells.map((cell, colIndex) => (rowIndex === row && colIndex === col ? null : cell))
-    );
+    const cells = updateCellById(activeLayout.cells, cellId, { itemKey: null });
+    const updatedLayout = { ...activeLayout, cells };
+    setLayouts((prev) => {
+      const updated = prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout));
+      persistLayouts(updated);
+      return updated;
+    });
+    setContextMenu(null);
+  }, [activeLayout, persistLayouts]);
+
+  const handleSplitCellIntoRows = useCallback((cellId) => {
+    if (!activeLayout) return;
+    const coords = findCellCoordinates(activeLayout.cells, cellId);
+    if (!coords) return;
+    const { row, col } = coords;
+
+    // Get the target cell
+    const targetCell = (activeLayout.cells?.[row] || [])[col];
+    if (!targetCell) return;
+    if (targetCell.subdivisions) return; // don't split already subdivided cells
+
+    // Create two new subcells that occupy the same width as the original
+    const subA = { id: `cell-${Date.now()}-${Math.random()}`, itemKey: null, subdivisions: null };
+    const subB = { id: `cell-${Date.now()}-${Math.random()}`, itemKey: null, subdivisions: null };
+
+    const subdiv = {
+      rows: 2,
+      cols: 1,
+      // cells is a 2D array: rows x cols
+      cells: [[subA], [subB]],
+    };
+
+    const cells = activeLayout.cells.map((r, rIdx) => {
+      if (rIdx !== row) return r;
+      return r.map((c, cIdx) => (cIdx === col ? { ...targetCell, subdivisions: subdiv } : c));
+    });
+
+    const updatedLayout = { ...activeLayout, cells };
+    setLayouts((prev) => {
+      const updated = prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout));
+      persistLayouts(updated);
+      return updated;
+    });
+    setContextMenu(null);
+  }, [activeLayout, persistLayouts]);
+
+  const handleSplitCellIntoColumns = useCallback((cellId) => {
+    if (!activeLayout) return;
+    const coords = findCellCoordinates(activeLayout.cells, cellId);
+    if (!coords) return;
+    const { row, col } = coords;
+
+    const targetCell = (activeLayout.cells?.[row] || [])[col];
+    if (!targetCell) return;
+    if (targetCell.subdivisions) return; // don't split already subdivided cells
+
+    // Create two new subcells that occupy half the width each
+    const subA = { id: `cell-${Date.now()}-${Math.random()}`, itemKey: null, subdivisions: null };
+    const subB = { id: `cell-${Date.now()}-${Math.random()}`, itemKey: null, subdivisions: null };
+
+    const subdiv = {
+      rows: 1,
+      cols: 2,
+      cells: [[subA, subB]],
+    };
+
+    const cells = activeLayout.cells.map((r, rIdx) => {
+      if (rIdx !== row) return r;
+      return r.map((c, cIdx) => (cIdx === col ? { ...targetCell, subdivisions: subdiv } : c));
+    });
+
     const updatedLayout = { ...activeLayout, cells };
     setLayouts((prev) => {
       const updated = prev.map((layout) => (layout.id === updatedLayout.id ? updatedLayout : layout));
@@ -320,25 +700,34 @@ const LayoutDesigner = () => {
   }, [activeLayout, persistLayouts]);
 
   const contextMenuItems = useMemo(() => {
-    if (!contextMenu) return [];
-    const { row, col, cell } = contextMenu;
-    return [
-      { label: 'Add row above', icon: 'arrow_upward', onClick: () => handleInsertRow(row, 'above') },
-      { label: 'Add row below', icon: 'arrow_downward', onClick: () => handleInsertRow(row, 'below') },
-      { label: 'Add column left', icon: 'arrow_back', onClick: () => handleInsertColumn(col, 'left') },
-      { label: 'Add column right', icon: 'arrow_forward', onClick: () => handleInsertColumn(col, 'right') },
-      ...(cell
-        ? [{ label: 'Remove item', icon: 'clear', onClick: () => handleClearCell(row, col) }]
+    if (!contextMenu || !activeLayout) return [];
+    const { cellId, cell } = contextMenu;
+    const totalCells = activeLayout.cells.reduce((sum, row) => sum + (row ? row.filter(c => c !== null).length : 0), 0);
+    const canRemoveCell = totalCells > 1;
+    const canMerge = selectedCells.length > 1 && areCellsNeighboring(selectedCells);
+
+    const items = [];
+
+    if (canMerge) {
+      items.push({ label: 'Merge cells', icon: 'merge', onClick: handleMergeCells });
+      items.push({ separator: true });
+    }
+
+    items.push(
+      ...(cell?.itemKey
+        ? [{ label: 'Remove item', icon: 'clear', onClick: () => handleClearCell(cellId) }]
         : [{
           label: 'Add item',
           icon: 'add',
-          submenu: availableItems.map((item) => ({ label: item.label, icon: item.icon, onClick: () => handleAssignItem(item.key, row, col) })),
+          submenu: availableItems.map((item) => ({ label: item.label, icon: item.icon, onClick: () => handleAssignItem(item.key, cellId) })),
           empty: 'All items have been assigned.',
         }]
       ),
-      { label: 'Remove cell', icon: 'delete', onClick: () => handleRemoveCell(row, col) },
-    ];
-  }, [contextMenu, availableItems, handleInsertRow, handleInsertColumn, handleClearCell, handleAssignItem, handleRemoveCell]);
+      ...(canRemoveCell ? [{ label: 'Remove cell', icon: 'delete', onClick: () => handleRemoveCell(contextMenu.row, contextMenu.col) }] : [])
+    );
+
+    return items;
+  }, [contextMenu, activeLayout, availableItems, selectedCells, areCellsNeighboring, handleInsertRow, handleInsertColumn, handleClearCell, handleAssignItem, handleRemoveCell, handleSplitCellIntoRows, handleSplitCellIntoColumns, handleMergeCells]);
 
   const hasLayout = !!activeLayout;
   const matchedLayout = useMemo(() => {
@@ -550,39 +939,78 @@ const LayoutDesigner = () => {
                       onChange={(e) => handleUpdateLayoutName(e.target.value)}
                     />
                   </div>
-                  <div
-                    className="layout-designer-grid"
-                    style={{
-                      gridTemplateColumns: `repeat(${activeLayout.cols}, minmax(100px, 1fr))`,
-                      gridTemplateRows: `repeat(${activeLayout.rows}, minmax(100px, 1fr))`,
-                    }}
-                  >
-                    {activeLayout.cells.map((rowCells, rowIndex) =>
-                      rowCells.map((cell, colIndex) => (
-                        <div
-                          key={`${rowIndex}-${colIndex}`}
-                          className={`layout-designer-cell${cell ? ' layout-designer-cell--filled' : ''}`}
-                          onContextMenu={(e) => {
-                            e.preventDefault();
-                            setContextMenu({
-                              x: e.clientX,
-                              y: e.clientY,
-                              row: rowIndex,
-                              col: colIndex,
-                              cell,
-                            });
-                          }}
-                        >
-                          {cell ? (
-                            <>
-                              <div className="layout-designer-cell__content">{LAYOUT_ITEMS.find((item) => item.key === cell)?.label || cell}</div>
-                            </>
-                          ) : (
-                            <div className="layout-designer-cell__placeholder">Right click to add</div>
-                          )}
+                  <div className="layout-designer-grid" onClick={clearSelection}>
+                    <div className="layout-designer-grid-toolbar">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-primary"
+                        onClick={handleAddSection}
+                        disabled={!activeLayout}
+                      >
+                        Add Section
+                      </button>
+                      <div className="text-muted small">
+                        Add a new section to the current layout.
+                      </div>
+                    </div>
+                    <div
+                      className="layout-designer-layout-viewer"
+                      style={{ width: `${layoutBaseWidth * layoutScale}px`, height: `${layoutBaseHeight * layoutScale}px` }}
+                    >
+                      <div
+                        className="layout-designer-layout-shell"
+                        style={{
+                          width: `${layoutBaseWidth}px`,
+                          height: `${layoutBaseHeight}px`,
+                          transform: `scale(${layoutScale})`,
+                        }}
+                      >
+                        <div className="layout-designer-layout-frame">
+                          <ReactGridLayout
+                            className="react-grid-layout"
+                            layout={gridLayout}
+                            onDragStop={handleLayoutStop}
+                            onResizeStop={handleLayoutStop}
+                            cols={Math.max(1, activeLayout.cols || 1)}
+                            width={layoutBaseWidth}
+                            rowHeight={Math.max(1, layoutBaseHeight / Math.max(1, activeLayout.rows || 1))}
+                            margin={[0, 0]}
+                            isResizable={true}
+                            isDraggable={true}
+                            compactType={null}
+                            preventCollision={true}
+                            measureBeforeMount={false}
+                            useCSSTransforms={true}
+                          >
+                            {Object.keys(cellMap).map((id) => {
+                              const info = cellMap[id];
+                              const cell = info.cell;
+                              const row = info.row;
+                              const col = info.col;
+                              return (
+                                <div
+                                  key={id}
+                                  className={`layout-designer-cell${cell.itemKey ? ' layout-designer-cell--filled' : ''}${selectedCells.includes(id) ? ' layout-designer-cell--selected' : ''}`}
+                                  onClick={(e) => handleCellClick(id, e)}
+                                  onContextMenu={(e) => {
+                                    e.preventDefault();
+                                    setContextMenu({ x: e.clientX, y: e.clientY, row, col, cellId: id, cell });
+                                  }}
+                                >
+                                  {cell.itemKey ? (
+                                    <div className="layout-designer-cell__content">{getCellKeyDisplay(cell.itemKey)}</div>
+                                  ) : (
+                                    <div className="layout-designer-cell__placeholder">
+                                      Empty
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </ReactGridLayout>
                         </div>
-                      ))
-                    )}
+                      </div>
+                    </div>
                   </div>
                 </>
               ) : (
