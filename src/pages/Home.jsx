@@ -5,7 +5,7 @@ import AnalogClock from '@/components/clocks/analog-clock';
 import IframeScreen from '@/components/IframeScreen';
 import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
-import ContextMenu from '@/components/ContextMenu';
+import AppMenu from '@/components/AppMenu';
 import TabletPlayer from './TabletPlayer';
 import MobilePlayer from './MobilePlayer';
 import LargeScreenPlayer from './LargeScreenPlayer';
@@ -117,7 +117,7 @@ const Home = () => {
 
   if (showPlayer) {
     const contextMenuNode = (
-      <ContextMenu
+      <AppMenu
         vizStopped={vizStopped}
         onStopViz={isSpectrumViz ? () => setVizStopped(true) : undefined}
         onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
@@ -195,7 +195,7 @@ const Home = () => {
   // the player (and its embedded menu) is not mounted, so we still need the
   // floating overlay as the only way for the user to get back to the player.
   const floatingContextMenu = !vizFullscreen && (!isLargeScreen || idle) && (
-    <ContextMenu
+    <AppMenu
       vizStopped={vizStopped}
       onStopViz={showPlayer && isSpectrumViz ? () => setVizStopped(true) : undefined}
       onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}

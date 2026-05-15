@@ -1,23 +1,24 @@
-import { useEffect, useMemo, useState, useCallback, useRef } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSocket } from '@/contexts/SocketContext';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/Toast';
+import ContextMenu from '@/components/ContextMenu';
 import './layout-designer.scss';
 
 const PLUGIN_ENDPOINT = 'user_interface/stylish_player';
 const LAYOUT_ITEMS = [
-  { key: 'trackName', label: 'Track Name' },
-  { key: 'albumName', label: 'Album Name' },
-  { key: 'artistName', label: 'Artist Name' },
-  { key: 'serviceLogo', label: 'Service Logo' },
-  { key: 'samplingRate', label: 'Sampling Rate' },
-  { key: 'playerControls', label: 'Player Controls' },
-  { key: 'player', label: 'Player' },
-  { key: 'viz', label: 'Visualization' },
-  { key: 'buttonRow', label: 'Button Row' },
-  { key: 'volumeSlider', label: 'Volume Slider' },
+  { key: 'trackName', label: 'Track Name', icon: 'music_note' },
+  { key: 'albumName', label: 'Album Name', icon: 'album' },
+  { key: 'artistName', label: 'Artist Name', icon: 'person' },
+  { key: 'serviceLogo', label: 'Service Logo', icon: 'image' },
+  { key: 'samplingRate', label: 'Sampling Rate', icon: 'equalizer' },
+  { key: 'playerControls', label: 'Player Controls', icon: 'play_arrow' },
+  { key: 'player', label: 'Player Graphic', icon: 'play_circle' },
+  { key: 'viz', label: 'Visualization', icon: 'graphic_eq' },
+  { key: 'buttonRow', label: 'Button Row', icon: 'apps' },
+  { key: 'volumeSlider', label: 'Volume Slider', icon: 'volume_up' },
 ];
 
 const parseLayoutDesigner = (value) => {
@@ -65,7 +66,7 @@ const LayoutDesigner = () => {
   const [saving, setSaving] = useState(false);
   const [contextMenu, setContextMenu] = useState(null);
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-  const menuRef = useRef(null);
+  const closeContextMenu = () => setContextMenu(null);
 
   useEffect(() => {
     const updateSize = () => {
@@ -93,16 +94,6 @@ const LayoutDesigner = () => {
       setActiveLayoutId(layouts[0]?.id || null);
     }
   }, [activeLayoutId, layouts]);
-
-  useEffect(() => {
-    const handleClick = (event) => {
-      if (contextMenu && menuRef.current && !menuRef.current.contains(event.target)) {
-        setContextMenu(null);
-      }
-    };
-    window.addEventListener('mousedown', handleClick);
-    return () => window.removeEventListener('mousedown', handleClick);
-  }, [contextMenu]);
 
   const activeLayout = useMemo(
     () => layouts.find((layout) => layout.id === activeLayoutId) || layouts[0] || null,
@@ -239,7 +230,7 @@ const LayoutDesigner = () => {
     setHeightInput('');
   };
 
-  const handleInsertRow = (rowIndex, direction) => {
+  const handleInsertRow = useCallback((rowIndex, direction) => {
     if (!activeLayout) return;
     const newRow = Array(activeLayout.cols).fill(null);
     const cells = [...activeLayout.cells];
@@ -252,9 +243,9 @@ const LayoutDesigner = () => {
       return updated;
     });
     setContextMenu(null);
-  };
+  }, [activeLayout, persistLayouts]);
 
-  const handleInsertColumn = (colIndex, direction) => {
+  const handleInsertColumn = useCallback((colIndex, direction) => {
     if (!activeLayout) return;
     const cells = activeLayout.cells.map((row) => {
       const newRow = [...row];
@@ -269,9 +260,9 @@ const LayoutDesigner = () => {
       return updated;
     });
     setContextMenu(null);
-  };
+  }, [activeLayout, persistLayouts]);
 
-  const handleRemoveCell = (row, col) => {
+  const handleRemoveCell = useCallback((row, col) => {
     if (!activeLayout) return;
     const cells = activeLayout.cells.map((rowCells, rowIndex) =>
       rowCells.map((cell, colIndex) => (rowIndex === row && colIndex === col ? null : cell))
@@ -283,7 +274,7 @@ const LayoutDesigner = () => {
       return updated;
     });
     setContextMenu(null);
-  };
+  }, [activeLayout, persistLayouts]);
 
   const handleUpdateLayoutName = (name) => {
     if (!activeLayout) return;
@@ -300,9 +291,8 @@ const LayoutDesigner = () => {
     });
   };
 
-  const handleAssignItem = (itemKey) => {
-    if (!activeLayout || !contextMenu) return;
-    const { row, col } = contextMenu;
+  const handleAssignItem = useCallback((itemKey, row, col) => {
+    if (!activeLayout) return;
     const cells = activeLayout.cells.map((rowCells, rowIndex) =>
       rowCells.map((cell, colIndex) => (rowIndex === row && colIndex === col ? itemKey : cell))
     );
@@ -313,9 +303,9 @@ const LayoutDesigner = () => {
       return updated;
     });
     setContextMenu(null);
-  };
+  }, [activeLayout, persistLayouts]);
 
-  const handleClearCell = (row, col) => {
+  const handleClearCell = useCallback((row, col) => {
     if (!activeLayout) return;
     const cells = activeLayout.cells.map((rowCells, rowIndex) =>
       rowCells.map((cell, colIndex) => (rowIndex === row && colIndex === col ? null : cell))
@@ -327,8 +317,28 @@ const LayoutDesigner = () => {
       return updated;
     });
     setContextMenu(null);
-  };
+  }, [activeLayout, persistLayouts]);
 
+  const contextMenuItems = useMemo(() => {
+    if (!contextMenu) return [];
+    const { row, col, cell } = contextMenu;
+    return [
+      { label: 'Add row above', icon: 'arrow_upward', onClick: () => handleInsertRow(row, 'above') },
+      { label: 'Add row below', icon: 'arrow_downward', onClick: () => handleInsertRow(row, 'below') },
+      { label: 'Add column left', icon: 'arrow_back', onClick: () => handleInsertColumn(col, 'left') },
+      { label: 'Add column right', icon: 'arrow_forward', onClick: () => handleInsertColumn(col, 'right') },
+      ...(cell
+        ? [{ label: 'Remove item', icon: 'clear', onClick: () => handleClearCell(row, col) }]
+        : [{
+          label: 'Add item',
+          icon: 'add',
+          submenu: availableItems.map((item) => ({ label: item.label, icon: item.icon, onClick: () => handleAssignItem(item.key, row, col) })),
+          empty: 'All items have been assigned.',
+        }]
+      ),
+      { label: 'Remove cell', icon: 'delete', onClick: () => handleRemoveCell(row, col) },
+    ];
+  }, [contextMenu, availableItems, handleInsertRow, handleInsertColumn, handleClearCell, handleAssignItem, handleRemoveCell]);
 
   const hasLayout = !!activeLayout;
   const matchedLayout = useMemo(() => {
@@ -584,74 +594,13 @@ const LayoutDesigner = () => {
       </div>
 
       {contextMenu && (
-        <div
-          ref={menuRef}
-          className="layout-designer-context-menu"
-          style={{ top: contextMenu.y, left: contextMenu.x }}
-        >
-          <button
-            type="button"
-            className="layout-designer-context-menu__item"
-            onClick={() => handleInsertRow(contextMenu.row, 'above')}
-          >
-            Add row above
-          </button>
-          <button
-            type="button"
-            className="layout-designer-context-menu__item"
-            onClick={() => handleInsertRow(contextMenu.row, 'below')}
-          >
-            Add row below
-          </button>
-          <button
-            type="button"
-            className="layout-designer-context-menu__item"
-            onClick={() => handleInsertColumn(contextMenu.col, 'left')}
-          >
-            Add column left
-          </button>
-          <button
-            type="button"
-            className="layout-designer-context-menu__item"
-            onClick={() => handleInsertColumn(contextMenu.col, 'right')}
-          >
-            Add column right
-          </button>
-          {contextMenu.cell ? (
-            <button
-              type="button"
-              className="layout-designer-context-menu__item"
-              onClick={() => handleClearCell(contextMenu.row, contextMenu.col)}
-            >
-              Remove item
-            </button>
-          ) : (
-            <>
-              <div className="layout-designer-context-menu__section">Add item</div>
-              {availableItems.length ? (
-                availableItems.map((item) => (
-                  <button
-                    key={item.key}
-                    type="button"
-                    className="layout-designer-context-menu__item"
-                    onClick={() => handleAssignItem(item.key)}
-                  >
-                    {item.label}
-                  </button>
-                ))
-              ) : (
-                <div className="layout-designer-context-menu__empty">All items have been assigned.</div>
-              )}
-            </>
-          )}
-          <button
-            type="button"
-            className="layout-designer-context-menu__item"
-            onClick={() => handleRemoveCell(contextMenu.row, contextMenu.col)}
-          >
-            Remove cell
-          </button>
-        </div>
+        <ContextMenu
+          variant="positioned"
+          isOpen={!!contextMenu}
+          onClose={closeContextMenu}
+          position={contextMenu ? { x: contextMenu.x, y: contextMenu.y } : null}
+          items={contextMenuItems}
+        />
       )}
 
       <Toast toasts={toasts} />
