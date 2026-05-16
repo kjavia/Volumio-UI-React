@@ -5,10 +5,8 @@ import usePluginConfig from '@/hooks/usePluginConfig';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/Toast';
 import ContextMenu from '@/components/ContextMenu';
-import { ReactGridLayout } from 'react-grid-layout';
+import Dialog from '@/components/Dialog';
 import './layout-designer.scss';
-import "react-grid-layout/css/styles.css";
-import "react-resizable/css/styles.css";
 
 const PLUGIN_ENDPOINT = 'user_interface/stylish_player';
 const LAYOUT_ITEMS = [
@@ -123,7 +121,7 @@ const LayoutDesigner = () => {
   const [nameInput, setNameInput] = useState('Layout1');
   const [saving, setSaving] = useState(false);
   const [contextMenu, setContextMenu] = useState(null);
-  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+  const [screenSize] = useState(() => ({ width: typeof window !== 'undefined' ? window.innerWidth : 0, height: typeof window !== 'undefined' ? window.innerHeight : 0 }));
   const [selectedCells, setSelectedCells] = useState([]);
   const closeContextMenu = () => {
     setContextMenu(null);
@@ -164,18 +162,7 @@ const LayoutDesigner = () => {
     return map;
   }, [activeLayout]);
 
-  const gridLayout = useMemo(() => {
-    if (!activeLayout) return [];
-    const items = [];
-    activeLayout.cells.forEach((row, r) => {
-      if (!row) return;
-      row.forEach((cell, c) => {
-        if (!cell) return;
-        items.push({ i: cell.id, x: c, y: r, w: 1, h: 1 });
-      });
-    });
-    return items;
-  }, [activeLayout]);
+
 
   const layoutBaseWidth = useMemo(() => {
     if (!activeLayout) return 0;
@@ -250,67 +237,8 @@ const LayoutDesigner = () => {
     });
   }, [activeLayout, persistLayouts]);
 
-  const handlePersistLayoutChange = useCallback((layoutArr) => {
-    if (!activeLayout || !layoutArr) return;
 
-    // Determine new grid size based on item positions and sizes
-    let maxRow = 0;
-    let maxCol = 0;
-    layoutArr.forEach((it) => {
-      const x = Number.isFinite(it.x) ? it.x : 0;
-      const y = Number.isFinite(it.y) ? it.y : 0;
-      const w = Number.isFinite(it.w) ? it.w : 1;
-      const h = Number.isFinite(it.h) ? it.h : 1;
-      maxCol = Math.max(maxCol, x + w);
-      maxRow = Math.max(maxRow, y + h);
-    });
 
-    const rows = Math.max(1, maxRow);
-    const cols = Math.max(1, maxCol);
-
-    // Create empty grid filled with nulls
-    const newCells = Array.from({ length: rows }, () => Array.from({ length: cols }, () => null));
-
-    // Place each cell object at its top-left coordinate; mark spanned cells as null
-    layoutArr.forEach((it) => {
-      const id = it.i;
-      const x = Number.isFinite(it.x) ? it.x : 0;
-      const y = Number.isFinite(it.y) ? it.y : 0;
-      const w = Number.isFinite(it.w) ? it.w : 1;
-      const h = Number.isFinite(it.h) ? it.h : 1;
-      const mapEntry = cellMap[id];
-      const cellObj = mapEntry ? mapEntry.cell : null;
-      if (!cellObj) return;
-
-      if (y < rows && x < cols) newCells[y][x] = cellObj;
-
-      for (let ry = y; ry < y + h; ry++) {
-        for (let cx = x; cx < x + w; cx++) {
-          if (ry === y && cx === x) continue;
-          if (ry < rows && cx < cols) newCells[ry][cx] = null;
-        }
-      }
-    });
-
-    const updatedLayout = { ...activeLayout, rows, cols, cells: newCells };
-    const updatedLayouts = layouts.map((l) => (l.id === updatedLayout.id ? updatedLayout : l));
-    setLayouts(updatedLayouts);
-    persistLayouts(updatedLayouts);
-  }, [activeLayout, cellMap, layouts, persistLayouts]);
-
-  const handleLayoutStop = useCallback((layoutArr) => {
-    handlePersistLayoutChange(layoutArr);
-  }, [handlePersistLayoutChange]);
-
-  const updateSize = useCallback(() => {
-    setScreenSize({ width: window.innerWidth, height: window.innerHeight });
-  }, []);
-
-  useEffect(() => {
-    updateSize();
-    window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
-  }, [updateSize]);
 
   useEffect(() => {
     if (!pluginConfig) return;
@@ -329,6 +257,9 @@ const LayoutDesigner = () => {
       setActiveLayoutId(layouts[0]?.id || null);
     }
   }, [activeLayoutId, layouts]);
+
+  // Calculate extra bottom padding so frame doesn't touch viewport edge
+  // No dynamic resize logic — screen size initialized once on mount
 
   const areCellsNeighboring = useCallback((cellIds) => {
     if (cellIds.length < 2) return false;
@@ -791,13 +722,26 @@ const LayoutDesigner = () => {
                         Delete layout
                       </button>
                     </div>
-                    <div className="col-md-4 text-end">
+                    <div className="col-md-3">
+                      {activeLayout && (
+                        <div>
+                          <label className="form-label">Layout name</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={activeLayout.name || ''}
+                            onChange={(e) => handleUpdateLayoutName(e.target.value)}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div className="col-12">
                       <div><strong>Current screen:</strong> {screenSize.width}×{screenSize.height}</div>
                       <div className="mt-2">
                         {matchedLayout ? (
                           <span className="text-success">Matching layout exists for this screen.</span>
                         ) : (
-                          <span className="text-muted">No matching layout for current screen.</span>
+                          <span className="">No matching layout for current screen.</span>
                         )}
                       </div>
                     </div>
@@ -922,23 +866,15 @@ const LayoutDesigner = () => {
               <div className="d-flex align-items-center justify-content-between mb-3">
                 <div>
                   <h3 className="card-title mb-1">{hasLayout ? `Editing ${activeLayout.name || `${activeLayout.width}×${activeLayout.height}`}` : 'Create your first layout'}</h3>
-                  <small className="text-muted">Right click any cell to add an item or adjust the grid.</small>
+                  <small className="">Right click any cell to add an item or adjust the grid.</small>
                 </div>
-                <div className="text-muted text-end">
+                <div className=" text-end">
                   {hasLayout ? `${activeLayout.rows} rows × ${activeLayout.cols} columns` : null}
                 </div>
               </div>
               {hasLayout ? (
                 <>
-                  <div className="mb-3">
-                    <label className="form-label">Layout name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={activeLayout.name || ''}
-                      onChange={(e) => handleUpdateLayoutName(e.target.value)}
-                    />
-                  </div>
+                  {/* layout name moved to top controls to save vertical space */}
                   <div className="layout-designer-grid" onClick={clearSelection}>
                     <div className="layout-designer-grid-toolbar">
                       <button
@@ -949,68 +885,68 @@ const LayoutDesigner = () => {
                       >
                         Add Section
                       </button>
-                      <div className="text-muted small">
+                      <div className=" small">
                         Add a new section to the current layout.
                       </div>
                     </div>
-                    <div
-                      className="layout-designer-layout-viewer"
-                      style={{ width: `${layoutBaseWidth * layoutScale}px`, height: `${layoutBaseHeight * layoutScale}px` }}
+                    {
+                      // compute dialog width to force correct sizing (inline style overrides theme)
+                    }
+                    <Dialog
+                      draggable
+                      modal={false}
+                      open={true}
+                      title={activeLayout ? `${activeLayout.name || `${activeLayout.width}×${activeLayout.height}`} — Preview` : 'Preview'}
+                      size="xl"
+                      showCloseButton={false}
+                      className="layout-designer-preview-dialog"
+                      style={{
+                        width: `${Math.min(Math.max(360, Math.round(layoutBaseWidth * layoutScale)), Math.min(900, Math.round(screenSize.width * 0.9)))}px`,
+                      }}
                     >
                       <div
-                        className="layout-designer-layout-shell"
-                        style={{
-                          width: `${layoutBaseWidth}px`,
-                          height: `${layoutBaseHeight}px`,
-                          transform: `scale(${layoutScale})`,
-                        }}
+                        className="layout-designer-layout-viewer"
+                        style={{ width: `${layoutBaseWidth * layoutScale}px`, height: `${layoutBaseHeight * layoutScale}px` }}
                       >
-                        <div className="layout-designer-layout-frame">
-                          <ReactGridLayout
-                            className="react-grid-layout"
-                            layout={gridLayout}
-                            onDragStop={handleLayoutStop}
-                            onResizeStop={handleLayoutStop}
-                            cols={Math.max(1, activeLayout.cols || 1)}
-                            width={layoutBaseWidth}
-                            rowHeight={Math.max(1, layoutBaseHeight / Math.max(1, activeLayout.rows || 1))}
-                            margin={[0, 0]}
-                            isResizable={true}
-                            isDraggable={true}
-                            compactType={null}
-                            preventCollision={true}
-                            measureBeforeMount={false}
-                            useCSSTransforms={true}
-                          >
-                            {Object.keys(cellMap).map((id) => {
-                              const info = cellMap[id];
-                              const cell = info.cell;
-                              const row = info.row;
-                              const col = info.col;
-                              return (
-                                <div
-                                  key={id}
-                                  className={`layout-designer-cell${cell.itemKey ? ' layout-designer-cell--filled' : ''}${selectedCells.includes(id) ? ' layout-designer-cell--selected' : ''}`}
-                                  onClick={(e) => handleCellClick(id, e)}
-                                  onContextMenu={(e) => {
-                                    e.preventDefault();
-                                    setContextMenu({ x: e.clientX, y: e.clientY, row, col, cellId: id, cell });
-                                  }}
-                                >
-                                  {cell.itemKey ? (
-                                    <div className="layout-designer-cell__content">{getCellKeyDisplay(cell.itemKey)}</div>
-                                  ) : (
-                                    <div className="layout-designer-cell__placeholder">
-                                      Empty
-                                    </div>
-                                  )}
-                                </div>
-                              );
-                            })}
-                          </ReactGridLayout>
+                        <div
+                          className="layout-designer-layout-shell"
+                          style={{
+                            width: `${layoutBaseWidth * layoutScale}px`,
+                            height: `${layoutBaseHeight * layoutScale}px`,
+                          }}
+                        >
+                          <div className="layout-designer-layout-frame">
+                            <div className="layout-designer-grid-body">
+                              {Object.keys(cellMap).map((id) => {
+                                const info = cellMap[id];
+                                const cell = info.cell;
+                                const row = info.row;
+                                const col = info.col;
+                                return (
+                                  <div
+                                    key={id}
+                                    className={`layout-designer-cell${cell.itemKey ? ' layout-designer-cell--filled' : ''}${selectedCells.includes(id) ? ' layout-designer-cell--selected' : ''}`}
+                                    onClick={(e) => handleCellClick(id, e)}
+                                    onContextMenu={(e) => {
+                                      e.preventDefault();
+                                      setContextMenu({ x: e.clientX, y: e.clientY, row, col, cellId: id, cell });
+                                    }}
+                                  >
+                                    {cell.itemKey ? (
+                                      <div className="layout-designer-cell__content">{getCellKeyDisplay(cell.itemKey)}</div>
+                                    ) : (
+                                      <div className="layout-designer-cell__placeholder">
+                                        Empty
+                                      </div>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Dialog>
                   </div>
                 </>
               ) : (

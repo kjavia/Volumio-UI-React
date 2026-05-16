@@ -2,6 +2,8 @@
   color: var(--text-light);
   background: var(--bg-color);
   padding: 1.25rem;
+  padding-bottom: calc(2.5rem + var(--ld-extra, 0px));
+  /* extra space so grid parent doesn't touch bottom edge; var set dynamically */
 }
 
 .layout-designer-topbar {
@@ -47,15 +49,35 @@
 
 .layout-designer-layout-viewer {
   width: 100%;
-  max-height: calc(100vh - 320px);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
+  /* let the frame overflow so the page scrolls instead */
+  padding-bottom: 1.5rem;
+  /* keep some space below the frame */
   background: var(--panel-bg-subtle);
   border: 6px solid var(--border-dark);
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.07);
   margin-bottom: 1.5rem;
+}
+
+/* Dialog-specific adjustments for the preview dialog */
+.layout-designer-preview-dialog.dialog {
+  /* prefer content width but cap to viewport */
+  max-width: min(900px, 90vw) !important;
+  max-height: 90vh !important;
+}
+
+.layout-designer-preview-dialog .dialog-body {
+  max-height: calc(100vh - 200px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem;
+}
+
+.layout-designer-preview-dialog .layout-designer-layout-viewer {
+  margin: 0 auto;
 }
 
 .layout-designer-layout-shell {
@@ -68,7 +90,7 @@
   height: 100%;
   border: 6px solid var(--border-dark);
   background: var(--panel-bg);
-  overflow: hidden;
+  overflow: visible;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -172,4 +194,22 @@
   padding: 0.75rem 1rem;
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+/* Make preview dialog size to its content with padding and allow dragging by header */
+.layout-designer-preview-dialog.dialog {
+  display: inline-block !important;
+  /* Use fit-content so the dialog sizes to the preview content reliably */
+  min-width: 360px !important;
+  max-width: 900px !important;
+  box-sizing: border-box;
+}
+
+.layout-designer-preview-dialog .dialog-header {
+  cursor: grab;
+  touch-action: none;
+}
+
+.layout-designer-preview-dialog .dialog.draggable .dialog-header:active {
+  cursor: grabbing;
 }
