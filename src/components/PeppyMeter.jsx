@@ -67,7 +67,7 @@ const PeppyMeter = ({
   const imagesRef = useRef(null);
   const configRef = useRef(null);
   const trackInfoRef = useRef(trackInfo);
-  trackInfoRef.current = trackInfo;
+  useEffect(() => { trackInfoRef.current = trackInfo; }, [trackInfo]);
 
   const [enabled, setEnabled] = useState(false);
   const [error, setError] = useState(null);
@@ -107,16 +107,21 @@ const PeppyMeter = ({
   useEffect(() => {
     if (!allConfigs || !trackUri) return;
     const names = Object.keys(allConfigs);
-    if (!names.length) { setError('No meters found in meters.txt'); return; }
+    if (!names.length) { // eslint-disable-next-line react-hooks/set-state-in-effect
+      setError('No meters found in meters.txt'); return;
+    }
 
     if (model === 'random') {
       const picked = pickRandom(names, prevRandomRef.current);
       prevRandomRef.current = picked;
+
       setActiveModel(picked);
     } else if (allConfigs[model]) {
+
       setActiveModel(model);
     } else {
       // Fallback to first available meter
+
       setActiveModel(names[0]);
     }
   }, [allConfigs, model, trackUri]);
@@ -407,6 +412,7 @@ const PeppyMeter = ({
     if (enabled || !trackInfo?.isPlaying || !imagesRef.current) return;
     setupAudio();
     startAnimation();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setEnabled(true);
   }, [enabled, trackInfo?.isPlaying, setupAudio, startAnimation]);
 

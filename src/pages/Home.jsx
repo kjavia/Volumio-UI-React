@@ -12,7 +12,6 @@ import LargeScreenPlayer from './LargeScreenPlayer';
 import useIdleScreen from '@/hooks/useIdleScreen';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import usePluginConfig from '@/hooks/usePluginConfig';
-import { VOLUMIO_BASE_URL } from '@/config';
 
 const CLOCK_SCREENS = {
   analogClock: AnalogClock,

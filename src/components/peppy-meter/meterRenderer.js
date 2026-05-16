@@ -150,7 +150,9 @@ export async function loadMeterImages(config, basePath) {
         await face.load();
         document.fonts.add(face);
         fonts[fontPath] = family;
-      } catch (e) { /* font load failed, will use fallback */ }
+      } catch {
+        // font load failed, will use fallback
+      }
     }
   }
 

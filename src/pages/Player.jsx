@@ -167,7 +167,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     togglePlay();
   };
 
-  const { seek, duration, refreshState } = useSeek();
+  const { refreshState } = useSeek();
 
   // Refresh Volumio state on mount so seek is accurate after navigating away
   useEffect(() => {

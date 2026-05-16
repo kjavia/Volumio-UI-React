@@ -671,7 +671,7 @@ PackUpload.propTypes = { packType: PropTypes.string.isRequired, onUploaded: Prop
 /* ─── Section Component ────────────────────────────────────────────────── */
 
 const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolders, peppySpectrumFolders, onPackUploaded, t }) => {
-  const [deleting, setDeleting] = useState(null);
+  const [, setDeleting] = useState(null);
 
   const isFieldVisible = (field) => {
     if (!field.visibleIf) return true;
@@ -808,6 +808,7 @@ const Settings = () => {
   // Populate form values from plugin config
   useEffect(() => {
     if (pluginConfig) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setValues((prev) => {
         // Only set initial values, don't overwrite user edits
         const hasValues = Object.keys(prev).length > 0;

@@ -22,26 +22,7 @@ const STREAMING_SERVICES = new Set([
 // DSD format types
 const DSD_TYPES = new Set(['dsd', 'dsf', 'dff']);
 
-/**
- * Derive a DSD variant label (DSD64, DSD128, DSD256, DSD512) from the
- * samplerate string that Volumio sends.  Volumio may report the native
- * rate as "2.82 MHz", "5.64 MHz", etc. or as a raw Hz integer.
- */
-function getDsdLabel(samplerate) {
-  const sr = String(samplerate || '');
-  let nativeHz = 0;
-  const mhzMatch = sr.match(/^(\d+\.?\d*)\s*[Mm][Hh][Zz]/);
-  if (mhzMatch) {
-    nativeHz = Math.round(parseFloat(mhzMatch[1]) * 1_000_000);
-  } else {
-    nativeHz = parseInt(sr, 10) || 0;
-  }
-  if (nativeHz >= 22_000_000) return 'DSD512';
-  if (nativeHz >= 10_000_000) return 'DSD256';
-  if (nativeHz >= 5_000_000) return 'DSD128';
-  if (nativeHz > 0) return 'DSD64';
-  return 'DSD';
-}
+// DSD label helper removed — unused in current UI. Keep logic in history if needed.
 
 const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className }) => {
   // Don't render if we have nothing to show

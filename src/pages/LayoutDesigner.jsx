@@ -244,6 +244,7 @@ const LayoutDesigner = () => {
     if (!pluginConfig) return;
     const designer = parseLayoutDesigner(pluginConfig.layoutDesigner);
     const newLayouts = Array.isArray(designer.layouts) ? designer.layouts : [];
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLayouts(newLayouts);
     if (!activeLayoutId && newLayouts.length) {
       setActiveLayoutId(newLayouts[0].id);
@@ -252,8 +253,10 @@ const LayoutDesigner = () => {
 
   useEffect(() => {
     if (!layouts.length) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveLayoutId(null);
     } else if (activeLayoutId && !layouts.some((layout) => layout.id === activeLayoutId)) {
+
       setActiveLayoutId(layouts[0]?.id || null);
     }
   }, [activeLayoutId, layouts]);

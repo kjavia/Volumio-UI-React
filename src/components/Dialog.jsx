@@ -101,7 +101,9 @@ const Dialog = ({
       dragStateRef.current.dragging = false;
       try {
         document.releasePointerCapture && document.releasePointerCapture();
-      } catch (err) { }
+      } catch {
+        // ignore
+      }
     };
 
     window.addEventListener('pointermove', handlePointerMove);
