@@ -149,19 +149,6 @@ const LayoutDesigner = () => {
     [layouts, activeLayoutId]
   );
 
-  const cellMap = useMemo(() => {
-    const map = {};
-    if (!activeLayout) return map;
-    activeLayout.cells.forEach((row, r) => {
-      if (!row) return;
-      row.forEach((cell, c) => {
-        if (!cell) return;
-        map[cell.id] = { cell, row: r, col: c };
-      });
-    });
-    return map;
-  }, [activeLayout]);
-
 
 
   const layoutBaseWidth = useMemo(() => {
@@ -672,6 +659,47 @@ const LayoutDesigner = () => {
     );
   }, [layouts, screenSize]);
 
+  // Preview dialog toolbar state (computed outside JSX to avoid inline declarations)
+  const selectedCellId = selectedCells.length === 1 ? selectedCells[0] : null;
+  // Only allow splitting when the selected id corresponds to an actual cell object
+  const selectedCellObj = activeLayout?.cells?.flat().find((c) => c && c.id === selectedCellId) || null;
+  const canSplit = !!selectedCellObj && !selectedCellObj.subdivisions;
+  // Allow merging when two or more cells are selected (adjacency not required here)
+  const canMerge = selectedCells.length >= 2;
+  const dialogToolbar = (
+    <div className="layout-designer-preview-toolbar d-flex align-items-center gap-2">
+      <button
+        type="button"
+        title="Split into rows"
+        className="btn-icon btn btn-sm btn-outline-secondary"
+        onClick={() => { if (selectedCellId) { handleSplitCellIntoRows(selectedCellId); setSelectedCells([]); } }}
+        disabled={!canSplit}
+      >
+        <span className="material-icons">vertical_split</span>
+      </button>
+
+      <button
+        type="button"
+        title="Split into columns"
+        className="btn-icon btn btn-sm btn-outline-secondary"
+        onClick={() => { if (selectedCellId) { handleSplitCellIntoColumns(selectedCellId); setSelectedCells([]); } }}
+        disabled={!canSplit}
+      >
+        <span className="material-icons">split_axis</span>
+      </button>
+
+      <button
+        type="button"
+        title="Merge selected cells"
+        className="btn-icon btn btn-sm btn-outline-secondary"
+        onClick={() => { handleMergeCells(); }}
+        disabled={!canMerge}
+      >
+        <span className="material-icons">merge</span>
+      </button>
+    </div>
+  );
+
   if (isLoading) {
     return (
       <div className="layout-designer-page d-flex align-items-center justify-content-center">
@@ -896,6 +924,7 @@ const LayoutDesigner = () => {
                       // compute dialog width to force correct sizing (inline style overrides theme)
                     }
                     <Dialog
+                      toolbar={dialogToolbar}
                       draggable
                       modal={false}
                       open={true}
@@ -911,42 +940,43 @@ const LayoutDesigner = () => {
                         className="layout-designer-layout-viewer"
                         style={{ width: `${layoutBaseWidth * layoutScale}px`, height: `${layoutBaseHeight * layoutScale}px` }}
                       >
+                        {/* Single grid container — all cells are direct children */}
                         <div
-                          className="layout-designer-layout-shell"
+                          className="layout-designer-grid-body"
                           style={{
+                            display: 'grid',
+                            gridTemplateColumns: `repeat(${activeLayout?.cols || 1}, 1fr)`,
+                            gridTemplateRows: `repeat(${activeLayout?.rows || 1}, 1fr)`,
                             width: `${layoutBaseWidth * layoutScale}px`,
                             height: `${layoutBaseHeight * layoutScale}px`,
                           }}
                         >
-                          <div className="layout-designer-layout-frame">
-                            <div className="layout-designer-grid-body">
-                              {Object.keys(cellMap).map((id) => {
-                                const info = cellMap[id];
-                                const cell = info.cell;
-                                const row = info.row;
-                                const col = info.col;
-                                return (
-                                  <div
-                                    key={id}
-                                    className={`layout-designer-cell${cell.itemKey ? ' layout-designer-cell--filled' : ''}${selectedCells.includes(id) ? ' layout-designer-cell--selected' : ''}`}
-                                    onClick={(e) => handleCellClick(id, e)}
-                                    onContextMenu={(e) => {
-                                      e.preventDefault();
-                                      setContextMenu({ x: e.clientX, y: e.clientY, row, col, cellId: id, cell });
-                                    }}
-                                  >
-                                    {cell.itemKey ? (
-                                      <div className="layout-designer-cell__content">{getCellKeyDisplay(cell.itemKey)}</div>
-                                    ) : (
-                                      <div className="layout-designer-cell__placeholder">
-                                        Empty
-                                      </div>
-                                    )}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
+                          {(activeLayout?.cells || [[createEmptyCell()]]).flat().map((cell, idx) => {
+                            const id = cell ? cell.id : `empty-${idx}`;
+                            const isSelected = selectedCells.includes(id);
+                            return (
+                              <div
+                                key={id}
+                                className={`layout-designer-cell${cell && cell.itemKey ? ' layout-designer-cell--filled' : ''}${isSelected ? ' layout-designer-cell--selected' : ''}`}
+                                onClick={(e) => { handleCellClick(id, e); }}
+                                onContextMenu={(e) => {
+                                  e.preventDefault();
+                                  // Determine row/col from index
+                                  const cols = activeLayout?.cols || 1;
+                                  const row = Math.floor(idx / cols);
+                                  const col = idx % cols;
+                                  setContextMenu({ x: e.clientX, y: e.clientY, row, col, cellId: id, cell });
+                                }}
+                              >
+                                {cell && cell.itemKey ? (
+                                  <div className="layout-designer-cell__content">{getCellKeyDisplay(cell.itemKey)}</div>
+                                ) : (
+                                  <div className="layout-designer-cell__placeholder">Click to select cell.
+                                    Use button above to modify layout</div>
+                                )}
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
                     </Dialog>
