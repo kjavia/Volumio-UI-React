@@ -188,6 +188,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
         { id: 'latitude', element: 'input', type: 'text', label: t('LATITUDE', 'Latitude'), icon: 'explore', doc: t('LATITUDE_DESC', 'e.g. 51.5074 for London') },
         { id: 'longitude', element: 'input', type: 'text', label: t('LONGITUDE', 'Longitude'), icon: 'explore', doc: t('LONGITUDE_DESC', 'e.g. -0.1278 for London') },
         { id: 'weatherApiKey', element: 'input', type: 'text', label: t('WEATHER_API_KEY', 'API Key (Optional)'), icon: 'vpn_key', doc: t('WEATHER_API_KEY_DESC', 'Open-Meteo API key. Free tier does not require one.') },
+        { id: 'weatherBackgroundColor', element: 'color', label: t('WEATHER_BACKGROUND_COLOR', 'Weather Background Color'), icon: 'format_color_fill', doc: t('WEATHER_BACKGROUND_COLOR_DESC', 'Override the background color used on all weather screens. Enter a hex code (e.g. #1a2b3c) or leave empty to use the theme default gradients.') },
         {
           id: 'unitSystem', element: 'select', label: t('UNIT_SYSTEM', 'Unit System'), icon: 'straighten',
           options: [

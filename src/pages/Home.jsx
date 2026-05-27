@@ -118,9 +118,18 @@ const Home = () => {
       '--sp-progress-font-size': { val: pluginConfig?.progressFontSize, cls: 'sp-has-progress-font-size' },
       '--sp-volume-font-size': { val: pluginConfig?.volumeFontSize, cls: 'sp-has-volume-font-size' },
     };
+    const normalizeFontSize = (v) => {
+      if (v === null || v === undefined) return v;
+      if (typeof v === 'number') return `${v}px`;
+      const s = String(v).trim();
+      // If the value is just a number, treat as pixels
+      if (/^\d+(?:\.\d+)?$/.test(s)) return `${s}px`;
+      return s;
+    };
+
     Object.entries(fontMap).forEach(([prop, { val, cls }]) => {
-      if (val) {
-        root.style.setProperty(prop, val);
+      if (val !== null && val !== undefined && String(val).trim() !== '') {
+        root.style.setProperty(prop, normalizeFontSize(val));
         root.classList.add(cls);
       } else {
         root.style.removeProperty(prop);

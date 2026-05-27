@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 import { useTranslation } from 'react-i18next';
 import useWeather from '@/hooks/useWeather';
+import usePluginConfig from '@/hooks/usePluginConfig';
 import WeatherEffects from './weather-effects/WeatherEffects';
 import './Weather.scss';
 
@@ -272,7 +273,10 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
   const allMax = Math.max(...daily.map((d) => d.tempMax));
   const span = allMax - allMin || 1;
 
-  const bg = BG_GRADIENT[current.icon] || BG_GRADIENT.cloud;
+  const { data: pluginConfig } = usePluginConfig();
+  const bg = pluginConfig?.weatherBackgroundColor
+    ? pluginConfig.weatherBackgroundColor
+    : (BG_GRADIENT[current.icon] || BG_GRADIENT.cloud);
 
   return (
     <div className="weather-full" style={{ background: bg }}>
@@ -531,9 +535,11 @@ const Weather = ({
   if (mode === 'full') {
     return <WeatherFull current={current} hourly={hourly} daily={daily} units={units} locationName={locationName} use24Hour={use24Hour} />;
   }
+  const { data: pluginConfig } = usePluginConfig();
+  const containerStyle = pluginConfig?.weatherBackgroundColor ? { background: pluginConfig.weatherBackgroundColor } : undefined;
 
   return (
-    <div className="weather-container">
+    <div className="weather-container" style={containerStyle}>
       {mode === 'current' && <WeatherEffects weatherCode={current.weatherCode} />}
       <LocationBadge name={locationName} />
       {/* Current */}

@@ -146,6 +146,40 @@ body,
   font-size: var(--sp-volume-font-size) !important;
 }
 
+/* High-specificity theme selectors (tp-grid / tp-right) can override the
+   generic .responsive-* classes. Add matching overrides so plugin font-size
+   settings always take precedence. */
+:root.sp-has-title-font-size .responsive-title,
+:root.sp-has-title-font-size .tp-right .responsive-title,
+:root.sp-has-title-font-size .tp-grid .tp-right .responsive-title,
+:root.sp-has-title-font-size .tp-grid:not(.tp-max-space) .tp-right .responsive-title,
+:root.sp-has-title-font-size .tp-max-space .tp-right .responsive-title {
+  font-size: var(--sp-title-font-size) !important;
+}
+
+:root.sp-has-artist-font-size .responsive-artist,
+:root.sp-has-artist-font-size .tp-right .responsive-artist,
+:root.sp-has-artist-font-size .tp-grid .tp-right .responsive-artist,
+:root.sp-has-artist-font-size .tp-grid:not(.tp-max-space) .tp-right .responsive-artist,
+:root.sp-has-artist-font-size .tp-max-space .tp-right .responsive-artist {
+  font-size: var(--sp-artist-font-size) !important;
+}
+
+:root.sp-has-album-font-size .responsive-album,
+:root.sp-has-album-font-size .tp-right .responsive-album,
+:root.sp-has-album-font-size .tp-grid .tp-right .responsive-album,
+:root.sp-has-album-font-size .tp-grid:not(.tp-max-space) .tp-right .responsive-album,
+:root.sp-has-album-font-size .tp-max-space .tp-right .responsive-album {
+  font-size: var(--sp-album-font-size) !important;
+}
+
+:root.sp-has-bitrate-font-size .tp-right .responsive-stream-info,
+:root.sp-has-bitrate-font-size .tp-grid .tp-right .responsive-stream-info,
+:root.sp-has-bitrate-font-size .tp-grid:not(.tp-max-space) .tp-right .responsive-stream-info,
+:root.sp-has-bitrate-font-size .tp-max-space .tp-right .responsive-stream-info {
+  font-size: var(--sp-bitrate-font-size) !important;
+}
+
 /* Context menu toggle button */
 :root.sp-has-control-color .context-menu-toggle,
 :root.sp-has-control-color .context-menu-toggle.context-menu-toggle--no-shadow,
