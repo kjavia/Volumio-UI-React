@@ -109,7 +109,37 @@ const Home = () => {
         root.classList.remove(cls);
       }
     });
-  }, [pluginConfig?.trackColor, pluginConfig?.artistColor, pluginConfig?.albumColor, pluginConfig?.streamInfoColor, pluginConfig?.controlColor]);
+    // Apply user font-size overrides as CSS custom properties on :root
+    const fontMap = {
+      '--sp-title-font-size': { val: pluginConfig?.titleFontSize, cls: 'sp-has-title-font-size' },
+      '--sp-album-font-size': { val: pluginConfig?.albumFontSize, cls: 'sp-has-album-font-size' },
+      '--sp-artist-font-size': { val: pluginConfig?.artistFontSize, cls: 'sp-has-artist-font-size' },
+      '--sp-bitrate-font-size': { val: pluginConfig?.bitrateFontSize, cls: 'sp-has-bitrate-font-size' },
+      '--sp-progress-font-size': { val: pluginConfig?.progressFontSize, cls: 'sp-has-progress-font-size' },
+      '--sp-volume-font-size': { val: pluginConfig?.volumeFontSize, cls: 'sp-has-volume-font-size' },
+    };
+    Object.entries(fontMap).forEach(([prop, { val, cls }]) => {
+      if (val) {
+        root.style.setProperty(prop, val);
+        root.classList.add(cls);
+      } else {
+        root.style.removeProperty(prop);
+        root.classList.remove(cls);
+      }
+    });
+  }, [
+    pluginConfig?.trackColor,
+    pluginConfig?.artistColor,
+    pluginConfig?.albumColor,
+    pluginConfig?.streamInfoColor,
+    pluginConfig?.controlColor,
+    pluginConfig?.titleFontSize,
+    pluginConfig?.albumFontSize,
+    pluginConfig?.artistFontSize,
+    pluginConfig?.bitrateFontSize,
+    pluginConfig?.progressFontSize,
+    pluginConfig?.volumeFontSize,
+  ]);
 
   const showPlayer = !idle || forcePlayer;
 

@@ -210,6 +210,20 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
         { id: 'slideshowInterval', element: 'knob', label: t('SLIDESHOW_INTERVAL', 'Slideshow Interval (seconds)'), icon: 'slideshow', doc: t('SLIDESHOW_INTERVAL_DESC', 'Time between wallpaper transitions.'), min: 5, max: 120 },
       ],
     },
+    {
+      id: 'section_fonts',
+      label: t('FONTS', 'Fonts'),
+      icon: 'text_fields',
+      method: 'configSaveFonts',
+      fields: [
+        { id: 'titleFontSize', element: 'input', type: 'text', label: t('TITLE_FONT_SIZE', 'Track Title Font Size'), icon: 'title', doc: t('TITLE_FONT_SIZE_DESC', 'CSS font size for the track title (e.g. 18px, 1.2rem).') },
+        { id: 'albumFontSize', element: 'input', type: 'text', label: t('ALBUM_FONT_SIZE', 'Album Name Font Size'), icon: 'album', doc: t('ALBUM_FONT_SIZE_DESC', 'CSS font size for the album name (e.g. 14px, 1rem).') },
+        { id: 'artistFontSize', element: 'input', type: 'text', label: t('ARTIST_FONT_SIZE', 'Artist Name Font Size'), icon: 'person', doc: t('ARTIST_FONT_SIZE_DESC', 'CSS font size for the artist name (e.g. 14px, 1rem).') },
+        { id: 'bitrateFontSize', element: 'input', type: 'text', label: t('BITRATE_FONT_SIZE', 'Bitrate/Stream Info Font Size'), icon: 'graphic_eq', doc: t('BITRATE_FONT_SIZE_DESC', 'CSS font size for bitrate and stream info text (e.g. 12px).') },
+        { id: 'progressFontSize', element: 'input', type: 'text', label: t('PROGRESS_FONT_SIZE', 'Progress Bar Font Size'), icon: 'linear_scale', doc: t('PROGRESS_FONT_SIZE_DESC', 'CSS font size for labels near the progress bar (e.g. 12px).') },
+        { id: 'volumeFontSize', element: 'input', type: 'text', label: t('VOLUME_FONT_SIZE', 'Volume Label Font Size'), icon: 'volume_up', doc: t('VOLUME_FONT_SIZE_DESC', 'CSS font size for the volume label and value (e.g. 12px).') },
+      ],
+    },
   ];
 };
 
