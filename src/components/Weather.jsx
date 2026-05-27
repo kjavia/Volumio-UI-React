@@ -249,7 +249,7 @@ const LocationBadge = ({ name }) =>
   ) : null;
 LocationBadge.propTypes = { name: PropTypes.string };
 
-const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour }) => {
+const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour, pluginConfig }) => {
   const { t, i18n } = useTranslation('weather');
   const locale = i18n.language;
   const today = daily[0];
@@ -273,7 +273,6 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour })
   const allMax = Math.max(...daily.map((d) => d.tempMax));
   const span = allMax - allMin || 1;
 
-  const { data: pluginConfig } = usePluginConfig();
   const bg = pluginConfig?.weatherBackgroundColor
     ? pluginConfig.weatherBackgroundColor
     : (BG_GRADIENT[current.icon] || BG_GRADIENT.cloud);
@@ -498,6 +497,7 @@ const Weather = ({
 }) => {
   const { data, isLoading, isError, isLocating, noLocation, locationName } = useWeather();
   const { t } = useTranslation('weather');
+  const { data: pluginConfig } = usePluginConfig();
 
   if (isLoading || isLocating) {
     return (
@@ -532,10 +532,11 @@ const Weather = ({
   const { current, hourly, daily, units } = data;
   const today = daily[0];
 
+
+
   if (mode === 'full') {
-    return <WeatherFull current={current} hourly={hourly} daily={daily} units={units} locationName={locationName} use24Hour={use24Hour} />;
+    return <WeatherFull current={current} hourly={hourly} daily={daily} units={units} locationName={locationName} use24Hour={use24Hour} pluginConfig={pluginConfig} />;
   }
-  const { data: pluginConfig } = usePluginConfig();
   const containerStyle = pluginConfig?.weatherBackgroundColor ? { background: pluginConfig.weatherBackgroundColor } : undefined;
 
   return (
