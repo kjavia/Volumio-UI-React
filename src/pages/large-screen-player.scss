@@ -73,6 +73,32 @@
   text-align: left;
 }
 
+/* Override large-screen font sizes when plugin config provides values */
+:root.sp-has-title-font-size .lsp-top__title {
+  font-size: var(--sp-title-font-size) !important;
+}
+
+:root.sp-has-artist-font-size .lsp-top__artist {
+  font-size: var(--sp-artist-font-size) !important;
+}
+
+:root.sp-has-album-font-size .lsp-top__album {
+  font-size: var(--sp-album-font-size) !important;
+}
+
+:root.sp-has-bitrate-font-size .lsp-stream-info,
+:root.sp-has-bitrate-font-size .lsp-stream-info span {
+  font-size: var(--sp-bitrate-font-size) !important;
+}
+
+:root.sp-has-progress-font-size .lsp-bottom__row2 .seekbar-labels {
+  font-size: var(--sp-progress-font-size) !important;
+}
+
+:root.sp-has-volume-font-size .lsp-volume-popup__value {
+  font-size: var(--sp-volume-font-size) !important;
+}
+
 /* Service logo — image or text badge */
 .lsp-top__service-logo {
   flex: 0 0 auto;
