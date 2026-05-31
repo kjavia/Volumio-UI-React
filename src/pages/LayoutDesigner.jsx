@@ -108,6 +108,25 @@ const findCellCoordinates = (cells, cellId) => {
   return null;
 };
 
+// Find the non-null cell object that covers a given grid slot (row,col),
+// accounting for cells that have colSpan/rowSpan. Returns the cell or null.
+const findCellCovering = (cells, targetRow, targetCol) => {
+  for (let r = 0; r < cells.length; r++) {
+    const row = cells[r];
+    if (!row) continue;
+    for (let c = 0; c < row.length; c++) {
+      const cell = row[c];
+      if (!cell) continue;
+      const colSpan = cell.colSpan && Number.isFinite(cell.colSpan) ? cell.colSpan : 1;
+      const rowSpan = cell.rowSpan && Number.isFinite(cell.rowSpan) ? cell.rowSpan : 1;
+      if (r <= targetRow && targetRow < r + rowSpan && c <= targetCol && targetCol < c + colSpan) {
+        return cell;
+      }
+    }
+  }
+  return null;
+};
+
 const LayoutDesigner = () => {
   const navigate = useNavigate();
   const { socket } = useSocket();
@@ -127,27 +146,82 @@ const LayoutDesigner = () => {
     setContextMenu(null);
     setSelectedCells([]);
   };
-
-  const handleCellClick = useCallback((cellId, event) => {
-    if (event.ctrlKey || event.metaKey) {
-      // Toggle selection
-      setSelectedCells(prev =>
-        prev.includes(cellId)
-          ? prev.filter(id => id !== cellId)
-          : [...prev, cellId]
-      );
-    } else {
-      // Single selection
-      setSelectedCells([cellId]);
-    }
-  }, []);
-
-  const clearSelection = useCallback(() => setSelectedCells([]), []);
-
   const activeLayout = useMemo(
     () => layouts.find((layout) => layout.id === activeLayoutId) || layouts[0] || null,
     [layouts, activeLayoutId]
   );
+
+
+  // Check whether a set of cell IDs are neighboring (contiguous in same row or same column)
+  const areCellsNeighboring = useCallback((cellIds) => {
+    if (cellIds.length < 2) return false;
+
+    if (!activeLayout || !activeLayout.cells) return false;
+
+    // Find positions of all selected cells
+    const positions = [];
+    activeLayout.cells.forEach((rowCells, rowIndex) => {
+      if (!rowCells) return;
+      rowCells.forEach((cell, colIndex) => {
+        if (cell && cellIds.includes(cell.id)) {
+          positions.push({ row: rowIndex, col: colIndex, id: cell.id });
+        }
+      });
+    });
+
+    if (positions.length !== cellIds.length) return false;
+
+    // Check if all in same row and consecutive columns
+    const sameRow = positions.every(pos => pos.row === positions[0].row);
+    if (sameRow) {
+      const cols = positions.map(p => p.col).sort((a, b) => a - b);
+      return cols.every((col, i) => i === 0 || col === cols[i - 1] + 1);
+    }
+
+    // Check if all in same column and consecutive rows
+    const sameCol = positions.every(pos => pos.col === positions[0].col);
+    if (sameCol) {
+      const rows = positions.map(p => p.row).sort((a, b) => a - b);
+      return rows.every((row, i) => i === 0 || row === rows[i - 1] + 1);
+    }
+
+    return false;
+  }, [activeLayout]);
+
+  const handleCellClick = useCallback((cellId, event) => {
+    setSelectedCells((prev) => {
+      // Modifier: explicit toggle add/remove, but only allow adding if selection remains adjacent
+      if (event.ctrlKey || event.metaKey) {
+        if (prev.includes(cellId)) return prev.filter(id => id !== cellId);
+        // If no prior selection, allow a single select
+        if (prev.length === 0) return [cellId];
+        const candidate = [...prev, cellId];
+        try {
+          if (areCellsNeighboring(candidate)) return candidate;
+        } catch {
+          // fall through to ignore non-adjacent add
+        }
+        // Ignore attempts to add a non-adjacent cell
+        return prev;
+      }
+
+      // No modifier
+      if (prev.length === 0) return [cellId];
+
+      // Clicking an already-selected cell toggles it off
+      if (prev.includes(cellId)) return prev.filter(id => id !== cellId);
+
+      // Try adding the clicked cell if it keeps selection contiguous (adjacent)
+      const candidate = [...prev, cellId];
+      try {
+        if (areCellsNeighboring(candidate)) return candidate;
+      } catch {
+        // fall through to single-select
+      }
+      // Otherwise replace selection with the clicked cell
+      return [cellId];
+    });
+  }, [areCellsNeighboring]);
 
 
 
@@ -231,7 +305,7 @@ const LayoutDesigner = () => {
     if (!pluginConfig) return;
     const designer = parseLayoutDesigner(pluginConfig.layoutDesigner);
     const newLayouts = Array.isArray(designer.layouts) ? designer.layouts : [];
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+
     setLayouts(newLayouts);
     if (!activeLayoutId && newLayouts.length) {
       setActiveLayoutId(newLayouts[0].id);
@@ -240,7 +314,7 @@ const LayoutDesigner = () => {
 
   useEffect(() => {
     if (!layouts.length) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+
       setActiveLayoutId(null);
     } else if (activeLayoutId && !layouts.some((layout) => layout.id === activeLayoutId)) {
 
@@ -248,41 +322,6 @@ const LayoutDesigner = () => {
     }
   }, [activeLayoutId, layouts]);
 
-  // Calculate extra bottom padding so frame doesn't touch viewport edge
-  // No dynamic resize logic — screen size initialized once on mount
-
-  const areCellsNeighboring = useCallback((cellIds) => {
-    if (cellIds.length < 2) return false;
-
-    // Find positions of all selected cells
-    const positions = [];
-    activeLayout.cells.forEach((rowCells, rowIndex) => {
-      if (!rowCells) return;
-      rowCells.forEach((cell, colIndex) => {
-        if (cell && cellIds.includes(cell.id)) {
-          positions.push({ row: rowIndex, col: colIndex, id: cell.id });
-        }
-      });
-    });
-
-    if (positions.length !== cellIds.length) return false;
-
-    // Check if all in same row and consecutive columns
-    const sameRow = positions.every(pos => pos.row === positions[0].row);
-    if (sameRow) {
-      const cols = positions.map(p => p.col).sort((a, b) => a - b);
-      return cols.every((col, i) => i === 0 || col === cols[i - 1] + 1);
-    }
-
-    // Check if all in same column and consecutive rows
-    const sameCol = positions.every(pos => pos.col === positions[0].col);
-    if (sameCol) {
-      const rows = positions.map(p => p.row).sort((a, b) => a - b);
-      return rows.every((row, i) => i === 0 || row === rows[i - 1] + 1);
-    }
-
-    return false;
-  }, [activeLayout]);
 
   const activeItemKeys = useMemo(() => {
     if (!activeLayout) return [];
@@ -400,37 +439,76 @@ const LayoutDesigner = () => {
 
     const sameRow = positions.every(pos => pos.row === positions[0].row);
     const sameCol = positions.every(pos => pos.col === positions[0].col);
-
     if (sameRow) {
-      // Merge horizontally in same row
       const rowIndex = positions[0].row;
       const cols = positions.map(p => p.col).sort((a, b) => a - b);
       const startCol = cols[0];
       const endCol = cols[cols.length - 1];
+      const spanCols = endCol - startCol + 1;
 
-      const newCells = [...activeLayout.cells[rowIndex]];
-      // Create merged cell
+      // Create merged cell with colspan
       const mergedCell = {
         id: `merged-${Date.now()}-${Math.random()}`,
         itemKey: null,
         subdivisions: null,
+        colSpan: spanCols,
       };
 
-      // Replace the range with merged cell
-      newCells.splice(startCol, endCol - startCol + 1, mergedCell);
+      // For each row, replace the column range with either merged cell (target row) or null placeholders
+      const newCells = activeLayout.cells.map((r, rIdx) => {
+        const nr = [...r];
+        nr.splice(startCol, spanCols, rIdx === rowIndex ? mergedCell : null);
+        return nr;
+      });
 
+      const newCols = (activeLayout.cols || (newCells[0]?.length || 0)) - (spanCols - 1);
       const newLayout = {
         ...activeLayout,
-        cells: activeLayout.cells.map((row, i) => i === rowIndex ? newCells : row),
+        cols: newCols,
+        cells: newCells,
       };
 
       setLayouts(prev => prev.map(l => l.id === activeLayoutId ? newLayout : l));
       persistLayouts([newLayout]);
       setSelectedCells([]);
     } else if (sameCol) {
-      // For vertical merge, we need to remove cells from multiple rows and create a taller cell
-      // This is more complex and would require restructuring the grid
-      // For now, just clear selection
+      // Merge vertically in same column
+      const colIndex = positions[0].col;
+      const rows = positions.map(p => p.row).sort((a, b) => a - b);
+      const startRow = rows[0];
+      const endRow = rows[rows.length - 1];
+      const spanRows = endRow - startRow + 1;
+
+      const mergedCell = {
+        id: `merged-${Date.now()}-${Math.random()}`,
+        itemKey: null,
+        subdivisions: null,
+        rowSpan: spanRows,
+      };
+
+      const newCells = activeLayout.cells.map((r, rIdx) => {
+        const nr = [...r];
+        if (rIdx === startRow) {
+          nr.splice(colIndex, 1, mergedCell);
+          return nr;
+        }
+        if (rIdx > startRow && rIdx <= endRow) {
+          // replace the spanned slot with null placeholder
+          nr.splice(colIndex, 1, null);
+          return nr;
+        }
+        return nr;
+      });
+
+      const newRows = (activeLayout.rows || newCells.length);
+      const newLayout = {
+        ...activeLayout,
+        rows: newRows,
+        cells: newCells,
+      };
+
+      setLayouts(prev => prev.map(l => l.id === activeLayoutId ? newLayout : l));
+      persistLayouts([newLayout]);
       setSelectedCells([]);
     }
   }, [activeLayout, selectedCells, areCellsNeighboring, activeLayoutId, persistLayouts]);
@@ -664,8 +742,9 @@ const LayoutDesigner = () => {
   // Only allow splitting when the selected id corresponds to an actual cell object
   const selectedCellObj = activeLayout?.cells?.flat().find((c) => c && c.id === selectedCellId) || null;
   const canSplit = !!selectedCellObj && !selectedCellObj.subdivisions;
-  // Allow merging when two or more cells are selected (adjacency not required here)
-  const canMerge = selectedCells.length >= 2;
+  // Allow merging when two or more cells are selected and they are adjacent
+  const canMerge = selectedCells.length >= 2 && areCellsNeighboring(selectedCells);
+
   const dialogToolbar = (
     <div className="layout-designer-preview-toolbar d-flex align-items-center gap-2">
       <button
@@ -675,7 +754,9 @@ const LayoutDesigner = () => {
         onClick={() => { if (selectedCellId) { handleSplitCellIntoRows(selectedCellId); setSelectedCells([]); } }}
         disabled={!canSplit}
       >
-        <span className="material-icons">vertical_split</span>
+        <span className="material-symbols-outlined">
+          splitscreen_portrait
+        </span>
       </button>
 
       <button
@@ -685,7 +766,9 @@ const LayoutDesigner = () => {
         onClick={() => { if (selectedCellId) { handleSplitCellIntoColumns(selectedCellId); setSelectedCells([]); } }}
         disabled={!canSplit}
       >
-        <span className="material-icons">split_axis</span>
+        <span className="material-symbols-outlined">
+          splitscreen_landscape
+        </span>
       </button>
 
       <button
@@ -695,7 +778,7 @@ const LayoutDesigner = () => {
         onClick={() => { handleMergeCells(); }}
         disabled={!canMerge}
       >
-        <span className="material-icons">merge</span>
+        <span className="material-symbols-outlined">merge</span>
       </button>
     </div>
   );
@@ -906,7 +989,7 @@ const LayoutDesigner = () => {
               {hasLayout ? (
                 <>
                   {/* layout name moved to top controls to save vertical space */}
-                  <div className="layout-designer-grid" onClick={clearSelection}>
+                  <div className="layout-designer-grid">
                     <div className="layout-designer-grid-toolbar">
                       <button
                         type="button"
@@ -952,27 +1035,38 @@ const LayoutDesigner = () => {
                           }}
                         >
                           {(activeLayout?.cells || [[createEmptyCell()]]).flat().map((cell, idx) => {
-                            const id = cell ? cell.id : `empty-${idx}`;
+                            // Compute row/col for this rendered slot
+                            const cols = activeLayout?.cols || 1;
+                            const row = Math.floor(idx / cols);
+                            const col = idx % cols;
+                            // Resolve canonical cell that actually covers this slot (handles merged spans)
+                            const canonical = activeLayout?.cells ? findCellCovering(activeLayout.cells, row, col) : null;
+                            const id = canonical ? canonical.id : (cell ? cell.id : `empty-${idx}`);
+                            const cellObj = canonical || cell || null;
                             const isSelected = selectedCells.includes(id);
+                            const style = {};
+                            if (cellObj) {
+                              if (cellObj.colSpan && cellObj.colSpan > 1) style.gridColumn = `span ${cellObj.colSpan}`;
+                              if (cellObj.rowSpan && cellObj.rowSpan > 1) style.gridRow = `span ${cellObj.rowSpan}`;
+                            }
                             return (
                               <div
                                 key={id}
-                                className={`layout-designer-cell${cell && cell.itemKey ? ' layout-designer-cell--filled' : ''}${isSelected ? ' layout-designer-cell--selected' : ''}`}
-                                onClick={(e) => { handleCellClick(id, e); }}
+                                className={`layout-designer-cell${cellObj && cellObj.itemKey ? ' layout-designer-cell--filled' : ''}${isSelected ? ' layout-designer-cell--selected' : ''}`}
+                                style={style}
+                                onClick={(e) => { e.stopPropagation(); handleCellClick(id, e); }}
                                 onContextMenu={(e) => {
                                   e.preventDefault();
-                                  // Determine row/col from index
-                                  const cols = activeLayout?.cols || 1;
-                                  const row = Math.floor(idx / cols);
-                                  const col = idx % cols;
-                                  setContextMenu({ x: e.clientX, y: e.clientY, row, col, cellId: id, cell });
+                                  // Use canonical cell coordinates when available
+                                  const coords = cellObj ? findCellCoordinates(activeLayout.cells, id) : { row, col };
+                                  setContextMenu({ x: e.clientX, y: e.clientY, row: coords?.row ?? row, col: coords?.col ?? col, cellId: id, cell: cellObj });
                                 }}
                               >
-                                {cell && cell.itemKey ? (
-                                  <div className="layout-designer-cell__content">{getCellKeyDisplay(cell.itemKey)}</div>
+                                {cellObj && cellObj.itemKey ? (
+                                  <div className="layout-designer-cell__content">{getCellKeyDisplay(cellObj.itemKey)}</div>
                                 ) : (
                                   <div className="layout-designer-cell__placeholder">Click to select cell.
-                                    Use button above to modify layout</div>
+                                    Use button above to modify layout. Right click to open context menu.</div>
                                 )}
                               </div>
                             );

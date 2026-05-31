@@ -129,7 +129,25 @@
 .layout-designer-cell--selected {
   border-color: var(--color-accent);
   background: color-mix(in srgb, var(--color-accent) 20%, var(--panel-bg-subtle));
-  box-shadow: 0 0 0 2px var(--color-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 30%, transparent), inset 0 0 18px color-mix(in srgb, var(--color-accent) 8%, transparent);
+}
+
+.layout-designer-cell--selected::after {
+  content: '✓';
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--color-accent);
+  color: var(--panel-bg);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
 .layout-designer-cell__content {
@@ -192,7 +210,7 @@
   display: inline-block !important;
   /* Use fit-content so the dialog sizes to the preview content reliably */
   min-width: 360px !important;
-  max-width: 900px !important;
+  max-width: max(95vw, 900px) !important;
   box-sizing: border-box;
 }
 

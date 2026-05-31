@@ -51,7 +51,7 @@ const SubmenuFlyout = ({ items, triggerRef, onCloseAll, onMouseEnter, onMouseLea
         position: 'fixed',
         top: 0,
         left: 0,
-        zIndex: 1201,
+        zIndex: 10001,
         visibility: 'hidden',
       }}
       onMouseEnter={onMouseEnter}
@@ -212,28 +212,37 @@ const ContextMenu = ({
 
   if (isPositioned) {
     if (!isOpen || !position) return null;
+    // When positioned, listen for document mousedown in capture phase so
+    // outside clicks close the menu but still propagate to underlying
+    // elements (so a click on a grid cell both closes the menu and selects
+    // the cell). We avoid rendering a backdrop which would intercept clicks.
+    useLayoutEffect(() => {
+      if (!isOpen) return undefined;
+      const handler = (e) => {
+        const el = menuNodeRef.current;
+        if (!el) return;
+        if (el.contains(e.target)) return; // click inside menu — ignore
+        externalOnClose?.();
+      };
+      document.addEventListener('mousedown', handler, true);
+      return () => document.removeEventListener('mousedown', handler, true);
+    }, [isOpen, externalOnClose]);
+
     return createPortal(
-      <>
-        <div
-          className="context-menu-backdrop"
-          style={{ zIndex: 1199 }}
-          onClick={() => setIsOpen(false)}
-        />
-        <div
-          ref={setMenuRef}
-          className="context-menu open"
-          role="menu"
-          style={{
-            position: 'fixed',
-            top: position.y,
-            left: position.x,
-            zIndex: 1200,
-            visibility: 'hidden',
-          }}
-        >
-          {renderItems(items, close, closeAll)}
-        </div>
-      </>,
+      <div
+        ref={setMenuRef}
+        className="context-menu open"
+        role="menu"
+        style={{
+          position: 'fixed',
+          top: position.y,
+          left: position.x,
+          zIndex: 10001,
+          visibility: 'hidden',
+        }}
+      >
+        {renderItems(items, close, closeAll)}
+      </div>,
       document.body,
     );
   }
