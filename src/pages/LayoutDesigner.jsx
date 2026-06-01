@@ -46,9 +46,20 @@ const LAYOUT_ITEM_ICONS = {
 // Pure helper functions (module-level — no closures over component state)
 // ---------------------------------------------------------------------------
 
+function generateId() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  // Fallback for non-secure contexts (HTTP)
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+  });
+}
+
 function makeCell() {
   return {
-    id: crypto.randomUUID(),
+    id: generateId(),
     itemKey: null,
     subdivisions: null,
     colSpan: 1,
@@ -60,7 +71,7 @@ function makeCell() {
 
 function makeLayout(name, width, height) {
   return {
-    id: crypto.randomUUID(),
+    id: generateId(),
     name,
     width: Number(width),
     height: Number(height),
