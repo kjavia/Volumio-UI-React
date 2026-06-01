@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import Marquee from './Marquee';
+import TrackTitle from './TrackTitle';
+import ArtistName from './ArtistName';
+import AlbumName from './AlbumName';
 
 const TrackInfo = ({ title, artist, album, isInFooter, children }) => {
   return (
@@ -9,23 +11,9 @@ const TrackInfo = ({ title, artist, album, isInFooter, children }) => {
         : 'align-items-center w-100 text-center overflow-hidden cq-track-info'
         }`}
     >
-      <div
-        className={`track-title user-select-none w-100 ${isInFooter ? 'h6 text-start mb-0' : 'responsive-title fw-bold'
-          }`}
-      >
-        <Marquee>{title || 'Unknown Title'}</Marquee>
-      </div>
-      <div
-        className={`artist-name user-select-none w-100 ${isInFooter ? 'small text-start' : 'responsive-artist'
-          }`}
-      >
-        <Marquee>{artist || 'Unknown Artist'}</Marquee>
-      </div>
-      {!isInFooter && album && (
-        <div className="album-name user-select-none small w-100 responsive-album">
-          <Marquee>{album}</Marquee>
-        </div>
-      )}
+      <TrackTitle title={title} isInFooter={isInFooter} />
+      <ArtistName artist={artist} isInFooter={isInFooter} />
+      {!isInFooter && <AlbumName album={album} />}
       {children}
     </div>
   );

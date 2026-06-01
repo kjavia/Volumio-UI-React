@@ -6,7 +6,7 @@ Scope:
 
 1. Allow users to create one or more named layouts for each screen resolution (for example 800x600px or 1920x1080px etc.
 2. Each layout will have a name unique to the resolution. Before creating ask user to entre Name, Width (px), Height (px).
-3. Once created, user can edit name, width, or height. 
+3. Once created, user can edit name, width, or height and there will be a save button to save the layout. 
 4. List all resolutions in a dropdown, let user select one from the dropdown to modify that screen. Next to dropdown, show buttons for editing Layout screen, deleting layout (with confirmation), setting the layout to default.
 5. Once a layout is saved, open the layout on a floating dialog box with a toolbar on the same screen.
 6. Initially the layout will have a single parent element representing the empty layout screen, with 1 cell inside initially created taking up 100% of space. 

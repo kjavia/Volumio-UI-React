@@ -14,6 +14,9 @@ import RadioPlayer from '@/components/animated-players/RadioPlayer';
 import GlobePlayer from '@/components/animated-players/GlobePlayer';
 import PlayerControls from '@/components/PlayerControls';
 import TrackInfo from '@/components/TrackInfo';
+import TrackTitle from '@/components/TrackTitle';
+import ArtistName from '@/components/ArtistName';
+import AlbumName from '@/components/AlbumName';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
 import VolumeManager from '@/components/VolumeManager';
 import SpectrumAnalyzer from '@/components/spectrum-analyzers/SpectrumAnalyzer';
@@ -177,10 +180,12 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
 
   const currentCustomLayout = useMemo(() => {
     if (!useCustomLayout || !layoutDesigner?.layouts?.length) return null;
-    return layoutDesigner.layouts.find((layout) =>
+    const matches = layoutDesigner.layouts.filter((layout) =>
       (layout.width === screenSize.width && layout.height === screenSize.height) ||
       (layout.width === screenSize.height && layout.height === screenSize.width)
     );
+    if (!matches.length) return null;
+    return matches.find((l) => l.isDefault) || matches[0];
   }, [layoutDesigner, screenSize, useCustomLayout]);
 
   const shouldUseCustomLayout = !!currentCustomLayout;
@@ -234,11 +239,11 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const renderCustomCellItem = (itemKey) => {
     switch (itemKey) {
       case 'trackName':
-        return <div className="custom-layout-text custom-layout-text--title">{title || 'Track Name'}</div>;
+        return <TrackTitle title={title} />;
       case 'albumName':
-        return <div className="custom-layout-text custom-layout-text--subtitle">{album || 'Album Name'}</div>;
+        return <AlbumName album={album} />;
       case 'artistName':
-        return <div className="custom-layout-text custom-layout-text--subtitle">{artist || 'Artist Name'}</div>;
+        return <ArtistName artist={artist} />;
       case 'serviceLogo':
         return <div className="custom-layout-media"><ServiceLogo service={service} /></div>;
       case 'samplingRate':
@@ -337,25 +342,113 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
             />
           </div>
         );
+      case 'volumeButton':
+        return (
+          <div className="custom-layout-volume">
+            <VolumeManager
+              volume={volume}
+              mute={mute}
+              onVolumeChange={setVolume}
+              onMute={toggleMute}
+              vertical
+            />
+          </div>
+        );
+      case 'progressBar':
+        return (
+          <div className="custom-layout-seekbar w-100">
+            <PlayerSeekbar />
+          </div>
+        );
       default:
         return null;
     }
   };
 
-  const renderCustomLayout = () => (
-    <div className="custom-layout-grid" style={{
-      gridTemplateColumns: `repeat(${currentCustomLayout.cols}, minmax(120px, 1fr))`,
-      gridTemplateRows: `repeat(${currentCustomLayout.rows}, minmax(120px, 1fr))`,
-    }}>
-      {currentCustomLayout.cells.map((rowCells, rowIndex) =>
-        rowCells.map((cell, colIndex) => (
-          <div key={`${rowIndex}-${colIndex}`} className="custom-layout-cell">
-            {cell ? renderCustomCellItem(cell) : <div className="custom-layout-empty">Empty Cell</div>}
+  const renderCustomCells = (cells) => {
+    const findCellCoveringLocal = (targetRow, targetCol) => {
+      for (let r = 0; r < cells.length; r++) {
+        const row = cells[r];
+        if (!row) continue;
+        for (let c = 0; c < row.length; c++) {
+          const cell = row[c];
+          if (!cell) continue;
+          const cs = cell.colSpan && Number.isFinite(cell.colSpan) ? cell.colSpan : 1;
+          const rs = cell.rowSpan && Number.isFinite(cell.rowSpan) ? cell.rowSpan : 1;
+          if (r <= targetRow && targetRow < r + rs && c <= targetCol && targetCol < c + cs) return cell;
+        }
+      }
+      return null;
+    };
+
+    const rendered = [];
+    const seen = new Set();
+    cells.forEach((rowCells, rowIndex) => {
+      if (!rowCells) return;
+      rowCells.forEach((cell, colIndex) => {
+        const canonical = findCellCoveringLocal(rowIndex, colIndex);
+        if (!canonical) return;
+        if (seen.has(canonical.id)) return;
+        seen.add(canonical.id);
+
+        const style = {
+          alignItems: canonical.alignItems || 'center',
+          justifyContent: canonical.justifyContent || 'center',
+          display: 'flex',
+          overflow: 'hidden',
+        };
+        if (canonical.colSpan > 1) style.gridColumn = `span ${canonical.colSpan}`;
+        if (canonical.rowSpan > 1) style.gridRow = `span ${canonical.rowSpan}`;
+
+        rendered.push(
+          <div key={canonical.id} className="custom-layout-cell" style={style}>
+            {canonical.subdivisions ? (
+              <div
+                style={{
+                  display: 'grid',
+                  width: '100%',
+                  height: '100%',
+                  gridTemplateColumns: `repeat(${canonical.subdivisions.cols || 1}, 1fr)`,
+                  gridTemplateRows: `repeat(${canonical.subdivisions.rows || 1}, 1fr)`,
+                }}
+              >
+                {renderCustomCells(canonical.subdivisions.cells)}
+              </div>
+            ) : canonical.itemKey ? (
+              renderCustomCellItem(canonical.itemKey)
+            ) : null}
           </div>
-        ))
-      )}
-    </div>
-  );
+        );
+      });
+    });
+    return rendered;
+  };
+
+  const renderCustomLayout = () => {
+    const layout = currentCustomLayout;
+    const cols = layout.cols || 1;
+    const rows = layout.rows || 1;
+    const colFractions = Array.isArray(layout.colFractions) && layout.colFractions.length === cols
+      ? layout.colFractions
+      : Array(cols).fill(1);
+    const rowFractions = Array.isArray(layout.rowFractions) && layout.rowFractions.length === rows
+      ? layout.rowFractions
+      : Array(rows).fill(1);
+    return (
+      <div
+        className="custom-layout-grid"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: colFractions.map(f => `${f}fr`).join(' '),
+          gridTemplateRows: rowFractions.map(f => `${f}fr`).join(' '),
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        {renderCustomCells(layout.cells)}
+      </div>
+    );
+  };
 
 
   // After 5 minutes of no connection, stop showing the retrying state
