@@ -136,6 +136,25 @@ body,
   font-size: var(--sp-bitrate-font-size) !important;
 }
 
+/* Format logos and service logos scale with the bitrate font size setting */
+:root.sp-has-bitrate-font-size .format-logo-responsive {
+  height: var(--sp-bitrate-font-size) !important;
+}
+
+:root.sp-has-bitrate-font-size .service-logo-img {
+  height: var(--sp-bitrate-font-size) !important;
+  width: auto !important;
+  max-height: none !important;
+}
+
+:root.sp-has-bitrate-font-size .service-logo-icon {
+  font-size: var(--sp-bitrate-font-size) !important;
+}
+
+:root.sp-has-bitrate-font-size .service-logo-badge {
+  font-size: var(--sp-bitrate-font-size) !important;
+}
+
 :root.sp-has-progress-font-size .seekbar-labels,
 :root.sp-has-progress-font-size .time-label {
   font-size: var(--sp-progress-font-size) !important;

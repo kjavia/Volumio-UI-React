@@ -6,6 +6,44 @@
 // ---------------------------------------------------------------------------
 .layout-designer {
   min-height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+
+  // Propagate theme text color to Bootstrap heading and form elements
+  // Exclude .dialog-title so theme-specific dialog header colors are preserved
+  h1:not(.dialog-title),
+  h2:not(.dialog-title),
+  h3:not(.dialog-title),
+  h4:not(.dialog-title),
+  h5:not(.dialog-title),
+  h6:not(.dialog-title) {
+    color: var(--text-primary);
+  }
+
+  .card {
+    background-color: var(--list-item-bg);
+    border-color: var(--border-dark);
+    color: var(--text-primary);
+  }
+
+  .form-control,
+  .form-select {
+    background-color: var(--color-white) !important;
+    color: var(--color-gray-950) !important;
+    border-color: var(--border-dark) !important;
+  }
+
+  .form-control::placeholder {
+    color: var(--color-gray-600) !important;
+  }
+
+  .form-label {
+    color: var(--text-primary);
+  }
+
+  .text-muted {
+    color: var(--text-secondary) !important;
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -53,9 +91,9 @@
   // cqw/cqh measure .ld-canvas-wrap's content box (inside its padding).
   width: min(100cqw, calc(100cqh * var(--ld-ratio, 1)));
   aspect-ratio: var(--ld-ratio, 1);
-  background: var(--bs-body-bg);
-  border: 1px solid var(--bs-border-color);
-  border-radius: var(--bs-border-radius);
+  background: var(--bg-color);
+  border: 1px solid var(--border-dark);
+  border-radius: 4px;
   overflow: hidden;
   position: relative;
 }
@@ -74,21 +112,21 @@
 // Cells
 // ---------------------------------------------------------------------------
 .ld-cell {
-  border: 1px dashed var(--bs-border-color);
+  border: 1px dashed var(--border-dark);
   cursor: pointer;
   box-sizing: border-box;
   transition: background 0.1s, border-color 0.1s;
   position: relative;
 
   &:hover {
-    background: rgba(var(--bs-primary-rgb), 0.06);
-    border-color: rgba(var(--bs-primary-rgb), 0.4);
+    background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+    border-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
   }
 
   // Selected state
   &--selected {
-    border: 2px solid var(--bs-primary) !important;
-    background: rgba(var(--bs-primary-rgb), 0.14) !important;
+    border: 2px solid var(--color-primary) !important;
+    background: color-mix(in srgb, var(--color-primary) 15%, transparent) !important;
 
     // Checkmark badge in top-right corner
     &::after {
@@ -97,7 +135,7 @@
       top: 3px;
       right: 5px;
       font-size: 0.65rem;
-      color: var(--bs-primary);
+      color: var(--color-primary);
       pointer-events: none;
       line-height: 1;
     }
@@ -107,11 +145,11 @@
   &--parent {
     cursor: default;
     border-style: dashed;
-    border-color: var(--bs-secondary);
+    border-color: var(--color-secondary);
 
     &:hover {
       background: none;
-      border-color: var(--bs-secondary);
+      border-color: var(--color-secondary);
     }
   }
 
@@ -119,7 +157,7 @@
   &__label {
     font-size: 0.7rem;
     opacity: 0.65;
-    color: var(--bs-body-color);
+    color: var(--text-primary);
     pointer-events: none;
     white-space: nowrap;
     overflow: hidden;
@@ -159,10 +197,10 @@
 // Context Menu
 // ---------------------------------------------------------------------------
 .ld-context-menu {
-  background: var(--bs-body-bg);
-  border: 1px solid var(--bs-border-color);
-  border-radius: var(--bs-border-radius);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  background: var(--bg-color);
+  border: 1px solid var(--border-dark);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px var(--shadow-30);
   min-width: 190px;
   padding: 4px 0;
   font-size: 0.875rem;
@@ -171,7 +209,7 @@
 
   hr {
     margin: 4px 0;
-    border-color: var(--bs-border-color);
+    border-color: var(--border-dark);
     opacity: 0.5;
   }
 
@@ -182,10 +220,10 @@
     cursor: pointer;
     position: relative;
     gap: 6px;
-    color: var(--bs-body-color);
+    color: var(--text-primary);
 
     &:hover {
-      background: rgba(var(--bs-primary-rgb), 0.1);
+      background: color-mix(in srgb, var(--color-primary) 10%, transparent);
     }
 
     &--disabled {
@@ -194,10 +232,10 @@
     }
 
     &--danger {
-      color: var(--bs-danger);
+      color: var(--color-danger);
 
       &:hover {
-        background: rgba(var(--bs-danger-rgb), 0.1);
+        background: color-mix(in srgb, var(--color-danger) 10%, transparent);
       }
     }
 
@@ -216,10 +254,10 @@
     position: absolute;
     left: 100%;
     top: -4px;
-    background: var(--bs-body-bg);
-    border: 1px solid var(--bs-border-color);
-    border-radius: var(--bs-border-radius);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    background: var(--bg-color);
+    border: 1px solid var(--border-dark);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px var(--shadow-30);
     min-width: 190px;
     padding: 4px 0;
     z-index: 10000;
@@ -243,7 +281,7 @@
 
     &:hover,
     &:active {
-      background: rgba(var(--bs-primary-rgb), 0.5);
+      background: color-mix(in srgb, var(--color-primary) 50%, transparent);
     }
   }
 
@@ -256,7 +294,7 @@
 
     &:hover,
     &:active {
-      background: rgba(var(--bs-primary-rgb), 0.5);
+      background: color-mix(in srgb, var(--color-primary) 50%, transparent);
     }
   }
 }

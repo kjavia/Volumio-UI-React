@@ -2,6 +2,7 @@ import { useMemo, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
+import { useSeek } from '@/contexts/SeekContext';
 import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
 import AlbumArtPlayer from '@/components/animated-players/AlbumArtPlayer';
 import VinylPlayer from '@/components/animated-players/VinylPlayer';
@@ -114,6 +115,8 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
     streamUri,
   } = useVolumioStatus();
 
+  const { seek, duration } = useSeek();
+
   const [randomIndex] = useState(() =>
     Math.floor(Math.random() * RANDOM_PLAYERS.length)
   );
@@ -131,6 +134,31 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
     if (albumart.startsWith('http')) return albumart;
     return `${VOLUMIO_BASE_URL}${albumart}`;
   }, [albumart]);
+
+  const peppyTrackInfo = useMemo(() => {
+    const elapsedSec = seek / 1000;
+    const remainingSec = duration > 0 ? Math.max(0, duration - elapsedSec) : 0;
+    const fmtTime = (s) => `${Math.floor(s / 60)}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
+    return {
+      title: title || '',
+      artist: artist || '',
+      album: album || '',
+      albumart: fullAlbumArt,
+      samplerate: [samplerate, bitdepth].filter(Boolean).join(' ') || '',
+      trackType: trackType || '',
+      bitrate: bitrate || '',
+      service: service || '',
+      remaining: duration > 0 ? fmtTime(remainingSec) : '',
+      elapsed: fmtTime(elapsedSec),
+      total: duration > 0 ? fmtTime(duration) : '',
+      progress: duration > 0 ? elapsedSec / duration : 0,
+      volume: volume || 0,
+      mute: !!mute,
+      isPlaying: !!isPlaying,
+      repeat: repeat || false,
+      random: random || false,
+    };
+  }, [seek, duration, title, artist, album, fullAlbumArt, samplerate, bitdepth, trackType, bitrate, service, volume, mute, isPlaying, repeat, random]);
 
   const [showPlaylist, setShowPlaylist] = useState(false);
   const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
@@ -200,7 +228,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
               />
             )}
             {vizType === 'peppyMeter' && (
-              <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} stopped={!isPlaying} />
+              <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} stopped={!isPlaying} />
             )}
             {vizType === 'peppySpectrum' && (
               <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} stopped={!isPlaying} />
@@ -268,9 +296,11 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
       rowCells.forEach((cell) => {
         if (!cell) return; // null = placeholder from a rowSpan merge, skip
 
+        const justifyToTextAlign = { 'flex-start': 'left', 'flex-end': 'right', 'center': 'center' };
         const style = {
           alignItems: cell.alignItems || 'center',
           justifyContent: cell.justifyContent || 'center',
+          textAlign: justifyToTextAlign[cell.justifyContent] || 'center',
           display: 'flex',
           overflow: 'hidden',
         };

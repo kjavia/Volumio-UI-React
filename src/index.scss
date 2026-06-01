@@ -86,17 +86,26 @@
   opacity: 0.9;
 }
 
-.custom-layout-media,
-.custom-layout-controls,
+// Player and viz must fill the entire cell.
 .custom-layout-player,
-.custom-layout-viz,
-.custom-layout-button-row,
-.custom-layout-volume {
+.custom-layout-viz {
   width: 100%;
   height: 100%;
 }
 
+// Controls, button-row, volume, and seekbar fill the cell width
+// but not the height — so the parent cell's alignItems can position
+// them vertically according to the designer alignment setting.
+.custom-layout-controls,
+.custom-layout-button-row,
+.custom-layout-volume {
+  width: 100%;
+}
+
+// Media items (service logo, stream info) — let them size to their content
+// so the parent cell's flexbox alignment positions them correctly.
 .custom-layout-media {
+  max-width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

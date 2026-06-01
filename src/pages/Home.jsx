@@ -35,6 +35,7 @@ const Home = () => {
   const [forcePlayer, setForcePlayer] = useState(false);
   const [isVizFullscreen, setIsVizFullscreen] = useState(false);
   const [vizPortalTarget, setVizPortalTarget] = useState(null);
+  const [layoutIndex, setLayoutIndex] = useState(0);
   const vizContainerRef = useRef(null);
 
   useEffect(() => {
@@ -99,17 +100,57 @@ const Home = () => {
     }
     return raw;
   })();
-  const currentCustomLayout = (() => {
-    if (!useCustomLayout || !layoutDesigner?.layouts?.length) return null;
+  // Matching layouts for current resolution — default sorted first so index 0 = preferred.
+  const matchingLayouts = (() => {
+    if (!useCustomLayout || !layoutDesigner?.layouts?.length) return [];
     const w = window.innerWidth;
     const h = window.innerHeight;
     const matches = layoutDesigner.layouts.filter((layout) =>
       (layout.width === w && layout.height === h) ||
       (layout.width === h && layout.height === w)
     );
-    if (!matches.length) return null;
-    return matches.find((l) => l.isDefault) || matches[0];
+    const def = matches.find((l) => l.isDefault);
+    return def ? [def, ...matches.filter((l) => !l.isDefault)] : matches;
   })();
+
+  // Reset to first layout whenever the set of matching layouts changes.
+  const matchingLayoutIds = matchingLayouts.map((l) => l.id).join(',');
+  useEffect(() => { setLayoutIndex(0); }, [matchingLayoutIds]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const currentCustomLayout = matchingLayouts.length
+    ? matchingLayouts[layoutIndex % matchingLayouts.length]
+    : null;
+
+  // Swipe up from the bottom edge cycles through matching layouts.
+  useEffect(() => {
+    if (matchingLayouts.length < 2) return;
+    const count = matchingLayouts.length;
+    let startY = null;
+    let fromEdge = false;
+
+    const onTouchStart = (e) => {
+      const t = e.touches[0];
+      startY = t.clientY;
+      fromEdge = t.clientY > window.innerHeight - 60;
+    };
+
+    const onTouchEnd = (e) => {
+      if (!fromEdge || startY === null) return;
+      const deltaY = e.changedTouches[0].clientY - startY;
+      if (deltaY < -80) {
+        setLayoutIndex((prev) => (prev + 1) % count);
+      }
+      startY = null;
+      fromEdge = false;
+    };
+
+    document.addEventListener('touchstart', onTouchStart, { passive: true });
+    document.addEventListener('touchend', onTouchEnd, { passive: true });
+    return () => {
+      document.removeEventListener('touchstart', onTouchStart);
+      document.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [matchingLayouts.length]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Apply user color overrides as CSS custom properties on :root
   useEffect(() => {

@@ -27,6 +27,21 @@ const LAYOUT_ITEMS = {
   viz: 'Visualization',
 };
 
+const LAYOUT_ITEM_ICONS = {
+  trackName: 'music_note',
+  albumName: 'album',
+  artistName: 'person',
+  samplingRate: 'graphic_eq',
+  serviceLogo: 'apps',
+  player: 'radio',
+  playerControls: 'play_circle',
+  buttonRow: 'tune',
+  progressBar: 'linear_scale',
+  volumeSlider: 'volume_up',
+  volumeButton: 'volume_up',
+  viz: 'equalizer',
+};
+
 // ---------------------------------------------------------------------------
 // Pure helper functions (module-level — no closures over component state)
 // ---------------------------------------------------------------------------
@@ -856,6 +871,7 @@ export default function LayoutDesigner() {
     // Clamp position to viewport
     const x = Math.min(contextMenu.x, window.innerWidth - 200);
     const y = Math.min(contextMenu.y, window.innerHeight - 300);
+    const Icon = ({ name }) => <span className="material-icons" style={{ fontSize: '1rem', opacity: 0.75 }}>{name}</span>;
 
     return (
       <div
@@ -866,6 +882,7 @@ export default function LayoutDesigner() {
         {/* Add Item submenu */}
         {!contextCellObj?.itemKey && availableItems.length > 0 && (
           <div className="ld-context-menu__item ld-context-menu__item--submenu">
+            <Icon name="add_box" />
             <span>Add Item</span>
             <span className="material-icons" style={{ fontSize: '0.9rem', marginLeft: 'auto' }}>chevron_right</span>
             <div className="ld-context-menu__submenu">
@@ -875,6 +892,7 @@ export default function LayoutDesigner() {
                   className="ld-context-menu__item"
                   onClick={() => handleAssignItem(key, contextMenu.cellId)}
                 >
+                  {LAYOUT_ITEM_ICONS[key] && <Icon name={LAYOUT_ITEM_ICONS[key]} />}
                   {label}
                 </div>
               ))}
@@ -882,7 +900,10 @@ export default function LayoutDesigner() {
           </div>
         )}
         {!contextCellObj?.itemKey && availableItems.length === 0 && (
-          <div className="ld-context-menu__item ld-context-menu__item--disabled">All items assigned</div>
+          <div className="ld-context-menu__item ld-context-menu__item--disabled">
+            <Icon name="inventory_2" />
+            All items assigned
+          </div>
         )}
 
         {contextCellObj?.itemKey && (
@@ -890,6 +911,7 @@ export default function LayoutDesigner() {
             className="ld-context-menu__item"
             onClick={() => { handleClearCell(contextMenu.cellId); closeContextMenu(); }}
           >
+            <Icon name="remove_circle_outline" />
             Remove Item
           </div>
         )}
@@ -902,12 +924,14 @@ export default function LayoutDesigner() {
               className="ld-context-menu__item"
               onClick={() => { handleSplitCellIntoRows(contextMenu.cellId); closeContextMenu(); }}
             >
+              <Icon name="table_rows" />
               Split into Rows
             </div>
             <div
               className="ld-context-menu__item"
               onClick={() => { handleSplitCellIntoColumns(contextMenu.cellId); closeContextMenu(); }}
             >
+              <Icon name="view_column" />
               Split into Columns
             </div>
           </>
@@ -917,6 +941,7 @@ export default function LayoutDesigner() {
           <>
             <hr />
             <div className="ld-context-menu__item" onClick={() => { handleMergeCells(); closeContextMenu(); }}>
+              <Icon name="merge" />
               Merge Selected Cells
             </div>
           </>
@@ -972,7 +997,7 @@ export default function LayoutDesigner() {
   // ---- Main page render ----------------------------------------------------
 
   return (
-    <div className="layout-designer container-fluid py-4">
+    <div className="layout-designer container-fluid p-4">
       <Toast toasts={toasts} />
 
       <div className="d-flex align-items-center mb-4 gap-3">
@@ -996,7 +1021,7 @@ export default function LayoutDesigner() {
       {/* Create Layout Form */}
       {showCreateForm && (
         <div className="card mb-4">
-          <div className="card-body">
+          <div className="card-body p-5">
             <h6 className="card-title mb-3">New Layout</h6>
             <CreateLayoutForm
               onSubmit={handleCreateLayout}
@@ -1018,7 +1043,7 @@ export default function LayoutDesigner() {
       {/* Layout Selector */}
       {layouts.length > 0 && (
         <div className="card mb-4">
-          <div className="card-body">
+          <div className="card-body p-5">
             {/* Dropdown + action buttons */}
             <div className="d-flex align-items-center gap-2 mb-3 flex-wrap">
               <select
