@@ -117,10 +117,23 @@
 }
 
 .custom-layout-player {
+  width: 99%;
   display: flex;
   justify-content: center;
   align-items: center;
   // No fixed min-height — cell size is controlled by the grid fr fractions.
+
+  // Override the player-responsive size variable so the album art
+  // fills 99% of the cell container (cq units come from the cell).
+  .player-responsive {
+    --p-size: 99;
+  }
+
+  // Album art: override the default 70% × 70% and fill the cell.
+  .album-art-player {
+    width: 99%;
+    height: 99%;
+  }
 }
 
 .custom-layout-viz {

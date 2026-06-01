@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation, Trans } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useSocket } from '@/contexts/SocketContext';
 import usePluginConfig from '@/hooks/usePluginConfig';
@@ -212,6 +213,7 @@ function replaceCellsArrayInTree(cells, targetCells, newCells) {
 // ---------------------------------------------------------------------------
 
 function CreateLayoutForm({ onSubmit, onCancel, existingNames }) {
+  const { t } = useTranslation('layoutDesigner');
   const [name, setName] = useState('');
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
@@ -219,10 +221,10 @@ function CreateLayoutForm({ onSubmit, onCancel, existingNames }) {
 
   function validate() {
     const e = {};
-    if (!name.trim()) e.name = 'Name is required.';
-    else if (existingNames.includes(name.trim())) e.name = 'A layout with this name already exists.';
-    if (!width || isNaN(width) || Number(width) <= 0) e.width = 'Must be a positive number.';
-    if (!height || isNaN(height) || Number(height) <= 0) e.height = 'Must be a positive number.';
+    if (!name.trim()) e.name = t('error_name_required');
+    else if (existingNames.includes(name.trim())) e.name = t('error_name_duplicate');
+    if (!width || isNaN(width) || Number(width) <= 0) e.width = t('error_positive_number');
+    if (!height || isNaN(height) || Number(height) <= 0) e.height = t('error_positive_number');
     return e;
   }
 
@@ -236,7 +238,7 @@ function CreateLayoutForm({ onSubmit, onCancel, existingNames }) {
   return (
     <form onSubmit={handleSubmit} noValidate>
       <div className="mb-3">
-        <label className="form-label">Layout Name</label>
+        <label className="form-label">{t('label_layout_name')}</label>
         <input
           className={`form-control form-control-sm${errors.name ? ' is-invalid' : ''}`}
           value={name}
@@ -247,7 +249,7 @@ function CreateLayoutForm({ onSubmit, onCancel, existingNames }) {
       </div>
       <div className="row g-2 mb-3">
         <div className="col">
-          <label className="form-label">Width (px)</label>
+          <label className="form-label">{t('label_width_px')}</label>
           <input
             type="number"
             className={`form-control form-control-sm${errors.width ? ' is-invalid' : ''}`}
@@ -258,7 +260,7 @@ function CreateLayoutForm({ onSubmit, onCancel, existingNames }) {
           {errors.width && <div className="invalid-feedback">{errors.width}</div>}
         </div>
         <div className="col">
-          <label className="form-label">Height (px)</label>
+          <label className="form-label">{t('label_height_px')}</label>
           <input
             type="number"
             className={`form-control form-control-sm${errors.height ? ' is-invalid' : ''}`}
@@ -270,8 +272,8 @@ function CreateLayoutForm({ onSubmit, onCancel, existingNames }) {
         </div>
       </div>
       <div className="d-flex gap-2 justify-content-end">
-        <button type="button" className="btn btn-sm btn-outline-secondary" onClick={onCancel}>Cancel</button>
-        <button type="submit" className="btn btn-sm btn-primary">Create</button>
+        <button type="button" className="btn btn-sm btn-outline-secondary" onClick={onCancel}>{t('btn_cancel')}</button>
+        <button type="submit" className="btn btn-sm btn-primary">{t('btn_create')}</button>
       </div>
     </form>
   );
@@ -288,6 +290,7 @@ CreateLayoutForm.propTypes = {
 // ---------------------------------------------------------------------------
 
 export default function LayoutDesigner() {
+  const { t } = useTranslation('layoutDesigner');
   const { socket } = useSocket();
   const { data: pluginConfig } = usePluginConfig();
   const { toasts, showToast } = useToast();
@@ -379,6 +382,26 @@ export default function LayoutDesigner() {
     window.addEventListener('click', handler);
     return () => window.removeEventListener('click', handler);
   }, [contextMenu]);
+
+  // ---- Clamp context menu within viewport ----------------------------------
+  // Callback ref fires after mount; measures actual size and repositions.
+  const menuRef = useCallback((node) => {
+    if (!node) return;
+    const rect = node.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    let left = rect.left;
+    let top = rect.top;
+    if (rect.right > vw) left = Math.max(0, vw - rect.width);
+    if (rect.bottom > vh) top = Math.max(0, vh - rect.height);
+    node.style.left = left + 'px';
+    node.style.top = top + 'px';
+    // Flip submenu left when there is not enough room on the right
+    if (left + rect.width + 190 > vw) {
+      node.classList.add('ld-context-menu--flip-x');
+    }
+    node.style.visibility = 'visible';
+  }, [contextMenu]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ---- Load layouts from plugin config (HTTP + pushStylishPlayerConfig) ----
   useEffect(() => {
@@ -778,7 +801,7 @@ export default function LayoutDesigner() {
             onContextMenu={(e) => handleContextMenu(cell.id, e)}
           >
             {cell.itemKey && (
-              <span className="ld-cell__label">{LAYOUT_ITEMS[cell.itemKey]}</span>
+              <span className="ld-cell__label">{t('item_' + cell.itemKey)}</span>
             )}
             {renderResizeHandles(cFr, rFr, colIdx, rowIdx, parentCellId)}
           </div>
@@ -796,40 +819,40 @@ export default function LayoutDesigner() {
           className="btn btn-sm btn-outline-secondary"
           disabled={!canSplit}
           onClick={() => handleSplitCellIntoRows(selectedCellId)}
-          title="Split into rows"
+          title={t('toolbar_title_split_rows')}
         >
           <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>table_rows</span>
-          <span className="ms-1">Split into Rows</span>
+          <span className="ms-1">{t('toolbar_split_rows')}</span>
         </button>
 
         <button
           className="btn btn-sm btn-outline-secondary"
           disabled={!canSplit}
           onClick={() => handleSplitCellIntoColumns(selectedCellId)}
-          title="Split into columns"
+          title={t('toolbar_title_split_cols')}
         >
           <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>view_column</span>
-          <span className="ms-1">Split into Columns</span>
+          <span className="ms-1">{t('toolbar_split_cols')}</span>
         </button>
 
         <button
           className="btn btn-sm btn-outline-secondary"
           disabled={!canMerge}
           onClick={handleMergeCells}
-          title="Merge selected cells"
+          title={t('toolbar_title_merge')}
         >
           <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>merge</span>
-          <span className="ms-1">Merge</span>
+          <span className="ms-1">{t('toolbar_merge')}</span>
         </button>
 
         <button
           className="btn btn-sm btn-outline-secondary"
           disabled={!canClear}
           onClick={() => handleClearCell(selectedCellId)}
-          title="Clear cell content"
+          title={t('toolbar_title_clear')}
         >
           <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>delete_sweep</span>
-          <span className="ms-1">Clear</span>
+          <span className="ms-1">{t('toolbar_clear')}</span>
         </button>
 
         {canAlign && (
@@ -837,13 +860,13 @@ export default function LayoutDesigner() {
             <div className="vr" />
             <div className="d-flex flex-row gap-1">
               {/* Vertical alignment */}
-              <div className="d-flex flex-row" role="group" aria-label="Vertical alignment">
+              <div className="d-flex flex-row" role="group" aria-label={t('toolbar_aria_valign')}>
                 {['flex-start', 'center', 'flex-end'].map((v, i) => (
                   <button
                     key={v}
                     className={`btn btn-sm ${(selectedCellObj?.alignItems ?? 'center') === v ? 'btn-primary' : 'btn-outline-secondary'}`}
                     onClick={() => handleSetCellAlignment(selectedCellId, 'alignItems', v)}
-                    title={['Align Top', 'Align Middle', 'Align Bottom'][i]}
+                    title={[t('toolbar_align_top'), t('toolbar_align_middle'), t('toolbar_align_bottom')][i]}
                   >
                     <span className="material-icons" style={{ fontSize: '1rem' }}>
                       {['vertical_align_top', 'vertical_align_center', 'vertical_align_bottom'][i]}
@@ -852,13 +875,13 @@ export default function LayoutDesigner() {
                 ))}
               </div>
               {/* Horizontal alignment */}
-              <div className="d-flex flex-row" role="group" aria-label="Horizontal alignment">
+              <div className="d-flex flex-row" role="group" aria-label={t('toolbar_aria_halign')}>
                 {['flex-start', 'center', 'flex-end'].map((v, i) => (
                   <button
                     key={v}
                     className={`btn btn-sm ${(selectedCellObj?.justifyContent ?? 'center') === v ? 'btn-primary' : 'btn-outline-secondary'}`}
                     onClick={() => handleSetCellAlignment(selectedCellId, 'justifyContent', v)}
-                    title={['Align Left', 'Align Center', 'Align Right'][i]}
+                    title={[t('toolbar_align_left'), t('toolbar_align_center'), t('toolbar_align_right')][i]}
                   >
                     <span className="material-icons" style={{ fontSize: '1rem' }}>
                       {['format_align_left', 'format_align_center', 'format_align_right'][i]}
@@ -879,32 +902,30 @@ export default function LayoutDesigner() {
   function renderContextMenu() {
     if (!contextMenu) return null;
 
-    // Clamp position to viewport
-    const x = Math.min(contextMenu.x, window.innerWidth - 200);
-    const y = Math.min(contextMenu.y, window.innerHeight - 300);
     const Icon = ({ name }) => <span className="material-icons" style={{ fontSize: '1rem', opacity: 0.75 }}>{name}</span>;
 
     return (
       <div
+        ref={menuRef}
         className="ld-context-menu"
-        style={{ position: 'fixed', top: y, left: x, zIndex: 9999 }}
+        style={{ position: 'fixed', top: contextMenu.y, left: contextMenu.x, zIndex: 9999, visibility: 'hidden' }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Add Item submenu */}
         {!contextCellObj?.itemKey && availableItems.length > 0 && (
           <div className="ld-context-menu__item ld-context-menu__item--submenu">
             <Icon name="add_box" />
-            <span>Add Item</span>
+            <span>{t('ctx_add_item')}</span>
             <span className="material-icons" style={{ fontSize: '0.9rem', marginLeft: 'auto' }}>chevron_right</span>
             <div className="ld-context-menu__submenu">
-              {availableItems.map(([key, label]) => (
+              {availableItems.map(([key]) => (
                 <div
                   key={key}
                   className="ld-context-menu__item"
                   onClick={() => handleAssignItem(key, contextMenu.cellId)}
                 >
                   {LAYOUT_ITEM_ICONS[key] && <Icon name={LAYOUT_ITEM_ICONS[key]} />}
-                  {label}
+                  {t('item_' + key)}
                 </div>
               ))}
             </div>
@@ -913,7 +934,7 @@ export default function LayoutDesigner() {
         {!contextCellObj?.itemKey && availableItems.length === 0 && (
           <div className="ld-context-menu__item ld-context-menu__item--disabled">
             <Icon name="inventory_2" />
-            All items assigned
+            {t('ctx_all_assigned')}
           </div>
         )}
 
@@ -923,7 +944,7 @@ export default function LayoutDesigner() {
             onClick={() => { handleClearCell(contextMenu.cellId); closeContextMenu(); }}
           >
             <Icon name="remove_circle_outline" />
-            Remove Item
+            {t('ctx_remove_item')}
           </div>
         )}
 
@@ -936,14 +957,14 @@ export default function LayoutDesigner() {
               onClick={() => { handleSplitCellIntoRows(contextMenu.cellId); closeContextMenu(); }}
             >
               <Icon name="table_rows" />
-              Split into Rows
+              {t('ctx_split_rows')}
             </div>
             <div
               className="ld-context-menu__item"
               onClick={() => { handleSplitCellIntoColumns(contextMenu.cellId); closeContextMenu(); }}
             >
               <Icon name="view_column" />
-              Split into Columns
+              {t('ctx_split_cols')}
             </div>
           </>
         )}
@@ -953,7 +974,7 @@ export default function LayoutDesigner() {
             <hr />
             <div className="ld-context-menu__item" onClick={() => { handleMergeCells(); closeContextMenu(); }}>
               <Icon name="merge" />
-              Merge Selected Cells
+              {t('ctx_merge')}
             </div>
           </>
         )}
@@ -972,7 +993,7 @@ export default function LayoutDesigner() {
       <Dialog
         open={showCanvasDialog}
         onClose={() => { setShowCanvasDialog(false); setSelectedCells([]); }}
-        title={`Editing: ${activeLayout.name} (${activeLayout.width}×${activeLayout.height})`}
+        title={t('canvas_title', { name: activeLayout.name, width: activeLayout.width, height: activeLayout.height })}
         size="full"
         className="ld-canvas-dialog"
         toolbar={renderToolbar()}
@@ -1012,18 +1033,18 @@ export default function LayoutDesigner() {
       <Toast toasts={toasts} />
 
       <div className="d-flex align-items-center mb-4 gap-3">
-        <h4 className="mb-0">Layout Designer</h4>
+        <h4 className="mb-0">{t('page_title')}</h4>
         <button
           className="btn btn-sm btn-primary ms-auto"
           onClick={() => setShowCreateForm(true)}
         >
           <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>add</span>
-          <span className="ms-1">New Layout</span>
+          <span className="ms-1">{t('btn_new_layout')}</span>
         </button>
         <button
           className="btn btn-sm btn-outline-secondary"
           onClick={() => navigate('/')}
-          title="Back to Home"
+          title={t('btn_back_to_home')}
         >
           <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>close</span>
         </button>
@@ -1033,7 +1054,7 @@ export default function LayoutDesigner() {
       {showCreateForm && (
         <div className="card mb-4">
           <div className="card-body p-5">
-            <h6 className="card-title mb-3">New Layout</h6>
+            <h6 className="card-title mb-3">{t('section_create')}</h6>
             <CreateLayoutForm
               onSubmit={handleCreateLayout}
               onCancel={() => setShowCreateForm(false)}
@@ -1047,7 +1068,9 @@ export default function LayoutDesigner() {
       {!layouts.length && !showCreateForm && (
         <div className="text-center text-secondary py-5">
           <span className="material-icons d-block mb-2" style={{ fontSize: '3rem' }}>dashboard_customize</span>
-          <p className="mb-0">No layouts yet. Click <strong>New Layout</strong> to get started.</p>
+          <p className="mb-0">
+            <Trans i18nKey="empty_state" t={t} components={{ bold: <strong /> }} />
+          </p>
         </div>
       )}
 
@@ -1074,30 +1097,30 @@ export default function LayoutDesigner() {
                 className="btn btn-sm btn-outline-primary"
                 disabled={!activeLayout}
                 onClick={() => setShowCanvasDialog(true)}
-                title="Edit layout grid"
+                title={t('btn_edit_layout')}
               >
                 <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>grid_on</span>
-                <span className="ms-1">Edit Layout</span>
+                <span className="ms-1">{t('btn_edit_layout')}</span>
               </button>
 
               <button
                 className={`btn btn-sm ${activeLayout?.isDefault ? 'btn-warning' : 'btn-outline-secondary'}`}
                 disabled={!activeLayout}
                 onClick={handleSetDefault}
-                title={activeLayout?.isDefault ? 'Remove default' : 'Set as default for this resolution'}
+                title={activeLayout?.isDefault ? t('title_remove_default') : t('title_set_default')}
               >
                 <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>star</span>
-                <span className="ms-1">{activeLayout?.isDefault ? 'Default' : 'Set Default'}</span>
+                <span className="ms-1">{activeLayout?.isDefault ? t('btn_default') : t('btn_set_default')}</span>
               </button>
 
               <button
                 className="btn btn-sm btn-outline-danger"
                 disabled={!activeLayout}
                 onClick={() => setShowDeleteConfirm(true)}
-                title="Delete layout"
+                title={t('title_delete_layout')}
               >
                 <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>delete</span>
-                Delete
+                {t('btn_delete')}
               </button>
             </div>
 
@@ -1105,7 +1128,7 @@ export default function LayoutDesigner() {
             {activeLayout && (
               <div className="d-flex gap-2 flex-wrap align-items-end">
                 <div>
-                  <label className="form-label form-label-sm mb-1">Name</label>
+                  <label className="form-label form-label-sm mb-1">{t('label_name')}</label>
                   <input
                     className="form-control form-control-sm"
                     style={{ maxWidth: 220 }}
@@ -1116,7 +1139,7 @@ export default function LayoutDesigner() {
                   />
                 </div>
                 <div>
-                  <label className="form-label form-label-sm mb-1">Width (px)</label>
+                  <label className="form-label form-label-sm mb-1">{t('label_width_px')}</label>
                   <input
                     type="number"
                     className="form-control form-control-sm"
@@ -1129,7 +1152,7 @@ export default function LayoutDesigner() {
                   />
                 </div>
                 <div>
-                  <label className="form-label form-label-sm mb-1">Height (px)</label>
+                  <label className="form-label form-label-sm mb-1">{t('label_height_px')}</label>
                   <input
                     type="number"
                     className="form-control form-control-sm"
@@ -1151,17 +1174,17 @@ export default function LayoutDesigner() {
       <Dialog
         open={showDeleteConfirm}
         onClose={() => setShowDeleteConfirm(false)}
-        title="Delete Layout"
+        title={t('delete_dialog_title')}
         size="sm"
         footer={
           <div className="d-flex gap-2 justify-content-end">
-            <button className="btn btn-sm btn-outline-secondary" onClick={() => setShowDeleteConfirm(false)}>Cancel</button>
-            <button className="btn btn-sm btn-danger" onClick={handleDeleteLayout}>Delete</button>
+            <button className="btn btn-sm btn-outline-secondary" onClick={() => setShowDeleteConfirm(false)}>{t('btn_cancel')}</button>
+            <button className="btn btn-sm btn-danger" onClick={handleDeleteLayout}>{t('btn_delete')}</button>
           </div>
         }
       >
         <p className="mb-0">
-          Delete <strong>{activeLayout?.name}</strong>? This cannot be undone.
+          <Trans i18nKey="delete_confirm" t={t} values={{ name: activeLayout?.name }} components={{ bold: <strong /> }} />
         </p>
       </Dialog>
 
