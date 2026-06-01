@@ -112,20 +112,22 @@
 // Cells
 // ---------------------------------------------------------------------------
 .ld-cell {
-  border: 1px dashed var(--border-dark);
+  // Use inset box-shadow instead of border so adjacent/nested cell borders
+  // never stack — each cell's "border" is drawn inside its own bounds.
+  box-shadow: inset 0 0 0 1px var(--border-dark);
   cursor: pointer;
   box-sizing: border-box;
-  transition: background 0.1s, border-color 0.1s;
+  transition: background 0.1s, box-shadow 0.1s;
   position: relative;
 
   &:hover {
     background: color-mix(in srgb, var(--color-primary) 8%, transparent);
-    border-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-primary) 40%, transparent);
   }
 
   // Selected state
   &--selected {
-    border: 2px solid var(--color-primary) !important;
+    box-shadow: inset 0 0 0 2px var(--color-primary) !important;
     background: color-mix(in srgb, var(--color-primary) 15%, transparent) !important;
 
     // Checkmark badge in top-right corner
@@ -144,12 +146,11 @@
   // Parent cell (has subdivisions) — not selectable, no hover effect
   &--parent {
     cursor: default;
-    border-style: dashed;
-    border-color: var(--color-secondary);
+    box-shadow: inset 0 0 0 1px var(--color-secondary);
 
     &:hover {
       background: none;
-      border-color: var(--color-secondary);
+      box-shadow: inset 0 0 0 1px var(--color-secondary);
     }
   }
 
