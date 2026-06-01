@@ -1,0 +1,262 @@
+// Layout Designer styles
+// Uses Bootstrap CSS variables and theme tokens — no hardcoded colors.
+
+// ---------------------------------------------------------------------------
+// Page
+// ---------------------------------------------------------------------------
+.layout-designer {
+  min-height: 100%;
+}
+
+// ---------------------------------------------------------------------------
+// Canvas dialog — constrain to 90% viewport, allow canvas to fill body
+// ---------------------------------------------------------------------------
+.ld-canvas-dialog {
+  max-width: 90vw !important;
+  max-height: 90vh !important;
+  // Definite height so flex children can use percentage heights
+  height: 90vh !important;
+
+  .dialog-body {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Canvas wrapper & aspect-ratio box
+// ---------------------------------------------------------------------------
+.ld-canvas-wrap {
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  // Enable container query units (cqw/cqh) so .ld-canvas can size itself
+  // relative to this wrapper in both dimensions simultaneously.
+  container-type: size;
+}
+
+.ld-canvas {
+  // Fit within the wrap while preserving the layout's aspect ratio.
+  // width = min(available width, available height × ratio)
+  // This handles both landscape and portrait layouts correctly:
+  //   - landscape: width-constrained, height derived via aspect-ratio
+  //   - portrait:  height-constrained, width = height × ratio (< wrap width)
+  // cqw/cqh measure .ld-canvas-wrap's content box (inside its padding).
+  width: min(100cqw, calc(100cqh * var(--ld-ratio, 1)));
+  aspect-ratio: var(--ld-ratio, 1);
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  overflow: hidden;
+  position: relative;
+}
+
+// ---------------------------------------------------------------------------
+// Grid
+// ---------------------------------------------------------------------------
+.ld-grid {
+  // Applied to both top-level and nested grids
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+// ---------------------------------------------------------------------------
+// Cells
+// ---------------------------------------------------------------------------
+.ld-cell {
+  border: 1px dashed var(--bs-border-color);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.1s, border-color 0.1s;
+  position: relative;
+
+  &:hover {
+    background: rgba(var(--bs-primary-rgb), 0.06);
+    border-color: rgba(var(--bs-primary-rgb), 0.4);
+  }
+
+  // Selected state
+  &--selected {
+    border: 2px solid var(--bs-primary) !important;
+    background: rgba(var(--bs-primary-rgb), 0.14) !important;
+
+    // Checkmark badge in top-right corner
+    &::after {
+      content: '✓';
+      position: absolute;
+      top: 3px;
+      right: 5px;
+      font-size: 0.65rem;
+      color: var(--bs-primary);
+      pointer-events: none;
+      line-height: 1;
+    }
+  }
+
+  // Parent cell (has subdivisions) — not selectable, no hover effect
+  &--parent {
+    cursor: default;
+    border-style: dashed;
+    border-color: var(--bs-secondary);
+
+    &:hover {
+      background: none;
+      border-color: var(--bs-secondary);
+    }
+  }
+
+  // Item label shown inside a cell
+  &__label {
+    font-size: 0.7rem;
+    opacity: 0.65;
+    color: var(--bs-body-color);
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 6px;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Toolbar
+// ---------------------------------------------------------------------------
+.ld-toolbar {
+  // Background and border come from the theme's .dialog-toolbar wrapper.
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  flex-shrink: 0;
+
+  .btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  // Alignment button clusters: small gap between adjacent buttons in the same group
+  [role="group"] {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Context Menu
+// ---------------------------------------------------------------------------
+.ld-context-menu {
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  min-width: 190px;
+  padding: 4px 0;
+  font-size: 0.875rem;
+  user-select: none;
+  z-index: 9999;
+
+  hr {
+    margin: 4px 0;
+    border-color: var(--bs-border-color);
+    opacity: 0.5;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 7px 14px;
+    cursor: pointer;
+    position: relative;
+    gap: 6px;
+    color: var(--bs-body-color);
+
+    &:hover {
+      background: rgba(var(--bs-primary-rgb), 0.1);
+    }
+
+    &--disabled {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    &--danger {
+      color: var(--bs-danger);
+
+      &:hover {
+        background: rgba(var(--bs-danger-rgb), 0.1);
+      }
+    }
+
+    &--submenu {
+      padding-right: 8px;
+
+      // Show submenu on hover
+      &:hover .ld-context-menu__submenu {
+        display: block;
+      }
+    }
+  }
+
+  &__submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -4px;
+    background: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    min-width: 190px;
+    padding: 4px 0;
+    z-index: 10000;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Resize handles
+// ---------------------------------------------------------------------------
+.ld-resize-handle {
+  position: absolute;
+  z-index: 10;
+  transition: background 0.1s;
+
+  &--col {
+    right: -3px;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    cursor: col-resize;
+
+    &:hover,
+    &:active {
+      background: rgba(var(--bs-primary-rgb), 0.5);
+    }
+  }
+
+  &--row {
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    cursor: row-resize;
+
+    &:hover,
+    &:active {
+      background: rgba(var(--bs-primary-rgb), 0.5);
+    }
+  }
+}

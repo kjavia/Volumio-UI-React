@@ -9,6 +9,7 @@ import AppMenu from '@/components/AppMenu';
 import TabletPlayer from './TabletPlayer';
 import MobilePlayer from './MobilePlayer';
 import LargeScreenPlayer from './LargeScreenPlayer';
+import CustomLayout from './CustomLayout';
 import useIdleScreen from '@/hooks/useIdleScreen';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import usePluginConfig from '@/hooks/usePluginConfig';
@@ -89,6 +90,27 @@ const Home = () => {
   const isSpectrumViz = vizType === 'spectrum';
   const hasViz = vizType !== 'none';
 
+  const useCustomLayout = pluginConfig?.useCustomLayout === true;
+  const layoutDesigner = (() => {
+    const raw = pluginConfig?.layoutDesigner;
+    if (!raw) return { layouts: [] };
+    if (typeof raw === 'string') {
+      try { return JSON.parse(raw); } catch { return { layouts: [] }; }
+    }
+    return raw;
+  })();
+  const currentCustomLayout = (() => {
+    if (!useCustomLayout || !layoutDesigner?.layouts?.length) return null;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const matches = layoutDesigner.layouts.filter((layout) =>
+      (layout.width === w && layout.height === h) ||
+      (layout.width === h && layout.height === w)
+    );
+    if (!matches.length) return null;
+    return matches.find((l) => l.isDefault) || matches[0];
+  })();
+
   // Apply user color overrides as CSS custom properties on :root
   useEffect(() => {
     const root = document.documentElement;
@@ -154,23 +176,27 @@ const Home = () => {
   let content;
 
   if (showPlayer) {
-    const contextMenuNode = (
-      <AppMenu
-        vizStopped={vizStopped}
-        onStopViz={isSpectrumViz ? () => setVizStopped(true) : undefined}
-        onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
-        onFullscreenViz={hasViz ? handleFullscreenViz : undefined}
-        isVizFullscreen={isVizFullscreen}
-      />
-    );
-    content = isMobile
-      ? <MobilePlayer
-        vizStopped={vizStopped}
-        onVizResumed={() => setVizStopped(false)}
-      />
-      : isLargeScreen
-        ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} vizContainerRef={vizContainerRef} />
-        : <TabletPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
+    if (currentCustomLayout) {
+      content = <CustomLayout layout={currentCustomLayout} vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} />;
+    } else {
+      const contextMenuNode = (
+        <AppMenu
+          vizStopped={vizStopped}
+          onStopViz={isSpectrumViz ? () => setVizStopped(true) : undefined}
+          onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
+          onFullscreenViz={hasViz ? handleFullscreenViz : undefined}
+          isVizFullscreen={isVizFullscreen}
+        />
+      );
+      content = isMobile
+        ? <MobilePlayer
+          vizStopped={vizStopped}
+          onVizResumed={() => setVizStopped(false)}
+        />
+        : isLargeScreen
+          ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} vizContainerRef={vizContainerRef} />
+          : <TabletPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
+    }
   } else if (idleScreen === 'wallpaper') {
     content = (
       <Wallpaper
