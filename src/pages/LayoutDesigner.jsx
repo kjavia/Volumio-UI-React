@@ -7,6 +7,7 @@ import usePluginConfig from '@/hooks/usePluginConfig';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/Toast';
 import Dialog from '@/components/Dialog';
+import AppMenu from '@/components/AppMenu';
 import './layout-designer.scss';
 
 // ---------------------------------------------------------------------------
@@ -1065,9 +1066,10 @@ export default function LayoutDesigner() {
   return (
     <div className="layout-designer container-fluid p-4">
       <Toast toasts={toasts} />
+      <AppMenu />
 
       <div className="d-flex align-items-center mb-4 gap-3">
-        <h4 className="mb-0">{t('page_title')}</h4>
+        <h4 className="mb-0 ms-4">{t('page_title')}</h4>
         <small className="text-secondary">{screen.w}×{screen.h}</small>
         <button
           className="btn btn-sm btn-primary ms-auto"
