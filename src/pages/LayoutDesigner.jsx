@@ -209,10 +209,27 @@ function replaceCellsArrayInTree(cells, targetCells, newCells) {
 }
 
 // ---------------------------------------------------------------------------
+// Hooks
+// ---------------------------------------------------------------------------
+
+function useScreenSize() {
+  const [size, setSize] = useState({ w: window.innerWidth, h: window.innerHeight });
+  useEffect(() => {
+    function update() {
+      setSize({ w: window.innerWidth, h: window.innerHeight });
+    }
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+  return size;
+}
+
+// ---------------------------------------------------------------------------
 // Sub-components
 // ---------------------------------------------------------------------------
 
 function CreateLayoutForm({ onSubmit, onCancel, existingNames }) {
+  const screen = useScreenSize();
   const { t } = useTranslation('layoutDesigner');
   const [name, setName] = useState('');
   const [width, setWidth] = useState('');
@@ -247,7 +264,7 @@ function CreateLayoutForm({ onSubmit, onCancel, existingNames }) {
         />
         {errors.name && <div className="invalid-feedback">{errors.name}</div>}
       </div>
-      <div className="row g-2 mb-3">
+      <div className="row g-2 mb-1">
         <div className="col">
           <label className="form-label">{t('label_width_px')}</label>
           <input
@@ -270,6 +287,19 @@ function CreateLayoutForm({ onSubmit, onCancel, existingNames }) {
           />
           {errors.height && <div className="invalid-feedback">{errors.height}</div>}
         </div>
+      </div>
+      <div className="mb-3">
+        <small className="text-secondary me-2">
+          {t('label_screen_resolution', 'Screen')}: {screen.w}×{screen.h}
+        </small>
+        <button
+          type="button"
+          className="btn btn-link btn-sm p-0 text-secondary"
+          style={{ fontSize: '0.75rem' }}
+          onClick={() => { setWidth(String(screen.w)); setHeight(String(screen.h)); }}
+        >
+          {t('btn_use_screen_size', 'Use')}
+        </button>
       </div>
       <div className="d-flex gap-2 justify-content-end">
         <button type="button" className="btn btn-sm btn-outline-secondary" onClick={onCancel}>{t('btn_cancel')}</button>
@@ -295,6 +325,7 @@ export default function LayoutDesigner() {
   const { data: pluginConfig } = usePluginConfig();
   const { toasts, showToast } = useToast();
   const navigate = useNavigate();
+  const screen = useScreenSize();
 
   // ---- State ---------------------------------------------------------------
   const [layouts, setLayouts] = useState([]);
@@ -426,7 +457,10 @@ export default function LayoutDesigner() {
 
   // ---- Layout CRUD handlers ------------------------------------------------
   function handleCreateLayout(name, width, height) {
-    const layout = makeLayout(name, width, height);
+    const isFirstForResolution = !layouts.some(
+      (l) => l.width === Number(width) && l.height === Number(height),
+    );
+    const layout = { ...makeLayout(name, width, height), isDefault: isFirstForResolution };
     const updated = [...layouts, layout];
     setLayouts(updated);
     setActiveLayoutId(layout.id);
@@ -1034,6 +1068,7 @@ export default function LayoutDesigner() {
 
       <div className="d-flex align-items-center mb-4 gap-3">
         <h4 className="mb-0">{t('page_title')}</h4>
+        <small className="text-secondary">{screen.w}×{screen.h}</small>
         <button
           className="btn btn-sm btn-primary ms-auto"
           onClick={() => setShowCreateForm(true)}

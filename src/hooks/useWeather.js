@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useGeoLocation } from '@bigdatacloudapi/react-reverse-geocode-client';
 import usePluginConfig from './usePluginConfig';
+import { useEffect } from 'react';
 
 // Fetches a city name from lat/lng via BigDataCloud reverse-geocode (free, no key needed).
 const fetchCityName = async ({ latitude, longitude, language }) => {
@@ -194,7 +195,16 @@ const useWeather = () => {
 
   // useGeoLocation handles GPS → IP fallback automatically, so it works on
   // Volumio where browser geolocation is unavailable.
-  const { data: geoData, loading: geoLoading } = useGeoLocation({ language });
+  // Pass manual:true so it doesn't fire on mount; we trigger it only when
+  // config has loaded and has no explicit coordinates.
+  const { data: geoData, loading: geoLoading, refresh: refreshGeo } = useGeoLocation({ language, manual: true });
+
+  useEffect(() => {
+    if (!configLoading && !hasConfigLocation) {
+      refreshGeo();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [configLoading, hasConfigLocation]);
 
   const latitude = configLat || geoData?.latitude || null;
   const longitude = configLng || geoData?.longitude || null;
