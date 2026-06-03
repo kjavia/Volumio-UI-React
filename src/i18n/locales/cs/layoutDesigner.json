@@ -1,8 +1,8 @@
 {
   "page_title": "Návrhář rozvržení",
+  "screen_resolution": "Rozlišení této obrazovky je {{w}}×{{h}}",
   "btn_new_layout": "Nové rozvržení",
   "btn_back_to_home": "Zpět na domovskou stránku",
-
   "section_create": "Nové rozvržení",
   "label_layout_name": "Název rozvržení",
   "label_width_px": "Šířka (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Musí být kladné číslo.",
   "btn_cancel": "Zrušit",
   "btn_create": "Vytvořit",
-
   "empty_state": "Žádná rozvržení. Klikněte na <bold>Nové rozvržení</bold> a začněte.",
-
   "btn_edit_layout": "Upravit rozvržení",
   "btn_set_default": "Nastavit jako výchozí",
   "btn_default": "Výchozí",
@@ -23,12 +21,9 @@
   "title_remove_default": "Odebrat výchozí",
   "btn_delete": "Smazat",
   "title_delete_layout": "Smazat rozvržení",
-
   "delete_dialog_title": "Smazat rozvržení",
   "delete_confirm": "Smazat <bold>{{name}}</bold>? Tuto akci nelze vrátit zpět.",
-
   "canvas_title": "Úprava: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Rozdělit na řádky",
   "toolbar_split_cols": "Rozdělit na sloupce",
   "toolbar_merge": "Sloučit",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Zarovnat doleva",
   "toolbar_align_center": "Zarovnat na střed",
   "toolbar_align_right": "Zarovnat doprava",
-
   "ctx_add_item": "Přidat položku",
   "ctx_all_assigned": "Všechny položky přiřazeny",
   "ctx_remove_item": "Odebrat položku",
   "ctx_split_rows": "Rozdělit na řádky",
   "ctx_split_cols": "Rozdělit na sloupce",
   "ctx_merge": "Sloučit vybrané buňky",
-
   "item_trackName": "Název skladby",
   "item_albumName": "Název alba",
   "item_artistName": "Jméno interpreta",

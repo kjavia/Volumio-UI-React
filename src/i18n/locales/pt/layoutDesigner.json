@@ -1,8 +1,8 @@
 {
   "page_title": "Designer de layout",
+  "screen_resolution": "A resolução deste ecrã é {{w}}×{{h}}",
   "btn_new_layout": "Novo layout",
   "btn_back_to_home": "Voltar ao início",
-
   "section_create": "Novo layout",
   "label_layout_name": "Nome do layout",
   "label_width_px": "Largura (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Deve ser um número positivo.",
   "btn_cancel": "Cancelar",
   "btn_create": "Criar",
-
   "empty_state": "Nenhum layout. Clique em <bold>Novo layout</bold> para começar.",
-
   "btn_edit_layout": "Editar layout",
   "btn_set_default": "Definir padrão",
   "btn_default": "Padrão",
@@ -23,12 +21,9 @@
   "title_remove_default": "Remover padrão",
   "btn_delete": "Excluir",
   "title_delete_layout": "Excluir layout",
-
   "delete_dialog_title": "Excluir layout",
   "delete_confirm": "Excluir <bold>{{name}}</bold>? Isto não pode ser desfeito.",
-
   "canvas_title": "Editando: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Dividir em linhas",
   "toolbar_split_cols": "Dividir em colunas",
   "toolbar_merge": "Mesclar",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Alinhar à esquerda",
   "toolbar_align_center": "Centralizar",
   "toolbar_align_right": "Alinhar à direita",
-
   "ctx_add_item": "Adicionar item",
   "ctx_all_assigned": "Todos os itens atribuídos",
   "ctx_remove_item": "Remover item",
   "ctx_split_rows": "Dividir em linhas",
   "ctx_split_cols": "Dividir em colunas",
   "ctx_merge": "Mesclar células selecionadas",
-
   "item_trackName": "Título da faixa",
   "item_albumName": "Nome do álbum",
   "item_artistName": "Nome do artista",

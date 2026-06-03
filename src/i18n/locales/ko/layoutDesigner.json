@@ -1,8 +1,8 @@
 {
   "page_title": "레이아웃 디자이너",
+  "screen_resolution": "이 화면의 해상도는 {{w}}×{{h}}입니다",
   "btn_new_layout": "새 레이아웃",
   "btn_back_to_home": "홈으로 돌아가기",
-
   "section_create": "새 레이아웃",
   "label_layout_name": "레이아웃 이름",
   "label_width_px": "너비 (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "양수여야 합니다.",
   "btn_cancel": "취소",
   "btn_create": "만들기",
-
   "empty_state": "레이아웃이 없습니다. <bold>새 레이아웃</bold>을 클릭하여 시작하세요.",
-
   "btn_edit_layout": "레이아웃 편집",
   "btn_set_default": "기본값으로 설정",
   "btn_default": "기본값",
@@ -23,12 +21,9 @@
   "title_remove_default": "기본값 제거",
   "btn_delete": "삭제",
   "title_delete_layout": "레이아웃 삭제",
-
   "delete_dialog_title": "레이아웃 삭제",
   "delete_confirm": "<bold>{{name}}</bold>을 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
-
   "canvas_title": "편집 중: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "행으로 분할",
   "toolbar_split_cols": "열로 분할",
   "toolbar_merge": "병합",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "왼쪽 정렬",
   "toolbar_align_center": "가운데 맞춤",
   "toolbar_align_right": "오른쪽 정렬",
-
   "ctx_add_item": "항목 추가",
   "ctx_all_assigned": "모든 항목이 할당됨",
   "ctx_remove_item": "항목 제거",
   "ctx_split_rows": "행으로 분할",
   "ctx_split_cols": "열로 분할",
   "ctx_merge": "선택한 셀 병합",
-
   "item_trackName": "트랙 제목",
   "item_albumName": "앨범 이름",
   "item_artistName": "아티스트 이름",

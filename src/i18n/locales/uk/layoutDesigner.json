@@ -1,8 +1,8 @@
 {
   "page_title": "Дизайнер макета",
+  "screen_resolution": "Роздільна здатність цього екрана — {{w}}×{{h}}",
   "btn_new_layout": "Новий макет",
   "btn_back_to_home": "На головну",
-
   "section_create": "Новий макет",
   "label_layout_name": "Назва макета",
   "label_width_px": "Ширина (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Має бути позитивним числом.",
   "btn_cancel": "Скасувати",
   "btn_create": "Створити",
-
   "empty_state": "Немає макетів. Натисніть <bold>Новий макет</bold>, щоб почати.",
-
   "btn_edit_layout": "Редагувати макет",
   "btn_set_default": "Встановити за замовчуванням",
   "btn_default": "За замовчуванням",
@@ -23,12 +21,9 @@
   "title_remove_default": "Видалити за замовчуванням",
   "btn_delete": "Видалити",
   "title_delete_layout": "Видалити макет",
-
   "delete_dialog_title": "Видалити макет",
   "delete_confirm": "Видалити <bold>{{name}}</bold>? Цю дію неможливо скасувати.",
-
   "canvas_title": "Редагування: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Розділити на рядки",
   "toolbar_split_cols": "Розділити на стовпці",
   "toolbar_merge": "Об'єднати",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "По лівому краю",
   "toolbar_align_center": "По центру",
   "toolbar_align_right": "По правому краю",
-
   "ctx_add_item": "Додати елемент",
   "ctx_all_assigned": "Всі елементи призначені",
   "ctx_remove_item": "Видалити елемент",
   "ctx_split_rows": "Розділити на рядки",
   "ctx_split_cols": "Розділити на стовпці",
   "ctx_merge": "Об'єднати вибрані комірки",
-
   "item_trackName": "Назва треку",
   "item_albumName": "Назва альбому",
   "item_artistName": "Ім'я виконавця",

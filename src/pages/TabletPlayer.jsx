@@ -26,6 +26,7 @@ import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
 import PeppyMeter from '@/components/PeppyMeter';
 import PeppySpectrum from '@/components/peppy-spectrum/PeppySpectrum';
+import SecondaryControls from '@/components/SecondaryControls';
 import './tablet-player.scss';
 
 const PLAYER_MAP = {
@@ -306,6 +307,11 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
                   onPlayPause={handlePlayPause}
                   onNext={next}
                   onPrev={prev}
+                />
+              )}
+
+              {showPlayerControls && (
+                <SecondaryControls
                   shuffle={random}
                   repeat={repeat}
                   onShuffle={toggleRandom}

@@ -1,8 +1,8 @@
 {
   "page_title": "Σχεδιαστής διάταξης",
+  "screen_resolution": "Η ανάλυση αυτής της οθόνης είναι {{w}}×{{h}}",
   "btn_new_layout": "Νέα διάταξη",
   "btn_back_to_home": "Πίσω στην αρχική",
-
   "section_create": "Νέα διάταξη",
   "label_layout_name": "Όνομα διάταξης",
   "label_width_px": "Πλάτος (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Πρέπει να είναι θετικός αριθμός.",
   "btn_cancel": "Ακύρωση",
   "btn_create": "Δημιουργία",
-
   "empty_state": "Δεν υπάρχουν διατάξεις. Κάντε κλικ στο <bold>Νέα διάταξη</bold> για να ξεκινήσετε.",
-
   "btn_edit_layout": "Επεξεργασία διάταξης",
   "btn_set_default": "Ορισμός ως προεπιλογή",
   "btn_default": "Προεπιλογή",
@@ -23,12 +21,9 @@
   "title_remove_default": "Κατάργηση προεπιλογής",
   "btn_delete": "Διαγραφή",
   "title_delete_layout": "Διαγραφή διάταξης",
-
   "delete_dialog_title": "Διαγραφή διάταξης",
   "delete_confirm": "Διαγραφή <bold>{{name}}</bold>; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
-
   "canvas_title": "Επεξεργασία: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Διαίρεση σε γραμμές",
   "toolbar_split_cols": "Διαίρεση σε στήλες",
   "toolbar_merge": "Συγχώνευση",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Στοίχιση αριστερά",
   "toolbar_align_center": "Κεντράριση",
   "toolbar_align_right": "Στοίχιση δεξιά",
-
   "ctx_add_item": "Προσθήκη στοιχείου",
   "ctx_all_assigned": "Όλα τα στοιχεία έχουν αντιστοιχιστεί",
   "ctx_remove_item": "Αφαίρεση στοιχείου",
   "ctx_split_rows": "Διαίρεση σε γραμμές",
   "ctx_split_cols": "Διαίρεση σε στήλες",
   "ctx_merge": "Συγχώνευση επιλεγμένων κελιών",
-
   "item_trackName": "Τίτλος κομματιού",
   "item_albumName": "Όνομα άλμπουμ",
   "item_artistName": "Όνομα καλλιτέχνη",

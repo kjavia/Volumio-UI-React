@@ -1,8 +1,8 @@
 {
   "page_title": "Asettelusuunnittelija",
+  "screen_resolution": "Tämän näytön resoluutio on {{w}}×{{h}}",
   "btn_new_layout": "Uusi asettelu",
   "btn_back_to_home": "Takaisin etusivulle",
-
   "section_create": "Uusi asettelu",
   "label_layout_name": "Asettelun nimi",
   "label_width_px": "Leveys (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Täytyy olla positiivinen luku.",
   "btn_cancel": "Peruuta",
   "btn_create": "Luo",
-
   "empty_state": "Ei asetteluja. Napsauta <bold>Uusi asettelu</bold> aloittaaksesi.",
-
   "btn_edit_layout": "Muokkaa asettelua",
   "btn_set_default": "Aseta oletukseksi",
   "btn_default": "Oletus",
@@ -23,12 +21,9 @@
   "title_remove_default": "Poista oletus",
   "btn_delete": "Poista",
   "title_delete_layout": "Poista asettelu",
-
   "delete_dialog_title": "Poista asettelu",
   "delete_confirm": "Poistetaanko <bold>{{name}}</bold>? Tätä ei voi kumota.",
-
   "canvas_title": "Muokataan: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Jaa riveiksi",
   "toolbar_split_cols": "Jaa sarakkeiksi",
   "toolbar_merge": "Yhdistä",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Tasaa vasemmalle",
   "toolbar_align_center": "Keskitä",
   "toolbar_align_right": "Tasaa oikealle",
-
   "ctx_add_item": "Lisää kohde",
   "ctx_all_assigned": "Kaikki kohteet määritetty",
   "ctx_remove_item": "Poista kohde",
   "ctx_split_rows": "Jaa riveiksi",
   "ctx_split_cols": "Jaa sarakkeiksi",
   "ctx_merge": "Yhdistä valitut solut",
-
   "item_trackName": "Kappaleen nimi",
   "item_albumName": "Albumin nimi",
   "item_artistName": "Artistin nimi",

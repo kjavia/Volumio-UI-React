@@ -1,8 +1,8 @@
 {
   "page_title": "Elrendezés-tervező",
+  "screen_resolution": "A képernyő felbontása {{w}}×{{h}}",
   "btn_new_layout": "Új elrendezés",
   "btn_back_to_home": "Vissza a főoldalra",
-
   "section_create": "Új elrendezés",
   "label_layout_name": "Elrendezés neve",
   "label_width_px": "Szélesség (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Pozitív szám kell.",
   "btn_cancel": "Mégse",
   "btn_create": "Létrehozás",
-
   "empty_state": "Nincsenek elrendezések. Kattintson az <bold>Új elrendezés</bold> gombra a kezdéshez.",
-
   "btn_edit_layout": "Elrendezés szerkesztése",
   "btn_set_default": "Alapértelmezettként beállítás",
   "btn_default": "Alapértelmezett",
@@ -23,12 +21,9 @@
   "title_remove_default": "Alapértelmezett eltávolítása",
   "btn_delete": "Törlés",
   "title_delete_layout": "Elrendezés törlése",
-
   "delete_dialog_title": "Elrendezés törlése",
   "delete_confirm": "Törli a(z) <bold>{{name}}</bold> elrendezést? Ez nem vonható vissza.",
-
   "canvas_title": "Szerkesztés: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Felosztás sorokra",
   "toolbar_split_cols": "Felosztás oszlopokra",
   "toolbar_merge": "Összevonás",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Balra igazítás",
   "toolbar_align_center": "Vízszintesen középre",
   "toolbar_align_right": "Jobbra igazítás",
-
   "ctx_add_item": "Elem hozzáadása",
   "ctx_all_assigned": "Minden elem hozzárendelve",
   "ctx_remove_item": "Elem eltávolítása",
   "ctx_split_rows": "Felosztás sorokra",
   "ctx_split_cols": "Felosztás oszlopokra",
   "ctx_merge": "Kijelölt cellák összevonása",
-
   "item_trackName": "Szám címe",
   "item_albumName": "Album neve",
   "item_artistName": "Előadó neve",

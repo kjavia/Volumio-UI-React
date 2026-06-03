@@ -1,8 +1,8 @@
 {
   "page_title": "Návrhár rozloženia",
+  "screen_resolution": "Rozlíšenie tejto obrazovky je {{w}}×{{h}}",
   "btn_new_layout": "Nové rozloženie",
   "btn_back_to_home": "Späť na domovskú stránku",
-
   "section_create": "Nové rozloženie",
   "label_layout_name": "Názov rozloženia",
   "label_width_px": "Šírka (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Musí byť kladné číslo.",
   "btn_cancel": "Zrušiť",
   "btn_create": "Vytvoriť",
-
   "empty_state": "Žiadne rozloženia. Kliknite na <bold>Nové rozloženie</bold> a začnite.",
-
   "btn_edit_layout": "Upraviť rozloženie",
   "btn_set_default": "Nastaviť ako predvolené",
   "btn_default": "Predvolené",
@@ -23,12 +21,9 @@
   "title_remove_default": "Odobrať predvolené",
   "btn_delete": "Vymazať",
   "title_delete_layout": "Vymazať rozloženie",
-
   "delete_dialog_title": "Vymazať rozloženie",
   "delete_confirm": "Vymazať <bold>{{name}}</bold>? Túto akciu nie je možné vrátiť späť.",
-
   "canvas_title": "Úprava: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Rozdeliť na riadky",
   "toolbar_split_cols": "Rozdeliť na stĺpce",
   "toolbar_merge": "Zlúčiť",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Zarovnať vľavo",
   "toolbar_align_center": "Zarovnať na stred",
   "toolbar_align_right": "Zarovnať vpravo",
-
   "ctx_add_item": "Pridať položku",
   "ctx_all_assigned": "Všetky položky priradené",
   "ctx_remove_item": "Odobrať položku",
   "ctx_split_rows": "Rozdeliť na riadky",
   "ctx_split_cols": "Rozdeliť na stĺpce",
   "ctx_merge": "Zlúčiť vybrané bunky",
-
   "item_trackName": "Názov skladby",
   "item_albumName": "Názov albumu",
   "item_artistName": "Meno interpreta",

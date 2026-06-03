@@ -1,8 +1,8 @@
 {
   "page_title": "Layoutdesigner",
+  "screen_resolution": "Denne skærms opløsning er {{w}}×{{h}}",
   "btn_new_layout": "Nyt layout",
   "btn_back_to_home": "Tilbage til hjem",
-
   "section_create": "Nyt layout",
   "label_layout_name": "Layoutnavn",
   "label_width_px": "Bredde (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Skal være et positivt tal.",
   "btn_cancel": "Annuller",
   "btn_create": "Opret",
-
   "empty_state": "Ingen layouts endnu. Klik på <bold>Nyt layout</bold> for at komme i gang.",
-
   "btn_edit_layout": "Rediger layout",
   "btn_set_default": "Angiv som standard",
   "btn_default": "Standard",
@@ -23,12 +21,9 @@
   "title_remove_default": "Fjern standard",
   "btn_delete": "Slet",
   "title_delete_layout": "Slet layout",
-
   "delete_dialog_title": "Slet layout",
   "delete_confirm": "Slet <bold>{{name}}</bold>? Dette kan ikke fortrydes.",
-
   "canvas_title": "Redigering: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Del i rækker",
   "toolbar_split_cols": "Del i kolonner",
   "toolbar_merge": "Flet",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Juster venstre",
   "toolbar_align_center": "Centrer",
   "toolbar_align_right": "Juster højre",
-
   "ctx_add_item": "Tilføj element",
   "ctx_all_assigned": "Alle elementer tildelt",
   "ctx_remove_item": "Fjern element",
   "ctx_split_rows": "Del i rækker",
   "ctx_split_cols": "Del i kolonner",
   "ctx_merge": "Flet valgte celler",
-
   "item_trackName": "Sporttitel",
   "item_albumName": "Albumnavn",
   "item_artistName": "Kunstnernavn",

@@ -1,8 +1,8 @@
 {
   "page_title": "Layout Designer",
+  "screen_resolution": "The resolution of this screen is {{w}}×{{h}}",
   "btn_new_layout": "New Layout",
   "btn_back_to_home": "Back to Home",
-
   "section_create": "New Layout",
   "label_layout_name": "Layout Name",
   "label_width_px": "Width (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Must be a positive number.",
   "btn_cancel": "Cancel",
   "btn_create": "Create",
-
   "empty_state": "No layouts yet. Click <bold>New Layout</bold> to get started.",
-
   "btn_edit_layout": "Edit Layout",
   "btn_set_default": "Set Default",
   "btn_default": "Default",
@@ -23,12 +21,9 @@
   "title_remove_default": "Remove default",
   "btn_delete": "Delete",
   "title_delete_layout": "Delete layout",
-
   "delete_dialog_title": "Delete Layout",
   "delete_confirm": "Delete <bold>{{name}}</bold>? This cannot be undone.",
-
   "canvas_title": "Editing: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Split into Rows",
   "toolbar_split_cols": "Split into Columns",
   "toolbar_merge": "Merge",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Align Left",
   "toolbar_align_center": "Align Center",
   "toolbar_align_right": "Align Right",
-
   "ctx_add_item": "Add Item",
   "ctx_all_assigned": "All items assigned",
   "ctx_remove_item": "Remove Item",
   "ctx_split_rows": "Split into Rows",
   "ctx_split_cols": "Split into Columns",
   "ctx_merge": "Merge Selected Cells",
-
   "item_trackName": "Track Title",
   "item_albumName": "Album Name",
   "item_artistName": "Artist Name",

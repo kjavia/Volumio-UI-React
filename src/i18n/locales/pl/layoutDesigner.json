@@ -1,8 +1,8 @@
 {
   "page_title": "Projektant układu",
+  "screen_resolution": "Rozdzielczość tego ekranu to {{w}}×{{h}}",
   "btn_new_layout": "Nowy układ",
   "btn_back_to_home": "Powrót do strony głównej",
-
   "section_create": "Nowy układ",
   "label_layout_name": "Nazwa układu",
   "label_width_px": "Szerokość (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Musi być liczbą dodatnią.",
   "btn_cancel": "Anuluj",
   "btn_create": "Utwórz",
-
   "empty_state": "Brak układów. Kliknij <bold>Nowy układ</bold>, aby rozpocząć.",
-
   "btn_edit_layout": "Edytuj układ",
   "btn_set_default": "Ustaw jako domyślny",
   "btn_default": "Domyślny",
@@ -23,12 +21,9 @@
   "title_remove_default": "Usuń domyślny",
   "btn_delete": "Usuń",
   "title_delete_layout": "Usuń układ",
-
   "delete_dialog_title": "Usuń układ",
   "delete_confirm": "Usunąć <bold>{{name}}</bold>? Tej operacji nie można cofnąć.",
-
   "canvas_title": "Edycja: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Podziel na wiersze",
   "toolbar_split_cols": "Podziel na kolumny",
   "toolbar_merge": "Scal",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Wyrównaj do lewej",
   "toolbar_align_center": "Wyśrodkuj",
   "toolbar_align_right": "Wyrównaj do prawej",
-
   "ctx_add_item": "Dodaj element",
   "ctx_all_assigned": "Wszystkie elementy przypisane",
   "ctx_remove_item": "Usuń element",
   "ctx_split_rows": "Podziel na wiersze",
   "ctx_split_cols": "Podziel na kolumny",
   "ctx_merge": "Scal zaznaczone komórki",
-
   "item_trackName": "Tytuł utworu",
   "item_albumName": "Nazwa albumu",
   "item_artistName": "Nazwa artysty",

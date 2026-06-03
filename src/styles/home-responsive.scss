@@ -176,7 +176,11 @@ body,
 }
 
 :root.sp-has-icon-font-size .btn-icon .material-icons,
-:root.sp-has-icon-font-size .btn-icon .material-icons-outlined {
+:root.sp-has-icon-font-size .btn-icon .material-icons-outlined,
+:root.sp-has-icon-font-size .lsp-btn.btn-icon .material-icons,
+:root.sp-has-icon-font-size .lsp-btn.btn-icon .material-icons-outlined,
+:root.sp-has-icon-font-size .lsp-btn.lsp-btn--sm.btn-icon .material-icons,
+:root.sp-has-icon-font-size .lsp-btn.lsp-btn--sm.btn-icon .material-icons-outlined {
   font-size: var(--sp-icon-font-size) !important;
 }
 

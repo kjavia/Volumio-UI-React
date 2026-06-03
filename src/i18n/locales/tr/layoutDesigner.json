@@ -1,8 +1,8 @@
 {
   "page_title": "Düzen Tasarımcısı",
+  "screen_resolution": "Bu ekranın çözünürlüğü {{w}}×{{h}}",
   "btn_new_layout": "Yeni Düzen",
   "btn_back_to_home": "Ana Sayfaya Dön",
-
   "section_create": "Yeni Düzen",
   "label_layout_name": "Düzen Adı",
   "label_width_px": "Genişlik (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Pozitif bir sayı olmalıdır.",
   "btn_cancel": "İptal",
   "btn_create": "Oluştur",
-
   "empty_state": "Henüz düzen yok. Başlamak için <bold>Yeni Düzen</bold>'e tıklayın.",
-
   "btn_edit_layout": "Düzeni Düzenle",
   "btn_set_default": "Varsayılan Olarak Ayarla",
   "btn_default": "Varsayılan",
@@ -23,12 +21,9 @@
   "title_remove_default": "Varsayılanı kaldır",
   "btn_delete": "Sil",
   "title_delete_layout": "Düzeni sil",
-
   "delete_dialog_title": "Düzeni Sil",
   "delete_confirm": "<bold>{{name}}</bold> silinsin mi? Bu işlem geri alınamaz.",
-
   "canvas_title": "Düzenleniyor: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Satırlara Böl",
   "toolbar_split_cols": "Sütunlara Böl",
   "toolbar_merge": "Birleştir",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Sola Hizala",
   "toolbar_align_center": "Ortala",
   "toolbar_align_right": "Sağa Hizala",
-
   "ctx_add_item": "Öğe Ekle",
   "ctx_all_assigned": "Tüm öğeler atandı",
   "ctx_remove_item": "Öğeyi Kaldır",
   "ctx_split_rows": "Satırlara Böl",
   "ctx_split_cols": "Sütunlara Böl",
   "ctx_merge": "Seçili Hücreleri Birleştir",
-
   "item_trackName": "Parça Başlığı",
   "item_albumName": "Albüm Adı",
   "item_artistName": "Sanatçı Adı",

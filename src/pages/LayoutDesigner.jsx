@@ -1070,7 +1070,7 @@ export default function LayoutDesigner() {
 
       <div className="d-flex align-items-center mb-4 gap-3">
         <h4 className="mb-0 ms-4">{t('page_title')}</h4>
-        <small className="text-secondary">{screen.w}×{screen.h}</small>
+        <small className="text-secondary">{t('screen_resolution', { w: screen.w, h: screen.h })}</small>
         <button
           className="btn btn-sm btn-primary ms-auto"
           onClick={() => setShowCreateForm(true)}

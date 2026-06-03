@@ -1,8 +1,8 @@
 {
   "page_title": "Nhà thiết kế bố cục",
+  "screen_resolution": "Độ phân giải của màn hình này là {{w}}×{{h}}",
   "btn_new_layout": "Bố cục mới",
   "btn_back_to_home": "Về trang chủ",
-
   "section_create": "Bố cục mới",
   "label_layout_name": "Tên bố cục",
   "label_width_px": "Chiều rộng (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Phải là số dương.",
   "btn_cancel": "Hủy",
   "btn_create": "Tạo",
-
   "empty_state": "Chưa có bố cục. Nhấp vào <bold>Bố cục mới</bold> để bắt đầu.",
-
   "btn_edit_layout": "Chỉnh sửa bố cục",
   "btn_set_default": "Đặt làm mặc định",
   "btn_default": "Mặc định",
@@ -23,12 +21,9 @@
   "title_remove_default": "Xóa mặc định",
   "btn_delete": "Xóa",
   "title_delete_layout": "Xóa bố cục",
-
   "delete_dialog_title": "Xóa bố cục",
   "delete_confirm": "Xóa <bold>{{name}}</bold>? Không thể hoàn tác.",
-
   "canvas_title": "Đang chỉnh sửa: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Chia thành hàng",
   "toolbar_split_cols": "Chia thành cột",
   "toolbar_merge": "Gộp",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Căn trái",
   "toolbar_align_center": "Căn giữa",
   "toolbar_align_right": "Căn phải",
-
   "ctx_add_item": "Thêm mục",
   "ctx_all_assigned": "Tất cả mục đã được gán",
   "ctx_remove_item": "Xóa mục",
   "ctx_split_rows": "Chia thành hàng",
   "ctx_split_cols": "Chia thành cột",
   "ctx_merge": "Gộp các ô đã chọn",
-
   "item_trackName": "Tiêu đề bài hát",
   "item_albumName": "Tên album",
   "item_artistName": "Tên nghệ sĩ",

@@ -1,8 +1,8 @@
 {
   "page_title": "Layout-ontwerper",
+  "screen_resolution": "De resolutie van dit scherm is {{w}}×{{h}}",
   "btn_new_layout": "Nieuw layout",
   "btn_back_to_home": "Terug naar start",
-
   "section_create": "Nieuw layout",
   "label_layout_name": "Layoutnaam",
   "label_width_px": "Breedte (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Moet een positief getal zijn.",
   "btn_cancel": "Annuleren",
   "btn_create": "Aanmaken",
-
   "empty_state": "Nog geen layouts. Klik op <bold>Nieuw layout</bold> om te beginnen.",
-
   "btn_edit_layout": "Layout bewerken",
   "btn_set_default": "Instellen als standaard",
   "btn_default": "Standaard",
@@ -23,12 +21,9 @@
   "title_remove_default": "Standaard verwijderen",
   "btn_delete": "Verwijderen",
   "title_delete_layout": "Layout verwijderen",
-
   "delete_dialog_title": "Layout verwijderen",
   "delete_confirm": "<bold>{{name}}</bold> verwijderen? Dit kan niet ongedaan worden gemaakt.",
-
   "canvas_title": "Bewerken: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Splitsen in rijen",
   "toolbar_split_cols": "Splitsen in kolommen",
   "toolbar_merge": "Samenvoegen",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Links uitlijnen",
   "toolbar_align_center": "Centreren",
   "toolbar_align_right": "Rechts uitlijnen",
-
   "ctx_add_item": "Item toevoegen",
   "ctx_all_assigned": "Alle items toegewezen",
   "ctx_remove_item": "Item verwijderen",
   "ctx_split_rows": "Splitsen in rijen",
   "ctx_split_cols": "Splitsen in kolommen",
   "ctx_merge": "Geselecteerde cellen samenvoegen",
-
   "item_trackName": "Tracktitel",
   "item_albumName": "Albumnaam",
   "item_artistName": "Artiestennaam",

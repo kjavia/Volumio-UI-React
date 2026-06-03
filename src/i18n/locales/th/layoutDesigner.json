@@ -1,8 +1,8 @@
 {
   "page_title": "ตัวออกแบบเลย์เอาต์",
+  "screen_resolution": "ความละเอียดของหน้าจอนี้คือ {{w}}×{{h}}",
   "btn_new_layout": "เลย์เอาต์ใหม่",
   "btn_back_to_home": "กลับหน้าหลัก",
-
   "section_create": "เลย์เอาต์ใหม่",
   "label_layout_name": "ชื่อเลย์เอาต์",
   "label_width_px": "ความกว้าง (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "ต้องเป็นจำนวนบวก",
   "btn_cancel": "ยกเลิก",
   "btn_create": "สร้าง",
-
   "empty_state": "ยังไม่มีเลย์เอาต์ คลิก <bold>เลย์เอาต์ใหม่</bold> เพื่อเริ่มต้น",
-
   "btn_edit_layout": "แก้ไขเลย์เอาต์",
   "btn_set_default": "ตั้งเป็นค่าเริ่มต้น",
   "btn_default": "ค่าเริ่มต้น",
@@ -23,12 +21,9 @@
   "title_remove_default": "นำค่าเริ่มต้นออก",
   "btn_delete": "ลบ",
   "title_delete_layout": "ลบเลย์เอาต์",
-
   "delete_dialog_title": "ลบเลย์เอาต์",
   "delete_confirm": "ลบ <bold>{{name}}</bold>? การดำเนินการนี้ไม่สามารถย้อนกลับได้",
-
   "canvas_title": "กำลังแก้ไข: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "แบ่งเป็นแถว",
   "toolbar_split_cols": "แบ่งเป็นคอลัมน์",
   "toolbar_merge": "รวม",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "จัดชิดซ้าย",
   "toolbar_align_center": "จัดกึ่งกลาง",
   "toolbar_align_right": "จัดชิดขวา",
-
   "ctx_add_item": "เพิ่มรายการ",
   "ctx_all_assigned": "กำหนดรายการทั้งหมดแล้ว",
   "ctx_remove_item": "นำรายการออก",
   "ctx_split_rows": "แบ่งเป็นแถว",
   "ctx_split_cols": "แบ่งเป็นคอลัมน์",
   "ctx_merge": "รวมเซลล์ที่เลือก",
-
   "item_trackName": "ชื่อเพลง",
   "item_albumName": "ชื่ออัลบั้ม",
   "item_artistName": "ชื่อศิลปิน",

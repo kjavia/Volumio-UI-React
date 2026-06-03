@@ -1,8 +1,8 @@
 {
   "page_title": "レイアウトデザイナー",
+  "screen_resolution": "この画面の解像度は {{w}}×{{h}} です",
   "btn_new_layout": "新しいレイアウト",
   "btn_back_to_home": "ホームに戻る",
-
   "section_create": "新しいレイアウト",
   "label_layout_name": "レイアウト名",
   "label_width_px": "幅 (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "正の数である必要があります。",
   "btn_cancel": "キャンセル",
   "btn_create": "作成",
-
   "empty_state": "レイアウトがありません。<bold>新しいレイアウト</bold>をクリックして開始してください。",
-
   "btn_edit_layout": "レイアウトを編集",
   "btn_set_default": "デフォルトに設定",
   "btn_default": "デフォルト",
@@ -23,12 +21,9 @@
   "title_remove_default": "デフォルトを削除",
   "btn_delete": "削除",
   "title_delete_layout": "レイアウトを削除",
-
   "delete_dialog_title": "レイアウトを削除",
   "delete_confirm": "<bold>{{name}}</bold>を削除しますか？この操作は元に戻せません。",
-
   "canvas_title": "編集中: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "行に分割",
   "toolbar_split_cols": "列に分割",
   "toolbar_merge": "結合",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "左揃え",
   "toolbar_align_center": "中央揃え",
   "toolbar_align_right": "右揃え",
-
   "ctx_add_item": "アイテムを追加",
   "ctx_all_assigned": "すべてのアイテムが割り当て済み",
   "ctx_remove_item": "アイテムを削除",
   "ctx_split_rows": "行に分割",
   "ctx_split_cols": "列に分割",
   "ctx_merge": "選択したセルを結合",
-
   "item_trackName": "トラックタイトル",
   "item_albumName": "アルバム名",
   "item_artistName": "アーティスト名",

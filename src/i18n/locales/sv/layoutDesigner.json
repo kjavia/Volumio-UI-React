@@ -1,8 +1,8 @@
 {
   "page_title": "Layoutdesigner",
+  "screen_resolution": "Upplösningen på den här skärmen är {{w}}×{{h}}",
   "btn_new_layout": "Ny layout",
   "btn_back_to_home": "Tillbaka till hem",
-
   "section_create": "Ny layout",
   "label_layout_name": "Layoutnamn",
   "label_width_px": "Bredd (px)",
@@ -13,9 +13,7 @@
   "error_positive_number": "Måste vara ett positivt tal.",
   "btn_cancel": "Avbryt",
   "btn_create": "Skapa",
-
   "empty_state": "Inga layouter ännu. Klicka på <bold>Ny layout</bold> för att komma igång.",
-
   "btn_edit_layout": "Redigera layout",
   "btn_set_default": "Ange som standard",
   "btn_default": "Standard",
@@ -23,12 +21,9 @@
   "title_remove_default": "Ta bort standard",
   "btn_delete": "Ta bort",
   "title_delete_layout": "Ta bort layout",
-
   "delete_dialog_title": "Ta bort layout",
   "delete_confirm": "Ta bort <bold>{{name}}</bold>? Det här kan inte ångras.",
-
   "canvas_title": "Redigering: {{name}} ({{width}}×{{height}})",
-
   "toolbar_split_rows": "Dela i rader",
   "toolbar_split_cols": "Dela i kolumner",
   "toolbar_merge": "Sammanfoga",
@@ -45,14 +40,12 @@
   "toolbar_align_left": "Justera vänster",
   "toolbar_align_center": "Centrera",
   "toolbar_align_right": "Justera höger",
-
   "ctx_add_item": "Lägg till objekt",
   "ctx_all_assigned": "Alla objekt tilldelade",
   "ctx_remove_item": "Ta bort objekt",
   "ctx_split_rows": "Dela i rader",
   "ctx_split_cols": "Dela i kolumner",
   "ctx_merge": "Sammanfoga markerade celler",
-
   "item_trackName": "Spårtitel",
   "item_albumName": "Albumnamn",
   "item_artistName": "Artistnamn",
