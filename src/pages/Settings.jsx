@@ -224,6 +224,8 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
         { id: 'bitrateFontSize', element: 'input', type: 'text', label: t('BITRATE_FONT_SIZE', 'Bitrate/Stream Info Font Size'), icon: 'graphic_eq', doc: t('BITRATE_FONT_SIZE_DESC', 'CSS font size for bitrate and stream info text (e.g. 12px).') },
         { id: 'progressFontSize', element: 'input', type: 'text', label: t('PROGRESS_FONT_SIZE', 'Progress Bar Font Size'), icon: 'linear_scale', doc: t('PROGRESS_FONT_SIZE_DESC', 'CSS font size for labels near the progress bar (e.g. 12px).') },
         { id: 'volumeFontSize', element: 'input', type: 'text', label: t('VOLUME_FONT_SIZE', 'Volume Label Font Size'), icon: 'volume_up', doc: t('VOLUME_FONT_SIZE_DESC', 'CSS font size for the volume label and value (e.g. 12px).') },
+        { id: 'playerButtonSize', element: 'input', type: 'text', label: t('PLAYER_BUTTON_SIZE', 'Player Button Size'), icon: 'radio_button_checked', doc: t('PLAYER_BUTTON_SIZE_DESC', 'Size of the play/pause button (e.g. 64px, 4rem). Skip buttons are sized at 75% of this value.') },
+        { id: 'secondaryRowFontSize', element: 'input', type: 'text', label: t('SECONDARY_ROW_FONT_SIZE', 'Secondary Controls Icon Size'), icon: 'interests', doc: t('SECONDARY_ROW_FONT_SIZE_DESC', 'CSS font size for the secondary control icons (shuffle, repeat, favourite, etc.). (e.g. 16px, 1.5rem).') },
       ],
     },
   ];

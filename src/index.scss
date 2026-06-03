@@ -63,6 +63,23 @@
   // Establish a size container so children can use cqw/cqh/cqmin units
   // relative to this cell rather than the viewport.
   container-type: size;
+
+  // Text items: scale font to occupy most of the cell height.
+  // min() keeps the text from overflowing horizontally in narrow cells.
+  .track-title,
+  .artist-name,
+  .album-name {
+    font-size: min(72cqh, 90cqw);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  // Stream info row is a flex row (logo + text); scale slightly smaller
+  // so all elements fit together without overflow.
+  .responsive-stream-info {
+    font-size: min(55cqh, 75cqw);
+    line-height: 1;
+  }
 }
 
 .custom-layout-empty {
@@ -93,11 +110,15 @@
   height: 100%;
 }
 
-// Controls, button-row, volume, and seekbar fill the cell width
-// but not the height — so the parent cell's alignItems can position
-// them vertically according to the designer alignment setting.
+// Controls and button-row fill the entire cell so buttons can use cqh to
+// maximise their size. Volume and seekbar stay width-only so they don't
+// stretch taller than their content.
 .custom-layout-controls,
-.custom-layout-button-row,
+.custom-layout-button-row {
+  width: 100%;
+  height: 100%;
+}
+
 .custom-layout-volume {
   width: 100%;
 }
@@ -129,10 +150,30 @@
     --p-size: 99;
   }
 
-  // Album art: override the default 70% × 70% and fill the cell.
+  // Album art: fill 99% of cell height; width follows aspect ratio.
+  // Must cascade through every wrapper layer.
   .album-art-player {
-    width: 99%;
     height: 99%;
+    width: auto;
+    max-width: 100%;
+
+    .rainbow-border {
+      height: 100%;
+      width: auto;
+      aspect-ratio: 1 / 1;
+    }
+
+    .album-art-inner {
+      height: 100%;
+      width: 100%;
+    }
+
+    .album-art-image,
+    .album-art-placeholder {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
   }
 }
 
@@ -165,45 +206,56 @@
   }
 
   // ── Transport buttons (btn-round / btn-round.btn-sm) ──────────────────
-  // Themes set fixed pixel widths (72px, 56px, 64px, 48px).
-  // Replace with cqmin so the button grows/shrinks with the cell.
+  // height-first sizing; cqw cap ensures all 3 buttons fit the row width.
+  // min(88cqh, 26cqw) on a 400×80 cell → min(70px, 104px) = 70px
   .btn-round {
-    width: clamp(24px, 18cqmin, 72px);
-    height: clamp(24px, 18cqmin, 72px);
+    width: min(88cqh, 26cqw);
+    height: min(88cqh, 26cqw);
   }
 
+  // Prev / Next — slightly smaller than play
   .btn-round.btn-sm {
-    width: clamp(20px, 14cqmin, 56px);
-    height: clamp(20px, 14cqmin, 56px);
+    width: min(72cqh, 21cqw);
+    height: min(72cqh, 21cqw);
   }
 
-  // Icons inside round buttons
+  // Icons inside round buttons scale proportionally
   .btn-round .material-icons,
   .btn-round .material-icons-outlined {
-    font-size: clamp(14px, 10cqmin, 36px);
+    font-size: min(56cqh, 16cqw);
   }
 
   // ── Secondary icon buttons (btn-icon) ─────────────────────────────────
-  // Themes set 42px × 42px.
+  // 6 buttons: 6 × 13cqw = 78cqw for buttons + gaps → fits within 100% width
   .btn-icon {
-    width: clamp(18px, 11cqmin, 42px);
-    height: clamp(18px, 11cqmin, 42px);
+    width: min(80cqh, 13cqw);
+    height: min(80cqh, 13cqw);
   }
 
   .btn-icon .material-icons,
   .btn-icon .material-icons-outlined {
-    font-size: clamp(12px, 7cqmin, 28px);
+    font-size: min(55cqh, 9cqw);
   }
 
   // ── Control row spacing ────────────────────────────────────────────────
-  .controls-transport-row {
-    gap: clamp(4px, 4cqw, 24px);
+  // Use fixed px padding — % padding is always relative to the containing
+  // block's WIDTH in CSS, so "8% 4%" on a wide cell means huge top/bottom gaps.
+  .custom-layout-controls .player-controls {
+    height: 100%;
+    padding: 4px;
+    box-sizing: border-box;
   }
 
-  // Secondary controls row — allow items to shrink instead of overflow
-  .secondary-controls>div,
+  .controls-transport-row {
+    gap: clamp(4px, 4cqw, 32px);
+  }
+
+  // Secondary controls row: minimal fixed padding
   .custom-layout-button-row>div {
-    gap: clamp(2px, 3cqw, 16px);
+    height: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+    gap: clamp(2px, 3cqw, 20px);
     flex-wrap: wrap;
   }
 

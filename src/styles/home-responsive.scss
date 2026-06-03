@@ -165,6 +165,21 @@ body,
   font-size: var(--sp-volume-font-size) !important;
 }
 
+:root.sp-has-player-btn-size .btn-round {
+  width: var(--sp-player-btn-size) !important;
+  height: var(--sp-player-btn-size) !important;
+}
+
+:root.sp-has-player-btn-size .btn-round.btn-sm {
+  width: calc(var(--sp-player-btn-size) * 0.75) !important;
+  height: calc(var(--sp-player-btn-size) * 0.75) !important;
+}
+
+:root.sp-has-icon-font-size .btn-icon .material-icons,
+:root.sp-has-icon-font-size .btn-icon .material-icons-outlined {
+  font-size: var(--sp-icon-font-size) !important;
+}
+
 /* High-specificity theme selectors (tp-grid / tp-right) can override the
    generic .responsive-* classes. Add matching overrides so plugin font-size
    settings always take precedence. */

@@ -115,7 +115,7 @@ const Home = () => {
 
   // Reset to first layout whenever the set of matching layouts changes.
   const matchingLayoutIds = matchingLayouts.map((l) => l.id).join(',');
-  useEffect(() => { setLayoutIndex(0); }, [matchingLayoutIds]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { setLayoutIndex(0); }, [matchingLayoutIds]);
 
   const currentCustomLayout = matchingLayouts.length
     ? matchingLayouts[layoutIndex % matchingLayouts.length]
@@ -150,7 +150,7 @@ const Home = () => {
       document.removeEventListener('touchstart', onTouchStart);
       document.removeEventListener('touchend', onTouchEnd);
     };
-  }, [matchingLayouts.length]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [matchingLayouts.length]);
 
   // Apply user color overrides as CSS custom properties on :root
   useEffect(() => {
@@ -179,6 +179,8 @@ const Home = () => {
       '--sp-bitrate-font-size': { val: pluginConfig?.bitrateFontSize, cls: 'sp-has-bitrate-font-size' },
       '--sp-progress-font-size': { val: pluginConfig?.progressFontSize, cls: 'sp-has-progress-font-size' },
       '--sp-volume-font-size': { val: pluginConfig?.volumeFontSize, cls: 'sp-has-volume-font-size' },
+      '--sp-player-btn-size': { val: pluginConfig?.playerButtonSize, cls: 'sp-has-player-btn-size' },
+      '--sp-icon-font-size': { val: pluginConfig?.secondaryRowFontSize, cls: 'sp-has-icon-font-size' },
     };
     const normalizeFontSize = (v) => {
       if (v === null || v === undefined) return v;
@@ -210,6 +212,8 @@ const Home = () => {
     pluginConfig?.bitrateFontSize,
     pluginConfig?.progressFontSize,
     pluginConfig?.volumeFontSize,
+    pluginConfig?.playerButtonSize,
+    pluginConfig?.secondaryRowFontSize,
   ]);
 
   const showPlayer = !idle || forcePlayer;
