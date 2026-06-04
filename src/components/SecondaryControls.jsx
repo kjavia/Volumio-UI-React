@@ -1,5 +1,11 @@
 import PropTypes from 'prop-types';
 import Button from './Button';
+import { useTheme } from '@/contexts/ThemeContext';
+
+const Label = ({ children }) => (
+    <span className="secondary-btn-label">{children}</span>
+);
+Label.propTypes = { children: PropTypes.node.isRequired };
 
 const SecondaryControls = ({
     shuffle,
@@ -11,7 +17,11 @@ const SecondaryControls = ({
     onBrowse,
     isFavourite,
     onToggleFavourite,
+    textMode,
 }) => {
+    const { theme } = useTheme();
+    const showText = textMode || theme === 'oled';
+
     return (
         <div className="d-flex gap-3 gap-md-4 align-items-center justify-content-center flex-wrap">
             <Button
@@ -19,7 +29,9 @@ const SecondaryControls = ({
                 onClick={onShuffle}
                 label={shuffle ? 'Shuffle On' : 'Shuffle Off'}
             >
-                <span className="material-icons">shuffle</span>
+                {showText
+                    ? <Label>SHUFFLE</Label>
+                    : <span className="material-icons">shuffle</span>}
             </Button>
 
             <Button
@@ -27,11 +39,15 @@ const SecondaryControls = ({
                 onClick={onRepeat}
                 label={repeat ? 'Repeat On' : 'Repeat Off'}
             >
-                <span className="material-icons">repeat</span>
+                {showText
+                    ? <Label>REPEAT</Label>
+                    : <span className="material-icons">repeat</span>}
             </Button>
 
             <Button classNames="btn-icon" onClick={onAddToPlaylist} label="Add to Playlist">
-                <span className="material-icons">playlist_add</span>
+                {showText
+                    ? <Label>ADD</Label>
+                    : <span className="material-icons">playlist_add</span>}
             </Button>
 
             <Button
@@ -39,15 +55,21 @@ const SecondaryControls = ({
                 onClick={onToggleFavourite}
                 label={isFavourite ? 'Remove from Favourites' : 'Add to Favourites'}
             >
-                <span className="material-icons">{isFavourite ? 'favorite' : 'favorite_border'}</span>
+                {showText
+                    ? <Label>FAVE</Label>
+                    : <span className="material-icons">{isFavourite ? 'favorite' : 'favorite_border'}</span>}
             </Button>
 
             <Button classNames="btn-icon btn-text" onClick={onShowPlaylist} label="Show Playlist">
-                <span className="material-icons">queue_music</span>
+                {showText
+                    ? <Label>QUEUE</Label>
+                    : <span className="material-icons">queue_music</span>}
             </Button>
 
             <Button classNames="btn-icon btn-text" onClick={onBrowse} label="Browse">
-                <span className="material-icons">library_music</span>
+                {showText
+                    ? <Label>BROWSE</Label>
+                    : <span className="material-icons">library_music</span>}
             </Button>
         </div>
     );
@@ -63,6 +85,7 @@ SecondaryControls.propTypes = {
     onBrowse: PropTypes.func,
     isFavourite: PropTypes.bool,
     onToggleFavourite: PropTypes.func,
+    textMode: PropTypes.bool,
 };
 
 export default SecondaryControls;

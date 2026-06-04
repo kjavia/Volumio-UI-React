@@ -259,6 +259,11 @@
     flex-wrap: wrap;
   }
 
+  // Scale text-mode labels relative to the cell so they fill space like icons do
+  .secondary-btn-label {
+    font-size: min(55cqh, 9cqw);
+  }
+
   // ── Seekbar / Volume slider — fill width, no fixed height ─────────────
   .slider-container {
     padding: 0 clamp(4px, 2cqw, 16px);
@@ -273,4 +278,18 @@
     width: auto;
     height: auto;
   }
+}
+
+// ── Secondary controls text-mode label ────────────────────────────────────
+// Used when icons are hidden (custom layout buttonRow, OLED theme).
+// Inherits active/hover colour from the parent .btn-icon state.
+.secondary-btn-label {
+  font-family: var(--font-display, var(--font-body, sans-serif));
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  color: inherit;
 }

@@ -3854,6 +3854,25 @@ h2 {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.12), 0 -1px 1px rgba(0, 0, 0, 0.6);
 }
 
+/* Lighter text when track panel is disabled (text floats on dark album art background) */
+.track-info-group:not(.track-panel) .track-title {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.track-info-group:not(.track-panel) .artist-name,
+.track-info-group:not(.track-panel) .track-artist {
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.track-info-group:not(.track-panel) .album-name {
+  color: rgba(255, 255, 255, 0.55);
+  text-shadow: none;
+}
+.track-info-group:not(.track-panel) .responsive-stream-info {
+  color: rgba(255, 255, 255, 0.65);
+  text-shadow: none;
+}
+
 .format-logo-responsive {
   height: clamp(1.3rem, 3.8cqw, 4.2rem);
   display: block;

@@ -1180,6 +1180,17 @@ body,
   flex-shrink: 0;
 }
 
+/* Strip brand colour from react-icon service logos — inherit tile text colour */
+.browse-tile__art.service-logo-icon {
+  color: currentColor !important;
+}
+
+/* Desaturate SVG image logos (e.g. Qobuz) so they match tile text colour */
+.browse-tile__art.service-logo-img {
+  filter: grayscale(1);
+  opacity: 0.85;
+}
+
 .browse-tile__label {
   font-size: clamp(0.65rem, 1.2cqi, 0.9rem);
   font-weight: 600;

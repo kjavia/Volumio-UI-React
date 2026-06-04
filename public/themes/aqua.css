@@ -4507,6 +4507,18 @@ input[type=range]::-moz-range-thumb:active {
   font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
 }
 
+/* Explicit white text when track panel is disabled (avoids near-white text on light aqua background) */
+.track-info-group:not(.track-panel) .track-title {
+  color: rgba(255, 255, 255, 0.95);
+}
+.track-info-group:not(.track-panel) .artist-name,
+.track-info-group:not(.track-panel) .album-name {
+  color: rgba(255, 255, 255, 0.75);
+}
+.track-info-group:not(.track-panel) .responsive-stream-info {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .format-logo-responsive {
   height: clamp(1.3rem, 3.8cqw, 4.2rem);
   display: block;

@@ -240,6 +240,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
         return (
           <div className="custom-layout-button-row">
             <SecondaryControls
+              textMode
               shuffle={random}
               repeat={repeat}
               onShuffle={toggleRandom}
