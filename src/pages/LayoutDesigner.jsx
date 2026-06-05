@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useState, useEffect, useCallback, useLayoutEffect, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -20,7 +20,7 @@ const LAYOUT_ITEMS = {
   artistName: 'Artist Name',
   samplingRate: 'Bitrate / Sample Rate',
   serviceLogo: 'Service Logo',
-  player: 'Player (Vinyl/CD)',
+  player: 'Album Art / Graphic',
   playerControls: 'Player Buttons',
   buttonRow: 'Control Buttons',
   progressBar: 'Track Progress Bar',
@@ -346,6 +346,8 @@ export default function LayoutDesigner() {
 
   // Drag-resize ref (avoids stale closures)
   const dragRef = useRef(null);
+  // Hidden file input for JSON import
+  const importInputRef = useRef(null);
 
   // ---- Derived values -------------------------------------------------------
   const activeLayout = useMemo(
@@ -416,16 +418,30 @@ export default function LayoutDesigner() {
   }, [contextMenu]);
 
   // ---- Clamp context menu within viewport ----------------------------------
-  // Callback ref fires after mount; measures actual size and repositions.
-  const menuRef = useCallback((node) => {
-    if (!node) return;
+  // useLayoutEffect runs synchronously after every commit so the node is already
+  // laid out with the correct size; we measure it and nudge left/top as needed.
+  const menuRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const node = menuRef.current;
+    if (!contextMenu || !node) return;
+    // Remove stale flip class from a previous open
+    node.classList.remove('ld-context-menu--flip-x');
+    // Position at cursor first so the browser can measure the real size
+    node.style.left = contextMenu.x + 'px';
+    node.style.top = contextMenu.y + 'px';
     const rect = node.getBoundingClientRect();
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    let left = rect.left;
-    let top = rect.top;
-    if (rect.right > vw) left = Math.max(0, vw - rect.width);
-    if (rect.bottom > vh) top = Math.max(0, vh - rect.height);
+    let left = contextMenu.x;
+    let top = contextMenu.y;
+    // Clamp right edge
+    if (left + rect.width > vw) left = Math.max(0, vw - rect.width);
+    // Clamp bottom edge
+    if (top + rect.height > vh) top = Math.max(0, vh - rect.height);
+    // Clamp top/left edges
+    if (top < 0) top = 0;
+    if (left < 0) left = 0;
     node.style.left = left + 'px';
     node.style.top = top + 'px';
     // Flip submenu left when there is not enough room on the right
@@ -433,7 +449,7 @@ export default function LayoutDesigner() {
       node.classList.add('ld-context-menu--flip-x');
     }
     node.style.visibility = 'visible';
-  }, [contextMenu]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [contextMenu]);
 
   // ---- Load layouts from plugin config (HTTP + pushStylishPlayerConfig) ----
   useEffect(() => {
@@ -515,6 +531,56 @@ export default function LayoutDesigner() {
     setLayouts(updated);
     persistLayouts(updated);
     setShowDeleteConfirm(false);
+  }
+
+  // ---- Export / Import all layouts ----------------------------------------
+
+  function handleExportLayouts() {
+    const blob = new Blob(
+      [JSON.stringify({ layouts }, null, 2)],
+      { type: 'application/json' },
+    );
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'stylish-player-layouts.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function handleImportLayouts(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    // Reset so the same file can be re-imported if needed
+    e.target.value = '';
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const parsed = JSON.parse(ev.target.result);
+        const incoming = Array.isArray(parsed.layouts) ? parsed.layouts : null;
+        if (!incoming) { showToast('Invalid layout file — missing "layouts" array.', 'error'); return; }
+        // Regenerate IDs to avoid collisions, rename duplicates
+        const existingNameSet = new Set(layouts.map((l) => l.name));
+        const merged = [...layouts];
+        let added = 0;
+        for (const layout of incoming) {
+          let name = layout.name || 'Imported Layout';
+          // Avoid name collisions
+          let candidate = name;
+          let suffix = 2;
+          while (existingNameSet.has(candidate)) { candidate = `${name} (${suffix++})`; }
+          existingNameSet.add(candidate);
+          merged.push({ ...layout, id: generateId(), name: candidate });
+          added++;
+        }
+        setLayouts(merged);
+        persistLayouts(merged);
+        showToast(`Imported ${added} layout${added !== 1 ? 's' : ''}.`, 'success');
+      } catch {
+        showToast('Failed to parse the JSON file.', 'error');
+      }
+    };
+    reader.readAsText(file);
   }
 
   // ---- Canvas / cell handlers (Features 03-08) ----------------------------
@@ -943,7 +1009,7 @@ export default function LayoutDesigner() {
       <div
         ref={menuRef}
         className="ld-context-menu"
-        style={{ position: 'fixed', top: contextMenu.y, left: contextMenu.x, zIndex: 9999, visibility: 'hidden' }}
+        style={{ position: 'fixed', top: 0, left: 0, zIndex: 9999, visibility: 'hidden' }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Add Item submenu */}
@@ -1068,6 +1134,15 @@ export default function LayoutDesigner() {
       <Toast toasts={toasts} />
       <AppMenu />
 
+      {/* Hidden file input for JSON import */}
+      <input
+        ref={importInputRef}
+        type="file"
+        accept=".json,application/json"
+        style={{ display: 'none' }}
+        onChange={handleImportLayouts}
+      />
+
       <div className="d-flex align-items-center mb-4 gap-3">
         <h4 className="mb-0 ms-4">{t('page_title')}</h4>
         <small className="text-secondary">{t('screen_resolution', { w: screen.w, h: screen.h })}</small>
@@ -1077,6 +1152,23 @@ export default function LayoutDesigner() {
         >
           <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>add</span>
           <span className="ms-1">{t('btn_new_layout')}</span>
+        </button>
+        <button
+          className="btn btn-sm btn-outline-secondary"
+          disabled={!layouts.length}
+          onClick={handleExportLayouts}
+          title="Export all layouts as JSON"
+        >
+          <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>file_download</span>
+          <span className="ms-1">Export</span>
+        </button>
+        <button
+          className="btn btn-sm btn-outline-secondary"
+          onClick={() => importInputRef.current?.click()}
+          title="Import layouts from JSON"
+        >
+          <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>file_upload</span>
+          <span className="ms-1">Import</span>
         </button>
         <button
           className="btn btn-sm btn-outline-secondary"
