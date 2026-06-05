@@ -207,27 +207,25 @@ const ContextMenu = ({
     el.style.visibility = 'visible';
   }, [isPositioned, isOpen, position]);
 
+  // Outside-click handler for 'positioned' variant — must be unconditional (Rules of Hooks)
+  useLayoutEffect(() => {
+    if (!isPositioned || !isOpen) return undefined;
+    const handler = (e) => {
+      const el = menuNodeRef.current;
+      if (!el) return;
+      if (el.contains(e.target)) return; // click inside main menu — ignore
+      if (e.target.closest?.('.context-menu')) return; // click inside portaled submenu — ignore
+      externalOnClose?.();
+    };
+    document.addEventListener('mousedown', handler, true);
+    return () => document.removeEventListener('mousedown', handler, true);
+  }, [isPositioned, isOpen, externalOnClose]);
+
   const close = (fn) => () => { setIsOpen(false); fn?.(); };
   const closeAll = () => setIsOpen(false);
 
   if (isPositioned) {
     if (!isOpen || !position) return null;
-    // When positioned, listen for document mousedown in capture phase so
-    // outside clicks close the menu but still propagate to underlying
-    // elements (so a click on a grid cell both closes the menu and selects
-    // the cell). We avoid rendering a backdrop which would intercept clicks.
-    useLayoutEffect(() => {
-      if (!isOpen) return undefined;
-      const handler = (e) => {
-        const el = menuNodeRef.current;
-        if (!el) return;
-        if (el.contains(e.target)) return; // click inside menu — ignore
-        externalOnClose?.();
-      };
-      document.addEventListener('mousedown', handler, true);
-      return () => document.removeEventListener('mousedown', handler, true);
-    }, [isOpen, externalOnClose]);
-
     return createPortal(
       <div
         ref={setMenuRef}

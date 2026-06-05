@@ -122,33 +122,38 @@ const Home = () => {
     : null;
 
   // Swipe up from the bottom edge cycles through matching layouts.
+  // Listeners use capture phase so child elements calling stopPropagation() can't block them.
   useEffect(() => {
     if (matchingLayouts.length < 2) return;
     const count = matchingLayouts.length;
     let startY = null;
     let fromEdge = false;
 
+    const reset = () => { startY = null; fromEdge = false; };
+
     const onTouchStart = (e) => {
       const t = e.touches[0];
       startY = t.clientY;
-      fromEdge = t.clientY > window.innerHeight - 60;
+      fromEdge = t.clientY > window.innerHeight - 80;
     };
 
     const onTouchEnd = (e) => {
       if (!fromEdge || startY === null) return;
       const deltaY = e.changedTouches[0].clientY - startY;
-      if (deltaY < -80) {
+      if (deltaY < -50) {
         setLayoutIndex((prev) => (prev + 1) % count);
       }
-      startY = null;
-      fromEdge = false;
+      reset();
     };
 
-    document.addEventListener('touchstart', onTouchStart, { passive: true });
-    document.addEventListener('touchend', onTouchEnd, { passive: true });
+    const opts = { passive: true, capture: true };
+    document.addEventListener('touchstart', onTouchStart, opts);
+    document.addEventListener('touchend', onTouchEnd, opts);
+    document.addEventListener('touchcancel', reset, opts);
     return () => {
-      document.removeEventListener('touchstart', onTouchStart);
-      document.removeEventListener('touchend', onTouchEnd);
+      document.removeEventListener('touchstart', onTouchStart, opts);
+      document.removeEventListener('touchend', onTouchEnd, opts);
+      document.removeEventListener('touchcancel', reset, opts);
     };
   }, [matchingLayouts.length]);
 

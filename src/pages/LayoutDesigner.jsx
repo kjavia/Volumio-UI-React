@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useLayoutEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -8,6 +8,7 @@ import useToast from '@/hooks/useToast';
 import Toast from '@/components/Toast';
 import Dialog from '@/components/Dialog';
 import AppMenu from '@/components/AppMenu';
+import ContextMenu from '@/components/ContextMenu';
 import './layout-designer.scss';
 
 // ---------------------------------------------------------------------------
@@ -410,46 +411,7 @@ export default function LayoutDesigner() {
   }, [layouts]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ---- Close context menu on outside click ---------------------------------
-  useEffect(() => {
-    if (!contextMenu) return;
-    const handler = () => setContextMenu(null);
-    window.addEventListener('click', handler);
-    return () => window.removeEventListener('click', handler);
-  }, [contextMenu]);
-
-  // ---- Clamp context menu within viewport ----------------------------------
-  // useLayoutEffect runs synchronously after every commit so the node is already
-  // laid out with the correct size; we measure it and nudge left/top as needed.
-  const menuRef = useRef(null);
-
-  useLayoutEffect(() => {
-    const node = menuRef.current;
-    if (!contextMenu || !node) return;
-    // Remove stale flip class from a previous open
-    node.classList.remove('ld-context-menu--flip-x');
-    // Position at cursor first so the browser can measure the real size
-    node.style.left = contextMenu.x + 'px';
-    node.style.top = contextMenu.y + 'px';
-    const rect = node.getBoundingClientRect();
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    let left = contextMenu.x;
-    let top = contextMenu.y;
-    // Clamp right edge
-    if (left + rect.width > vw) left = Math.max(0, vw - rect.width);
-    // Clamp bottom edge
-    if (top + rect.height > vh) top = Math.max(0, vh - rect.height);
-    // Clamp top/left edges
-    if (top < 0) top = 0;
-    if (left < 0) left = 0;
-    node.style.left = left + 'px';
-    node.style.top = top + 'px';
-    // Flip submenu left when there is not enough room on the right
-    if (left + rect.width + 190 > vw) {
-      node.classList.add('ld-context-menu--flip-x');
-    }
-    node.style.visibility = 'visible';
-  }, [contextMenu]);
+  // Handled internally by the ContextMenu 'positioned' variant.
 
   // ---- Load layouts from plugin config (HTTP + pushStylishPlayerConfig) ----
   useEffect(() => {
@@ -561,6 +523,10 @@ export default function LayoutDesigner() {
         if (!incoming) { showToast('Invalid layout file — missing "layouts" array.', 'error'); return; }
         // Regenerate IDs to avoid collisions, rename duplicates
         const existingNameSet = new Set(layouts.map((l) => l.name));
+        // Track which resolutions already have a default in the existing layouts
+        const existingDefaultResolutions = new Set(
+          layouts.filter((l) => l.isDefault).map((l) => `${l.width}x${l.height}`)
+        );
         const merged = [...layouts];
         let added = 0;
         for (const layout of incoming) {
@@ -570,7 +536,11 @@ export default function LayoutDesigner() {
           let suffix = 2;
           while (existingNameSet.has(candidate)) { candidate = `${name} (${suffix++})`; }
           existingNameSet.add(candidate);
-          merged.push({ ...layout, id: generateId(), name: candidate });
+          // Strip isDefault if the existing layouts already have a default for this resolution
+          const key = `${layout.width}x${layout.height}`;
+          const isDefault = layout.isDefault && !existingDefaultResolutions.has(key);
+          if (isDefault) existingDefaultResolutions.add(key); // claim it so subsequent imports don't also get it
+          merged.push({ ...layout, id: generateId(), name: candidate, isDefault });
           added++;
         }
         setLayouts(merged);
@@ -600,11 +570,6 @@ export default function LayoutDesigner() {
     event.stopPropagation();
     setSelectedCells([cellId]);
     setContextMenu({ cellId, x: event.clientX, y: event.clientY });
-  }
-
-  function closeContextMenu() {
-    setContextMenu(null);
-    // Deliberately do NOT clear selectedCells
   }
 
   function applyLayoutUpdate(newLayout) {
@@ -725,7 +690,7 @@ export default function LayoutDesigner() {
   function handleAssignItem(itemKey, cellId) {
     if (!activeLayout) return;
     applyLayoutUpdate({ ...activeLayout, cells: updateCellById(activeLayout.cells, cellId, { itemKey }) });
-    closeContextMenu();
+    setContextMenu(null);
   }
 
   function handleSetCellAlignment(cellId, prop, value) {
@@ -902,7 +867,12 @@ export default function LayoutDesigner() {
             onContextMenu={(e) => handleContextMenu(cell.id, e)}
           >
             {cell.itemKey && (
-              <span className="ld-cell__label">{t('item_' + cell.itemKey)}</span>
+              <>
+                {LAYOUT_ITEM_ICONS[cell.itemKey] && (
+                  <span className="material-icons ld-cell__icon">{LAYOUT_ITEM_ICONS[cell.itemKey]}</span>
+                )}
+                <span className="ld-cell__label">{t('item_' + cell.itemKey)}</span>
+              </>
             )}
             {renderResizeHandles(cFr, rFr, colIdx, rowIdx, parentCellId)}
           </div>
@@ -998,89 +968,62 @@ export default function LayoutDesigner() {
     );
   }
 
-  // ---- Context menu JSX ----------------------------------------------------
+  // ---- Context menu items (derived from current cell state) ---------------
+
+  const contextMenuItems = (() => {
+    if (!contextMenu) return [];
+    const items = [];
+
+    // Add Item (submenu) or "all assigned" placeholder
+    if (!contextCellObj?.itemKey) {
+      items.push({
+        label: t('ctx_add_item'),
+        icon: 'add_box',
+        submenu: availableItems.length > 0
+          ? availableItems.map(([key]) => ({
+            label: t('item_' + key),
+            icon: LAYOUT_ITEM_ICONS[key] ?? null,
+            onClick: () => { handleAssignItem(key, contextMenu.cellId); setContextMenu(null); },
+          }))
+          : undefined,
+        empty: availableItems.length === 0 ? t('ctx_all_assigned') : undefined,
+      });
+    } else {
+      items.push({
+        label: t('ctx_remove_item'),
+        icon: 'remove_circle_outline',
+        onClick: () => { handleClearCell(contextMenu.cellId); setContextMenu(null); },
+      });
+    }
+
+    items.push({ separator: true });
+
+    if (canSplitContextCell) {
+      items.push(
+        { label: t('ctx_split_rows'), icon: 'table_rows', onClick: () => { handleSplitCellIntoRows(contextMenu.cellId); setContextMenu(null); } },
+        { label: t('ctx_split_cols'), icon: 'view_column', onClick: () => { handleSplitCellIntoColumns(contextMenu.cellId); setContextMenu(null); } },
+      );
+    }
+
+    if (canMerge) {
+      if (canSplitContextCell) items.push({ separator: true });
+      items.push({ label: t('ctx_merge'), icon: 'merge', onClick: () => { handleMergeCells(); setContextMenu(null); } });
+    }
+
+    return items;
+  })();
+
+  // ---- Context menu JSX — now delegated to ContextMenu component ----------
 
   function renderContextMenu() {
-    if (!contextMenu) return null;
-
-    const Icon = ({ name }) => <span className="material-icons" style={{ fontSize: '1rem', opacity: 0.75 }}>{name}</span>;
-
     return (
-      <div
-        ref={menuRef}
-        className="ld-context-menu"
-        style={{ position: 'fixed', top: 0, left: 0, zIndex: 9999, visibility: 'hidden' }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Add Item submenu */}
-        {!contextCellObj?.itemKey && availableItems.length > 0 && (
-          <div className="ld-context-menu__item ld-context-menu__item--submenu">
-            <Icon name="add_box" />
-            <span>{t('ctx_add_item')}</span>
-            <span className="material-icons" style={{ fontSize: '0.9rem', marginLeft: 'auto' }}>chevron_right</span>
-            <div className="ld-context-menu__submenu">
-              {availableItems.map(([key]) => (
-                <div
-                  key={key}
-                  className="ld-context-menu__item"
-                  onClick={() => handleAssignItem(key, contextMenu.cellId)}
-                >
-                  {LAYOUT_ITEM_ICONS[key] && <Icon name={LAYOUT_ITEM_ICONS[key]} />}
-                  {t('item_' + key)}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-        {!contextCellObj?.itemKey && availableItems.length === 0 && (
-          <div className="ld-context-menu__item ld-context-menu__item--disabled">
-            <Icon name="inventory_2" />
-            {t('ctx_all_assigned')}
-          </div>
-        )}
-
-        {contextCellObj?.itemKey && (
-          <div
-            className="ld-context-menu__item"
-            onClick={() => { handleClearCell(contextMenu.cellId); closeContextMenu(); }}
-          >
-            <Icon name="remove_circle_outline" />
-            {t('ctx_remove_item')}
-          </div>
-        )}
-
-        <hr />
-
-        {canSplitContextCell && (
-          <>
-            <div
-              className="ld-context-menu__item"
-              onClick={() => { handleSplitCellIntoRows(contextMenu.cellId); closeContextMenu(); }}
-            >
-              <Icon name="table_rows" />
-              {t('ctx_split_rows')}
-            </div>
-            <div
-              className="ld-context-menu__item"
-              onClick={() => { handleSplitCellIntoColumns(contextMenu.cellId); closeContextMenu(); }}
-            >
-              <Icon name="view_column" />
-              {t('ctx_split_cols')}
-            </div>
-          </>
-        )}
-
-        {canMerge && (
-          <>
-            <hr />
-            <div className="ld-context-menu__item" onClick={() => { handleMergeCells(); closeContextMenu(); }}>
-              <Icon name="merge" />
-              {t('ctx_merge')}
-            </div>
-          </>
-        )}
-
-      </div>
+      <ContextMenu
+        variant="positioned"
+        isOpen={!!contextMenu}
+        onClose={() => setContextMenu(null)}
+        position={contextMenu ? { x: contextMenu.x, y: contextMenu.y } : null}
+        items={contextMenuItems}
+      />
     );
   }
 

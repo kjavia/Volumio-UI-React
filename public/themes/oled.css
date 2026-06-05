@@ -5956,7 +5956,7 @@ input[type=range]::-moz-range-thumb:active {
   opacity: 0;
   transform: translateY(-8px) scale(0.96);
   pointer-events: none;
-  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1), transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .context-menu.open {
   opacity: 1;
