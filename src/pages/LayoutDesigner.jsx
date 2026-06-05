@@ -470,17 +470,28 @@ export default function LayoutDesigner() {
       field === 'width' ? setEditWidth(String(activeLayout.width)) : setEditHeight(String(activeLayout.height));
       return;
     }
-    const updated = layouts.map((l) => l.id === activeLayoutId ? { ...l, [field]: num } : l);
+    // Compute the new resolution after the change
+    const newW = field === 'width' ? num : activeLayout.width;
+    const newH = field === 'height' ? num : activeLayout.height;
+    // If this layout is the default and the target resolution already has another default, demote it
+    const newResAlreadyHasDefault = activeLayout.isDefault && layouts.some(
+      (l) => l.id !== activeLayoutId && l.isDefault && l.width === newW && l.height === newH
+    );
+    const updated = layouts.map((l) =>
+      l.id === activeLayoutId
+        ? { ...l, [field]: num, isDefault: newResAlreadyHasDefault ? false : l.isDefault }
+        : l
+    );
     setLayouts(updated);
     persistLayouts(updated);
   }
 
   function handleSetDefault() {
-    if (!activeLayout) return;
+    if (!activeLayout || activeLayout.isDefault) return;
     const updated = layouts.map((l) => ({
       ...l,
       isDefault: l.id === activeLayoutId
-        ? !l.isDefault
+        ? true
         : (l.width === activeLayout.width && l.height === activeLayout.height ? false : l.isDefault),
     }));
     setLayouts(updated);
@@ -1177,7 +1188,7 @@ export default function LayoutDesigner() {
 
               <button
                 className={`btn btn-sm ${activeLayout?.isDefault ? 'btn-warning' : 'btn-outline-secondary'}`}
-                disabled={!activeLayout}
+                disabled={!activeLayout || activeLayout?.isDefault}
                 onClick={handleSetDefault}
                 title={activeLayout?.isDefault ? t('title_remove_default') : t('title_set_default')}
               >
