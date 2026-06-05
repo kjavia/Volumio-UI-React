@@ -89,24 +89,24 @@ const useVolumioStatus = () => {
 
     const handlePushState = (data) => {
       if (!data) return;
-      setStatus(data.status);
-      if (data.title) setTitle(data.title);
-      if (data.artist) setArtist(data.artist);
-      if (data.album) setAlbum(data.album);
-      if (data.albumart !== '/albumart') setAlbumart(data.albumart);
-      if (data.volume !== undefined) setVolume(data.volume);
-      if (data.mute !== undefined) setMute(data.mute);
-      if (data.random !== undefined) setRandom(data.random);
-      if (data.repeat !== undefined) setRepeat(data.repeat);
-      if (data.repeatSingle !== undefined) setRepeatSingle(data.repeatSingle);
-      if (data.disableVolumeControl !== undefined) setDisableVolumeControl(data.disableVolumeControl);
-      if (data.samplerate) setSamplerate(data.samplerate != null ? String(data.samplerate) : '');
-      if (data.bitdepth) setBitdepth(data.bitdepth != null ? String(data.bitdepth) : '');
-      if (data.trackType) setTrackType(data.trackType || '');
-      if (data.codec) setCodec(data.codec || '');
-      if (data.bitrate) setBitrate(data.bitrate != null ? String(data.bitrate) : '');
-      if (data.service) setService(data.service || '');
-      if (data.uri) setStreamUri(data.uri || '');
+      setStatus(data.status ?? 'stop');
+      setTitle(data.title ?? '');
+      setArtist(data.artist ?? '');
+      setAlbum(data.album ?? '');
+      setAlbumart(data.albumart !== '/albumart' ? data.albumart : '');
+      setVolume(data.volume ?? 0);
+      setMute(data.mute ?? false);
+      setRandom(data.random ?? false);
+      setRepeat(data.repeat ?? false);
+      setRepeatSingle(data.repeatSingle ?? false);
+      setDisableVolumeControl(data.disableVolumeControl ?? false);
+      setSamplerate(data.samplerate != null ? String(data.samplerate) : '');
+      setBitdepth(data.bitdepth != null ? String(data.bitdepth) : '');
+      setTrackType(data.trackType || '');
+      setCodec(data.codec || '');
+      setBitrate(data.bitrate != null ? String(data.bitrate) : '');
+      setService(data.service || '');
+      setStreamUri(data.uri || '');
       if (data.position >= 0) setPosition(data.position);
     };
 

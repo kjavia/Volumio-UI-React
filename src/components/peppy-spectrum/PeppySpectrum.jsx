@@ -117,7 +117,9 @@ const PeppySpectrum = ({
   useEffect(() => {
     if (!allConfigs || !trackUri) return;
     const names = Object.keys(allConfigs);
-    if (!names.length) { setError('No spectrums found in config'); return; }
+    if (!names.length) { // eslint-disable-next-line react-hooks/set-state-in-effect
+      setError('No spectrums found in config'); return;
+    }
 
     if (model === 'random') {
       const picked = pickRandom(names, prevRandomRef.current);
@@ -277,6 +279,7 @@ const PeppySpectrum = ({
 
   useEffect(() => {
     if (autoEnable && !enabled) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       handleEnable();
     }
   }, [autoEnable, enabled, handleEnable]);

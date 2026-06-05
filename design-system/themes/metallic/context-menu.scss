@@ -15,11 +15,9 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: linear-gradient(
-        135deg,
-        var(--color-gray-200),
-        var(--color-gray-300)
-    );
+    background: linear-gradient(135deg,
+            var(--color-gray-200),
+            var(--color-gray-300));
     border: none;
     display: flex;
     align-items: center;
@@ -33,11 +31,9 @@
 }
 
 .context-menu-toggle:hover {
-    background: linear-gradient(
-        135deg,
-        var(--color-gray-150),
-        var(--color-gray-250)
-    );
+    background: linear-gradient(135deg,
+            var(--color-gray-150),
+            var(--color-gray-250));
     box-shadow:
         0 6px 16px var(--shadow-35),
         inset 0 1px 0 var(--highlight-50);
@@ -91,11 +87,9 @@
     top: calc(100% + 8px);
     left: 0;
     min-width: 200px;
-    background: linear-gradient(
-        135deg,
-        var(--color-gray-800) 0%,
-        var(--color-gray-850) 100%
-    );
+    background: linear-gradient(135deg,
+            var(--color-gray-800) 0%,
+            var(--color-gray-850) 100%);
     border-radius: 8px;
     border: 1px solid var(--color-gray-700);
     box-shadow:
@@ -112,6 +106,7 @@
         opacity: 0;
         transform: scale(0.95) translateY(-8px);
     }
+
     to {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -165,22 +160,66 @@
 
 /* ─── Responsive sizing at ≥1980px ───────────────────────────────────────── */
 @media (min-width: 1980px) {
-  .context-menu-toggle {
-    width: clamp(40px, 3vw, 72px);
-    height: clamp(40px, 3vw, 72px);
+    .context-menu-toggle {
+        width: clamp(40px, 3vw, 72px);
+        height: clamp(40px, 3vw, 72px);
 
-    .material-icons { font-size: clamp(20px, 1.8vw, 34px); }
-  }
+        .material-icons {
+            font-size: clamp(20px, 1.8vw, 34px);
+        }
+    }
 
-  .context-menu {
-    min-width: clamp(180px, 16vw, 360px);
-  }
+    .context-menu {
+        min-width: clamp(180px, 16vw, 360px);
+    }
 
-  .context-menu-item {
-    font-size: clamp(13px, 1.1vw, 1.6rem);
-    gap: clamp(10px, 0.8vw, 18px);
-    padding: clamp(8px, 0.6vw, 14px) clamp(12px, 1vw, 22px);
+    .context-menu-item {
+        font-size: clamp(13px, 1.1vw, 1.6rem);
+        gap: clamp(10px, 0.8vw, 18px);
+        padding: clamp(8px, 0.6vw, 14px) clamp(12px, 1vw, 22px);
 
-    .material-icons { font-size: clamp(18px, 1.5vw, 2.2rem); }
-  }
+        .material-icons {
+            font-size: clamp(18px, 1.5vw, 2.2rem);
+        }
+    }
+}
+
+/* ─── Section Header ───────────────────────────────────────────────────── */
+.context-menu-section {
+    padding: 0.4rem 1rem 0.65rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--border-dark);
+    margin-top: 0.25rem;
+}
+
+/* ─── Empty State ──────────────────────────────────────────────────────── */
+.context-menu-empty {
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* ─── Submenu Trigger ───────────────────────────────────────────────────── */
+.context-menu-item--has-submenu {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .context-menu-item__label {
+        flex: 1;
+    }
+
+    .context-menu-item__chevron {
+        font-size: 18px;
+        color: var(--text-muted);
+        flex-shrink: 0;
+    }
+
+    &:hover .context-menu-item__chevron {
+        color: var(--color-primary-light);
+    }
 }

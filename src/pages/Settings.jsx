@@ -87,6 +87,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
         { id: 'albumArtMaxSpace', element: 'switch', label: t('ALBUM_ART_MAX_SPACE', 'Use Maximum Space'), icon: 'aspect_ratio', doc: t('ALBUM_ART_MAX_SPACE_DESC', 'Expand album art to fill the panel.'), visibleIf: { field: 'playerType', value: 'albumArt' } },
         { id: 'albumArtAnimated', element: 'switch', label: t('ALBUM_ART_ANIMATED', 'Animated Album Art'), icon: 'animation', doc: t('ALBUM_ART_ANIMATED_DESC', 'Enable rainbow border animation when playing.'), visibleIf: { field: 'playerType', value: 'albumArt' } },
         { id: 'showTrackPanel', element: 'switch', label: t('SHOW_TRACK_PANEL', 'Show Track Info Panel'), icon: 'info', doc: t('SHOW_TRACK_PANEL_DESC', 'Display a themed panel behind track info.') },
+        { id: 'useCustomLayout', element: 'switch', label: t('USE_CUSTOM_LAYOUT', 'Use Custom Layouts'), icon: 'grid_view', doc: t('USE_CUSTOM_LAYOUT_DESC', 'When enabled, the player will use a saved custom layout for the current screen resolution if one exists.') },
         {
           id: 'vizType', element: 'select', label: t('VIZ_TYPE', 'Visualization'), icon: 'equalizer',
           doc: t('VIZ_TYPE_DESC', 'Select the visualization displayed on the player screen.'),
@@ -223,6 +224,8 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
         { id: 'bitrateFontSize', element: 'input', type: 'text', label: t('BITRATE_FONT_SIZE', 'Bitrate/Stream Info Font Size'), icon: 'graphic_eq', doc: t('BITRATE_FONT_SIZE_DESC', 'CSS font size for bitrate and stream info text (e.g. 12px).') },
         { id: 'progressFontSize', element: 'input', type: 'text', label: t('PROGRESS_FONT_SIZE', 'Progress Bar Font Size'), icon: 'linear_scale', doc: t('PROGRESS_FONT_SIZE_DESC', 'CSS font size for labels near the progress bar (e.g. 12px).') },
         { id: 'volumeFontSize', element: 'input', type: 'text', label: t('VOLUME_FONT_SIZE', 'Volume Label Font Size'), icon: 'volume_up', doc: t('VOLUME_FONT_SIZE_DESC', 'CSS font size for the volume label and value (e.g. 12px).') },
+        { id: 'playerButtonSize', element: 'input', type: 'text', label: t('PLAYER_BUTTON_SIZE', 'Player Button Size'), icon: 'radio_button_checked', doc: t('PLAYER_BUTTON_SIZE_DESC', 'Size of the play/pause button (e.g. 64px, 4rem). Skip buttons are sized at 75% of this value.') },
+        { id: 'secondaryRowFontSize', element: 'input', type: 'text', label: t('SECONDARY_ROW_FONT_SIZE', 'Secondary Controls Icon Size'), icon: 'interests', doc: t('SECONDARY_ROW_FONT_SIZE_DESC', 'CSS font size for the secondary control icons (shuffle, repeat, favourite, etc.). (e.g. 16px, 1.5rem).') },
       ],
     },
   ];
@@ -685,7 +688,7 @@ PackUpload.propTypes = { packType: PropTypes.string.isRequired, onUploaded: Prop
 /* ─── Section Component ────────────────────────────────────────────────── */
 
 const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolders, peppySpectrumFolders, onPackUploaded, t }) => {
-  const [deleting, setDeleting] = useState(null);
+  const [, setDeleting] = useState(null);
 
   const isFieldVisible = (field) => {
     if (!field.visibleIf) return true;
@@ -822,6 +825,7 @@ const Settings = () => {
   // Populate form values from plugin config
   useEffect(() => {
     if (pluginConfig) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setValues((prev) => {
         // Only set initial values, don't overwrite user edits
         const hasValues = Object.keys(prev).length > 0;
@@ -915,11 +919,19 @@ const Settings = () => {
 
   return (
     <div className="settings-page">
-      <div className="settings-topbar">
-        <h2 className="settings-topbar__title">Settings</h2>
-        <button className="btn btn-sm btn-primary settings-close-btn" onClick={() => navigate(-1)} aria-label="Close">
-          <span className="material-icons">close</span>
-        </button>
+      <div className="settings-topbar d-flex align-items-center justify-content-between">
+        <div>
+          <h2 className="settings-topbar__title">Settings</h2>
+        </div>
+        <div className="d-flex gap-2 align-items-center">
+          <button className="btn btn-sm btn-outline-secondary" onClick={() => navigate('/layout-designer')}>
+            <span className="material-icons">grid_view</span>
+            Layout Designer
+          </button>
+          <button className="btn btn-sm btn-primary settings-close-btn" onClick={() => navigate(-1)} aria-label="Close">
+            <span className="material-icons">close</span>
+          </button>
+        </div>
       </div>
       <div className="settings-tabs" role="tablist">
         {sections.map((section) => (

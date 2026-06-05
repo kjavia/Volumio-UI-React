@@ -40,3 +40,256 @@
 .slider-track input[type="range"]:focus-visible {
   outline: none;
 }
+
+.custom-layout-grid {
+  display: grid;
+  gap: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+}
+
+.custom-layout-cell {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  color: var(--text-dark, inherit);
+  // Establish a size container so children can use cqw/cqh/cqmin units
+  // relative to this cell rather than the viewport.
+  container-type: size;
+
+  // Text items: scale font to occupy most of the cell height.
+  // min() keeps the text from overflowing horizontally in narrow cells.
+  .track-title,
+  .artist-name,
+  .album-name {
+    font-size: min(72cqh, 90cqw);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  // Stream info row is a flex row (logo + text); scale slightly smaller
+  // so all elements fit together without overflow.
+  .responsive-stream-info {
+    font-size: min(55cqh, 75cqw);
+    line-height: 1;
+  }
+}
+
+.custom-layout-empty {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.custom-layout-text {
+  width: 100%;
+  text-align: center;
+}
+
+.custom-layout-text--title {
+  font-size: clamp(1rem, 2vw, 2rem);
+  font-weight: 700;
+}
+
+.custom-layout-text--subtitle {
+  font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  opacity: 0.9;
+}
+
+// Player and viz must fill the entire cell.
+.custom-layout-player,
+.custom-layout-viz {
+  width: 100%;
+  height: 100%;
+}
+
+// Controls and button-row fill the entire cell so buttons can use cqh to
+// maximise their size. Volume and seekbar stay width-only so they don't
+// stretch taller than their content.
+.custom-layout-controls,
+.custom-layout-button-row {
+  width: 100%;
+  height: 100%;
+}
+
+.custom-layout-volume {
+  width: 100%;
+}
+
+// Media items (service logo, stream info) — let them size to their content
+// so the parent cell's flexbox alignment positions them correctly.
+.custom-layout-media {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-layout-media--small {
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.custom-layout-player {
+  width: 99%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // No fixed min-height — cell size is controlled by the grid fr fractions.
+
+  // Override the player-responsive size variable so the album art
+  // fills 99% of the cell container (cq units come from the cell).
+  .player-responsive {
+    --p-size: 99;
+  }
+
+  // Album art: fill 99% of cell height; width follows aspect ratio.
+  // Must cascade through every wrapper layer.
+  .album-art-player {
+    height: 99%;
+    width: auto;
+    max-width: 100%;
+
+    .rainbow-border {
+      height: 100%;
+      width: auto;
+      aspect-ratio: 1 / 1;
+    }
+
+    .album-art-inner {
+      height: 100%;
+      width: 100%;
+    }
+
+    .album-art-image,
+    .album-art-placeholder {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+.custom-layout-viz {
+  width: 100%;
+  height: 100%;
+  // No fixed min-height inside a grid cell.
+}
+
+// ---------------------------------------------------------------------------
+// CustomLayout cell content overrides
+// Override fixed-px sizes from themes/components with cell-relative cqmin units
+// so every item fits its assigned cell regardless of cell dimensions.
+// ---------------------------------------------------------------------------
+.custom-layout-cell {
+
+  // ── Text items ────────────────────────────────────────────────────────
+  // Text cells are typically wide, short rows — use cqh so the font fills
+  // the cell height (with room for padding) rather than being driven by width.
+  .track-title,
+  .responsive-title {
+    font-size: clamp(0.75rem, 55cqh, 3rem);
+  }
+
+  .artist-name,
+  .album-name,
+  .responsive-artist,
+  .responsive-album {
+    font-size: clamp(0.6rem, 50cqh, 2.25rem);
+  }
+
+  // ── Transport buttons (btn-round / btn-round.btn-sm) ──────────────────
+  // height-first sizing; cqw cap ensures all 3 buttons fit the row width.
+  // min(88cqh, 26cqw) on a 400×80 cell → min(70px, 104px) = 70px
+  .btn-round {
+    width: min(88cqh, 26cqw);
+    height: min(88cqh, 26cqw);
+  }
+
+  // Prev / Next — slightly smaller than play
+  .btn-round.btn-sm {
+    width: min(72cqh, 21cqw);
+    height: min(72cqh, 21cqw);
+  }
+
+  // Icons inside round buttons scale proportionally
+  .btn-round .material-icons,
+  .btn-round .material-icons-outlined {
+    font-size: min(56cqh, 16cqw);
+  }
+
+  // ── Secondary icon buttons (btn-icon) ─────────────────────────────────
+  // 6 buttons: 6 × 13cqw = 78cqw for buttons + gaps → fits within 100% width
+  .btn-icon {
+    width: min(80cqh, 13cqw);
+    height: min(80cqh, 13cqw);
+  }
+
+  .btn-icon .material-icons,
+  .btn-icon .material-icons-outlined {
+    font-size: min(55cqh, 9cqw);
+  }
+
+  // ── Control row spacing ────────────────────────────────────────────────
+  // Use fixed px padding — % padding is always relative to the containing
+  // block's WIDTH in CSS, so "8% 4%" on a wide cell means huge top/bottom gaps.
+  .custom-layout-controls .player-controls {
+    height: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+  }
+
+  .controls-transport-row {
+    gap: clamp(4px, 4cqw, 32px);
+  }
+
+  // Secondary controls row: minimal fixed padding
+  .custom-layout-button-row>div {
+    height: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+    gap: clamp(2px, 3cqw, 20px);
+    flex-wrap: wrap;
+  }
+
+  // Scale text-mode labels relative to the cell so they fill space like icons do
+  .secondary-btn-label {
+    font-size: min(55cqh, 9cqw);
+  }
+
+  // ── Seekbar / Volume slider — fill width, no fixed height ─────────────
+  .slider-container {
+    padding: 0 clamp(4px, 2cqw, 16px);
+    gap: clamp(4px, 2cqw, 12px);
+  }
+
+  // ── Media items (service logo, stream info) — scale to cell ───────────
+  .service-logo,
+  .service-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+}
+
+// ── Secondary controls text-mode label ────────────────────────────────────
+// Used when icons are hidden (custom layout buttonRow, OLED theme).
+// Inherits active/hover colour from the parent .btn-icon state.
+.secondary-btn-label {
+  font-family: var(--font-display, var(--font-body, sans-serif));
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  color: inherit;
+}

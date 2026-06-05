@@ -150,7 +150,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     togglePlay();
   };
 
-  const { seek, duration, refreshState } = useSeek();
+  const { refreshState } = useSeek();
 
   // Refresh Volumio state on mount so seek is accurate after navigating away
   useEffect(() => {
@@ -204,8 +204,6 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     return `${VOLUMIO_BASE_URL}${albumart}`;
   }, [albumart]);
 
-
-
   // After 5 minutes of no connection, stop showing the retrying state
   const [isRetrying, setIsRetrying] = useState(true);
   useEffect(() => {
@@ -242,7 +240,6 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
         />
       ) : null}
 
-      {/* Main Grid Layout */}
       <div className={`home-grid position-relative ${!showViz ? 'no-viz' : ''} ${albumArtMaxSpace && effectivePlayerType === 'albumArt' ? 'album-art-max-space' : ''} ${effectivePlayerType === 'none' ? 'no-player' : ''}`} style={{ zIndex: 1 }}>
         {/* PLAYER SECTION */}
         {effectivePlayerType !== 'none' && (

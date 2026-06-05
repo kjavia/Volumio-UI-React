@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import useFocusTrap from '@/hooks/useFocusTrap';
@@ -54,9 +54,13 @@ const Dialog = ({
   showCloseButton = true,
   className,
   bodyRef,
+  draggable = false,
+  modal = true,
 }) => {
   const dialogRef = useRef(null);
   const trapRef = useFocusTrap(open);
+  const dragStateRef = useRef({ dragging: false, startX: 0, startY: 0, origX: 0, origY: 0 });
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   // Close on Escape key
   useEffect(() => {
@@ -81,6 +85,35 @@ const Dialog = ({
     };
   }, [open]);
 
+  // Drag handlers (optional)
+  useEffect(() => {
+    if (!draggable) return undefined;
+
+    const handlePointerMove = (e) => {
+      if (!dragStateRef.current.dragging) return;
+      const dx = e.clientX - dragStateRef.current.startX;
+      const dy = e.clientY - dragStateRef.current.startY;
+      setOffset({ x: dragStateRef.current.origX + dx, y: dragStateRef.current.origY + dy });
+    };
+
+    const handlePointerUp = () => {
+      if (!dragStateRef.current.dragging) return;
+      dragStateRef.current.dragging = false;
+      try {
+        document.releasePointerCapture && document.releasePointerCapture();
+      } catch {
+        // ignore
+      }
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+    };
+  }, [draggable]);
+
   if (!open) return null;
 
   const handleBackdropClick = (e) => {
@@ -99,12 +132,14 @@ const Dialog = ({
 
   return (
     <>
-      {/* Backdrop */}
-      <div
-        className="dialog-backdrop"
-        onClick={handleBackdropClick}
-        aria-hidden="true"
-      />
+      {/* Backdrop (optional for modal dialogs) */}
+      {modal && (
+        <div
+          className="dialog-backdrop"
+          onClick={handleBackdropClick}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Dialog Container */}
       <div className="dialog-container">
@@ -113,7 +148,8 @@ const Dialog = ({
             dialogRef.current = node;
             trapRef.current = node;
           }}
-          className={cn('dialog', sizeClasses[size], className)}
+          className={cn('dialog', sizeClasses[size], className, { draggable })}
+          style={draggable ? { position: 'fixed', left: '50%', top: '50%', transform: `translate(calc(-50% + ${offset.x}px), calc(-50% + ${offset.y}px))` } : undefined}
           role="dialog"
           aria-modal="true"
           aria-labelledby={title ? 'dialog-title' : undefined}
@@ -121,7 +157,19 @@ const Dialog = ({
         >
           {/* Header */}
           {(title || showCloseButton) && (
-            <div className="dialog-header">
+            <div
+              className="dialog-header"
+              onPointerDown={(e) => {
+                if (!draggable) return;
+                // start dragging
+                dragStateRef.current.dragging = true;
+                dragStateRef.current.startX = e.clientX;
+                dragStateRef.current.startY = e.clientY;
+                dragStateRef.current.origX = offset.x;
+                dragStateRef.current.origY = offset.y;
+                e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId);
+              }}
+            >
               {title && (
                 <h5 id="dialog-title" className="dialog-title">
                   {title}

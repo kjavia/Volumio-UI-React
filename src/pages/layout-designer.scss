@@ -1,0 +1,251 @@
+// Layout Designer styles
+// Uses Bootstrap CSS variables and theme tokens — no hardcoded colors.
+
+// ---------------------------------------------------------------------------
+// Page
+// ---------------------------------------------------------------------------
+.layout-designer {
+  min-height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+
+  // Propagate theme text color to Bootstrap heading and form elements
+  // Exclude .dialog-title so theme-specific dialog header colors are preserved
+  h1:not(.dialog-title),
+  h2:not(.dialog-title),
+  h3:not(.dialog-title),
+  h4:not(.dialog-title),
+  h5:not(.dialog-title),
+  h6:not(.dialog-title) {
+    color: var(--text-primary);
+  }
+
+  .card {
+    background-color: var(--list-item-bg);
+    border-color: var(--border-dark);
+    color: var(--text-primary);
+  }
+
+  .form-control,
+  .form-select {
+    background-color: var(--color-white) !important;
+    color: var(--color-gray-950) !important;
+    border-color: var(--border-dark) !important;
+  }
+
+  .form-control::placeholder {
+    color: var(--color-gray-600) !important;
+  }
+
+  .form-label {
+    color: var(--text-primary);
+  }
+
+  .text-muted {
+    color: var(--text-secondary) !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Canvas dialog — constrain to 90% viewport, allow canvas to fill body
+// ---------------------------------------------------------------------------
+.ld-canvas-dialog {
+  max-width: 90vw !important;
+  max-height: 90vh !important;
+  // Definite height so flex children can use percentage heights
+  height: 90vh !important;
+
+  .dialog-body {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Canvas wrapper & aspect-ratio box
+// ---------------------------------------------------------------------------
+.ld-canvas-wrap {
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  // Enable container query units (cqw/cqh) so .ld-canvas can size itself
+  // relative to this wrapper in both dimensions simultaneously.
+  container-type: size;
+}
+
+.ld-canvas {
+  // Fit within the wrap while preserving the layout's aspect ratio.
+  // width = min(available width, available height × ratio)
+  // This handles both landscape and portrait layouts correctly:
+  //   - landscape: width-constrained, height derived via aspect-ratio
+  //   - portrait:  height-constrained, width = height × ratio (< wrap width)
+  // cqw/cqh measure .ld-canvas-wrap's content box (inside its padding).
+  width: min(100cqw, calc(100cqh * var(--ld-ratio, 1)));
+  aspect-ratio: var(--ld-ratio, 1);
+  background: var(--bg-color);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+
+  // ── Cell border system ────────────────────────────────────────────────────
+  // One CSS variable drives ALL cell borders (adjacent, nested, and the canvas
+  // outer edge) so they are always the same size and colour.
+  // color-mix produces a solid colour derived from the theme text/bg tokens,
+  // guaranteeing contrast on every theme without hardcoding a hex value.
+  --ld-cell-border: color-mix(in srgb, var(--text-primary) 30%, var(--bg-color));
+  --ld-cell-bg: var(--bg-color);
+
+  // Canvas outer border reuses the same variable.
+  border: 1px solid var(--ld-cell-border);
+}
+
+// ---------------------------------------------------------------------------
+// Grid — gap technique eliminates doubled borders
+// ---------------------------------------------------------------------------
+// Every .ld-grid (top-level AND nested) exposes its background through a 1px
+// gap between cells.  Each shared edge shows exactly ONE 1-px line — no
+// doubling regardless of nesting depth.
+.ld-grid {
+  width: 100%;
+  height: 100%;
+  background: var(--ld-cell-border);
+  gap: 1px;
+}
+
+// ---------------------------------------------------------------------------
+// Cells
+// ---------------------------------------------------------------------------
+.ld-cell {
+  background: var(--ld-cell-bg);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.1s;
+  position: relative;
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-primary) 8%, var(--ld-cell-bg));
+  }
+
+  // Selected state — outline instead of box-shadow so it draws inside the
+  // cell without affecting the gap-based border system.
+  &--selected {
+    background: color-mix(in srgb, var(--color-primary) 15%, var(--ld-cell-bg)) !important;
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+
+    // Checkmark badge in top-right corner
+    &::after {
+      content: '✓';
+      position: absolute;
+      top: 3px;
+      right: 5px;
+      font-size: 0.65rem;
+      color: var(--color-primary);
+      pointer-events: none;
+      line-height: 1;
+    }
+  }
+
+  // Parent cell (has subdivisions).
+  // Its background IS the border colour seen through the nested grid's gaps,
+  // so borders inside the sub-grid match borders everywhere else.
+  &--parent {
+    cursor: default;
+    background: var(--ld-cell-border);
+
+    &:hover {
+      background: var(--ld-cell-border);
+    }
+  }
+
+  // Item label shown inside a cell
+  &__icon {
+    font-size: 1rem !important;
+    opacity: 0.5;
+    color: var(--text-primary);
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: 0.7rem;
+    opacity: 0.65;
+    color: var(--text-primary);
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 4px;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Toolbar
+// ---------------------------------------------------------------------------
+.ld-toolbar {
+  // Background and border come from the theme's .dialog-toolbar wrapper.
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  flex-shrink: 0;
+
+  .btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  // Alignment button clusters: small gap between adjacent buttons in the same group
+  [role="group"] {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Resize handles
+// ---------------------------------------------------------------------------
+.ld-resize-handle {
+  position: absolute;
+  z-index: 10;
+  transition: background 0.1s;
+
+  &--col {
+    right: -3px;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    cursor: col-resize;
+
+    &:hover,
+    &:active {
+      background: color-mix(in srgb, var(--color-primary) 50%, transparent);
+    }
+  }
+
+  &--row {
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    cursor: row-resize;
+
+    &:hover,
+    &:active {
+      background: color-mix(in srgb, var(--color-primary) 50%, transparent);
+    }
+  }
+}

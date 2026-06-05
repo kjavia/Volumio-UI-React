@@ -26,6 +26,7 @@ import DisconnectedScreen from '@/components/DisconnectedScreen';
 import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
 import PeppyMeter from '@/components/PeppyMeter';
+import SecondaryControls from '@/components/SecondaryControls';
 import './mobile-player.scss';
 
 const PLAYER_MAP = {
@@ -123,10 +124,12 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
 
   useEffect(() => {
     if (playerType === 'random') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setRandomIndex(Math.floor(Math.random() * RANDOM_PLAYERS.length));
     }
   }, [title, playerType]);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setCycleIndex(null); }, [playerType]);
 
   const cyclePlayer = () => {
@@ -200,6 +203,7 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
 
   const [isRetrying, setIsRetrying] = useState(true);
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (isConnected) { setIsRetrying(true); return; }
     const timer = setTimeout(() => setIsRetrying(false), 5 * 60 * 1000);
     return () => clearTimeout(timer);
@@ -332,26 +336,17 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
         {/* ROW 6 — Secondary controls */}
         {showPlayerControls && (
           <div className="mobile-row-secondary text-white">
-            <div className="d-flex gap-3 align-items-center justify-content-center">
-              <Button classNames={`btn-icon ${random ? 'active' : ''}`} onClick={toggleRandom} label={random ? 'Shuffle On' : 'Shuffle Off'}>
-                <span className="material-icons">shuffle</span>
-              </Button>
-              <Button classNames={`btn-icon ${repeat ? 'active' : ''}`} onClick={toggleRepeat} label={repeat ? 'Repeat On' : 'Repeat Off'}>
-                <span className="material-icons">repeat</span>
-              </Button>
-              <Button classNames="btn-icon" onClick={() => setShowAddToPlaylist(true)} label="Add to Playlist">
-                <span className="material-icons">playlist_add</span>
-              </Button>
-              <Button classNames={`btn-icon ${isFavourite ? 'active' : ''}`} onClick={toggleFavourite} label={isFavourite ? 'Remove from Favourites' : 'Add to Favourites'}>
-                <span className="material-icons">{isFavourite ? 'favorite' : 'favorite_border'}</span>
-              </Button>
-              <Button classNames="btn-icon btn-text" onClick={() => setShowPlaylist(true)} label="Show Playlist">
-                <span className="material-icons">queue_music</span>
-              </Button>
-              <Button classNames="btn-icon btn-text" onClick={() => setShowBrowse(true)} label="Browse">
-                <span className="material-icons">library_music</span>
-              </Button>
-            </div>
+            <SecondaryControls
+              shuffle={random}
+              repeat={repeat}
+              onShuffle={toggleRandom}
+              onRepeat={toggleRepeat}
+              onAddToPlaylist={() => setShowAddToPlaylist(true)}
+              onShowPlaylist={() => setShowPlaylist(true)}
+              onBrowse={() => setShowBrowse(true)}
+              isFavourite={isFavourite}
+              onToggleFavourite={toggleFavourite}
+            />
           </div>
         )}
 

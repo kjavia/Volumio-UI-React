@@ -315,7 +315,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
       }
       return 0;
     });
-  }, [browseItems, isSearching, isSortableList, sortBy, sortDir]);
+  }, [browseItems, isSortableList, sortBy, sortDir]);
 
   const useVirtual = !isSearching && !isFavouritesView;
   const gridItemMin = largeGrid ? 260 : 130;

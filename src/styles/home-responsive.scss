@@ -136,6 +136,25 @@ body,
   font-size: var(--sp-bitrate-font-size) !important;
 }
 
+/* Format logos and service logos scale with the bitrate font size setting */
+:root.sp-has-bitrate-font-size .format-logo-responsive {
+  height: var(--sp-bitrate-font-size) !important;
+}
+
+:root.sp-has-bitrate-font-size .service-logo-img {
+  height: var(--sp-bitrate-font-size) !important;
+  width: auto !important;
+  max-height: none !important;
+}
+
+:root.sp-has-bitrate-font-size .service-logo-icon {
+  font-size: var(--sp-bitrate-font-size) !important;
+}
+
+:root.sp-has-bitrate-font-size .service-logo-badge {
+  font-size: var(--sp-bitrate-font-size) !important;
+}
+
 :root.sp-has-progress-font-size .seekbar-labels,
 :root.sp-has-progress-font-size .time-label {
   font-size: var(--sp-progress-font-size) !important;
@@ -144,6 +163,25 @@ body,
 :root.sp-has-volume-font-size .lsp-volume-popup__value,
 :root.sp-has-volume-font-size .volume-manager .small {
   font-size: var(--sp-volume-font-size) !important;
+}
+
+:root.sp-has-player-btn-size .btn-round {
+  width: var(--sp-player-btn-size) !important;
+  height: var(--sp-player-btn-size) !important;
+}
+
+:root.sp-has-player-btn-size .btn-round.btn-sm {
+  width: calc(var(--sp-player-btn-size) * 0.75) !important;
+  height: calc(var(--sp-player-btn-size) * 0.75) !important;
+}
+
+:root.sp-has-icon-font-size .btn-icon .material-icons,
+:root.sp-has-icon-font-size .btn-icon .material-icons-outlined,
+:root.sp-has-icon-font-size .lsp-btn.btn-icon .material-icons,
+:root.sp-has-icon-font-size .lsp-btn.btn-icon .material-icons-outlined,
+:root.sp-has-icon-font-size .lsp-btn.lsp-btn--sm.btn-icon .material-icons,
+:root.sp-has-icon-font-size .lsp-btn.lsp-btn--sm.btn-icon .material-icons-outlined {
+  font-size: var(--sp-icon-font-size) !important;
 }
 
 /* High-specificity theme selectors (tp-grid / tp-right) can override the
@@ -1140,6 +1178,17 @@ body,
   border-radius: 6px;
   font-size: clamp(1.5rem, 3cqi, 3rem) !important;
   flex-shrink: 0;
+}
+
+/* Strip brand colour from react-icon service logos — inherit tile text colour */
+.browse-tile__art.service-logo-icon {
+  color: currentColor !important;
+}
+
+/* Desaturate SVG image logos (e.g. Qobuz) so they match tile text colour */
+.browse-tile__art.service-logo-img {
+  filter: grayscale(1);
+  opacity: 0.85;
 }
 
 .browse-tile__label {

@@ -26,6 +26,7 @@ import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
 import PeppyMeter from '@/components/PeppyMeter';
 import PeppySpectrum from '@/components/peppy-spectrum/PeppySpectrum';
+import SecondaryControls from '@/components/SecondaryControls';
 import './tablet-player.scss';
 
 const PLAYER_MAP = {
@@ -134,10 +135,12 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
 
   useEffect(() => {
     if (playerType === 'random' && title) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setRandomIndex(Math.floor(Math.random() * RANDOM_PLAYERS.length));
     }
   }, [title, playerType]);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setCycleIndex(null); }, [playerType]);
 
   const cyclePlayer = () => {
@@ -213,6 +216,7 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
 
   const [isRetrying, setIsRetrying] = useState(true);
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (isConnected) { setIsRetrying(true); return; }
     const timer = setTimeout(() => setIsRetrying(false), 5 * 60 * 1000);
     return () => clearTimeout(timer);
@@ -303,6 +307,11 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
                   onPlayPause={handlePlayPause}
                   onNext={next}
                   onPrev={prev}
+                />
+              )}
+
+              {showPlayerControls && (
+                <SecondaryControls
                   shuffle={random}
                   repeat={repeat}
                   onShuffle={toggleRandom}

@@ -96,6 +96,8 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
   const isPlayable = PLAYABLE_TYPES.has(item.type);
   const isAlbumItem = ALBUM_TYPES.has(item.type);
   const showMenu = isPlayable || isPlaylistItem || isAlbumItem;
+  // Play button on grid tiles: tracks, individual albums, and playlists only
+  const showPlayBtn = isPlayable || item.type === 'album' || isPlaylistItem || item.type === 'folder' || item.type === 'folder-with-favourites';
   const isFavourite = item.uri ? favouritesUris.has(item.uri) : false;
   const isInQueue = queueUris ? queueUris.has(item.uri) : false;
 
@@ -386,15 +388,17 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
                 ? <img src={artUrl} alt="" loading="lazy" />
                 : <span className="material-icons">music_note</span>
             }
-            <button
-              className="btn btn-round btn-primary browse-result-card__play"
-              type="button"
-              tabIndex={-1}
-              aria-label="Play"
-              onClick={(e) => { e.stopPropagation(); socket?.emit('replaceAndPlay', trackPayload); onPlayAndClose?.(); }}
-            >
-              <span className="material-icons">play_arrow</span>
-            </button>
+            {showPlayBtn && (
+              <button
+                className="btn btn-round btn-primary browse-result-card__play"
+                type="button"
+                tabIndex={-1}
+                aria-label="Play"
+                onClick={(e) => { e.stopPropagation(); socket?.emit('replaceAndPlay', trackPayload); onPlayAndClose?.(); }}
+              >
+                <span className="material-icons">play_arrow</span>
+              </button>
+            )}
             {showMenu && (
               <div
                 className="browse-result-card__menu"

@@ -5,14 +5,14 @@ import AnalogClock from '@/components/clocks/analog-clock';
 import IframeScreen from '@/components/IframeScreen';
 import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
-import ContextMenu from '@/components/ContextMenu';
+import AppMenu from '@/components/AppMenu';
 import TabletPlayer from './TabletPlayer';
 import MobilePlayer from './MobilePlayer';
 import LargeScreenPlayer from './LargeScreenPlayer';
+import CustomLayout from './CustomLayout';
 import useIdleScreen from '@/hooks/useIdleScreen';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import usePluginConfig from '@/hooks/usePluginConfig';
-import { VOLUMIO_BASE_URL } from '@/config';
 
 const CLOCK_SCREENS = {
   analogClock: AnalogClock,
@@ -35,6 +35,7 @@ const Home = () => {
   const [forcePlayer, setForcePlayer] = useState(false);
   const [isVizFullscreen, setIsVizFullscreen] = useState(false);
   const [vizPortalTarget, setVizPortalTarget] = useState(null);
+  const [layoutIndex, setLayoutIndex] = useState(0);
   const vizContainerRef = useRef(null);
 
   useEffect(() => {
@@ -90,6 +91,72 @@ const Home = () => {
   const isSpectrumViz = vizType === 'spectrum';
   const hasViz = vizType !== 'none';
 
+  const useCustomLayout = pluginConfig?.useCustomLayout === true;
+  const layoutDesigner = (() => {
+    const raw = pluginConfig?.layoutDesigner;
+    if (!raw) return { layouts: [] };
+    if (typeof raw === 'string') {
+      try { return JSON.parse(raw); } catch { return { layouts: [] }; }
+    }
+    return raw;
+  })();
+  // Matching layouts for current resolution — default sorted first so index 0 = preferred.
+  const matchingLayouts = (() => {
+    if (!useCustomLayout || !layoutDesigner?.layouts?.length) return [];
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const matches = layoutDesigner.layouts.filter((layout) =>
+      (layout.width === w && layout.height === h) ||
+      (layout.width === h && layout.height === w)
+    );
+    const def = matches.find((l) => l.isDefault);
+    return def ? [def, ...matches.filter((l) => !l.isDefault)] : matches;
+  })();
+
+  // Reset to first layout whenever the set of matching layouts changes.
+  const matchingLayoutIds = matchingLayouts.map((l) => l.id).join(',');
+  useEffect(() => { setLayoutIndex(0); }, [matchingLayoutIds]);
+
+  const currentCustomLayout = matchingLayouts.length
+    ? matchingLayouts[layoutIndex % matchingLayouts.length]
+    : null;
+
+  // Swipe up from the bottom edge cycles through matching layouts.
+  // Listeners use capture phase so child elements calling stopPropagation() can't block them.
+  useEffect(() => {
+    if (matchingLayouts.length < 2) return;
+    const count = matchingLayouts.length;
+    let startY = null;
+    let fromEdge = false;
+
+    const reset = () => { startY = null; fromEdge = false; };
+
+    const onTouchStart = (e) => {
+      const t = e.touches[0];
+      startY = t.clientY;
+      fromEdge = t.clientY > window.innerHeight - 80;
+    };
+
+    const onTouchEnd = (e) => {
+      if (!fromEdge || startY === null) return;
+      const deltaY = e.changedTouches[0].clientY - startY;
+      if (deltaY < -50) {
+        setLayoutIndex((prev) => (prev + 1) % count);
+      }
+      reset();
+    };
+
+    const opts = { passive: true, capture: true };
+    document.addEventListener('touchstart', onTouchStart, opts);
+    document.addEventListener('touchend', onTouchEnd, opts);
+    document.addEventListener('touchcancel', reset, opts);
+    return () => {
+      document.removeEventListener('touchstart', onTouchStart, opts);
+      document.removeEventListener('touchend', onTouchEnd, opts);
+      document.removeEventListener('touchcancel', reset, opts);
+    };
+  }, [matchingLayouts.length]);
+
   // Apply user color overrides as CSS custom properties on :root
   useEffect(() => {
     const root = document.documentElement;
@@ -117,6 +184,8 @@ const Home = () => {
       '--sp-bitrate-font-size': { val: pluginConfig?.bitrateFontSize, cls: 'sp-has-bitrate-font-size' },
       '--sp-progress-font-size': { val: pluginConfig?.progressFontSize, cls: 'sp-has-progress-font-size' },
       '--sp-volume-font-size': { val: pluginConfig?.volumeFontSize, cls: 'sp-has-volume-font-size' },
+      '--sp-player-btn-size': { val: pluginConfig?.playerButtonSize, cls: 'sp-has-player-btn-size' },
+      '--sp-icon-font-size': { val: pluginConfig?.secondaryRowFontSize, cls: 'sp-has-icon-font-size' },
     };
     const normalizeFontSize = (v) => {
       if (v === null || v === undefined) return v;
@@ -148,6 +217,8 @@ const Home = () => {
     pluginConfig?.bitrateFontSize,
     pluginConfig?.progressFontSize,
     pluginConfig?.volumeFontSize,
+    pluginConfig?.playerButtonSize,
+    pluginConfig?.secondaryRowFontSize,
   ]);
 
   const showPlayer = !idle || forcePlayer;
@@ -155,23 +226,27 @@ const Home = () => {
   let content;
 
   if (showPlayer) {
-    const contextMenuNode = (
-      <ContextMenu
-        vizStopped={vizStopped}
-        onStopViz={isSpectrumViz ? () => setVizStopped(true) : undefined}
-        onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
-        onFullscreenViz={hasViz ? handleFullscreenViz : undefined}
-        isVizFullscreen={isVizFullscreen}
-      />
-    );
-    content = isMobile
-      ? <MobilePlayer
-        vizStopped={vizStopped}
-        onVizResumed={() => setVizStopped(false)}
-      />
-      : isLargeScreen
-        ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} vizContainerRef={vizContainerRef} />
-        : <TabletPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
+    if (currentCustomLayout) {
+      content = <CustomLayout layout={currentCustomLayout} vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} />;
+    } else {
+      const contextMenuNode = (
+        <AppMenu
+          vizStopped={vizStopped}
+          onStopViz={isSpectrumViz ? () => setVizStopped(true) : undefined}
+          onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
+          onFullscreenViz={hasViz ? handleFullscreenViz : undefined}
+          isVizFullscreen={isVizFullscreen}
+        />
+      );
+      content = isMobile
+        ? <MobilePlayer
+          vizStopped={vizStopped}
+          onVizResumed={() => setVizStopped(false)}
+        />
+        : isLargeScreen
+          ? <LargeScreenPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} menuSlot={contextMenuNode} vizContainerRef={vizContainerRef} />
+          : <TabletPlayer vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
+    }
   } else if (idleScreen === 'wallpaper') {
     content = (
       <Wallpaper
@@ -234,7 +309,7 @@ const Home = () => {
   // the player (and its embedded menu) is not mounted, so we still need the
   // floating overlay as the only way for the user to get back to the player.
   const floatingContextMenu = !vizFullscreen && (!isLargeScreen || idle) && (
-    <ContextMenu
+    <AppMenu
       vizStopped={vizStopped}
       onStopViz={showPlayer && isSpectrumViz ? () => setVizStopped(true) : undefined}
       onBackToPlayer={idle && !forcePlayer ? () => setForcePlayer(true) : undefined}
