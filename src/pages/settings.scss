@@ -204,6 +204,26 @@
   width: auto;
 }
 
+.settings-field--fontrow {
+  flex-direction: column;
+}
+
+.settings-fontrow-inputs {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  .settings-fontrow-name {
+    flex: 2;
+    min-width: 0;
+  }
+
+  .settings-fontrow-size {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
 .settings-field--switch {
   flex-direction: row;
 }

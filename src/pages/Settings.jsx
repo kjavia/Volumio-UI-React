@@ -218,14 +218,14 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
       icon: 'text_fields',
       method: 'configSaveFonts',
       fields: [
-        { id: 'titleFontSize', element: 'input', type: 'text', label: t('TITLE_FONT_SIZE', 'Track Title Font Size'), icon: 'title', doc: t('TITLE_FONT_SIZE_DESC', 'CSS font size for the track title (e.g. 18px, 1.2rem).') },
-        { id: 'albumFontSize', element: 'input', type: 'text', label: t('ALBUM_FONT_SIZE', 'Album Name Font Size'), icon: 'album', doc: t('ALBUM_FONT_SIZE_DESC', 'CSS font size for the album name (e.g. 14px, 1rem).') },
-        { id: 'artistFontSize', element: 'input', type: 'text', label: t('ARTIST_FONT_SIZE', 'Artist Name Font Size'), icon: 'person', doc: t('ARTIST_FONT_SIZE_DESC', 'CSS font size for the artist name (e.g. 14px, 1rem).') },
-        { id: 'bitrateFontSize', element: 'input', type: 'text', label: t('BITRATE_FONT_SIZE', 'Bitrate/Stream Info Font Size'), icon: 'graphic_eq', doc: t('BITRATE_FONT_SIZE_DESC', 'CSS font size for bitrate and stream info text (e.g. 12px).') },
-        { id: 'progressFontSize', element: 'input', type: 'text', label: t('PROGRESS_FONT_SIZE', 'Progress Bar Font Size'), icon: 'linear_scale', doc: t('PROGRESS_FONT_SIZE_DESC', 'CSS font size for labels near the progress bar (e.g. 12px).') },
-        { id: 'volumeFontSize', element: 'input', type: 'text', label: t('VOLUME_FONT_SIZE', 'Volume Label Font Size'), icon: 'volume_up', doc: t('VOLUME_FONT_SIZE_DESC', 'CSS font size for the volume label and value (e.g. 12px).') },
-        { id: 'playerButtonSize', element: 'input', type: 'text', label: t('PLAYER_BUTTON_SIZE', 'Player Button Size'), icon: 'radio_button_checked', doc: t('PLAYER_BUTTON_SIZE_DESC', 'Size of the play/pause button (e.g. 64px, 4rem). Skip buttons are sized at 75% of this value.') },
-        { id: 'secondaryRowFontSize', element: 'input', type: 'text', label: t('SECONDARY_ROW_FONT_SIZE', 'Secondary Controls Icon Size'), icon: 'interests', doc: t('SECONDARY_ROW_FONT_SIZE_DESC', 'CSS font size for the secondary control icons (shuffle, repeat, favourite, etc.). (e.g. 16px, 1.5rem).') },
+        { id: 'titleFont', element: 'fontrow', nameId: 'titleFontName', sizeId: 'titleFontSize', label: t('TITLE_FONT', 'Track Title'), icon: 'title', doc: t('TITLE_FONT_SIZE_DESC', 'CSS font size for the track title (e.g. 18px, 1.2rem).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 18px)' },
+        { id: 'albumFont', element: 'fontrow', nameId: 'albumFontName', sizeId: 'albumFontSize', label: t('ALBUM_FONT', 'Album Name'), icon: 'album', doc: t('ALBUM_FONT_SIZE_DESC', 'CSS font size for the album name (e.g. 14px, 1rem).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 14px)' },
+        { id: 'artistFont', element: 'fontrow', nameId: 'artistFontName', sizeId: 'artistFontSize', label: t('ARTIST_FONT', 'Artist Name'), icon: 'person', doc: t('ARTIST_FONT_SIZE_DESC', 'CSS font size for the artist name (e.g. 14px, 1rem).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 14px)' },
+        { id: 'bitrateFont', element: 'fontrow', nameId: 'bitrateFontName', sizeId: 'bitrateFontSize', label: t('BITRATE_FONT', 'Bitrate/Stream Info'), icon: 'graphic_eq', doc: t('BITRATE_FONT_SIZE_DESC', 'CSS font size for bitrate and stream info text (e.g. 12px).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 12px)' },
+        { id: 'progressFont', element: 'fontrow', nameId: 'progressFontName', sizeId: 'progressFontSize', label: t('PROGRESS_FONT', 'Progress Bar'), icon: 'linear_scale', doc: t('PROGRESS_FONT_SIZE_DESC', 'CSS font size for labels near the progress bar (e.g. 12px).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 12px)' },
+        { id: 'volumeFont', element: 'fontrow', nameId: 'volumeFontName', sizeId: 'volumeFontSize', label: t('VOLUME_FONT', 'Volume Label'), icon: 'volume_up', doc: t('VOLUME_FONT_SIZE_DESC', 'CSS font size for the volume label and value (e.g. 12px).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 12px)' },
+        { id: 'playerButtonFont', element: 'fontrow', nameId: 'playerButtonFontName', sizeId: 'playerButtonSize', label: t('PLAYER_BUTTON_FONT', 'Player Button'), icon: 'radio_button_checked', doc: t('PLAYER_BUTTON_SIZE_DESC', 'Size of the play/pause button (e.g. 64px, 4rem). Skip buttons are sized at 75% of this value.'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 64px)' },
+        { id: 'secondaryRowFont', element: 'fontrow', nameId: 'secondaryRowFontName', sizeId: 'secondaryRowFontSize', label: t('SECONDARY_ROW_FONT', 'Secondary Controls'), icon: 'interests', doc: t('SECONDARY_ROW_FONT_SIZE_DESC', 'CSS font size for the secondary control icons (shuffle, repeat, favourite, etc.). (e.g. 16px, 1.5rem).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 16px)' },
       ],
     },
   ];
@@ -385,6 +385,35 @@ const InputField = ({ field, value, onChange }) => (
   </div>
 );
 InputField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), onChange: PropTypes.func.isRequired };
+
+const FontRowField = ({ field, nameValue, sizeValue, onChange }) => (
+  <div className="settings-field settings-field--fontrow">
+    <label className="settings-label">
+      {field.icon && <span className="material-icons settings-field__icon">{field.icon}</span>}
+      {field.label}
+    </label>
+    {field.doc && <small className="settings-doc">{field.doc}</small>}
+    <div className="settings-fontrow-inputs">
+      <input
+        id={field.nameId}
+        className="form-control settings-input settings-fontrow-name"
+        type="text"
+        placeholder={field.namePlaceholder || 'Font name (e.g. Arial)'}
+        value={nameValue ?? ''}
+        onChange={(e) => onChange(field.nameId, e.target.value)}
+      />
+      <input
+        id={field.sizeId}
+        className="form-control settings-input settings-fontrow-size"
+        type="text"
+        placeholder={field.sizePlaceholder || 'Size (e.g. 16px)'}
+        value={sizeValue ?? ''}
+        onChange={(e) => onChange(field.sizeId, e.target.value)}
+      />
+    </div>
+  </div>
+);
+FontRowField.propTypes = { field: PropTypes.object.isRequired, nameValue: PropTypes.string, sizeValue: PropTypes.string, onChange: PropTypes.func.isRequired };
 
 const JsonField = ({ field, value, onChange }) => {
   const [text, setText] = useState(() => {
@@ -750,6 +779,8 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
               return <ColorField key={field.id} field={field} value={values[field.id]} onChange={onChange} />;
             case 'input':
               return <InputField key={field.id} field={field} value={values[field.id]} onChange={onChange} />;
+            case 'fontrow':
+              return <FontRowField key={field.id} field={field} nameValue={values[field.nameId]} sizeValue={values[field.sizeId]} onChange={onChange} />;
             case 'json':
               return <JsonField key={field.id} field={field} value={values[field.id]} onChange={onChange} />;
             case 'knob':
