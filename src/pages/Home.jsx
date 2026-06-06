@@ -221,6 +221,64 @@ const Home = () => {
     pluginConfig?.secondaryRowFontSize,
   ]);
 
+  // Load Google Fonts and apply font-family CSS custom properties
+  useEffect(() => {
+    const root = document.documentElement;
+
+    const fontFamilyMap = {
+      '--sp-title-font-family': { val: pluginConfig?.titleFontName, cls: 'sp-has-title-font-family' },
+      '--sp-album-font-family': { val: pluginConfig?.albumFontName, cls: 'sp-has-album-font-family' },
+      '--sp-artist-font-family': { val: pluginConfig?.artistFontName, cls: 'sp-has-artist-font-family' },
+      '--sp-bitrate-font-family': { val: pluginConfig?.bitrateFontName, cls: 'sp-has-bitrate-font-family' },
+      '--sp-progress-font-family': { val: pluginConfig?.progressFontName, cls: 'sp-has-progress-font-family' },
+      '--sp-volume-font-family': { val: pluginConfig?.volumeFontName, cls: 'sp-has-volume-font-family' },
+    };
+
+    // Collect unique non-empty font names that are likely Google Fonts
+    // (not generic families like serif, sans-serif, monospace, cursive, fantasy, system-ui)
+    const genericFamilies = new Set(['serif', 'sans-serif', 'monospace', 'cursive', 'fantasy', 'system-ui', 'ui-serif', 'ui-sans-serif', 'ui-monospace', 'ui-rounded']);
+    const toLoad = new Set();
+    Object.values(fontFamilyMap).forEach(({ val }) => {
+      if (val && String(val).trim()) {
+        const name = String(val).trim().replace(/^["']|["']$/g, '');
+        if (!genericFamilies.has(name.toLowerCase())) toLoad.add(name);
+      }
+    });
+
+    // Load each unique font from Google Fonts (idempotent — skip if already loaded)
+    toLoad.forEach((name) => {
+      const linkId = `gfont-${name.replace(/\s+/g, '-').toLowerCase()}`;
+      if (!document.getElementById(linkId)) {
+        const link = document.createElement('link');
+        link.id = linkId;
+        link.rel = 'stylesheet';
+        link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(name)}:wght@400;700&display=swap`;
+        document.head.appendChild(link);
+      }
+    });
+
+    // Apply / remove CSS vars and classes
+    Object.entries(fontFamilyMap).forEach(([prop, { val, cls }]) => {
+      const name = val ? String(val).trim() : '';
+      if (name) {
+        // Quote the font name for CSS if it contains spaces
+        const cssValue = /\s/.test(name) ? `"${name}"` : name;
+        root.style.setProperty(prop, cssValue);
+        root.classList.add(cls);
+      } else {
+        root.style.removeProperty(prop);
+        root.classList.remove(cls);
+      }
+    });
+  }, [
+    pluginConfig?.titleFontName,
+    pluginConfig?.albumFontName,
+    pluginConfig?.artistFontName,
+    pluginConfig?.bitrateFontName,
+    pluginConfig?.progressFontName,
+    pluginConfig?.volumeFontName,
+  ]);
+
   const showPlayer = !idle || forcePlayer;
 
   let content;

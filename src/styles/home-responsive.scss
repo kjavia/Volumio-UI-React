@@ -218,6 +218,58 @@ body,
   font-size: var(--sp-bitrate-font-size) !important;
 }
 
+/* ── Font family overrides from plugin config (Google Fonts) ── */
+:root.sp-has-title-font-family .track-title,
+:root.sp-has-title-font-family .lsp-top__title,
+:root.sp-has-title-font-family .responsive-title,
+:root.sp-has-title-font-family .tp-right .responsive-title,
+:root.sp-has-title-font-family .tp-grid .tp-right .responsive-title,
+:root.sp-has-title-font-family .tp-grid:not(.tp-max-space) .tp-right .responsive-title,
+:root.sp-has-title-font-family .tp-max-space .tp-right .responsive-title {
+  font-family: var(--sp-title-font-family) !important;
+}
+
+:root.sp-has-artist-font-family .artist-name,
+:root.sp-has-artist-font-family .lsp-top__artist,
+:root.sp-has-artist-font-family .responsive-artist,
+:root.sp-has-artist-font-family .tp-right .responsive-artist,
+:root.sp-has-artist-font-family .tp-grid .tp-right .responsive-artist,
+:root.sp-has-artist-font-family .tp-grid:not(.tp-max-space) .tp-right .responsive-artist,
+:root.sp-has-artist-font-family .tp-max-space .tp-right .responsive-artist {
+  font-family: var(--sp-artist-font-family) !important;
+}
+
+:root.sp-has-album-font-family .album-name,
+:root.sp-has-album-font-family .lsp-top__album,
+:root.sp-has-album-font-family .responsive-album,
+:root.sp-has-album-font-family .tp-right .responsive-album,
+:root.sp-has-album-font-family .tp-grid .tp-right .responsive-album,
+:root.sp-has-album-font-family .tp-grid:not(.tp-max-space) .tp-right .responsive-album,
+:root.sp-has-album-font-family .tp-max-space .tp-right .responsive-album {
+  font-family: var(--sp-album-font-family) !important;
+}
+
+:root.sp-has-bitrate-font-family .responsive-stream-info,
+:root.sp-has-bitrate-font-family .responsive-stream-info span,
+:root.sp-has-bitrate-font-family .lsp-stream-info,
+:root.sp-has-bitrate-font-family .lsp-stream-info span,
+:root.sp-has-bitrate-font-family .tp-right .responsive-stream-info,
+:root.sp-has-bitrate-font-family .tp-grid .tp-right .responsive-stream-info,
+:root.sp-has-bitrate-font-family .tp-grid:not(.tp-max-space) .tp-right .responsive-stream-info,
+:root.sp-has-bitrate-font-family .tp-max-space .tp-right .responsive-stream-info {
+  font-family: var(--sp-bitrate-font-family) !important;
+}
+
+:root.sp-has-progress-font-family .seekbar-labels,
+:root.sp-has-progress-font-family .time-label {
+  font-family: var(--sp-progress-font-family) !important;
+}
+
+:root.sp-has-volume-font-family .lsp-volume-popup__value,
+:root.sp-has-volume-font-family .volume-manager .small {
+  font-family: var(--sp-volume-font-family) !important;
+}
+
 /* Context menu toggle button */
 :root.sp-has-control-color .context-menu-toggle,
 :root.sp-has-control-color .context-menu-toggle.context-menu-toggle--no-shadow,

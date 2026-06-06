@@ -99,6 +99,32 @@
   font-size: var(--sp-volume-font-size) !important;
 }
 
+/* Override large-screen font families when plugin config provides values */
+:root.sp-has-title-font-family .lsp-top__title {
+  font-family: var(--sp-title-font-family) !important;
+}
+
+:root.sp-has-artist-font-family .lsp-top__artist {
+  font-family: var(--sp-artist-font-family) !important;
+}
+
+:root.sp-has-album-font-family .lsp-top__album {
+  font-family: var(--sp-album-font-family) !important;
+}
+
+:root.sp-has-bitrate-font-family .lsp-stream-info,
+:root.sp-has-bitrate-font-family .lsp-stream-info span {
+  font-family: var(--sp-bitrate-font-family) !important;
+}
+
+:root.sp-has-progress-font-family .lsp-bottom__row2 .seekbar-labels {
+  font-family: var(--sp-progress-font-family) !important;
+}
+
+:root.sp-has-volume-font-family .lsp-volume-popup__value {
+  font-family: var(--sp-volume-font-family) !important;
+}
+
 /* Service logo — image or text badge */
 .lsp-top__service-logo {
   flex: 0 0 auto;
