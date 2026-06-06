@@ -210,17 +210,52 @@
 
 .settings-fontrow-inputs {
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
+  gap: 0.75rem;
+  align-items: flex-start;
 
-  .settings-fontrow-name {
-    flex: 2;
-    min-width: 0;
+  .settings-fontrow-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
   }
 
+  .settings-fontrow-col--name {
+    width: 300px;
+  }
+
+  .settings-fontrow-col--size {
+    width: 300px;
+  }
+
+  .settings-fontrow-col__label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .settings-fontrow-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .settings-fontrow-name,
   .settings-fontrow-size {
     flex: 1;
     min-width: 0;
+  }
+}
+
+.settings-fontrow-info {
+  flex: 0 0 auto;
+  font-size: 1.1rem;
+  color: var(--text-primary, currentColor);
+  opacity: 0.45;
+  cursor: help;
+
+  &:hover {
+    opacity: 0.85;
   }
 }
 

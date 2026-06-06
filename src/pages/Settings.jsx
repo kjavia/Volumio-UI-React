@@ -218,14 +218,14 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
       icon: 'text_fields',
       method: 'configSaveFonts',
       fields: [
-        { id: 'titleFont', element: 'fontrow', nameId: 'titleFontName', sizeId: 'titleFontSize', label: t('TITLE_FONT', 'Track Title'), icon: 'title', doc: t('TITLE_FONT_SIZE_DESC', 'CSS font size for the track title (e.g. 18px, 1.2rem).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 18px)' },
-        { id: 'albumFont', element: 'fontrow', nameId: 'albumFontName', sizeId: 'albumFontSize', label: t('ALBUM_FONT', 'Album Name'), icon: 'album', doc: t('ALBUM_FONT_SIZE_DESC', 'CSS font size for the album name (e.g. 14px, 1rem).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 14px)' },
-        { id: 'artistFont', element: 'fontrow', nameId: 'artistFontName', sizeId: 'artistFontSize', label: t('ARTIST_FONT', 'Artist Name'), icon: 'person', doc: t('ARTIST_FONT_SIZE_DESC', 'CSS font size for the artist name (e.g. 14px, 1rem).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 14px)' },
-        { id: 'bitrateFont', element: 'fontrow', nameId: 'bitrateFontName', sizeId: 'bitrateFontSize', label: t('BITRATE_FONT', 'Bitrate/Stream Info'), icon: 'graphic_eq', doc: t('BITRATE_FONT_SIZE_DESC', 'CSS font size for bitrate and stream info text (e.g. 12px).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 12px)' },
-        { id: 'progressFont', element: 'fontrow', nameId: 'progressFontName', sizeId: 'progressFontSize', label: t('PROGRESS_FONT', 'Progress Bar'), icon: 'linear_scale', doc: t('PROGRESS_FONT_SIZE_DESC', 'CSS font size for labels near the progress bar (e.g. 12px).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 12px)' },
-        { id: 'volumeFont', element: 'fontrow', nameId: 'volumeFontName', sizeId: 'volumeFontSize', label: t('VOLUME_FONT', 'Volume Label'), icon: 'volume_up', doc: t('VOLUME_FONT_SIZE_DESC', 'CSS font size for the volume label and value (e.g. 12px).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 12px)' },
-        { id: 'playerButtonFont', element: 'fontrow', nameId: 'playerButtonFontName', sizeId: 'playerButtonSize', label: t('PLAYER_BUTTON_FONT', 'Player Button'), icon: 'radio_button_checked', doc: t('PLAYER_BUTTON_SIZE_DESC', 'Size of the play/pause button (e.g. 64px, 4rem). Skip buttons are sized at 75% of this value.'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 64px)' },
-        { id: 'secondaryRowFont', element: 'fontrow', nameId: 'secondaryRowFontName', sizeId: 'secondaryRowFontSize', label: t('SECONDARY_ROW_FONT', 'Secondary Controls'), icon: 'interests', doc: t('SECONDARY_ROW_FONT_SIZE_DESC', 'CSS font size for the secondary control icons (shuffle, repeat, favourite, etc.). (e.g. 16px, 1.5rem).'), namePlaceholder: 'Font name (e.g. Arial)', sizePlaceholder: 'Size (e.g. 16px)' },
+        { id: 'titleFont', element: 'fontrow', nameId: 'titleFontName', sizeId: 'titleFontSize', label: t('TITLE_FONT', 'Track Title'), icon: 'title', nameLabel: t('FONT_NAME', 'Font Name'), nameDoc: t('FONT_NAME_DESC', 'CSS font family (e.g. Arial, "Roboto").'), namePlaceholder: 'e.g. Arial', sizeLabel: t('FONT_SIZE', 'Font Size'), sizeDoc: t('TITLE_FONT_SIZE_DESC', 'CSS font size (e.g. 18px, 1.2rem).'), sizePlaceholder: 'e.g. 18px' },
+        { id: 'albumFont', element: 'fontrow', nameId: 'albumFontName', sizeId: 'albumFontSize', label: t('ALBUM_FONT', 'Album Name'), icon: 'album', nameLabel: t('FONT_NAME', 'Font Name'), nameDoc: t('FONT_NAME_DESC', 'CSS font family (e.g. Arial, "Roboto").'), namePlaceholder: 'e.g. Arial', sizeLabel: t('FONT_SIZE', 'Font Size'), sizeDoc: t('ALBUM_FONT_SIZE_DESC', 'CSS font size (e.g. 14px, 1rem).'), sizePlaceholder: 'e.g. 14px' },
+        { id: 'artistFont', element: 'fontrow', nameId: 'artistFontName', sizeId: 'artistFontSize', label: t('ARTIST_FONT', 'Artist Name'), icon: 'person', nameLabel: t('FONT_NAME', 'Font Name'), nameDoc: t('FONT_NAME_DESC', 'CSS font family (e.g. Arial, "Roboto").'), namePlaceholder: 'e.g. Arial', sizeLabel: t('FONT_SIZE', 'Font Size'), sizeDoc: t('ARTIST_FONT_SIZE_DESC', 'CSS font size (e.g. 14px, 1rem).'), sizePlaceholder: 'e.g. 14px' },
+        { id: 'bitrateFont', element: 'fontrow', nameId: 'bitrateFontName', sizeId: 'bitrateFontSize', label: t('BITRATE_FONT', 'Bitrate/Stream Info'), icon: 'graphic_eq', nameLabel: t('FONT_NAME', 'Font Name'), nameDoc: t('FONT_NAME_DESC', 'CSS font family (e.g. Arial, "Roboto").'), namePlaceholder: 'e.g. Arial', sizeLabel: t('FONT_SIZE', 'Font Size'), sizeDoc: t('BITRATE_FONT_SIZE_DESC', 'CSS font size (e.g. 12px).'), sizePlaceholder: 'e.g. 12px' },
+        { id: 'progressFont', element: 'fontrow', nameId: 'progressFontName', sizeId: 'progressFontSize', label: t('PROGRESS_FONT', 'Progress Bar'), icon: 'linear_scale', nameLabel: t('FONT_NAME', 'Font Name'), nameDoc: t('FONT_NAME_DESC', 'CSS font family (e.g. Arial, "Roboto").'), namePlaceholder: 'e.g. Arial', sizeLabel: t('FONT_SIZE', 'Font Size'), sizeDoc: t('PROGRESS_FONT_SIZE_DESC', 'CSS font size (e.g. 12px).'), sizePlaceholder: 'e.g. 12px' },
+        { id: 'volumeFont', element: 'fontrow', nameId: 'volumeFontName', sizeId: 'volumeFontSize', label: t('VOLUME_FONT', 'Volume Label'), icon: 'volume_up', nameLabel: t('FONT_NAME', 'Font Name'), nameDoc: t('FONT_NAME_DESC', 'CSS font family (e.g. Arial, "Roboto").'), namePlaceholder: 'e.g. Arial', sizeLabel: t('FONT_SIZE', 'Font Size'), sizeDoc: t('VOLUME_FONT_SIZE_DESC', 'CSS font size (e.g. 12px).'), sizePlaceholder: 'e.g. 12px' },
+        { id: 'playerButtonSize', element: 'input', type: 'text', width: '100px', label: t('PLAYER_BUTTON_FONT', 'Player Button Size'), icon: 'radio_button_checked', doc: t('PLAYER_BUTTON_SIZE_DESC', 'Button size (e.g. 64px). Skip buttons are 75% of this.') },
+        { id: 'secondaryRowFontSize', element: 'input', type: 'text', width: '100px', label: t('SECONDARY_ROW_FONT', 'Secondary Controls Icon Size'), icon: 'interests', doc: t('SECONDARY_ROW_FONT_SIZE_DESC', 'CSS font size for secondary control icons (e.g. 16px).') },
       ],
     },
   ];
@@ -379,6 +379,7 @@ const InputField = ({ field, value, onChange }) => (
       id={field.id}
       className="form-control settings-input"
       type={field.type || 'text'}
+      style={field.width ? { width: field.width } : undefined}
       value={value ?? ''}
       onChange={(e) => onChange(field.id, e.target.value)}
     />
@@ -386,33 +387,74 @@ const InputField = ({ field, value, onChange }) => (
 );
 InputField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), onChange: PropTypes.func.isRequired };
 
-const FontRowField = ({ field, nameValue, sizeValue, onChange }) => (
-  <div className="settings-field settings-field--fontrow">
-    <label className="settings-label">
-      {field.icon && <span className="material-icons settings-field__icon">{field.icon}</span>}
-      {field.label}
-    </label>
-    {field.doc && <small className="settings-doc">{field.doc}</small>}
-    <div className="settings-fontrow-inputs">
-      <input
-        id={field.nameId}
-        className="form-control settings-input settings-fontrow-name"
-        type="text"
-        placeholder={field.namePlaceholder || 'Font name (e.g. Arial)'}
-        value={nameValue ?? ''}
-        onChange={(e) => onChange(field.nameId, e.target.value)}
-      />
-      <input
-        id={field.sizeId}
-        className="form-control settings-input settings-fontrow-size"
-        type="text"
-        placeholder={field.sizePlaceholder || 'Size (e.g. 16px)'}
-        value={sizeValue ?? ''}
-        onChange={(e) => onChange(field.sizeId, e.target.value)}
-      />
+const FontRowField = ({ field, nameValue, sizeValue, onChange }) => {
+  const nameInfoRef = useRef(null);
+  const sizeInfoRef = useRef(null);
+
+  useEffect(() => {
+    let nameTip, sizeTip;
+    import('bootstrap/js/dist/tooltip').then(({ default: Tooltip }) => {
+      if (nameInfoRef.current) nameTip = new Tooltip(nameInfoRef.current);
+      if (sizeInfoRef.current) sizeTip = new Tooltip(sizeInfoRef.current);
+    });
+    return () => { nameTip?.dispose(); sizeTip?.dispose(); };
+  }, []);
+
+  return (
+    <div className="settings-field settings-field--fontrow">
+      <label className="settings-label">
+        {field.icon && <span className="material-icons settings-field__icon">{field.icon}</span>}
+        {field.label}
+      </label>
+      <div className="settings-fontrow-inputs">
+        <div className="settings-fontrow-col settings-fontrow-col--name">
+          {field.nameLabel && <label className="settings-fontrow-col__label" htmlFor={field.nameId}>{field.nameLabel}</label>}
+          <div className="settings-fontrow-input-row">
+            <input
+              id={field.nameId}
+              className="form-control settings-input settings-fontrow-name"
+              type="text"
+              placeholder={field.namePlaceholder || 'e.g. Arial'}
+              value={nameValue ?? ''}
+              onChange={(e) => onChange(field.nameId, e.target.value)}
+            />
+            {field.nameDoc && (
+              <span
+                ref={nameInfoRef}
+                className="material-icons settings-fontrow-info"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title={field.nameDoc}
+              >info_outline</span>
+            )}
+          </div>
+        </div>
+        <div className="settings-fontrow-col settings-fontrow-col--size">
+          {field.sizeLabel && <label className="settings-fontrow-col__label" htmlFor={field.sizeId}>{field.sizeLabel}</label>}
+          <div className="settings-fontrow-input-row">
+            <input
+              id={field.sizeId}
+              className="form-control settings-input settings-fontrow-size"
+              type="text"
+              placeholder={field.sizePlaceholder || 'e.g. 16px'}
+              value={sizeValue ?? ''}
+              onChange={(e) => onChange(field.sizeId, e.target.value)}
+            />
+            {field.sizeDoc && (
+              <span
+                ref={sizeInfoRef}
+                className="material-icons settings-fontrow-info"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title={field.sizeDoc}
+              >info_outline</span>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 FontRowField.propTypes = { field: PropTypes.object.isRequired, nameValue: PropTypes.string, sizeValue: PropTypes.string, onChange: PropTypes.func.isRequired };
 
 const JsonField = ({ field, value, onChange }) => {
@@ -900,6 +942,10 @@ const Settings = () => {
         // Backend expects { value, label } for selects
         const opt = options.find((o) => o.value === val);
         data[field.id] = opt || { value: val, label: val };
+      } else if (field.element === 'fontrow') {
+        // fontrow stores two separate values under nameId and sizeId
+        data[field.nameId] = values[field.nameId] ?? '';
+        data[field.sizeId] = values[field.sizeId] ?? '';
       } else {
         data[field.id] = val;
       }
