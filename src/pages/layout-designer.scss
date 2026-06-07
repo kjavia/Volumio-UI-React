@@ -188,6 +188,20 @@
     max-width: 100%;
     text-align: center;
   }
+
+  &__sublabel {
+    font-size: 0.6rem;
+    opacity: 0.45;
+    color: var(--text-primary);
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 4px;
+    max-width: 100%;
+    text-align: center;
+    margin-top: 1px;
+  }
 }
 
 // ---------------------------------------------------------------------------

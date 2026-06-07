@@ -45,6 +45,28 @@ const LAYOUT_ITEM_ICONS = {
   viz: 'equalizer',
 };
 
+const PLAYER_TYPE_OPTIONS = [
+  { value: 'albumArt', label: 'Album Art' },
+  { value: 'vinyl', label: 'Vinyl' },
+  { value: 'vinylCover', label: 'Vinyl Cover' },
+  { value: 'cd', label: 'CD' },
+  { value: 'cdCover', label: 'CD Cover' },
+  { value: 'cassette', label: 'Cassette' },
+  { value: 'reelToReel', label: 'Reel to Reel' },
+  { value: 'radio', label: 'Radio' },
+  { value: 'globe', label: 'Globe' },
+  { value: 'matchSource', label: 'Match Source' },
+  { value: 'random', label: 'Random' },
+  { value: 'none', label: 'None' },
+];
+
+const VIZ_TYPE_OPTIONS = [
+  { value: 'spectrum', label: 'Spectrum Analyzer' },
+  { value: 'peppyMeter', label: 'Peppy Meter' },
+  { value: 'peppySpectrum', label: 'Peppy Spectrum' },
+  { value: 'none', label: 'None' },
+];
+
 // ---------------------------------------------------------------------------
 // Pure helper functions (module-level — no closures over component state)
 // ---------------------------------------------------------------------------
@@ -698,6 +720,16 @@ export default function LayoutDesigner() {
     applyLayoutUpdate({ ...activeLayout, cells: updateCellById(activeLayout.cells, cellId, { itemKey: null }) });
   }
 
+  function handleSetCellPlayerType(cellId, playerType) {
+    if (!activeLayout) return;
+    applyLayoutUpdate({ ...activeLayout, cells: updateCellById(activeLayout.cells, cellId, { playerType: playerType || null }) });
+  }
+
+  function handleSetCellVizType(cellId, vizType) {
+    if (!activeLayout) return;
+    applyLayoutUpdate({ ...activeLayout, cells: updateCellById(activeLayout.cells, cellId, { vizType: vizType || null }) });
+  }
+
   function handleAssignItem(itemKey, cellId) {
     if (!activeLayout) return;
     applyLayoutUpdate({ ...activeLayout, cells: updateCellById(activeLayout.cells, cellId, { itemKey }) });
@@ -883,6 +915,12 @@ export default function LayoutDesigner() {
                   <span className="material-icons ld-cell__icon">{LAYOUT_ITEM_ICONS[cell.itemKey]}</span>
                 )}
                 <span className="ld-cell__label">{t('item_' + cell.itemKey)}</span>
+                {cell.itemKey === 'player' && cell.playerType && (
+                  <span className="ld-cell__sublabel">{t('player_type_' + cell.playerType, cell.playerType)}</span>
+                )}
+                {cell.itemKey === 'viz' && cell.vizType && (
+                  <span className="ld-cell__sublabel">{t('viz_type_' + cell.vizType, cell.vizType)}</span>
+                )}
               </>
             )}
             {renderResizeHandles(cFr, rFr, colIdx, rowIdx, parentCellId)}
@@ -1005,6 +1043,44 @@ export default function LayoutDesigner() {
         icon: 'remove_circle_outline',
         onClick: () => { handleClearCell(contextMenu.cellId); setContextMenu(null); },
       });
+
+      if (contextCellObj.itemKey === 'player') {
+        items.push({
+          label: t('ctx_player_type', 'Player Type'),
+          icon: 'radio',
+          submenu: PLAYER_TYPE_OPTIONS.map(({ value, label }) => ({
+            label: t('player_type_' + value, label),
+            icon: contextCellObj.playerType === value ? 'check' : null,
+            onClick: () => handleSetCellPlayerType(contextMenu.cellId, contextCellObj.playerType === value ? null : value),
+          })),
+        });
+        if (contextCellObj.playerType) {
+          items.push({
+            label: t('ctx_use_global_setting', 'Use Global Setting'),
+            icon: 'settings_backup_restore',
+            onClick: () => handleSetCellPlayerType(contextMenu.cellId, null),
+          });
+        }
+      }
+
+      if (contextCellObj.itemKey === 'viz') {
+        items.push({
+          label: t('ctx_viz_type', 'Visualization Type'),
+          icon: 'equalizer',
+          submenu: VIZ_TYPE_OPTIONS.map(({ value, label }) => ({
+            label: t('viz_type_' + value, label),
+            icon: contextCellObj.vizType === value ? 'check' : null,
+            onClick: () => handleSetCellVizType(contextMenu.cellId, contextCellObj.vizType === value ? null : value),
+          })),
+        });
+        if (contextCellObj.vizType) {
+          items.push({
+            label: t('ctx_use_global_setting', 'Use Global Setting'),
+            icon: 'settings_backup_restore',
+            onClick: () => handleSetCellVizType(contextMenu.cellId, null),
+          });
+        }
+      }
     }
 
     items.push({ separator: true });

@@ -121,8 +121,12 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
     Math.floor(Math.random() * RANDOM_PLAYERS.length)
   );
 
-  const effectivePlayerType =
-    playerType === 'matchSource' ? getPlayerTypeForSource(service, trackType) : playerType;
+  const resolvePlayerType = (overridePlayerType) => {
+    const pt = overridePlayerType || playerType;
+    return pt === 'matchSource' ? getPlayerTypeForSource(service, trackType) : pt;
+  };
+
+  const effectivePlayerType = resolvePlayerType(null);
 
   const CurrentPlayerComponent =
     effectivePlayerType === 'random'
@@ -170,7 +174,16 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
     togglePlay();
   };
 
-  const renderCellItem = (itemKey) => {
+  const renderCellItem = (cell) => {
+    const { itemKey, playerType: cellPlayerType, vizType: cellVizType } = cell;
+    const cellEffectivePlayerType = cellPlayerType
+      ? resolvePlayerType(cellPlayerType)
+      : effectivePlayerType;
+    const CellPlayerComponent =
+      cellEffectivePlayerType === 'random'
+        ? RANDOM_PLAYERS[randomIndex]
+        : PLAYER_MAP[cellEffectivePlayerType] || AlbumArtPlayer;
+    const cellVizType_ = cellVizType || vizType;
     switch (itemKey) {
       case 'trackName':
         return <TrackTitle title={title} />;
@@ -206,18 +219,18 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
       case 'player':
         return (
           <div className="custom-layout-player">
-            <CurrentPlayerComponent
+            <CellPlayerComponent
               isPlaying={isPlaying}
               albumArt={fullAlbumArt}
-              maxSpace={albumArtMaxSpace && effectivePlayerType === 'albumArt'}
-              animated={albumArtAnimated && effectivePlayerType === 'albumArt'}
+              maxSpace={albumArtMaxSpace && cellEffectivePlayerType === 'albumArt'}
+              animated={albumArtAnimated && cellEffectivePlayerType === 'albumArt'}
             />
           </div>
         );
       case 'viz':
         return (
           <div className="custom-layout-viz">
-            {vizType === 'spectrum' && (
+            {cellVizType_ === 'spectrum' && (
               <SpectrumAnalyzer
                 ref={vizRef}
                 stopped={vizStopped}
@@ -227,13 +240,13 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
                 isPlaying={isPlaying}
               />
             )}
-            {vizType === 'peppyMeter' && (
+            {cellVizType_ === 'peppyMeter' && (
               <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} stopped={!isPlaying} />
             )}
-            {vizType === 'peppySpectrum' && (
+            {cellVizType_ === 'peppySpectrum' && (
               <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} stopped={!isPlaying} />
             )}
-            {vizType === 'none' && <span className="material-icons viz-placeholder">equalizer</span>}
+            {cellVizType_ === 'none' && <span className="material-icons viz-placeholder">equalizer</span>}
           </div>
         );
       case 'buttonRow':
@@ -329,7 +342,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
                 {renderCells(cell.subdivisions.cells)}
               </div>
             ) : cell.itemKey ? (
-              renderCellItem(cell.itemKey)
+              renderCellItem(cell)
             ) : null}
           </div>
         );
