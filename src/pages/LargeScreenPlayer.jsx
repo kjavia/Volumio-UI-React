@@ -2,6 +2,7 @@ import { useMemo, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
+import usePlayerKeyboard from '@/hooks/usePlayerKeyboard';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
 import { useSeek } from '@/contexts/SeekContext';
@@ -229,6 +230,18 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
   const [showBrowse, setShowBrowse] = useState(false);
   const [showVolumePopup, setShowVolumePopup] = useState(false);
 
+  usePlayerKeyboard({
+    onPlayPause: togglePlay,
+    onPrev: prev,
+    onNext: next,
+    onQueue: () => setShowPlaylist((prev) => !prev),
+    onBrowse: () => setShowBrowse(true),
+    onAddToPlaylist: () => setShowAddToPlaylist(true),
+    onFavourite: toggleFavourite,
+    onRepeat: toggleRepeat,
+    onShuffle: toggleRandom,
+  });
+
   const fullAlbumArt = useMemo(() => {
     if (!albumart) return '';
     if (albumart.startsWith('http')) return albumart;
@@ -369,11 +382,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
       <div className="lsp-btn-group lsp-btn-group--left">
         {menuSlot}
         {showPlayerControls && (
-          <Button
-            classNames={`btn-icon lsp-btn ${isFavourite ? 'active' : ''}`}
-            onClick={toggleFavourite}
-            label={isFavourite ? 'Remove from Favourites' : 'Add to Favourites'}
-          >
+          <Button classNames={`btn-icon lsp-btn ${isFavourite ? 'active' : ''}`} onClick={toggleFavourite} label={isFavourite ? 'Remove from Favourites' : 'Add to Favourites'} data-shortcut-key="f">
             <span className="material-icons">{isFavourite ? 'favorite' : 'favorite_border'}</span>
           </Button>
         )}
@@ -381,32 +390,32 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
 
       {/* Centre transport controls */}
       <div className="lsp-btn-group lsp-btn-group--center">
-        <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${repeat ? 'active' : ''}`} onClick={toggleRepeat} label={repeat ? 'Repeat On' : 'Repeat Off'}>
+        <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${repeat ? 'active' : ''}`} onClick={toggleRepeat} label={repeat ? 'Repeat On' : 'Repeat Off'} data-shortcut-key="r">
           <span className="material-icons">repeat</span>
         </Button>
-        <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={prev} label="Previous">
+        <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={prev} label="Previous" data-shortcut-key="arrowleft">
           <span className="material-icons">skip_previous</span>
         </Button>
-        <Button classNames="btn-round btn-primary lsp-btn lsp-btn--lg" onClick={handlePlayPause} label={isPlaying ? 'Pause' : 'Play'}>
+        <Button classNames="btn-round btn-primary lsp-btn lsp-btn--lg" onClick={handlePlayPause} label={isPlaying ? 'Pause' : 'Play'} data-shortcut-key="p">
           <span className={`material-icons play-icon ${isPlaying ? 'is-pause' : 'is-play'}`}>{isPlaying ? 'pause' : 'play_arrow'}</span>
         </Button>
-        <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={next} label="Next">
+        <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={next} label="Next" data-shortcut-key="arrowright">
           <span className="material-icons">skip_next</span>
         </Button>
-        <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${random ? 'active' : ''}`} onClick={toggleRandom} label={random ? 'Shuffle On' : 'Shuffle Off'}>
+        <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${random ? 'active' : ''}`} onClick={toggleRandom} label={random ? 'Shuffle On' : 'Shuffle Off'} data-shortcut-key="s">
           <span className="material-icons">shuffle</span>
         </Button>
       </div>
 
       {/* Right edge buttons */}
       <div className="lsp-btn-group lsp-btn-group--right">
-        <Button classNames="btn-icon lsp-btn" onClick={() => setShowAddToPlaylist(true)} label="Add to Playlist">
+        <Button classNames="btn-icon lsp-btn" onClick={() => setShowAddToPlaylist(true)} label="Add to Playlist" data-shortcut-key="a">
           <span className="material-icons">playlist_add</span>
         </Button>
-        <Button classNames="btn-icon lsp-btn" onClick={() => setShowPlaylist(true)} label="Current Playlist">
+        <Button classNames="btn-icon lsp-btn" onClick={() => setShowPlaylist(true)} label="Current Playlist" data-shortcut-key="q">
           <span className="material-icons">queue_music</span>
         </Button>
-        <Button classNames="btn-icon lsp-btn" onClick={() => setShowBrowse(true)} label="Browse">
+        <Button classNames="btn-icon lsp-btn" onClick={() => setShowBrowse(true)} label="Browse" data-shortcut-key="b">
           <span className="material-icons">library_music</span>
         </Button>
         {!disableVolumeControl && (
@@ -526,36 +535,36 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
               <div className="lsp-btn-group lsp-btn-group--left">
                 {menuSlot}
                 {showPlayerControls && (
-                  <Button classNames={`btn-icon lsp-btn ${isFavourite ? 'active' : ''}`} onClick={toggleFavourite} label={isFavourite ? 'Remove from Favourites' : 'Add to Favourites'}>
+                  <Button classNames={`btn-icon lsp-btn ${isFavourite ? 'active' : ''}`} onClick={toggleFavourite} label={isFavourite ? 'Remove from Favourites' : 'Add to Favourites'} data-shortcut-key="f">
                     <span className="material-icons">{isFavourite ? 'favorite' : 'favorite_border'}</span>
                   </Button>
                 )}
               </div>
               <div className="lsp-btn-group lsp-btn-group--center">
-                <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${repeat ? 'active' : ''}`} onClick={toggleRepeat} label={repeat ? 'Repeat On' : 'Repeat Off'}>
+                <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${repeat ? 'active' : ''}`} onClick={toggleRepeat} label={repeat ? 'Repeat On' : 'Repeat Off'} data-shortcut-key="r">
                   <span className="material-icons">repeat</span>
                 </Button>
-                <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={prev} label="Previous">
+                <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={prev} label="Previous" data-shortcut-key="arrowleft">
                   <span className="material-icons">skip_previous</span>
                 </Button>
-                <Button classNames="btn-round btn-primary lsp-btn lsp-btn--lg" onClick={handlePlayPause} label={isPlaying ? 'Pause' : 'Play'}>
+                <Button classNames="btn-round btn-primary lsp-btn lsp-btn--lg" onClick={handlePlayPause} label={isPlaying ? 'Pause' : 'Play'} data-shortcut-key="p">
                   <span className={`material-icons play-icon ${isPlaying ? 'is-pause' : 'is-play'}`}>{isPlaying ? 'pause' : 'play_arrow'}</span>
                 </Button>
-                <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={next} label="Next">
+                <Button classNames="btn-round lsp-btn lsp-btn--md" onClick={next} label="Next" data-shortcut-key="arrowright">
                   <span className="material-icons">skip_next</span>
                 </Button>
-                <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${random ? 'active' : ''}`} onClick={toggleRandom} label={random ? 'Shuffle On' : 'Shuffle Off'}>
+                <Button classNames={`btn-icon lsp-btn lsp-btn--sm ${random ? 'active' : ''}`} onClick={toggleRandom} label={random ? 'Shuffle On' : 'Shuffle Off'} data-shortcut-key="s">
                   <span className="material-icons">shuffle</span>
                 </Button>
               </div>
               <div className="lsp-btn-group lsp-btn-group--right">
-                <Button classNames="btn-icon lsp-btn" onClick={() => setShowAddToPlaylist(true)} label="Add to Playlist">
+                <Button classNames="btn-icon lsp-btn" onClick={() => setShowAddToPlaylist(true)} label="Add to Playlist" data-shortcut-key="a">
                   <span className="material-icons">playlist_add</span>
                 </Button>
-                <Button classNames="btn-icon lsp-btn" onClick={() => setShowPlaylist(true)} label="Current Playlist">
+                <Button classNames="btn-icon lsp-btn" onClick={() => setShowPlaylist(true)} label="Current Playlist" data-shortcut-key="q">
                   <span className="material-icons">queue_music</span>
                 </Button>
-                <Button classNames="btn-icon lsp-btn" onClick={() => setShowBrowse(true)} label="Browse">
+                <Button classNames="btn-icon lsp-btn" onClick={() => setShowBrowse(true)} label="Browse" data-shortcut-key="b">
                   <span className="material-icons">library_music</span>
                 </Button>
                 {!disableVolumeControl && (

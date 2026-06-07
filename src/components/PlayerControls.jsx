@@ -10,7 +10,7 @@ const PlayerControls = ({
   return (
     <div className="player-controls d-flex align-items-center justify-content-center w-100">
       <div className="controls-transport-row d-flex gap-3 align-items-center justify-content-center">
-        <Button classNames="btn-round btn-sm" onClick={onPrev} label="Previous">
+        <Button classNames="btn-round btn-sm" onClick={onPrev} label="Previous" data-shortcut-key="arrowleft">
           <span className="material-icons">skip_previous</span>
         </Button>
 
@@ -18,11 +18,12 @@ const PlayerControls = ({
           classNames="btn-round btn-primary"
           onClick={onPlayPause}
           label={isPlaying ? 'Pause' : 'Play'}
+          data-shortcut-key="p"
         >
           <span className={`material-icons play-icon ${isPlaying ? 'is-pause' : 'is-play'}`}>{isPlaying ? 'pause' : 'play_arrow'}</span>
         </Button>
 
-        <Button classNames="btn-round btn-sm" onClick={onNext} label="Next">
+        <Button classNames="btn-round btn-sm" onClick={onNext} label="Next" data-shortcut-key="arrowright">
           <span className="material-icons">skip_next</span>
         </Button>
       </div>

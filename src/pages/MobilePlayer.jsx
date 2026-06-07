@@ -2,6 +2,7 @@ import { useMemo, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
+import usePlayerKeyboard from '@/hooks/usePlayerKeyboard';
 import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
 import { useSeek } from '@/contexts/SeekContext';
 import AlbumArtPlayer from '@/components/animated-players/AlbumArtPlayer';
@@ -157,6 +158,18 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
   const [showPlaylist, setShowPlaylist] = useState(false);
   const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
   const [showBrowse, setShowBrowse] = useState(false);
+
+  usePlayerKeyboard({
+    onPlayPause: togglePlay,
+    onPrev: prev,
+    onNext: next,
+    onQueue: () => setShowPlaylist((prev) => !prev),
+    onBrowse: () => setShowBrowse(true),
+    onAddToPlaylist: () => setShowAddToPlaylist(true),
+    onFavourite: toggleFavourite,
+    onRepeat: toggleRepeat,
+    onShuffle: toggleRandom,
+  });
 
   const fullAlbumArt = useMemo(() => {
     if (!albumart) return '';

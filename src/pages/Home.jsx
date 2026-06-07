@@ -362,6 +362,19 @@ const Home = () => {
     return () => document.removeEventListener('dblclick', handler);
   }, [handleFullscreenViz]);
 
+  // Press 'v' while on the player to toggle viz fullscreen
+  useEffect(() => {
+    if (!showPlayer || !hasViz) return;
+    const handler = (e) => {
+      if (e.key !== 'v' && e.key !== 'V') return;
+      const tag = e.target?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return;
+      handleFullscreenViz();
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [showPlayer, hasViz, handleFullscreenViz]);
+
   // On the large-screen layout the menu is embedded in the bottom row, so we
   // normally skip the floating overlay. However when the idle screen is active
   // the player (and its embedded menu) is not mounted, so we still need the
