@@ -293,7 +293,7 @@ const Home = () => {
 
   if (showPlayer) {
     if (currentCustomLayout) {
-      content = <CustomLayout layout={currentCustomLayout} vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} />;
+      content = <CustomLayout layout={currentCustomLayout} vizStopped={vizStopped} onVizResumed={() => setVizStopped(false)} vizContainerRef={vizContainerRef} />;
     } else {
       const contextMenuNode = (
         <AppMenu

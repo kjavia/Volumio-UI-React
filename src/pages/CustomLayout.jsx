@@ -64,7 +64,7 @@ const getPlayerTypeForSource = (service, trackType) => {
   return 'vinylCover';
 };
 
-const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
+const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => {
   console.log('CustomLayout render', { layout });
   const { data: pluginConfig } = usePluginConfig();
   const playerType = pluginConfig?.playerType || 'radio';
@@ -243,7 +243,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed }) => {
         );
       case 'viz':
         return (
-          <div className="custom-layout-viz">
+          <div className="custom-layout-viz" ref={vizContainerRef}>
             {cellVizType_ === 'spectrum' && (
               <SpectrumAnalyzer
                 ref={vizRef}
@@ -458,6 +458,7 @@ CustomLayout.propTypes = {
   }).isRequired,
   vizStopped: PropTypes.bool,
   onVizResumed: PropTypes.func,
+  vizContainerRef: PropTypes.object,
 };
 
 export default CustomLayout;
