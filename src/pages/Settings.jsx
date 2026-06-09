@@ -955,7 +955,8 @@ const Settings = () => {
         data[field.nameId] = values[field.nameId] ?? '';
         data[field.sizeId] = values[field.sizeId] ?? '';
       } else {
-        data[field.id] = val;
+        // Ensure undefined/null values are sent as empty string, not dropped from JSON
+        data[field.id] = val ?? '';
       }
     }
 
