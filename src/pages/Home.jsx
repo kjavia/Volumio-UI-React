@@ -166,6 +166,10 @@ const Home = () => {
       '--sp-album-color': { val: pluginConfig?.albumColor, cls: 'sp-has-album-color' },
       '--sp-stream-info-color': { val: pluginConfig?.streamInfoColor, cls: 'sp-has-stream-info-color' },
       '--sp-control-color': { val: pluginConfig?.controlColor, cls: 'sp-has-control-color' },
+      '--sp-btn-bg-color': { val: pluginConfig?.buttonBgColor, cls: 'sp-has-btn-bg-color' },
+      '--sp-bar-track-color': { val: pluginConfig?.barTrackColor, cls: 'sp-has-bar-track-color' },
+      '--sp-bar-text-color': { val: pluginConfig?.barTextColor, cls: 'sp-has-bar-text-color' },
+      '--sp-icon-btn-color': { val: pluginConfig?.iconBtnColor, cls: 'sp-has-icon-btn-color' },
     };
     Object.entries(colorMap).forEach(([prop, { val, cls }]) => {
       if (val) {
@@ -211,6 +215,10 @@ const Home = () => {
     pluginConfig?.albumColor,
     pluginConfig?.streamInfoColor,
     pluginConfig?.controlColor,
+    pluginConfig?.buttonBgColor,
+    pluginConfig?.barTrackColor,
+    pluginConfig?.barTextColor,
+    pluginConfig?.iconBtnColor,
     pluginConfig?.titleFontSize,
     pluginConfig?.albumFontSize,
     pluginConfig?.artistFontSize,

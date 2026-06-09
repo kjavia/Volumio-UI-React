@@ -113,6 +113,48 @@ body,
   border-color: var(--sp-control-color) !important;
 }
 
+/* ── Play button background color (player only) ── */
+:root.sp-has-btn-bg-color .controls-transport-row .btn-round.btn-primary,
+:root.sp-has-btn-bg-color .lsp-btn-group .btn-round.btn-primary {
+  background: var(--sp-btn-bg-color) !important;
+  border-color: var(--sp-btn-bg-color) !important;
+}
+
+/* ── Progress / volume bar track color — the unfilled rail (player only) ── */
+:root.sp-has-bar-track-color .slider-container .slider-track,
+:root.sp-has-bar-track-color .seekbar-container-wrap .slider-track,
+:root.sp-has-bar-track-color .volume-manager-wrap .slider-track,
+:root.sp-has-bar-track-color .mobile-row-seekbar .slider-track,
+:root.sp-has-bar-track-color .mobile-row-volume .slider-track,
+:root.sp-has-bar-track-color .lsp-volume-popup__range {
+  background: var(--sp-bar-track-color) !important;
+}
+
+/* ── Progress / volume text color — time labels and volume value (player only) ── */
+:root.sp-has-bar-text-color .seekbar-labels,
+:root.sp-has-bar-text-color .time-label,
+:root.sp-has-bar-text-color .lsp-volume-popup__value,
+:root.sp-has-bar-text-color .volume-manager .small,
+:root.sp-has-bar-text-color .volume-manager .text-white {
+  color: var(--sp-bar-text-color) !important;
+}
+
+/* ── Icon button color — secondary icon buttons (player only) ── */
+:root.sp-has-icon-btn-color .player-controls .btn-icon .material-icons,
+:root.sp-has-icon-btn-color .player-controls .btn-icon .material-icons-outlined,
+:root.sp-has-icon-btn-color .controls-transport-row .btn-icon .material-icons,
+:root.sp-has-icon-btn-color .controls-transport-row .btn-icon .material-icons-outlined,
+:root.sp-has-icon-btn-color .lsp-btn-group .btn-icon .material-icons,
+:root.sp-has-icon-btn-color .lsp-btn-group .btn-icon .material-icons-outlined {
+  color: var(--sp-icon-btn-color) !important;
+}
+
+:root.sp-has-icon-btn-color .player-controls .btn-icon .material-icons::after,
+:root.sp-has-icon-btn-color .controls-transport-row .btn-icon .material-icons::after,
+:root.sp-has-icon-btn-color .lsp-btn-group .btn-icon .material-icons::after {
+  color: var(--sp-icon-btn-color) !important;
+}
+
 /* ── Font size overrides from plugin config ── */
 :root.sp-has-title-font-size .track-title,
 :root.sp-has-title-font-size .lsp-top__title {
