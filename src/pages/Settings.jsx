@@ -140,7 +140,11 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
         { id: 'artistColor', element: 'color', label: t('ARTIST_COLOR', 'Artist Name Color'), icon: 'person' },
         { id: 'albumColor', element: 'color', label: t('ALBUM_COLOR', 'Album Name Color'), icon: 'album' },
         { id: 'streamInfoColor', element: 'color', label: t('STREAM_INFO_COLOR', 'Stream Info Color'), icon: 'stream' },
-        { id: 'controlColor', element: 'color', label: t('CONTROL_COLOR', 'Control Color'), icon: 'touch_app', doc: t('CONTROL_COLOR_DESC', 'Color of player buttons, sliders, and labels.') },
+        { id: 'buttonColor', element: 'color', label: t('CONTROL_COLOR', 'Transport Button Icon Color'), icon: 'play_circle', doc: t('CONTROL_COLOR_DESC', 'Override the icon/foreground color of the play, skip back, and skip forward buttons.') },
+        { id: 'buttonBgColor', element: 'color', label: t('BUTTON_BG_COLOR', 'Control Buttons Background Color'), icon: 'play_circle', doc: t('BUTTON_BG_COLOR_DESC', 'Override the background color of the play, skip back and skip forward buttons.') },
+        { id: 'barTrackColor', element: 'color', label: t('BAR_TRACK_COLOR', 'Progress / Volume Bar Track Color'), icon: 'linear_scale', doc: t('BAR_TRACK_COLOR_DESC', 'Override the background (track/rail) color of the seek bar and volume bar.') },
+        { id: 'barTextColor', element: 'color', label: t('BAR_TEXT_COLOR', 'Progress / Volume Text Color'), icon: 'text_fields', doc: t('BAR_TEXT_COLOR_DESC', 'Override the color of time labels and volume value text next to the bars.') },
+        { id: 'iconBtnColor', element: 'color', label: t('ICON_BTN_COLOR', 'Icon Button Color'), icon: 'interests', doc: t('ICON_BTN_COLOR_DESC', 'Override the color of secondary icon buttons (shuffle, repeat, favourite, queue, browse).') },
       ],
     },
     {
@@ -323,6 +327,10 @@ const ColorField = ({ field, value, onChange }) => {
   const handleBlur = (e) => {
     const text = e.target.value.trim();
     if (!text || text.startsWith('#')) return;
+    if (/^[0-9a-fA-F]{6}$/.test(text) || /^[0-9a-fA-F]{3}$/.test(text)) {
+      onChange(field.id, '#' + text);
+      return;
+    }
     const hex = colorNameToHex(text);
     if (hex) onChange(field.id, hex);
   };
