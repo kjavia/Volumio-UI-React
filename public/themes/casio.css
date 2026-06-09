@@ -7,37 +7,59 @@
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -72,8 +94,8 @@
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -82,6 +104,7 @@
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -124,14 +147,20 @@
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -150,13 +179,15 @@
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -164,37 +195,59 @@
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -229,8 +282,8 @@
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -239,6 +292,7 @@
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -281,14 +335,20 @@
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -307,13 +367,15 @@
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -431,37 +493,59 @@ p {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -496,8 +580,8 @@ p {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -506,6 +590,7 @@ p {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -548,14 +633,20 @@ p {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -574,13 +665,15 @@ p {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -960,37 +1053,59 @@ p {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -1025,8 +1140,8 @@ p {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -1035,6 +1150,7 @@ p {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -1077,14 +1193,20 @@ p {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -1103,13 +1225,15 @@ p {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -1383,37 +1507,59 @@ p {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -1448,8 +1594,8 @@ p {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -1458,6 +1604,7 @@ p {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -1500,14 +1647,20 @@ p {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -1526,13 +1679,15 @@ p {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -1817,37 +1972,59 @@ input[type=range]::-webkit-slider-thumb {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -1882,8 +2059,8 @@ input[type=range]::-webkit-slider-thumb {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -1892,6 +2069,7 @@ input[type=range]::-webkit-slider-thumb {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -1934,14 +2112,20 @@ input[type=range]::-webkit-slider-thumb {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -1960,13 +2144,15 @@ input[type=range]::-webkit-slider-thumb {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -2082,37 +2268,59 @@ input[type=range]::-webkit-slider-thumb {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -2147,8 +2355,8 @@ input[type=range]::-webkit-slider-thumb {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -2157,6 +2365,7 @@ input[type=range]::-webkit-slider-thumb {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -2199,14 +2408,20 @@ input[type=range]::-webkit-slider-thumb {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -2225,13 +2440,15 @@ input[type=range]::-webkit-slider-thumb {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -2389,37 +2606,59 @@ input[type=range]::-webkit-slider-thumb {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -2454,8 +2693,8 @@ input[type=range]::-webkit-slider-thumb {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -2464,6 +2703,7 @@ input[type=range]::-webkit-slider-thumb {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -2506,14 +2746,20 @@ input[type=range]::-webkit-slider-thumb {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -2532,13 +2778,15 @@ input[type=range]::-webkit-slider-thumb {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -2611,37 +2859,59 @@ input[type=range]::-webkit-slider-thumb {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -2676,8 +2946,8 @@ input[type=range]::-webkit-slider-thumb {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -2686,6 +2956,7 @@ input[type=range]::-webkit-slider-thumb {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -2728,14 +2999,20 @@ input[type=range]::-webkit-slider-thumb {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -2754,13 +3031,15 @@ input[type=range]::-webkit-slider-thumb {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -2849,37 +3128,59 @@ input[type=range]::-webkit-slider-thumb {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -2914,8 +3215,8 @@ input[type=range]::-webkit-slider-thumb {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -2924,6 +3225,7 @@ input[type=range]::-webkit-slider-thumb {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -2966,14 +3268,20 @@ input[type=range]::-webkit-slider-thumb {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -2992,13 +3300,15 @@ input[type=range]::-webkit-slider-thumb {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -3452,37 +3762,59 @@ input[type=range]::-webkit-slider-thumb {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -3517,8 +3849,8 @@ input[type=range]::-webkit-slider-thumb {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -3527,6 +3859,7 @@ input[type=range]::-webkit-slider-thumb {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -3569,14 +3902,20 @@ input[type=range]::-webkit-slider-thumb {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -3595,13 +3934,15 @@ input[type=range]::-webkit-slider-thumb {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -3740,37 +4081,59 @@ input[type=range]::-webkit-slider-thumb {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -3805,8 +4168,8 @@ input[type=range]::-webkit-slider-thumb {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -3815,6 +4178,7 @@ input[type=range]::-webkit-slider-thumb {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -3857,14 +4221,20 @@ input[type=range]::-webkit-slider-thumb {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -3883,13 +4253,15 @@ input[type=range]::-webkit-slider-thumb {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -4031,37 +4403,59 @@ input[type=range]::-webkit-slider-thumb {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -4096,8 +4490,8 @@ input[type=range]::-webkit-slider-thumb {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -4106,6 +4500,7 @@ input[type=range]::-webkit-slider-thumb {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -4148,14 +4543,20 @@ input[type=range]::-webkit-slider-thumb {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -4174,13 +4575,15 @@ input[type=range]::-webkit-slider-thumb {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -4283,37 +4686,59 @@ input[type=range]::-webkit-slider-thumb {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -4348,8 +4773,8 @@ input[type=range]::-webkit-slider-thumb {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -4358,6 +4783,7 @@ input[type=range]::-webkit-slider-thumb {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -4400,14 +4826,20 @@ input[type=range]::-webkit-slider-thumb {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -4426,13 +4858,15 @@ input[type=range]::-webkit-slider-thumb {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -4612,37 +5046,59 @@ input[type=range]::-webkit-slider-thumb {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -4677,8 +5133,8 @@ input[type=range]::-webkit-slider-thumb {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -4687,6 +5143,7 @@ input[type=range]::-webkit-slider-thumb {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -4729,14 +5186,20 @@ input[type=range]::-webkit-slider-thumb {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -4755,13 +5218,15 @@ input[type=range]::-webkit-slider-thumb {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;
@@ -5324,37 +5789,59 @@ input[type=range]::-webkit-slider-thumb {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE — 80s Casio Theme
-     Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
-     Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE — 80s Casio Theme
+      Dark navy casing · Teal backlit LCD · Pixel font · Red accent key
+      Inspired by: Casio Twin-Graph, DW-6900, BGD-560 (circa 1988–1995)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Casio Hardware Palette ────────────────────────────────────────── */
-  --casio-body: #0e1218; /* main dark navy plastic casing */
-  --casio-face: #161c28; /* button / raised surface face */
-  --casio-sheen: #263048; /* plastic highlight edge (top-left bevel) */
-  --casio-edge: #07080e; /* deep plastic shadow edge (bottom-right) */
-  --casio-ridge: #1a2238; /* molding lines / panel dividers */
-  --casio-silver: #4a6080; /* metal trim / side rails */
-  --casio-silver-hi: #6880a0; /* silver highlight */
+  --casio-body: #0e1218;
+  /* main dark navy plastic casing */
+  --casio-face: #161c28;
+  /* button / raised surface face */
+  --casio-sheen: #263048;
+  /* plastic highlight edge (top-left bevel) */
+  --casio-edge: #07080e;
+  /* deep plastic shadow edge (bottom-right) */
+  --casio-ridge: #1a2238;
+  /* molding lines / panel dividers */
+  --casio-silver: #4a6080;
+  /* metal trim / side rails */
+  --casio-silver-hi: #6880a0;
+  /* silver highlight */
   /* ─── LCD Display ───────────────────────────────────────────────────── */
-  --casio-lcd-bg: #44dda8; /* bright teal — segment / accent color */
-  --casio-lcd-bg-alt: #58f0bc; /* brighter teal variant */
-  --casio-lcd-panel: #0c1e18; /* dark teal LCD panel background */
-  --casio-lcd-on: #44dda8; /* segment ON — bright teal (= lcd-bg) */
-  --casio-lcd-off: #2a7858; /* segment OFF — dimmer teal, secondary text */
-  --casio-lcd-frame: #060f0a; /* LCD bezel (very dark border) */
-  --casio-lcd-glare: rgba(68, 221, 168, 0.10); /* teal-tinted reflection */
+  --casio-lcd-bg: #44dda8;
+  /* bright teal — segment / accent color */
+  --casio-lcd-bg-alt: #58f0bc;
+  /* brighter teal variant */
+  --casio-lcd-panel: #0c1e18;
+  /* dark teal LCD panel background */
+  --casio-lcd-on: #44dda8;
+  /* segment ON — bright teal (= lcd-bg) */
+  --casio-lcd-off: #2a7858;
+  /* segment OFF — dimmer teal, secondary text */
+  --casio-lcd-frame: #060f0a;
+  /* LCD bezel (very dark border) */
+  --casio-lcd-glare: rgba(68, 221, 168, 0.10);
+  /* teal-tinted reflection */
   /* ─── Key Colors ────────────────────────────────────────────────────── */
-  --casio-red: #e06020; /* orange accent — function key ring */
-  --casio-red-hi: #f07830; /* orange highlight */
-  --casio-red-sh: #904010; /* orange shadow */
-  --casio-key-face: #18203a; /* standard key face — navy */
-  --casio-key-hi: #2a3858; /* key top-left bevel — blue highlight */
-  --casio-key-sh: #0c1020; /* key bottom-right bevel — near-black */
+  --casio-red: #e06020;
+  /* orange accent — function key ring */
+  --casio-red-hi: #f07830;
+  /* orange highlight */
+  --casio-red-sh: #904010;
+  /* orange shadow */
+  --casio-key-face: #18203a;
+  /* standard key face — navy */
+  --casio-key-hi: #2a3858;
+  /* key top-left bevel — blue highlight */
+  --casio-key-sh: #0c1020;
+  /* key bottom-right bevel — near-black */
   /* ─── Pixel display text colors ────────────────────────────────────── */
   --casio-on-lcd: var(--casio-lcd-on);
-  --casio-on-dark: #a8ccbe; /* teal-tinted light text on dark plastic */
-  --casio-on-dark-dim: #506860; /* dimmed teal-gray text */
+  --casio-on-dark: #a8ccbe;
+  /* teal-tinted light text on dark plastic */
+  --casio-on-dark-dim: #506860;
+  /* dimmed teal-gray text */
   /* ─── Standard fallback palette (keep token parity with other themes) ── */
   --color-primary: var(--casio-red);
   --color-primary-light: var(--casio-red-hi);
@@ -5389,8 +5876,8 @@ input[type=range]::-webkit-slider-thumb {
   --color-info-dark: #1040a0;
   --color-info-light: #4080e0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC TOKENS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: var(--casio-on-dark);
   --text-secondary: var(--casio-on-dark-dim);
   --text-muted: #3a5850;
@@ -5399,6 +5886,7 @@ input[type=range]::-webkit-slider-thumb {
   --text-dark: var(--casio-on-dark);
   --text-accent: var(--casio-red);
   --bg-color: var(--casio-body);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.85));
   --panel-bg-dark: var(--casio-body);
   --device-surface: var(--casio-face);
   --list-item-bg: rgba(255, 255, 255, 0.04);
@@ -5441,14 +5929,20 @@ input[type=range]::-webkit-slider-thumb {
   --highlight-60: rgba(255, 255, 255, 0.28);
   --highlight-80: rgba(255, 255, 255, 0.40);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — pixel-crisp, no smoothing
-     ═══════════════════════════════════════════════════════════════════════ */
-  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* large display — track title, clock */
-  --font-body: 'Share Tech Mono', 'Courier New', monospace; /* body text — readable */
-  --font-label: 'Share Tech Mono', 'Courier New', monospace; /* buttons, labels, menus */
-  --font-title: 'Share Tech Mono', 'Courier New', monospace; /* section headings */
-  --font-mono: 'Share Tech Mono', 'Courier New', monospace; /* times, values, metadata */
-  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace; /* tech/data labels */
+      TYPOGRAPHY — pixel-crisp, no smoothing
+      ═══════════════════════════════════════════════════════════════════════ */
+  --font-display: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* large display — track title, clock */
+  --font-body: 'Share Tech Mono', 'Courier New', monospace;
+  /* body text — readable */
+  --font-label: 'Share Tech Mono', 'Courier New', monospace;
+  /* buttons, labels, menus */
+  --font-title: 'Share Tech Mono', 'Courier New', monospace;
+  /* section headings */
+  --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  /* times, values, metadata */
+  --font-tech: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* tech/data labels */
   /* VT323 renders large — calibrate sizes down one step */
   /* clamp() makes every rem-based rule responsive across all viewport widths */
   --text-xs: clamp(0.75rem, 0.7vw, 1rem);
@@ -5467,13 +5961,15 @@ input[type=range]::-webkit-slider-thumb {
   --tracking-wide: 0.1em;
   --tracking-wider: 0.18em;
   /* ═══════════════════════════════════════════════════════════════════════
-     RADIUS & TRANSITIONS  — hard edges, no animation
-     ═══════════════════════════════════════════════════════════════════════ */
-  --radius-sm: 2px; /* very slight plastic corner */
+      RADIUS & TRANSITIONS  — hard edges, no animation
+      ═══════════════════════════════════════════════════════════════════════ */
+  --radius-sm: 2px;
+  /* very slight plastic corner */
   --radius-md: 2px;
   --radius-lg: 3px;
   --radius-xl: 3px;
-  --radius-pill: 4px; /* even "pill" buttons are almost rectangular */
+  --radius-pill: 4px;
+  /* even "pill" buttons are almost rectangular */
   --transition-fast: none;
   --transition-normal: none;
   --transition-slow: none;

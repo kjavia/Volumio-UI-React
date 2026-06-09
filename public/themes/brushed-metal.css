@@ -101,6 +101,7 @@
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -299,6 +300,7 @@
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -646,6 +648,7 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -1272,6 +1275,7 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -1829,6 +1833,7 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -2368,6 +2373,7 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -2634,6 +2640,7 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -2915,6 +2922,7 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -3182,6 +3190,7 @@ code {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -3482,6 +3491,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -4598,6 +4608,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -4874,6 +4885,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -5530,6 +5542,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -5827,6 +5840,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);
@@ -6217,6 +6231,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #d0d0d0;
+  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   --panel-bg: var(--color-gray-900);
   --panel-bg-dark: #a8a8a8;
   --panel-bg-subtle: rgba(0, 0, 0, 0.05);

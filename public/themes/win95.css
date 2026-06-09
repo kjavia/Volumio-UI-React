@@ -7,9 +7,9 @@
 @import url("https://fonts.cdnfonts.com/css/w95fa");
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -22,31 +22,43 @@
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -66,8 +78,8 @@
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -75,7 +87,9 @@
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -138,15 +152,16 @@
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -154,7 +169,8 @@
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -164,9 +180,12 @@
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -174,8 +193,8 @@
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -202,16 +221,16 @@
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -219,9 +238,9 @@
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -234,31 +253,43 @@
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -278,8 +309,8 @@
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -287,7 +318,9 @@
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -350,15 +383,16 @@
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -366,7 +400,8 @@
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -376,9 +411,12 @@
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -386,8 +424,8 @@
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -414,16 +452,16 @@
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -534,9 +572,9 @@ code, pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -549,31 +587,43 @@ code, pre {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -593,8 +643,8 @@ code, pre {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -602,7 +652,9 @@ code, pre {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -665,15 +717,16 @@ code, pre {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -681,7 +734,8 @@ code, pre {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -691,9 +745,12 @@ code, pre {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -701,8 +758,8 @@ code, pre {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -729,16 +786,16 @@ code, pre {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -1110,9 +1167,9 @@ code, pre {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -1125,31 +1182,43 @@ code, pre {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -1169,8 +1238,8 @@ code, pre {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -1178,7 +1247,9 @@ code, pre {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -1241,15 +1312,16 @@ code, pre {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -1257,7 +1329,8 @@ code, pre {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -1267,9 +1340,12 @@ code, pre {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -1277,8 +1353,8 @@ code, pre {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -1305,16 +1381,16 @@ code, pre {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -1598,9 +1674,9 @@ code, pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -1613,31 +1689,43 @@ code, pre {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -1657,8 +1745,8 @@ code, pre {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -1666,7 +1754,9 @@ code, pre {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -1729,15 +1819,16 @@ code, pre {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -1745,7 +1836,8 @@ code, pre {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -1755,9 +1847,12 @@ code, pre {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -1765,8 +1860,8 @@ code, pre {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -1793,16 +1888,16 @@ code, pre {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -2061,9 +2156,9 @@ label {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -2076,31 +2171,43 @@ label {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -2120,8 +2227,8 @@ label {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -2129,7 +2236,9 @@ label {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -2192,15 +2301,16 @@ label {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -2208,7 +2318,8 @@ label {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -2218,9 +2329,12 @@ label {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -2228,8 +2342,8 @@ label {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -2256,16 +2370,16 @@ label {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -2336,9 +2450,9 @@ label {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -2351,31 +2465,43 @@ label {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -2395,8 +2521,8 @@ label {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -2404,7 +2530,9 @@ label {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -2467,15 +2595,16 @@ label {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -2483,7 +2612,8 @@ label {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -2493,9 +2623,12 @@ label {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -2503,8 +2636,8 @@ label {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -2531,16 +2664,16 @@ label {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -2671,9 +2804,9 @@ input[type=range]::-webkit-slider-runnable-track {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -2686,31 +2819,43 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -2730,8 +2875,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -2739,7 +2884,9 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -2802,15 +2949,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -2818,7 +2966,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -2828,9 +2977,12 @@ input[type=range]::-webkit-slider-runnable-track {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -2838,8 +2990,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -2866,16 +3018,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -2931,9 +3083,9 @@ input[type=range]::-webkit-slider-runnable-track {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -2946,31 +3098,43 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -2990,8 +3154,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -2999,7 +3163,9 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -3062,15 +3228,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -3078,7 +3245,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -3088,9 +3256,12 @@ input[type=range]::-webkit-slider-runnable-track {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -3098,8 +3269,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -3126,16 +3297,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -3223,9 +3394,9 @@ input[type=range]::-webkit-slider-runnable-track {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -3238,31 +3409,43 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -3282,8 +3465,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -3291,7 +3474,9 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -3354,15 +3539,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -3370,7 +3556,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -3380,9 +3567,12 @@ input[type=range]::-webkit-slider-runnable-track {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -3390,8 +3580,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -3418,16 +3608,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -3958,9 +4148,9 @@ input[type=range]::-webkit-slider-runnable-track {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -3973,31 +4163,43 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -4017,8 +4219,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -4026,7 +4228,9 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -4089,15 +4293,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -4105,7 +4310,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -4115,9 +4321,12 @@ input[type=range]::-webkit-slider-runnable-track {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -4125,8 +4334,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -4153,16 +4362,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -4270,9 +4479,9 @@ input[type=range]::-webkit-slider-runnable-track {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -4285,31 +4494,43 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -4329,8 +4550,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -4338,7 +4559,9 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -4401,15 +4624,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -4417,7 +4641,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -4427,9 +4652,12 @@ input[type=range]::-webkit-slider-runnable-track {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -4437,8 +4665,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -4465,16 +4693,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -4601,9 +4829,9 @@ input[type=range]::-webkit-slider-runnable-track {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -4616,31 +4844,43 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -4660,8 +4900,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -4669,7 +4909,9 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -4732,15 +4974,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -4748,7 +4991,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -4758,9 +5002,12 @@ input[type=range]::-webkit-slider-runnable-track {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -4768,8 +5015,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -4796,16 +5043,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -4898,9 +5145,9 @@ input[type=range]::-webkit-slider-runnable-track {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -4913,31 +5160,43 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -4957,8 +5216,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -4966,7 +5225,9 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -5029,15 +5290,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -5045,7 +5307,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -5055,9 +5318,12 @@ input[type=range]::-webkit-slider-runnable-track {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -5065,8 +5331,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -5093,16 +5359,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -5260,9 +5526,9 @@ input[type=range]::-webkit-slider-runnable-track {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -5275,31 +5541,43 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -5319,8 +5597,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -5328,7 +5606,9 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -5391,15 +5671,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -5407,7 +5688,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -5417,9 +5699,12 @@ input[type=range]::-webkit-slider-runnable-track {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -5427,8 +5712,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -5455,16 +5740,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);
@@ -6007,9 +6292,9 @@ input[type=range]::-webkit-slider-runnable-track {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE - Windows 95 Theme
-     Classic silver desktop OS aesthetic
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE - Windows 95 Theme
+      Classic silver desktop OS aesthetic
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
   --color-primary: #000080;
   --color-primary-light: #1084d0;
@@ -6022,31 +6307,43 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-gray-850: #000000;
   --color-gray-800: #1a1a1a;
   --color-gray-750: #404040;
-  --color-gray-700: #808080; /* Win95 shadow / dark border */
+  --color-gray-700: #808080;
+  /* Win95 shadow / dark border */
   --color-gray-600: #a0a0a0;
   --color-gray-550: #b0b0b0;
-  --color-gray-500: #c0c0c0; /* Classic Win95 silver */
+  --color-gray-500: #c0c0c0;
+  /* Classic Win95 silver */
   --color-gray-400: #c8c8c8;
   --color-gray-300: #d4d4d4;
   --color-gray-250: #d8d8d8;
-  --color-gray-200: #dfdfdf; /* Highlight face */
+  --color-gray-200: #dfdfdf;
+  /* Highlight face */
   --color-gray-150: #e8e8e8;
   --color-gray-100: #ececec;
   --color-gray-075: #f0f0f0;
   --color-gray-050: #f4f4f4;
   --color-gray-025: #f8f8f8;
   --color-gray-010: #fcfcfc;
-  --color-white: #ffffff; /* Top-left highlight bevel */
+  --color-white: #ffffff;
+  /* Top-left highlight bevel */
   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-  --win95-face: #c0c0c0; /* button / window face */
-  --win95-highlight: #ffffff; /* top-left bevel edge */
-  --win95-light: #dfdfdf; /* inner top-left bevel */
-  --win95-shadow: #808080; /* inner bottom-right bevel */
-  --win95-dark: #404040; /* outer bottom-right bevel */
-  --win95-titlebar: #000080; /* active title bar */
+  --win95-face: #c0c0c0;
+  /* button / window face */
+  --win95-highlight: #ffffff;
+  /* top-left bevel edge */
+  --win95-light: #dfdfdf;
+  /* inner top-left bevel */
+  --win95-shadow: #808080;
+  /* inner bottom-right bevel */
+  --win95-dark: #404040;
+  /* outer bottom-right bevel */
+  --win95-titlebar: #000080;
+  /* active title bar */
   --win95-titletext: #ffffff;
-  --win95-desktop: #008080; /* classic teal desktop */
-  --win95-inset: #808080; /* inset/sunken control bg border */
+  --win95-desktop: #008080;
+  /* classic teal desktop */
+  --win95-inset: #808080;
+  /* inset/sunken control bg border */
   /* ─── Secondary ───────────────────────────────────────────────────── */
   --color-secondary: #808080;
   --color-secondary-light: #a0a0a0;
@@ -6066,8 +6363,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --color-info-dark: #006060;
   --color-info-light: #00a0a0;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLORS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLORS
+      ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #000000;
   --text-secondary: #404040;
   --text-accent: var(--color-primary);
@@ -6075,7 +6372,9 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-warning: var(--color-warning);
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
-  --bg-color: var(--win95-face); /* page background */
+  --bg-color: var(--win95-face);
+  /* page background */
+  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -6138,15 +6437,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --btn-info-top: var(--color-info);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
   --shadow-08: rgba(0, 0, 0, 0.08);
   --shadow-10: rgba(0, 0, 0, 0.1);
   --shadow-15: rgba(0, 0, 0, 0.15);
-  --shadow-20: rgba(0, 0, 0, 0.08); /* lighter — silver bg */
+  --shadow-20: rgba(0, 0, 0, 0.08);
+  /* lighter — silver bg */
   --shadow-30: rgba(0, 0, 0, 0.12);
   --shadow-40: rgba(0, 0, 0, 0.4);
   --shadow-50: rgba(0, 0, 0, 0.5);
@@ -6154,7 +6454,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --shadow-80: rgba(0, 0, 0, 0.8);
   --shadow-90: rgba(0, 0, 0, 0.9);
   --highlight-03: rgba(0, 0, 0, 0.03);
-  --highlight-05: rgba(0, 0, 0, 0.08); /* dark borders on light bg */
+  --highlight-05: rgba(0, 0, 0, 0.08);
+  /* dark borders on light bg */
   --highlight-10: rgba(0, 0, 0, 0.15);
   --highlight-15: rgba(0, 0, 0, 0.2);
   --highlight-20: rgba(0, 0, 0, 0.25);
@@ -6164,9 +6465,12 @@ input[type=range]::-webkit-slider-runnable-track {
   --highlight-60: rgba(0, 0, 0, 0.6);
   --highlight-80: rgba(0, 0, 0, 0.8);
   /* ─── Weather / text-light semantic aliases for light theme ──────── */
-  --text-light: #000000; /* primary text on silver bg */
-  --text-muted: #404040; /* secondary/muted text */
-  --text-dim: #606060; /* dimmed text */
+  --text-light: #000000;
+  /* primary text on silver bg */
+  --text-muted: #404040;
+  /* secondary/muted text */
+  --text-dim: #606060;
+  /* dimmed text */
   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
   --glow-primary: rgba(0, 0, 128, 0.3);
   --glow-success: rgba(0, 128, 0, 0.3);
@@ -6174,8 +6478,8 @@ input[type=range]::-webkit-slider-runnable-track {
   --glow-danger: rgba(128, 0, 0, 0.3);
   --glow-info: rgba(0, 128, 128, 0.3);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
@@ -6202,16 +6506,16 @@ input[type=range]::-webkit-slider-runnable-track {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BORDER RADIUS — Win95 is square, no rounding
-     ═══════════════════════════════════════════════════════════════════════ */
+      BORDER RADIUS — Win95 is square, no rounding
+      ═══════════════════════════════════════════════════════════════════════ */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 0px;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD-COMPAT ALIASES
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD-COMPAT ALIASES
+      ═══════════════════════════════════════════════════════════════════════ */
   --color-orange-vivid: var(--win95-titlebar);
   --color-aqua-vivid: var(--win95-desktop);
   --text-orange: var(--win95-titlebar);

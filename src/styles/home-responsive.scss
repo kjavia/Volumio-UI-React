@@ -18,6 +18,11 @@ body,
   height: 100%;
 }
 
+/* ── Album art shadow — uses per-theme --album-art-shadow variable for contrast against any theme background ── */
+.album-art-player .rainbow-border {
+  filter: var(--album-art-shadow, drop-shadow(0 8px 24px rgba(0, 0, 0, 0.6)));
+}
+
 /* ── User color overrides via plugin config ──
    Rules are scoped behind .sp-has-* classes that the app toggles on :root
    only when the user has configured a color.  When no override is set
@@ -70,6 +75,20 @@ body,
   border-color: var(--sp-btn-bg-color) !important;
 }
 
+/* Slider handle (cap) and fill bar — seekbar and volume (player only) */
+:root.sp-has-btn-bg-color .slider-cap,
+:root.sp-has-btn-bg-color .slider-fill {
+  background: var(--sp-btn-bg-color) !important;
+}
+
+:root.sp-has-btn-bg-color .lsp-volume-popup__range::-webkit-slider-thumb {
+  background: var(--sp-btn-bg-color) !important;
+}
+
+:root.sp-has-btn-bg-color .lsp-volume-popup__range::-moz-range-thumb {
+  background: var(--sp-btn-bg-color) !important;
+}
+
 /* ── Progress / volume bar track color — the unfilled rail (player only) ── */
 :root.sp-has-bar-track-color .slider-container .slider-track,
 :root.sp-has-bar-track-color .seekbar-container-wrap .slider-track,
@@ -89,11 +108,17 @@ body,
   color: var(--sp-bar-text-color) !important;
 }
 
-/* ── Icon button color — secondary icon buttons (player only) ── */
+/* ── Icon button color — secondary icon buttons + volume icon (player only) ── */
 :root.sp-has-icon-btn-color .player-controls .btn-icon .material-icons,
 :root.sp-has-icon-btn-color .player-controls .btn-icon .material-icons-outlined,
 :root.sp-has-icon-btn-color .controls-transport-row .btn-icon .material-icons,
 :root.sp-has-icon-btn-color .controls-transport-row .btn-icon .material-icons-outlined,
+:root.sp-has-icon-btn-color .player-controls-container .btn-icon .material-icons,
+:root.sp-has-icon-btn-color .player-controls-container .btn-icon .material-icons-outlined,
+:root.sp-has-icon-btn-color .volume-manager .btn-icon .material-icons,
+:root.sp-has-icon-btn-color .volume-manager .btn-icon .material-icons-outlined,
+:root.sp-has-icon-btn-color .volume-manager-wrap .btn-icon .material-icons,
+:root.sp-has-icon-btn-color .volume-manager-wrap .btn-icon .material-icons-outlined,
 :root.sp-has-icon-btn-color .lsp-btn-group .btn-icon .material-icons,
 :root.sp-has-icon-btn-color .lsp-btn-group .btn-icon .material-icons-outlined {
   color: var(--sp-icon-btn-color) !important;
@@ -101,6 +126,9 @@ body,
 
 :root.sp-has-icon-btn-color .player-controls .btn-icon .material-icons::after,
 :root.sp-has-icon-btn-color .controls-transport-row .btn-icon .material-icons::after,
+:root.sp-has-icon-btn-color .player-controls-container .btn-icon .material-icons::after,
+:root.sp-has-icon-btn-color .volume-manager .btn-icon .material-icons::after,
+:root.sp-has-icon-btn-color .volume-manager-wrap .btn-icon .material-icons::after,
 :root.sp-has-icon-btn-color .lsp-btn-group .btn-icon .material-icons::after {
   color: var(--sp-icon-btn-color) !important;
 }

@@ -7,9 +7,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&family=JetBrains+Mono:wght@400;500&display=swap");
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -59,8 +59,8 @@
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -69,6 +69,7 @@
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -130,8 +131,8 @@
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -162,8 +163,8 @@
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -188,8 +189,8 @@
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -247,9 +248,9 @@
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -299,8 +300,8 @@
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -309,6 +310,7 @@
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -370,8 +372,8 @@
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -402,8 +404,8 @@
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -428,8 +430,8 @@
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -607,9 +609,9 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -659,8 +661,8 @@ pre {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -669,6 +671,7 @@ pre {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -730,8 +733,8 @@ pre {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -762,8 +765,8 @@ pre {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -788,8 +791,8 @@ pre {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -1199,9 +1202,9 @@ pre {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -1251,8 +1254,8 @@ pre {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -1261,6 +1264,7 @@ pre {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -1322,8 +1326,8 @@ pre {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -1354,8 +1358,8 @@ pre {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -1380,8 +1384,8 @@ pre {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -1717,9 +1721,9 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -1769,8 +1773,8 @@ pre {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -1779,6 +1783,7 @@ pre {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -1840,8 +1845,8 @@ pre {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -1872,8 +1877,8 @@ pre {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -1898,8 +1903,8 @@ pre {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -2198,9 +2203,9 @@ label {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -2250,8 +2255,8 @@ label {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -2260,6 +2265,7 @@ label {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -2321,8 +2327,8 @@ label {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -2353,8 +2359,8 @@ label {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -2379,8 +2385,8 @@ label {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -2496,9 +2502,9 @@ label {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -2548,8 +2554,8 @@ label {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -2558,6 +2564,7 @@ label {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -2619,8 +2626,8 @@ label {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -2651,8 +2658,8 @@ label {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -2677,8 +2684,8 @@ label {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -2930,9 +2937,9 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -2982,8 +2989,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -2992,6 +2999,7 @@ input[type=range]::-moz-range-thumb:active {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -3053,8 +3061,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -3085,8 +3093,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -3111,8 +3119,8 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -3232,9 +3240,9 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -3284,8 +3292,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -3294,6 +3302,7 @@ input[type=range]::-moz-range-thumb:active {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -3355,8 +3364,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -3387,8 +3396,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -3413,8 +3422,8 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -3542,9 +3551,9 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -3594,8 +3603,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -3604,6 +3613,7 @@ input[type=range]::-moz-range-thumb:active {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -3665,8 +3675,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -3697,8 +3707,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -3723,8 +3733,8 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -4503,9 +4513,9 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -4555,8 +4565,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -4565,6 +4575,7 @@ input[type=range]::-moz-range-thumb:active {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -4626,8 +4637,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -4658,8 +4669,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -4684,8 +4695,8 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -4862,9 +4873,9 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -4914,8 +4925,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -4924,6 +4935,7 @@ input[type=range]::-moz-range-thumb:active {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -4985,8 +4997,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -5017,8 +5029,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -5043,8 +5055,8 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -5325,9 +5337,9 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -5377,8 +5389,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -5387,6 +5399,7 @@ input[type=range]::-moz-range-thumb:active {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -5448,8 +5461,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -5480,8 +5493,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -5506,8 +5519,8 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -5647,9 +5660,9 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -5699,8 +5712,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -5709,6 +5722,7 @@ input[type=range]::-moz-range-thumb:active {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -5770,8 +5784,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -5802,8 +5816,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -5828,8 +5842,8 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);
@@ -6099,9 +6113,9 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-       COLOR PALETTE - OLED Theme
-       Pure black with orange accent for true OLED displays
-       ═══════════════════════════════════════════════════════════════════════ */
+    COLOR PALETTE - OLED Theme
+    Pure black with orange accent for true OLED displays
+    ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ─────────────────────────────────────────────── */
   --color-primary: #ff6600;
   --color-primary-light: #ff8533;
@@ -6151,8 +6165,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0891b2;
   --color-info-light: #22d3ee;
   /* ═══════════════════════════════════════════════════════════════════════
-       SEMANTIC COLORS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SEMANTIC COLORS
+    ═══════════════════════════════════════════════════════════════════════ */
   --text-primary: #f0f0f0;
   --text-secondary: #888888;
   --text-accent: var(--color-primary);
@@ -6161,6 +6175,7 @@ input[type=range]::-moz-range-thumb:active {
   --text-danger: var(--color-danger);
   --text-info: var(--color-info);
   --bg-color: #000000;
+  --album-art-shadow: drop-shadow(0 0 16px rgba(255, 255, 255, 0.1)) drop-shadow(0 8px 28px rgba(0, 0, 0, 1));
   --panel-bg-dark: #000000;
   --device-surface: #000000;
   --btn-bg-dark: var(--color-gray-700);
@@ -6222,8 +6237,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info);
   /* ═══════════════════════════════════════════════════════════════════════
-       SHADOW & HIGHLIGHT OVERLAYS
-       ═══════════════════════════════════════════════════════════════════════ */
+    SHADOW & HIGHLIGHT OVERLAYS
+    ═══════════════════════════════════════════════════════════════════════ */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
   --shadow-05: rgba(0, 0, 0, 0.05);
@@ -6254,8 +6269,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(239, 68, 68, 0.4);
   --glow-info: rgba(6, 182, 212, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-       TYPOGRAPHY
-       ═══════════════════════════════════════════════════════════════════════ */
+    TYPOGRAPHY
+    ═══════════════════════════════════════════════════════════════════════ */
   --font-body: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-label: 'Inter', 'system-ui', -apple-system, sans-serif;
   --font-tech: 'Minisystem', 'Inter', 'system-ui', sans-serif;
@@ -6280,8 +6295,8 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.04em;
   --tracking-widest: 0.08em;
   /* ═══════════════════════════════════════════════════════════════════════
-       BACKWARD COMPATIBILITY ALIASES
-       ═══════════════════════════════════════════════════════════════════════ */
+    BACKWARD COMPATIBILITY ALIASES
+    ═══════════════════════════════════════════════════════════════════════ */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
   --color-aqua-mid: var(--color-primary-dark);

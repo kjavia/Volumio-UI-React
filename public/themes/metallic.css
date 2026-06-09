@@ -5,8 +5,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Titillium+Web:wght@300;400;600;700&family=Share+Tech+Mono&display=swap");
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -62,8 +62,8 @@
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -77,6 +77,7 @@
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -117,9 +118,9 @@
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -152,8 +153,8 @@
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -209,8 +210,8 @@
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -224,6 +225,7 @@
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -264,9 +266,9 @@
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -454,8 +456,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -511,8 +513,8 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -526,6 +528,7 @@ pre {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -566,9 +569,9 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -968,8 +971,8 @@ pre {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -1025,8 +1028,8 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -1040,6 +1043,7 @@ pre {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -1080,9 +1084,9 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -1378,8 +1382,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -1435,8 +1439,8 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -1450,6 +1454,7 @@ pre {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -1490,9 +1495,9 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -1801,8 +1806,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -1858,8 +1863,8 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -1873,6 +1878,7 @@ pre {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -1913,9 +1919,9 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -2014,8 +2020,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -2071,8 +2077,8 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -2086,6 +2092,7 @@ pre {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -2126,9 +2133,9 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -2244,8 +2251,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -2301,8 +2308,8 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -2316,6 +2323,7 @@ pre {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -2356,9 +2364,9 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -2470,8 +2478,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -2527,8 +2535,8 @@ pre {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -2542,6 +2550,7 @@ pre {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -2582,9 +2591,9 @@ pre {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -2717,8 +2726,8 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -2774,8 +2783,8 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -2789,6 +2798,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -2829,9 +2839,9 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -3521,8 +3531,8 @@ h2 {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -3578,8 +3588,8 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -3593,6 +3603,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -3633,9 +3644,9 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -3746,8 +3757,8 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -3803,8 +3814,8 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -3818,6 +3829,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -3858,9 +3870,9 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -4080,8 +4092,8 @@ h2 {
 /* padding and border-radius set directly on .playlist-item above */
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -4137,8 +4149,8 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -4152,6 +4164,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -4192,9 +4205,9 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -4311,8 +4324,8 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -4368,8 +4381,8 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -4383,6 +4396,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -4423,9 +4437,9 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -4650,8 +4664,8 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Dark Metallic / Black Chrome Theme
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Dark Metallic / Black Chrome Theme
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Electric Cyan/Blue) ────────────────────────────────── */
   --color-primary: #00e1ff;
   --color-primary-light: #66efff;
@@ -4707,8 +4721,8 @@ h2 {
   --color-info-dark: #0099cc;
   --color-info-light: #66ddff;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-100);
   --text-secondary: var(--color-gray-400);
@@ -4722,6 +4736,7 @@ h2 {
   --text-muted: var(--color-gray-500);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: #050505;
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.9));
   --panel-bg-dark: #0a0a0a;
   --device-surface: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -4762,9 +4777,9 @@ h2 {
   --font-mono: 'Share Tech Mono', monospace;
   --font-label: 'Titillium Web', sans-serif;
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);

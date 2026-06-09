@@ -1,242 +1,261 @@
 :root {
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        COLOR PALETTE - Windows 95 Theme
        Classic silver desktop OS aesthetic
        ═══════════════════════════════════════════════════════════════════════ */
 
-    /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
-    --color-primary: #000080;
-    --color-primary-light: #1084d0;
-    --color-primary-dark: #00005a;
-    --color-primary-deep: #000040;
+   /* ─── Primary (Navy title bar) ─────────────────────────────────────── */
+   --color-primary: #000080;
+   --color-primary-light: #1084d0;
+   --color-primary-dark: #00005a;
+   --color-primary-deep: #000040;
 
-    /* ─── Win95 Silver Palette ────────────────────────────────────────── */
-    --color-black:      #000000;
-    --color-gray-950:   #000000;
-    --color-gray-900:   #000000;
-    --color-gray-850:   #000000;
-    --color-gray-800:   #1a1a1a;
-    --color-gray-750:   #404040;
-    --color-gray-700:   #808080;  /* Win95 shadow / dark border */
-    --color-gray-600:   #a0a0a0;
-    --color-gray-550:   #b0b0b0;
-    --color-gray-500:   #c0c0c0;  /* Classic Win95 silver */
-    --color-gray-400:   #c8c8c8;
-    --color-gray-300:   #d4d4d4;
-    --color-gray-250:   #d8d8d8;
-    --color-gray-200:   #dfdfdf;  /* Highlight face */
-    --color-gray-150:   #e8e8e8;
-    --color-gray-100:   #ececec;
-    --color-gray-075:   #f0f0f0;
-    --color-gray-050:   #f4f4f4;
-    --color-gray-025:   #f8f8f8;
-    --color-gray-010:   #fcfcfc;
-    --color-white:      #ffffff;  /* Top-left highlight bevel */
+   /* ─── Win95 Silver Palette ────────────────────────────────────────── */
+   --color-black: #000000;
+   --color-gray-950: #000000;
+   --color-gray-900: #000000;
+   --color-gray-850: #000000;
+   --color-gray-800: #1a1a1a;
+   --color-gray-750: #404040;
+   --color-gray-700: #808080;
+   /* Win95 shadow / dark border */
+   --color-gray-600: #a0a0a0;
+   --color-gray-550: #b0b0b0;
+   --color-gray-500: #c0c0c0;
+   /* Classic Win95 silver */
+   --color-gray-400: #c8c8c8;
+   --color-gray-300: #d4d4d4;
+   --color-gray-250: #d8d8d8;
+   --color-gray-200: #dfdfdf;
+   /* Highlight face */
+   --color-gray-150: #e8e8e8;
+   --color-gray-100: #ececec;
+   --color-gray-075: #f0f0f0;
+   --color-gray-050: #f4f4f4;
+   --color-gray-025: #f8f8f8;
+   --color-gray-010: #fcfcfc;
+   --color-white: #ffffff;
+   /* Top-left highlight bevel */
 
-    /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
-    --win95-face:       #c0c0c0;  /* button / window face */
-    --win95-highlight:  #ffffff;  /* top-left bevel edge */
-    --win95-light:      #dfdfdf;  /* inner top-left bevel */
-    --win95-shadow:     #808080;  /* inner bottom-right bevel */
-    --win95-dark:       #404040;  /* outer bottom-right bevel */
-    --win95-titlebar:   #000080;  /* active title bar */
-    --win95-titletext:  #ffffff;
-    --win95-desktop:    #008080;  /* classic teal desktop */
-    --win95-inset:      #808080;  /* inset/sunken control bg border */
+   /* ─── Win95 3D Bevel colors ───────────────────────────────────────── */
+   --win95-face: #c0c0c0;
+   /* button / window face */
+   --win95-highlight: #ffffff;
+   /* top-left bevel edge */
+   --win95-light: #dfdfdf;
+   /* inner top-left bevel */
+   --win95-shadow: #808080;
+   /* inner bottom-right bevel */
+   --win95-dark: #404040;
+   /* outer bottom-right bevel */
+   --win95-titlebar: #000080;
+   /* active title bar */
+   --win95-titletext: #ffffff;
+   --win95-desktop: #008080;
+   /* classic teal desktop */
+   --win95-inset: #808080;
+   /* inset/sunken control bg border */
 
-    /* ─── Secondary ───────────────────────────────────────────────────── */
-    --color-secondary: #808080;
-    --color-secondary-light: #a0a0a0;
-    --color-secondary-dark: #606060;
+   /* ─── Secondary ───────────────────────────────────────────────────── */
+   --color-secondary: #808080;
+   --color-secondary-light: #a0a0a0;
+   --color-secondary-dark: #606060;
 
-    /* ─── Status colors ───────────────────────────────────────────────── */
-    --color-success: #008000;
-    --color-success-dark: #006000;
-    --color-success-light: #00a000;
+   /* ─── Status colors ───────────────────────────────────────────────── */
+   --color-success: #008000;
+   --color-success-dark: #006000;
+   --color-success-light: #00a000;
 
-    --color-warning: #808000;
-    --color-warning-dark: #606000;
-    --color-warning-light: #a0a000;
+   --color-warning: #808000;
+   --color-warning-dark: #606000;
+   --color-warning-light: #a0a000;
 
-    --color-danger: #800000;
-    --color-danger-dark: #600000;
-    --color-danger-light: #a00000;
-    --color-danger-muted: #400000;
+   --color-danger: #800000;
+   --color-danger-dark: #600000;
+   --color-danger-light: #a00000;
+   --color-danger-muted: #400000;
 
-    --color-info: #008080;
-    --color-info-dark: #006060;
-    --color-info-light: #00a0a0;
+   --color-info: #008080;
+   --color-info-dark: #006060;
+   --color-info-light: #00a0a0;
 
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        SEMANTIC COLORS
        ═══════════════════════════════════════════════════════════════════════ */
 
-    --text-primary:   #000000;
-    --text-secondary: #404040;
-    --text-accent:    var(--color-primary);
-    --text-success:   var(--color-success);
-    --text-warning:   var(--color-warning);
-    --text-danger:    var(--color-danger);
-    --text-info:      var(--color-info);
+   --text-primary: #000000;
+   --text-secondary: #404040;
+   --text-accent: var(--color-primary);
+   --text-success: var(--color-success);
+   --text-warning: var(--color-warning);
+   --text-danger: var(--color-danger);
+   --text-info: var(--color-info);
 
-    --bg-color:        var(--win95-face);    /* page background */
-    --panel-bg-dark:   var(--win95-face);
-    --device-surface:  var(--win95-face);
+   --bg-color: var(--win95-face);
+   /* page background */
+   --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+   --panel-bg-dark: var(--win95-face);
+   --device-surface: var(--win95-face);
 
-    --btn-bg-dark:      var(--win95-face);
-    --btn-bg-light:     var(--win95-face);
-    --btn-bg-primary:   var(--win95-titlebar);
-    --btn-bg-secondary: var(--win95-face);
-    --btn-bg-success:   var(--color-success);
-    --btn-bg-warning:   var(--color-warning);
-    --btn-bg-danger:    var(--color-danger);
-    --btn-bg-info:      var(--color-info);
+   --btn-bg-dark: var(--win95-face);
+   --btn-bg-light: var(--win95-face);
+   --btn-bg-primary: var(--win95-titlebar);
+   --btn-bg-secondary: var(--win95-face);
+   --btn-bg-success: var(--color-success);
+   --btn-bg-warning: var(--color-warning);
+   --btn-bg-danger: var(--color-danger);
+   --btn-bg-info: var(--color-info);
 
-    /* ─── Alert Backgrounds ───────────────────────────────────────────── */
-    --alert-bg-success: rgba(0, 128, 0, 0.15);
-    --alert-bg-warning: rgba(128, 128, 0, 0.15);
-    --alert-bg-danger:  rgba(128, 0, 0, 0.15);
-    --alert-bg-info:    rgba(0, 128, 128, 0.15);
-    --alert-border-success: var(--color-success);
-    --alert-border-warning: var(--color-warning);
-    --alert-border-danger:  var(--color-danger);
-    --alert-border-info:    var(--color-info);
+   /* ─── Alert Backgrounds ───────────────────────────────────────────── */
+   --alert-bg-success: rgba(0, 128, 0, 0.15);
+   --alert-bg-warning: rgba(128, 128, 0, 0.15);
+   --alert-bg-danger: rgba(128, 0, 0, 0.15);
+   --alert-bg-info: rgba(0, 128, 128, 0.15);
+   --alert-border-success: var(--color-success);
+   --alert-border-warning: var(--color-warning);
+   --alert-border-danger: var(--color-danger);
+   --alert-border-info: var(--color-info);
 
-    /* ─── UI Components ───────────────────────────────────────────────── */
-    --list-item-bg:       rgba(0, 0, 0, 0.04);
-    --list-item-bg-hover: #000080;
-    --list-item-text-hover: #ffffff;
-    --border-dark:        var(--win95-dark);
-    --border-light:       var(--win95-highlight);
-    --border-warm:        var(--win95-shadow);
-    --border-primary:     var(--color-primary);
-    --border-secondary:   var(--win95-shadow);
-    --border-success:     var(--color-success);
-    --border-warning:     var(--color-warning);
-    --border-danger:      var(--color-danger);
-    --border-info:        var(--color-info);
+   /* ─── UI Components ───────────────────────────────────────────────── */
+   --list-item-bg: rgba(0, 0, 0, 0.04);
+   --list-item-bg-hover: #000080;
+   --list-item-text-hover: #ffffff;
+   --border-dark: var(--win95-dark);
+   --border-light: var(--win95-highlight);
+   --border-warm: var(--win95-shadow);
+   --border-primary: var(--color-primary);
+   --border-secondary: var(--win95-shadow);
+   --border-success: var(--color-success);
+   --border-warning: var(--color-warning);
+   --border-danger: var(--color-danger);
+   --border-info: var(--color-info);
 
-    /* ─── Indicators ──────────────────────────────────────────────────── */
-    --led-on:              var(--color-success);
-    --led-off:             #004000;
-    --indicator-success:   var(--color-success);
-    --indicator-warning:   var(--color-warning);
-    --indicator-danger:    var(--color-danger);
-    --indicator-info:      var(--color-info);
-    --indicator-error:     var(--color-danger);
+   /* ─── Indicators ──────────────────────────────────────────────────── */
+   --led-on: var(--color-success);
+   --led-off: #004000;
+   --indicator-success: var(--color-success);
+   --indicator-warning: var(--color-warning);
+   --indicator-danger: var(--color-danger);
+   --indicator-info: var(--color-info);
+   --indicator-error: var(--color-danger);
 
-    /* ─── No gradients — flat Win95 style ─────────────────────────────── */
-    --grad-primary:  var(--win95-titlebar);
-    --grad-metallic: var(--win95-face);
-    --grad-warm:     var(--win95-face);
+   /* ─── No gradients — flat Win95 style ─────────────────────────────── */
+   --grad-primary: var(--win95-titlebar);
+   --grad-metallic: var(--win95-face);
+   --grad-warm: var(--win95-face);
 
-    /* ─── Button Colors ───────────────────────────────────────────────── */
-    --btn-black-top:     var(--win95-face);
-    --btn-black-btm:     var(--win95-face);
-    --btn-white-top:     var(--win95-face);
-    --btn-white-btm:     var(--win95-face);
-    --btn-primary-top:   var(--win95-titlebar);
-    --btn-primary-btm:   var(--win95-titlebar);
-    --btn-secondary-top: var(--win95-face);
-    --btn-secondary-btm: var(--win95-face);
-    --btn-success-top:   var(--color-success);
-    --btn-success-btm:   var(--color-success);
-    --btn-warning-top:   var(--color-warning);
-    --btn-warning-btm:   var(--color-warning);
-    --btn-danger-top:    var(--color-danger);
-    --btn-danger-btm:    var(--color-danger);
-    --btn-info-top:      var(--color-info);
-    --btn-info-btm:      var(--color-info);
+   /* ─── Button Colors ───────────────────────────────────────────────── */
+   --btn-black-top: var(--win95-face);
+   --btn-black-btm: var(--win95-face);
+   --btn-white-top: var(--win95-face);
+   --btn-white-btm: var(--win95-face);
+   --btn-primary-top: var(--win95-titlebar);
+   --btn-primary-btm: var(--win95-titlebar);
+   --btn-secondary-top: var(--win95-face);
+   --btn-secondary-btm: var(--win95-face);
+   --btn-success-top: var(--color-success);
+   --btn-success-btm: var(--color-success);
+   --btn-warning-top: var(--color-warning);
+   --btn-warning-btm: var(--color-warning);
+   --btn-danger-top: var(--color-danger);
+   --btn-danger-btm: var(--color-danger);
+   --btn-info-top: var(--color-info);
+   --btn-info-btm: var(--color-info);
 
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        SHADOW & HIGHLIGHT OVERLAYS
        ═══════════════════════════════════════════════════════════════════════ */
 
-    --shadow-02: rgba(0, 0, 0, 0.02);
-    --shadow-03: rgba(0, 0, 0, 0.03);
-    --shadow-05: rgba(0, 0, 0, 0.05);
-    --shadow-08: rgba(0, 0, 0, 0.08);
-    --shadow-10: rgba(0, 0, 0, 0.1);
-    --shadow-15: rgba(0, 0, 0, 0.15);
-    --shadow-20: rgba(0, 0, 0, 0.08);  /* lighter — silver bg */
-    --shadow-30: rgba(0, 0, 0, 0.12);
-    --shadow-40: rgba(0, 0, 0, 0.4);
-    --shadow-50: rgba(0, 0, 0, 0.5);
-    --shadow-60: rgba(0, 0, 0, 0.6);
-    --shadow-80: rgba(0, 0, 0, 0.8);
-    --shadow-90: rgba(0, 0, 0, 0.9);
+   --shadow-02: rgba(0, 0, 0, 0.02);
+   --shadow-03: rgba(0, 0, 0, 0.03);
+   --shadow-05: rgba(0, 0, 0, 0.05);
+   --shadow-08: rgba(0, 0, 0, 0.08);
+   --shadow-10: rgba(0, 0, 0, 0.1);
+   --shadow-15: rgba(0, 0, 0, 0.15);
+   --shadow-20: rgba(0, 0, 0, 0.08);
+   /* lighter — silver bg */
+   --shadow-30: rgba(0, 0, 0, 0.12);
+   --shadow-40: rgba(0, 0, 0, 0.4);
+   --shadow-50: rgba(0, 0, 0, 0.5);
+   --shadow-60: rgba(0, 0, 0, 0.6);
+   --shadow-80: rgba(0, 0, 0, 0.8);
+   --shadow-90: rgba(0, 0, 0, 0.9);
 
-    --highlight-03: rgba(0, 0, 0, 0.03);
-    --highlight-05: rgba(0, 0, 0, 0.08);  /* dark borders on light bg */
-    --highlight-10: rgba(0, 0, 0, 0.15);
-    --highlight-15: rgba(0, 0, 0, 0.2);
-    --highlight-20: rgba(0, 0, 0, 0.25);
-    --highlight-30: rgba(0, 0, 0, 0.3);
-    --highlight-40: rgba(0, 0, 0, 0.4);
-    --highlight-50: rgba(0, 0, 0, 0.5);
-    --highlight-60: rgba(0, 0, 0, 0.6);
-    --highlight-80: rgba(0, 0, 0, 0.8);
+   --highlight-03: rgba(0, 0, 0, 0.03);
+   --highlight-05: rgba(0, 0, 0, 0.08);
+   /* dark borders on light bg */
+   --highlight-10: rgba(0, 0, 0, 0.15);
+   --highlight-15: rgba(0, 0, 0, 0.2);
+   --highlight-20: rgba(0, 0, 0, 0.25);
+   --highlight-30: rgba(0, 0, 0, 0.3);
+   --highlight-40: rgba(0, 0, 0, 0.4);
+   --highlight-50: rgba(0, 0, 0, 0.5);
+   --highlight-60: rgba(0, 0, 0, 0.6);
+   --highlight-80: rgba(0, 0, 0, 0.8);
 
-    /* ─── Weather / text-light semantic aliases for light theme ──────── */
-    --text-light:  #000000;       /* primary text on silver bg */
-    --text-muted:  #404040;       /* secondary/muted text */
-    --text-dim:    #606060;       /* dimmed text */
+   /* ─── Weather / text-light semantic aliases for light theme ──────── */
+   --text-light: #000000;
+   /* primary text on silver bg */
+   --text-muted: #404040;
+   /* secondary/muted text */
+   --text-dim: #606060;
+   /* dimmed text */
 
-    /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
-    --glow-primary: rgba(0, 0, 128, 0.3);
-    --glow-success: rgba(0, 128, 0, 0.3);
-    --glow-warning: rgba(128, 128, 0, 0.3);
-    --glow-danger:  rgba(128, 0, 0, 0.3);
-    --glow-info:    rgba(0, 128, 128, 0.3);
+   /* ─── Glow Effects (minimal in Win95) ─────────────────────────────── */
+   --glow-primary: rgba(0, 0, 128, 0.3);
+   --glow-success: rgba(0, 128, 0, 0.3);
+   --glow-warning: rgba(128, 128, 0, 0.3);
+   --glow-danger: rgba(128, 0, 0, 0.3);
+   --glow-info: rgba(0, 128, 128, 0.3);
 
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        TYPOGRAPHY
        ═══════════════════════════════════════════════════════════════════════ */
 
-    --font-body:    'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-    --font-label:   'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-    --font-tech:    'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-    --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
-    --font-mono:    'Courier New', 'Courier', monospace;
+   --font-body: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+   --font-label: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+   --font-tech: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+   --font-display: 'W95FA', 'MS Sans Serif', 'Tahoma', 'Arial', system-ui, sans-serif;
+   --font-mono: 'Courier New', 'Courier', monospace;
 
-    /* ── Fluid Type Scale ────────────────────────────────────────────────── */
-    --text-xs:   clamp(0.625rem,  0.589rem + 0.179vw, 0.75rem);
-    --text-sm:   clamp(0.75rem,   0.714rem + 0.179vw, 0.875rem);
-    --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
-    --text-md:   clamp(0.875rem,  0.804rem + 0.357vw, 1.125rem);
-    --text-lg:   clamp(1rem,      0.929rem + 0.357vw, 1.25rem);
-    --text-xl:   clamp(1.125rem,  1.018rem + 0.536vw, 1.5rem);
-    --text-2xl:  clamp(1.25rem,   1.071rem + 0.893vw, 1.875rem);
-    --text-3xl:  clamp(1.5rem,    1.214rem + 1.429vw, 2.5rem);
-    --text-4xl:  clamp(1.875rem,  1.482rem + 1.964vw, 3.25rem);
+   /* ── Fluid Type Scale ────────────────────────────────────────────────── */
+   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+   --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+   --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+   --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+   --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+   --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+   --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+   --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
 
-    /* ─── Line Heights ───────────────────────────────────────────────────── */
-    --leading-tight:   1.25;
-    --leading-normal:  1.5;
-    --leading-relaxed: 1.75;
+   /* ─── Line Heights ───────────────────────────────────────────────────── */
+   --leading-tight: 1.25;
+   --leading-normal: 1.5;
+   --leading-relaxed: 1.75;
 
-    /* ─── Letter Spacing ─────────────────────────────────────────────────── */
-    --tracking-tight:   -0.03em;
-    --tracking-normal:   0em;
-    --tracking-wide:     0.01em;
-    --tracking-wider:    0.03em;
-    --tracking-widest:   0.08em;
+   /* ─── Letter Spacing ─────────────────────────────────────────────────── */
+   --tracking-tight: -0.03em;
+   --tracking-normal: 0em;
+   --tracking-wide: 0.01em;
+   --tracking-wider: 0.03em;
+   --tracking-widest: 0.08em;
 
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        BORDER RADIUS — Win95 is square, no rounding
        ═══════════════════════════════════════════════════════════════════════ */
 
-    --radius-sm:   0px;
-    --radius-md:   0px;
-    --radius-lg:   0px;
-    --radius-xl:   0px;
-    --radius-full: 0px;
+   --radius-sm: 0px;
+   --radius-md: 0px;
+   --radius-lg: 0px;
+   --radius-xl: 0px;
+   --radius-full: 0px;
 
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        BACKWARD-COMPAT ALIASES
        ═══════════════════════════════════════════════════════════════════════ */
 
-    --color-orange-vivid:  var(--win95-titlebar);
-    --color-aqua-vivid:    var(--win95-desktop);
-    --text-orange:         var(--win95-titlebar);
+   --color-orange-vivid: var(--win95-titlebar);
+   --color-aqua-vivid: var(--win95-desktop);
+   --text-orange: var(--win95-titlebar);
 }

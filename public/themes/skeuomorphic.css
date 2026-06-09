@@ -2,8 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Michroma&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap");
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ────────────────────────────────────────────── */
   --color-primary: #ff4500;
   --color-primary-light: #ff7043;
@@ -57,8 +57,8 @@
   --color-info-dark: #1976d2;
   --color-info-light: #64b5f6;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-050);
   --text-secondary: var(--color-gray-300);
@@ -70,6 +70,7 @@
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -111,17 +112,13 @@
   --indicator-info: var(--color-info);
   --indicator-error: var(--color-danger);
   /* ─── Gradients ────────────────────────────────────────────────────── */
-  --grad-primary: linear-gradient(
-      90deg,
-      var(--color-primary-light),
-      var(--color-primary-dark)
-  );
+  --grad-primary: linear-gradient(90deg,
+        var(--color-primary-light),
+        var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  --grad-warm: linear-gradient(
-      135deg,
-      var(--color-taupe-light),
-      var(--color-taupe-dark)
-  );
+  --grad-warm: linear-gradient(135deg,
+        var(--color-taupe-light),
+        var(--color-taupe-dark));
   /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -140,8 +137,8 @@
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -172,8 +169,8 @@
   --glow-danger: rgba(255, 51, 51, 0.4);
   --glow-info: rgba(33, 150, 243, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
@@ -182,18 +179,27 @@
   --font-mono: 'Roboto Mono', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -205,9 +211,9 @@
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD COMPATIBILITY ALIASES
-     (Legacy variable names → New semantic names)
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD COMPATIBILITY ALIASES
+      (Legacy variable names → New semantic names)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Orange ────────────────────────────────────────────────── */
   --color-orange-vivid: var(--color-primary);
   --color-orange-light: var(--color-primary-light);
@@ -238,8 +244,8 @@
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ────────────────────────────────────────────── */
   --color-primary: #ff4500;
   --color-primary-light: #ff7043;
@@ -293,8 +299,8 @@
   --color-info-dark: #1976d2;
   --color-info-light: #64b5f6;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-050);
   --text-secondary: var(--color-gray-300);
@@ -306,6 +312,7 @@
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -347,17 +354,13 @@
   --indicator-info: var(--color-info);
   --indicator-error: var(--color-danger);
   /* ─── Gradients ────────────────────────────────────────────────────── */
-  --grad-primary: linear-gradient(
-      90deg,
-      var(--color-primary-light),
-      var(--color-primary-dark)
-  );
+  --grad-primary: linear-gradient(90deg,
+        var(--color-primary-light),
+        var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  --grad-warm: linear-gradient(
-      135deg,
-      var(--color-taupe-light),
-      var(--color-taupe-dark)
-  );
+  --grad-warm: linear-gradient(135deg,
+        var(--color-taupe-light),
+        var(--color-taupe-dark));
   /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -376,8 +379,8 @@
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -408,8 +411,8 @@
   --glow-danger: rgba(255, 51, 51, 0.4);
   --glow-info: rgba(33, 150, 243, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
@@ -418,18 +421,27 @@
   --font-mono: 'Roboto Mono', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -441,9 +453,9 @@
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD COMPATIBILITY ALIASES
-     (Legacy variable names → New semantic names)
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD COMPATIBILITY ALIASES
+      (Legacy variable names → New semantic names)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Orange ────────────────────────────────────────────────── */
   --color-orange-vivid: var(--color-primary);
   --color-orange-light: var(--color-primary-light);
@@ -697,8 +709,8 @@ ol li {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ────────────────────────────────────────────── */
   --color-primary: #ff4500;
   --color-primary-light: #ff7043;
@@ -752,8 +764,8 @@ ol li {
   --color-info-dark: #1976d2;
   --color-info-light: #64b5f6;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-050);
   --text-secondary: var(--color-gray-300);
@@ -765,6 +777,7 @@ ol li {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -806,17 +819,13 @@ ol li {
   --indicator-info: var(--color-info);
   --indicator-error: var(--color-danger);
   /* ─── Gradients ────────────────────────────────────────────────────── */
-  --grad-primary: linear-gradient(
-      90deg,
-      var(--color-primary-light),
-      var(--color-primary-dark)
-  );
+  --grad-primary: linear-gradient(90deg,
+        var(--color-primary-light),
+        var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  --grad-warm: linear-gradient(
-      135deg,
-      var(--color-taupe-light),
-      var(--color-taupe-dark)
-  );
+  --grad-warm: linear-gradient(135deg,
+        var(--color-taupe-light),
+        var(--color-taupe-dark));
   /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -835,8 +844,8 @@ ol li {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -867,8 +876,8 @@ ol li {
   --glow-danger: rgba(255, 51, 51, 0.4);
   --glow-info: rgba(33, 150, 243, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
@@ -877,18 +886,27 @@ ol li {
   --font-mono: 'Roboto Mono', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -900,9 +918,9 @@ ol li {
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD COMPATIBILITY ALIASES
-     (Legacy variable names → New semantic names)
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD COMPATIBILITY ALIASES
+      (Legacy variable names → New semantic names)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Orange ────────────────────────────────────────────────── */
   --color-orange-vivid: var(--color-primary);
   --color-orange-light: var(--color-primary-light);
@@ -1461,8 +1479,8 @@ ol li {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ────────────────────────────────────────────── */
   --color-primary: #ff4500;
   --color-primary-light: #ff7043;
@@ -1516,8 +1534,8 @@ ol li {
   --color-info-dark: #1976d2;
   --color-info-light: #64b5f6;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-050);
   --text-secondary: var(--color-gray-300);
@@ -1529,6 +1547,7 @@ ol li {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -1570,17 +1589,13 @@ ol li {
   --indicator-info: var(--color-info);
   --indicator-error: var(--color-danger);
   /* ─── Gradients ────────────────────────────────────────────────────── */
-  --grad-primary: linear-gradient(
-      90deg,
-      var(--color-primary-light),
-      var(--color-primary-dark)
-  );
+  --grad-primary: linear-gradient(90deg,
+        var(--color-primary-light),
+        var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  --grad-warm: linear-gradient(
-      135deg,
-      var(--color-taupe-light),
-      var(--color-taupe-dark)
-  );
+  --grad-warm: linear-gradient(135deg,
+        var(--color-taupe-light),
+        var(--color-taupe-dark));
   /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -1599,8 +1614,8 @@ ol li {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -1631,8 +1646,8 @@ ol li {
   --glow-danger: rgba(255, 51, 51, 0.4);
   --glow-info: rgba(33, 150, 243, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
@@ -1641,18 +1656,27 @@ ol li {
   --font-mono: 'Roboto Mono', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -1664,9 +1688,9 @@ ol li {
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD COMPATIBILITY ALIASES
-     (Legacy variable names → New semantic names)
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD COMPATIBILITY ALIASES
+      (Legacy variable names → New semantic names)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Orange ────────────────────────────────────────────────── */
   --color-orange-vivid: var(--color-primary);
   --color-orange-light: var(--color-primary-light);
@@ -2058,8 +2082,8 @@ ol li {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ────────────────────────────────────────────── */
   --color-primary: #ff4500;
   --color-primary-light: #ff7043;
@@ -2113,8 +2137,8 @@ ol li {
   --color-info-dark: #1976d2;
   --color-info-light: #64b5f6;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-050);
   --text-secondary: var(--color-gray-300);
@@ -2126,6 +2150,7 @@ ol li {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -2167,17 +2192,13 @@ ol li {
   --indicator-info: var(--color-info);
   --indicator-error: var(--color-danger);
   /* ─── Gradients ────────────────────────────────────────────────────── */
-  --grad-primary: linear-gradient(
-      90deg,
-      var(--color-primary-light),
-      var(--color-primary-dark)
-  );
+  --grad-primary: linear-gradient(90deg,
+        var(--color-primary-light),
+        var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  --grad-warm: linear-gradient(
-      135deg,
-      var(--color-taupe-light),
-      var(--color-taupe-dark)
-  );
+  --grad-warm: linear-gradient(135deg,
+        var(--color-taupe-light),
+        var(--color-taupe-dark));
   /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -2196,8 +2217,8 @@ ol li {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -2228,8 +2249,8 @@ ol li {
   --glow-danger: rgba(255, 51, 51, 0.4);
   --glow-info: rgba(33, 150, 243, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
@@ -2238,18 +2259,27 @@ ol li {
   --font-mono: 'Roboto Mono', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -2261,9 +2291,9 @@ ol li {
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD COMPATIBILITY ALIASES
-     (Legacy variable names → New semantic names)
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD COMPATIBILITY ALIASES
+      (Legacy variable names → New semantic names)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Orange ────────────────────────────────────────────────── */
   --color-orange-vivid: var(--color-primary);
   --color-orange-light: var(--color-primary-light);
@@ -2805,8 +2835,8 @@ input:checked + .slider:after {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ────────────────────────────────────────────── */
   --color-primary: #ff4500;
   --color-primary-light: #ff7043;
@@ -2860,8 +2890,8 @@ input:checked + .slider:after {
   --color-info-dark: #1976d2;
   --color-info-light: #64b5f6;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-050);
   --text-secondary: var(--color-gray-300);
@@ -2873,6 +2903,7 @@ input:checked + .slider:after {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -2914,17 +2945,13 @@ input:checked + .slider:after {
   --indicator-info: var(--color-info);
   --indicator-error: var(--color-danger);
   /* ─── Gradients ────────────────────────────────────────────────────── */
-  --grad-primary: linear-gradient(
-      90deg,
-      var(--color-primary-light),
-      var(--color-primary-dark)
-  );
+  --grad-primary: linear-gradient(90deg,
+        var(--color-primary-light),
+        var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  --grad-warm: linear-gradient(
-      135deg,
-      var(--color-taupe-light),
-      var(--color-taupe-dark)
-  );
+  --grad-warm: linear-gradient(135deg,
+        var(--color-taupe-light),
+        var(--color-taupe-dark));
   /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -2943,8 +2970,8 @@ input:checked + .slider:after {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -2975,8 +3002,8 @@ input:checked + .slider:after {
   --glow-danger: rgba(255, 51, 51, 0.4);
   --glow-info: rgba(33, 150, 243, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
@@ -2985,18 +3012,27 @@ input:checked + .slider:after {
   --font-mono: 'Roboto Mono', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -3008,9 +3044,9 @@ input:checked + .slider:after {
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD COMPATIBILITY ALIASES
-     (Legacy variable names → New semantic names)
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD COMPATIBILITY ALIASES
+      (Legacy variable names → New semantic names)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Orange ────────────────────────────────────────────────── */
   --color-orange-vivid: var(--color-primary);
   --color-orange-light: var(--color-primary-light);
@@ -3290,8 +3326,8 @@ input:checked + .slider:after {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ────────────────────────────────────────────── */
   --color-primary: #ff4500;
   --color-primary-light: #ff7043;
@@ -3345,8 +3381,8 @@ input:checked + .slider:after {
   --color-info-dark: #1976d2;
   --color-info-light: #64b5f6;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-050);
   --text-secondary: var(--color-gray-300);
@@ -3358,6 +3394,7 @@ input:checked + .slider:after {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -3399,17 +3436,13 @@ input:checked + .slider:after {
   --indicator-info: var(--color-info);
   --indicator-error: var(--color-danger);
   /* ─── Gradients ────────────────────────────────────────────────────── */
-  --grad-primary: linear-gradient(
-      90deg,
-      var(--color-primary-light),
-      var(--color-primary-dark)
-  );
+  --grad-primary: linear-gradient(90deg,
+        var(--color-primary-light),
+        var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  --grad-warm: linear-gradient(
-      135deg,
-      var(--color-taupe-light),
-      var(--color-taupe-dark)
-  );
+  --grad-warm: linear-gradient(135deg,
+        var(--color-taupe-light),
+        var(--color-taupe-dark));
   /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -3428,8 +3461,8 @@ input:checked + .slider:after {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -3460,8 +3493,8 @@ input:checked + .slider:after {
   --glow-danger: rgba(255, 51, 51, 0.4);
   --glow-info: rgba(33, 150, 243, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
@@ -3470,18 +3503,27 @@ input:checked + .slider:after {
   --font-mono: 'Roboto Mono', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -3493,9 +3535,9 @@ input:checked + .slider:after {
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD COMPATIBILITY ALIASES
-     (Legacy variable names → New semantic names)
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD COMPATIBILITY ALIASES
+      (Legacy variable names → New semantic names)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Orange ────────────────────────────────────────────────── */
   --color-orange-vivid: var(--color-primary);
   --color-orange-light: var(--color-primary-light);
@@ -4181,8 +4223,8 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ────────────────────────────────────────────── */
   --color-primary: #ff4500;
   --color-primary-light: #ff7043;
@@ -4236,8 +4278,8 @@ h2 {
   --color-info-dark: #1976d2;
   --color-info-light: #64b5f6;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-050);
   --text-secondary: var(--color-gray-300);
@@ -4249,6 +4291,7 @@ h2 {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -4290,17 +4333,13 @@ h2 {
   --indicator-info: var(--color-info);
   --indicator-error: var(--color-danger);
   /* ─── Gradients ────────────────────────────────────────────────────── */
-  --grad-primary: linear-gradient(
-      90deg,
-      var(--color-primary-light),
-      var(--color-primary-dark)
-  );
+  --grad-primary: linear-gradient(90deg,
+        var(--color-primary-light),
+        var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  --grad-warm: linear-gradient(
-      135deg,
-      var(--color-taupe-light),
-      var(--color-taupe-dark)
-  );
+  --grad-warm: linear-gradient(135deg,
+        var(--color-taupe-light),
+        var(--color-taupe-dark));
   /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -4319,8 +4358,8 @@ h2 {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -4351,8 +4390,8 @@ h2 {
   --glow-danger: rgba(255, 51, 51, 0.4);
   --glow-info: rgba(33, 150, 243, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
@@ -4361,18 +4400,27 @@ h2 {
   --font-mono: 'Roboto Mono', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -4384,9 +4432,9 @@ h2 {
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD COMPATIBILITY ALIASES
-     (Legacy variable names → New semantic names)
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD COMPATIBILITY ALIASES
+      (Legacy variable names → New semantic names)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Orange ────────────────────────────────────────────────── */
   --color-orange-vivid: var(--color-primary);
   --color-orange-light: var(--color-primary-light);
@@ -4494,8 +4542,8 @@ h2 {
 /* padding and border-radius set directly on .playlist-item above */
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ────────────────────────────────────────────── */
   --color-primary: #ff4500;
   --color-primary-light: #ff7043;
@@ -4549,8 +4597,8 @@ h2 {
   --color-info-dark: #1976d2;
   --color-info-light: #64b5f6;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-050);
   --text-secondary: var(--color-gray-300);
@@ -4562,6 +4610,7 @@ h2 {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -4603,17 +4652,13 @@ h2 {
   --indicator-info: var(--color-info);
   --indicator-error: var(--color-danger);
   /* ─── Gradients ────────────────────────────────────────────────────── */
-  --grad-primary: linear-gradient(
-      90deg,
-      var(--color-primary-light),
-      var(--color-primary-dark)
-  );
+  --grad-primary: linear-gradient(90deg,
+        var(--color-primary-light),
+        var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  --grad-warm: linear-gradient(
-      135deg,
-      var(--color-taupe-light),
-      var(--color-taupe-dark)
-  );
+  --grad-warm: linear-gradient(135deg,
+        var(--color-taupe-light),
+        var(--color-taupe-dark));
   /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -4632,8 +4677,8 @@ h2 {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -4664,8 +4709,8 @@ h2 {
   --glow-danger: rgba(255, 51, 51, 0.4);
   --glow-info: rgba(33, 150, 243, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
@@ -4674,18 +4719,27 @@ h2 {
   --font-mono: 'Roboto Mono', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -4697,9 +4751,9 @@ h2 {
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD COMPATIBILITY ALIASES
-     (Legacy variable names → New semantic names)
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD COMPATIBILITY ALIASES
+      (Legacy variable names → New semantic names)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Orange ────────────────────────────────────────────────── */
   --color-orange-vivid: var(--color-primary);
   --color-orange-light: var(--color-primary-light);
@@ -4813,8 +4867,8 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ────────────────────────────────────────────── */
   --color-primary: #ff4500;
   --color-primary-light: #ff7043;
@@ -4868,8 +4922,8 @@ h2 {
   --color-info-dark: #1976d2;
   --color-info-light: #64b5f6;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-050);
   --text-secondary: var(--color-gray-300);
@@ -4881,6 +4935,7 @@ h2 {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -4922,17 +4977,13 @@ h2 {
   --indicator-info: var(--color-info);
   --indicator-error: var(--color-danger);
   /* ─── Gradients ────────────────────────────────────────────────────── */
-  --grad-primary: linear-gradient(
-      90deg,
-      var(--color-primary-light),
-      var(--color-primary-dark)
-  );
+  --grad-primary: linear-gradient(90deg,
+        var(--color-primary-light),
+        var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  --grad-warm: linear-gradient(
-      135deg,
-      var(--color-taupe-light),
-      var(--color-taupe-dark)
-  );
+  --grad-warm: linear-gradient(135deg,
+        var(--color-taupe-light),
+        var(--color-taupe-dark));
   /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -4951,8 +5002,8 @@ h2 {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -4983,8 +5034,8 @@ h2 {
   --glow-danger: rgba(255, 51, 51, 0.4);
   --glow-info: rgba(33, 150, 243, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
@@ -4993,18 +5044,27 @@ h2 {
   --font-mono: 'Roboto Mono', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -5016,9 +5076,9 @@ h2 {
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD COMPATIBILITY ALIASES
-     (Legacy variable names → New semantic names)
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD COMPATIBILITY ALIASES
+      (Legacy variable names → New semantic names)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Orange ────────────────────────────────────────────────── */
   --color-orange-vivid: var(--color-primary);
   --color-orange-light: var(--color-primary-light);
@@ -5264,8 +5324,8 @@ h2 {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-     COLOR PALETTE
-     ═══════════════════════════════════════════════════════════════════════ */
+      COLOR PALETTE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Orange) ────────────────────────────────────────────── */
   --color-primary: #ff4500;
   --color-primary-light: #ff7043;
@@ -5319,8 +5379,8 @@ h2 {
   --color-info-dark: #1976d2;
   --color-info-light: #64b5f6;
   /* ═══════════════════════════════════════════════════════════════════════
-     SEMANTIC COLOR USAGE
-     ═══════════════════════════════════════════════════════════════════════ */
+      SEMANTIC COLOR USAGE
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: var(--color-gray-050);
   --text-secondary: var(--color-gray-300);
@@ -5332,6 +5392,7 @@ h2 {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
+  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -5373,17 +5434,13 @@ h2 {
   --indicator-info: var(--color-info);
   --indicator-error: var(--color-danger);
   /* ─── Gradients ────────────────────────────────────────────────────── */
-  --grad-primary: linear-gradient(
-      90deg,
-      var(--color-primary-light),
-      var(--color-primary-dark)
-  );
+  --grad-primary: linear-gradient(90deg,
+        var(--color-primary-light),
+        var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, var(--color-gray-050), #bdbdbd);
-  --grad-warm: linear-gradient(
-      135deg,
-      var(--color-taupe-light),
-      var(--color-taupe-dark)
-  );
+  --grad-warm: linear-gradient(135deg,
+        var(--color-taupe-light),
+        var(--color-taupe-dark));
   /* ─── Button Gradients ─────────────────────────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -5402,8 +5459,8 @@ h2 {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-     SHADOW & HIGHLIGHT OVERLAYS
-     ═══════════════════════════════════════════════════════════════════════ */
+      SHADOW & HIGHLIGHT OVERLAYS
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -5434,8 +5491,8 @@ h2 {
   --glow-danger: rgba(255, 51, 51, 0.4);
   --glow-info: rgba(33, 150, 243, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-     TYPOGRAPHY
-     ═══════════════════════════════════════════════════════════════════════ */
+      TYPOGRAPHY
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: 'Roboto', sans-serif;
   --font-label: 'Roboto', sans-serif;
@@ -5444,18 +5501,27 @@ h2 {
   --font-mono: 'Roboto Mono', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-     Formula: clamp(min, intercept + slope * 100vw, max)
-     Generated via Utopia method: slope = (max−min)/(1440−320)
-     ─────────────────────────────────────────────────────────────────── */
-  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem); /* 10→12px */
-  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem); /* 12→14px */
-  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem); /* 13→16px */
-  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem); /* 14→18px */
-  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem); /* 16→20px */
-  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem); /* 18→24px */
-  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem); /* 20→30px */
-  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem); /* 24→40px */
-  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem); /* 30→52px */
+      Formula: clamp(min, intercept + slope * 100vw, max)
+      Generated via Utopia method: slope = (max−min)/(1440−320)
+      ─────────────────────────────────────────────────────────────────── */
+  --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+  /* 10→12px */
+  --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+  /* 12→14px */
+  --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+  /* 13→16px */
+  --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+  /* 14→18px */
+  --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+  /* 16→20px */
+  --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+  /* 18→24px */
+  --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+  /* 20→30px */
+  --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+  /* 24→40px */
+  --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+  /* 30→52px */
   /* ─── Line Heights ─────────────────────────────────────────────────── */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -5467,9 +5533,9 @@ h2 {
   --tracking-wider: 0.05em;
   --tracking-widest: 0.1em;
   /* ═══════════════════════════════════════════════════════════════════════
-     BACKWARD COMPATIBILITY ALIASES
-     (Legacy variable names → New semantic names)
-     ═══════════════════════════════════════════════════════════════════════ */
+      BACKWARD COMPATIBILITY ALIASES
+      (Legacy variable names → New semantic names)
+      ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Orange ────────────────────────────────────────────────── */
   --color-orange-vivid: var(--color-primary);
   --color-orange-light: var(--color-primary-light);
