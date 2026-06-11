@@ -82,8 +82,14 @@ const Marquee = memo(({ children, className, speed = 40, gap = '4em', align = 'c
     };
   }, [text, speed, gap]);
 
+  const justifyContent = align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center';
+
   return (
-    <div ref={outerRef} className={`marquee-outer${className ? ` ${className}` : ''}`} style={{ textAlign: align }}>
+    <div
+      ref={outerRef}
+      className={`marquee-outer${className ? ` ${className}` : ''}`}
+      style={{ textAlign: align, justifyContent }}
+    >
       <span ref={trackRef} className="marquee-track" style={{ '--marquee-gap': gap }}>
         <span ref={copy1Ref} className="marquee-copy">{text}</span>
         <span ref={copy2Ref} className="marquee-copy" aria-hidden="true">{text}</span>

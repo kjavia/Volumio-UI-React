@@ -238,14 +238,18 @@
   // the cell height (with room for padding) rather than being driven by width.
   .track-title,
   .responsive-title {
-    font-size: clamp(0.75rem, 55cqh, 3rem);
+    font-size: clamp(0.75rem, 52.25cqh, 2.85rem);
+    line-height: 1;
+    max-height: 95%;
   }
 
   .artist-name,
   .album-name,
   .responsive-artist,
   .responsive-album {
-    font-size: clamp(0.6rem, 50cqh, 2.25rem);
+    font-size: clamp(0.6rem, 47.5cqh, 2.1375rem);
+    line-height: 1;
+    max-height: 95%;
   }
 
   // ── Transport buttons (btn-round / btn-round.btn-sm) ──────────────────
@@ -287,6 +291,39 @@
     height: 100%;
     padding: 4px;
     box-sizing: border-box;
+    align-items: stretch;
+  }
+
+  .custom-layout-controls .player-controls .controls-transport-row {
+    height: 100%;
+    gap: clamp(4px, 4cqw, 32px);
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  .custom-layout-controls .player-controls .controls-transport-row .btn-round {
+    height: calc(100% - 8px) !important;
+    max-height: calc(100% - 8px) !important;
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  .custom-layout-controls .player-controls .controls-transport-row .btn-round.btn-sm {
+    height: calc((100% - 8px) * 0.7) !important;
+    max-height: calc((100% - 8px) * 0.7) !important;
+  }
+
+  .custom-layout-controls .player-controls .controls-transport-row .btn-round .material-icons,
+  .custom-layout-controls .player-controls .controls-transport-row .btn-round .material-icons-outlined {
+    font-size: min(56cqh, 16cqw) !important;
+  }
+
+  .custom-layout-controls .player-controls .controls-transport-row .btn-round.btn-sm .material-icons,
+  .custom-layout-controls .player-controls .controls-transport-row .btn-round.btn-sm .material-icons-outlined {
+    font-size: min(calc(56cqh * 0.7), calc(16cqw * 0.7)) !important;
   }
 
   .controls-transport-row {
@@ -298,8 +335,25 @@
     height: 100%;
     padding: 4px;
     box-sizing: border-box;
-    gap: clamp(2px, 3cqw, 20px);
+    gap: clamp(4px, 3cqw, 20px) !important;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-layout-button-row .btn-icon {
+    height: 95% !important;
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  .custom-layout-button-row .btn-icon .material-icons,
+  .custom-layout-button-row .btn-icon .material-icons-outlined {
+    font-size: min(52cqh, 9cqw) !important;
+    line-height: 1 !important;
   }
 
   // Scale text-mode labels relative to the cell so they fill space like icons do

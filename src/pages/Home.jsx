@@ -289,6 +289,21 @@ const Home = () => {
 
   const showPlayer = !idle || forcePlayer;
 
+  useEffect(() => {
+    if (!idle || forcePlayer) return;
+
+    const restorePlayer = () => setForcePlayer(true);
+    const opts = { passive: true, capture: true };
+
+    document.addEventListener('dblclick', restorePlayer);
+    document.addEventListener('touchend', restorePlayer, opts);
+
+    return () => {
+      document.removeEventListener('dblclick', restorePlayer);
+      document.removeEventListener('touchend', restorePlayer, opts);
+    };
+  }, [idle, forcePlayer]);
+
   let content;
 
   if (showPlayer) {

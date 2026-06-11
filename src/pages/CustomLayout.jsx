@@ -183,8 +183,10 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
     onShuffle: toggleRandom,
   });
 
+  const justifyToTextAlign = { 'flex-start': 'left', 'flex-end': 'right', center: 'center' };
+
   const renderCellItem = (cell) => {
-    const { itemKey, playerType: cellPlayerType, vizType: cellVizType } = cell;
+    const { itemKey, playerType: cellPlayerType, vizType: cellVizType, justifyContent } = cell;
     const cellEffectivePlayerType = cellPlayerType
       ? resolvePlayerType(cellPlayerType)
       : effectivePlayerType;
@@ -193,13 +195,14 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         ? RANDOM_PLAYERS[randomIndex]
         : PLAYER_MAP[cellEffectivePlayerType] || AlbumArtPlayer;
     const cellVizType_ = cellVizType || vizType;
+    const textAlign = justifyToTextAlign[justifyContent] || 'center';
     switch (itemKey) {
       case 'trackName':
-        return <TrackTitle title={title} />;
+        return <TrackTitle title={title} align={textAlign} />;
       case 'albumName':
-        return <AlbumName album={album} />;
+        return <AlbumName album={album} align={textAlign} />;
       case 'artistName':
-        return <ArtistName artist={artist} />;
+        return <ArtistName artist={artist} align={textAlign} />;
       case 'serviceLogo':
         return <div className="custom-layout-media"><ServiceLogo service={service} /></div>;
       case 'samplingRate':
