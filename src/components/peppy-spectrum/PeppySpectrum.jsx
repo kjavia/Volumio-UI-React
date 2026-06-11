@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
+import { forwardRef, useRef, useState, useEffect, useCallback, useMemo, useImperativeHandle } from 'react';
 import PropTypes from 'prop-types';
 import { SPECTRUM_STREAM_URL, PLUGIN_BASE_URL } from '@/config';
 import { fetchSpectrumConfigs } from './parseSpectrumConfig';
@@ -29,7 +29,7 @@ const pickRandom = (arr, prev) => {
  * @param {boolean} [props.stopped] — pause animation & audio
  * @param {string} [props.className] — additional CSS class names
  */
-const PeppySpectrum = ({
+const PeppySpectrum = forwardRef(({
   folder,
   model = 'random',
   trackUri,
@@ -38,7 +38,7 @@ const PeppySpectrum = ({
   className = '',
   autoEnable = false,
   clipSize = null,
-}) => {
+}, ref) => {
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
   const analyserRef = useRef(null);
@@ -117,8 +117,9 @@ const PeppySpectrum = ({
   useEffect(() => {
     if (!allConfigs || !trackUri) return;
     const names = Object.keys(allConfigs);
-    if (!names.length) { // eslint-disable-next-line react-hooks/set-state-in-effect
-      setError('No spectrums found in config'); return;
+    if (!names.length) {
+      const id = setTimeout(() => setError('No spectrums found in config'), 0);
+      return () => clearTimeout(id);
     }
 
     if (model === 'random') {
@@ -275,13 +276,16 @@ const PeppySpectrum = ({
     setEnabled(true);
   }, [enabled, setupAudio, startAnimation]);
 
-  // ── Auto-enable (for embedded use inside PeppyMeter) ──────────────────
+  useImperativeHandle(ref, () => ({
+    enable: handleEnable,
+  }), [handleEnable]);
+
+  // ── Auto-enable for embedded use only ─────────────────────────────
 
   useEffect(() => {
-    if (autoEnable && !enabled) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      handleEnable();
-    }
+    if (!autoEnable || enabled) return undefined;
+    const id = setTimeout(() => handleEnable(), 0);
+    return () => clearTimeout(id);
   }, [autoEnable, enabled, handleEnable]);
 
   // ── Restart animation when model/config changes while already active ────
@@ -311,10 +315,10 @@ const PeppySpectrum = ({
   // ── Cleanup ─────────────────────────────────────────────────────────────
 
   useEffect(() => {
+    const audio = audioRef.current;
     return () => {
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
       if (retryTimerRef.current) clearTimeout(retryTimerRef.current);
-      const audio = audioRef.current;
       if (audio && !audio.paused) audio.pause();
     };
   }, []);
@@ -364,7 +368,7 @@ const PeppySpectrum = ({
       )}
     </div>
   );
-};
+});
 
 PeppySpectrum.propTypes = {
   folder: PropTypes.string.isRequired,

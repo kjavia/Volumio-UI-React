@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useEffect } from 'react';
+import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
@@ -28,6 +28,7 @@ import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
 import PeppyMeter from '@/components/PeppyMeter';
 import SecondaryControls from '@/components/SecondaryControls';
+import PeppySpectrum from '@/components/peppy-spectrum/PeppySpectrum';
 import './mobile-player.scss';
 
 const PLAYER_MAP = {
@@ -150,17 +151,17 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
   const mobileVizRef = useRef(null);
   const peppyMobileRef = useRef(null);
 
-  const handlePlayPause = () => {
+  const handlePlayPause = useCallback(() => {
     mobileVizRef.current?.enable();
     togglePlay();
-  };
+  }, [togglePlay]);
 
   const [showPlaylist, setShowPlaylist] = useState(false);
   const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
   const [showBrowse, setShowBrowse] = useState(false);
 
   usePlayerKeyboard({
-    onPlayPause: togglePlay,
+    onPlayPause: handlePlayPause,
     onPrev: prev,
     onNext: next,
     onQueue: () => setShowPlaylist((prev) => !prev),
@@ -299,6 +300,17 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
               model={peppyMeterModel}
               trackUri={streamUri}
               trackInfo={peppyTrackInfo}
+            />
+          </div>
+        )}
+        {showViz && vizType === 'peppySpectrum' && (
+          <div className="mobile-row-viz" ref={peppyMobileRef}>
+            {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
+            <PeppySpectrum
+              ref={mobileVizRef}
+              folder={peppySpectrumFolder}
+              model={peppySpectrumModel}
+              trackUri={streamUri}
             />
           </div>
         )}

@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useEffect } from 'react';
+import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
@@ -161,17 +161,17 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
   const vizRef = useRef(null);
   const peppyVizRef = useRef(null);
 
-  const handlePlayPause = () => {
+  const handlePlayPause = useCallback(() => {
     vizRef.current?.enable();
     togglePlay();
-  };
+  }, [togglePlay]);
 
   const [showPlaylist, setShowPlaylist] = useState(false);
   const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
   const [showBrowse, setShowBrowse] = useState(false);
 
   usePlayerKeyboard({
-    onPlayPause: togglePlay,
+    onPlayPause: handlePlayPause,
     onPrev: prev,
     onNext: next,
     onQueue: () => setShowPlaylist((prev) => !prev),
@@ -366,7 +366,7 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
               />
             )}
             {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} />}
-            {vizType === 'peppySpectrum' && <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />}
+            {vizType === 'peppySpectrum' && <PeppySpectrum ref={vizRef} folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />}
           </div>
         )}
       </div>

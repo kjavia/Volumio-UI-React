@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useEffect } from 'react';
+import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
@@ -170,7 +170,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
   const [showBrowse, setShowBrowse] = useState(false);
 
   usePlayerKeyboard({
-    onPlayPause: togglePlay,
+    onPlayPause: handlePlayPause,
     onPrev: prev,
     onNext: next,
     onQueue: () => setShowPlaylist((prev) => !prev),
@@ -183,10 +183,10 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
 
   const vizRef = useRef(null);
 
-  const handlePlayPause = () => {
+  const handlePlayPause = useCallback(() => {
     vizRef.current?.enable();
     togglePlay();
-  };
+  }, [togglePlay]);
 
   const renderCellItem = (cell) => {
     const { itemKey, playerType: cellPlayerType, vizType: cellVizType } = cell;
@@ -258,7 +258,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
               <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} stopped={!isPlaying} />
             )}
             {cellVizType_ === 'peppySpectrum' && (
-              <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} stopped={!isPlaying} />
+              <PeppySpectrum ref={vizRef} folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} stopped={!isPlaying} />
             )}
             {cellVizType_ === 'none' && <span className="material-icons viz-placeholder">equalizer</span>}
           </div>

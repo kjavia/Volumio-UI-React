@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useEffect } from 'react';
+import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import usePlayerKeyboard from '@/hooks/usePlayerKeyboard';
@@ -140,8 +140,20 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
   const [showBrowse, setShowBrowse] = useState(false);
 
+  const vizRef = useRef(null);
+  const mobileVizRef = useRef(null);
+  const peppyMobileRef = useRef(null);
+
+  // Wrap togglePlay so that clicking play/pause (a user gesture) also enables
+  // the visualization if it hasn't been enabled yet.
+  const handlePlayPause = useCallback(() => {
+    vizRef.current?.enable();
+    mobileVizRef.current?.enable();
+    togglePlay();
+  }, [togglePlay]);
+
   usePlayerKeyboard({
-    onPlayPause: togglePlay,
+    onPlayPause: handlePlayPause,
     onPrev: prev,
     onNext: next,
     onQueue: () => setShowPlaylist((prev) => !prev),
@@ -151,18 +163,6 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     onRepeat: toggleRepeat,
     onShuffle: toggleRandom,
   });
-
-  const vizRef = useRef(null);
-  const mobileVizRef = useRef(null);
-  const peppyMobileRef = useRef(null);
-
-  // Wrap togglePlay so that clicking play/pause (a user gesture) also enables
-  // the visualization if it hasn't been enabled yet.
-  const handlePlayPause = () => {
-    vizRef.current?.enable();
-    mobileVizRef.current?.enable();
-    togglePlay();
-  };
 
   const { refreshState } = useSeek();
 
@@ -291,7 +291,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
         {showViz && vizType === 'peppySpectrum' && (
           <div className="home-panel area-mobile-viz" ref={peppyMobileRef}>
             {!isPlaying && <span className="material-icons viz-placeholder">equalizer</span>}
-            <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} stopped={!isPlaying} />
+            <PeppySpectrum ref={mobileVizRef} folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} stopped={!isPlaying} />
           </div>
         )}
 
@@ -376,7 +376,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
               <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} stopped={!isPlaying} />
             )}
             {vizType === 'peppySpectrum' && (
-              <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} stopped={!isPlaying} />
+              <PeppySpectrum ref={vizRef} folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} stopped={!isPlaying} />
             )}
           </div>
         )}

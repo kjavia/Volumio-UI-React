@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
+import { flushSync } from 'react-dom';
 import PropTypes from 'prop-types';
 import { SPECTRUM_STREAM_URL, PLUGIN_BASE_URL } from '@/config';
 import { getServiceLogoUrl } from './ServiceLogo';
@@ -64,6 +65,7 @@ const PeppyMeter = ({
   const animFrameRef = useRef(null);
   const smoothedRef = useRef({ left: MIN_DB, right: MIN_DB });
   const retryTimerRef = useRef(null);
+  const embeddedSpectrumRef = useRef(null);
   const imagesRef = useRef(null);
   const configRef = useRef(null);
   const trackInfoRef = useRef(trackInfo);
@@ -423,6 +425,7 @@ const PeppyMeter = ({
     setupAudio();
     startAnimation();
     setEnabled(true);
+    embeddedSpectrumRef.current?.enable();
   }, [enabled, setupAudio, startAnimation]);
 
   // ── Restart animation when model/config changes while already active ────
@@ -504,16 +507,17 @@ const PeppyMeter = ({
         height={nativeH}
       />
 
-      {embeddedSpectrum && enabled && (
+      {embeddedSpectrum && (
         <PeppySpectrum
+          ref={embeddedSpectrumRef}
           folder={folder}
           model={embeddedSpectrum.name}
           trackUri={trackUri}
           streamUrl={streamUrl}
           stopped={stopped}
-          autoEnable
           clipSize={embeddedSpectrum.size}
           className="peppy-meter__embedded-spectrum"
+          hidden={!enabled}
         />
       )}
 

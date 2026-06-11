@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useEffect } from 'react';
+import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
@@ -219,10 +219,10 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
   const peppyBottomVizRef = useRef(null);
 
   // Wrap togglePlay so clicking play/pause (a user gesture) also enables the viz.
-  const handlePlayPause = () => {
+  const handlePlayPause = useCallback(() => {
     vizRef.current?.enable();
     togglePlay();
-  };
+  }, [togglePlay]);
 
   // Panel state
   const [showPlaylist, setShowPlaylist] = useState(false);
@@ -231,7 +231,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
   const [showVolumePopup, setShowVolumePopup] = useState(false);
 
   usePlayerKeyboard({
-    onPlayPause: togglePlay,
+    onPlayPause: handlePlayPause,
     onPrev: prev,
     onNext: next,
     onQueue: () => setShowPlaylist((prev) => !prev),
@@ -315,7 +315,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
         />
       )}
       {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} />}
-      {vizType === 'peppySpectrum' && <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />}
+      {vizType === 'peppySpectrum' && <PeppySpectrum ref={vizRef} folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />}
     </div>
   );
 
@@ -520,7 +520,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
                     <SpectrumAnalyzer ref={vizRef} stopped={vizStopped} onResumed={onVizResumed} streamUrl={SPECTRUM_STREAM_URL} options={spectrumOptions} isPlaying={isPlaying} />
                   )}
                   {vizType === 'peppyMeter' && <PeppyMeter folder={peppyMeterFolder} model={peppyMeterModel} trackUri={streamUri} trackInfo={peppyTrackInfo} />}
-                  {vizType === 'peppySpectrum' && <PeppySpectrum folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />}
+                  {vizType === 'peppySpectrum' && <PeppySpectrum ref={vizRef} folder={peppySpectrumFolder} model={peppySpectrumModel} trackUri={streamUri} />}
                 </div>
               )}
             </div>
