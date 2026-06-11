@@ -1,20 +1,27 @@
 .marquee-outer {
-  display: block;
+  display: flex;
+  align-items: center;
   overflow: hidden;
   white-space: nowrap;
   text-align: center;
+  line-height: normal;
+  padding-block: 0.12em;
 }
 
 .marquee-track {
   display: inline-flex;
+  align-items: center;
   gap: var(--marquee-gap, 4em);
   white-space: nowrap;
   will-change: transform;
 }
 
 .marquee-copy {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   white-space: nowrap;
   flex-shrink: 0;
   min-width: 0;
+  line-height: normal;
+  vertical-align: middle;
 }
