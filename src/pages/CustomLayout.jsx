@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
+import { useMemo, useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
@@ -129,11 +129,6 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
 
   const effectivePlayerType = resolvePlayerType(null);
 
-  const CurrentPlayerComponent =
-    effectivePlayerType === 'random'
-      ? RANDOM_PLAYERS[randomIndex]
-      : PLAYER_MAP[effectivePlayerType] || AlbumArtPlayer;
-
   const fullAlbumArt = useMemo(() => {
     if (!albumart) return '';
     if (albumart.startsWith('http')) return albumart;
@@ -169,6 +164,13 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
   const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
   const [showBrowse, setShowBrowse] = useState(false);
 
+  const vizRef = useRef(null);
+
+  const handlePlayPause = useCallback(() => {
+    vizRef.current?.enable();
+    togglePlay();
+  }, [togglePlay]);
+
   usePlayerKeyboard({
     onPlayPause: handlePlayPause,
     onPrev: prev,
@@ -180,13 +182,6 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
     onRepeat: toggleRepeat,
     onShuffle: toggleRandom,
   });
-
-  const vizRef = useRef(null);
-
-  const handlePlayPause = useCallback(() => {
-    vizRef.current?.enable();
-    togglePlay();
-  }, [togglePlay]);
 
   const renderCellItem = (cell) => {
     const { itemKey, playerType: cellPlayerType, vizType: cellVizType } = cell;
