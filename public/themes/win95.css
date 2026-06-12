@@ -89,7 +89,7 @@
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -320,7 +320,7 @@
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -654,7 +654,7 @@ code, pre {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -1249,7 +1249,7 @@ code, pre {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -1756,7 +1756,7 @@ code, pre {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -2238,7 +2238,7 @@ label {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -2532,7 +2532,7 @@ label {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -2886,7 +2886,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -3165,7 +3165,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -3476,7 +3476,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -4230,7 +4230,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -4561,7 +4561,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -4911,7 +4911,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -5227,7 +5227,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -5608,7 +5608,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);
@@ -6374,7 +6374,7 @@ input[type=range]::-webkit-slider-runnable-track {
   --text-info: var(--color-info);
   --bg-color: var(--win95-face);
   /* page background */
-  --album-art-shadow: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--win95-face);
   --device-surface: var(--win95-face);
   --btn-bg-dark: var(--win95-face);

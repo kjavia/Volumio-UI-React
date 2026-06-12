@@ -78,6 +78,8 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
   const backgroundColor = pluginConfig?.backgroundColor || '';
   const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
   const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
+  const peppySpectrumFolder = pluginConfig?.peppySpectrumFolder || '';
+  const peppySpectrumModel = pluginConfig?.peppySpectrumModel || 'random';
   const {
     isConnected,
     isPlaying,

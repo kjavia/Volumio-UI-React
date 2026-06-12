@@ -20,7 +20,7 @@ body,
 
 /* ── Album art shadow — uses per-theme --album-art-shadow variable for contrast against any theme background ── */
 .album-art-player .rainbow-border {
-  filter: var(--album-art-shadow, drop-shadow(0 8px 24px rgba(0, 0, 0, 0.6)));
+  filter: var(--album-art-shadow, drop-shadow(0 2px 6px rgba(0, 0, 0, 0.16)));
 }
 
 /* ── User color overrides via plugin config ──

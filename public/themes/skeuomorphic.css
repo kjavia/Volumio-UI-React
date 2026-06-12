@@ -70,7 +70,7 @@
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
-  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -312,7 +312,7 @@
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
-  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -777,7 +777,7 @@ ol li {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
-  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -1547,7 +1547,7 @@ ol li {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
-  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -2150,7 +2150,7 @@ ol li {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
-  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -2903,7 +2903,7 @@ input:checked + .slider:after {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
-  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -3394,7 +3394,7 @@ input:checked + .slider:after {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
-  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -4291,7 +4291,7 @@ h2 {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
-  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -4610,7 +4610,7 @@ h2 {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
-  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -4935,7 +4935,7 @@ h2 {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
-  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */
@@ -5392,7 +5392,7 @@ h2 {
   --text-info: var(--color-info-dark);
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-900);
-  --album-art-shadow: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.8));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: var(--color-gray-950);
   --device-surface: var(--color-gray-100);
   /* ─── Button Colors ────────────────────────────────────────────────── */

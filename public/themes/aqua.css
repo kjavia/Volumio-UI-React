@@ -2,8 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=SF+Mono&display=swap");
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -59,8 +59,8 @@
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -73,7 +73,7 @@
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -117,12 +117,12 @@
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -141,8 +141,8 @@
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -175,8 +175,8 @@
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -185,9 +185,9 @@
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -218,9 +218,9 @@
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -284,8 +284,8 @@
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -341,8 +341,8 @@
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -355,7 +355,7 @@
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -399,12 +399,12 @@
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -423,8 +423,8 @@
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -457,8 +457,8 @@
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -467,9 +467,9 @@
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -500,9 +500,9 @@
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -667,8 +667,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -724,8 +724,8 @@ pre {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -738,7 +738,7 @@ pre {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -782,12 +782,12 @@ pre {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -806,8 +806,8 @@ pre {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -840,8 +840,8 @@ pre {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -850,9 +850,9 @@ pre {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -883,9 +883,9 @@ pre {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -1333,8 +1333,8 @@ pre {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -1390,8 +1390,8 @@ pre {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -1404,7 +1404,7 @@ pre {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -1448,12 +1448,12 @@ pre {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -1472,8 +1472,8 @@ pre {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -1506,8 +1506,8 @@ pre {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -1516,9 +1516,9 @@ pre {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -1549,9 +1549,9 @@ pre {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -1945,8 +1945,8 @@ pre {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -2002,8 +2002,8 @@ pre {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -2016,7 +2016,7 @@ pre {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -2060,12 +2060,12 @@ pre {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -2084,8 +2084,8 @@ pre {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -2118,8 +2118,8 @@ pre {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -2128,9 +2128,9 @@ pre {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -2161,9 +2161,9 @@ pre {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -2721,8 +2721,8 @@ input[type=radio]:focus-visible {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -2778,8 +2778,8 @@ input[type=radio]:focus-visible {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -2792,7 +2792,7 @@ input[type=radio]:focus-visible {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -2836,12 +2836,12 @@ input[type=radio]:focus-visible {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -2860,8 +2860,8 @@ input[type=radio]:focus-visible {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -2894,8 +2894,8 @@ input[type=radio]:focus-visible {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -2904,9 +2904,9 @@ input[type=radio]:focus-visible {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -2937,9 +2937,9 @@ input[type=radio]:focus-visible {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -3085,8 +3085,8 @@ input[type=radio]:focus-visible {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -3142,8 +3142,8 @@ input[type=radio]:focus-visible {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -3156,7 +3156,7 @@ input[type=radio]:focus-visible {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -3200,12 +3200,12 @@ input[type=radio]:focus-visible {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -3224,8 +3224,8 @@ input[type=radio]:focus-visible {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -3258,8 +3258,8 @@ input[type=radio]:focus-visible {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -3268,9 +3268,9 @@ input[type=radio]:focus-visible {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -3301,9 +3301,9 @@ input[type=radio]:focus-visible {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -3494,8 +3494,8 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -3551,8 +3551,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -3565,7 +3565,7 @@ input[type=range]::-moz-range-thumb:active {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -3609,12 +3609,12 @@ input[type=range]::-moz-range-thumb:active {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -3633,8 +3633,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -3667,8 +3667,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -3677,9 +3677,9 @@ input[type=range]::-moz-range-thumb:active {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -3710,9 +3710,9 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -3846,8 +3846,8 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -3903,8 +3903,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -3917,7 +3917,7 @@ input[type=range]::-moz-range-thumb:active {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -3961,12 +3961,12 @@ input[type=range]::-moz-range-thumb:active {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -3985,8 +3985,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -4019,8 +4019,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -4029,9 +4029,9 @@ input[type=range]::-moz-range-thumb:active {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -4062,9 +4062,9 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -4228,8 +4228,8 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -4285,8 +4285,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -4299,7 +4299,7 @@ input[type=range]::-moz-range-thumb:active {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -4343,12 +4343,12 @@ input[type=range]::-moz-range-thumb:active {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -4367,8 +4367,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -4401,8 +4401,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -4411,9 +4411,9 @@ input[type=range]::-moz-range-thumb:active {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -4444,9 +4444,9 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -4894,8 +4894,8 @@ input[type=range]::-moz-range-thumb:active {
 }
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -4951,8 +4951,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -4965,7 +4965,7 @@ input[type=range]::-moz-range-thumb:active {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -5009,12 +5009,12 @@ input[type=range]::-moz-range-thumb:active {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -5033,8 +5033,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -5067,8 +5067,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -5077,9 +5077,9 @@ input[type=range]::-moz-range-thumb:active {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -5110,9 +5110,9 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -5371,8 +5371,8 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -5428,8 +5428,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -5442,7 +5442,7 @@ input[type=range]::-moz-range-thumb:active {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -5486,12 +5486,12 @@ input[type=range]::-moz-range-thumb:active {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -5510,8 +5510,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -5544,8 +5544,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -5554,9 +5554,9 @@ input[type=range]::-moz-range-thumb:active {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -5587,9 +5587,9 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -5756,8 +5756,8 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -5813,8 +5813,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -5827,7 +5827,7 @@ input[type=range]::-moz-range-thumb:active {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -5871,12 +5871,12 @@ input[type=range]::-moz-range-thumb:active {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -5895,8 +5895,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -5929,8 +5929,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -5939,9 +5939,9 @@ input[type=range]::-moz-range-thumb:active {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -5972,9 +5972,9 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -6133,8 +6133,8 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -6190,8 +6190,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -6204,7 +6204,7 @@ input[type=range]::-moz-range-thumb:active {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -6248,12 +6248,12 @@ input[type=range]::-moz-range-thumb:active {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -6272,8 +6272,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -6306,8 +6306,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -6316,9 +6316,9 @@ input[type=range]::-moz-range-thumb:active {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -6349,9 +6349,9 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);
@@ -6661,8 +6661,8 @@ input[type=range]::-moz-range-thumb:active {
 
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
-      COLOR PALETTE - Aqua Theme (macOS Classic)
-      ═══════════════════════════════════════════════════════════════════════ */
+     COLOR PALETTE - Aqua Theme (macOS Classic)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
   --color-primary: #147aff;
   /* Classic macOS Aqua blue */
@@ -6718,8 +6718,8 @@ input[type=range]::-moz-range-thumb:active {
   --color-info-dark: #0077b6;
   --color-info-light: #48cae4;
   /* ═══════════════════════════════════════════════════════════════════════
-      SEMANTIC COLOR USAGE
-      ═══════════════════════════════════════════════════════════════════════ */
+     SEMANTIC COLOR USAGE
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Text Colors ──────────────────────────────────────────────────── */
   --text-primary: #1d1d1f;
   /* Apple's near-black for text */
@@ -6732,7 +6732,7 @@ input[type=range]::-moz-range-thumb:active {
   /* ─── Background Colors ────────────────────────────────────────────── */
   --bg-color: var(--color-gray-100);
   /* Classic macOS window gray */
-  --album-art-shadow: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
   --panel-bg-dark: #1c1c1e;
   --device-surface: #dcdcdc;
   /* Brushed aluminum panel */
@@ -6776,12 +6776,12 @@ input[type=range]::-moz-range-thumb:active {
   --indicator-error: var(--color-danger);
   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
   --grad-primary: linear-gradient(180deg,
-        var(--color-primary-light),
-        var(--color-primary-dark));
+          var(--color-primary-light),
+          var(--color-primary-dark));
   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
   --grad-warm: linear-gradient(135deg,
-        var(--color-aluminum-light),
-        var(--color-aluminum-dark));
+          var(--color-aluminum-light),
+          var(--color-aluminum-dark));
   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
   --btn-black-top: var(--color-gray-700);
   --btn-black-btm: var(--color-gray-800);
@@ -6800,8 +6800,8 @@ input[type=range]::-moz-range-thumb:active {
   --btn-info-top: var(--color-info-light);
   --btn-info-btm: var(--color-info-dark);
   /* ═══════════════════════════════════════════════════════════════════════
-      SHADOW & HIGHLIGHT OVERLAYS
-      ═══════════════════════════════════════════════════════════════════════ */
+     SHADOW & HIGHLIGHT OVERLAYS
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
   --shadow-02: rgba(0, 0, 0, 0.02);
   --shadow-03: rgba(0, 0, 0, 0.03);
@@ -6834,8 +6834,8 @@ input[type=range]::-moz-range-thumb:active {
   --glow-danger: rgba(255, 95, 87, 0.4);
   --glow-info: rgba(0, 180, 216, 0.4);
   /* ═══════════════════════════════════════════════════════════════════════
-      TYPOGRAPHY
-      ═══════════════════════════════════════════════════════════════════════ */
+     TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Font Families ────────────────────────────────────────────────── */
   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
@@ -6844,9 +6844,9 @@ input[type=range]::-moz-range-thumb:active {
   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
   /* ─── Type Scale ───────────────────────────────────────────────────── */
   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
-      Formula: clamp(min, intercept + slope * 100vw, max)
-      Generated via Utopia method: slope = (max−min)/(1440−320)
-      ─────────────────────────────────────────────────────────────────── */
+     Formula: clamp(min, intercept + slope * 100vw, max)
+     Generated via Utopia method: slope = (max−min)/(1440−320)
+     ─────────────────────────────────────────────────────────────────── */
   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
   /* 10→12px */
   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
@@ -6877,9 +6877,9 @@ input[type=range]::-moz-range-thumb:active {
   --tracking-wider: 0.03em;
   --tracking-widest: 0.06em;
   /* ═══════════════════════════════════════════════════════════════════════
-      BACKWARD COMPATIBILITY ALIASES
-      (Legacy variable names → New semantic names)
-      ═══════════════════════════════════════════════════════════════════════ */
+     BACKWARD COMPATIBILITY ALIASES
+     (Legacy variable names → New semantic names)
+     ═══════════════════════════════════════════════════════════════════════ */
   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
   --color-aqua-vivid: var(--color-primary);
   --color-aqua-bright: var(--color-primary-light);

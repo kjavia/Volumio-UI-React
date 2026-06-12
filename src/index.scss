@@ -145,12 +145,14 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  padding: 4%;
+  box-sizing: border-box;
 
   // ── Album art (1:1 square) ────────────────────────────────────────────
   // Fit to the shorter dimension so it never clips; square aspect ratio is
   // maintained via explicit aspect-ratio rather than relying on equal w/h.
   .album-art-player {
-    height: 100%;
+    height: 90%;
     width: 100%;
     max-width: 100%;
     display: flex;
