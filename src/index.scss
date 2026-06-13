@@ -148,85 +148,84 @@
   padding: 4%;
   box-sizing: border-box;
 
-  // ── Album art (1:1 square) ────────────────────────────────────────────
-  // Fit to the shorter dimension so it never clips; square aspect ratio is
-  // maintained via explicit aspect-ratio rather than relying on equal w/h.
-  .album-art-player {
-    height: 90%;
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  &--max-space {
+    padding: 0;
 
-    .rainbow-border {
+    .album-art-player {
       height: 100%;
-      width: auto;
-      max-width: 100%;
-      aspect-ratio: 1 / 1;
+      width: 100%;
+      max-width: none;
     }
 
-    .album-art-inner {
+    .album-art-player .rainbow-border {
       width: 100%;
       height: 100%;
-    }
-
-    .album-art-image,
-    .album-art-placeholder {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+      max-width: none;
     }
   }
 
-  // ── Circular players (vinyl, cd) — enforce square to avoid ellipse ────
-  // These use percentage width/height on their inner disc, so the container
-  // must be square. We give them the largest square that fits the cell.
-  // The 5% vertical padding gives the drop-shadow room to render without
-  // being clipped by the cell's overflow:hidden boundary. The square side
-  // is derived from the padded height so total height stays ≤ 100%.
-  .vinyl-container,
-  .cd-container {
-    height: 90%;
-    width: auto;
-    max-width: 90%;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  // ── Aspect-ratio players: constrain by height, derive width ───────────
-  // cassette (1.56), reel (1.3), radio (1.25), vinyl-cover (1.5), cd-cover (1.4)
-  // All use width:100% + aspect-ratio by default, which can overflow a short cell.
-  // Instead: fix height to ~90%, let width follow aspect-ratio, cap at 100% width.
-  // The 10% reduction gives drop-shadows room to render without clipping.
-  .cassette-container,
-  .reel-deck-container,
-  .radio-container,
-  .vinyl-sleeve-container,
-  .cd-case-container {
-    height: 90%;
-    width: auto;
-    max-width: 95%;
-    max-height: 90%;
-  }
-
-  // ── Globe player (circular, fills container) ──────────────────────────
-  // Globe uses width:100%; height:100% — force it square so it renders as circle.
-  .globe-player {
+  .rainbow-border {
     height: 100%;
     width: auto;
     max-width: 100%;
     aspect-ratio: 1 / 1;
   }
+
+  .album-art-inner {
+    width: 100%;
+    height: 100%;
+  }
+
+  .album-art-image,
+  .album-art-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 }
 
-.custom-layout-viz {
-  width: 100%;
-  height: 100%;
-  // No fixed min-height inside a grid cell.
+// ── Circular players (vinyl, cd) — enforce square to avoid ellipse ────
+// These use percentage width/height on their inner disc, so the container
+// must be square. We give them the largest square that fits the cell.
+// The 5% vertical padding gives the drop-shadow room to render without
+// being clipped by the cell's overflow:hidden boundary. The square side
+// is derived from the padded height so total height stays ≤ 100%.
+.vinyl-container,
+.cd-container {
+  height: 90%;
+  width: auto;
+  max-width: 90%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+// ── Aspect-ratio players: constrain by height, derive width ───────────
+// cassette (1.56), reel (1.3), radio (1.25), vinyl-cover (1.5), cd-cover (1.4)
+// All use width:100% + aspect-ratio by default, which can overflow a short cell.
+// Instead: fix height to ~90%, let width follow aspect-ratio, cap at 100% width.
+// The 10% reduction gives drop-shadows room to render without clipping.
+.cassette-container,
+.reel-deck-container,
+.radio-container,
+.vinyl-sleeve-container,
+.cd-case-container {
+  height: 90%;
+  width: auto;
+  max-width: 95%;
+  max-height: 90%;
+}
+
+// ── Globe player (circular, fills container) ──────────────────────────
+// Globe uses width:100%; height:100% — force it square so it renders as circle.
+.globe-player {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
 
 // ---------------------------------------------------------------------------
 // CustomLayout cell content overrides

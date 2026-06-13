@@ -228,17 +228,19 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
             />
           </div>
         );
-      case 'player':
+      case 'player': {
+        const isPlayerMaxSpace = albumArtMaxSpace && cellEffectivePlayerType === 'albumArt';
         return (
-          <div className="custom-layout-player">
+          <div className={`custom-layout-player ${isPlayerMaxSpace ? 'custom-layout-player--max-space' : ''}`}>
             <CellPlayerComponent
               isPlaying={isPlaying}
               albumArt={fullAlbumArt}
-              maxSpace={albumArtMaxSpace && cellEffectivePlayerType === 'albumArt'}
+              maxSpace={isPlayerMaxSpace}
               animated={albumArtAnimated && cellEffectivePlayerType === 'albumArt'}
             />
           </div>
         );
+      }
       case 'viz':
         return (
           <div className="custom-layout-viz" ref={vizContainerRef}>
