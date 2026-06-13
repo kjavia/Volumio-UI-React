@@ -837,7 +837,10 @@ export default function LayoutDesigner() {
     );
   }
 
-  function renderCells(cells, cFr, rFr, parentCellId = null) {
+  function renderCells(cells, cFr, rFr, parentCellId = null, parentWidth = activeLayout?.width ?? 0, parentHeight = activeLayout?.height ?? 0) {
+    const totalColFr = cFr.reduce((sum, f) => sum + f, 0);
+    const totalRowFr = rFr.reduce((sum, f) => sum + f, 0);
+
     return cells.flatMap((rowArr, rowIdx) =>
       (rowArr || []).map((cell, colIdx) => {
         if (!cell) return null;
@@ -851,6 +854,16 @@ export default function LayoutDesigner() {
         const colStart = (rowArr || []).slice(0, colIdx).reduce(
           (sum, c) => sum + (c ? (c.colSpan || 1) : 1), 1
         );
+
+        const colStartIndex = (rowArr || []).slice(0, colIdx).reduce(
+          (sum, c) => sum + (c ? (c.colSpan || 1) : 1), 0
+        );
+
+        const cellColFrac = cFr.slice(colStartIndex, colStartIndex + colSpan).reduce((sum, f) => sum + f, 0);
+        const cellRowFrac = rFr.slice(rowIdx, rowIdx + rowSpan).reduce((sum, f) => sum + f, 0);
+        const cellWidth = totalColFr > 0 ? (cellColFrac / totalColFr) * parentWidth : 0;
+        const cellHeight = totalRowFr > 0 ? (cellRowFrac / totalRowFr) * parentHeight : 0;
+        const cellDims = `${Math.round(cellWidth)}×${Math.round(cellHeight)}`;
 
         const cellStyle = {
           gridColumn: `${colStart} / span ${colSpan}`,
@@ -877,8 +890,9 @@ export default function LayoutDesigner() {
                   height: '100%',
                 }}
               >
-                {renderCells(subCells, subCF, subRF, cell.id)}
+                {renderCells(subCells, subCF, subRF, cell.id, cellWidth, cellHeight)}
               </div>
+              <span className="ld-cell__dimensions">{cellDims}</span>
               {/* Outer row/col handles on the parent cell itself */}
               {colIdx < cFr.length - 1 && (
                 <div
@@ -923,6 +937,7 @@ export default function LayoutDesigner() {
                 )}
               </>
             )}
+            <span className="ld-cell__dimensions">{cellDims}</span>
             {renderResizeHandles(cFr, rFr, colIdx, rowIdx, parentCellId)}
           </div>
         );
@@ -1147,7 +1162,7 @@ export default function LayoutDesigner() {
               }}
               onClick={() => setSelectedCells([])}
             >
-              {renderCells(activeLayout.cells, colFractions, rowFractions)}
+              {renderCells(activeLayout.cells, colFractions, rowFractions, null, activeLayout.width, activeLayout.height)}
             </div>
           </div>
         </div>
