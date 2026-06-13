@@ -837,6 +837,13 @@ export default function LayoutDesigner() {
     );
   }
 
+  function getGridColumnIndex(rowArr, colIdx) {
+    return (rowArr || []).slice(0, colIdx).reduce(
+      (sum, c) => sum + (c ? (c.colSpan || 1) : 1),
+      0,
+    );
+  }
+
   function renderCells(cells, cFr, rFr, parentCellId = null, parentWidth = activeLayout?.width ?? 0, parentHeight = activeLayout?.height ?? 0) {
     const totalColFr = cFr.reduce((sum, f) => sum + f, 0);
     const totalRowFr = rFr.reduce((sum, f) => sum + f, 0);
@@ -851,13 +858,8 @@ export default function LayoutDesigner() {
 
         // Compute actual grid column start from cumulative colSpans of preceding cells.
         // colIdx alone is wrong after a merge-splice because cells shift to lower indices.
-        const colStart = (rowArr || []).slice(0, colIdx).reduce(
-          (sum, c) => sum + (c ? (c.colSpan || 1) : 1), 1
-        );
-
-        const colStartIndex = (rowArr || []).slice(0, colIdx).reduce(
-          (sum, c) => sum + (c ? (c.colSpan || 1) : 1), 0
-        );
+        const colStart = getGridColumnIndex(rowArr, colIdx) + 1;
+        const colStartIndex = getGridColumnIndex(rowArr, colIdx);
 
         const cellColFrac = cFr.slice(colStartIndex, colStartIndex + colSpan).reduce((sum, f) => sum + f, 0);
         const cellRowFrac = rFr.slice(rowIdx, rowIdx + rowSpan).reduce((sum, f) => sum + f, 0);
@@ -892,7 +894,6 @@ export default function LayoutDesigner() {
               >
                 {renderCells(subCells, subCF, subRF, cell.id, cellWidth, cellHeight)}
               </div>
-              <span className="ld-cell__dimensions">{cellDims}</span>
               {/* Outer row/col handles on the parent cell itself */}
               {colIdx < cFr.length - 1 && (
                 <div
