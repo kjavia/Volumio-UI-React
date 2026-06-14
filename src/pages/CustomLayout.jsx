@@ -230,8 +230,12 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'player': {
         const isPlayerMaxSpace = albumArtMaxSpace && cellEffectivePlayerType === 'albumArt';
+        const playerStyle = {
+          justifyContent: cell.justifyContent || 'center',
+          alignItems: cell.alignItems || 'center',
+        };
         return (
-          <div className={`custom-layout-player ${isPlayerMaxSpace ? 'custom-layout-player--max-space' : ''}`}>
+          <div className={`custom-layout-player ${isPlayerMaxSpace ? 'custom-layout-player--max-space' : ''}`} style={playerStyle}>
             <CellPlayerComponent
               isPlaying={isPlaying}
               albumArt={fullAlbumArt}
@@ -342,7 +346,11 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
           : Array(cell.subdivisions?.rows || 1).fill(1);
 
         rendered.push(
-          <div key={cell.id} className="custom-layout-cell" style={style}>
+          <div
+            key={cell.id}
+            className={`custom-layout-cell${cell.itemKey === 'player' ? ' custom-layout-cell--player' : ''}`}
+            style={style}
+          >
             {cell.subdivisions ? (
               <div
                 style={{

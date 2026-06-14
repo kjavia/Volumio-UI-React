@@ -38,22 +38,6 @@ const ReelToReelPlayer = ({ isPlaying }) => {
           {/* <!-- Head Cover --> */}
           <div className="head-cover"></div>
 
-          {/* <!-- Decor: VU Meters --> */}
-          <div className="vu-meter-group">
-            <div className="vu-meter">
-              <div
-                className={`vu-needle ${isPlaying ? 'playing' : ''}`}
-                style={{ animationDelay: '0s' }}
-              ></div>
-            </div>
-            <div className="vu-meter">
-              <div
-                className={`vu-needle ${isPlaying ? 'playing' : ''}`}
-                style={{ animationDelay: '0.1s' }}
-              ></div>
-            </div>
-          </div>
-
           {/* <!-- Decor: Knob --> */}
           <div className="deck-knob"></div>
         </div>
