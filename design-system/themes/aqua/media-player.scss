@@ -163,6 +163,27 @@
   }
 }
 
+/* Match regular layout's lighter text treatment in Custom Layout cells */
+.custom-layout-cell {
+
+  .track-title,
+  .responsive-title {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  .artist-name,
+  .track-artist,
+  .album-name,
+  .responsive-artist,
+  .responsive-album {
+    color: rgba(255, 255, 255, 0.75) !important;
+  }
+
+  .responsive-stream-info {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+}
+
 .format-logo-responsive {
   height: clamp(1.3rem, 3.8cqw, 4.2rem);
   display: block;

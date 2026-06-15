@@ -4639,6 +4639,22 @@ input[type=range]::-moz-range-thumb:active {
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* Match regular layout's lighter text treatment in Custom Layout cells */
+.custom-layout-cell .track-title,
+.custom-layout-cell .responsive-title {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+.custom-layout-cell .artist-name,
+.custom-layout-cell .track-artist,
+.custom-layout-cell .album-name,
+.custom-layout-cell .responsive-artist,
+.custom-layout-cell .responsive-album {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+.custom-layout-cell .responsive-stream-info {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
 .format-logo-responsive {
   height: clamp(1.3rem, 3.8cqw, 4.2rem);
   display: block;

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import Button from './Button';
-import { useTheme } from '@/contexts/ThemeContext';
 
 const Label = ({ children }) => (
     <span className="secondary-btn-label">{children}</span>
@@ -19,8 +18,7 @@ const SecondaryControls = ({
     onToggleFavourite,
     textMode,
 }) => {
-    const { theme } = useTheme();
-    const showText = textMode || theme === 'oled';
+    const showText = textMode;
 
     return (
         <div className="d-flex gap-3 gap-md-4 align-items-center justify-content-center flex-wrap">

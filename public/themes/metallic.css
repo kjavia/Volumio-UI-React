@@ -3232,7 +3232,7 @@ h2 {
     color: var(--text-primary) !important;
     opacity: 1 !important;
   }
-  .slider-track {
+  .lsp-root .slider-track {
     height: clamp(12px, 1.4vw, 18px) !important;
   }
   .lsp-btn.btn-icon, .lsp-btn.lsp-btn--sm.btn-icon, .lsp-btn.lsp-btn--md.btn-round {

@@ -4280,14 +4280,17 @@ input[type=range]::-moz-range-thumb:active {
     min-height: 64px;
   }
   /* Secondary controls row: tighter gap, bigger buttons */
-  .player-controls > .d-flex.gap-3 {
+  .player-controls > .d-flex.gap-3,
+  .tp-controls > .d-flex.gap-3 {
     gap: 0.25rem !important;
   }
-  .player-controls .btn-icon {
+  .player-controls .btn-icon,
+  .tp-controls .btn-icon {
     width: 40px !important;
     height: 40px !important;
   }
-  .player-controls .btn-icon .material-icons::after {
+  .player-controls .btn-icon .material-icons::after,
+  .tp-controls .btn-icon .material-icons::after {
     font-size: 0.7rem !important;
   }
 }
@@ -4357,7 +4360,9 @@ input[type=range]::-moz-range-thumb:active {
 /* Shared: hide icon ligature in all player btn-icon buttons */
 .player-controls .btn-icon .material-icons,
 .lsp-btn-group .btn-icon .material-icons,
-.mobile-row-secondary .btn-icon .material-icons {
+.tp-controls .btn-icon .material-icons,
+.mobile-row-secondary .btn-icon .material-icons,
+.custom-layout-button-row .btn-icon .material-icons {
   font-size: 0 !important;
   color: transparent !important;
   text-indent: -9999px;
@@ -4371,7 +4376,9 @@ input[type=range]::-moz-range-thumb:active {
 }
 .player-controls .btn-icon .material-icons::after,
 .lsp-btn-group .btn-icon .material-icons::after,
-.mobile-row-secondary .btn-icon .material-icons::after {
+.tp-controls .btn-icon .material-icons::after,
+.mobile-row-secondary .btn-icon .material-icons::after,
+.custom-layout-button-row .btn-icon .material-icons::after {
   font-family: var(--font-display);
   font-size: 0.85rem;
   font-weight: 700;
@@ -4390,13 +4397,17 @@ input[type=range]::-moz-range-thumb:active {
    on btn-icon material-icons or clipping via overflow:hidden. */
 .player-controls .btn-icon,
 .lsp-btn-group .btn-icon,
-.mobile-row-secondary .btn-icon {
+.tp-controls .btn-icon,
+.mobile-row-secondary .btn-icon,
+.custom-layout-button-row .btn-icon {
   overflow: visible !important;
 }
 
 .player-controls .btn-icon .material-icons,
 .lsp-btn-group .btn-icon .material-icons,
-.mobile-row-secondary .btn-icon .material-icons {
+.tp-controls .btn-icon .material-icons,
+.mobile-row-secondary .btn-icon .material-icons,
+.custom-layout-button-row .btn-icon .material-icons {
   font-size: 0 !important;
 }
 

@@ -3884,6 +3884,33 @@ h2 {
   text-shadow: none;
 }
 
+/* Match regular layout's lighter text treatment in Custom Layout cells */
+.custom-layout-cell .track-title,
+.custom-layout-cell .responsive-title {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+}
+.custom-layout-cell .artist-name,
+.custom-layout-cell .track-artist,
+.custom-layout-cell .responsive-artist {
+  color: rgba(255, 255, 255, 0.7) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+}
+.custom-layout-cell .album-name,
+.custom-layout-cell .responsive-album {
+  color: rgba(255, 255, 255, 0.55) !important;
+  text-shadow: none !important;
+}
+.custom-layout-cell .responsive-stream-info {
+  color: rgba(255, 255, 255, 0.65) !important;
+  text-shadow: none !important;
+}
+.custom-layout-cell .seekbar-labels,
+.custom-layout-cell .time-label {
+  color: rgba(255, 255, 255, 0.7) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+}
+
 .format-logo-responsive {
   height: clamp(1.3rem, 3.8cqw, 4.2rem);
   display: block;
@@ -4002,7 +4029,7 @@ h2 {
     color: var(--text-primary) !important;
     opacity: 1 !important;
   }
-  .slider-track {
+  .lsp-root .slider-track {
     height: clamp(12px, 1.4vw, 18px) !important;
   }
   .lsp-btn.btn-icon, .lsp-btn.lsp-btn--sm.btn-icon, .lsp-btn.lsp-btn--md.btn-round {
