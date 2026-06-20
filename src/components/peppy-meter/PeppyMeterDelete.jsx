@@ -43,7 +43,7 @@ const dbToVolume = (db) => Math.max(0, Math.min(1, (db - MIN_DB) / DB_RANGE));
  * @param {boolean} [props.stopped] — pause animation & audio
  * @param {string} [props.className] — additional CSS class names
  */
-const PeppyMeter = ({
+const PeppyMeterDelete = ({
   width,
   height,
   folderName,
@@ -304,7 +304,7 @@ const PeppyMeter = ({
   );
 };
 
-PeppyMeter.propTypes = {
+PeppyMeterDelete.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   folderName: PropTypes.string.isRequired,
@@ -314,4 +314,4 @@ PeppyMeter.propTypes = {
   className: PropTypes.string,
 };
 
-export default PeppyMeter;
+export default PeppyMeterDelete;
