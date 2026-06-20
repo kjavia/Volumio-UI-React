@@ -1012,13 +1012,6 @@
         aspect-ratio: 1 / 1;
       }
     }
-
-    // Globe player: constrain to a square so it doesn't spread wide
-    .globe-player {
-      height: 100%;
-      width: auto;
-      aspect-ratio: 1 / 1;
-    }
   }
 
   .lsp-meta-area {

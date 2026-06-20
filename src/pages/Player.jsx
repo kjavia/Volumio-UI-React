@@ -12,7 +12,6 @@ import CdCoverPlayer from '@/components/animated-players/CdCoverPlayer';
 import CassettePlayer from '@/components/animated-players/CassettePlayer';
 import ReelToReelPlayer from '@/components/animated-players/ReelToReelPlayer';
 import RadioPlayer from '@/components/animated-players/RadioPlayer';
-import GlobePlayer from '@/components/animated-players/GlobePlayer';
 import PlayerControls from '@/components/PlayerControls';
 import TrackInfo from '@/components/TrackInfo';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
@@ -37,7 +36,6 @@ const PLAYER_MAP = {
   cassette: CassettePlayer,
   reelToReel: ReelToReelPlayer,
   radio: RadioPlayer,
-  globe: GlobePlayer,
 };
 
 const RANDOM_PLAYERS = [
@@ -48,7 +46,6 @@ const RANDOM_PLAYERS = [
   CassettePlayer,
   ReelToReelPlayer,
   RadioPlayer,
-  GlobePlayer,
   AlbumArtPlayer,
 ];
 
@@ -61,7 +58,7 @@ const getPlayerTypeForSource = (service, trackType) => {
   }
 
   if (s.includes('qobuz') || s.includes('tidal') || s.includes('deezer') || s.includes('spotify')) {
-    return 'globe';
+    return 'albumArt';
   }
 
   if (['mp3', 'flac', 'ogg', 'dsd'].includes(t)) {

@@ -95,10 +95,6 @@ To install the plugin for development & testing on actual device, follow these s
 
 # Credits
 
-## 3D Globe
-
-The globe visualization uses [cobe](https://github.com/shuding/cobe), a lightweight WebGL globe renderer by Shuding. It is integrated in `src/components/animated-players/GlobePlayer.jsx`.
-
 ## Wallpapers
 
 [https://unsplash.com](UnSplash)

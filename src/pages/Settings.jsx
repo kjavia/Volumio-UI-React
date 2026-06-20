@@ -75,7 +75,6 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
             { value: 'cassette', label: t('PLAYER_TYPE_CASSETTE', 'Cassette') },
             { value: 'reelToReel', label: t('PLAYER_TYPE_REEL_TO_REEL', 'Reel to Reel') },
             { value: 'radio', label: t('PLAYER_TYPE_RADIO', 'Radio') },
-            { value: 'globe', label: t('PLAYER_TYPE_GLOBE', 'Globe') },
             { value: 'matchSource', label: t('PLAYER_TYPE_MATCH_SOURCE', 'Match Source') },
             { value: 'random', label: t('PLAYER_TYPE_RANDOM', 'Random') },
             { value: 'none', label: t('NONE', 'None') },

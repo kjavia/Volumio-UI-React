@@ -54,7 +54,6 @@ const PLAYER_TYPE_OPTIONS = [
   { value: 'cassette', label: 'Cassette' },
   { value: 'reelToReel', label: 'Reel to Reel' },
   { value: 'radio', label: 'Radio' },
-  { value: 'globe', label: 'Globe' },
   { value: 'matchSource', label: 'Match Source' },
   { value: 'random', label: 'Random' },
   { value: 'none', label: 'None' },

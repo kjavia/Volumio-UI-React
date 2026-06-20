@@ -14,7 +14,6 @@ import CdCoverPlayer from '@/components/animated-players/CdCoverPlayer';
 import CassettePlayer from '@/components/animated-players/CassettePlayer';
 import ReelToReelPlayer from '@/components/animated-players/ReelToReelPlayer';
 import RadioPlayer from '@/components/animated-players/RadioPlayer';
-import GlobePlayer from '@/components/animated-players/GlobePlayer';
 import PlayerSeekbar from '@/components/PlayerSeekbar';
 import SpectrumAnalyzer from '@/components/spectrum-analyzers/SpectrumAnalyzer';
 import PeppyMeter from '@/components/PeppyMeter';
@@ -38,19 +37,18 @@ const PLAYER_MAP = {
   cassette: CassettePlayer,
   reelToReel: ReelToReelPlayer,
   radio: RadioPlayer,
-  globe: GlobePlayer,
 };
 
 const RANDOM_PLAYERS = [
   VinylPlayer, VinylCoverPlayer, CdPlayer, CdCoverPlayer,
-  CassettePlayer, ReelToReelPlayer, RadioPlayer, GlobePlayer, AlbumArtPlayer,
+  CassettePlayer, ReelToReelPlayer, RadioPlayer, AlbumArtPlayer,
 ];
 
 const getPlayerTypeForSource = (service, trackType) => {
   const s = (service || '').toLowerCase();
   const t = (trackType || '').toLowerCase();
   if (s === 'radio' || s.includes('webradio') || s.includes('internet')) return 'radio';
-  if (s.includes('qobuz') || s.includes('tidal') || s.includes('deezer') || s.includes('spotify')) return 'globe';
+  if (s.includes('qobuz') || s.includes('tidal') || s.includes('deezer') || s.includes('spotify')) return 'albumArt';
   if (['mp3', 'flac', 'dsd'].includes(t)) return 'cdCover';
   if (s.includes('mp3') || s.includes('flac') || s.includes('dsd')) return 'cdCover';
   return 'vinylCover';

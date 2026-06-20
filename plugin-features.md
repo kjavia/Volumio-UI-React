@@ -11,9 +11,8 @@ Provides a feature rich alternative "Now Playing" screen with controls, animatio
    4. Cassette
    5. Reel 2 Reel
    6. Radio
-   7. Globe
-   8. Random
-   9. Match source (Flac -> CD, Qobuz to Globe, Internet Radio to Radio etc.)
+   7. Random
+   8. Match source (Flac -> CD, Qobuz/Tidal/Spotify -> Album Art, Internet Radio -> Radio etc.)
 2. Player controls on the right, along with track and source information, and playlist management controls
 3. Spectrum analyzer / VU Meters on bottom (or right depending on screen size). Provides a slightly delayed visualization based on the audio stream exposed by the device.
 

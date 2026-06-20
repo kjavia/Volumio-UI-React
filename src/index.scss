@@ -274,15 +274,6 @@
   align-self: flex-start;
 }
 
-// ── Globe player (circular, fills container) ──────────────────────────
-// Globe uses width:100%; height:100% — force it square so it renders as circle.
-.globe-player {
-  height: 100%;
-  width: auto;
-  max-width: 100%;
-  aspect-ratio: 1 / 1;
-}
-
 
 // ---------------------------------------------------------------------------
 // CustomLayout cell content overrides

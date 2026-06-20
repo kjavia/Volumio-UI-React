@@ -191,21 +191,30 @@ export function renderSpectrumFrame(
     }
 
     // Reflection (same height as bar, drawn below origin)
-    if (images.reflection && config.reflectionType) {
+    if (config.reflectionType) {
       const refGap = (config.reflectionGap || 0) * scaleY;
       const refY = originY + refGap;
       const refH = fillH;
 
-      if (config.reflectionType === 'image.extended') {
-        const ratio = fillH / barH;
-        const srcH = ratio * images.reflection.height;
-        ctx.drawImage(
-          images.reflection,
-          0, 0, images.reflection.width, srcH,
-          x, refY, barW, refH,
-        );
-      } else if (config.reflectionType === 'image') {
-        ctx.drawImage(images.reflection, x, refY, barW, refH);
+      if (images.reflection) {
+        if (config.reflectionType === 'image.extended') {
+          const ratio = fillH / barH;
+          const srcH = ratio * images.reflection.height;
+          ctx.drawImage(
+            images.reflection,
+            0, 0, images.reflection.width, srcH,
+            x, refY, barW, refH,
+          );
+        } else if (config.reflectionType === 'image') {
+          ctx.drawImage(images.reflection, x, refY, barW, refH);
+        }
+      } else if (config.reflectionType === 'gradient' && config.reflectionGradient) {
+        const grad = makeBarGradient(ctx, config.reflectionGradient, x, refY, refY + refH);
+        ctx.fillStyle = grad || '#ffffff';
+        ctx.fillRect(x, refY, barW, refH);
+      } else if (config.reflectionType === 'color' && config.reflectionColor) {
+        ctx.fillStyle = `rgb(${config.reflectionColor})`;
+        ctx.fillRect(x, refY, barW, refH);
       }
     }
 
