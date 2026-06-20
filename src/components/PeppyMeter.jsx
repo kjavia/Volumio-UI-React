@@ -13,6 +13,7 @@ const mediaSourceCache = new WeakMap();
 
 const FFT_SIZE = 1024;
 const SMOOTH_BUFFER_SIZE = 4;
+const NEEDLE_SENSITIVITY = 0.5;
 
 const getChannelPeakLevel = (data) => {
   let peak = 0;
@@ -324,8 +325,8 @@ const PeppyMeter = ({
       const rawL = getChannelPeakLevel(dataL);
       const rawR = getChannelPeakLevel(dataR);
       const smooth = smoothBuffersRef.current;
-      const leftLevel = getSmoothedLevel(smooth.left, rawL);
-      const rightLevel = getSmoothedLevel(smooth.right, rawR);
+      const leftLevel = Math.max(0, Math.min(1, getSmoothedLevel(smooth.left, rawL) * NEEDLE_SENSITIVITY));
+      const rightLevel = Math.max(0, Math.min(1, getSmoothedLevel(smooth.right, rawR) * NEEDLE_SENSITIVITY));
 
       // Accumulate reel rotation only when audio is playing (signal detected)
       if (cfg.reel && (rawL > 0.01 || rawR > 0.01)) {
