@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
-import { flushSync } from 'react-dom';
 import PropTypes from 'prop-types';
 import { SPECTRUM_STREAM_URL, PLUGIN_BASE_URL } from '@/config';
 import { getServiceLogoUrl } from './ServiceLogo';
@@ -13,21 +12,24 @@ import './peppy-meter/PeppyMeter.scss';
 const mediaSourceCache = new WeakMap();
 
 const FFT_SIZE = 1024;
-const MIN_DB = -20;
-const MAX_DB = 5;
-const DB_RANGE = MAX_DB - MIN_DB;
+const SMOOTH_BUFFER_SIZE = 4;
 
-const calcRms = (data) => {
-  let sum = 0;
+const getChannelPeakLevel = (data) => {
+  let peak = 0;
   for (let i = 0; i < data.length; i++) {
-    const s = (data[i] - 128) / 128;
-    sum += s * s;
+    const sample = Math.abs((data[i] - 128) / 128);
+    if (sample > peak) peak = sample;
   }
-  return Math.sqrt(sum / data.length);
+  return Math.max(0, Math.min(1, peak));
 };
 
-const rmsToDb = (rms) => (rms < 0.00001 ? -100 : 20 * Math.log10(rms));
-const dbToVolume = (db) => Math.max(0, Math.min(1, (db - MIN_DB) / DB_RANGE));
+const getSmoothedLevel = (buffer, level) => {
+  buffer.push(level);
+  if (buffer.length > SMOOTH_BUFFER_SIZE) buffer.shift();
+  let sum = 0;
+  for (let i = 0; i < buffer.length; i++) sum += buffer[i];
+  return sum / buffer.length;
+};
 
 /**
  * Pick a random element from an array, avoiding the previous pick when possible.
@@ -63,7 +65,7 @@ const PeppyMeter = ({
   const analyserLRef = useRef(null);
   const analyserRRef = useRef(null);
   const animFrameRef = useRef(null);
-  const smoothedRef = useRef({ left: MIN_DB, right: MIN_DB });
+  const smoothBuffersRef = useRef({ left: [], right: [] });
   const retryTimerRef = useRef(null);
   const embeddedSpectrumRef = useRef(null);
   const imagesRef = useRef(null);
@@ -255,8 +257,12 @@ const PeppyMeter = ({
       const analyserR = ctx.createAnalyser();
       analyserL.fftSize = FFT_SIZE;
       analyserR.fftSize = FFT_SIZE;
-      analyserL.smoothingTimeConstant = 0;
-      analyserR.smoothingTimeConstant = 0;
+      analyserL.smoothingTimeConstant = 0.5;
+      analyserR.smoothingTimeConstant = 0.5;
+      analyserL.minDecibels = -85;
+      analyserR.minDecibels = -85;
+      analyserL.maxDecibels = -25;
+      analyserR.maxDecibels = -25;
       sourceNode.connect(analyserL);
       sourceNode.connect(analyserR);
       analyserLRef.current = analyserL;
@@ -287,8 +293,7 @@ const PeppyMeter = ({
   // ── Animation loop ──────────────────────────────────────────────────────
 
   const startAnimation = useCallback(() => {
-    const ATTACK = 0.35;
-    const RELEASE = 0.07;
+    smoothBuffersRef.current = { left: [], right: [] };
     const dataL = new Uint8Array(FFT_SIZE);
     const dataR = new Uint8Array(FFT_SIZE);
     let lastTime = performance.now();
@@ -316,15 +321,14 @@ const PeppyMeter = ({
       analyserLRef.current.getByteTimeDomainData(dataL);
       analyserRRef.current.getByteTimeDomainData(dataR);
 
-      const rawL = rmsToDb(calcRms(dataL));
-      const rawR = rmsToDb(calcRms(dataR));
-
-      const s = smoothedRef.current;
-      s.left += (rawL - s.left) * (rawL > s.left ? ATTACK : RELEASE);
-      s.right += (rawR - s.right) * (rawR > s.right ? ATTACK : RELEASE);
+      const rawL = getChannelPeakLevel(dataL);
+      const rawR = getChannelPeakLevel(dataR);
+      const smooth = smoothBuffersRef.current;
+      const leftLevel = getSmoothedLevel(smooth.left, rawL);
+      const rightLevel = getSmoothedLevel(smooth.right, rawR);
 
       // Accumulate reel rotation only when audio is playing (signal detected)
-      if (cfg.reel && (rawL > -80 || rawR > -80)) {
+      if (cfg.reel && (rawL > 0.01 || rawR > 0.01)) {
         reelAngle += cfg.reel.rotationSpeed * dt * 6;
         if (reelAngle >= 360) reelAngle -= 360;
       }
@@ -402,7 +406,7 @@ const PeppyMeter = ({
         turntableState = { vinylAngle, tonearmAngle: tonearmAngle != null ? tonearmAngle : 0 };
       }
 
-      renderMeterFrame(ctx, cfg, imgs, dbToVolume(s.left), dbToVolume(s.right), canvas.width, canvas.height, nativeW, nativeH, reelAngle, trackInfoRef.current, albumArtRef.current, formatIconRef.current, turntableState);
+      renderMeterFrame(ctx, cfg, imgs, leftLevel, rightLevel, canvas.width, canvas.height, nativeW, nativeH, reelAngle, trackInfoRef.current, albumArtRef.current, formatIconRef.current, turntableState);
     };
 
     tick();
