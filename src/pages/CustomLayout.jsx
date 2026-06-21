@@ -28,6 +28,7 @@ import BrowseDialog from '@/components/BrowseDialog';
 import PeppyMeter from '@/components/PeppyMeter';
 import PeppySpectrum from '@/components/peppy-spectrum/PeppySpectrum';
 import SecondaryControls from '@/components/SecondaryControls';
+import { normalizeConfigValue } from '@/utils/pluginConfigValue';
 
 const PLAYER_MAP = {
   albumArt: AlbumArtPlayer,
@@ -64,15 +65,15 @@ const getPlayerTypeForSource = (service, trackType) => {
 const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => {
   console.log('CustomLayout render', { layout });
   const { data: pluginConfig } = usePluginConfig();
-  const playerType = pluginConfig?.playerType || 'radio';
+  const playerType = normalizeConfigValue(pluginConfig?.playerType) || 'radio';
   const albumArtMaxSpace = pluginConfig?.albumArtMaxSpace === true;
   const albumArtAnimated = pluginConfig?.albumArtAnimated !== false;
-  const vizType = pluginConfig?.vizType || 'spectrum';
+  const vizType = normalizeConfigValue(pluginConfig?.vizType) || 'spectrum';
   const backgroundColor = pluginConfig?.backgroundColor || '';
-  const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
-  const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
-  const peppySpectrumFolder = pluginConfig?.peppySpectrumFolder || '';
-  const peppySpectrumModel = pluginConfig?.peppySpectrumModel || 'random';
+  const peppyMeterFolder = normalizeConfigValue(pluginConfig?.peppyMeterFolder) || '';
+  const peppyMeterModel = normalizeConfigValue(pluginConfig?.peppyMeterModel) || 'random';
+  const peppySpectrumFolder = normalizeConfigValue(pluginConfig?.peppySpectrumFolder) || '';
+  const peppySpectrumModel = normalizeConfigValue(pluginConfig?.peppySpectrumModel) || 'random';
 
   const spectrumOptions = useMemo(() => {
     const raw = pluginConfig?.spectrumOptions;

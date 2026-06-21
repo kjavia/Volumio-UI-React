@@ -26,6 +26,7 @@ import Button from '@/components/Button';
 import Marquee from '@/components/Marquee';
 import StreamInfo from '@/components/StreamInfo';
 import ServiceLogo from '@/components/ServiceLogo';
+import { normalizeConfigValue } from '@/utils/pluginConfigValue';
 import './large-screen-player.scss';
 
 const PLAYER_MAP = {
@@ -119,16 +120,16 @@ VolumePopup.propTypes = {
  */
 const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizContainerRef }) => {
   const { data: pluginConfig } = usePluginConfig();
-  const playerType = pluginConfig?.playerType || 'radio';
-  const vizType = pluginConfig?.vizType || 'spectrum';
+  const playerType = normalizeConfigValue(pluginConfig?.playerType) || 'radio';
+  const vizType = normalizeConfigValue(pluginConfig?.vizType) || 'spectrum';
   const showViz = vizType !== 'none';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
   const albumArtAnimated = pluginConfig?.albumArtAnimated !== false;
   const backgroundColor = pluginConfig?.backgroundColor || '';
-  const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
-  const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
-  const peppySpectrumFolder = pluginConfig?.peppySpectrumFolder || '';
-  const peppySpectrumModel = pluginConfig?.peppySpectrumModel || 'random';
+  const peppyMeterFolder = normalizeConfigValue(pluginConfig?.peppyMeterFolder) || '';
+  const peppyMeterModel = normalizeConfigValue(pluginConfig?.peppyMeterModel) || 'random';
+  const peppySpectrumFolder = normalizeConfigValue(pluginConfig?.peppySpectrumFolder) || '';
+  const peppySpectrumModel = normalizeConfigValue(pluginConfig?.peppySpectrumModel) || 'random';
 
   // Ultrawide landscape short — 3-column layout (player | meta | viz)
   // Targets screens like 2650×700 or 1920×515 where width >> height

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,6 +7,8 @@ import { useSocket } from '@/contexts/SocketContext';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/Toast';
+import SettingsExportImport from '@/components/SettingsExportImport';
+import { normalizeConfigValue } from '@/utils/pluginConfigValue';
 import './settings.scss';
 
 const PLUGIN_ENDPOINT = 'user_interface/stylish_player';
@@ -246,12 +248,12 @@ const SelectField = ({ field, value, onChange, onDelete }) => (
     <div className="settings-radio-group">
       {field.options.map((opt) => (
         <div key={opt.value} className={`settings-radio-wrapper${opt.preview ? ' settings-radio-wrapper--has-preview' : ''}`}>
-          <label className={`btn ${value === opt.value ? 'btn-primary' : 'btn-secondary'} settings-radio`}>
+          <label className={`btn ${normalizeConfigValue(value) === opt.value ? 'btn-primary' : 'btn-secondary'} settings-radio`}>
             <input
               type="radio"
               name={field.id}
               value={opt.value}
-              checked={value === opt.value}
+              checked={normalizeConfigValue(value) === opt.value}
               onChange={() => onChange(field.id, opt.value)}
               className="settings-radio__input"
             />
@@ -533,10 +535,10 @@ const KnobField = ({ field, value, onChange }) => {
 
   const angleRange = 270;
   const valueToAngle = (v) => ((v - min) / (max - min)) * angleRange - angleRange / 2;
-  const angleToValue = (deg) => {
+  const angleToValue = useCallback((deg) => {
     const clamped = Math.max(-angleRange / 2, Math.min(angleRange / 2, deg));
     return Math.round(((clamped + angleRange / 2) / angleRange) * (max - min) + min);
-  };
+  }, [angleRange, max, min]);
 
   const rotation = valueToAngle(numValue);
 
@@ -572,7 +574,7 @@ const KnobField = ({ field, value, onChange }) => {
     document.addEventListener('mouseup', onUp);
     document.addEventListener('touchmove', onMove, { passive: false });
     document.addEventListener('touchend', onUp);
-  }, [field.id, onChange, getAngleFromEvent]);
+  }, [field.id, onChange, getAngleFromEvent, angleToValue]);
 
   const handleWheel = useCallback((e) => {
     e.preventDefault();
@@ -770,13 +772,13 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
 
   const isFieldVisible = (field) => {
     if (!field.visibleIf) return true;
-    return values[field.visibleIf.field] === field.visibleIf.value;
+    return normalizeConfigValue(values[field.visibleIf.field]) === field.visibleIf.value;
   };
 
   // Resolve dynamic options for model fields based on selected folder
   const resolveField = (field) => {
     if (field.dynamicOptionsFrom) {
-      const selectedFolder = values[field.dynamicOptionsFrom];
+      const selectedFolder = normalizeConfigValue(values[field.dynamicOptionsFrom]);
       const sourceFolders = field.dynamicOptionsFrom === 'peppySpectrumFolder'
         ? (peppySpectrumFolders || [])
         : (peppyFolders || []);
@@ -839,8 +841,8 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
           }
         })}
         {/* Upload section for peppy packs */}
-        {section.id === 'section_player_config' && (values.vizType === 'peppyMeter' || values.vizType === 'peppySpectrum') && (
-          <PackUpload packType={values.vizType === 'peppyMeter' ? 'meter' : 'spectrum'} onUploaded={onPackUploaded} t={t} />
+        {section.id === 'section_player_config' && (normalizeConfigValue(values.vizType) === 'peppyMeter' || normalizeConfigValue(values.vizType) === 'peppySpectrum') && (
+          <PackUpload packType={normalizeConfigValue(values.vizType) === 'peppyMeter' ? 'meter' : 'spectrum'} onUploaded={onPackUploaded} t={t} />
         )}
       </div>
       <div className="settings-section__footer">
@@ -881,6 +883,10 @@ const Settings = () => {
   const t = useSettingsTranslations();
   const sections = getSections(t, peppyFolders, peppySpectrumFolders);
   const [activeTab, setActiveTab] = useState(sections[0].id);
+  const effectiveValues = useMemo(
+    () => (Object.keys(values).length > 0 ? values : (pluginConfig || {})),
+    [values, pluginConfig],
+  );
 
   // Fetch peppy meter and spectrum folders from the API
   useEffect(() => {
@@ -902,36 +908,23 @@ const Settings = () => {
       .catch(() => { });
   }, []);
 
-  // Populate form values from plugin config
-  useEffect(() => {
-    if (pluginConfig) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setValues((prev) => {
-        // Only set initial values, don't overwrite user edits
-        const hasValues = Object.keys(prev).length > 0;
-        if (hasValues) return prev;
-        return { ...pluginConfig };
-      });
-    }
-  }, [pluginConfig]);
-
   const handleChange = useCallback((id, val) => {
-    setValues((prev) => ({ ...prev, [id]: val }));
-  }, []);
+    setValues((prev) => {
+      const base = Object.keys(prev).length > 0 ? prev : effectiveValues;
+      return { ...base, [id]: val };
+    });
+  }, [effectiveValues]);
 
-  const handleSave = useCallback((section) => {
-    if (!socket) return;
-    setSaving(true);
-
-    // Build the data payload matching what the backend expects
+  const buildSectionData = useCallback((section, sourceValues) => {
     const data = {};
+
     for (const field of section.fields) {
-      const val = values[field.id];
+      const rawVal = sourceValues[field.id];
 
       // Resolve dynamic options (e.g. peppyMeterModel options depend on selected folder)
       let options = field.options || [];
       if (field.dynamicOptionsFrom) {
-        const selectedFolder = values[field.dynamicOptionsFrom];
+        const selectedFolder = sourceValues[field.dynamicOptionsFrom];
         const sourceFolders = field.dynamicOptionsFrom === 'peppySpectrumFolder'
           ? (peppySpectrumFolders || [])
           : (peppyFolders || []);
@@ -946,18 +939,26 @@ const Settings = () => {
       }
 
       if (field.element === 'select') {
-        // Backend expects { value, label } for selects
-        const opt = options.find((o) => o.value === val);
-        data[field.id] = opt || { value: val, label: val };
+        // Imported settings may contain either the raw value or { value, label } shape
+        const selectedValue = typeof rawVal === 'object' && rawVal !== null ? rawVal.value : rawVal;
+        const opt = options.find((o) => o.value === selectedValue);
+        data[field.id] = opt || { value: selectedValue, label: rawVal?.label || selectedValue };
       } else if (field.element === 'fontrow') {
-        // fontrow stores two separate values under nameId and sizeId
-        data[field.nameId] = values[field.nameId] ?? '';
-        data[field.sizeId] = values[field.sizeId] ?? '';
+        data[field.nameId] = sourceValues[field.nameId] ?? '';
+        data[field.sizeId] = sourceValues[field.sizeId] ?? '';
       } else {
-        // Ensure undefined/null values are sent as empty string, not dropped from JSON
-        data[field.id] = val ?? '';
+        data[field.id] = rawVal ?? '';
       }
     }
+
+    return data;
+  }, [peppyFolders, peppySpectrumFolders]);
+
+  const handleSave = useCallback((section) => {
+    if (!socket) return;
+    setSaving(true);
+
+    const data = buildSectionData(section, effectiveValues);
 
     socket.emit('callMethod', {
       endpoint: PLUGIN_ENDPOINT,
@@ -990,7 +991,56 @@ const Settings = () => {
       socket.off('pushStylishPlayerConfig', handleConfigPush);
       setSaving(false);
     }, 5000);
-  }, [socket, values, showToast, peppyFolders, peppySpectrumFolders]);
+  }, [socket, effectiveValues, showToast, buildSectionData]);
+
+  /**
+   * Handle importing of settings and layouts from JSON file
+   */
+  const handleImportSettings = useCallback((importedSettings, importedLayouts, error) => {
+    if (error) {
+      showToast(error, 'error');
+      return;
+    }
+
+    if (!importedSettings) return;
+
+    if (!socket) {
+      showToast('Socket connection not available', 'error');
+      return;
+    }
+
+    try {
+      const mergedValues = { ...effectiveValues, ...importedSettings };
+      setValues(mergedValues);
+      setSaving(true);
+
+      sections.forEach((section) => {
+        const data = buildSectionData(section, mergedValues);
+        socket.emit('callMethod', {
+          endpoint: PLUGIN_ENDPOINT,
+          method: section.method,
+          data,
+        });
+      });
+
+      // Save layouts if provided
+      if (importedLayouts && Array.isArray(importedLayouts)) {
+        socket.emit('callMethod', {
+          endpoint: PLUGIN_ENDPOINT,
+          method: 'configSaveLayoutDesigner',
+          data: { layoutDesigner: JSON.stringify({ layouts: importedLayouts }) },
+        });
+      }
+
+      setTimeout(() => {
+        setSaving(false);
+        showToast('Settings and layouts imported successfully.', 'success');
+      }, 1500);
+    } catch (err) {
+      showToast(`Failed to import settings: ${err.message}`, 'error');
+      setSaving(false);
+    }
+  }, [socket, effectiveValues, sections, showToast, buildSectionData]);
 
   if (isLoading) {
     return (
@@ -1008,7 +1058,13 @@ const Settings = () => {
         <div>
           <h2 className="settings-topbar__title">Settings</h2>
         </div>
-        <div className="d-flex gap-2 align-items-center">
+        <div className="settings-topbar__actions d-flex gap-2 align-items-center">
+          <SettingsExportImport
+            currentSettings={effectiveValues}
+            currentLayouts={pluginConfig?.layoutDesigner?.layouts}
+            onImport={handleImportSettings}
+            t={t}
+          />
           <button className="btn btn-sm btn-outline-secondary" onClick={() => navigate('/layout-designer')}>
             <span className="material-icons">grid_view</span>
             Layout Designer
@@ -1037,7 +1093,7 @@ const Settings = () => {
           <SettingsSection
             key={activeSection.id}
             section={activeSection}
-            values={values}
+            values={effectiveValues}
             onChange={handleChange}
             onSave={handleSave}
             saving={saving}

@@ -26,6 +26,7 @@ import AddToPlaylistDialog from '@/components/AddToPlaylistDialog';
 import BrowseDialog from '@/components/BrowseDialog';
 import PeppyMeter from '@/components/PeppyMeter';
 import PeppySpectrum from '@/components/peppy-spectrum/PeppySpectrum';
+import { normalizeConfigValue } from '@/utils/pluginConfigValue';
 
 const PLAYER_MAP = {
   albumArt: AlbumArtPlayer,
@@ -76,18 +77,18 @@ const getPlayerTypeForSource = (service, trackType) => {
 const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   useEffect(() => { document.title = 'Volumio - Stylish Player | Player'; }, []);
   const { data: pluginConfig } = usePluginConfig();
-  const playerType = pluginConfig?.playerType || 'radio';
+  const playerType = normalizeConfigValue(pluginConfig?.playerType) || 'radio';
   const showPlayerControls = pluginConfig?.showPlayerControls !== false;
   const albumArtMaxSpace = pluginConfig?.albumArtMaxSpace === true;
   const albumArtAnimated = pluginConfig?.albumArtAnimated !== false;
   const showTrackPanel = pluginConfig?.showTrackPanel === true;
-  const vizType = pluginConfig?.vizType || 'spectrum';
+  const vizType = normalizeConfigValue(pluginConfig?.vizType) || 'spectrum';
   const showViz = vizType !== 'none';
   const backgroundColor = pluginConfig?.backgroundColor || '';
-  const peppyMeterFolder = pluginConfig?.peppyMeterFolder || '';
-  const peppyMeterModel = pluginConfig?.peppyMeterModel || 'random';
-  const peppySpectrumFolder = pluginConfig?.peppySpectrumFolder || '';
-  const peppySpectrumModel = pluginConfig?.peppySpectrumModel || 'random';
+  const peppyMeterFolder = normalizeConfigValue(pluginConfig?.peppyMeterFolder) || '';
+  const peppyMeterModel = normalizeConfigValue(pluginConfig?.peppyMeterModel) || 'random';
+  const peppySpectrumFolder = normalizeConfigValue(pluginConfig?.peppySpectrumFolder) || '';
+  const peppySpectrumModel = normalizeConfigValue(pluginConfig?.peppySpectrumModel) || 'random';
 
   const spectrumOptions = useMemo(() => {
     const raw = pluginConfig?.spectrumOptions;

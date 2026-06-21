@@ -13,6 +13,7 @@ import CustomLayout from './CustomLayout';
 import useIdleScreen from '@/hooks/useIdleScreen';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import usePluginConfig from '@/hooks/usePluginConfig';
+import { normalizeConfigValue } from '@/utils/pluginConfigValue';
 
 const CLOCK_SCREENS = {
   analogClock: AnalogClock,
@@ -87,13 +88,13 @@ const Home = () => {
   }
 
   const { data: pluginConfig } = usePluginConfig();
-  const vizType = pluginConfig?.vizType || 'spectrum';
+  const vizType = normalizeConfigValue(pluginConfig?.vizType) || 'spectrum';
   const isSpectrumViz = vizType === 'spectrum';
   const hasViz = vizType !== 'none';
 
-  const useCustomLayout = pluginConfig?.useCustomLayout === true;
+  const useCustomLayout = normalizeConfigValue(pluginConfig?.useCustomLayout) === true;
   const layoutDesigner = (() => {
-    const raw = pluginConfig?.layoutDesigner;
+    const raw = normalizeConfigValue(pluginConfig?.layoutDesigner);
     if (!raw) return { layouts: [] };
     if (typeof raw === 'string') {
       try { return JSON.parse(raw); } catch { return { layouts: [] }; }
@@ -115,7 +116,10 @@ const Home = () => {
 
   // Reset to first layout whenever the set of matching layouts changes.
   const matchingLayoutIds = matchingLayouts.map((l) => l.id).join(',');
-  useEffect(() => { setLayoutIndex(0); }, [matchingLayoutIds]);
+  useEffect(() => {
+    const id = setTimeout(() => setLayoutIndex(0), 0);
+    return () => clearTimeout(id);
+  }, [matchingLayoutIds]);
 
   const currentCustomLayout = matchingLayouts.length
     ? matchingLayouts[layoutIndex % matchingLayouts.length]

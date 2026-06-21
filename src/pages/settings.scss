@@ -31,6 +31,31 @@
   flex: 1;
 }
 
+.settings-topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.settings-export-import,
+.settings-export-import__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+
+.settings-export-import .btn,
+.settings-topbar__actions .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
 .settings-close-btn {
   margin-left: auto;
   opacity: 0.6;
