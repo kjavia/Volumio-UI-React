@@ -1,6 +1,5 @@
 import { useState, useRef, useLayoutEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import useMenuKeyboard from '@/hooks/useMenuKeyboard';
 
 const EDGE_MARGIN = 8; // px gap kept from viewport edges
@@ -283,15 +282,5 @@ const ContextMenu = ({
   );
 };
 
-ContextMenu.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object),
-  variant: PropTypes.oneOf(['dropdown', 'drawer', 'positioned']),
-  isOpen: PropTypes.bool,
-  onClose: PropTypes.func,
-  position: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
-  toggleIcon: PropTypes.string,
-  toggleLabel: PropTypes.string,
-  toggleClassName: PropTypes.string,
-};
 
 export default ContextMenu;

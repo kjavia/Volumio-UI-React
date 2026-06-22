@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import Marquee from './Marquee';
 
 const TrackTitle = ({ title, isInFooter, align = 'center' }) => (
@@ -10,10 +9,5 @@ const TrackTitle = ({ title, isInFooter, align = 'center' }) => (
     </div>
 );
 
-TrackTitle.propTypes = {
-    title: PropTypes.string,
-    isInFooter: PropTypes.bool,
-    align: PropTypes.oneOf(['left', 'center', 'right']),
-};
 
 export default TrackTitle;

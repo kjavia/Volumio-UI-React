@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { SPECTRUM_STREAM_URL } from '../../config';
 import { fetchMeterConfigs } from './parseMeterConfig';
 import { loadMeterImages, renderMeterFrame } from './meterRenderer';
@@ -304,14 +303,5 @@ const PeppyMeterDelete = ({
   );
 };
 
-PeppyMeterDelete.propTypes = {
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  folderName: PropTypes.string.isRequired,
-  model: PropTypes.string.isRequired,
-  streamUrl: PropTypes.string,
-  stopped: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 export default PeppyMeterDelete;

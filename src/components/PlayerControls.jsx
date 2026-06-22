@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import Button from './Button';
 
 const PlayerControls = ({
@@ -31,11 +30,5 @@ const PlayerControls = ({
   );
 };
 
-PlayerControls.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-  onPlayPause: PropTypes.func.isRequired,
-  onNext: PropTypes.func.isRequired,
-  onPrev: PropTypes.func.isRequired,
-};
 
 export default PlayerControls;

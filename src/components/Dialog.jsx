@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import useFocusTrap from '@/hooks/useFocusTrap';
 
@@ -205,20 +204,5 @@ const Dialog = ({
   );
 };
 
-Dialog.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func,
-  title: PropTypes.node,
-  children: PropTypes.node,
-  footer: PropTypes.node,
-  toolbar: PropTypes.node,
-  headerActions: PropTypes.node,
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', 'full']),
-  closeOnBackdrop: PropTypes.bool,
-  closeOnEscape: PropTypes.bool,
-  showCloseButton: PropTypes.bool,
-  className: PropTypes.string,
-  bodyRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-};
 
 export default Dialog;

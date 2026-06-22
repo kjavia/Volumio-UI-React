@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { PLUGIN_BASE_URL } from '@/config';
@@ -279,7 +278,6 @@ const SelectField = ({ field, value, onChange, onDelete }) => (
     </div>
   </div>
 );
-SelectField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.string, onChange: PropTypes.func.isRequired, onDelete: PropTypes.func };
 
 const SwitchField = ({ field, value, onChange }) => (
   <div className="settings-field settings-field--switch">
@@ -304,7 +302,6 @@ const SwitchField = ({ field, value, onChange }) => (
     </div>
   </div>
 );
-SwitchField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.bool, onChange: PropTypes.func.isRequired };
 
 const colorNameToHex = (name) => {
   const ctx = document.createElement('canvas').getContext('2d');
@@ -375,7 +372,6 @@ const ColorField = ({ field, value, onChange }) => {
     </div>
   );
 };
-ColorField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.string, onChange: PropTypes.func.isRequired };
 
 const InputField = ({ field, value, onChange }) => (
   <div className="settings-field settings-field--inline">
@@ -394,7 +390,6 @@ const InputField = ({ field, value, onChange }) => (
     />
   </div>
 );
-InputField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), onChange: PropTypes.func.isRequired };
 
 const FontRowField = ({ field, nameValue, sizeValue, onChange }) => {
   const nameInfoRef = useRef(null);
@@ -464,7 +459,6 @@ const FontRowField = ({ field, nameValue, sizeValue, onChange }) => {
     </div>
   );
 };
-FontRowField.propTypes = { field: PropTypes.object.isRequired, nameValue: PropTypes.string, sizeValue: PropTypes.string, onChange: PropTypes.func.isRequired };
 
 const JsonField = ({ field, value, onChange }) => {
   const [text, setText] = useState(() => {
@@ -517,7 +511,6 @@ const JsonField = ({ field, value, onChange }) => {
     </div>
   );
 };
-JsonField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.string, onChange: PropTypes.func.isRequired };
 
 /* ─── Knob Field ───────────────────────────────────────────────────────── */
 const KnobField = ({ field, value, onChange }) => {
@@ -682,7 +675,6 @@ const KnobField = ({ field, value, onChange }) => {
     </div>
   );
 };
-KnobField.propTypes = { field: PropTypes.object.isRequired, value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), onChange: PropTypes.func.isRequired };
 
 /* ─── Pack Upload Component ────────────────────────────────────────────── */
 
@@ -763,7 +755,6 @@ const PackUpload = ({ packType, onUploaded, t }) => {
     </div>
   );
 };
-PackUpload.propTypes = { packType: PropTypes.string.isRequired, onUploaded: PropTypes.func, t: PropTypes.func.isRequired };
 
 /* ─── Section Component ────────────────────────────────────────────────── */
 
@@ -853,17 +844,6 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
       </div>
     </div>
   );
-};
-SettingsSection.propTypes = {
-  section: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
-  saving: PropTypes.bool,
-  peppyFolders: PropTypes.array,
-  peppySpectrumFolders: PropTypes.array,
-  onPackUploaded: PropTypes.func,
-  t: PropTypes.func.isRequired,
 };
 
 /* ═══════════════════════════════════════════════════════════════════════

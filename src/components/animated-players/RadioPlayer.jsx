@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import './radio-player.scss';
 
 const RadioPlayer = ({ isPlaying }) => {
@@ -69,9 +68,6 @@ const RadioPlayer = ({ isPlaying }) => {
   );
 };
 
-RadioPlayer.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-};
 
 export default RadioPlayer;
 

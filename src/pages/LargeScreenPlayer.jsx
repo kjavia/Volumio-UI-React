@@ -1,5 +1,4 @@
 import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import usePlayerKeyboard from '@/hooks/usePlayerKeyboard';
@@ -99,13 +98,6 @@ const VolumePopup = ({ volume, mute, onVolumeChange, onMute, onClose }) => {
   );
 };
 
-VolumePopup.propTypes = {
-  volume: PropTypes.number,
-  mute: PropTypes.bool,
-  onVolumeChange: PropTypes.func.isRequired,
-  onMute: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
 
 /**
  * LargeScreenPlayer — full-screen layout for displays ≥ 1920 px wide.
@@ -606,11 +598,5 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
   );
 };
 
-LargeScreenPlayer.propTypes = {
-  vizStopped: PropTypes.bool,
-  onVizResumed: PropTypes.func,
-  menuSlot: PropTypes.node,
-  vizContainerRef: PropTypes.object,
-};
 
 export default LargeScreenPlayer;

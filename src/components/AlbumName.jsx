@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import Marquee from './Marquee';
 
 const AlbumName = ({ album, align = 'center' }) => {
@@ -10,9 +9,5 @@ const AlbumName = ({ album, align = 'center' }) => {
     );
 };
 
-AlbumName.propTypes = {
-    album: PropTypes.string,
-    align: PropTypes.oneOf(['left', 'center', 'right']),
-};
 
 export default AlbumName;

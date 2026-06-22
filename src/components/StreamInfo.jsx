@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 // Map trackType values to available logo files in /assets/logos/
 const LOGO_MAP = {
@@ -121,13 +120,5 @@ const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className
   );
 };
 
-StreamInfo.propTypes = {
-  trackType: PropTypes.string,
-  codec: PropTypes.string,
-  samplerate: PropTypes.string,
-  bitdepth: PropTypes.string,
-  bitrate: PropTypes.string,
-  className: PropTypes.string,
-};
 
 export default StreamInfo;

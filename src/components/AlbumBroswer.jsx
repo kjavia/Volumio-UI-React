@@ -57,6 +57,5 @@ const AlbumBrowser = ({ albums }) => {
   );
 };
 
-AlbumBrowser.propTypes = {};
 
 export default AlbumBrowser;

@@ -2,7 +2,6 @@ import { useState, useCallback, useMemo, useRef, useEffect, useLayoutEffect } fr
 import { useQuery } from '@tanstack/react-query';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import Dialog from './Dialog';
 import Button from './Button';
 import TrackItem from './TrackItem';
@@ -1045,13 +1044,6 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   );
 };
 
-BrowseDialog.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  initialFullscreen: PropTypes.bool,
-  initialLargeGrid: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 export default BrowseDialog;
 

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import './vinyl-cover-player.scss';
 
 const VinylCoverPlayer = ({ isPlaying, albumArt }) => {
@@ -26,9 +25,5 @@ const VinylCoverPlayer = ({ isPlaying, albumArt }) => {
   );
 };
 
-VinylCoverPlayer.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-  albumArt: PropTypes.string,
-};
 
 export default VinylCoverPlayer;

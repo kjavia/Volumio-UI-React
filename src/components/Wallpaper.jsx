@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 import useWeather from '@/hooks/useWeather';
 import useWallpaperImages from '@/hooks/useWallpaperImages';
@@ -113,13 +112,5 @@ const Wallpaper = ({
   );
 };
 
-Wallpaper.propTypes = {
-  url: PropTypes.string,
-  showTime: PropTypes.bool,
-  showSeconds: PropTypes.bool,
-  showWeather: PropTypes.bool,
-  slideshowInterval: PropTypes.number,
-  use24Hour: PropTypes.bool,
-};
 
 export default Wallpaper;

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 import { useTranslation } from 'react-i18next';
 import useWeather from '@/hooks/useWeather';
@@ -55,7 +54,6 @@ const WeatherIcon = ({ name, className = '' }) => (
     {name}
   </span>
 );
-WeatherIcon.propTypes = { name: PropTypes.string.isRequired, className: PropTypes.string };
 
 const DetailRow = ({ icon, label, value }) => (
   <div className="weather-detail">
@@ -64,11 +62,6 @@ const DetailRow = ({ icon, label, value }) => (
     <span className="weather-detail-value">{value}</span>
   </div>
 );
-DetailRow.propTypes = {
-  icon: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-};
 
 /* ── Current Weather ──────────────────────────────────────────────────── */
 
@@ -123,18 +116,6 @@ const CurrentWeather = ({
     </div>
   );
 };
-CurrentWeather.propTypes = {
-  current: PropTypes.object.isRequired,
-  units: PropTypes.object.isRequired,
-  showWind: PropTypes.bool,
-  showHumidity: PropTypes.bool,
-  showFeelsLike: PropTypes.bool,
-  showSunrise: PropTypes.bool,
-  showSunset: PropTypes.bool,
-  todaySunrise: PropTypes.string,
-  todaySunset: PropTypes.string,
-  use24Hour: PropTypes.bool,
-};
 
 /* ── Hourly Forecast ──────────────────────────────────────────────────── */
 
@@ -160,12 +141,6 @@ const HourlyForecast = ({ hourly, units, showWind, use24Hour }) => (
     </div>
   </div>
 );
-HourlyForecast.propTypes = {
-  hourly: PropTypes.array.isRequired,
-  units: PropTypes.object.isRequired,
-  showWind: PropTypes.bool,
-  use24Hour: PropTypes.bool,
-};
 
 /* ── Daily Forecast Card ──────────────────────────────────────────────── */
 
@@ -217,16 +192,6 @@ const DailyCard = ({ day, units, showWind, showSunrise, showSunset, showPrecip, 
     </div>
   );
 };
-DailyCard.propTypes = {
-  day: PropTypes.object.isRequired,
-  units: PropTypes.object.isRequired,
-  showWind: PropTypes.bool,
-  showSunrise: PropTypes.bool,
-  showSunset: PropTypes.bool,
-  showPrecip: PropTypes.bool,
-  isToday: PropTypes.bool,
-  use24Hour: PropTypes.bool,
-};
 
 /* ── Full Dashboard ───────────────────────────────────────────────────── */
 
@@ -247,7 +212,6 @@ const LocationBadge = ({ name }) =>
       <span className="weather-location-name">{name}</span>
     </div>
   ) : null;
-LocationBadge.propTypes = { name: PropTypes.string };
 
 const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour, pluginConfig }) => {
   const { t, i18n } = useTranslation('weather');
@@ -472,14 +436,6 @@ const WeatherFull = ({ current, hourly, daily, units, locationName, use24Hour, p
   );
 };
 
-WeatherFull.propTypes = {
-  current: PropTypes.object.isRequired,
-  hourly: PropTypes.array.isRequired,
-  daily: PropTypes.array.isRequired,
-  units: PropTypes.object.isRequired,
-  locationName: PropTypes.string,
-  use24Hour: PropTypes.bool,
-};
 
 /* ── Main Weather Component ───────────────────────────────────────────── */
 
@@ -586,17 +542,5 @@ const Weather = ({
   );
 };
 
-Weather.propTypes = {
-  mode: PropTypes.oneOf(['current', 'hourly', 'daily', 'full']),
-  showWind: PropTypes.bool,
-  showHumidity: PropTypes.bool,
-  showFeelsLike: PropTypes.bool,
-  showSunrise: PropTypes.bool,
-  showSunset: PropTypes.bool,
-  showPrecip: PropTypes.bool,
-  days: PropTypes.number,
-  hours: PropTypes.number,
-  use24Hour: PropTypes.bool,
-};
 
 export default Weather;

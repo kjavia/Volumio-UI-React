@@ -1,5 +1,4 @@
 import { useMemo, useState, useRef, useCallback } from 'react';
-import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import usePlayerKeyboard from '@/hooks/usePlayerKeyboard';
@@ -454,17 +453,5 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
   );
 };
 
-CustomLayout.propTypes = {
-  layout: PropTypes.shape({
-    cols: PropTypes.number,
-    rows: PropTypes.number,
-    colFractions: PropTypes.arrayOf(PropTypes.number),
-    rowFractions: PropTypes.arrayOf(PropTypes.number),
-    cells: PropTypes.array.isRequired,
-  }).isRequired,
-  vizStopped: PropTypes.bool,
-  onVizResumed: PropTypes.func,
-  vizContainerRef: PropTypes.object,
-};
 
 export default CustomLayout;

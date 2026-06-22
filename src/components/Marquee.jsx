@@ -1,5 +1,4 @@
 import { useRef, useEffect, memo } from 'react';
-import PropTypes from 'prop-types';
 import './marquee.scss';
 
 /**
@@ -100,12 +99,5 @@ const Marquee = memo(({ children, className, speed = 40, gap = '4em', align = 'c
 
 Marquee.displayName = 'Marquee';
 
-Marquee.propTypes = {
-  children: PropTypes.string,
-  className: PropTypes.string,
-  speed: PropTypes.number,
-  gap: PropTypes.string,
-  align: PropTypes.oneOf(['left', 'center', 'right']),
-};
 
 export default Marquee;

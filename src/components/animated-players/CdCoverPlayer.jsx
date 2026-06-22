@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import './cd-cover-player.scss';
 
 const CdCoverPlayer = ({ isPlaying, albumArt }) => {
@@ -22,9 +21,5 @@ const CdCoverPlayer = ({ isPlaying, albumArt }) => {
   );
 };
 
-CdCoverPlayer.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-  albumArt: PropTypes.string,
-};
 
 export default CdCoverPlayer;

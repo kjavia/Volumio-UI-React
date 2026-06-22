@@ -1,5 +1,4 @@
 import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import usePlayerKeyboard from '@/hooks/usePlayerKeyboard';
@@ -399,10 +398,5 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
   );
 };
 
-TabletPlayer.propTypes = {
-  vizStopped: PropTypes.bool,
-  onVizResumed: PropTypes.func,
-  vizContainerRef: PropTypes.object,
-};
 
 export default TabletPlayer;

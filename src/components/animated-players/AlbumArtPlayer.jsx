@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import './album-art.scss';
 
 const AlbumArtPlayer = ({ isPlaying, albumArt, maxSpace, animated = true }) => {
@@ -27,11 +26,5 @@ const AlbumArtPlayer = ({ isPlaying, albumArt, maxSpace, animated = true }) => {
   );
 };
 
-AlbumArtPlayer.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-  albumArt: PropTypes.string,
-  maxSpace: PropTypes.bool,
-  animated: PropTypes.bool,
-};
 
 export default AlbumArtPlayer;

@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import SlidePanel from './SlidePanel';
 
 const Playlist = ({ open, onClose, queue, currentPosition, isPlaying, onPlay, onRemove, onClear, host, width = 'max(50vw, 380px)' }) => {
@@ -113,17 +112,5 @@ const Playlist = ({ open, onClose, queue, currentPosition, isPlaying, onPlay, on
   );
 };
 
-Playlist.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  queue: PropTypes.array.isRequired,
-  currentPosition: PropTypes.number,
-  isPlaying: PropTypes.bool,
-  onPlay: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired,
-  onClear: PropTypes.func,
-  host: PropTypes.string,
-  width: PropTypes.string,
-};
 
 export default Playlist;

@@ -1,5 +1,4 @@
 import { useRef, useState, useCallback, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import './AlphabetScroller.scss';
 
 const ALPHABET = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -121,12 +120,6 @@ const AlphabetScroller = ({ labels = ALPHABET, availableLetters, currentLetter, 
   );
 };
 
-AlphabetScroller.propTypes = {
-  labels: PropTypes.arrayOf(PropTypes.string),
-  availableLetters: PropTypes.arrayOf(PropTypes.string),
-  currentLetter: PropTypes.string,
-  onSelect: PropTypes.func.isRequired,
-};
 
 AlphabetScroller.defaultProps = {
   labels: ALPHABET,

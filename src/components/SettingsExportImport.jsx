@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import PropTypes from 'prop-types';
 
 /**
  * SettingsExportImport Component
@@ -121,11 +120,5 @@ const SettingsExportImport = ({ currentSettings, currentLayouts, onImport, t }) 
   );
 };
 
-SettingsExportImport.propTypes = {
-  currentSettings: PropTypes.object.isRequired,
-  currentLayouts: PropTypes.array,
-  onImport: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
-};
 
 export default SettingsExportImport;

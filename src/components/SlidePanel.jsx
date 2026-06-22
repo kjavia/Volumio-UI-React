@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import useFocusTrap from '@/hooks/useFocusTrap';
 
 const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px', headerActions }) => {
@@ -65,14 +64,5 @@ const SlidePanel = ({ open, onClose, title, subtitle, children, width = '300px',
   );
 };
 
-SlidePanel.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
-  children: PropTypes.node,
-  width: PropTypes.string,
-  headerActions: PropTypes.node,
-};
 
 export default SlidePanel;

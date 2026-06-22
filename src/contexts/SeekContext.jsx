@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { useSocket } from './SocketContext';
 
 const SeekContext = createContext(null);
@@ -80,9 +79,6 @@ export const SeekProvider = ({ children }) => {
   return <SeekContext.Provider value={{ seek, duration, seekTo, refreshState }}>{children}</SeekContext.Provider>;
 };
 
-SeekProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useSeek = () => {

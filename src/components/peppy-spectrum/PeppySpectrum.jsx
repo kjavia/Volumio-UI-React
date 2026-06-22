@@ -1,5 +1,4 @@
 import { forwardRef, useRef, useState, useEffect, useCallback, useMemo, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
 import { SPECTRUM_STREAM_URL, PLUGIN_BASE_URL } from '@/config';
 import { fetchSpectrumConfigs } from './parseSpectrumConfig';
 import { loadSpectrumImages, renderSpectrumFrame } from './spectrumRenderer';
@@ -370,15 +369,5 @@ const PeppySpectrum = forwardRef(({
   );
 });
 
-PeppySpectrum.propTypes = {
-  folder: PropTypes.string.isRequired,
-  model: PropTypes.string,
-  trackUri: PropTypes.string,
-  streamUrl: PropTypes.string,
-  stopped: PropTypes.bool,
-  className: PropTypes.string,
-  autoEnable: PropTypes.bool,
-  clipSize: PropTypes.shape({ w: PropTypes.number, h: PropTypes.number }),
-};
 
 export default PeppySpectrum;

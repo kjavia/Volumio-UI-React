@@ -1,5 +1,4 @@
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import './toast.scss';
 
 const ICONS = {
@@ -25,14 +24,5 @@ const Toast = ({ toasts }) => {
     );
 };
 
-Toast.propTypes = {
-    toasts: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            message: PropTypes.string.isRequired,
-            type: PropTypes.string.isRequired,
-        }),
-    ).isRequired,
-};
 
 export default Toast;

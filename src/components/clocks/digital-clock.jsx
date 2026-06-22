@@ -1,6 +1,5 @@
 import { useState, useEffect, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 import useWeather from '@/hooks/useWeather';
 
 // Segment map: [a, b, c, d, e, f, g]
@@ -159,10 +158,5 @@ const DigitalClock = ({ showSeconds = true, use12Hour = true, showWeather = fals
   );
 };
 
-DigitalClock.propTypes = {
-  showSeconds: PropTypes.bool,
-  use12Hour: PropTypes.bool,
-  showWeather: PropTypes.bool,
-};
 
 export default DigitalClock;

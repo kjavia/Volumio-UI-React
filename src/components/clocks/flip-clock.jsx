@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 // @pqina/flip is loaded as a global UMD script in index.html.
 // It sets window.Tick (with the Flip view already registered).
 // This sidesteps Vite/esbuild's typeof-window evaluation issue in the module build.
@@ -53,7 +52,6 @@ const FlipDigit = memo(({ digit }) => {
 });
 
 FlipDigit.displayName = 'FlipDigit';
-FlipDigit.propTypes = { digit: PropTypes.string.isRequired };
 
 /** Two-digit panel (hours / minutes / seconds). */
 const FlipPanel = memo(({ value }) => {
@@ -67,7 +65,6 @@ const FlipPanel = memo(({ value }) => {
 });
 
 FlipPanel.displayName = 'FlipPanel';
-FlipPanel.propTypes = { value: PropTypes.number.isRequired };
 
 const FlipClock = ({ showSeconds = true, showWeather = false, use12Hour = true }) => {
   const { i18n } = useTranslation();
@@ -134,10 +131,5 @@ const FlipClock = ({ showSeconds = true, showWeather = false, use12Hour = true }
   );
 };
 
-FlipClock.propTypes = {
-  showSeconds: PropTypes.bool,
-  showWeather: PropTypes.bool,
-  use12Hour: PropTypes.bool,
-};
 
 export default FlipClock;

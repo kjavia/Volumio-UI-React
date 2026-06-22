@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import SlidePanel from './SlidePanel';
 
 const SideMenu = ({ onStopViz, onBack, onExit }) => {
@@ -105,10 +104,5 @@ const SideMenu = ({ onStopViz, onBack, onExit }) => {
   );
 };
 
-SideMenu.propTypes = {
-  onStopViz: PropTypes.func,
-  onBack: PropTypes.func,
-  onExit: PropTypes.func,
-};
 
 export default SideMenu;

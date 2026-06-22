@@ -1,10 +1,8 @@
-import PropTypes from 'prop-types';
 import Button from './Button';
 
 const Label = ({ children }) => (
     <span className="secondary-btn-label">{children}</span>
 );
-Label.propTypes = { children: PropTypes.node.isRequired };
 
 const SecondaryControls = ({
     shuffle,
@@ -76,17 +74,5 @@ const SecondaryControls = ({
     );
 };
 
-SecondaryControls.propTypes = {
-    shuffle: PropTypes.bool,
-    repeat: PropTypes.bool,
-    onShuffle: PropTypes.func,
-    onRepeat: PropTypes.func,
-    onAddToPlaylist: PropTypes.func,
-    onShowPlaylist: PropTypes.func,
-    onBrowse: PropTypes.func,
-    isFavourite: PropTypes.bool,
-    onToggleFavourite: PropTypes.func,
-    textMode: PropTypes.bool,
-};
 
 export default SecondaryControls;

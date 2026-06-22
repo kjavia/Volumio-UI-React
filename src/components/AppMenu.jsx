@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import ContextMenu from './ContextMenu';
 import { VOLUMIO_BASE_URL } from '@/config';
 
@@ -91,15 +90,5 @@ const AppMenu = ({
     );
 };
 
-AppMenu.propTypes = {
-    vizStopped: PropTypes.bool,
-    onStopViz: PropTypes.func,
-    onBackToPlayer: PropTypes.func,
-    onFullscreenViz: PropTypes.func,
-    isVizFullscreen: PropTypes.bool,
-    variant: PropTypes.oneOf(['dropdown', 'drawer']),
-    isOpen: PropTypes.bool,
-    onClose: PropTypes.func,
-};
 
 export default AppMenu;

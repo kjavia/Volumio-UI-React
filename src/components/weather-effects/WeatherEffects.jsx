@@ -1,5 +1,4 @@
 import { useEffect, useRef, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import './weather-effects.scss';
 
 /* ── WMO code → effect type + density ────────────────────────────────── */
@@ -211,8 +210,5 @@ const WeatherEffects = ({ weatherCode }) => {
   );
 };
 
-WeatherEffects.propTypes = {
-  weatherCode: PropTypes.number,
-};
 
 export default WeatherEffects;

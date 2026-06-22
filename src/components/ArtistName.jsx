@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import Marquee from './Marquee';
 
 const ArtistName = ({ artist, isInFooter, align = 'center' }) => (
@@ -10,10 +9,5 @@ const ArtistName = ({ artist, isInFooter, align = 'center' }) => (
     </div>
 );
 
-ArtistName.propTypes = {
-    artist: PropTypes.string,
-    isInFooter: PropTypes.bool,
-    align: PropTypes.oneOf(['left', 'center', 'right']),
-};
 
 export default ArtistName;

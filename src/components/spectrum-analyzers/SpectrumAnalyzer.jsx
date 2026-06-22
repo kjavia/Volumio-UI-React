@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect, forwardRef, useImperativeHandle } from 'react';
-import PropTypes from 'prop-types';
 import AudioMotionAnalyzer from 'audiomotion-analyzer';
 
 // MediaElementSourceNode can only be created ONCE per HTMLMediaElement.
@@ -327,14 +326,5 @@ const SpectrumAnalyzer = forwardRef(({ streamUrl, gradient = 'prism', initialMod
 
 SpectrumAnalyzer.displayName = 'SpectrumAnalyzer';
 
-SpectrumAnalyzer.propTypes = {
-  streamUrl: PropTypes.string.isRequired,
-  gradient: PropTypes.string,
-  initialMode: PropTypes.number,
-  stopped: PropTypes.bool,
-  onResumed: PropTypes.func,
-  options: PropTypes.object,
-  isPlaying: PropTypes.bool,
-};
 
 export default SpectrumAnalyzer;

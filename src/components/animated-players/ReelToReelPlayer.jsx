@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import './reel-to-reel-player.scss';
 
 const ReelToReelPlayer = ({ isPlaying }) => {
@@ -46,8 +45,5 @@ const ReelToReelPlayer = ({ isPlaying }) => {
   );
 };
 
-ReelToReelPlayer.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-};
 
 export default ReelToReelPlayer;

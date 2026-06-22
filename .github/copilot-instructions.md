@@ -25,7 +25,7 @@ https://developers.volumio.com/plugins/plugins-overview
 - All UI components like buttons, inputs, etc. should be in `src/components/` and be reusable
 - Keep components small and focused on a single responsibility
 - Use functional components and React hooks
-- Use PropTypes for component props validation
+- Do not use PropTypes — it is deprecated in React 19 and removed from this project
 - Use `src/contexts/` for React Context providers (e.g. SocketContext)
 - Use `src/pages/` for page-level components that represent routes
 - use now_playing folder for reference (it's a separate but completed plugin, so it has examples of how to use Volumio APIs and structure a plugin)

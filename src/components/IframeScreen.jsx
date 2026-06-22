@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 const IframeScreen = ({ url }) => {
   if (!url) {
@@ -29,8 +28,5 @@ const IframeScreen = ({ url }) => {
   );
 };
 
-IframeScreen.propTypes = {
-  url: PropTypes.string
-};
 
 export default IframeScreen;

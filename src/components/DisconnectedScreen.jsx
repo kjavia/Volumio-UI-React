@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 const DisconnectedScreen = ({ isRetrying = false, host }) => {
   return (
@@ -56,9 +55,5 @@ const DisconnectedScreen = ({ isRetrying = false, host }) => {
   );
 };
 
-DisconnectedScreen.propTypes = {
-  isRetrying: PropTypes.bool,
-  host: PropTypes.string,
-};
 
 export default DisconnectedScreen;

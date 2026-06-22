@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import Marquee from './Marquee';
 import AddToPlaylistDialog from './AddToPlaylistDialog';
 import { useSocket } from '@/contexts/SocketContext';
@@ -476,24 +475,5 @@ const TrackItem = ({ item, viewMode = 'list', onNavigate, queueUris, onFavourite
   );
 };
 
-TrackItem.propTypes = {
-  item: PropTypes.shape({
-    uri: PropTypes.string,
-    title: PropTypes.string,
-    artist: PropTypes.string,
-    album: PropTypes.string,
-    albumart: PropTypes.string,
-    service: PropTypes.string,
-    type: PropTypes.string,
-  }).isRequired,
-  viewMode: PropTypes.oneOf(['grid', 'list']),
-  onNavigate: PropTypes.func,
-  queueUris: PropTypes.instanceOf(Set),
-  onFavouriteToggled: PropTypes.func,
-  isPlaylistItem: PropTypes.bool,
-  onPlaylistDeleted: PropTypes.func,
-  itemIndex: PropTypes.number,
-  onPlayAndClose: PropTypes.func,
-};
 
 export default TrackItem;

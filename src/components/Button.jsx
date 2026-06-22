@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 const Button = ({ label, onClick, classNames, children, disabled, ...rest }) => {
@@ -9,11 +8,5 @@ const Button = ({ label, onClick, classNames, children, disabled, ...rest }) => 
   );
 };
 
-Button.propTypes = {
-  label: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
-  classNames: PropTypes.string,
-  disabled: PropTypes.bool,
-};
 
 export default Button;

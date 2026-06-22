@@ -1,7 +1,6 @@
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import PropTypes from 'prop-types';
 import { useAlbums, useAlbumTracks } from '@/hooks/useAlbums';
 import usePlaylists from '@/hooks/usePlaylists';
 import useBrowse from '@/hooks/useBrowse';
@@ -200,10 +199,6 @@ const AlbumList = ({ selectedAlbumUri, onSelect }) => {
   );
 };
 
-AlbumList.propTypes = {
-  selectedAlbumUri: PropTypes.string,
-  onSelect: PropTypes.func.isRequired,
-};
 
 // ─── Track List (col 2) ───────────────────────────────────────────────────────
 
@@ -387,15 +382,6 @@ const TrackList = ({ albumUri, selectedTracks, onToggleTrack, onToggleFavourites
   );
 };
 
-TrackList.propTypes = {
-  albumUri: PropTypes.string,
-  selectedTracks: PropTypes.instanceOf(Map).isRequired,
-  onToggleTrack: PropTypes.func.isRequired,
-  onToggleFavourites: PropTypes.func.isRequired,
-  favouritesUris: PropTypes.instanceOf(Set),
-  playlistNormUris: PropTypes.instanceOf(Set),
-  socket: PropTypes.object,
-};
 
 // ─── Playlist Column (col 3) ──────────────────────────────────────────────────
 
@@ -590,13 +576,6 @@ const PlaylistColumn = ({ onTracksAdded, onToast, selectedPlaylist, onSelectPlay
   );
 };
 
-PlaylistColumn.propTypes = {
-  selectedTracks: PropTypes.instanceOf(Map).isRequired,
-  onTracksAdded: PropTypes.func,
-  onToast: PropTypes.func,
-  selectedPlaylist: PropTypes.string.isRequired,
-  onSelectPlaylist: PropTypes.func.isRequired,
-};
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 

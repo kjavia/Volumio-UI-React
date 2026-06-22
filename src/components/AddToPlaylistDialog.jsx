@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import PropTypes from 'prop-types';
 import { useQueryClient } from '@tanstack/react-query';
 import Dialog from './Dialog';
 import Button from './Button';
@@ -265,17 +264,5 @@ const AddToPlaylistDialog = ({ open, onClose, track }) => {
   );
 };
 
-AddToPlaylistDialog.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  track: PropTypes.shape({
-    title: PropTypes.string,
-    artist: PropTypes.string,
-    album: PropTypes.string,
-    albumart: PropTypes.string,
-    uri: PropTypes.string,
-    service: PropTypes.string,
-  }),
-};
 
 export default AddToPlaylistDialog;

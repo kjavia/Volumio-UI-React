@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { SPECTRUM_STREAM_URL, PLUGIN_BASE_URL } from '@/config';
 import { getServiceLogoUrl } from './ServiceLogo';
 import { fetchMeterConfigs } from './peppy-meter/parseMeterConfig';
@@ -535,13 +534,5 @@ const PeppyMeter = ({
   );
 };
 
-PeppyMeter.propTypes = {
-  folder: PropTypes.string.isRequired,
-  model: PropTypes.string,
-  trackUri: PropTypes.string,
-  streamUrl: PropTypes.string,
-  stopped: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 export default PeppyMeter;

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 import useWeather from '@/hooks/useWeather';
 
 const HOURS = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -113,10 +112,5 @@ const AnalogClock = ({ showSeconds = true, showWeather = false, showDate = true 
   );
 };
 
-AnalogClock.propTypes = {
-  showSeconds: PropTypes.bool,
-  showWeather: PropTypes.bool,
-  showDate: PropTypes.bool,
-};
 
 export default AnalogClock;

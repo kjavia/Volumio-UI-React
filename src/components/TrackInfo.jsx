@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import TrackTitle from './TrackTitle';
 import ArtistName from './ArtistName';
 import AlbumName from './AlbumName';
@@ -19,12 +18,5 @@ const TrackInfo = ({ title, artist, album, isInFooter, children }) => {
   );
 };
 
-TrackInfo.propTypes = {
-  title: PropTypes.string,
-  artist: PropTypes.string,
-  album: PropTypes.string,
-  isInFooter: PropTypes.bool,
-  children: PropTypes.node,
-};
 
 export default TrackInfo;

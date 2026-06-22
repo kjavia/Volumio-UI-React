@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import Button from './Button';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -74,13 +73,5 @@ const VolumeManager = ({ volume, mute, onVolumeChange, onMute, isOnFooter, verti
   );
 };
 
-VolumeManager.propTypes = {
-  volume: PropTypes.number,
-  mute: PropTypes.bool,
-  onVolumeChange: PropTypes.func,
-  onMute: PropTypes.func,
-  isOnFooter: PropTypes.bool,
-  vertical: PropTypes.bool,
-};
 
 export default VolumeManager;

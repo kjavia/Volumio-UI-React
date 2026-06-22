@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
-import PropTypes from 'prop-types';
 import { useSocket } from '@/contexts/SocketContext';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import useToast from '@/hooks/useToast';
@@ -332,11 +331,6 @@ function CreateLayoutForm({ onSubmit, onCancel, existingNames }) {
   );
 }
 
-CreateLayoutForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  existingNames: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
 
 // ---------------------------------------------------------------------------
 // Main LayoutDesigner component

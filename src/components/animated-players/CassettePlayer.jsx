@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useSeek } from '@/contexts/SeekContext';
 import './cassette-player.scss';
 
@@ -89,9 +88,5 @@ const CassettePlayer = ({ isPlaying, albumArt }) => {
   );
 };
 
-CassettePlayer.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-  albumArt: PropTypes.string,
-};
 
 export default CassettePlayer;

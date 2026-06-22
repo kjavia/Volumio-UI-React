@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { FaSpotify, FaYoutube, FaSoundcloud, FaDeezer } from 'react-icons/fa';
 import { SiTidal, SiYoutubemusic, SiApplemusic, SiPandora, SiBandcamp, SiNapster, SiDlna } from 'react-icons/si';
 
@@ -164,11 +163,6 @@ const ServiceLogo = ({ service, noText = false, className = '' }) => {
   );
 };
 
-ServiceLogo.propTypes = {
-  service: PropTypes.string,
-  noText: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 /** Returns true when ServiceLogo can render something for this service name. */
 export const hasServiceLogo = (service) => {
