@@ -8,6 +8,32 @@ const mediaSourceCache = new WeakMap();
 
 const MODES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 10]; // Discrete to Octaves to Line
 
+// Merge defaults + props + user-supplied options, then apply forced overrides
+// that must always win (transparent canvas). User options spread on top of
+// defaults so any property missing from the saved JSON falls back to defaults.
+const buildAnalyzerOptions = (userOptions, gradient, mode) => {
+  const normalizedUser = userOptions
+    ? Object.fromEntries(
+      Object.entries(userOptions)
+        .filter(([, v]) => v !== null && v !== undefined)
+        .map(([k, v]) => [k, typeof v === 'string' && v !== '' && !isNaN(v) ? Number(v) : v])
+    )
+    : {};
+  return {
+    ...defaultSpectrumOptions,
+    gradient,
+    mode,
+    ...normalizedUser,
+    // Always force transparent canvas — the album art behind the viz acts as
+    // the background; the analyzer's own bg must be invisible. overlay:true
+    // is required by AudioMotionAnalyzer to make the canvas transparent;
+    // without it the canvas fills with a solid black bg.
+    showBgColor: false,
+    bgAlpha: 0,
+    overlay: true,
+  };
+};
+
 const SpectrumAnalyzer = forwardRef(({ streamUrl, gradient = 'prism', initialMode = 2, stopped = false, onResumed, options = null, isPlaying = false }, ref) => {
   const containerRef = useRef(null);
   const audioRef = useRef(null);
@@ -24,6 +50,22 @@ const SpectrumAnalyzer = forwardRef(({ streamUrl, gradient = 'prism', initialMod
       analyzerRef.current.mode = currentMode;
     }
   }, [currentMode]);
+
+  // Re-apply analyzer settings live when the user changes them in the plugin
+  // config (or when the gradient prop changes). setOptions() updates the live
+  // instance in place without tearing down the audio graph, so playback
+  // continues seamlessly with the new look/feel.
+  useEffect(() => {
+    if (!analyzerRef.current) return;
+    try {
+      analyzerRef.current.setOptions(buildAnalyzerOptions(options, gradient, currentMode));
+    } catch (e) {
+      console.warn('SpectrumAnalyzer: failed to apply updated options', e);
+    }
+    // currentMode is intentionally omitted — it has its own dedicated effect
+    // above and is included in buildAnalyzerOptions via closure on each call.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [options, gradient]);
 
   const cycleMode = () => {
     setCurrentMode((prev) => {
@@ -123,33 +165,11 @@ const SpectrumAnalyzer = forwardRef(({ streamUrl, gradient = 'prism', initialMod
 
     if (!analyzerRef.current) {
       try {
-        const defaultOptions = {
-          ...defaultSpectrumOptions,
-          gradient,
-          mode: currentMode,
-        };
-        // Normalize user options: coerce numeric strings to numbers, drop
-        // null/undefined so they cannot clobber defaults.
-        const userOptions = options
-          ? Object.fromEntries(
-            Object.entries(options)
-              .filter(([, v]) => v !== null && v !== undefined)
-              .map(([k, v]) => [k, typeof v === 'string' && v !== '' && !isNaN(v) ? Number(v) : v])
-          )
-          : {};
         analyzerRef.current = new AudioMotionAnalyzer(container, {
           audioCtx: ctx,
           source: sourceNode,
           connectSpeakers: false,
-          ...defaultOptions,
-          ...userOptions,
-          // Always force transparent canvas — the album art behind the viz
-          // acts as the background; the analyzer's own bg must be invisible.
-          // overlay:true is required by AudioMotionAnalyzer to make the canvas
-          // transparent; without it the canvas fills with a solid black bg.
-          showBgColor: false,
-          bgAlpha: 0,
-          overlay: true,
+          ...buildAnalyzerOptions(options, gradient, currentMode),
         });
       } catch (e) {
         // Analyzer failed to initialize but audio is already playing — mark
