@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import AudioMotionAnalyzer from 'audiomotion-analyzer';
+import defaultSpectrumOptions from '@/config/defaultSpectrumOptions';
 
 // MediaElementSourceNode can only be created ONCE per HTMLMediaElement.
 // Cache { ctx, sourceNode } in a WeakMap so remounts reuse the same pair.
@@ -123,70 +124,25 @@ const SpectrumAnalyzer = forwardRef(({ streamUrl, gradient = 'prism', initialMod
     if (!analyzerRef.current) {
       try {
         const defaultOptions = {
+          ...defaultSpectrumOptions,
           gradient,
           mode: currentMode,
-          "alphaBars": false,
-          "ansiBands": true,
-          "barSpace": 0.5,
-          "bgAlpha": 0.7,
-          "channelLayout": "single",
-          "colorMode": "gradient",
-          "fadePeaks": false,
-          "fftSize": 8192,
-          "fillAlpha": 1,
-          "frequencyScale": "log",
-          "gravity": 3.8,
-          "ledBars": true,
-          "linearAmplitude": false,
-          "linearBoost": 1,
-          "lineWidth": 0,
-          "loRes": false,
-          "lumiBars": false,
-          "maxDecibels": -25,
-          "maxFPS": 0,
-          "maxFreq": 20000,
-          "minDecibels": -85,
-          "minFreq": 25,
-          "mirror": 0,
-          "noteLabels": false,
-          "outlineBars": false,
-          "overlay": true,
-          "peakFadeTime": 750,
-          "peakHoldTime": 500,
-          "peakLine": false,
-          "radial": false,
-          "radialInvert": false,
-          "radius": 0.3,
-          "reflexAlpha": 0.15,
-          "reflexBright": 1,
-          "reflexFit": true,
-          "reflexRatio": 0,
-          "roundBars": false,
-          "showBgColor": false,
-          "showFPS": false,
-          "showPeaks": true,
-          "showScaleX": false,
-          "showScaleY": false,
-          "smoothing": 0.5,
-          "spinSpeed": 0,
-          "splitGradient": false,
-          "trueLeds": true,
-          "useCanvas": true,
-          "volume": 1,
-          "weightingFilter": ""
         };
-        // Coerce any string numeric values in user options (config JSON may have them)
-        const coerced = options
+        // Normalize user options: coerce numeric strings to numbers, drop
+        // null/undefined so they cannot clobber defaults.
+        const userOptions = options
           ? Object.fromEntries(
-            Object.entries(options).map(([k, v]) => [k, typeof v === 'string' && !isNaN(v) ? Number(v) : v])
+            Object.entries(options)
+              .filter(([, v]) => v !== null && v !== undefined)
+              .map(([k, v]) => [k, typeof v === 'string' && v !== '' && !isNaN(v) ? Number(v) : v])
           )
-          : null;
+          : {};
         analyzerRef.current = new AudioMotionAnalyzer(container, {
           audioCtx: ctx,
           source: sourceNode,
           connectSpeakers: false,
           ...defaultOptions,
-          ...(coerced || {}),
+          ...userOptions,
           // Always force transparent canvas — the album art behind the viz
           // acts as the background; the analyzer's own bg must be invisible.
           // overlay:true is required by AudioMotionAnalyzer to make the canvas
