@@ -3984,11 +3984,11 @@ input[type=range]::-moz-range-thumb:active {
 }
 
 .responsive-stream-info {
-  font-size: clamp(0.7rem, 2.1cqw, 1.96rem);
+  font-size: clamp(0.9rem, 2.8cqw, 2.2rem);
 }
 
 .format-logo-responsive {
-  height: clamp(1.3rem, 3.8cqw, 4.2rem);
+  height: clamp(1.7rem, 5.2cqw, 4.6rem);
   display: block;
 }
 
