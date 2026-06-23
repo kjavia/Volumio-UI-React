@@ -79,11 +79,30 @@
     padding: 0;
   }
 
-  // Stream info row is a flex row (logo + text); scale slightly smaller
-  // so all elements fit together without overflow.
+  // Stream info row is a flex row (logo + text). The themes set their own
+  // font-size and logo height (mostly cqw-based against the *page*), which
+  // collapse to near-zero inside a small custom-layout cell. Override here
+  // with cell-relative container-query units so the row reliably fills the
+  // cell regardless of the active theme. With line-height:1 the font-size
+  // value equals the line-box height, so 95cqh ≈ 95% of cell height.
+  // !important is required because several themes ship `!important`
+  // @media (max-height: 600px) rules that would otherwise win.
   .responsive-stream-info {
-    font-size: min(55cqh, 75cqw);
+    font-size: min(75cqh, 35cqw) !important;
     line-height: 1;
+    gap: 0.4em;
+  }
+
+  // Format / hi-res logos: scale to 95% of the cell height regardless of
+  // theme. `width: auto` plus aspect-ratio:2/1 (set inline on the element)
+  // keeps the proper logo proportions, and `max-width: 100%` prevents the
+  // logo from overflowing very narrow cells (aspect-ratio shrinks height
+  // proportionally when max-width clamps). !important needed to beat the
+  // themes' @media (max-height: 600px) override.
+  .format-logo-responsive {
+    height: 95cqh !important;
+    width: auto;
+    max-width: 100%;
   }
 }
 

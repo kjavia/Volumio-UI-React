@@ -40,6 +40,8 @@
   "toolbar_align_left": "Zarovnať vľavo",
   "toolbar_align_center": "Zarovnať na stred",
   "toolbar_align_right": "Zarovnať vpravo",
+  "toolbar_show_dimensions": "Zobraziť rozmery",
+  "toolbar_title_show_dimensions": "Zobraziť popisky šírka × výška buniek",
   "ctx_add_item": "Pridať položku",
   "ctx_all_assigned": "Všetky položky priradené",
   "ctx_remove_item": "Odobrať položku",

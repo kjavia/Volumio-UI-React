@@ -130,6 +130,12 @@
   box-sizing: border-box;
   transition: background 0.1s;
   position: relative;
+  // Allow the grid/flex track to shrink below the intrinsic size of the
+  // cell's contents (labels, dimensions badge). Without these the cell
+  // refuses to resize smaller than its longest unbreakable label.
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
 
   &:hover {
     background: color-mix(in srgb, var(--color-primary) 8%, var(--ld-cell-bg));

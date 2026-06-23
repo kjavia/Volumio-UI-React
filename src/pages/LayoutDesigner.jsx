@@ -359,6 +359,9 @@ export default function LayoutDesigner() {
   // Canvas / grid state
   const [selectedCells, setSelectedCells] = useState([]);
   const [contextMenu, setContextMenu] = useState(null); // { cellId, x, y }
+  // Toggle for the cell dimension labels overlay. Off by default so the
+  // labels don't clutter small cells; user can enable for layout debugging.
+  const [showDimensions, setShowDimensions] = useState(false);
 
   // Drag-resize ref (avoids stale closures)
   const dragRef = useRef(null);
@@ -418,10 +421,16 @@ export default function LayoutDesigner() {
   }, [activeLayout?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ---- Auto-correct activeLayoutId after deletions -------------------------
+  // When there's only one resolution across all saved layouts, prefer the one
+  // flagged isDefault so users land on the canonical layout for their device.
   useEffect(() => {
     if (!layouts.length) { setActiveLayoutId(null); return; }
     if (!layouts.some((l) => l.id === activeLayoutId)) {
-      setActiveLayoutId(layouts[0].id);
+      const resolutions = new Set(layouts.map((l) => `${l.width}x${l.height}`));
+      const pick = resolutions.size === 1
+        ? (layouts.find((l) => l.isDefault) ?? layouts[0])
+        : layouts[0];
+      setActiveLayoutId(pick.id);
     }
   }, [layouts]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -764,7 +773,12 @@ export default function LayoutDesigner() {
       const { type: t, index: i, parentCellId: pid, startX, startY, startFrA, totalFr, totalSize: ts } = dragRef.current;
       const delta = t === 'col' ? ev.clientX - startX : ev.clientY - startY;
       const deltaFr = (delta / ts) * totalFr;
-      const min = 0.1;
+      // Minimum cell size expressed in pixels and converted to fr so the
+      // floor stays consistent regardless of how deep the subdivision is.
+      // A pure fraction-based floor felt heavier on shallow subdivisions
+      // (large container) than deep ones (small container).
+      const MIN_PX = 4;
+      const min = ts > 0 ? (MIN_PX / ts) * totalFr : 0.01;
       const newFrA = Math.max(min, Math.min(totalFr - min, startFrA + deltaFr));
       const newFrB = totalFr - newFrA;
 
@@ -879,8 +893,8 @@ export default function LayoutDesigner() {
                 className="ld-grid"
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: subCF.map((f) => `${f}fr`).join(' '),
-                  gridTemplateRows: subRF.map((f) => `${f}fr`).join(' '),
+                  gridTemplateColumns: subCF.map((f) => `minmax(0, ${f}fr)`).join(' '),
+                  gridTemplateRows: subRF.map((f) => `minmax(0, ${f}fr)`).join(' '),
                   width: '100%',
                   height: '100%',
                 }}
@@ -931,7 +945,7 @@ export default function LayoutDesigner() {
                 )}
               </>
             )}
-            <span className="ld-cell__dimensions">{cellDims}</span>
+            {showDimensions && <span className="ld-cell__dimensions">{cellDims}</span>}
             {renderResizeHandles(cFr, rFr, colIdx, rowIdx, parentCellId)}
           </div>
         );
@@ -1021,6 +1035,26 @@ export default function LayoutDesigner() {
             </div>
           </>
         )}
+
+        <div className="ms-auto form-check form-switch mb-0 d-flex align-items-center flex-shrink-0" style={{ paddingLeft: 0, gap: '0.5rem' }}>
+          <input
+            className="form-check-input m-0"
+            type="checkbox"
+            role="switch"
+            id="ld-toggle-dimensions"
+            checked={showDimensions}
+            onChange={(e) => setShowDimensions(e.target.checked)}
+            style={{ marginLeft: 0, flexShrink: 0 }}
+          />
+          <label
+            className="form-check-label mb-0"
+            htmlFor="ld-toggle-dimensions"
+            title={t('toolbar_title_show_dimensions')}
+            style={{ whiteSpace: 'nowrap' }}
+          >
+            {t('toolbar_show_dimensions')}
+          </label>
+        </div>
 
       </div>
     );
@@ -1149,8 +1183,8 @@ export default function LayoutDesigner() {
               className="ld-grid"
               style={{
                 display: 'grid',
-                gridTemplateColumns: colFractions.map((f) => `${f}fr`).join(' '),
-                gridTemplateRows: rowFractions.map((f) => `${f}fr`).join(' '),
+                gridTemplateColumns: colFractions.map((f) => `minmax(0, ${f}fr)`).join(' '),
+                gridTemplateRows: rowFractions.map((f) => `minmax(0, ${f}fr)`).join(' '),
                 width: '100%',
                 height: '100%',
               }}

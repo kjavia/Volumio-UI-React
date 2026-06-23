@@ -40,6 +40,8 @@
   "toolbar_align_left": "Juster venstre",
   "toolbar_align_center": "Sentrer",
   "toolbar_align_right": "Juster høyre",
+  "toolbar_show_dimensions": "Vis dimensjoner",
+  "toolbar_title_show_dimensions": "Vis bredde × høyde-etiketter for celler",
   "ctx_add_item": "Legg til element",
   "ctx_all_assigned": "Alle elementer tildelt",
   "ctx_remove_item": "Fjern element",

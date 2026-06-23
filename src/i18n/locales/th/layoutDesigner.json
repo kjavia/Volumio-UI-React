@@ -40,6 +40,8 @@
   "toolbar_align_left": "จัดชิดซ้าย",
   "toolbar_align_center": "จัดกึ่งกลาง",
   "toolbar_align_right": "จัดชิดขวา",
+  "toolbar_show_dimensions": "แสดงขนาด",
+  "toolbar_title_show_dimensions": "แสดงป้ายความกว้าง × ความสูงของเซลล์",
   "ctx_add_item": "เพิ่มรายการ",
   "ctx_all_assigned": "กำหนดรายการทั้งหมดแล้ว",
   "ctx_remove_item": "นำรายการออก",

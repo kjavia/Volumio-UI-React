@@ -40,6 +40,8 @@
   "toolbar_align_left": "Balra igazítás",
   "toolbar_align_center": "Vízszintesen középre",
   "toolbar_align_right": "Jobbra igazítás",
+  "toolbar_show_dimensions": "Méretek megjelenítése",
+  "toolbar_title_show_dimensions": "Cella szélesség × magasság feliratok megjelenítése",
   "ctx_add_item": "Elem hozzáadása",
   "ctx_all_assigned": "Minden elem hozzárendelve",
   "ctx_remove_item": "Elem eltávolítása",

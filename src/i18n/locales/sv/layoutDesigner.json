@@ -40,6 +40,8 @@
   "toolbar_align_left": "Justera vänster",
   "toolbar_align_center": "Centrera",
   "toolbar_align_right": "Justera höger",
+  "toolbar_show_dimensions": "Visa dimensioner",
+  "toolbar_title_show_dimensions": "Visa bredd × höjd-etiketter för celler",
   "ctx_add_item": "Lägg till objekt",
   "ctx_all_assigned": "Alla objekt tilldelade",
   "ctx_remove_item": "Ta bort objekt",

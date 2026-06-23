@@ -40,6 +40,8 @@
   "toolbar_align_left": "Στοίχιση αριστερά",
   "toolbar_align_center": "Κεντράριση",
   "toolbar_align_right": "Στοίχιση δεξιά",
+  "toolbar_show_dimensions": "Εμφάνιση διαστάσεων",
+  "toolbar_title_show_dimensions": "Εμφάνιση ετικετών πλάτους × ύψους κελιών",
   "ctx_add_item": "Προσθήκη στοιχείου",
   "ctx_all_assigned": "Όλα τα στοιχεία έχουν αντιστοιχιστεί",
   "ctx_remove_item": "Αφαίρεση στοιχείου",

@@ -40,6 +40,8 @@
   "toolbar_align_left": "靠左對齊",
   "toolbar_align_center": "水平置中",
   "toolbar_align_right": "靠右對齊",
+  "toolbar_show_dimensions": "顯示尺寸",
+  "toolbar_title_show_dimensions": "顯示儲存格寬度×高度標籤",
   "ctx_add_item": "新增項目",
   "ctx_all_assigned": "所有項目已分配",
   "ctx_remove_item": "移除項目",

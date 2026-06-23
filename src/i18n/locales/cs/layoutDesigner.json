@@ -40,6 +40,8 @@
   "toolbar_align_left": "Zarovnat doleva",
   "toolbar_align_center": "Zarovnat na střed",
   "toolbar_align_right": "Zarovnat doprava",
+  "toolbar_show_dimensions": "Zobrazit rozměry",
+  "toolbar_title_show_dimensions": "Zobrazit popisky šířky × výšky buněk",
   "ctx_add_item": "Přidat položku",
   "ctx_all_assigned": "Všechny položky přiřazeny",
   "ctx_remove_item": "Odebrat položku",

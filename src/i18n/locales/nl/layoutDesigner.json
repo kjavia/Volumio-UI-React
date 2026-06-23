@@ -40,6 +40,8 @@
   "toolbar_align_left": "Links uitlijnen",
   "toolbar_align_center": "Centreren",
   "toolbar_align_right": "Rechts uitlijnen",
+  "toolbar_show_dimensions": "Afmetingen tonen",
+  "toolbar_title_show_dimensions": "Breedte × hoogte labels van cellen tonen",
   "ctx_add_item": "Item toevoegen",
   "ctx_all_assigned": "Alle items toegewezen",
   "ctx_remove_item": "Item verwijderen",

@@ -40,6 +40,8 @@
   "toolbar_align_left": "Links ausrichten",
   "toolbar_align_center": "Zentriert ausrichten",
   "toolbar_align_right": "Rechts ausrichten",
+  "toolbar_show_dimensions": "Maße anzeigen",
+  "toolbar_title_show_dimensions": "Zell-Breite × Höhe-Beschriftungen anzeigen",
   "ctx_add_item": "Element hinzufügen",
   "ctx_all_assigned": "Alle Elemente zugewiesen",
   "ctx_remove_item": "Element entfernen",

@@ -40,6 +40,8 @@
   "toolbar_align_left": "Sola Hizala",
   "toolbar_align_center": "Ortala",
   "toolbar_align_right": "Sağa Hizala",
+  "toolbar_show_dimensions": "Boyutları Göster",
+  "toolbar_title_show_dimensions": "Hücre genişliği × yüksekliği etiketlerini göster",
   "ctx_add_item": "Öğe Ekle",
   "ctx_all_assigned": "Tüm öğeler atandı",
   "ctx_remove_item": "Öğeyi Kaldır",

@@ -40,6 +40,8 @@
   "toolbar_align_left": "Wyrównaj do lewej",
   "toolbar_align_center": "Wyśrodkuj",
   "toolbar_align_right": "Wyrównaj do prawej",
+  "toolbar_show_dimensions": "Pokaż wymiary",
+  "toolbar_title_show_dimensions": "Pokaż etykiety szerokość × wysokość komórek",
   "ctx_add_item": "Dodaj element",
   "ctx_all_assigned": "Wszystkie elementy przypisane",
   "ctx_remove_item": "Usuń element",

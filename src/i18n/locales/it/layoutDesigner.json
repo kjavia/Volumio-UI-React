@@ -40,6 +40,8 @@
   "toolbar_align_left": "Allinea a sinistra",
   "toolbar_align_center": "Centra",
   "toolbar_align_right": "Allinea a destra",
+  "toolbar_show_dimensions": "Mostra dimensioni",
+  "toolbar_title_show_dimensions": "Mostra etichette larghezza × altezza delle celle",
   "ctx_add_item": "Aggiungi elemento",
   "ctx_all_assigned": "Tutti gli elementi assegnati",
   "ctx_remove_item": "Rimuovi elemento",

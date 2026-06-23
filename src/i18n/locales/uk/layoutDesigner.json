@@ -40,6 +40,8 @@
   "toolbar_align_left": "По лівому краю",
   "toolbar_align_center": "По центру",
   "toolbar_align_right": "По правому краю",
+  "toolbar_show_dimensions": "Показати розміри",
+  "toolbar_title_show_dimensions": "Показувати мітки ширина × висота клітинок",
   "ctx_add_item": "Додати елемент",
   "ctx_all_assigned": "Всі елементи призначені",
   "ctx_remove_item": "Видалити елемент",

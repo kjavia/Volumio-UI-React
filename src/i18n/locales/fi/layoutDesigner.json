@@ -40,6 +40,8 @@
   "toolbar_align_left": "Tasaa vasemmalle",
   "toolbar_align_center": "Keskitä",
   "toolbar_align_right": "Tasaa oikealle",
+  "toolbar_show_dimensions": "Näytä mitat",
+  "toolbar_title_show_dimensions": "Näytä solujen leveys × korkeus -merkinnät",
   "ctx_add_item": "Lisää kohde",
   "ctx_all_assigned": "Kaikki kohteet määritetty",
   "ctx_remove_item": "Poista kohde",

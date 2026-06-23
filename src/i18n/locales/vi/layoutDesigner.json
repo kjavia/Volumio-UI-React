@@ -40,6 +40,8 @@
   "toolbar_align_left": "Căn trái",
   "toolbar_align_center": "Căn giữa",
   "toolbar_align_right": "Căn phải",
+  "toolbar_show_dimensions": "Hiển thị kích thước",
+  "toolbar_title_show_dimensions": "Hiển thị nhãn chiều rộng × chiều cao của ô",
   "ctx_add_item": "Thêm mục",
   "ctx_all_assigned": "Tất cả mục đã được gán",
   "ctx_remove_item": "Xóa mục",

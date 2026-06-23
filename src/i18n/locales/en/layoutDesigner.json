@@ -40,6 +40,8 @@
   "toolbar_align_left": "Align Left",
   "toolbar_align_center": "Align Center",
   "toolbar_align_right": "Align Right",
+  "toolbar_show_dimensions": "Show Dimensions",
+  "toolbar_title_show_dimensions": "Show cell width × height labels",
   "ctx_add_item": "Add Item",
   "ctx_all_assigned": "All items assigned",
   "ctx_remove_item": "Remove Item",

@@ -40,6 +40,8 @@
   "toolbar_align_left": "左揃え",
   "toolbar_align_center": "中央揃え",
   "toolbar_align_right": "右揃え",
+  "toolbar_show_dimensions": "寸法を表示",
+  "toolbar_title_show_dimensions": "セルの幅×高さラベルを表示",
   "ctx_add_item": "アイテムを追加",
   "ctx_all_assigned": "すべてのアイテムが割り当て済み",
   "ctx_remove_item": "アイテムを削除",

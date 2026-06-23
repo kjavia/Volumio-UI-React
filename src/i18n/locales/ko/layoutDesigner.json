@@ -40,6 +40,8 @@
   "toolbar_align_left": "왼쪽 정렬",
   "toolbar_align_center": "가운데 맞춤",
   "toolbar_align_right": "오른쪽 정렬",
+  "toolbar_show_dimensions": "치수 표시",
+  "toolbar_title_show_dimensions": "셀 너비 × 높이 라벨 표시",
   "ctx_add_item": "항목 추가",
   "ctx_all_assigned": "모든 항목이 할당됨",
   "ctx_remove_item": "항목 제거",

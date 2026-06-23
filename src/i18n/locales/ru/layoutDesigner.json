@@ -40,6 +40,8 @@
   "toolbar_align_left": "По левому краю",
   "toolbar_align_center": "По центру",
   "toolbar_align_right": "По правому краю",
+  "toolbar_show_dimensions": "Показать размеры",
+  "toolbar_title_show_dimensions": "Показывать ярлыки ширина × высота ячеек",
   "ctx_add_item": "Добавить элемент",
   "ctx_all_assigned": "Все элементы назначены",
   "ctx_remove_item": "Удалить элемент",
