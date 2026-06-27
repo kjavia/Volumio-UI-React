@@ -119,6 +119,8 @@ body,
 :root.sp-has-icon-btn-color .volume-manager .btn-icon .material-icons-outlined,
 :root.sp-has-icon-btn-color .volume-manager-wrap .btn-icon .material-icons,
 :root.sp-has-icon-btn-color .volume-manager-wrap .btn-icon .material-icons-outlined,
+:root.sp-has-icon-btn-color .custom-layout-button-row .btn-icon .material-icons,
+:root.sp-has-icon-btn-color .custom-layout-button-row .btn-icon .material-icons-outlined,
 :root.sp-has-icon-btn-color .lsp-btn-group .btn-icon .material-icons,
 :root.sp-has-icon-btn-color .lsp-btn-group .btn-icon .material-icons-outlined {
   color: var(--sp-icon-btn-color) !important;
@@ -129,8 +131,18 @@ body,
 :root.sp-has-icon-btn-color .player-controls-container .btn-icon .material-icons::after,
 :root.sp-has-icon-btn-color .volume-manager .btn-icon .material-icons::after,
 :root.sp-has-icon-btn-color .volume-manager-wrap .btn-icon .material-icons::after,
+:root.sp-has-icon-btn-color .custom-layout-button-row .btn-icon .material-icons::after,
 :root.sp-has-icon-btn-color .lsp-btn-group .btn-icon .material-icons::after {
   color: var(--sp-icon-btn-color) !important;
+}
+
+/* Selected-state indicator for secondary buttons when icon color override is active */
+:root.sp-has-icon-btn-color .player-controls .btn-icon.active,
+:root.sp-has-icon-btn-color .player-controls-container .btn-icon.active,
+:root.sp-has-icon-btn-color .custom-layout-button-row .btn-icon.active,
+:root.sp-has-icon-btn-color .lsp-btn-group .btn-icon.active {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid rgba(255, 255, 255, 0.42) !important;
 }
 
 /* ── Font size overrides from plugin config ── */

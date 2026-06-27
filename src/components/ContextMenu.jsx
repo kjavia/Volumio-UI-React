@@ -58,6 +58,7 @@ const SubmenuFlyout = ({ items, triggerRef, onCloseAll, onMouseEnter, onMouseLea
     >
       {items.map((item, i) => {
         if (item.separator) return <div key={i} className="context-menu-separator" />;
+        if (item.submenu !== undefined) return <SubmenuItem key={i} item={item} onCloseAll={onCloseAll} />;
         if (item.empty != null) return <div key={i} className="context-menu-empty">{item.empty}</div>;
         return (
           <button

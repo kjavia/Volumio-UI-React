@@ -27,6 +27,12 @@ import BrowseDialog from '@/components/BrowseDialog';
 import PeppyMeter from '@/components/PeppyMeter';
 import PeppySpectrum from '@/components/peppy-spectrum/PeppySpectrum';
 import SecondaryControls from '@/components/SecondaryControls';
+import ShuffleButton from '@/components/secondary-controls/ShuffleButton';
+import RepeatButton from '@/components/secondary-controls/RepeatButton';
+import AddToPlaylistButton from '@/components/secondary-controls/AddToPlaylistButton';
+import FavouriteButton from '@/components/secondary-controls/FavouriteButton';
+import QueueButton from '@/components/secondary-controls/QueueButton';
+import BrowseButton from '@/components/secondary-controls/BrowseButton';
 import { normalizeConfigValue } from '@/utils/pluginConfigValue';
 
 const PLAYER_MAP = {
@@ -277,6 +283,57 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
               onBrowse={() => setShowBrowse(true)}
               isFavourite={isFavourite}
               onToggleFavourite={toggleFavourite}
+            />
+          </div>
+        );
+      case 'buttonShuffle':
+        return (
+          <div className="custom-layout-button-row">
+            <ShuffleButton
+              shuffle={random}
+              onShuffle={toggleRandom}
+            />
+          </div>
+        );
+      case 'buttonRepeat':
+        return (
+          <div className="custom-layout-button-row">
+            <RepeatButton
+              repeat={repeat}
+              onRepeat={toggleRepeat}
+            />
+          </div>
+        );
+      case 'buttonAddToPlaylist':
+        return (
+          <div className="custom-layout-button-row">
+            <AddToPlaylistButton
+              onAddToPlaylist={() => setShowAddToPlaylist(true)}
+            />
+          </div>
+        );
+      case 'buttonFavourite':
+        return (
+          <div className="custom-layout-button-row">
+            <FavouriteButton
+              isFavourite={isFavourite}
+              onToggleFavourite={toggleFavourite}
+            />
+          </div>
+        );
+      case 'buttonQueue':
+        return (
+          <div className="custom-layout-button-row">
+            <QueueButton
+              onShowPlaylist={() => setShowPlaylist(true)}
+            />
+          </div>
+        );
+      case 'buttonBrowse':
+        return (
+          <div className="custom-layout-button-row">
+            <BrowseButton
+              onBrowse={() => setShowBrowse(true)}
             />
           </div>
         );

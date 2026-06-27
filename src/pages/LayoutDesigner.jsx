@@ -23,6 +23,12 @@ const LAYOUT_ITEMS = {
   player: 'Album Art / Graphic',
   playerControls: 'Player Buttons',
   buttonRow: 'Control Buttons',
+  buttonShuffle: 'Shuffle',
+  buttonRepeat: 'Repeat',
+  buttonAddToPlaylist: 'Add to Playlist',
+  buttonFavourite: 'Favourite',
+  buttonQueue: 'Queue',
+  buttonBrowse: 'Browse',
   progressBar: 'Track Progress Bar',
   volumeSlider: 'Volume Slider',
   volumeButton: 'Volume Button',
@@ -38,11 +44,26 @@ const LAYOUT_ITEM_ICONS = {
   player: 'radio',
   playerControls: 'play_circle',
   buttonRow: 'tune',
+  buttonShuffle: 'shuffle',
+  buttonRepeat: 'repeat',
+  buttonAddToPlaylist: 'playlist_add',
+  buttonFavourite: 'favorite',
+  buttonQueue: 'queue_music',
+  buttonBrowse: 'library_music',
   progressBar: 'linear_scale',
   volumeSlider: 'volume_up',
   volumeButton: 'volume_up',
   viz: 'equalizer',
 };
+
+const OTHER_BUTTON_ITEM_KEYS = [
+  'buttonShuffle',
+  'buttonRepeat',
+  'buttonAddToPlaylist',
+  'buttonFavourite',
+  'buttonQueue',
+  'buttonBrowse',
+];
 
 const PLAYER_TYPE_OPTIONS = [
   { value: 'albumArt', label: 'Album Art' },
@@ -390,7 +411,7 @@ export default function LayoutDesigner() {
     [activeLayout],
   );
   const availableItems = useMemo(
-    () => Object.entries(LAYOUT_ITEMS).filter(([key]) => !assignedItemKeys.has(key)),
+    () => Object.entries(LAYOUT_ITEMS).filter(([key]) => !assignedItemKeys.has(key) && !OTHER_BUTTON_ITEM_KEYS.includes(key)),
     [assignedItemKeys],
   );
 
@@ -936,7 +957,7 @@ export default function LayoutDesigner() {
                 {LAYOUT_ITEM_ICONS[cell.itemKey] && (
                   <span className="material-icons ld-cell__icon">{LAYOUT_ITEM_ICONS[cell.itemKey]}</span>
                 )}
-                <span className="ld-cell__label">{t('item_' + cell.itemKey)}</span>
+                <span className="ld-cell__label">{t('item_' + cell.itemKey, LAYOUT_ITEMS[cell.itemKey] ?? cell.itemKey)}</span>
                 {cell.itemKey === 'player' && cell.playerType && (
                   <span className="ld-cell__sublabel">{t('player_type_' + cell.playerType, cell.playerType)}</span>
                 )}
@@ -1072,11 +1093,39 @@ export default function LayoutDesigner() {
         label: t('ctx_add_item'),
         icon: 'add_box',
         submenu: availableItems.length > 0
-          ? availableItems.map(([key]) => ({
-            label: t('item_' + key),
-            icon: LAYOUT_ITEM_ICONS[key] ?? null,
-            onClick: () => { handleAssignItem(key, contextMenu.cellId); setContextMenu(null); },
-          }))
+          ? availableItems.map(([key]) => {
+            if (key === 'buttonRow') {
+              const otherButtonItems = OTHER_BUTTON_ITEM_KEYS
+                .filter((subKey) => !assignedItemKeys.has(subKey))
+                .map((subKey) => ({
+                  label: t('item_' + subKey, LAYOUT_ITEMS[subKey]),
+                  icon: LAYOUT_ITEM_ICONS[subKey] ?? null,
+                  onClick: () => { handleAssignItem(subKey, contextMenu.cellId); setContextMenu(null); },
+                }));
+
+              if (!assignedItemKeys.has('buttonRow')) {
+                if (otherButtonItems.length) otherButtonItems.push({ separator: true });
+                otherButtonItems.push({
+                  label: t('item_buttonRowAll', 'All'),
+                  icon: LAYOUT_ITEM_ICONS.buttonRow ?? null,
+                  onClick: () => { handleAssignItem('buttonRow', contextMenu.cellId); setContextMenu(null); },
+                });
+              }
+
+              return {
+                label: t('item_' + key, LAYOUT_ITEMS[key]),
+                icon: LAYOUT_ITEM_ICONS[key] ?? null,
+                submenu: otherButtonItems.length ? otherButtonItems : undefined,
+                empty: otherButtonItems.length === 0 ? t('ctx_all_assigned') : undefined,
+              };
+            }
+
+            return {
+              label: t('item_' + key, LAYOUT_ITEMS[key]),
+              icon: LAYOUT_ITEM_ICONS[key] ?? null,
+              onClick: () => { handleAssignItem(key, contextMenu.cellId); setContextMenu(null); },
+            };
+          })
           : undefined,
         empty: availableItems.length === 0 ? t('ctx_all_assigned') : undefined,
       });
