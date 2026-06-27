@@ -116,7 +116,14 @@ export async function loadMeterImages(config, basePath) {
 
   // Extended: vinyl disc images (may be comma-separated: "cdart.png,vinyl.png")
   if (config.vinyl?.filename) {
-    const files = config.vinyl.filename.split(',').map((f) => loadImage(f.trim() ? `${prefix}${f.trim()}` : ''));
+    const vinylFiles = config.vinyl.filename.split(',').map((f) => f.trim()).filter(Boolean);
+    const files = vinylFiles.map((f, idx) => {
+      // CD art mask should come from track folder when available, not meter pack.
+      if (idx === 0 && /^cdart\.(png|jpe?g|webp)$/i.test(f)) {
+        return Promise.resolve(null);
+      }
+      return loadImage(`${prefix}${f}`);
+    });
     loads.push(Promise.all(files));
   } else {
     loads.push(Promise.resolve(null));
@@ -405,10 +412,10 @@ export function renderMeterFrame(
         ctx.translate(cx, cy);
         ctx.rotate(angleRad);
 
-        if (vinylImgs.length >= 2 && albumArt) {
-          // Two images: first is "cdart" template, second is vinyl plate
+        const hasMask = !!(cdartImage || vinylImgs.length >= 2);
+        if (hasMask && albumArt) {
           // Draw vinyl plate first (the disc texture)
-          const vinyl = vinylImgs[1];
+          const vinyl = vinylImgs.length >= 2 ? vinylImgs[1] : vinylImgs[0];
           ctx.drawImage(vinyl, dx - cx, dy - cy, vw, vh);
           // Composite album art using cdart as mask via offscreen canvas
           const cdart = cdartImage || vinylImgs[0];

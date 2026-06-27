@@ -77,6 +77,7 @@ const PeppyMeter = ({
   const [error, setError] = useState(null);
   const [allConfigs, setAllConfigs] = useState(null);
   const [activeModel, setActiveModel] = useState(null);
+  const [fanartFrame, setFanartFrame] = useState(0);
   const prevRandomRef = useRef(null);
 
   // Parse width/height from folder name (e.g. "1280x400-Gelo5-BASIC_221")
@@ -187,6 +188,22 @@ const PeppyMeter = ({
   // ── Load fanart image when track changes (fallback to album art) ──────
 
   const fanartRef = useRef(null);
+
+  // Advance fanart frame while a track is active.
+  useEffect(() => {
+    const cfg = configRef.current;
+    const needsFanart = cfg?.fanart?.pos && cfg?.fanart?.dimension;
+    const trackUriForFanart = trackInfo?.uri || trackUri;
+    if (!needsFanart || !trackUriForFanart) return;
+
+    setFanartFrame(0);
+    const timer = setInterval(() => {
+      setFanartFrame((n) => n + 1);
+    }, 10000);
+
+    return () => clearInterval(timer);
+  }, [trackInfo?.uri, trackUri, activeModel]);
+
   useEffect(() => {
     const cfg = configRef.current;
     const needsFanart = cfg?.fanart?.pos && cfg?.fanart?.dimension;
@@ -196,8 +213,8 @@ const PeppyMeter = ({
     const candidates = [];
     if (trackInfo?.fanart) candidates.push(trackInfo.fanart);
     if (trackUriForFanart) {
-      candidates.push(`${PLUGIN_BASE_URL}/api/track-asset?uri=${encodeURIComponent(trackUriForFanart)}&name=fanart`);
-      candidates.push(`${PLUGIN_BASE_URL}/api/fanart?uri=${encodeURIComponent(trackUriForFanart)}`);
+      candidates.push(`${PLUGIN_BASE_URL}/api/track-asset?uri=${encodeURIComponent(trackUriForFanart)}&name=fanart&index=${fanartFrame}`);
+      candidates.push(`${PLUGIN_BASE_URL}/api/fanart?uri=${encodeURIComponent(trackUriForFanart)}&index=${fanartFrame}`);
     }
     if (trackInfo?.albumart) candidates.push(trackInfo.albumart);
 
@@ -228,7 +245,7 @@ const PeppyMeter = ({
     tryNext();
 
     return () => { cancelled = true; };
-  }, [trackInfo?.fanart, trackInfo?.albumart, trackInfo?.uri, trackUri, activeModel]);
+  }, [trackInfo?.fanart, trackInfo?.albumart, trackInfo?.uri, trackUri, activeModel, fanartFrame]);
 
   // ── Load cdart mask from track directory (if present) ──────────────────
 
