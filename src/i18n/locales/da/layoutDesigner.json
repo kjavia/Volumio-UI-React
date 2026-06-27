@@ -59,5 +59,12 @@
   "item_progressBar": "Sporfremdriftsbar",
   "item_volumeSlider": "Lydstyrkebjælke",
   "item_volumeButton": "Lydstyrkeknap",
-  "item_viz": "Visualisering"
+  "item_viz": "Visualisering",
+  "item_buttonShuffle": "Bland",
+  "item_buttonRepeat": "Gentag",
+  "item_buttonAddToPlaylist": "Tilføj til afspilningsliste",
+  "item_buttonFavourite": "Favorit",
+  "item_buttonQueue": "Kø",
+  "item_buttonBrowse": "Gennemse",
+  "item_buttonRowAll": "Alle"
 }

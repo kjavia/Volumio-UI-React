@@ -59,5 +59,12 @@
   "item_progressBar": "แถบความคืบหน้า",
   "item_volumeSlider": "แถบเลื่อนระดับเสียง",
   "item_volumeButton": "ปุ่มระดับเสียง",
-  "item_viz": "การแสดงภาพ"
+  "item_viz": "การแสดงภาพ",
+  "item_buttonShuffle": "สุ่ม",
+  "item_buttonRepeat": "เล่นซ้ำ",
+  "item_buttonAddToPlaylist": "เพิ่มไปยังเพลย์ลิสต์",
+  "item_buttonFavourite": "รายการโปรด",
+  "item_buttonQueue": "คิว",
+  "item_buttonBrowse": "เรียกดู",
+  "item_buttonRowAll": "ทั้งหมด"
 }

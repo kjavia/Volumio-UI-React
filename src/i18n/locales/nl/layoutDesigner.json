@@ -59,5 +59,12 @@
   "item_progressBar": "Voortgangsbalk",
   "item_volumeSlider": "Volumeschuifregelaar",
   "item_volumeButton": "Volumeknop",
-  "item_viz": "Visualisatie"
+  "item_viz": "Visualisatie",
+  "item_buttonShuffle": "Willekeurig",
+  "item_buttonRepeat": "Herhalen",
+  "item_buttonAddToPlaylist": "Toevoegen aan afspeellijst",
+  "item_buttonFavourite": "Favoriet",
+  "item_buttonQueue": "Wachtrij",
+  "item_buttonBrowse": "Bladeren",
+  "item_buttonRowAll": "Alles"
 }

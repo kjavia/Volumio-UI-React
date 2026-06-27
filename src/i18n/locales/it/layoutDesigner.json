@@ -59,5 +59,12 @@
   "item_progressBar": "Barra di avanzamento",
   "item_volumeSlider": "Cursore volume",
   "item_volumeButton": "Pulsante volume",
-  "item_viz": "Visualizzazione"
+  "item_viz": "Visualizzazione",
+  "item_buttonShuffle": "Casuale",
+  "item_buttonRepeat": "Ripeti",
+  "item_buttonAddToPlaylist": "Aggiungi alla playlist",
+  "item_buttonFavourite": "Preferito",
+  "item_buttonQueue": "Coda",
+  "item_buttonBrowse": "Sfoglia",
+  "item_buttonRowAll": "Tutto"
 }

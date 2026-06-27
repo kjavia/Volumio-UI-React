@@ -59,5 +59,12 @@
   "item_progressBar": "Parça İlerleme Çubuğu",
   "item_volumeSlider": "Ses Kaydırıcısı",
   "item_volumeButton": "Ses Düğmesi",
-  "item_viz": "Görselleştirme"
+  "item_viz": "Görselleştirme",
+  "item_buttonShuffle": "Karıştır",
+  "item_buttonRepeat": "Tekrarla",
+  "item_buttonAddToPlaylist": "Çalma listesine ekle",
+  "item_buttonFavourite": "Favori",
+  "item_buttonQueue": "Kuyruk",
+  "item_buttonBrowse": "Gözat",
+  "item_buttonRowAll": "Tümü"
 }

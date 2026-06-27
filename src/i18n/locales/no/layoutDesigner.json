@@ -59,5 +59,12 @@
   "item_progressBar": "Sporprogressbar",
   "item_volumeSlider": "Volumglidebryter",
   "item_volumeButton": "Volumknapp",
-  "item_viz": "Visualisering"
+  "item_viz": "Visualisering",
+  "item_buttonShuffle": "Tilfeldig",
+  "item_buttonRepeat": "Gjenta",
+  "item_buttonAddToPlaylist": "Legg til i spilleliste",
+  "item_buttonFavourite": "Favoritt",
+  "item_buttonQueue": "Kø",
+  "item_buttonBrowse": "Bla gjennom",
+  "item_buttonRowAll": "Alle"
 }

@@ -59,5 +59,12 @@
   "item_progressBar": "播放进度条",
   "item_volumeSlider": "音量滑块",
   "item_volumeButton": "音量按钮",
-  "item_viz": "可视化"
+  "item_viz": "可视化",
+  "item_buttonShuffle": "随机",
+  "item_buttonRepeat": "重复",
+  "item_buttonAddToPlaylist": "添加到播放列表",
+  "item_buttonFavourite": "收藏",
+  "item_buttonQueue": "队列",
+  "item_buttonBrowse": "浏览",
+  "item_buttonRowAll": "全部"
 }

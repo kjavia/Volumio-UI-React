@@ -59,5 +59,12 @@
   "item_progressBar": "Thanh tiến trình",
   "item_volumeSlider": "Thanh trượt âm lượng",
   "item_volumeButton": "Nút âm lượng",
-  "item_viz": "Hình ảnh hóa"
+  "item_viz": "Hình ảnh hóa",
+  "item_buttonShuffle": "Ngẫu nhiên",
+  "item_buttonRepeat": "Lặp lại",
+  "item_buttonAddToPlaylist": "Thêm vào danh sách phát",
+  "item_buttonFavourite": "Yêu thích",
+  "item_buttonQueue": "Hàng đợi",
+  "item_buttonBrowse": "Duyệt",
+  "item_buttonRowAll": "Tất cả"
 }

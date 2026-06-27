@@ -59,5 +59,12 @@
   "item_progressBar": "Kappaleen edistymispalkki",
   "item_volumeSlider": "Äänenvoimakkuuden liukusäädin",
   "item_volumeButton": "Äänenvoimakkuuspainike",
-  "item_viz": "Visualisointi"
+  "item_viz": "Visualisointi",
+  "item_buttonShuffle": "Satunnainen",
+  "item_buttonRepeat": "Toista",
+  "item_buttonAddToPlaylist": "Lisää soittolistaan",
+  "item_buttonFavourite": "Suosikki",
+  "item_buttonQueue": "Jono",
+  "item_buttonBrowse": "Selaa",
+  "item_buttonRowAll": "Kaikki"
 }

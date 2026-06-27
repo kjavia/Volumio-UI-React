@@ -59,5 +59,12 @@
   "item_progressBar": "Lejátszási sáv",
   "item_volumeSlider": "Hangerő csúszka",
   "item_volumeButton": "Hangerő gomb",
-  "item_viz": "Vizualizáció"
+  "item_viz": "Vizualizáció",
+  "item_buttonShuffle": "Véletlen",
+  "item_buttonRepeat": "Ismétlés",
+  "item_buttonAddToPlaylist": "Hozzáadás lejátszási listához",
+  "item_buttonFavourite": "Kedvenc",
+  "item_buttonQueue": "Várólista",
+  "item_buttonBrowse": "Tallózás",
+  "item_buttonRowAll": "Összes"
 }

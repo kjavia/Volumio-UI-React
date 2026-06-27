@@ -288,7 +288,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonShuffle':
         return (
-          <div className="custom-layout-button-row">
+          <div className="custom-layout-button-row custom-layout-button-row--single">
             <ShuffleButton
               shuffle={random}
               onShuffle={toggleRandom}
@@ -297,7 +297,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonRepeat':
         return (
-          <div className="custom-layout-button-row">
+          <div className="custom-layout-button-row custom-layout-button-row--single">
             <RepeatButton
               repeat={repeat}
               onRepeat={toggleRepeat}
@@ -306,7 +306,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonAddToPlaylist':
         return (
-          <div className="custom-layout-button-row">
+          <div className="custom-layout-button-row custom-layout-button-row--single">
             <AddToPlaylistButton
               onAddToPlaylist={() => setShowAddToPlaylist(true)}
             />
@@ -314,7 +314,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonFavourite':
         return (
-          <div className="custom-layout-button-row">
+          <div className="custom-layout-button-row custom-layout-button-row--single">
             <FavouriteButton
               isFavourite={isFavourite}
               onToggleFavourite={toggleFavourite}
@@ -323,7 +323,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonQueue':
         return (
-          <div className="custom-layout-button-row">
+          <div className="custom-layout-button-row custom-layout-button-row--single">
             <QueueButton
               onShowPlaylist={() => setShowPlaylist(true)}
             />
@@ -331,7 +331,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonBrowse':
         return (
-          <div className="custom-layout-button-row">
+          <div className="custom-layout-button-row custom-layout-button-row--single">
             <BrowseButton
               onBrowse={() => setShowBrowse(true)}
             />

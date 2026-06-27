@@ -59,5 +59,12 @@
   "item_progressBar": "Spårframstegsbalk",
   "item_volumeSlider": "Volymreglage",
   "item_volumeButton": "Volymknapp",
-  "item_viz": "Visualisering"
+  "item_viz": "Visualisering",
+  "item_buttonShuffle": "Slumpa",
+  "item_buttonRepeat": "Upprepa",
+  "item_buttonAddToPlaylist": "Lägg till i spellista",
+  "item_buttonFavourite": "Favorit",
+  "item_buttonQueue": "Kö",
+  "item_buttonBrowse": "Bläddra",
+  "item_buttonRowAll": "Alla"
 }

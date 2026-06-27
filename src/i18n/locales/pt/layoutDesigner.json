@@ -59,5 +59,12 @@
   "item_progressBar": "Barra de progresso",
   "item_volumeSlider": "Controle de volume",
   "item_volumeButton": "Botão de volume",
-  "item_viz": "Visualização"
+  "item_viz": "Visualização",
+  "item_buttonShuffle": "Aleatório",
+  "item_buttonRepeat": "Repetir",
+  "item_buttonAddToPlaylist": "Adicionar à playlist",
+  "item_buttonFavourite": "Favorito",
+  "item_buttonQueue": "Fila",
+  "item_buttonBrowse": "Procurar",
+  "item_buttonRowAll": "Tudo"
 }

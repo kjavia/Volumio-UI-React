@@ -59,5 +59,12 @@
   "item_progressBar": "トラック進行バー",
   "item_volumeSlider": "音量スライダー",
   "item_volumeButton": "音量ボタン",
-  "item_viz": "ビジュアライゼーション"
+  "item_viz": "ビジュアライゼーション",
+  "item_buttonShuffle": "シャッフル",
+  "item_buttonRepeat": "リピート",
+  "item_buttonAddToPlaylist": "プレイリストに追加",
+  "item_buttonFavourite": "お気に入り",
+  "item_buttonQueue": "キュー",
+  "item_buttonBrowse": "参照",
+  "item_buttonRowAll": "すべて"
 }

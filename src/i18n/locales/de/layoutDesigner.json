@@ -59,5 +59,12 @@
   "item_progressBar": "Track-Fortschrittsbalken",
   "item_volumeSlider": "Lautstärkeregler",
   "item_volumeButton": "Lautstärketaste",
-  "item_viz": "Visualisierung"
+  "item_viz": "Visualisierung",
+  "item_buttonShuffle": "Zufällig",
+  "item_buttonRepeat": "Wiederholen",
+  "item_buttonAddToPlaylist": "Zur Playlist hinzufügen",
+  "item_buttonFavourite": "Favorit",
+  "item_buttonQueue": "Warteschlange",
+  "item_buttonBrowse": "Durchsuchen",
+  "item_buttonRowAll": "Alle"
 }

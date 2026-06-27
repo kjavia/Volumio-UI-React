@@ -59,5 +59,12 @@
   "item_progressBar": "Pasek postępu",
   "item_volumeSlider": "Suwak głośności",
   "item_volumeButton": "Przycisk głośności",
-  "item_viz": "Wizualizacja"
+  "item_viz": "Wizualizacja",
+  "item_buttonShuffle": "Losowo",
+  "item_buttonRepeat": "Powtarzaj",
+  "item_buttonAddToPlaylist": "Dodaj do playlisty",
+  "item_buttonFavourite": "Ulubione",
+  "item_buttonQueue": "Kolejka",
+  "item_buttonBrowse": "Przeglądaj",
+  "item_buttonRowAll": "Wszystko"
 }

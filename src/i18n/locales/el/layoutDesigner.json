@@ -59,5 +59,12 @@
   "item_progressBar": "Γραμμή προόδου",
   "item_volumeSlider": "Ρυθμιστικό έντασης",
   "item_volumeButton": "Κουμπί έντασης",
-  "item_viz": "Οπτικοποίηση"
+  "item_viz": "Οπτικοποίηση",
+  "item_buttonShuffle": "Τυχαία",
+  "item_buttonRepeat": "Επανάληψη",
+  "item_buttonAddToPlaylist": "Προσθήκη στη λίστα αναπαραγωγής",
+  "item_buttonFavourite": "Αγαπημένο",
+  "item_buttonQueue": "Ουρά",
+  "item_buttonBrowse": "Περιήγηση",
+  "item_buttonRowAll": "Όλα"
 }

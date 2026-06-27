@@ -59,5 +59,12 @@
   "item_progressBar": "Panel průběhu",
   "item_volumeSlider": "Posuvník hlasitosti",
   "item_volumeButton": "Tlačítko hlasitosti",
-  "item_viz": "Vizualizace"
+  "item_viz": "Vizualizace",
+  "item_buttonShuffle": "Náhodně",
+  "item_buttonRepeat": "Opakovat",
+  "item_buttonAddToPlaylist": "Přidat do playlistu",
+  "item_buttonFavourite": "Oblíbené",
+  "item_buttonQueue": "Fronta",
+  "item_buttonBrowse": "Procházet",
+  "item_buttonRowAll": "Vše"
 }

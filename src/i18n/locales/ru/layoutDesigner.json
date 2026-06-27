@@ -59,5 +59,12 @@
   "item_progressBar": "Прогресс-бар трека",
   "item_volumeSlider": "Регулятор громкости",
   "item_volumeButton": "Кнопка громкости",
-  "item_viz": "Визуализация"
+  "item_viz": "Визуализация",
+  "item_buttonShuffle": "Случайно",
+  "item_buttonRepeat": "Повтор",
+  "item_buttonAddToPlaylist": "Добавить в плейлист",
+  "item_buttonFavourite": "Избранное",
+  "item_buttonQueue": "Очередь",
+  "item_buttonBrowse": "Обзор",
+  "item_buttonRowAll": "Все"
 }

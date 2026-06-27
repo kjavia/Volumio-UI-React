@@ -59,5 +59,12 @@
   "item_progressBar": "Panel priebehu",
   "item_volumeSlider": "Posúvač hlasitosti",
   "item_volumeButton": "Tlačidlo hlasitosti",
-  "item_viz": "Vizualizácia"
+  "item_viz": "Vizualizácia",
+  "item_buttonShuffle": "Náhodne",
+  "item_buttonRepeat": "Opakovať",
+  "item_buttonAddToPlaylist": "Pridať do playlistu",
+  "item_buttonFavourite": "Obľúbené",
+  "item_buttonQueue": "Fronta",
+  "item_buttonBrowse": "Prehľadávať",
+  "item_buttonRowAll": "Všetko"
 }

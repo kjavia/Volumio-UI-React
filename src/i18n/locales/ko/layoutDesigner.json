@@ -59,5 +59,12 @@
   "item_progressBar": "트랙 진행 바",
   "item_volumeSlider": "볼륨 슬라이더",
   "item_volumeButton": "볼륨 버튼",
-  "item_viz": "시각화"
+  "item_viz": "시각화",
+  "item_buttonShuffle": "셔플",
+  "item_buttonRepeat": "반복",
+  "item_buttonAddToPlaylist": "재생목록에 추가",
+  "item_buttonFavourite": "즐겨찾기",
+  "item_buttonQueue": "대기열",
+  "item_buttonBrowse": "찾아보기",
+  "item_buttonRowAll": "전체"
 }

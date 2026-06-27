@@ -59,5 +59,12 @@
   "item_progressBar": "Прогрес-бар треку",
   "item_volumeSlider": "Регулятор гучності",
   "item_volumeButton": "Кнопка гучності",
-  "item_viz": "Візуалізація"
+  "item_viz": "Візуалізація",
+  "item_buttonShuffle": "Випадково",
+  "item_buttonRepeat": "Повтор",
+  "item_buttonAddToPlaylist": "Додати до плейлиста",
+  "item_buttonFavourite": "Улюблене",
+  "item_buttonQueue": "Черга",
+  "item_buttonBrowse": "Огляд",
+  "item_buttonRowAll": "Усе"
 }
