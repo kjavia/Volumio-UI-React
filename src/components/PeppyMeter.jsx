@@ -111,7 +111,7 @@ const PeppyMeter = ({
   useEffect(() => {
     if (!allConfigs || !trackUri) return;
     const names = Object.keys(allConfigs);
-    if (!names.length) { // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!names.length) {
       setError('No meters found in meters.txt'); return;
     }
 
@@ -161,7 +161,7 @@ const PeppyMeter = ({
           }
           initTurntable = { vinylAngle: 0, tonearmAngle: armAngle };
         }
-        renderMeterFrame(ctx, cfg, imgs, 0, 0, canvas.width, canvas.height, nativeW, nativeH, 0, null, null, null, initTurntable);
+        renderMeterFrame(ctx, cfg, imgs, 0, 0, canvas.width, canvas.height, nativeW, nativeH, 0, null, null, null, initTurntable, fanartRef.current, cdartRef.current);
       }
     });
 
@@ -183,6 +183,71 @@ const PeppyMeter = ({
     img.src = trackInfo.albumart;
     return () => { cancelled = true; };
   }, [trackInfo?.albumart, activeModel]);
+
+  // ── Load fanart image when track changes (fallback to album art) ──────
+
+  const fanartRef = useRef(null);
+  useEffect(() => {
+    const cfg = configRef.current;
+    const needsFanart = cfg?.fanart?.pos && cfg?.fanart?.dimension;
+    if (!needsFanart) { fanartRef.current = null; return; }
+
+    const trackUriForFanart = trackInfo?.uri || trackUri;
+    const candidates = [];
+    if (trackInfo?.fanart) candidates.push(trackInfo.fanart);
+    if (trackUriForFanart) {
+      candidates.push(`${PLUGIN_BASE_URL}/api/track-asset?uri=${encodeURIComponent(trackUriForFanart)}&name=fanart`);
+      candidates.push(`${PLUGIN_BASE_URL}/api/fanart?uri=${encodeURIComponent(trackUriForFanart)}`);
+    }
+    if (trackInfo?.albumart) candidates.push(trackInfo.albumart);
+
+    if (!candidates.length) { fanartRef.current = null; return; }
+
+    let cancelled = false;
+    let idx = 0;
+
+    const tryNext = () => {
+      if (cancelled) return;
+      if (idx >= candidates.length) {
+        fanartRef.current = null;
+        return;
+      }
+
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      const src = candidates[idx++];
+      img.onload = () => {
+        if (!cancelled) fanartRef.current = img;
+      };
+      img.onerror = () => {
+        if (!cancelled) tryNext();
+      };
+      img.src = src;
+    };
+
+    tryNext();
+
+    return () => { cancelled = true; };
+  }, [trackInfo?.fanart, trackInfo?.albumart, trackInfo?.uri, trackUri, activeModel]);
+
+  // ── Load cdart mask from track directory (if present) ──────────────────
+
+  const cdartRef = useRef(null);
+  useEffect(() => {
+    const cfg = configRef.current;
+    const needsCdart = !!cfg?.vinyl?.filename;
+    const trackUriForAssets = trackInfo?.uri || trackUri;
+    if (!needsCdart || !trackUriForAssets) { cdartRef.current = null; return; }
+
+    let cancelled = false;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => { if (!cancelled) cdartRef.current = img; };
+    img.onerror = () => { if (!cancelled) cdartRef.current = null; };
+    img.src = `${PLUGIN_BASE_URL}/api/track-asset?uri=${encodeURIComponent(trackUriForAssets)}&name=cdart`;
+
+    return () => { cancelled = true; };
+  }, [trackInfo?.uri, trackUri, activeModel]);
 
   // ── Load format/service icon when track type changes ────────────────────
 
@@ -406,7 +471,7 @@ const PeppyMeter = ({
         turntableState = { vinylAngle, tonearmAngle: tonearmAngle != null ? tonearmAngle : 0 };
       }
 
-      renderMeterFrame(ctx, cfg, imgs, leftLevel, rightLevel, canvas.width, canvas.height, nativeW, nativeH, reelAngle, trackInfoRef.current, albumArtRef.current, formatIconRef.current, turntableState);
+      renderMeterFrame(ctx, cfg, imgs, leftLevel, rightLevel, canvas.width, canvas.height, nativeW, nativeH, reelAngle, trackInfoRef.current, albumArtRef.current, formatIconRef.current, turntableState, fanartRef.current, cdartRef.current);
     };
 
     tick();
@@ -418,7 +483,7 @@ const PeppyMeter = ({
     if (enabled || !trackInfo?.isPlaying || !imagesRef.current) return;
     setupAudio();
     startAnimation();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+
     setEnabled(true);
   }, [enabled, trackInfo?.isPlaying, setupAudio, startAnimation]);
 

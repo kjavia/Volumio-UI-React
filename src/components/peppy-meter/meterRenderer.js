@@ -318,9 +318,39 @@ export function renderMeterFrame(
   albumArt = null,
   formatIcon = null,
   turntableState = null,
+  fanartImage = null,
+  cdartImage = null,
 ) {
   const scaleX = canvasW / nativeW;
   const scaleY = canvasH / nativeH;
+
+  const drawFanartLayer = (targetZorder) => {
+    if (!fanartImage || !config?.fanart?.pos || !config?.fanart?.dimension) return;
+    const zorder = (config.fanart.zorder || 'background').toLowerCase();
+    if (zorder !== targetZorder) return;
+
+    const dx = config.fanart.pos.x * scaleX;
+    const dy = config.fanart.pos.y * scaleY;
+    const dw = config.fanart.dimension.w * scaleX;
+    const dh = config.fanart.dimension.h * scaleY;
+    const mode = (config.fanart.scale || 'fit').toLowerCase();
+
+    if (mode === 'stretch') {
+      ctx.drawImage(fanartImage, dx, dy, dw, dh);
+      return;
+    }
+
+    // Default to fit/contain behavior.
+    const iw = fanartImage.naturalWidth || fanartImage.width;
+    const ih = fanartImage.naturalHeight || fanartImage.height;
+    if (!iw || !ih) return;
+    const ratio = Math.min(dw / iw, dh / ih);
+    const rw = iw * ratio;
+    const rh = ih * ratio;
+    const ox = dx + (dw - rw) / 2;
+    const oy = dy + (dh - rh) / 2;
+    ctx.drawImage(fanartImage, ox, oy, rw, rh);
+  };
 
   // Clear
   ctx.clearRect(0, 0, canvasW, canvasH);
@@ -329,6 +359,9 @@ export function renderMeterFrame(
   if (images.screenBgr) {
     ctx.drawImage(images.screenBgr, 0, 0, canvasW, canvasH);
   }
+
+  // Fanart background layer (if configured)
+  drawFanartLayer('background');
 
   // Layers 2-4 only if meter is visible (meter.visible = True)
   if (config.meterVisible !== false) {
@@ -378,7 +411,7 @@ export function renderMeterFrame(
           const vinyl = vinylImgs[1];
           ctx.drawImage(vinyl, dx - cx, dy - cy, vw, vh);
           // Composite album art using cdart as mask via offscreen canvas
-          const cdart = vinylImgs[0];
+          const cdart = cdartImage || vinylImgs[0];
           const offscreen = document.createElement('canvas');
           offscreen.width = Math.round(vw);
           offscreen.height = Math.round(vh);
@@ -826,4 +859,7 @@ export function renderMeterFrame(
       }
     }
   }
+
+  // Fanart overlay layer (if configured)
+  drawFanartLayer('overlay');
 }

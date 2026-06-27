@@ -123,6 +123,14 @@ export function normalizeMeterConfig(raw) {
   // ── Extended config (reel, playinfo, progress, volume, icons, etc.) ──
 
   if (configExtend) {
+    // Fanart image region (typically uses current track artwork)
+    base.fanart = {
+      pos: parsePos(raw['fanart.pos']),
+      dimension: parseDimension(raw['fanart.dimension']),
+      scale: str('fanart.scale', 'fit'),
+      zorder: str('fanart.zorder', 'background'),
+    };
+
     // Reel-to-reel
     base.reel = {
       left: {
