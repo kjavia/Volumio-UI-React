@@ -141,25 +141,9 @@ export async function loadMeterImages(config, basePath) {
   // Extended: volume slider tip image
   loads.push(loadImage(config.volume?.sliderTip ? `${prefix}${config.volume.sliderTip}` : ''));
 
-  // Extended: folder layers (first matching file from files list)
-  if (Array.isArray(config.folderLayers) && config.folderLayers.length > 0) {
-    const layerLoads = config.folderLayers.map((layer) => {
-      const files = Array.isArray(layer.files) ? layer.files : [];
-      if (!files.length) return Promise.resolve(null);
-      const tryLoad = (idx) => {
-        if (idx >= files.length) return Promise.resolve(null);
-        return loadImage(`${prefix}${files[idx]}`).then((img) => img || tryLoad(idx + 1));
-      };
-      return tryLoad(0);
-    });
-    loads.push(Promise.all(layerLoads));
-  } else {
-    loads.push(Promise.resolve([]));
-  }
+  const [bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons, vinylImages, tonearmImg, albumArtMask, progressHead, volumeSliderTip] = await Promise.all(loads);
 
-  const [bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons, vinylImages, tonearmImg, albumArtMask, progressHead, volumeSliderTip, folderLayerImages] = await Promise.all(loads);
-
-  // Load custom fonts from the pack (e.g. fonts/MyDigi.ttf)
+  // Load custom fonts from public assets (e.g. /assets/fonts/MyDigi.ttf)
   const fonts = {};
   if (config.time) {
     const fontFiles = new Set();
@@ -169,7 +153,9 @@ export async function loadMeterImages(config, basePath) {
     for (const fontPath of fontFiles) {
       const family = `peppy-${fontPath.replace(/[^a-zA-Z0-9]/g, '-')}`;
       try {
-        const face = new FontFace(family, `url(${prefix}${fontPath})`);
+        const normalized = String(fontPath || '').trim().replace(/^\/+/, '').replace(/^fonts\//i, '');
+        if (!normalized) continue;
+        const face = new FontFace(family, `url(/assets/fonts/${normalized})`);
         await face.load();
         document.fonts.add(face);
         fonts[fontPath] = family;
@@ -179,7 +165,7 @@ export async function loadMeterImages(config, basePath) {
     }
   }
 
-  return { bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons, vinylImages, tonearmImg, albumArtMask, progressHead, volumeSliderTip, folderLayerImages, fonts };
+  return { bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons, vinylImages, tonearmImg, albumArtMask, progressHead, volumeSliderTip, fonts };
 }
 
 // ── Circular meter rendering ────────────────────────────────────────────────
@@ -416,12 +402,6 @@ export function renderMeterFrame(
     ctx.drawImage(images.screenBgr, 0, 0, canvasW, canvasH);
   }
 
-  // Custom folder layers behind meter and overlays (e.g. back image)
-  drawFolderLayers('background');
-
-  // Fanart background layer (if configured)
-  drawFanartLayer('background');
-
   // Layers 2-4 only if meter is visible (meter.visible = True)
   if (config.meterVisible !== false) {
     // Layer 2: Meter background
@@ -434,6 +414,14 @@ export function renderMeterFrame(
         images.bgr.height * scaleY,
       );
     }
+
+    // Draw configured folder backgrounds after bgr so opaque meter backgrounds
+    // do not hide track-folder artwork (e.g. back.png).
+    drawFolderLayers('background');
+
+    // Fanart background layer should render above bgr so opaque meter backgrounds
+    // do not hide fanart regions in some skins.
+    drawFanartLayer('background');
 
     // Layer 2.1: Vinyl disc rotation (turntable meters — drawn above bgr)
     if (config.vinyl?.filename && images.vinylImages && turntableState) {
@@ -633,6 +621,13 @@ export function renderMeterFrame(
         images.fgr.height * scaleY,
       );
     }
+  }
+  else {
+    // When meter graphics are hidden, still render configured folder backgrounds.
+    drawFolderLayers('background');
+
+    // When meter graphics are hidden, still render configured fanart background.
+    drawFanartLayer('background');
   }
 
   // Layer 5: Tonearm (drawn above foreground, animated by progress)
