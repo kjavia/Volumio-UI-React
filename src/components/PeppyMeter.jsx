@@ -162,7 +162,7 @@ const PeppyMeter = ({
           }
           initTurntable = { vinylAngle: 0, tonearmAngle: armAngle };
         }
-        renderMeterFrame(ctx, cfg, imgs, 0, 0, canvas.width, canvas.height, nativeW, nativeH, 0, null, null, null, initTurntable, fanartRef.current, cdartRef.current);
+        renderMeterFrame(ctx, cfg, imgs, 0, 0, canvas.width, canvas.height, nativeW, nativeH, 0, null, null, null, initTurntable, fanartRef.current, cdartRef.current, folderLayerRefs.current);
       }
     });
 
@@ -264,6 +264,37 @@ const PeppyMeter = ({
     img.src = `${PLUGIN_BASE_URL}/api/track-asset?uri=${encodeURIComponent(trackUriForAssets)}&name=cdart`;
 
     return () => { cancelled = true; };
+  }, [trackInfo?.uri, trackUri, activeModel]);
+
+  // ── Load folderlayer images from track directory (back/logo/etc.) ───────
+
+  const folderLayerRefs = useRef([]);
+  useEffect(() => {
+    const cfg = configRef.current;
+    const layers = Array.isArray(cfg?.folderLayers) ? cfg.folderLayers : [];
+    const trackUriForAssets = trackInfo?.uri || trackUri;
+    if (!layers.length || !trackUriForAssets) { folderLayerRefs.current = []; return; }
+
+    let cancelled = false;
+
+    Promise.all(layers.map((layer) => {
+      const files = Array.isArray(layer.files) ? layer.files : [];
+      if (!files.length) return Promise.resolve(null);
+
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+        img.src = `${PLUGIN_BASE_URL}/api/track-asset?uri=${encodeURIComponent(trackUriForAssets)}&candidates=${encodeURIComponent(files.join(','))}`;
+      });
+    })).then((images) => {
+      if (!cancelled) {
+        folderLayerRefs.current = images;
+      }
+    });
+
+    return () => { cancelled = true; folderLayerRefs.current = []; };
   }, [trackInfo?.uri, trackUri, activeModel]);
 
   // ── Load format/service icon when track type changes ────────────────────
@@ -488,7 +519,7 @@ const PeppyMeter = ({
         turntableState = { vinylAngle, tonearmAngle: tonearmAngle != null ? tonearmAngle : 0 };
       }
 
-      renderMeterFrame(ctx, cfg, imgs, leftLevel, rightLevel, canvas.width, canvas.height, nativeW, nativeH, reelAngle, trackInfoRef.current, albumArtRef.current, formatIconRef.current, turntableState, fanartRef.current, cdartRef.current);
+      renderMeterFrame(ctx, cfg, imgs, leftLevel, rightLevel, canvas.width, canvas.height, nativeW, nativeH, reelAngle, trackInfoRef.current, albumArtRef.current, formatIconRef.current, turntableState, fanartRef.current, cdartRef.current, folderLayerRefs.current);
     };
 
     tick();

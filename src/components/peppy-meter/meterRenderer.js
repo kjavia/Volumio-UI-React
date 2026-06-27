@@ -141,7 +141,23 @@ export async function loadMeterImages(config, basePath) {
   // Extended: volume slider tip image
   loads.push(loadImage(config.volume?.sliderTip ? `${prefix}${config.volume.sliderTip}` : ''));
 
-  const [bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons, vinylImages, tonearmImg, albumArtMask, progressHead, volumeSliderTip] = await Promise.all(loads);
+  // Extended: folder layers (first matching file from files list)
+  if (Array.isArray(config.folderLayers) && config.folderLayers.length > 0) {
+    const layerLoads = config.folderLayers.map((layer) => {
+      const files = Array.isArray(layer.files) ? layer.files : [];
+      if (!files.length) return Promise.resolve(null);
+      const tryLoad = (idx) => {
+        if (idx >= files.length) return Promise.resolve(null);
+        return loadImage(`${prefix}${files[idx]}`).then((img) => img || tryLoad(idx + 1));
+      };
+      return tryLoad(0);
+    });
+    loads.push(Promise.all(layerLoads));
+  } else {
+    loads.push(Promise.resolve([]));
+  }
+
+  const [bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons, vinylImages, tonearmImg, albumArtMask, progressHead, volumeSliderTip, folderLayerImages] = await Promise.all(loads);
 
   // Load custom fonts from the pack (e.g. fonts/MyDigi.ttf)
   const fonts = {};
@@ -163,7 +179,7 @@ export async function loadMeterImages(config, basePath) {
     }
   }
 
-  return { bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons, vinylImages, tonearmImg, albumArtMask, progressHead, volumeSliderTip, fonts };
+  return { bgr, fgr, indicator, screenBgr, reelLeft, reelRight, playstateIcons, muteIcons, repeatIcons, shuffleIcons, vinylImages, tonearmImg, albumArtMask, progressHead, volumeSliderTip, folderLayerImages, fonts };
 }
 
 // ── Circular meter rendering ────────────────────────────────────────────────
@@ -327,6 +343,7 @@ export function renderMeterFrame(
   turntableState = null,
   fanartImage = null,
   cdartImage = null,
+  folderLayerOverrideImages = null,
 ) {
   const scaleX = canvasW / nativeW;
   const scaleY = canvasH / nativeH;
@@ -359,6 +376,38 @@ export function renderMeterFrame(
     ctx.drawImage(fanartImage, ox, oy, rw, rh);
   };
 
+  const drawFolderLayers = (targetZorder) => {
+    if (!Array.isArray(config?.folderLayers) || !config.folderLayers.length) return;
+    const renderOne = (img, layer) => {
+      if (!img || !layer?.pos || !layer?.dimension) return;
+      const dx = layer.pos.x * scaleX;
+      const dy = layer.pos.y * scaleY;
+      const dw = layer.dimension.w * scaleX;
+      const dh = layer.dimension.h * scaleY;
+      const mode = (layer.scale || 'fit').toLowerCase();
+      if (mode === 'stretch') {
+        ctx.drawImage(img, dx, dy, dw, dh);
+        return;
+      }
+      const iw = img.naturalWidth || img.width;
+      const ih = img.naturalHeight || img.height;
+      if (!iw || !ih) return;
+      const ratio = Math.min(dw / iw, dh / ih);
+      const rw = iw * ratio;
+      const rh = ih * ratio;
+      const ox = dx + (dw - rw) / 2;
+      const oy = dy + (dh - rh) / 2;
+      ctx.drawImage(img, ox, oy, rw, rh);
+    };
+
+    config.folderLayers.forEach((layer, idx) => {
+      const z = (layer.zorder || 'background').toLowerCase();
+      if (z !== targetZorder) return;
+      const layerImg = Array.isArray(folderLayerOverrideImages) ? (folderLayerOverrideImages[idx] || null) : null;
+      renderOne(layerImg, layer);
+    });
+  };
+
   // Clear
   ctx.clearRect(0, 0, canvasW, canvasH);
 
@@ -366,6 +415,9 @@ export function renderMeterFrame(
   if (images.screenBgr) {
     ctx.drawImage(images.screenBgr, 0, 0, canvasW, canvasH);
   }
+
+  // Custom folder layers behind meter and overlays (e.g. back image)
+  drawFolderLayers('background');
 
   // Fanart background layer (if configured)
   drawFanartLayer('background');
@@ -866,6 +918,9 @@ export function renderMeterFrame(
       }
     }
   }
+
+  // Custom folder layers above meter/overlays (e.g. logo)
+  drawFolderLayers('overlay');
 
   // Fanart overlay layer (if configured)
   drawFanartLayer('overlay');

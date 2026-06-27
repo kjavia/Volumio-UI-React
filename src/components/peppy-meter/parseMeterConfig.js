@@ -123,6 +123,35 @@ export function normalizeMeterConfig(raw) {
   // ── Extended config (reel, playinfo, progress, volume, icons, etc.) ──
 
   if (configExtend) {
+    // Folder image layers (e.g. back/logo overlays)
+    const layerBuckets = new Map();
+    for (const [k, v] of Object.entries(raw)) {
+      const m = k.match(/^folderlayer(?:\.(\d+))?\.(enabled|files|pos|dimension|scale|zorder)$/i);
+      if (!m) continue;
+      const idx = m[1] ? parseInt(m[1], 10) : 1;
+      const prop = m[2].toLowerCase();
+      if (!layerBuckets.has(idx)) {
+        layerBuckets.set(idx, { idx, enabled: false, files: [], pos: null, dimension: null, scale: 'fit', zorder: 'background' });
+      }
+      const layer = layerBuckets.get(idx);
+      if (prop === 'enabled') {
+        layer.enabled = String(v).trim().toLowerCase() === 'true';
+      } else if (prop === 'files') {
+        layer.files = String(v).split(',').map((s) => s.trim()).filter(Boolean);
+      } else if (prop === 'pos') {
+        layer.pos = parsePos(v);
+      } else if (prop === 'dimension') {
+        layer.dimension = parseDimension(v);
+      } else if (prop === 'scale') {
+        layer.scale = String(v || 'fit').trim() || 'fit';
+      } else if (prop === 'zorder') {
+        layer.zorder = String(v || 'background').trim() || 'background';
+      }
+    }
+    base.folderLayers = Array.from(layerBuckets.values())
+      .sort((a, b) => a.idx - b.idx)
+      .filter((l) => l.enabled && l.pos && l.dimension && l.files.length > 0);
+
     // Fanart image region (typically uses current track artwork)
     base.fanart = {
       pos: parsePos(raw['fanart.pos']),
