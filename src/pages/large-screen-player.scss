@@ -273,24 +273,45 @@
   justify-content: center;
 }
 
-/* Cassette is a wide asset; use ratio-aware box instead of forcing square. */
+/* Wide-asset players: use a ratio-aware box so the child fills 100%×100% at the
+   correct aspect ratio without distortion. */
 .lsp-bottom__player--cassette {
   flex: 0 0 calc(400px * 458 / 308);
   width: calc(400px * 458 / 308);
   height: 400px;
 }
 
-.lsp-bottom__player--cassette>.cassette-container {
-  width: 100% !important;
+/* Cover players are height-driven: the container auto-sizes to the child's
+   natural width (height × aspect-ratio). overflow:visible keeps shadows unclipped. */
+.lsp-bottom__player--vinylCover,
+.lsp-bottom__player--cdCover {
+  flex: 0 0 auto;
+  width: auto;
+  overflow: visible;
+}
+
+/* All animated players fill their wrapper height; cover players keep width auto */
+.lsp-bottom__player>* {
   height: 100% !important;
+  width: 100% !important;
   max-width: none !important;
   max-height: none !important;
 }
 
-/* All animated players accept 100% size inside this wrapper */
-.lsp-bottom__player>* {
-  width: 100% !important;
-  height: 100% !important;
+.lsp-bottom__player--vinylCover>.vinyl-sleeve-container,
+.lsp-bottom__player--cdCover>.cd-case-container {
+  width: auto !important;
+  /* let aspect-ratio drive width from the 400px height */
+}
+
+/* Album art: propagate height through the inner chain so the image fills the box */
+.lsp-bottom__player>.album-art-player {
+
+  .rainbow-border,
+  .album-art-inner {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 /* Visualization area — fills remaining space, up to 50% of row */
@@ -745,6 +766,13 @@
     height: 200px;
   }
 
+  .lsp-bottom__player--vinylCover,
+  .lsp-bottom__player--cdCover {
+    flex: 0 0 auto;
+    width: auto;
+    overflow: visible;
+  }
+
   .lsp-bottom__viz {
     flex: 0 0 320px;
     width: 320px;
@@ -1013,6 +1041,13 @@
       max-height: 100% !important;
       width: auto !important;
       max-width: none !important;
+    }
+
+    // Cassette: container-type:size needs a determined width for cqw to work.
+    // With width:auto the browser can't resolve cqw, so scale() collapses to 0.
+    // Provide the aspect-ratio so the browser derives width from the known height.
+    >.cassette-container {
+      aspect-ratio: calc(458 / 308) !important;
     }
 
     // Album art player: propagate height through the full inner chain so the

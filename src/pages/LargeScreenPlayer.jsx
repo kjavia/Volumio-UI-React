@@ -497,7 +497,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
             {/* Row 1: Mini player (left) + Visualization (right) */}
             <div className={`lsp-bottom__row1${effectivePlayerType === 'none' ? ' lsp-bottom__row1--no-player' : ''}`}>
               {effectivePlayerType !== 'none' && (
-                <div className={`lsp-bottom__player${effectivePlayerType === 'cassette' ? ' lsp-bottom__player--cassette' : ''}`}
+                <div className={`lsp-bottom__player lsp-bottom__player--${effectivePlayerType}`}
                   onDoubleClick={cyclePlayer}
                   onTouchEnd={handleDoubleTap}
                 >
