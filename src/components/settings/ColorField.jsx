@@ -21,7 +21,7 @@ const ColorField = ({ field, value, onChange }) => {
 
   const handleBlur = (e) => {
     const text = e.target.value.trim();
-    if (!text || text.startsWith('#')) return;
+    if (!text || text.startsWith('#') || /^transparent$/i.test(text)) return;
     if (/^[0-9a-fA-F]{6}$/.test(text) || /^[0-9a-fA-F]{3}$/.test(text)) {
       onChange(field.id, '#' + text);
       return;
@@ -41,7 +41,7 @@ const ColorField = ({ field, value, onChange }) => {
         <input
           type="color"
           className="settings-color-picker"
-          value={value || '#ffffff'}
+          value={/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(value) ? value : '#ffffff'}
           onChange={(e) => onChange(field.id, e.target.value)}
         />
         <input
@@ -63,7 +63,7 @@ const ColorField = ({ field, value, onChange }) => {
           className="material-icons settings-color-info"
           data-bs-toggle="tooltip"
           data-bs-placement="top"
-          title="Enter HTML hex code OR a valid HTML color name"
+          title="Enter a hex code (e.g. #1a2b3c), 'transparent', or a valid HTML color name"
         >info_outline</span>
       </div>
     </div>
