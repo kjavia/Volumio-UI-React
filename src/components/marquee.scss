@@ -5,6 +5,11 @@
   white-space: nowrap;
   text-align: center;
   line-height: normal;
+
+  /* During scroll: force left-start so translateX(0) == left edge regardless of align prop */
+  &[data-scrolling] {
+    justify-content: flex-start !important;
+  }
 }
 
 .marquee-track {

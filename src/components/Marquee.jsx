@@ -2,23 +2,28 @@ import { useRef, useEffect, memo } from 'react';
 import './marquee.scss';
 
 /**
- * Renders text with a continuous scroll animation only when it overflows its
- * container. Uses the Web Animations API (WAAPI) — not CSS animations — so
- * that layout reflows (e.g. the seekbar updating every second) never restart
- * the animation.
+ * Renders text with a scroll animation only when it overflows its container.
+ * Uses the Web Animations API (WAAPI) so layout reflows never restart the animation.
+ *
+ * Scroll behaviour:
+ *   Phase 1 — initial run: scrolls the visible text off to the left (once).
+ *   Phase 2+ — every repeat: text enters from the right edge and scrolls left.
+ *
+ * This is consistent regardless of the `align` prop.
  *
  * @param {string}  children  - Text to display
  * @param {string}  className - Class applied to the outer wrapper
  * @param {number}  speed     - Pixels per second (default 40)
- * @param {string}  gap       - Space between the two copies (default '4em')
+ * @param {string}  align     - 'left' | 'center' | 'right' (static display only)
  */
 const Marquee = memo(({ children, className, speed = 40, gap = '4em', align = 'center' }) => {
   const outerRef = useRef(null);
   const trackRef = useRef(null);
   const copy1Ref = useRef(null);
   const copy2Ref = useRef(null);
-  const animRef = useRef(null);
-  const prevDist = useRef(0);
+  const loopRef = useRef(null);   // phase-2 looping animation
+  const phase1Ref = useRef(null);   // phase-1 one-shot animation
+  const prevDims = useRef({ textWidth: 0, containerWidth: 0 });
 
   const text = children ?? '';
 
@@ -29,6 +34,11 @@ const Marquee = memo(({ children, className, speed = 40, gap = '4em', align = 'c
     const copy2 = copy2Ref.current;
     if (!outer || !track || !copy1 || !copy2) return;
 
+    const cancelAll = () => {
+      if (loopRef.current) { loopRef.current.cancel(); loopRef.current = null; }
+      if (phase1Ref.current) { phase1Ref.current.cancel(); phase1Ref.current = null; }
+    };
+
     const apply = () => {
       const containerWidth = outer.clientWidth;
       if (!containerWidth) return;
@@ -37,49 +47,63 @@ const Marquee = memo(({ children, className, speed = 40, gap = '4em', align = 'c
       const overflows = textWidth > containerWidth;
 
       if (!overflows) {
-        if (animRef.current) {
-          animRef.current.cancel();
-          animRef.current = null;
-          prevDist.current = 0;
-        }
-        // Show static: reset track position, hide second copy
+        cancelAll();
         track.style.transform = '';
-        track.style.gap = '0';
-        copy2.style.display = 'none';
+        outer.removeAttribute('data-scrolling');
         return;
       }
 
-      // Reveal second copy and restore gap before measuring/animating
-      copy2.style.display = '';
-      track.style.gap = '';
+      // Already looping with the same dimensions — leave it running.
+      const prev = prevDims.current;
+      if (
+        loopRef.current?.playState === 'running' &&
+        textWidth === prev.textWidth &&
+        containerWidth === prev.containerWidth
+      ) return;
 
-      const gapPx = parseFloat(getComputedStyle(copy1).fontSize) * parseFloat(gap);
-      const dist = Math.round(textWidth + gapPx);
+      cancelAll();
+      prevDims.current = { textWidth, containerWidth };
 
-      // If already animating the same distance, leave it running
-      if (dist === prevDist.current && animRef.current?.playState === 'running') return;
-      prevDist.current = dist;
+      // Force left-start so translateX(0) == left edge regardless of align prop.
+      outer.setAttribute('data-scrolling', '');
 
-      if (animRef.current) animRef.current.cancel();
+      const startLoop = () => {
+        const fullDist = containerWidth + textWidth;
+        loopRef.current = track.animate(
+          [
+            { transform: `translateX(${containerWidth}px)` },
+            { transform: `translateX(${-textWidth}px)` },
+          ],
+          { duration: Math.round((fullDist / speed) * 1000), iterations: Infinity, easing: 'linear' },
+        );
+      };
 
-      animRef.current = track.animate(
-        [{ transform: 'translateX(0px)' }, { transform: `translateX(${-dist}px)` }],
-        { duration: Math.round((dist / speed) * 1000), iterations: Infinity, easing: 'linear' },
+      // Phase 1: scroll the already-visible text off to the left, then hand off.
+      const p1 = track.animate(
+        [{ transform: 'translateX(0px)' }, { transform: `translateX(${-textWidth}px)` }],
+        { duration: Math.round((textWidth / speed) * 1000), iterations: 1, easing: 'linear', fill: 'forwards' },
       );
+      phase1Ref.current = p1;
+
+      p1.addEventListener('finish', () => {
+        if (phase1Ref.current !== p1) return; // superseded by a newer call
+        phase1Ref.current = null;
+        p1.cancel(); // remove fill effect so the loop animation is unambiguous
+        startLoop();
+      });
     };
 
-    // Hide second copy on first mount until we know it overflows
     copy2.style.display = 'none';
-
     apply();
     const ro = new ResizeObserver(apply);
     ro.observe(outer);
+
     return () => {
       ro.disconnect();
-      if (animRef.current) { animRef.current.cancel(); animRef.current = null; }
-      prevDist.current = 0;
+      cancelAll();
+      prevDims.current = { textWidth: 0, containerWidth: 0 };
     };
-  }, [text, speed, gap]);
+  }, [text, speed]);
 
   const justifyContent = align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center';
 
@@ -98,6 +122,5 @@ const Marquee = memo(({ children, className, speed = 40, gap = '4em', align = 'c
 });
 
 Marquee.displayName = 'Marquee';
-
 
 export default Marquee;
