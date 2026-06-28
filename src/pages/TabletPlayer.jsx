@@ -278,6 +278,8 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
               <CurrentPlayerComponent
                 isPlaying={isPlaying}
                 albumArt={fullAlbumArt}
+                title={title}
+                artist={artist}
                 maxSpace={isMaxSpace}
                 animated={albumArtAnimated && effectivePlayerType === 'albumArt'}
               />

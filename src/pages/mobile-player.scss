@@ -170,7 +170,6 @@
   object-position: center;
 }
 
-.mobile-row-player .cassette-container,
 .mobile-row-player .radio-container,
 .mobile-row-player .reel-deck-container,
 .mobile-row-player .cd-case-container,
@@ -179,6 +178,15 @@
   height: 100%;
   max-width: 100%;
   max-height: 100%;
+}
+
+/* Cassette inner element is position:absolute so it has no intrinsic size.
+   Give the container explicit 100%×100% so container queries return real values. */
+.mobile-row-player .cassette-container {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
 }
 
 /* ═══════════════════════════════════════════════════

@@ -273,6 +273,20 @@
   justify-content: center;
 }
 
+/* Cassette is a wide asset; use ratio-aware box instead of forcing square. */
+.lsp-bottom__player--cassette {
+  flex: 0 0 calc(400px * 458 / 308);
+  width: calc(400px * 458 / 308);
+  height: 400px;
+}
+
+.lsp-bottom__player--cassette>.cassette-container {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
 /* All animated players accept 100% size inside this wrapper */
 .lsp-bottom__player>* {
   width: 100% !important;
@@ -722,6 +736,12 @@
   .lsp-bottom__player {
     flex: 0 0 200px;
     width: 200px;
+    height: 200px;
+  }
+
+  .lsp-bottom__player--cassette {
+    flex: 0 0 calc(200px * 458 / 308);
+    width: calc(200px * 458 / 308);
     height: 200px;
   }
 

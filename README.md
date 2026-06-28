@@ -85,6 +85,7 @@ Open <http://localhost:5173> in your browser.
 | `npm run lint`    | Lint source files                |
 
 ### Visualizations
+
 Currently does not work on any Apple devices (webkit based browsers). Requires hardware accelaration on the browser to be enabled for best performance.
 
 ## Plugin installation on Volumio device for testing
@@ -114,3 +115,7 @@ To install the plugin for development & testing on actual device, follow these s
 ### Weather Effects
 
 <https://github.com/rauschermate/react-weather-effects>
+
+### Audio Cassette
+
+<https://codepen.io/manz/pen/qBmWYdo>

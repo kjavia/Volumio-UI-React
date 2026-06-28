@@ -242,6 +242,8 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
             <CellPlayerComponent
               isPlaying={isPlaying}
               albumArt={fullAlbumArt}
+              title={title}
+              artist={artist}
               maxSpace={isPlayerMaxSpace}
               animated={albumArtAnimated && cellEffectivePlayerType === 'albumArt'}
             />

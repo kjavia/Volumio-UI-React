@@ -1,338 +1,494 @@
-/* Cassette Specific Styles */
+@font-face {
+  font-family: 'BioRhyme';
+  src: url('/assets/fonts/biorhyme.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Code';
+  src: url('/assets/fonts/code.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Desyrel';
+  src:
+    url('/assets/fonts/desyrel.woff2') format('woff2'),
+    url('/assets/fonts/desyrel.woff') format('woff');
+}
+
 .cassette-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  /* Cassette size/aspect ratio ~1.56 */
-  width: 100%;
-  max-width: 450px;
-  aspect-ratio: 1.56;
-  height: auto;
-  margin: 0 auto;
-}
-
-/* Main Body of the Cassette */
-.cassette-body {
   width: 100%;
   height: 100%;
-  background-color: #2c3e50;
-  /* Dark plastic color */
-  border-radius: 10px;
-  position: relative;
-  box-shadow:
-    inset 1px 1px 2px var(--highlight-10),
-    inset -1px -1px 2px var(--shadow-50),
-    5px 5px 15px var(--shadow-50);
-  /* Texture */
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 2px,
-    rgba(255, 255, 255, 0.02) 2px,
-    rgba(255, 255, 255, 0.02) 4px
-  );
+  overflow: hidden;
+  container-type: size;
 }
 
-/* Top Label Sticker */
-.cassette-label {
+.cassette {
+  --bgcolor: #2f2f2f;
+  --border-color: #404040;
+  --light-color: #555;
+  --dark-color: #1c1c1c;
+  --external-notch-shape: polygon(100% 0, 0 5%, 0 95%, 100% 100%);
+
   position: absolute;
-  top: 7%;
-  left: 5%;
-  right: 5%;
-  bottom: 25%;
-  /* Leave space for bottom details */
-  background-color: var(--color-gray-010);
-  /* Paper label */
-  border-radius: 4px;
-  z-index: 1;
-  /* Subtle paper texture */
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 458px;
+  /* No explicit height — content determines it: top-tape(25)+label(197)+bottom-tape(80)+border(6) ≈ 308px */
+  transform-origin: center center;
+  transform: #{'scale(min(calc(100cqw / 458px), calc(100cqh / 308px)))'};
+  background: var(--bgcolor);
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    repeating-linear-gradient(to bottom, #ddd, #ddd 1px, transparent 1px, transparent 20px);
-  box-shadow: 0 1px 2px var(--shadow-20);
-  overflow: hidden;
-}
-
-/* Placeholder Art on Label (Stripes style) */
-.label-art {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 25%;
-  background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+    linear-gradient(273deg, #fff1, transparent),
+    repeating-linear-gradient(to bottom, #1c1c1c 3px, #2c2c2c 6px);
+  border: 3px solid var(--border-color);
+  border-radius: 15px;
   display: flex;
-  align-items: center;
-  padding-left: 10px;
+  flex-direction: column;
+  box-shadow: 0 0 10px 2px #2227;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    background: #333;
+    width: 5px;
+    height: 75px;
+    position: absolute;
+    bottom: 20px;
+    clip-path: var(--external-notch-shape);
+  }
+
+  &::before {
+    left: -8px;
+  }
+
+  &::after {
+    right: -8px;
+    transform: scaleX(-1);
+    background: #444;
+  }
+
+  .top-tape {
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+    padding: 0 25px;
+
+    .arrow-mark-container {
+      background: #0004;
+      display: flex;
+
+      .arrow-mark {
+        color: var(--light-color);
+        font-size: 32px;
+        transform: scaleY(1.6) translate(0, -10px);
+      }
+    }
+
+    .brand-mark {
+      background: #0004;
+      font-family: 'BioRhyme', serif;
+      padding: 0 6px;
+      color: var(--light-color);
+    }
+  }
+
+  .medium-tape {
+    display: flex;
+    justify-content: center;
+
+    .label-container {
+      width: 400px;
+      background: var(--dark-color);
+      border-radius: 4px;
+      padding: 4px;
+
+      .label {
+        background: #eee;
+        background-image:
+          repeating-linear-gradient(transparent 0 20px, #c6c6c6 20px 21px),
+          linear-gradient(278deg, #eee, #ccc);
+        border-radius: 10px;
+
+        .top-label {
+          height: 62px;
+          font-weight: normal;
+          font-size: 16px;
+          color: #333;
+
+          .predefined-text {
+            font-family: Arial, sans-serif;
+            font-size: 9px;
+            padding: 6px 6px 4px;
+            position: absolute;
+          }
+
+          .top-text {
+            font-family: 'Desyrel', sans-serif;
+            padding: 4px 10px 2px;
+            font-size: 20px;
+            line-height: 115%;
+            text-shadow: 0 0 1px #444;
+            text-align: center;
+
+            .top-text__artist,
+            .top-text__title {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+
+        .medium-label {
+          height: 95px;
+          background: #4d7fb4;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-family: Arial, sans-serif;
+
+          .side-name {
+            width: 50px;
+            font-weight: bold;
+            font-size: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #222;
+          }
+
+          .gap-container {
+            width: 360px;
+            height: 75px;
+            border: 4px solid var(--dark-color);
+            background: var(--bgcolor);
+            background-image: linear-gradient(76deg, transparent, #aaa2);
+            border-radius: 5px;
+
+            .gap {
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              position: relative;
+
+              .tapereel {
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                border: 4px solid #aaa;
+                box-shadow: 0 0 0 4px #111;
+                background: transparent;
+
+                &.left {
+                  animation: reel-spin 6s linear infinite reverse;
+                }
+
+                &.right {
+                  animation: reel-spin 8s linear infinite reverse;
+                }
+
+                .notch {
+                  background: linear-gradient(to right, #aaa 0 10%, transparent 12% 88%, #aaa 90% 100%);
+                  width: 50px;
+                  height: 8px;
+                  position: absolute;
+                }
+
+                .notch-1 {
+                  transform: rotate(60deg);
+                }
+
+                .notch-2 {
+                  transform: rotate(0deg);
+                }
+
+                .notch-3 {
+                  transform: rotate(-60deg);
+                }
+              }
+
+              .central-gap {
+                width: 100px;
+                height: 50px;
+                border: 3px solid #222;
+                background: transparent;
+                margin: 0 10px;
+                overflow: hidden;
+                position: relative;
+
+                &::after {
+                  content: '';
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  background-image: linear-gradient(transparent, #fff5, transparent);
+                  position: absolute;
+                  top: 0;
+                }
+
+                .innertape {
+                  width: 150px;
+                  height: 150px;
+                  border-radius: 50%;
+                  background: radial-gradient(#999 45%, #3e3e3e 47% 100%);
+                  border: 2px solid #2e2e2e;
+                  position: relative;
+
+                  &.left {
+                    transform: translate(-119px, -52px);
+                  }
+
+                  &.right {
+                    transform: translate(66px, -206px);
+                    box-shadow: -10px -10px 15px #3335;
+                  }
+                }
+              }
+            }
+          }
+
+          .noise-reduction {
+            width: 50px;
+            font-size: 7px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 2px;
+
+            .box {
+              display: flex;
+              margin-top: 2px;
+
+              >div {
+                border: 1px solid #444;
+                background: #fff;
+                font-size: 6px;
+                padding: 0 3px;
+                border-radius: 2px;
+              }
+            }
+          }
+        }
+
+        .bottom-label {
+          border-bottom-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+          background: #eee;
+          background-image: linear-gradient(-278deg, #eee, #ccc);
+          height: 32px;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+
+          .brand-text {
+            .maintext {
+              font-family: 'BioRhyme', sans-serif;
+              font-size: 20px;
+              color: #222;
+              transform: translate(18px, 0) scaleX(1.4);
+            }
+
+            .subtext {
+              font-family: Arial, sans-serif;
+              font-weight: bold;
+              color: #333;
+              font-size: 7px;
+              transform: translateY(-7px);
+            }
+          }
+
+          .arrow-text {
+            color: #4d7fb4;
+            font-size: 32px;
+            transform: scaleX(1.5) translate(-6px, -3px);
+          }
+
+          .model-text {
+            font-family: 'Code', sans-serif;
+            font-weight: bold;
+            color: #222;
+            font-size: 28px;
+            transform: translate(0, 2px);
+
+            span {
+              color: #4d7fb4;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .bottom-tape {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    .magnetic-shield-container {
+      filter:
+        drop-shadow(-4px 0 1px #131313) drop-shadow(4px 0 1px #383838) drop-shadow(0 -4px 0 #202020);
+
+      .magnetic-shield {
+        background: #2a2a2a;
+        width: 350px;
+        height: 65px;
+        clip-path: polygon(0 100%, 4% 0, 96% 0, 100% 100%);
+        display: flex;
+        justify-content: space-between;
+        background-image: repeating-linear-gradient(to bottom, #2c2c2c 3px, #1c1c1c 6px);
+
+        .left-hole-container,
+        .right-hole-container {
+          width: 125px;
+          display: flex;
+          justify-content: space-evenly;
+          align-items: flex-end;
+        }
+
+        .hole.hole-2,
+        .hole.hole-3 {
+          transform: translateY(-15px);
+          border: 3px solid #222;
+          width: 24px;
+          height: 18px;
+          border-radius: 30px;
+          box-shadow: 0 0 0 2px #111;
+        }
+
+        .hole.hole-3 {
+          width: 20px;
+          border-radius: 10px;
+          transform-origin: 50% 50%;
+          transform: rotate(90deg) translateX(-17px);
+        }
+
+        .screw-container {
+          position: relative;
+
+          &::before {
+            content: '';
+            display: block;
+            background: rgba(0, 0, 0, 0.75);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            position: relative;
+            top: 10px;
+            z-index: 10;
+          }
+
+          .screw {
+            position: absolute;
+            left: calc(50% - 8px);
+            top: 10px;
+            box-shadow:
+              0 0 2px 4px #000,
+              0 0 2px 8px #111;
+          }
+        }
+
+        .hole {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #111;
+          border: 2px solid #191919;
+          box-shadow: 0 0 0 2px #171717;
+          transform: translateY(-5px);
+        }
+      }
+    }
+  }
+
+  .screw {
+    background: linear-gradient(#555, #333);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #666;
+    transform: rotate(-25deg);
+    box-shadow: 0 0 2px 2px #111;
+
+    .dot {
+      width: 4px;
+      height: 4px;
+      background: #222;
+      border-radius: 50%;
+      position: absolute;
+      z-index: 5;
+      filter: blur(1px);
+    }
+
+    &::before,
+    &::after {
+      content: ' ';
+      display: block;
+      background: linear-gradient(to right, #222 10%, #111 45% 65%, #222 90%);
+      width: 14px;
+      height: 4px;
+      border-radius: 2px;
+      position: absolute;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+
+    &.screw-1 {
+      top: 4px;
+      left: 4px;
+    }
+
+    &.screw-2 {
+      top: 4px;
+      right: 4px;
+    }
+
+    &.screw-3 {
+      bottom: 4px;
+      left: 4px;
+    }
+
+    &.screw-4 {
+      bottom: 4px;
+      right: 4px;
+    }
+  }
 }
 
-.cassette-label-art {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 4px;
+/* Hoist play-state control to top-level to avoid deep-nesting specificity war.
+   !important ensures these beat any animation shorthand's implicit running state. */
+.cassette .tapereel {
+  animation-play-state: paused !important;
 }
 
-.cassette-window-art {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  z-index: 0;
-  opacity: 0.6;
+.cassette.is-playing .tapereel {
+  animation-play-state: running !important;
 }
 
-.label-text {
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
-  font-size: clamp(10px, 2vw, 14px);
-  color: var(--color-gray-700);
-  text-transform: uppercase;
-}
-
-/* Clear Window in the Middle */
-.cassette-window {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  height: 40%;
-  background-color: rgba(44, 62, 80, 0.4);
-  /* See through to plastic behind label */
-  border-radius: 25px;
-  /* Stadium shape */
-  border: 1px solid var(--color-gray-100);
-  z-index: 2;
-  overflow: hidden;
-}
-
-/* Spools */
-.spool {
-  width: 18%;
-  aspect-ratio: 1/1;
-  height: auto;
-  background-color: var(--color-white);
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  /* Cog-like look */
-  background-image: radial-gradient(circle, transparent 30%, #ddd 31%, var(--color-white) 35%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-}
-
-.spool-inner {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  animation: cassette-spin 3s linear infinite;
-  animation-play-state: paused;
-}
-
-.spool-inner.playing {
-  animation-play-state: running;
-}
-
-/* Teeth of the spool */
-.spool-teeth {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    linear-gradient(
-      0deg,
-      transparent 45%,
-      var(--color-gray-700) 45%,
-      var(--color-gray-700) 55%,
-      transparent 55%
-    ),
-    linear-gradient(
-      60deg,
-      transparent 45%,
-      var(--color-gray-700) 45%,
-      var(--color-gray-700) 55%,
-      transparent 55%
-    ),
-    linear-gradient(
-      120deg,
-      transparent 45%,
-      var(--color-gray-700) 45%,
-      var(--color-gray-700) 55%,
-      transparent 55%
-    );
-  border-radius: 50%;
-  clip-path: circle(40%);
-  /* Only show center part */
-}
-
-.spool-hole {
-  width: 12px;
-  height: 12px;
-  background: #2c3e50;
-  /* See through to back */
-  border-radius: 50%;
-  z-index: 5;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Tape Reels (Dark circles behind spools seen through window) */
-
-.reel-L {
-  position: absolute;
-  left: 27%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 38%;
-  aspect-ratio: 1/1;
-  height: auto;
-  background: var(--color-gray-850);
-  border-radius: 50%;
-  border: 1px solid var(--color-gray-700);
-  z-index: 1;
-}
-
-.reel-R {
-  position: absolute;
-  left: 73%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 38%;
-  aspect-ratio: 1/1;
-  height: auto;
-  background: var(--color-gray-850);
-  border-radius: 50%;
-  border: 1px solid var(--color-gray-700);
-  z-index: 1;
-}
-
-/* Adjust spool positions to match reels */
-.spool-left {
-  left: 27%;
-  transform: translate(-50%, -50%);
-}
-
-.spool-right {
-  left: 73%;
-  transform: translate(-50%, -50%);
-}
-
-/* Bottom Trapezoid Area */
-.cassette-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 10%;
-  right: 10%;
-  height: 20%;
-  background-color: #263644;
-  /* Slightly different tone */
-  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
-  z-index: 3;
-  /* Shine */
-  background-image: linear-gradient(to bottom, #2c3e50, var(--color-gray-800));
-  border-top: 1px solid var(--highlight-10);
-}
-
-.head-area {
-  position: absolute;
-  bottom: 0px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40%;
-  height: 12%;
-  background: var(--color-gray-900);
-  border-radius: 4px 4px 0 0;
-}
-
-/* Screws */
-.screw {
-  width: 2.5%;
-  aspect-ratio: 1/1;
-  height: auto;
-  background: radial-gradient(circle, var(--color-gray-150) 40%, var(--color-gray-500) 100%);
-  border-radius: 50%;
-  position: absolute;
-  z-index: 4;
-  box-shadow: inset 1px 1px 1px var(--shadow-80);
-
-  /* Animation for screws? No usually static. But maybe spools need spin? */
-}
-
-/* Rotating spools inside the cassette */
-/* We need to select spools and apply spin */
-.spool-hole {
-  /* No animation on the hole itself */
-}
-
-.screw::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 60%;
-  height: 1px;
-  background: var(--color-gray-700);
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.screw::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 60%;
-  height: 1px;
-  background: var(--color-gray-700);
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-.screw-tl {
-  top: 5%;
-  left: 3%;
-}
-
-.screw-tr {
-  top: 5%;
-  right: 3%;
-}
-
-.screw-bl {
-  bottom: 5%;
-  left: 3%;
-}
-
-.screw-br {
-  bottom: 5%;
-  right: 3%;
-}
-
-.screw-bc {
-  bottom: 12%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-/* Middle screw often present below window */
-
-@keyframes cassette-spin {
-  from {
+@keyframes reel-spin {
+  0% {
     transform: rotate(0deg);
   }
 
-  to {
+  100% {
     transform: rotate(360deg);
   }
 }

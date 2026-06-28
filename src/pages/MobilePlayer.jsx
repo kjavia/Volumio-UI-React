@@ -272,6 +272,8 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
               <CurrentPlayerComponent
                 isPlaying={isPlaying}
                 albumArt={fullAlbumArt}
+                title={title}
+                artist={artist}
                 animated={albumArtAnimated && effectivePlayerType === 'albumArt'}
               />
             </div>

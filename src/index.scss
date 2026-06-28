@@ -247,20 +247,15 @@
 // All use width:100% + aspect-ratio by default, which can overflow a short cell.
 // Instead: fix height to ~90%, let width follow aspect-ratio, cap at 100% width.
 // The 10% reduction gives drop-shadows room to render without clipping.
+/* Cassette inner element is position:absolute so container needs explicit size
+   for container queries (cqw/cqh) to return real values. Fill the cell entirely;
+   the scale() transform inside preserves the 458:279 aspect ratio automatically. */
 .custom-layout-player>.cassette-container {
-  width: min(100%, calc(100cqh * 1.56)) !important;
-  height: auto !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  flex: 0 0 auto !important;
-  flex-shrink: 0 !important;
-  align-self: flex-start;
-  aspect-ratio: 1.56 !important;
-}
-
-.custom-layout-player>.cassette-container .cassette-body {
   width: 100% !important;
   height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  flex: 1 1 auto !important;
 }
 
 .custom-layout-player>.reel-deck-container {
