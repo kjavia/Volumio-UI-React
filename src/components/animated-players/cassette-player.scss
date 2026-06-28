@@ -19,7 +19,9 @@
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: clip;
+  overflow-clip-margin: 24px;
+  /* allow drop shadow to bleed outside without triggering scroll */
   container-type: size;
 }
 
@@ -46,7 +48,9 @@
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 10px 2px #2227;
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.55),
+    0 2px 6px rgba(0, 0, 0, 0.35);
 
   &::before,
   &::after {
@@ -185,6 +189,7 @@
                 border: 4px solid #aaa;
                 box-shadow: 0 0 0 4px #111;
                 background: transparent;
+                overflow: hidden;
 
                 &.left {
                   animation: reel-spin 6s linear infinite reverse;
@@ -195,9 +200,12 @@
                 }
 
                 .notch {
-                  background: linear-gradient(to right, #aaa 0 10%, transparent 12% 88%, #aaa 90% 100%);
+                  background: linear-gradient(to right,
+                      #aaa 0 23%,
+                      transparent 23% 77%,
+                      #aaa 77% 100%);
                   width: 50px;
-                  height: 8px;
+                  height: 5px;
                   position: absolute;
                 }
 

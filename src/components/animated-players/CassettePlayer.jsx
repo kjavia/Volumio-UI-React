@@ -1,11 +1,11 @@
+import useAlbumColor from '@/hooks/useAlbumColor';
 import './cassette-player.scss';
 
 const CassettePlayer = ({ isPlaying, albumArt, title, artist }) => {
-  // Kept for API compatibility with other player components.
-  void albumArt;
-
   const displayArtist = (artist || '').toUpperCase() || '\u00a0';
   const displayTitle = (title || '').toUpperCase() || '\u00a0';
+
+  const { color: labelColor, contrastColor: labelTextColor } = useAlbumColor(albumArt);
 
   return (
     <div className="cassette-container">
@@ -25,8 +25,8 @@ const CassettePlayer = ({ isPlaying, albumArt, title, artist }) => {
                 </div>
               </div>
 
-              <div className="medium-label">
-                <div className="side-name">A</div>
+              <div className="medium-label" style={{ background: labelColor }}>
+                <div className="side-name" style={{ color: labelTextColor }}>A</div>
 
                 <div className="gap-container">
                   <div className="gap">
