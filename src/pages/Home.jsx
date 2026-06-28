@@ -171,6 +171,7 @@ const Home = () => {
       '--sp-stream-info-color': { val: pluginConfig?.streamInfoColor, cls: 'sp-has-stream-info-color' },
       '--sp-button-color': { val: pluginConfig?.buttonColor, cls: 'sp-has-button-color' },
       '--sp-btn-bg-color': { val: pluginConfig?.buttonBgColor, cls: 'sp-has-btn-bg-color' },
+
       '--sp-bar-track-color': { val: pluginConfig?.barTrackColor, cls: 'sp-has-bar-track-color' },
       '--sp-bar-text-color': { val: pluginConfig?.barTextColor, cls: 'sp-has-bar-text-color' },
       '--sp-icon-btn-color': { val: pluginConfig?.iconBtnColor, cls: 'sp-has-icon-btn-color' },
@@ -184,6 +185,11 @@ const Home = () => {
         root.classList.remove(cls);
       }
     });
+    if (/^transparent$/i.test(pluginConfig?.buttonBgColor)) {
+      root.classList.add('sp-btn-bg-transparent');
+    } else {
+      root.classList.remove('sp-btn-bg-transparent');
+    }
     // Apply user font-size overrides as CSS custom properties on :root
     const fontMap = {
       '--sp-title-font-size': { val: pluginConfig?.titleFontSize, cls: 'sp-has-title-font-size' },

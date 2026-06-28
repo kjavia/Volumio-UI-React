@@ -78,6 +78,7 @@ export const ThemeProvider = ({ children }) => {
     // In dev, themes are in public/themes/
     // In prod, they are in /themes/ (relative to root)
     link.href = `/themes/${theme}.css?v=${__THEME_VERSION__}`;
+    document.documentElement.setAttribute('data-theme', theme);
 
   }, [theme]);
 

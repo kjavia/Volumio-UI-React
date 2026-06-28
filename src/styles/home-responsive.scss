@@ -69,25 +69,49 @@ body,
 }
 
 /* ── Control buttons background color — play, skip back, skip forward (player only) ── */
-:root.sp-has-btn-bg-color .controls-transport-row .btn-round,
-:root.sp-has-btn-bg-color .lsp-btn-group .btn-round {
+:root.sp-has-btn-bg-color:not(.sp-btn-bg-transparent) .controls-transport-row .btn-round,
+:root.sp-has-btn-bg-color:not(.sp-btn-bg-transparent) .lsp-btn-group .btn-round {
   background: var(--sp-btn-bg-color) !important;
   border-color: var(--sp-btn-bg-color) !important;
 }
 
-/* Slider handle (cap) and fill bar — seekbar and volume (player only) */
-:root.sp-has-btn-bg-color .slider-cap,
-:root.sp-has-btn-bg-color .slider-fill {
-  background: var(--sp-btn-bg-color) !important;
+/* Transparent bg: no background/border/shadow at rest; hover falls through to theme styles */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(:hover):not(:focus):not(:active),
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:not(:hover):not(:focus):not(:active) {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
-:root.sp-has-btn-bg-color .lsp-volume-popup__range::-webkit-slider-thumb {
-  background: var(--sp-btn-bg-color) !important;
+/* Suppress theme pseudo-element sheens (e.g. Aqua gel ::after) on transparent buttons */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(:hover):not(:focus):not(:active)::after,
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:not(:hover):not(:focus):not(:active)::after {
+  display: none !important;
 }
 
-:root.sp-has-btn-bg-color .lsp-volume-popup__range::-moz-range-thumb {
-  background: var(--sp-btn-bg-color) !important;
+/* Transparent bg: shrink icon to match secondary icon-button size */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round .material-icons,
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round .material-icons-outlined,
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round .material-icons,
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round .material-icons-outlined {
+  font-size: 1.25rem !important;
 }
+
+/* Custom-layout cells provide a size container — use the same cq formula as btn-icon icons */
+:root.sp-btn-bg-transparent .custom-layout-controls .controls-transport-row .btn-round .material-icons,
+:root.sp-btn-bg-transparent .custom-layout-controls .controls-transport-row .btn-round .material-icons-outlined {
+  font-size: min(55cqh, 9cqw) !important;
+}
+
+/* Aqua theme: use white icons on transparent buttons (dark theme bg shows through) */
+:root[data-theme="aqua"].sp-btn-bg-transparent .controls-transport-row .btn-round .material-icons,
+:root[data-theme="aqua"].sp-btn-bg-transparent .controls-transport-row .btn-round .material-icons-outlined,
+:root[data-theme="aqua"].sp-btn-bg-transparent .lsp-btn-group .btn-round .material-icons,
+:root[data-theme="aqua"].sp-btn-bg-transparent .lsp-btn-group .btn-round .material-icons-outlined {
+  color: #ffffff !important;
+}
+
+
 
 /* ── Progress / volume bar track color — the unfilled rail (player only) ── */
 :root.sp-has-bar-track-color .slider-container .slider-track,
