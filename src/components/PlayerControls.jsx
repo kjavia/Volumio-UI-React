@@ -8,7 +8,7 @@ const PlayerControls = ({
 }) => {
   return (
     <div className="player-controls d-flex align-items-center justify-content-center w-100">
-      <div className="controls-transport-row d-flex gap-3 align-items-center justify-content-center">
+      <div className="controls-transport-row d-flex align-items-center justify-content-center">
         <Button classNames="btn-round btn-sm" onClick={onPrev} label="Previous" data-shortcut-key="arrowleft">
           <span className="material-icons">skip_previous</span>
         </Button>

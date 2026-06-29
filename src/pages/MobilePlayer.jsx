@@ -346,7 +346,7 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
         {/* ROW 5 — Transport buttons */}
         {showPlayerControls && (
           <div className="mobile-row-transport text-white">
-            <div className="controls-transport-row d-flex gap-3 align-items-center justify-content-center">
+            <div className="controls-transport-row d-flex align-items-center justify-content-center">
               <Button classNames="btn-round btn-sm" onClick={prev} label="Previous">
                 <span className="material-icons">skip_previous</span>
               </Button>

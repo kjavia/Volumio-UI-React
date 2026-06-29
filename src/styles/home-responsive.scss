@@ -92,7 +92,9 @@ body,
 /* Tighten transparent button box: themes often set fixed 48–56px width/height
    with padding 0, which (combined with the transform: scale below) makes the
    hover chrome appear oversized once the user hovers. Collapsing the box to
-   wrap the icon snugly + small padding keeps the hover chrome compact. */
+   wrap the icon snugly + small padding keeps the hover chrome compact.
+   aspect-ratio: 1 forces a square box so the hover border stays square even
+   in themes (like OLED) that use non-square text glyphs as icons. */
 :root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(.custom-layout-controls .btn-round),
 :root.sp-btn-bg-transparent .lsp-btn-group .btn-round {
   width: auto !important;
@@ -100,29 +102,51 @@ body,
   min-width: 0 !important;
   min-height: 0 !important;
   padding: 0.25rem !important;
+  aspect-ratio: 1 !important;
 }
 
-/* Transparent button state: visually enlarge the whole transparent button
-   via transform: scale on the .btn-round itself. Because the button has no
-   visible chrome at rest (bg/border/shadow suppressed above), the user only
-   sees the icon scaling. Scaling the button reliably scales all glyph forms
-   — material-icons, .play-icon, theme ::after text replacements (OLED) — in
-   every theme and breakpoint without needing to know icon font-sizes.
-   - Skip / back (.btn-round.btn-sm / .lsp-btn--md): 25% larger
-   - Play / pause (.btn-round:not(.btn-sm) / .lsp-btn--lg): 50% larger
+/* Transparent button state: override icon font-size directly so the theme's
+   per-breakpoint font-size rules (further down in this file and in theme
+   stylesheets) don't dictate the size when transparent. Using clamp() keeps
+   sizes responsive. The play/pause icon is 1.5× the skip/back icon.
+   Combined with the transform: scale rules below for an extra visual punch.
    Custom layouts (.custom-layout-controls) are excluded. */
 
-/* Skip / back — 25% */
+/* Skip / back — icon size */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(.custom-layout-controls .btn-round) .material-icons,
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(.custom-layout-controls .btn-round) .material-icons-outlined,
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(.custom-layout-controls .btn-round) .play-icon,
+:root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round .material-icons,
+:root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round .material-icons-outlined {
+  font-size: clamp(1.75rem, 7.5vw, 2.5rem) !important;
+  line-height: 1 !important;
+}
+
+/* Play / pause — icon size (1.5× the skip size) */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(.btn-sm):not(.custom-layout-controls .btn-round) .material-icons,
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(.btn-sm):not(.custom-layout-controls .btn-round) .material-icons-outlined,
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(.btn-sm):not(.custom-layout-controls .btn-round) .play-icon,
+:root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--lg.btn-round .material-icons,
+:root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--lg.btn-round .material-icons-outlined,
+:root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--lg.btn-round .play-icon {
+  font-size: clamp(2.625rem, 11.25vw, 3.75rem) !important;
+  line-height: 1 !important;
+}
+
+/* Transparent button state: small extra visual punch via transform: scale.
+   Layout box already grew via font-size above, so this just adds a touch. */
+
+/* Skip / back — 10% extra */
 :root.sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(.custom-layout-controls .btn-round),
 :root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round {
-  transform: scale(1.25) !important;
+  transform: scale(1.1) !important;
   transform-origin: center center !important;
 }
 
-/* Play / pause — 50% */
+/* Play / pause — 20% extra */
 :root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(.btn-sm):not(.custom-layout-controls .btn-round),
 :root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--lg.btn-round {
-  transform: scale(1.75) !important;
+  transform: scale(1.2) !important;
   transform-origin: center center !important;
 }
 
@@ -133,6 +157,20 @@ body,
 :root[data-theme="aqua"].sp-btn-bg-transparent .lsp-btn-group .btn-round .material-icons-outlined {
   color: #ffffff !important;
 }
+
+/* Win95 theme: lighten skip/back icons on transparent buttons. The default
+   text-primary is black, which is hard to read against album art. On hover
+   the theme's dark color returns (background/border come back too). */
+:root[data-theme="win95"].sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(:hover):not(:focus):not(:active) .material-icons,
+:root[data-theme="win95"].sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(:hover):not(:focus):not(:active) .material-icons-outlined,
+:root[data-theme="win95"].sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round:not(:hover):not(:focus):not(:active) .material-icons,
+:root[data-theme="win95"].sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round:not(:hover):not(:focus):not(:active) .material-icons-outlined {
+  color: #ffffff !important;
+}
+
+/* Note: OLED-specific transparent button rules live in the OLED theme file
+   (design-system/themes/oled/media-player.scss) since OLED renders icons
+   via .material-icons::after text glyphs that the theme owns. */
 
 
 
@@ -439,10 +477,19 @@ body,
   gap: clamp(4px, 1.8cqh, 22px) !important;
 }
 
-/* ── Transport row: spacing below to separate from secondary controls ── */
+/* ── Transport row: spacing below to separate from secondary controls.
+   Default (opaque buttons): smaller gap since the button chrome is visible
+   and already provides visual separation. Transparent state bumps the gap
+   below to compensate for enlarged icons. ── */
 .controls-transport-row {
   margin-block: 0;
   margin-bottom: clamp(10px, 3.5cqh, 32px);
+  gap: clamp(0.5rem, 1.5vw, 1rem) !important;
+}
+
+/* Larger gap when transparent buttons are on, since the icons/box grow */
+:root.sp-btn-bg-transparent .controls-transport-row {
+  gap: clamp(2rem, 5vw, 3.5rem) !important;
 }
 
 /* ── Controls/volume stay compact (don't grow) ── */

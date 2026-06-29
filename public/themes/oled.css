@@ -4522,6 +4522,41 @@ input[type=range]::-moz-range-thumb:active {
   transform: translate(-50%, -50%);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════
+   OLED: Transparent button state overrides
+   When plugin's "transparent buttons" setting is on (:root.sp-btn-bg-transparent),
+   the home-responsive.scss rules collapse the button box to icon-size and
+   apply transform: scale. That doesn't work for OLED because:
+   - .material-icons here is font-size:0 (we render via ::after instead)
+   - The auto-sized box collapses to nothing
+   - The ::after sits absolutely centered and doesn't drive layout
+   Give the button an explicit responsive size and size the ::after glyph
+   directly. Aspect-ratio:1 (from home-responsive.scss) makes it square.
+   ═══════════════════════════════════════════════════════════════════════ */
+/* Skip / back — ::after glyph + button box */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(.custom-layout-controls .btn-round) .material-icons::after,
+:root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round .material-icons::after {
+  font-size: clamp(1rem, 2.5vw, 1.3rem) !important;
+}
+
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(.custom-layout-controls .btn-round),
+:root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round {
+  width: clamp(1.75rem, 4.5vw, 2.5rem) !important;
+  height: clamp(1.75rem, 4.5vw, 2.5rem) !important;
+}
+
+/* Play / pause — ::after glyph + button box (1.5× of skip) */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(.btn-sm):not(.custom-layout-controls .btn-round) .material-icons::after,
+:root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--lg.btn-round .material-icons::after {
+  font-size: clamp(1.5rem, 3.75vw, 1.95rem) !important;
+}
+
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(.btn-sm):not(.custom-layout-controls .btn-round),
+:root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--lg.btn-round {
+  width: clamp(2.625rem, 6.75vw, 3.75rem) !important;
+  height: clamp(2.625rem, 6.75vw, 3.75rem) !important;
+}
+
 :root {
   /* ═══════════════════════════════════════════════════════════════════════
     COLOR PALETTE - OLED Theme
