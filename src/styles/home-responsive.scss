@@ -89,18 +89,41 @@ body,
   display: none !important;
 }
 
-/* Transparent bg: shrink icon to match secondary icon-button size */
-:root.sp-btn-bg-transparent .controls-transport-row .btn-round .material-icons,
-:root.sp-btn-bg-transparent .controls-transport-row .btn-round .material-icons-outlined,
-:root.sp-btn-bg-transparent .lsp-btn-group .btn-round .material-icons,
-:root.sp-btn-bg-transparent .lsp-btn-group .btn-round .material-icons-outlined {
-  font-size: 1.25rem !important;
+/* Tighten transparent button box: themes often set fixed 48–56px width/height
+   with padding 0, which (combined with the transform: scale below) makes the
+   hover chrome appear oversized once the user hovers. Collapsing the box to
+   wrap the icon snugly + small padding keeps the hover chrome compact. */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(.custom-layout-controls .btn-round),
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round {
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0.25rem !important;
 }
 
-/* Custom-layout cells provide a size container — use the same cq formula as btn-icon icons */
-:root.sp-btn-bg-transparent .custom-layout-controls .controls-transport-row .btn-round .material-icons,
-:root.sp-btn-bg-transparent .custom-layout-controls .controls-transport-row .btn-round .material-icons-outlined {
-  font-size: min(55cqh, 9cqw) !important;
+/* Transparent button state: visually enlarge the whole transparent button
+   via transform: scale on the .btn-round itself. Because the button has no
+   visible chrome at rest (bg/border/shadow suppressed above), the user only
+   sees the icon scaling. Scaling the button reliably scales all glyph forms
+   — material-icons, .play-icon, theme ::after text replacements (OLED) — in
+   every theme and breakpoint without needing to know icon font-sizes.
+   - Skip / back (.btn-round.btn-sm / .lsp-btn--md): 25% larger
+   - Play / pause (.btn-round:not(.btn-sm) / .lsp-btn--lg): 50% larger
+   Custom layouts (.custom-layout-controls) are excluded. */
+
+/* Skip / back — 25% */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(.custom-layout-controls .btn-round),
+:root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round {
+  transform: scale(1.25) !important;
+  transform-origin: center center !important;
+}
+
+/* Play / pause — 50% */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(.btn-sm):not(.custom-layout-controls .btn-round),
+:root.sp-btn-bg-transparent .lsp-btn-group .lsp-btn--lg.btn-round {
+  transform: scale(1.75) !important;
+  transform-origin: center center !important;
 }
 
 /* Aqua theme: use white icons on transparent buttons (dark theme bg shows through) */
