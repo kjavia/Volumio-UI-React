@@ -6094,6 +6094,49 @@ h2 {
 }
 
 /* ── Responsive sizing — handled via container-query units (cqw) above ── */
+/* ─────────────────────────────────────────────────────────────────────────
+   Tablet / desktop: make the digital clock as large as possible.
+   Approach: the wrapper fills the full viewport (and is the size-container
+   for all the cqw-based digit dimensions). The frame keeps its natural
+   fit-content size and is auto-centered (the wrapper is a centering flex
+   container). We then apply a uniform CSS transform: scale() computed
+   from container-query length math so the frame visually fills whichever
+   viewport axis is constraining — without overflowing the other.
+
+   Natural frame dimensions (approx, in container-query units):
+     • width  ≈ 60cqi   (HH:MM with a bit of padding/gap)
+     • height ≈ 38cqi   (digits + day-row + date row)
+   The min() picks the smaller of the horizontal / vertical scale so the
+   frame stays fully visible. cqi / cqi cancels to a number; cqb / cqi
+   evaluates to the dvh-to-vw ratio of the wrapper times a constant.
+   ───────────────────────────────────────────────────────────────────────── */
+@media (min-width: 769px) {
+  .digital-clock-wrapper {
+    width: 100vw !important;
+    height: 100dvh !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .digital-clock-frame {
+    transform: scale(min(85cqi / 65cqi, 85cqb / 42cqi)) !important;
+    transform-origin: center center !important;
+    will-change: transform;
+  }
+  /* Center the digit row inside the frame so it never appears left-aligned
+     even if the frame ever grows wider than its content. */
+  .lcd-time,
+  .lcd-digits,
+  .lcd-info,
+  .lcd-days {
+    justify-content: center !important;
+  }
+}
 /* ── Skeuomorphic Analog Clock ─────────────────────────────────────────── */
 /* Bezel — raised metallic ring */
 .clock-bezel {
