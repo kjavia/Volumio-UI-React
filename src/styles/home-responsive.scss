@@ -75,17 +75,34 @@ body,
   border-color: var(--sp-btn-bg-color) !important;
 }
 
-/* Transparent bg: no background/border/shadow at rest; hover falls through to theme styles */
-:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(:hover):not(:focus):not(:active),
-:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:not(:hover):not(:focus):not(:active) {
+/* Transparent bg: no background/border/shadow at rest, on :focus, or on :active.
+   Only :hover brings back the theme's button chrome. This prevents the
+   pressed/focused state from leaving a coloured background behind after a click. */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(:hover),
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:not(:hover) {
   background: transparent !important;
   border-color: transparent !important;
   box-shadow: none !important;
 }
 
-/* Suppress theme pseudo-element sheens (e.g. Aqua gel ::after) on transparent buttons */
-:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(:hover):not(:focus):not(:active)::after,
-:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:not(:hover):not(:focus):not(:active)::after {
+/* Explicit :focus / :focus-visible / :active overrides — beat any theme
+   stylesheet that decorates these states with backgrounds, borders, or shadows. */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:focus,
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:focus-visible,
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:active,
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:focus,
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:focus-visible,
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:active {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Suppress theme pseudo-element sheens (e.g. Aqua gel ::after) on transparent
+   buttons — at rest, on focus, and when active. Only :hover reveals them. */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(:hover)::after,
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:not(:hover)::after {
   display: none !important;
 }
 
@@ -161,10 +178,10 @@ body,
 /* Win95 theme: lighten skip/back icons on transparent buttons. The default
    text-primary is black, which is hard to read against album art. On hover
    the theme's dark color returns (background/border come back too). */
-:root[data-theme="win95"].sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(:hover):not(:focus):not(:active) .material-icons,
-:root[data-theme="win95"].sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(:hover):not(:focus):not(:active) .material-icons-outlined,
-:root[data-theme="win95"].sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round:not(:hover):not(:focus):not(:active) .material-icons,
-:root[data-theme="win95"].sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round:not(:hover):not(:focus):not(:active) .material-icons-outlined {
+:root[data-theme="win95"].sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(:hover) .material-icons,
+:root[data-theme="win95"].sp-btn-bg-transparent .controls-transport-row .btn-round.btn-sm:not(:hover) .material-icons-outlined,
+:root[data-theme="win95"].sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round:not(:hover) .material-icons,
+:root[data-theme="win95"].sp-btn-bg-transparent .lsp-btn-group .lsp-btn--md.btn-round:not(:hover) .material-icons-outlined {
   color: #ffffff !important;
 }
 

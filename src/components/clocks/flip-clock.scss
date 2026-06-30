@@ -6,16 +6,38 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  overflow: visible;
+  overflow: hidden;
   user-select: none;
   container-type: size;
 
   // font-size drives ALL Tick flip panel sizing via em inheritance.
-  // Total body content ≈ 9em wide (6 tiles × 1.25em + colons + AM/PM).
-  // 10.5cqw → font-size that fills ~95% of container width.
-  // 19cqh cap → just above 10.5cqw equivalent on 16:9, so cqw wins on landscape.
+  // Total body content for HH:MM:SS + AMPM ≈ 9.5em wide.
+  // Per-layout modifiers below recalibrate so each combination targets
+  // ~93–95% width fill without clipping the bezel frame.
+  // 90cqh cap → effectively only kicks in on extremely tall/narrow viewports
+  // (the body is only ~1.16em tall, so even at 90cqh the body fits height-wise).
   // .tick-flip line-height override below reduces tile height from 1.4× to 1.0×.
-  --digit-h: min(19cqh, 10.5cqw);
+  --digit-h: min(90cqh, 10cqw);
+}
+
+// Modifier classes — recalibrate digit-h so the body fills the width when
+// fewer elements are present. Values target ~93% fill (with ~5% safety
+// margin) to prevent the bezel frame from clipping at the container edge.
+// Body width estimates (in em of digit-h):
+//   HH:MM:SS + AMPM ≈ 9.5em → 10cqw     (default)
+//   HH:MM:SS only   ≈ 8.4em → 11cqw     (--no-ampm)
+//   HH:MM    + AMPM ≈ 7.2em → 13cqw     (--no-seconds)
+//   HH:MM    only   ≈ 6.6em → 14cqw     (--no-seconds.--no-ampm)
+.flip-clock--no-ampm {
+  --digit-h: min(90cqh, 11cqw);
+}
+
+.flip-clock--no-seconds {
+  --digit-h: min(90cqh, 13cqw);
+}
+
+.flip-clock--no-seconds.flip-clock--no-ampm {
+  --digit-h: min(90cqh, 14cqw);
 }
 
 /* Clock body — outer decorative bezel frame */

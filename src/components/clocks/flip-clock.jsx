@@ -100,8 +100,14 @@ const FlipClock = ({ showSeconds = true, showWeather = false, use12Hour = true }
     day: 'numeric',
   });
 
+  const layoutClass = [
+    'flip-clock',
+    !showSeconds && 'flip-clock--no-seconds',
+    !use12Hour && 'flip-clock--no-ampm',
+  ].filter(Boolean).join(' ');
+
   return (
-    <div className="flip-clock">
+    <div className={layoutClass}>
       <div className="flip-clock-body">
         <FlipPanel value={displayHours} />
         <span className="flip-colon">:</span>
