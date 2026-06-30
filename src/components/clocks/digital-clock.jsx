@@ -108,8 +108,14 @@ const DigitalClock = ({ showSeconds = true, use12Hour = true, showWeather = fals
     day: 'numeric',
   });
 
+  const wrapperClass = [
+    'digital-clock-wrapper',
+    !showSeconds && 'digital-clock-wrapper--no-seconds',
+    !use12Hour && 'digital-clock-wrapper--no-ampm',
+  ].filter(Boolean).join(' ');
+
   return (
-    <div className="digital-clock-wrapper">
+    <div className={wrapperClass}>
       <div className="digital-clock-frame">
         <div className="digital-clock">
           {/* Day-of-week bar */}

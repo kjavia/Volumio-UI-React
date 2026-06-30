@@ -7573,12 +7573,17 @@ input[type=range]::-moz-range-thumb:active {
    from container-query length math so the frame visually fills whichever
    viewport axis is constraining — without overflowing the other.
 
-   Natural frame dimensions (approx, in container-query units):
-     • width  ≈ 60cqi   (HH:MM with a bit of padding/gap)
-     • height ≈ 38cqi   (digits + day-row + date row)
+   Natural frame width estimates (in cqi, derived from .lcd-digit width
+   plus colons, gaps, paddings, and bezel; conservatively rounded up so
+   the scale never overflows even on themes with wider digits like Casio):
+     • HH:MM         only  ≈  68cqi   (4 digits + 1 colon)
+     • HH:MM + AM/PM       ≈  75cqi
+     • HH:MM:SS      only  ≈ 108cqi   (6 digits + 2 colons)
+     • HH:MM:SS + AM/PM    ≈ 115cqi
+   Natural height ≈ 42cqi (digits + day-row + date row).
+   Each layout targets ~92cqi fill (leaves ~4cqi safety margin per side).
    The min() picks the smaller of the horizontal / vertical scale so the
-   frame stays fully visible. cqi / cqi cancels to a number; cqb / cqi
-   evaluates to the dvh-to-vw ratio of the wrapper times a constant.
+   frame stays fully visible.
    ───────────────────────────────────────────────────────────────────────── */
 @media (min-width: 769px) {
   .digital-clock-wrapper {
@@ -7593,10 +7598,23 @@ input[type=range]::-moz-range-thumb:active {
     align-items: center !important;
     justify-content: center !important;
   }
+  /* Default (HH:MM:SS + AM/PM) — widest layout */
   .digital-clock-frame {
-    transform: scale(min(85cqi / 65cqi, 85cqb / 42cqi)) !important;
+    transform: scale(min(92cqi / 115cqi, 85cqb / 42cqi)) !important;
     transform-origin: center center !important;
     will-change: transform;
+  }
+  /* HH:MM:SS only (24-hour with seconds) */
+  .digital-clock-wrapper--no-ampm .digital-clock-frame {
+    transform: scale(min(92cqi / 108cqi, 85cqb / 42cqi)) !important;
+  }
+  /* HH:MM + AM/PM */
+  .digital-clock-wrapper--no-seconds .digital-clock-frame {
+    transform: scale(min(92cqi / 75cqi, 85cqb / 42cqi)) !important;
+  }
+  /* HH:MM only (24-hour without seconds) — narrowest */
+  .digital-clock-wrapper--no-seconds.digital-clock-wrapper--no-ampm .digital-clock-frame {
+    transform: scale(min(92cqi / 68cqi, 85cqb / 42cqi)) !important;
   }
   /* Center the digit row inside the frame so it never appears left-aligned
      even if the frame ever grows wider than its content. */
