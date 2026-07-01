@@ -732,7 +732,18 @@ export function renderMeterFrame(
           const ratio = Math.min(fullW / natW, fullH / natH) * 0.85;
           const dw = natW * ratio;
           const dh = natH * ratio;
+          // When a fanart background is being drawn behind the meter, add a
+          // drop-shadow to the format logo so it stays legible over busy art.
+          const fanartActive = !!(fanartImage && config?.fanart?.pos && config?.fanart?.dimension);
+          if (fanartActive) {
+            ctx.save();
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+            ctx.shadowBlur = 4 * Math.max(scaleX, scaleY);
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 1 * scaleY;
+          }
           ctx.drawImage(formatIcon, bx + (fullW - dw) / 2, by + (fullH - dh) / 2, dw, dh);
+          if (fanartActive) ctx.restore();
         } else if (trackInfo.trackType || trackInfo.service) {
           // Text fallback — size to fit within the dimension box
           const label = (trackInfo.trackType || trackInfo.service || '').toUpperCase();
