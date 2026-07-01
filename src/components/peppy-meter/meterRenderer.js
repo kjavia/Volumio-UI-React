@@ -452,8 +452,18 @@ export function renderMeterFrame(
         ctx.translate(cx, cy);
         ctx.rotate(angleRad);
 
+        // When the meter skin supports fanart, prefer painting the whole
+        // cdart image (from fanart.tv) directly on the vinyl plate instead
+        // of using it as an alpha mask for the album cover. fanart.tv cdart
+        // PNGs already contain the full disc artwork.
+        const supportsFanart = !!(config.fanart?.pos && config.fanart?.dimension);
         const hasMask = !!(cdartImage || vinylImgs.length >= 2);
-        if (hasMask && albumArt) {
+        if (supportsFanart && cdartImage) {
+          // Vinyl plate underneath, then whole cdart image on top.
+          const vinyl = vinylImgs.length >= 2 ? vinylImgs[1] : vinylImgs[0];
+          ctx.drawImage(vinyl, dx - cx, dy - cy, vw, vh);
+          ctx.drawImage(cdartImage, dx - cx, dy - cy, vw, vh);
+        } else if (hasMask && albumArt) {
           // Draw vinyl plate first (the disc texture)
           const vinyl = vinylImgs.length >= 2 ? vinylImgs[1] : vinylImgs[0];
           ctx.drawImage(vinyl, dx - cx, dy - cy, vw, vh);
