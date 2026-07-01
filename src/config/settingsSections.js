@@ -61,6 +61,8 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
         { id: 'albumArtAnimated', element: 'switch', label: t('ALBUM_ART_ANIMATED', 'Animated Album Art'), icon: 'animation', doc: t('ALBUM_ART_ANIMATED_DESC', 'Enable rainbow border animation when playing.'), visibleIf: { field: 'playerType', value: 'albumArt' } },
         { id: 'showTrackPanel', element: 'switch', label: t('SHOW_TRACK_PANEL', 'Show Track Info Panel'), icon: 'info', doc: t('SHOW_TRACK_PANEL_DESC', 'Display a themed panel behind track info.') },
         { id: 'useCustomLayout', element: 'switch', label: t('USE_CUSTOM_LAYOUT', 'Use Custom Layouts'), icon: 'grid_view', doc: t('USE_CUSTOM_LAYOUT_DESC', 'When enabled, the player will use a saved custom layout for the current screen resolution if one exists.') },
+        { id: 'fanartTvApiKey', element: 'input', type: 'text', label: t('FANART_TV_API_KEY', 'fanart.tv API Key'), icon: 'vpn_key', doc: t('FANART_TV_API_KEY_DESC', 'API key from fanart.tv used to fetch album/artist artwork. Sign up at https://fanart.tv/get-an-api-key/') },
+        { id: 'displayFanartBackground', element: 'switch', label: t('DISPLAY_FANART_BACKGROUND', 'Display Fan Art in Background'), icon: 'wallpaper', doc: t('DISPLAY_FANART_BACKGROUND_DESC', 'When enabled, the player background rotates through fan art images fetched from fanart.tv for the currently playing artist.') },
         {
           id: 'vizType', element: 'select', label: t('VIZ_TYPE', 'Visualization'), icon: 'equalizer',
           doc: t('VIZ_TYPE_DESC', 'Select the visualization displayed on the player screen.'),

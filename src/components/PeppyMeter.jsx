@@ -4,6 +4,7 @@ import { getServiceLogoUrl } from './ServiceLogo';
 import { fetchMeterConfigs } from './peppy-meter/parseMeterConfig';
 import { loadMeterImages, renderMeterFrame } from './peppy-meter/meterRenderer';
 import PeppySpectrum from './peppy-spectrum/PeppySpectrum';
+import useFanartTv from '@/hooks/useFanartTv';
 import './peppy-meter/PeppyMeter.scss';
 
 // MediaElementSourceNode can only be created ONCE per HTMLMediaElement.
@@ -79,6 +80,16 @@ const PeppyMeter = ({
   const [activeModel, setActiveModel] = useState(null);
   const [fanartFrame, setFanartFrame] = useState(0);
   const prevRandomRef = useRef(null);
+
+  // ── fanart.tv images for the current album (falls back to filesystem) ──
+  const { data: fanartTvData } = useFanartTv({
+    artist: trackInfo?.artist || null,
+    album: trackInfo?.album || null,
+  });
+  const fanartTvImages = useMemo(() => {
+    const imgs = fanartTvData?.images || [];
+    return Array.isArray(imgs) ? imgs : [];
+  }, [fanartTvData]);
 
   // Parse width/height from folder name (e.g. "1280x400-Gelo5-BASIC_221")
   const { nativeW, nativeH } = useMemo(() => {
@@ -211,6 +222,15 @@ const PeppyMeter = ({
 
     const trackUriForFanart = trackInfo?.uri || trackUri;
     const candidates = [];
+    // Prefer fanart.tv images when available (rotates by fanartFrame).
+    if (fanartTvImages.length) {
+      const idxTv = fanartFrame % fanartTvImages.length;
+      // Add the current rotation first, then the rest as fallbacks.
+      candidates.push(fanartTvImages[idxTv]);
+      for (let k = 1; k < fanartTvImages.length; k++) {
+        candidates.push(fanartTvImages[(idxTv + k) % fanartTvImages.length]);
+      }
+    }
     if (trackInfo?.fanart) candidates.push(trackInfo.fanart);
     if (trackUriForFanart) {
       candidates.push(`${PLUGIN_BASE_URL}/api/track-asset?uri=${encodeURIComponent(trackUriForFanart)}&name=fanart&index=${fanartFrame}`);
@@ -245,7 +265,7 @@ const PeppyMeter = ({
     tryNext();
 
     return () => { cancelled = true; };
-  }, [trackInfo?.fanart, trackInfo?.albumart, trackInfo?.uri, trackUri, activeModel, fanartFrame]);
+  }, [trackInfo?.fanart, trackInfo?.albumart, trackInfo?.uri, trackUri, activeModel, fanartFrame, fanartTvImages]);
 
   // ── Load cdart mask from track directory (if present) ──────────────────
 
