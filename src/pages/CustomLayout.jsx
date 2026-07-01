@@ -408,7 +408,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         rendered.push(
           <div
             key={cell.id}
-            className={`custom-layout-cell${cell.itemKey === 'player' ? ' custom-layout-cell--player' : ''}`}
+            className={`custom-layout-cell${cell.itemKey === 'player' ? ' custom-layout-cell--player' : ''}${cell.subdivisions ? ' custom-layout-cell--parent' : ''}`}
             style={style}
           >
             {cell.subdivisions ? (
@@ -445,7 +445,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
       : Array(rows).fill(1);
 
   return (
-    <div className="container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100">
+    <div className={`container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100${fanartBackgroundUrl ? ' sp-fanart-active' : ''}`}>
       {/* Background */}
       {backgroundColor ? (
         <div

@@ -54,7 +54,15 @@
   background: none;
   border: none;
   border-radius: 0;
-  padding: 0 4px;
+  // Responsive horizontal padding: scales with the *viewport* width, NOT
+  // the cell's own width. Using `cqw` (cell-relative) would give a wide
+  // cell (e.g. trackName in FanartTV) a large left padding while a narrow
+  // sibling cell (e.g. serviceLogo) got a much smaller right padding, so
+  // left/right edges of content in the same row wouldn't line up. Viewport
+  // units guarantee every leaf cell in the player gets the same padding
+  // regardless of its width.
+  // ~15px at 1280px viewport, ~12px at 1024px, clamped 6–24px.
+  padding: 0 clamp(6px, 1.2vw, 24px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,17 +71,36 @@
   // Establish a size container so children can use cqw/cqh/cqmin units
   // relative to this cell rather than the viewport.
   container-type: size;
+}
+
+// Subdivided (parent) cells shouldn't add their own horizontal padding —
+// only leaf cells do. Otherwise a leaf that's nested N levels deep is
+// pushed inward per level relative to a shallow-nested sibling in another
+// row, causing text (track/artist/album) at the same visual column to
+// misalign across rows. Leaves at "col 1" of any row then reliably land
+// at their own (responsive) padding offset from their nearest grid-column
+// edge, and the outermost row edge naturally gets that same padding from
+// the leaves themselves.
+.custom-layout-cell.custom-layout-cell--parent {
+  padding: 0;
+}
+
+.custom-layout-cell {
 
   // Text items: custom layout should maximize text usage of the cell height
   // without extra spacing from theme defaults.
+  // NB: line-height must be >1 so descenders (g, y, p, q, j) on font faces
+  // with tall metrics are not clipped by the grid's overflow:hidden. The
+  // vertical font-size cap is lowered so that font-size * line-height still
+  // fits inside the cell (0.72 * 1.2 ≈ 0.86 ≈ old 0.85cqh visual size).
   .track-title,
   .artist-name,
   .album-name,
   .responsive-title,
   .responsive-artist,
   .responsive-album {
-    font-size: min(85cqh, 95cqw);
-    line-height: 1;
+    font-size: min(72cqh, 95cqw);
+    line-height: 1.2;
     white-space: nowrap;
     margin: 0;
     padding: 0;
@@ -317,7 +344,11 @@
     line-height: 1.25 !important;
     max-height: 100%;
     margin: 0 !important;
+    margin-block: 0 !important;
+    margin-inline: 0 !important;
     padding: 0 !important;
+    padding-block: 0 !important;
+    padding-inline: 0 !important;
   }
 
   .track-title .marquee-outer,
@@ -472,13 +503,41 @@
     gap: clamp(4px, 2cqw, 12px);
   }
 
-  // ── Media items (service logo, stream info) — scale to cell ───────────
-  .service-logo,
-  .service-logo img {
-    max-width: 100%;
-    max-height: 100%;
+  // ── Service logo — scale to fill the cell while leaving room for the
+  //    drop-shadow added by `.sp-fanart-active` (the cell has
+  //    `overflow: hidden`, so a logo sized 100% × 100% would have its
+  //    shadow clipped at the edges). Subtracting 12px from each axis
+  //    reserves ~6px on every side, which comfortably fits the shadow
+  //    blur radius. NB: the previous `.service-logo` / `.service-logo img`
+  //    selectors did not match the DOM emitted by `ServiceLogo.jsx`, which
+  //    uses `.service-logo-img`, `.service-logo-icon`, `.service-logo-badge`.
+  .service-logo-img {
     width: auto;
     height: auto;
+    max-width: calc(100cqw - 12px);
+    max-height: calc(100cqh - 12px);
+    object-fit: contain;
+    // react-icons' inline `height: 1.6rem` on <img> is overridden by
+    // max-* + auto above; no !important needed here.
+  }
+
+  // react-icons SVGs and material-icons spans are sized via font-size
+  // (they have inline `fontSize: '1.8rem'` from the component, so
+  // !important is required to override).
+  .service-logo-icon,
+  .material-icons.service-logo-icon {
+    font-size: min(calc(100cqh - 12px), calc(100cqw - 12px)) !important;
+    line-height: 1 !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .service-logo-badge {
+    font-size: min(45cqh, 20cqw);
+    line-height: 1;
+    white-space: nowrap;
+    max-width: calc(100cqw - 12px);
+    max-height: calc(100cqh - 12px);
   }
 }
 
@@ -494,4 +553,45 @@
   pointer-events: none;
   user-select: none;
   color: inherit;
+}
+
+/* ── Fanart.tv background readability ──────────────────────────────────────
+   When the fanart.tv wallpaper is being displayed, images can be arbitrarily
+   bright, dark, busy or colourful. To keep track metadata, format info and
+   service logos legible in every case, add a strong text-shadow (for text)
+   and a matching drop-shadow (for images/icons). Applied whenever the
+   player root has the `sp-fanart-active` class.
+
+   Uses `!important` so theme rules that reset text-shadow/filter (e.g. OLED,
+   flat, casio, aqua …) do not strip these overlays. */
+.sp-fanart-active {
+
+  // Track/artist/album metadata and stream info use a tight, low-blur
+  // shadow so the text stays crisp and readable against the fanart
+  // rather than looking hazy or fuzzy.
+  .track-title,
+  .artist-name,
+  .album-name,
+  .album-name *,
+  .stream-info,
+  .stream-info *,
+  .responsive-stream-info,
+  .responsive-stream-info *,
+  .track-info,
+  .track-info * {
+    text-shadow:
+      0 1px 1px rgba(0, 0, 0, 0.95),
+      0 0 2px rgba(0, 0, 0, 0.85) !important;
+  }
+
+  .service-logo-img,
+  .service-logo-icon,
+  .service-logo-badge,
+  .format-logo-responsive,
+  .format-logo-responsive img,
+  .format-logo-responsive svg,
+  .hires-logo {
+    filter:
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.7)) !important;
+  }
 }

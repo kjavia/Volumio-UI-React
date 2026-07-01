@@ -43,6 +43,37 @@ const pickRandom = (arr, prev) => {
 };
 
 /**
+ * Fetch an image via `fetch` (not `<img src=...>`) so a 404 does not
+ * produce a "Failed to load resource" error in the browser console.
+ * Resolves with an `HTMLImageElement` on success, or `null` on any failure
+ * (network error, non-2xx status, invalid image, decode error).
+ */
+const fetchImage = async (url) => {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const blob = await res.blob();
+    const objectUrl = URL.createObjectURL(blob);
+    return await new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        // Image bytes are decoded into the element; the blob URL is no
+        // longer needed and can be revoked immediately to release memory.
+        URL.revokeObjectURL(objectUrl);
+        resolve(img);
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(objectUrl);
+        resolve(null);
+      };
+      img.src = objectUrl;
+    });
+  } catch {
+    return null;
+  }
+};
+
+/**
  * PeppyMeter — canvas-based VU/level meter using PeppyMeter-style assets.
  *
  * @param {string} props.folder — full folder name e.g. "1280x400-Gelo5-BASIC_221"
@@ -81,7 +112,7 @@ const PeppyMeter = ({
   const [fanartFrame, setFanartFrame] = useState(0);
   const prevRandomRef = useRef(null);
 
-  // ── fanart.tv images for the current album (falls back to filesystem) ──
+  // ── fanart.tv images for the current album ────────────────────────────
   const { data: fanartTvData } = useFanartTv({
     artist: trackInfo?.artist || null,
     album: trackInfo?.album || null,
@@ -89,6 +120,10 @@ const PeppyMeter = ({
   const fanartTvImages = useMemo(() => {
     const imgs = fanartTvData?.images || [];
     return Array.isArray(imgs) ? imgs : [];
+  }, [fanartTvData]);
+  const fanartTvCdart = useMemo(() => {
+    const arr = fanartTvData?.cdart || [];
+    return Array.isArray(arr) ? arr : [];
   }, [fanartTvData]);
 
   // Parse width/height from folder name (e.g. "1280x400-Gelo5-BASIC_221")
@@ -220,7 +255,6 @@ const PeppyMeter = ({
     const needsFanart = cfg?.fanart?.pos && cfg?.fanart?.dimension;
     if (!needsFanart) { fanartRef.current = null; return; }
 
-    const trackUriForFanart = trackInfo?.uri || trackUri;
     const candidates = [];
     // Prefer fanart.tv images when available (rotates by fanartFrame).
     if (fanartTvImages.length) {
@@ -232,10 +266,6 @@ const PeppyMeter = ({
       }
     }
     if (trackInfo?.fanart) candidates.push(trackInfo.fanart);
-    if (trackUriForFanart) {
-      candidates.push(`${PLUGIN_BASE_URL}/api/track-asset?uri=${encodeURIComponent(trackUriForFanart)}&name=fanart&index=${fanartFrame}`);
-      candidates.push(`${PLUGIN_BASE_URL}/api/fanart?uri=${encodeURIComponent(trackUriForFanart)}&index=${fanartFrame}`);
-    }
     if (trackInfo?.albumart) candidates.push(trackInfo.albumart);
 
     if (!candidates.length) { fanartRef.current = null; return; }
@@ -265,57 +295,32 @@ const PeppyMeter = ({
     tryNext();
 
     return () => { cancelled = true; };
-  }, [trackInfo?.fanart, trackInfo?.albumart, trackInfo?.uri, trackUri, activeModel, fanartFrame, fanartTvImages]);
+  }, [trackInfo?.fanart, trackInfo?.albumart, activeModel, fanartFrame, fanartTvImages]);
 
-  // ── Load cdart mask from track directory (if present) ──────────────────
+  // ── Load cdart mask from fanart.tv ────────────────────────────────────
+  // The cdart overlay comes exclusively from fanart.tv. If fanart.tv has no
+  // cdart for the album, no overlay is shown.
 
   const cdartRef = useRef(null);
   useEffect(() => {
     const cfg = configRef.current;
     const needsCdart = !!cfg?.vinyl?.filename;
-    const trackUriForAssets = trackInfo?.uri || trackUri;
-    if (!needsCdart || !trackUriForAssets) { cdartRef.current = null; return; }
+    if (!needsCdart || !fanartTvCdart.length) { cdartRef.current = null; return; }
 
     let cancelled = false;
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => { if (!cancelled) cdartRef.current = img; };
-    img.onerror = () => { if (!cancelled) cdartRef.current = null; };
-    img.src = `${PLUGIN_BASE_URL}/api/track-asset?uri=${encodeURIComponent(trackUriForAssets)}&name=cdart`;
-
-    return () => { cancelled = true; };
-  }, [trackInfo?.uri, trackUri, activeModel]);
-
-  // ── Load folderlayer images from track directory (back/logo/etc.) ───────
-
-  const folderLayerRefs = useRef([]);
-  useEffect(() => {
-    const cfg = configRef.current;
-    const layers = Array.isArray(cfg?.folderLayers) ? cfg.folderLayers : [];
-    const trackUriForAssets = trackInfo?.uri || trackUri;
-    if (!layers.length || !trackUriForAssets) { folderLayerRefs.current = []; return; }
-
-    let cancelled = false;
-
-    Promise.all(layers.map((layer) => {
-      const files = Array.isArray(layer.files) ? layer.files : [];
-      if (!files.length) return Promise.resolve(null);
-
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => resolve(img);
-        img.onerror = () => resolve(null);
-        img.src = `${PLUGIN_BASE_URL}/api/track-asset?uri=${encodeURIComponent(trackUriForAssets)}&candidates=${encodeURIComponent(files.join(','))}`;
-      });
-    })).then((images) => {
-      if (!cancelled) {
-        folderLayerRefs.current = images;
-      }
+    fetchImage(fanartTvCdart[0]).then((img) => {
+      if (!cancelled) cdartRef.current = img;
     });
 
-    return () => { cancelled = true; folderLayerRefs.current = []; };
-  }, [trackInfo?.uri, trackUri, activeModel]);
+    return () => { cancelled = true; };
+  }, [fanartTvCdart, activeModel]);
+
+  // ── folderLayer images (removed) ───────────────────────────────────
+  // The folderLayer feature used to load per-track image files (back.jpg,
+  // logo.png, etc.) from the local music directory. Filesystem-based art
+  // loading has been removed; all album artwork now comes from fanart.tv.
+  // The empty ref is retained so the renderer can safely skip layers.
+  const folderLayerRefs = useRef([]);
 
   // ── Load format/service icon when track type changes ────────────────────
 

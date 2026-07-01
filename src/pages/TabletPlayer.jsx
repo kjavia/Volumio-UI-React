@@ -249,7 +249,7 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
   ].filter(Boolean).join(' ');
 
   return (
-    <div className="h-100 overflow-hidden position-relative p-0 w-100">
+    <div className={`h-100 overflow-hidden position-relative p-0 w-100${fanartBackgroundUrl ? ' sp-fanart-active' : ''}`}>
       {/* Background */}
       {backgroundColor ? (
         <div

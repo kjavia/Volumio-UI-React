@@ -241,7 +241,7 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
 
   return (
     <div
-      className="container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100"
+      className={`container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100${fanartBackgroundUrl ? ' sp-fanart-active' : ''}`}
     >
       {/* Background */}
       {backgroundColor ? (

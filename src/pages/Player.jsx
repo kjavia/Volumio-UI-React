@@ -236,7 +236,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   }
 
   return (
-    <div className="container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100">
+    <div className={`container-fluid h-100 bg-dark overflow-hidden position-relative p-0 w-100${fanartBackgroundUrl ? ' sp-fanart-active' : ''}`}>
       {/* Background */}
       {backgroundColor ? (
         <div

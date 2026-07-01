@@ -63,7 +63,7 @@ const useFanartBackground = ({ artist, album } = {}) => {
     el.style.setProperty('transform', 'none', 'important');
   }, [fanartBackgroundUrl]);
 
-  return { fanartBackgroundUrl, fanartBgRef };
+  return { fanartBackgroundUrl, fanartBgRef, fanartActive: !!fanartBackgroundUrl };
 };
 
 export default useFanartBackground;
