@@ -159,6 +159,21 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
     ? fanartImages[fanartFrame % fanartImages.length]
     : null;
 
+  // Apply the fanart background image with !important so it beats theme rules
+  // (e.g. OLED forcibly overrides `.container-fluid.bg-dark>.position-absolute`
+  // with `background-image: none !important`). React's `style` prop cannot
+  // emit `!important`, so we set the properties via setProperty on a ref.
+  const fanartBgRef = useRef(null);
+  useEffect(() => {
+    const el = fanartBgRef.current;
+    if (!el || !fanartBackgroundUrl) return;
+    el.style.setProperty('background-image', `url("${fanartBackgroundUrl}")`, 'important');
+    el.style.setProperty('background-color', 'transparent', 'important');
+    el.style.setProperty('background-size', 'cover', 'important');
+    el.style.setProperty('background-position', 'center', 'important');
+    el.style.setProperty('filter', 'none', 'important');
+  }, [fanartBackgroundUrl]);
+
   const [cycleIndex, setCycleIndex] = useState(null);
   const [showPlaylist, setShowPlaylist] = useState(false);
   const [showAddToPlaylist, setShowAddToPlaylist] = useState(false);
@@ -268,14 +283,9 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
       ) : fanartBackgroundUrl ? (
         <div
           key={fanartBackgroundUrl}
-          className="position-absolute top-0 start-0 w-100 h-100"
-          style={{
-            backgroundImage: `url(${fanartBackgroundUrl})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            zIndex: 0,
-            transition: 'opacity 1s ease-in-out',
-          }}
+          ref={fanartBgRef}
+          className="position-absolute top-0 start-0 w-100 h-100 sp-fanart-bg"
+          style={{ zIndex: 0, transition: 'opacity 1s ease-in-out' }}
         />
       ) : fullAlbumArt ? (
         <div

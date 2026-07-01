@@ -9,15 +9,33 @@ import usePluginConfig from './usePluginConfig';
  * Returns { data, isLoading, error } where data has shape:
  *   { images: [url...], albumcover: [...], cdart: [...], artistbackground: [...] }
  *
+ * The plugin proxies all image URLs through `/api/fanart-tv-image` so the
+ * browser never talks to fanart.tv directly (avoids CORS issues, especially
+ * for canvas usage in PeppyMeter). We prefix relative proxy URLs with
+ * PLUGIN_BASE_URL so they resolve correctly in dev mode too.
+ *
  * Only runs when a fanart.tv API key is configured and both artist + album
  * are known. Results are cached in-memory (server also caches for 24h).
  */
+const prefixProxy = (url) => {
+  if (!url) return url;
+  if (url.startsWith('/api/')) return `${PLUGIN_BASE_URL}${url}`;
+  return url;
+};
+
 const fetchFanartTv = async ({ artist, album }) => {
   if (!artist) return { images: [] };
   const params = new URLSearchParams({ artist });
   if (album) params.set('album', album);
   const { data } = await axios.get(`${PLUGIN_BASE_URL}/api/fanart-tv?${params.toString()}`);
-  return data || { images: [] };
+  if (!data) return { images: [] };
+  return {
+    ...data,
+    images: (data.images || []).map(prefixProxy),
+    albumcover: (data.albumcover || []).map(prefixProxy),
+    cdart: (data.cdart || []).map(prefixProxy),
+    artistbackground: (data.artistbackground || []).map(prefixProxy),
+  };
 };
 
 const useFanartTv = ({ artist, album } = {}) => {
