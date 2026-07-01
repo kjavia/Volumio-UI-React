@@ -69,21 +69,37 @@ const StreamInfo = ({ trackType, codec, samplerate, bitdepth, bitrate, className
           role="img"
           aria-label={formatType}
           style={{
-            display: 'flex',
+            display: 'inline-flex',
             alignItems: 'center',
+            justifyContent: 'center',
             flexShrink: 0,
             aspectRatio: '2/1',
-            WebkitMaskImage: `url(${logoSrc})`,
-            maskImage: `url(${logoSrc})`,
-            WebkitMaskSize: 'contain',
-            maskSize: 'contain',
-            WebkitMaskRepeat: 'no-repeat',
-            maskRepeat: 'no-repeat',
-            WebkitMaskPosition: 'center',
-            maskPosition: 'center',
-            backgroundColor: 'currentColor',
           }}
-        />
+        >
+          {/* Inner masked element paints the logo silhouette in `currentColor`.
+              Wrapping it in the outer span lets `.sp-fanart-active` apply
+              `filter: drop-shadow(...)` to the wrapper — the mask clips the
+              inner element first, so the parent's filter sees the actual
+              logo shape and draws a shadow around it (a filter on the same
+              masked element would have its shadow clipped by the mask). */}
+          <span
+            aria-hidden="true"
+            style={{
+              display: 'block',
+              width: '100%',
+              height: '100%',
+              WebkitMaskImage: `url(${logoSrc})`,
+              maskImage: `url(${logoSrc})`,
+              WebkitMaskSize: 'contain',
+              maskSize: 'contain',
+              WebkitMaskRepeat: 'no-repeat',
+              maskRepeat: 'no-repeat',
+              WebkitMaskPosition: 'center',
+              maskPosition: 'center',
+              backgroundColor: 'currentColor',
+            }}
+          />
+        </span>
       ) : (
         formatType && (
           <span className="text-uppercase fw-semibold" style={{ letterSpacing: '0.05em' }}>

@@ -5,9 +5,9 @@ import usePluginConfig from '@/hooks/usePluginConfig';
 const PlayerSeekbar = ({ readOnly }) => {
   const { seek, duration, seekTo } = useSeek();
   const { data: pluginConfig } = usePluginConfig();
-  const showRemainingTime = pluginConfig?.showRemainingTime === true;
-  const hideSeekHandle = pluginConfig?.hideSeekHandle === true;
-  const hideTrackTimes = pluginConfig?.hideTrackTimes === true;
+  const showRemainingTime = !!pluginConfig?.showRemainingTime;
+  const hideSeekHandle = !!pluginConfig?.hideSeekHandle;
+  const hideTrackTimes = !!pluginConfig?.hideTrackTimes;
 
   const handleSeek = (e) => {
     if (readOnly) return;
@@ -42,26 +42,24 @@ const PlayerSeekbar = ({ readOnly }) => {
           {!readOnly && !hideSeekHandle && <div className="slider-cap"></div>}
         </div>
       </div>
-      <div className="seekbar-labels d-flex justify-content-between w-100">
-        {!hideTrackTimes && (
-          <>
-            <span
-              className="time-label text-start"
-              style={{ lineHeight: 1, fontSize: '0.9em', fontFamily: 'inherit' }}
-            >
-              {formatTime(currentSeconds)}
-            </span>
-            <span
-              className="time-label text-end"
-              style={{ lineHeight: 1, fontSize: '0.9em', fontFamily: 'inherit' }}
-            >
-              {showRemainingTime
-                ? remainingTime !== "0:00" ? `-${remainingTime}` : remainingTime
-                : formatTime(durationSeconds)}
-            </span>
-          </>
-        )}
-      </div>
+      {!hideTrackTimes && (
+        <div className="seekbar-labels d-flex justify-content-between w-100">
+          <span
+            className="time-label text-start"
+            style={{ lineHeight: 1, fontSize: '0.9em', fontFamily: 'inherit' }}
+          >
+            {formatTime(currentSeconds)}
+          </span>
+          <span
+            className="time-label text-end"
+            style={{ lineHeight: 1, fontSize: '0.9em', fontFamily: 'inherit' }}
+          >
+            {showRemainingTime
+              ? remainingTime !== "0:00" ? `-${remainingTime}` : remainingTime
+              : formatTime(durationSeconds)}
+          </span>
+        </div>
+      )}
     </div>
   );
 };
