@@ -2,7 +2,7 @@ import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import usePlayerKeyboard from '@/hooks/usePlayerKeyboard';
-import useFanartTv from '@/hooks/useFanartTv';
+import useFanartBackground from '@/hooks/useFanartBackground';
 import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
 import { useSeek } from '@/contexts/SeekContext';
 import AlbumArtPlayer from '@/components/animated-players/AlbumArtPlayer';
@@ -86,7 +86,6 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
   const vizType = normalizeConfigValue(pluginConfig?.vizType) || 'spectrum';
   const showViz = vizType !== 'none';
   const backgroundColor = pluginConfig?.backgroundColor || '';
-  const displayFanartBackground = pluginConfig?.displayFanartBackground === true;
   const peppyMeterFolder = normalizeConfigValue(pluginConfig?.peppyMeterFolder) || '';
   const peppyMeterModel = normalizeConfigValue(pluginConfig?.peppyMeterModel) || 'random';
   const peppySpectrumFolder = normalizeConfigValue(pluginConfig?.peppySpectrumFolder) || '';
@@ -135,44 +134,8 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
 
   const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
 
-  // Fetch fanart.tv images for the currently playing album (only when enabled).
-  const { data: fanartData } = useFanartTv({
-    artist: displayFanartBackground ? artist : null,
-    album: displayFanartBackground ? album : null,
-  });
-  const fanartImages = useMemo(() => {
-    if (!displayFanartBackground) return [];
-    const imgs = fanartData?.images || [];
-    return Array.isArray(imgs) ? imgs : [];
-  }, [displayFanartBackground, fanartData]);
-  const slideshowInterval = Math.max(5, Number(pluginConfig?.slideshowInterval) || 30);
-  const [fanartFrame, setFanartFrame] = useState(0);
-  useEffect(() => {
-    setFanartFrame(0);
-    if (!displayFanartBackground || fanartImages.length <= 1) return undefined;
-    const timer = setInterval(() => {
-      setFanartFrame((n) => (n + 1) % fanartImages.length);
-    }, slideshowInterval * 1000);
-    return () => clearInterval(timer);
-  }, [displayFanartBackground, fanartImages, slideshowInterval]);
-  const fanartBackgroundUrl = displayFanartBackground && fanartImages.length
-    ? fanartImages[fanartFrame % fanartImages.length]
-    : null;
-
-  // Apply the fanart background image with !important so it beats theme rules
-  // (e.g. OLED forcibly overrides `.container-fluid.bg-dark>.position-absolute`
-  // with `background-image: none !important`). React's `style` prop cannot
-  // emit `!important`, so we set the properties via setProperty on a ref.
-  const fanartBgRef = useRef(null);
-  useEffect(() => {
-    const el = fanartBgRef.current;
-    if (!el || !fanartBackgroundUrl) return;
-    el.style.setProperty('background-image', `url("${fanartBackgroundUrl}")`, 'important');
-    el.style.setProperty('background-color', 'transparent', 'important');
-    el.style.setProperty('background-size', 'cover', 'important');
-    el.style.setProperty('background-position', 'center', 'important');
-    el.style.setProperty('filter', 'none', 'important');
-  }, [fanartBackgroundUrl]);
+  // Rotating fanart.tv background (only active when the setting is on).
+  const { fanartBackgroundUrl, fanartBgRef } = useFanartBackground({ artist, album });
 
   const [cycleIndex, setCycleIndex] = useState(null);
   const [showPlaylist, setShowPlaylist] = useState(false);

@@ -2,6 +2,7 @@ import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import usePlayerKeyboard from '@/hooks/usePlayerKeyboard';
+import useFanartBackground from '@/hooks/useFanartBackground';
 import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
 import { useSeek } from '@/contexts/SeekContext';
 import AlbumArtPlayer from '@/components/animated-players/AlbumArtPlayer';
@@ -122,6 +123,9 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
   } = useVolumioStatus();
 
   const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
+
+  // Rotating fanart.tv background (only active when the setting is on).
+  const { fanartBackgroundUrl, fanartBgRef } = useFanartBackground({ artist, album });
 
   const { seek, duration, refreshState } = useSeek();
   useEffect(() => { refreshState(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -251,6 +255,13 @@ const TabletPlayer = ({ vizStopped = false, onVizResumed, vizContainerRef }) => 
         <div
           className="position-absolute top-0 start-0 w-100 h-100"
           style={{ backgroundColor, zIndex: 0 }}
+        />
+      ) : fanartBackgroundUrl ? (
+        <div
+          key={fanartBackgroundUrl}
+          ref={fanartBgRef}
+          className="position-absolute top-0 start-0 w-100 h-100 sp-fanart-bg"
+          style={{ zIndex: 0, transition: 'opacity 1s ease-in-out' }}
         />
       ) : fullAlbumArt ? (
         <div

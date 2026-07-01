@@ -2,6 +2,7 @@ import { useMemo, useState, useRef, useCallback } from 'react';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import usePlayerKeyboard from '@/hooks/usePlayerKeyboard';
+import useFanartBackground from '@/hooks/useFanartBackground';
 import { useSeek } from '@/contexts/SeekContext';
 import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
 import AlbumArtPlayer from '@/components/animated-players/AlbumArtPlayer';
@@ -118,6 +119,9 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
     toggleFavourite,
     streamUri,
   } = useVolumioStatus();
+
+  // Rotating fanart.tv background (only active when the setting is on).
+  const { fanartBackgroundUrl, fanartBgRef } = useFanartBackground({ artist, album });
 
   const { seek, duration } = useSeek();
 
@@ -447,6 +451,13 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         <div
           className="position-absolute top-0 start-0 w-100 h-100"
           style={{ backgroundColor, zIndex: 0 }}
+        />
+      ) : fanartBackgroundUrl ? (
+        <div
+          key={fanartBackgroundUrl}
+          ref={fanartBgRef}
+          className="position-absolute top-0 start-0 w-100 h-100 sp-fanart-bg"
+          style={{ zIndex: 0, transition: 'opacity 1s ease-in-out' }}
         />
       ) : fullAlbumArt ? (
         <div

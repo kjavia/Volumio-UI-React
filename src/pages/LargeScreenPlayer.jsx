@@ -2,6 +2,7 @@ import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
 import useVolumioStatus from '@/hooks/useVolumioStatus';
 import usePluginConfig from '@/hooks/usePluginConfig';
 import usePlayerKeyboard from '@/hooks/usePlayerKeyboard';
+import useFanartBackground from '@/hooks/useFanartBackground';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { VOLUMIO_BASE_URL, SPECTRUM_STREAM_URL } from '@/config';
 import { useSeek } from '@/contexts/SeekContext';
@@ -169,6 +170,9 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
   } = useVolumioStatus();
 
   const disableVolumeControl = volumioDisableVolume || pluginConfig?.disableVolumeControl === true;
+
+  // Rotating fanart.tv background (only active when the setting is on).
+  const { fanartBackgroundUrl, fanartBgRef } = useFanartBackground({ artist, album });
 
   const { seek, duration, refreshState } = useSeek();
   useEffect(() => { refreshState(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -440,6 +444,12 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
       {/* ── Background wallpaper ── */}
       {backgroundColor ? (
         <div className="lsp-bg" style={{ backgroundColor, filter: 'none', transform: 'none' }} />
+      ) : fanartBackgroundUrl ? (
+        <div
+          key={fanartBackgroundUrl}
+          ref={fanartBgRef}
+          className="lsp-bg sp-fanart-bg"
+        />
       ) : fullAlbumArt ? (
         <div className="lsp-bg" style={{ backgroundImage: `url(${fullAlbumArt})` }} />
       ) : null}
