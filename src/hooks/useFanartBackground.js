@@ -22,6 +22,7 @@ import usePluginConfig from './usePluginConfig';
 const useFanartBackground = ({ artist, album } = {}) => {
   const { data: pluginConfig } = usePluginConfig();
   const enabled = pluginConfig?.displayFanartBackground === true;
+  const grayscale = pluginConfig?.fanartBackgroundGrayscale === true;
   const slideshowInterval = Math.max(5, Number(pluginConfig?.slideshowInterval) || 30);
 
   const { data: fanartData } = useFanartTv({
@@ -59,9 +60,9 @@ const useFanartBackground = ({ artist, album } = {}) => {
     el.style.setProperty('background-color', 'transparent', 'important');
     el.style.setProperty('background-size', 'cover', 'important');
     el.style.setProperty('background-position', 'center', 'important');
-    el.style.setProperty('filter', 'none', 'important');
+    el.style.setProperty('filter', grayscale ? 'grayscale(100%)' : 'none', 'important');
     el.style.setProperty('transform', 'none', 'important');
-  }, [fanartBackgroundUrl]);
+  }, [fanartBackgroundUrl, grayscale]);
 
   return { fanartBackgroundUrl, fanartBgRef, fanartActive: !!fanartBackgroundUrl };
 };

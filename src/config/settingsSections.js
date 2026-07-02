@@ -64,6 +64,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
         { id: 'useCustomLayout', element: 'switch', label: t('USE_CUSTOM_LAYOUT', 'Use Custom Layouts'), icon: 'grid_view', doc: t('USE_CUSTOM_LAYOUT_DESC', 'When enabled, the player will use a saved custom layout for the current screen resolution if one exists.') },
         { id: 'fanartTvApiKey', element: 'input', type: 'text', label: t('FANART_TV_API_KEY', 'fanart.tv API Key'), icon: 'vpn_key', doc: t('FANART_TV_API_KEY_DESC', 'API key from fanart.tv used to fetch album/artist artwork. Sign up at https://fanart.tv/get-an-api-key/') },
         { id: 'displayFanartBackground', element: 'switch', label: t('DISPLAY_FANART_BACKGROUND', 'Display Fan Art in Background'), icon: 'wallpaper', doc: t('DISPLAY_FANART_BACKGROUND_DESC', 'When enabled, the player background rotates through fan art images fetched from fanart.tv for the currently playing artist.') },
+        { id: 'fanartBackgroundGrayscale', element: 'switch', label: t('FANART_BACKGROUND_GRAYSCALE', 'Grayscale Fan Art Background'), icon: 'filter_b_and_w', doc: t('FANART_BACKGROUND_GRAYSCALE_DESC', 'When enabled, the fan art background image is displayed in grayscale.'), visibleIf: { field: 'displayFanartBackground', value: true } },
         {
           id: 'vizType', element: 'select', label: t('VIZ_TYPE', 'Visualization'), icon: 'equalizer',
           doc: t('VIZ_TYPE_DESC', 'Select the visualization displayed on the player screen.'),
