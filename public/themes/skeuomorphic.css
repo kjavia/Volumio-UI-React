@@ -3852,8 +3852,9 @@ h2 {
   .responsive-album {
     font-size: clamp(0.8rem, 2.415cqw, 2.25rem) !important;
   }
+  /* 50% smaller than the other track-info fields at this breakpoint */
   .responsive-stream-info {
-    font-size: clamp(0.8rem, 2.415cqw, 2.25rem) !important;
+    font-size: clamp(0.4rem, 1.2075cqw, 1.125rem) !important;
   }
   .cq-track-info {
     gap: clamp(2px, 1cqh, 12px) !important;

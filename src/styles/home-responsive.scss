@@ -86,13 +86,17 @@ body,
 }
 
 /* Explicit :focus / :focus-visible / :active overrides — beat any theme
-   stylesheet that decorates these states with backgrounds, borders, or shadows. */
-:root.sp-btn-bg-transparent .controls-transport-row .btn-round:focus,
-:root.sp-btn-bg-transparent .controls-transport-row .btn-round:focus-visible,
-:root.sp-btn-bg-transparent .controls-transport-row .btn-round:active,
-:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:focus,
-:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:focus-visible,
-:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:active {
+   stylesheet that decorates these states with backgrounds, borders, or shadows.
+   The `:not(:hover)` guard is important: after a click the button often stays
+   `:focus`, so re-hovering hits `:focus:hover` — without this exclusion the
+   `!important` transparent bg here would win over the theme's `.btn:hover`
+   background, leaving only pseudo-element sheens visible (e.g. Aqua). */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:focus:not(:hover),
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:focus-visible:not(:hover),
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:active:not(:hover),
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:focus:not(:hover),
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:focus-visible:not(:hover),
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:active:not(:hover) {
   background: transparent !important;
   border-color: transparent !important;
   box-shadow: none !important;
@@ -167,11 +171,35 @@ body,
   transform-origin: center center !important;
 }
 
-/* Aqua theme: use white icons on transparent buttons (dark theme bg shows through) */
-:root[data-theme="aqua"].sp-btn-bg-transparent .controls-transport-row .btn-round .material-icons,
-:root[data-theme="aqua"].sp-btn-bg-transparent .controls-transport-row .btn-round .material-icons-outlined,
-:root[data-theme="aqua"].sp-btn-bg-transparent .lsp-btn-group .btn-round .material-icons,
-:root[data-theme="aqua"].sp-btn-bg-transparent .lsp-btn-group .btn-round .material-icons-outlined {
+/* ── Skip/back icon color === play button icon color ─────────────────────
+   When the button chrome is stripped (transparent bg), themes color the
+   play button (.btn-primary) with a light foreground that used to contrast
+   the primary background, while skip/back inherit the theme's darker body
+   text color — creating a visible mismatch. Force skip/back to the same
+   white so all three transport buttons read as one group.
+
+   The `:not(:hover)` guard lets the theme's default (darker) icon color
+   return on hover — hover also brings back the button's chrome, so the
+   darker icon stays readable against the reappearing background.
+
+   Skipped when the user has explicitly picked a Control Buttons Icon Color
+   (which already colors all three buttons uniformly via
+   `.sp-has-button-color`). Also skipped on OLED, which already colors
+   every transport button with the same theme primary. */
+:root.sp-btn-bg-transparent:not([data-theme="oled"]):not(.sp-has-button-color) .controls-transport-row .btn-round.btn-sm:not(:hover) .material-icons,
+:root.sp-btn-bg-transparent:not([data-theme="oled"]):not(.sp-has-button-color) .controls-transport-row .btn-round.btn-sm:not(:hover) .material-icons-outlined,
+:root.sp-btn-bg-transparent:not([data-theme="oled"]):not(.sp-has-button-color) .lsp-btn-group .lsp-btn--md.btn-round:not(:hover) .material-icons,
+:root.sp-btn-bg-transparent:not([data-theme="oled"]):not(.sp-has-button-color) .lsp-btn-group .lsp-btn--md.btn-round:not(:hover) .material-icons-outlined {
+  color: #ffffff !important;
+}
+
+/* Aqua theme: use white icons on transparent buttons (dark theme bg shows
+   through). The `:not(:hover)` guard lets the theme's default darker icon
+   color return on hover so it stays readable against the reappearing chrome. */
+:root[data-theme="aqua"].sp-btn-bg-transparent .controls-transport-row .btn-round:not(:hover) .material-icons,
+:root[data-theme="aqua"].sp-btn-bg-transparent .controls-transport-row .btn-round:not(:hover) .material-icons-outlined,
+:root[data-theme="aqua"].sp-btn-bg-transparent .lsp-btn-group .btn-round:not(:hover) .material-icons,
+:root[data-theme="aqua"].sp-btn-bg-transparent .lsp-btn-group .btn-round:not(:hover) .material-icons-outlined {
   color: #ffffff !important;
 }
 
@@ -245,6 +273,20 @@ body,
 :root.sp-has-icon-btn-color .lsp-btn-group .btn-icon.active {
   background: rgba(255, 255, 255, 0.14) !important;
   border: 1px solid rgba(255, 255, 255, 0.42) !important;
+}
+
+/* ── Hide Track Times: reserve space below seekbar ────────────────────────
+   When elapsed/total time labels are hidden, the seekbar wrapper loses ~1em
+   of vertical space and can end up flush against the transport buttons
+   below it. Add padding equivalent to the missing label row on every
+   layout that hosts the seekbar — Player / TabletPlayer (`.seekbar-container-wrap`),
+   MobilePlayer (`.mobile-row-seekbar`), and LargeScreenPlayer
+   (`.lsp-seekbar-area`). Custom layout cells are intentionally excluded
+   because the user controls their own spacing in the layout designer. */
+:root.sp-hide-track-times .seekbar-container-wrap:not(.custom-layout-cell .seekbar-container-wrap),
+:root.sp-hide-track-times .mobile-row-seekbar,
+:root.sp-hide-track-times .lsp-seekbar-area {
+  padding-bottom: 1em;
 }
 
 /* ── Font size overrides from plugin config ── */
@@ -662,9 +704,10 @@ body,
     height: 1.5rem !important;
   }
 
+  /* Slightly smaller transport play/pause icon on tablet-width screens. */
   .controls-transport-row .btn-round .material-icons,
   .controls-transport-row .btn-round .play-icon {
-    font-size: 1.875rem !important;
+    font-size: 1.65rem !important;
   }
 }
 
@@ -699,34 +742,36 @@ body,
   }
 }
 
-/* ── Large panel (controls area ≥ 700px tall): enlarge buttons and volume icon ── */
+/* ── Large panel (controls area ≥ 700px tall): enlarge buttons and volume icon
+   Transport play/skip sizes are intentionally kept a bit smaller on tablets
+   and desktops so they don't dominate the layout on wide players. */
 @container (min-height: 700px) {
   .btn-round {
-    width: 80px !important;
-    height: 80px !important;
+    width: 70px !important;
+    height: 70px !important;
   }
 
   .btn-round.btn-sm {
-    width: 56px !important;
-    height: 56px !important;
+    width: 48px !important;
+    height: 48px !important;
   }
 
   .btn-round .material-icons,
   .btn-round .play-icon {
-    font-size: 2.5rem !important;
+    font-size: 2.2rem !important;
   }
 
   .btn-round.btn-sm .material-icons {
-    font-size: 1.75rem !important;
+    font-size: 1.5rem !important;
   }
 
   .controls-transport-row .btn-round .material-icons,
   .controls-transport-row .btn-round .play-icon {
-    font-size: 3.125rem !important;
+    font-size: 2.75rem !important;
   }
 
   .controls-transport-row .btn-round.btn-sm .material-icons {
-    font-size: 2.2rem !important;
+    font-size: 1.9rem !important;
   }
 
   .btn-icon {

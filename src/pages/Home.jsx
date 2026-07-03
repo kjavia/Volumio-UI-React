@@ -190,6 +190,11 @@ const Home = () => {
     } else {
       root.classList.remove('sp-btn-bg-transparent');
     }
+    if (pluginConfig?.hideTrackTimes === true) {
+      root.classList.add('sp-hide-track-times');
+    } else {
+      root.classList.remove('sp-hide-track-times');
+    }
     // Apply user font-size overrides as CSS custom properties on :root
     const fontMap = {
       '--sp-title-font-size': { val: pluginConfig?.titleFontSize, cls: 'sp-has-title-font-size' },

@@ -61,17 +61,45 @@ const SERVICE_MAP = {
 
 const normalise = (s = '') => s.toLowerCase().replace(/[_\s-]+/g, '');
 
-const ServiceLogo = ({ service, noText = false, className = '' }) => {
-  if (!service) return null;
+/**
+ * Look up a SERVICE_MAP entry for a single hint string (a service name,
+ * trackType, or URI fragment). Returns the map entry (which may itself be
+ * `null` for known-but-hidden services like plain MPD) or `undefined` when
+ * no match is found.
+ */
+const lookupEntry = (hint) => {
+  if (!hint) return undefined;
+  const key = normalise(hint);
+  if (!key) return undefined;
+  if (Object.prototype.hasOwnProperty.call(SERVICE_MAP, key)) return SERVICE_MAP[key];
+  const found = Object.keys(SERVICE_MAP).find((k) => key.includes(k) || k.includes(key));
+  return found !== undefined ? SERVICE_MAP[found] : undefined;
+};
 
-  const key = normalise(service);
+/**
+ * Resolve the best SERVICE_MAP entry using `service` first, then falling
+ * back to `trackType` and finally to `uri` — because Volumio often reports
+ * `service: 'mpd'` for the generic playback engine while the actual source
+ * (Spotify, Tidal, Qobuz, …) is only visible in the trackType or URI. If
+ * `service` maps to a real logo we always keep it; only when it's absent
+ * or resolves to `mpd`/unknown do the other hints get a chance.
+ */
+const resolveEntry = (service, trackType, uri) => {
+  const primary = lookupEntry(service);
+  // A truthy entry with a real logo wins outright.
+  if (primary) return primary;
+  // Otherwise (undefined or explicitly null like `mpd`), try the fallbacks.
+  const fromType = lookupEntry(trackType);
+  if (fromType) return fromType;
+  const fromUri = lookupEntry(uri);
+  if (fromUri) return fromUri;
+  // No fallback match — return whatever primary was (null for mpd,
+  // undefined for unknown) so the caller can decide what to render.
+  return primary;
+};
 
-  // Try exact match first, then partial
-  let entry = SERVICE_MAP[key];
-  if (entry === undefined) {
-    const found = Object.keys(SERVICE_MAP).find((k) => key.includes(k) || k.includes(key));
-    entry = found !== undefined ? SERVICE_MAP[found] : undefined;
-  }
+const ServiceLogo = ({ service, trackType, uri, noText = false, className = '' }) => {
+  const entry = resolveEntry(service, trackType, uri);
 
   // Null entry → local/unknown service, render nothing
   if (entry === null || entry === undefined) return null;
@@ -165,26 +193,13 @@ const ServiceLogo = ({ service, noText = false, className = '' }) => {
 
 
 /** Returns true when ServiceLogo can render something for this service name. */
-export const hasServiceLogo = (service) => {
-  if (!service) return false;
-  const key = normalise(service);
-  let entry = SERVICE_MAP[key];
-  if (entry === undefined) {
-    const found = Object.keys(SERVICE_MAP).find((k) => key.includes(k) || k.includes(key));
-    entry = found !== undefined ? SERVICE_MAP[found] : undefined;
-  }
-  return entry != null;
+export const hasServiceLogo = (service, trackType, uri) => {
+  return resolveEntry(service, trackType, uri) != null;
 };
 
 /** Returns the SVG image URL for a service (for canvas/non-React use), or null. */
-export const getServiceLogoUrl = (service) => {
-  if (!service) return null;
-  const key = normalise(service);
-  let entry = SERVICE_MAP[key];
-  if (entry === undefined) {
-    const found = Object.keys(SERVICE_MAP).find((k) => key.includes(k) || k.includes(key));
-    entry = found !== undefined ? SERVICE_MAP[found] : undefined;
-  }
+export const getServiceLogoUrl = (service, trackType, uri) => {
+  const entry = resolveEntry(service, trackType, uri);
   return entry?.imgUrl || null;
 };
 

@@ -421,25 +421,25 @@
   }
 
   /* Medium transport buttons (skip prev / next).
-     Sized at 70% of the play button (56/80) to match the tablet/desktop
-     player's transport-to-play ratio; previously 60/80 = 75% looked
-     slightly oversized next to the play button. */
+     Sized at 70% of the play button (48/70) to match the tablet/desktop
+     player's transport-to-play ratio. Kept a little smaller so the trio
+     doesn't dominate the large-screen layout. */
   &.lsp-btn--md.btn-round {
-    width: 56px !important;
-    height: 56px !important;
+    width: 48px !important;
+    height: 48px !important;
 
     .material-icons {
-      font-size: 1.7rem !important;
+      font-size: 1.5rem !important;
     }
   }
 
   /* Large play/pause button */
   &.lsp-btn--lg.btn-round {
-    width: 80px !important;
-    height: 80px !important;
+    width: 70px !important;
+    height: 70px !important;
 
     .material-icons.play-icon {
-      font-size: 2.4rem !important;
+      font-size: 2.1rem !important;
     }
   }
 }

@@ -311,7 +311,7 @@ const Player = ({ vizStopped = false, onVizResumed, vizContainerRef }) => {
             <div className={`track-info-group ${showTrackPanel ? 'track-panel' : ''}`} style={{ width: 'clamp(300px, 95%, 99%)' }}>
               <TrackInfo title={title} artist={artist} album={album}>
                 <div className="stream-info-row d-flex align-items-center justify-content-center gap-3 w-100">
-                  <ServiceLogo service={service} />
+                  <ServiceLogo service={service} trackType={trackType} uri={streamUri} />
                   <StreamInfo
                     trackType={trackType}
                     codec={codec}

@@ -3561,6 +3561,37 @@ input[type=range]::-webkit-slider-thumb {
   color: var(--casio-lcd-off);
 }
 
+/* ─── Track Info Panel: force dark LCD colours for every text element ───
+   The casio panel bg is a very light green/grey with a bright sheen on top,
+   so any text that keeps the outside-panel light colours (or inherits from
+   Bootstrap's `.text-white` on the wrapping .area-track-info) becomes
+   invisible. Cover every text element rendered inside .track-info /
+   .stream-info-row explicitly. */
+.track-panel .responsive-title,
+.track-panel .responsive-album,
+.track-panel .responsive-stream-info,
+.track-panel .responsive-stream-info span,
+.track-panel .stream-info,
+.track-panel .stream-info span,
+.track-panel .stream-info-row {
+  color: var(--casio-lcd-panel) !important;
+}
+
+/* Responsive-artist takes a mid-tone LCD-off green, matching the rest area
+   of an LCD segment — keeps hierarchy (title/album darkest, artist a touch
+   lighter) while still passing contrast on the light panel. */
+.track-panel .responsive-artist {
+  color: var(--casio-lcd-off) !important;
+}
+
+/* Format logo mask + service logo glyph pick up currentColor by default —
+   force them to the dark LCD tone so they remain readable on the panel. */
+.track-panel .format-logo-responsive,
+.track-panel .service-logo-icon,
+.track-panel .service-logo-badge {
+  color: var(--casio-lcd-panel) !important;
+}
+
 /* ─── Control buttons — calculator key style ──────────────────────────── */
 .control-btn {
   width: 44px;

@@ -211,7 +211,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
       case 'artistName':
         return <ArtistName artist={artist} align={textAlign} />;
       case 'serviceLogo':
-        return <div className="custom-layout-media"><ServiceLogo service={service} /></div>;
+        return <div className="custom-layout-media"><ServiceLogo service={service} trackType={trackType} uri={streamUri} /></div>;
       case 'samplingRate':
         return (
           <div className="custom-layout-media custom-layout-media--small">

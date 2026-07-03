@@ -332,7 +332,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
           <div className="lsp-top__title">
             <Marquee align="left">{title || 'Unknown Title'}</Marquee>
           </div>
-          <ServiceLogo service={service} className="lsp-top__service-logo" />
+          <ServiceLogo service={service} trackType={trackType} uri={streamUri} className="lsp-top__service-logo" />
         </div>
 
         {/* Row 2: Artist · Album */}
@@ -475,7 +475,7 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
               <div className="lsp-top__title">
                 <Marquee align="left">{title || 'Unknown Title'}</Marquee>
               </div>
-              <ServiceLogo service={service} className="lsp-top__service-logo" />
+              <ServiceLogo service={service} trackType={trackType} uri={streamUri} className="lsp-top__service-logo" />
             </div>
             <div className="lsp-top__row2">
               <span className="lsp-top__artist">

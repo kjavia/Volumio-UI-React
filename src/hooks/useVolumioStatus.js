@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSocket } from '../contexts/SocketContext';
 import useFavourites from './useFavourites';
 
@@ -84,6 +84,12 @@ const useVolumioStatus = () => {
   const [streamUri, setStreamUri] = useState('');
   const [queue, setQueue] = useState([]);
 
+  // Track the last-seen track URI so we can decide whether a pushState is a
+  // real track change or just a transient update (pause, seek, etc). This is
+  // used to protect `service` from being wiped by Volumio pause events that
+  // omit or replace it with a generic fallback like `mpd`.
+  const lastTrackUriRef = useRef('');
+
   useEffect(() => {
     if (!socket) return;
 
@@ -105,8 +111,25 @@ const useVolumioStatus = () => {
       setTrackType(data.trackType || '');
       setCodec(data.codec || '');
       setBitrate(data.bitrate != null ? String(data.bitrate) : '');
-      setService(data.service || '');
-      setStreamUri(data.uri || '');
+      // `service` handling: Volumio's pushState during pause (and some seek/
+      // volume updates) can arrive with `service` missing, empty, or
+      // replaced by a generic fallback like `mpd` — even while the same
+      // track is still loaded. Overwriting `service` in those cases makes
+      // the <ServiceLogo> disappear and never come back until Volumio
+      // re-broadcasts a proper service value.
+      //
+      // Rule: only accept a new service value on a real track change (URI
+      // changed) or when playback is truly stopped with no track. Between
+      // those, keep the last valid service regardless of what the incoming
+      // update says.
+      const newUri = data.uri || '';
+      const isTrackChange = newUri && newUri !== lastTrackUriRef.current;
+      const isFullyStopped = data.status === 'stop' && !data.title && !newUri;
+      if (isTrackChange || isFullyStopped) {
+        setService(data.service || '');
+      }
+      lastTrackUriRef.current = newUri;
+      setStreamUri(newUri);
       if (data.position >= 0) setPosition(data.position);
     };
 

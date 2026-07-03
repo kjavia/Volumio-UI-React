@@ -247,34 +247,36 @@
   }
 }
 
-/* ── Large panel: ≥700px ── */
+/* ── Large panel: ≥700px ──
+   Play/skip transport buttons kept slightly smaller on tablet/desktop so
+   they don't overwhelm the layout when the panel is tall. */
 @container (min-height: 700px) {
   .tp-controls .btn-round {
-    width: 80px !important;
-    height: 80px !important;
+    width: 70px !important;
+    height: 70px !important;
   }
 
   .tp-controls .btn-round.btn-sm {
-    width: 56px !important;
-    height: 56px !important;
+    width: 48px !important;
+    height: 48px !important;
   }
 
   .tp-controls .btn-round .material-icons,
   .tp-controls .btn-round .play-icon {
-    font-size: 2.5rem !important;
+    font-size: 2.2rem !important;
   }
 
   .tp-controls .btn-round.btn-sm .material-icons {
-    font-size: 1.75rem !important;
+    font-size: 1.5rem !important;
   }
 
   .tp-controls .controls-transport-row .btn-round .material-icons,
   .tp-controls .controls-transport-row .btn-round .play-icon {
-    font-size: 3.125rem !important;
+    font-size: 2.75rem !important;
   }
 
   .tp-controls .controls-transport-row .btn-round.btn-sm .material-icons {
-    font-size: 2.2rem !important;
+    font-size: 1.9rem !important;
   }
 
   .tp-controls .btn-icon {
@@ -370,37 +372,37 @@
 
   .tp-controls .controls-transport-row .btn-round .material-icons,
   .tp-controls .controls-transport-row .btn-round .play-icon {
-    font-size: 1.875rem !important;
+    font-size: 1.65rem !important;
   }
 
-  /* Tablet button sizes at mid-height */
+  /* Tablet button sizes at mid-height (slightly smaller on tablet/desktop). */
   @container (min-height: 500px) {
     .tp-controls .btn-round {
-      width: 70px !important;
-      height: 70px !important;
+      width: 62px !important;
+      height: 62px !important;
     }
 
     .tp-controls .btn-round.btn-sm {
-      width: 50px !important;
-      height: 50px !important;
+      width: 44px !important;
+      height: 44px !important;
     }
 
     .tp-controls .btn-round .material-icons,
     .tp-controls .btn-round .play-icon {
-      font-size: 2rem !important;
+      font-size: 1.75rem !important;
     }
 
     .tp-controls .btn-round.btn-sm .material-icons {
-      font-size: 1.4rem !important;
+      font-size: 1.2rem !important;
     }
 
     .tp-controls .controls-transport-row .btn-round .material-icons,
     .tp-controls .controls-transport-row .btn-round .play-icon {
-      font-size: 2.5rem !important;
+      font-size: 2.2rem !important;
     }
 
     .tp-controls .controls-transport-row .btn-round.btn-sm .material-icons {
-      font-size: 1.75rem !important;
+      font-size: 1.5rem !important;
     }
 
     .tp-controls .btn-icon {
