@@ -1813,8 +1813,14 @@ pre {
 .btn-icon::after {
   display: none;
 }
+.btn-icon {
+  /* Default icon size for dialog / toolbar contexts. Player layouts
+     (mobile / tablet / desktop) override this via their own responsive
+     rules — leaving off `!important` here so those rules can win at the
+     same specificity. */
+}
 .btn-icon .material-icons {
-  font-size: 16px !important;
+  font-size: 1.25rem;
 }
 .btn-icon:hover, .btn-icon:focus-visible {
   background: rgba(0, 0, 0, 0.06);

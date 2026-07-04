@@ -188,12 +188,12 @@
   }
 
   .tp-controls .btn-icon {
-    width: 34px !important;
-    height: 34px !important;
+    width: 38px !important;
+    height: 38px !important;
   }
 
   .tp-controls .btn-icon .material-icons {
-    font-size: 1.25rem !important;
+    font-size: 1.4rem !important;
   }
 }
 
@@ -223,7 +223,7 @@
   }
 
   .tp-controls .btn-icon .material-icons {
-    font-size: 1.1rem !important;
+    font-size: 1.5rem !important;
   }
 
   .tp-controls .volume-manager .material-icons {
@@ -238,12 +238,12 @@
 /* ── Mid-large: 500–699px ── */
 @container (min-height: 500px) {
   .tp-controls .btn-icon {
-    width: 48px !important;
-    height: 48px !important;
+    width: 52px !important;
+    height: 52px !important;
   }
 
   .tp-controls .btn-icon .material-icons {
-    font-size: 1.5rem !important;
+    font-size: 1.75rem !important;
   }
 }
 
@@ -406,16 +406,16 @@
     }
 
     .tp-controls .btn-icon {
-      width: 44px !important;
-      height: 44px !important;
+      width: 48px !important;
+      height: 48px !important;
     }
 
     .tp-controls .btn-icon .material-icons {
-      font-size: 1.5rem !important;
+      font-size: 1.7rem !important;
     }
 
     .tp-controls .volume-manager .material-icons {
-      font-size: 1.5rem !important;
+      font-size: 1.7rem !important;
     }
   }
 }
@@ -445,12 +445,12 @@
   /* Match tablet btn-icon sizing */
   @container (min-height: 500px) {
     .tp-controls .btn-icon {
-      width: 48px !important;
-      height: 48px !important;
+      width: 52px !important;
+      height: 52px !important;
     }
 
     .tp-controls .btn-icon .material-icons {
-      font-size: 1.5rem !important;
+      font-size: 1.75rem !important;
     }
   }
 }

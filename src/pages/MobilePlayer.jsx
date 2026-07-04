@@ -236,7 +236,13 @@ const MobilePlayer = ({ vizStopped = false, onVizResumed }) => {
     'position-relative',
     !showViz && 'no-viz',
     effectivePlayerType === 'none' && 'no-player',
-    (disableVolumeControl || !showPlayerControls) && 'no-volume',
+    // When player controls are entirely hidden, transport/secondary/volume
+    // rows all disappear together — collapse the grid so the visible rows
+    // share the freed space instead of leaving a big empty bottom band.
+    !showPlayerControls && 'no-controls',
+    // Volume-only hide (controls still shown but the volume slider is
+    // administratively disabled).
+    disableVolumeControl && showPlayerControls && 'no-volume',
   ].filter(Boolean).join(' ');
 
   return (

@@ -313,8 +313,12 @@
     display: none;
   }
 
+  /* Default icon size for dialog / toolbar contexts. Player layouts
+     (mobile / tablet / desktop) override this via their own responsive
+     rules — leaving off `!important` here so those rules can win at the
+     same specificity. */
   .material-icons {
-    font-size: 16px !important;
+    font-size: 1.25rem;
   }
 
   // Hover / focus: subtle highlight

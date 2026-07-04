@@ -2,19 +2,50 @@
    MOBILE-PLAYER.SCSS — Layout for MobilePlayer.jsx
    ═══════════════════════════════════════════════════════════════════
    Spec (player-screen-layout.md → Mobile screens):
-     Row 1 (30%) — Player: album art fills space, margins around it
-     Row 2 (10%) — Visualizations
-     Row 3 (20%) — Track info
-     Row 4 (40%) — Controls: seekbar / transport / volume
+     Single column, 7 rows, equal vertical gap between them.
+       Row 1 (30%) — Player: album art fills space, margins around it
+       Row 2 (10%) — Visualizations
+       Row 3 (20%) — Track info panel area
+       Row 4 (10%) — Track seekbar (labels stay clear of the knob)
+       Row 5 (10%) — Play / Pause + Back + Next
+       Row 6 (10%) — Fav / Add to playlist / Shuffle / Repeat …
+       Row 7 (10%) — Volume seekbar
+     When a row is hidden its space is redistributed proportionally to
+     the remaining rows (via `fr` units), so nothing is left with a big
+     empty band. Track-info fonts are scoped to `.mobile-row-track-info`
+     and kept small enough that enabling the track panel does not push
+     content over the row boundary.
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── Grid container ── */
+/* ── Grid container ──
+   Layout strategy: the player row takes ALL remaining vertical space
+   (`1fr`) while the rest of the rows size to their intrinsic content
+   (`auto`) or a small clamped viz height. This way the album art
+   stretches as tall as possible instead of leaving unused space in the
+   track-info panel.
+
+   When the player is hidden (`.no-player`) the track-info row becomes
+   the flexible one and grows to consume the leftover height instead. */
 .mobile-grid {
   display: grid;
   width: 100%;
   height: 100%;
   grid-template-columns: 1fr;
-  grid-template-rows: 28% 8% 16% 10% 16% 10% 12%;
+  grid-template-rows:
+    minmax(0, 1fr)
+    /* player — grows to fill */
+    clamp(60px, 10vh, 120px)
+    /* viz — small fixed band */
+    auto
+    /* track info — sized to text */
+    auto
+    /* seekbar */
+    auto
+    /* transport */
+    auto
+    /* secondary */
+    auto;
+  /* volume */
   grid-template-areas:
     'player'
     'viz'
@@ -23,12 +54,26 @@
     'transport'
     'secondary'
     'volume';
+  /* Extra vertical breathing room between rows so button hover chrome
+     (backgrounds, borders, shadows) can extend outside its own row
+     without visually crashing into the row above/below. */
+  row-gap: clamp(6px, 1.4vh, 14px);
+  padding: clamp(4px, 1vh, 12px) 0;
   overflow: hidden;
 }
 
-/* ── Grid variants ── */
+/* ── Row-hide variants ────────────────────────────────────────────────
+   Drop the corresponding row + grid-area entry so nothing collapses to
+   an empty band. The flexible `minmax(0, 1fr)` row absorbs the freed
+   space; the remaining rows keep their content-based sizing. */
+
+/* No visualization row.
+   Player keeps a definite share (~3/7 of the leftover) so its container
+   queries resolve and the album art renders at a useful size; the four
+   control rows split the remainder equally, giving each breathing room.
+   Track-info is `auto`, so it sits tight against the player. */
 .mobile-grid.no-viz {
-  grid-template-rows: 30% 18% 12% 16% 12% 12%;
+  grid-template-rows: 3fr auto 1fr 1fr 1fr 1fr;
   grid-template-areas:
     'player'
     'track-info'
@@ -42,8 +87,9 @@
   display: none;
 }
 
+/* No player — track info takes over as the flexible row. */
 .mobile-grid.no-player {
-  grid-template-rows: 1fr 16% 8% 16% 10% 14%;
+  grid-template-rows: clamp(60px, 10vh, 120px) minmax(0, 1fr) auto auto auto auto;
   grid-template-areas:
     'viz'
     'track-info'
@@ -53,19 +99,29 @@
     'volume';
 }
 
-.mobile-grid.no-player.no-viz {
-  grid-template-rows: 24% 14% 24% 16% 22%;
-  grid-template-areas:
-    'track-info'
-    'seekbar'
-    'transport'
-    'secondary'
-    'volume';
+.mobile-grid.no-player .mobile-row-player {
+  display: none;
 }
 
-/* ── No-volume: collapse volume row, redistribute space ── */
+/* Show-player-controls is off → transport, secondary, volume all hidden. */
+.mobile-grid.no-controls {
+  grid-template-rows: minmax(0, 1fr) clamp(60px, 10vh, 120px) auto auto;
+  grid-template-areas:
+    'player'
+    'viz'
+    'track-info'
+    'seekbar';
+}
+
+.mobile-grid.no-controls .mobile-row-transport,
+.mobile-grid.no-controls .mobile-row-secondary,
+.mobile-grid.no-controls .mobile-row-volume {
+  display: none;
+}
+
+/* Volume-only hide (controls are still shown). */
 .mobile-grid.no-volume {
-  grid-template-rows: 32% 8% 18% 12% 18% 12%;
+  grid-template-rows: minmax(0, 1fr) clamp(60px, 10vh, 120px) auto auto auto auto;
   grid-template-areas:
     'player'
     'viz'
@@ -79,8 +135,44 @@
   display: none;
 }
 
+/* Combinations */
+.mobile-grid.no-viz.no-player {
+  grid-template-rows: minmax(0, 1fr) auto auto auto auto;
+  grid-template-areas:
+    'track-info'
+    'seekbar'
+    'transport'
+    'secondary'
+    'volume';
+}
+
+.mobile-grid.no-viz.no-controls {
+  grid-template-rows: minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    'player'
+    'track-info'
+    'seekbar';
+}
+
+.mobile-grid.no-player.no-controls {
+  grid-template-rows: clamp(60px, 10vh, 120px) minmax(0, 1fr) auto;
+  grid-template-areas:
+    'viz'
+    'track-info'
+    'seekbar';
+}
+
+.mobile-grid.no-viz.no-player.no-controls {
+  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'track-info'
+    'seekbar';
+}
+
+/* No-viz + no-volume: same pattern with three control rows sharing the
+   remainder. */
 .mobile-grid.no-viz.no-volume {
-  grid-template-rows: 34% 20% 14% 18% 14%;
+  grid-template-rows: 3fr auto 1fr 1fr 1fr;
   grid-template-areas:
     'player'
     'track-info'
@@ -90,7 +182,7 @@
 }
 
 .mobile-grid.no-player.no-volume {
-  grid-template-rows: 1fr 20% 10% 20% 16%;
+  grid-template-rows: clamp(60px, 10vh, 120px) minmax(0, 1fr) auto auto auto;
   grid-template-areas:
     'viz'
     'track-info'
@@ -99,8 +191,8 @@
     'secondary';
 }
 
-.mobile-grid.no-player.no-viz.no-volume {
-  grid-template-rows: 28% 16% 28% 28%;
+.mobile-grid.no-viz.no-player.no-volume {
+  grid-template-rows: minmax(0, 1fr) auto auto auto;
   grid-template-areas:
     'track-info'
     'seekbar'
@@ -110,6 +202,8 @@
 
 /* ═══════════════════════════════════════════════════
    ROW 1 — Player (30%)
+   Album art fills the row using its own aspect ratio while
+   leaving small margins so it never touches the screen edge.
    ═══════════════════════════════════════════════════ */
 .mobile-row-player {
   grid-area: player;
@@ -121,11 +215,8 @@
   min-height: 0;
   container-type: size;
   padding: clamp(4px, 2vw, 12px);
-  padding-top: clamp(12px, 3vh, 24px);
 }
 
-/* Let each player fill the available space using its own aspect ratio
-   instead of forcing a square. Constrain to parent so nothing clips. */
 .mobile-row-player .player-responsive {
   width: 100cqw;
   height: 100cqh;
@@ -135,41 +226,9 @@
   cursor: pointer;
 }
 
-/* Lift the desktop max-width caps so players scale to fill the row.
-   Contain within the row: width driven by aspect-ratio, capped by height. */
 .mobile-row-player .album-art-container,
 .mobile-row-player .vinyl-container,
-.mobile-row-player .cd-container {
-  width: auto !important;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-/* Album art player: fill the container, image uses max space without clipping */
-.mobile-row-player .album-art-player {
-  width: 100%;
-  height: 100%;
-}
-
-.mobile-row-player .album-art-player .rainbow-border {
-  width: 100%;
-  height: 100%;
-}
-
-.mobile-row-player .album-art-player .album-art-inner {
-  width: 100%;
-  height: 100%;
-  background: transparent;
-}
-
-.mobile-row-player .album-art-player .album-art-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-
+.mobile-row-player .cd-container,
 .mobile-row-player .radio-container,
 .mobile-row-player .reel-deck-container,
 .mobile-row-player .cd-case-container,
@@ -178,6 +237,24 @@
   height: 100%;
   max-width: 100%;
   max-height: 100%;
+}
+
+.mobile-row-player .album-art-player,
+.mobile-row-player .album-art-player .rainbow-border,
+.mobile-row-player .album-art-player .album-art-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-row-player .album-art-player .album-art-inner {
+  background: transparent;
+}
+
+.mobile-row-player .album-art-player .album-art-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 /* Cassette inner element is position:absolute so it has no intrinsic size.
@@ -206,31 +283,104 @@
 }
 
 /* ═══════════════════════════════════════════════════
-   ROW 3 — Track Info (20%)
+   ROW 3 — Track info (content-sized)
+   The grid gives the track-info row an `auto` track — it sizes to its
+   own text content so it never "wastes" pixels the player row could
+   use. Fonts are clamped by vw + rem only (no cqh) because the row
+   height is now derived from the fonts themselves.
    ═══════════════════════════════════════════════════ */
 .mobile-row-track-info {
   grid-area: track-info;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: visible;
+  overflow: hidden;
   min-width: 0;
   min-height: 0;
-  padding: 0 clamp(8px, 3vw, 16px) clamp(4px, 1vh, 10px);
+  /* Slightly larger padding on all sides so the track-panel bg and text
+     have breathing room from the row edges (and from the neighbouring viz
+     / seekbar rows). */
+  padding: clamp(6px, 1.4vh, 12px) clamp(10px, 4vw, 20px);
+}
+
+.mobile-row-track-info .track-info-group {
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Stack rows with equal gaps. Interior padding is bumped a notch on
+   mobile so title / artist / album / stream text stays clear of the
+   panel background edges when the panel is on. */
+.mobile-row-track-info .track-info,
+.mobile-row-track-info .cq-track-info {
+  gap: clamp(5px, 1.6vh, 14px) !important;
+  padding: clamp(8px, 1.6vh, 18px) clamp(10px, 4vw, 20px) !important;
+}
+
+/* Font sizes: viewport-width based clamps (row is content-sized so
+   container-height units would be circular). Beats home-mobile.scss
+   because these selectors are more specific. */
+.mobile-row-track-info .responsive-title {
+  font-size: clamp(1.15rem, 6.5vw, 2rem) !important;
+  line-height: 1.15 !important;
+}
+
+.mobile-row-track-info .responsive-artist {
+  font-size: clamp(0.95rem, 4.8vw, 1.5rem) !important;
+  line-height: 1.2 !important;
+}
+
+.mobile-row-track-info .responsive-album,
+.mobile-row-track-info .responsive-stream-info {
+  font-size: clamp(0.9rem, 3.8vw, 1.25rem) !important;
+  line-height: 1.2 !important;
+}
+
+.mobile-row-track-info .stream-info-row {
+  gap: 0.5rem !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+.mobile-row-track-info .format-logo-responsive {
+  height: clamp(0.9rem, 3.8vw, 1.3rem) !important;
+}
+
+/* When the panel is enabled shrink one notch — theme panels add
+   noticeable padding/borders. */
+.mobile-row-track-info .track-panel .responsive-title {
+  font-size: clamp(1.05rem, 5.5vw, 1.75rem) !important;
+}
+
+.mobile-row-track-info .track-panel .responsive-artist {
+  font-size: clamp(0.9rem, 4.3vw, 1.35rem) !important;
+}
+
+.mobile-row-track-info .track-panel .responsive-album,
+.mobile-row-track-info .track-panel .responsive-stream-info {
+  font-size: clamp(0.85rem, 3.5vw, 1.15rem) !important;
 }
 
 /* ═══════════════════════════════════════════════════
-   ROW 4 — Seekbar (10%)
+   ROW 4 — Track seekbar (10%)
+   Slider hugs the top of the row; labels get reserved space at the
+   bottom so the knob can never overlap them. Fonts stay readable.
    ═══════════════════════════════════════════════════ */
 .mobile-row-seekbar {
   grid-area: seekbar;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   overflow: hidden;
   min-width: 0;
   min-height: 0;
-  padding: clamp(12px, 3vh, 24px) clamp(8px, 3vw, 16px) 0;
+  padding: clamp(4px, 1vh, 10px) clamp(8px, 3vw, 16px) clamp(6px, 1.4vh, 12px);
 }
 
 .mobile-row-seekbar>* {
@@ -241,7 +391,7 @@
 .mobile-row-seekbar .slider-container {
   flex-direction: column !important;
   align-items: stretch !important;
-  gap: 6px !important;
+  gap: clamp(6px, 1vh, 12px) !important;
   padding: 0 0.25rem !important;
 }
 
@@ -251,48 +401,72 @@
 }
 
 .mobile-row-seekbar .seekbar-labels {
-  margin-top: 0.5rem;
+  margin-top: clamp(4px, 0.6vh, 8px);
   padding: 0 0.1rem;
 }
 
 .mobile-row-seekbar .time-label {
-  font-size: 0.85rem !important;
-  width: 50px;
+  font-size: clamp(0.75rem, 3vw, 0.95rem) !important;
+  width: auto;
+  min-width: 42px;
   white-space: nowrap;
 }
 
 /* ═══════════════════════════════════════════════════
-   ROW 5 — Transport buttons (16%)
+   ROW 5 — Transport buttons (10%)
+   Play button noticeably larger than Prev/Next per the spec.
    ═══════════════════════════════════════════════════ */
 .mobile-row-transport {
   grid-area: transport;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  /* Visible so per-theme button hover chrome (rings, shadows, scales)
+     is not clipped at the row edge. */
+  overflow: visible;
   min-width: 0;
   min-height: 0;
+  padding: 0 clamp(4px, 2vw, 12px);
 }
 
 .mobile-row-transport .controls-transport-row {
   margin-bottom: 0 !important;
+  gap: clamp(0.5rem, 3vw, 1.5rem) !important;
 }
 
 /* ═══════════════════════════════════════════════════
    ROW 6 — Secondary controls (10%)
+   Fav / Add to playlist / Shuffle / Repeat / Queue / Browse.
    ═══════════════════════════════════════════════════ */
 .mobile-row-secondary {
   grid-area: secondary;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
   min-width: 0;
   min-height: 0;
+  padding: 0 clamp(4px, 2vw, 12px);
+}
+
+/* Responsive size for the secondary-row icon buttons. Compound selector
+   (0,3,0) beats any theme's bare `.btn-icon .material-icons` rule so
+   aqua's small 20px baseline doesn't shrink the icons on mobile. */
+.mobile-row-secondary .btn-icon {
+  width: clamp(36px, 10vw, 48px) !important;
+  height: clamp(36px, 10vw, 48px) !important;
+}
+
+.mobile-row-secondary .btn-icon .material-icons,
+.mobile-row-secondary .btn-icon .material-icons-outlined {
+  font-size: clamp(1.3rem, 5.5vw, 1.75rem) !important;
 }
 
 /* ═══════════════════════════════════════════════════
-   ROW 7 — Volume (12%)
+   ROW 7 — Volume seekbar (10%)
+   Volume renders as a single row (mute icon + slider + "N / 100"),
+   sized to fill the row width. Slider height / knob styling comes
+   from `.slider-track` / `.slider-cap` which the theme already sizes.
    ═══════════════════════════════════════════════════ */
 .mobile-row-volume {
   grid-area: volume;
@@ -302,32 +476,41 @@
   overflow: hidden;
   min-width: 0;
   min-height: 0;
-  padding: 0 clamp(8px, 3vw, 16px);
-  padding-bottom: 8px;
+  padding: clamp(4px, 1vh, 10px) clamp(8px, 3vw, 16px) clamp(6px, 1.4vh, 12px);
 }
 
 .mobile-row-volume .volume-manager {
   width: 100%;
+  gap: clamp(6px, 2vw, 14px) !important;
 }
 
-.mobile-row-volume .slider-container {
-  flex-direction: column !important;
-  align-items: stretch !important;
-  gap: 4px !important;
-  padding: 0 0.5rem !important;
+.mobile-row-volume .volume-manager .small {
+  font-size: clamp(0.75rem, 3vw, 0.95rem) !important;
+  min-width: 4.5ch;
+  white-space: nowrap;
+  text-align: right;
 }
 
-.mobile-row-volume .slider-container .slider-track {
-  flex-basis: auto !important;
-  width: 100%;
+/* Size the mute icon-button so aqua's small toolbar default doesn't
+   apply on mobile. */
+.mobile-row-volume .btn-icon {
+  width: clamp(36px, 10vw, 48px) !important;
+  height: clamp(36px, 10vw, 48px) !important;
+}
+
+.mobile-row-volume .btn-icon .material-icons,
+.mobile-row-volume .btn-icon .material-icons-outlined {
+  font-size: clamp(1.3rem, 5.5vw, 1.75rem) !important;
 }
 
 /* ═══════════════════════════════════════════════════
-   Short screens (≤ 654px height): hide viz row
+   Very short screens (≤ 500 px height): drop the viz row so the other
+   rows aren't cramped. Above 500 px there is enough vertical room to
+   keep viz visible on typical phones (e.g. 361×654, 375×667).
    ═══════════════════════════════════════════════════ */
-@media (max-height: 654px) {
-  .mobile-grid {
-    grid-template-rows: 30% 18% 12% 16% 12% 12%;
+@media (max-height: 500px) {
+  .mobile-grid:not(.no-player) {
+    grid-template-rows: minmax(0, 1fr) auto auto auto auto auto;
     grid-template-areas:
       'player'
       'track-info'
@@ -340,34 +523,29 @@
   .mobile-grid:not(.no-player) .mobile-row-viz {
     display: none !important;
   }
-
-  .mobile-grid.no-player {
-    grid-template-rows: 1fr 16% 8% 16% 10% 14%;
-    grid-template-areas:
-      'viz'
-      'track-info'
-      'seekbar'
-      'transport'
-      'secondary'
-      'volume';
-  }
-
-  .cq-track-info {
-    flex: 0 0 auto;
-    min-height: 0;
-    gap: clamp(2px, 0.2cqh, 14px);
-  }
 }
 
 /* ═══════════════════════════════════════════════════
-   Very short screens (≤ 480px height)
+   Very short screens (≤ 480 px height): shrink the track-info fonts so
+   the player still gets some vertical space to work with.
    ═══════════════════════════════════════════════════ */
 @media (max-height: 480px) {
-  .mobile-grid {
-    grid-template-rows: 24% 8% 14% 10% 18% 12% 14%;
+  .mobile-row-track-info .responsive-title {
+    font-size: clamp(0.9rem, 4.5vw, 1.4rem) !important;
   }
 
-  .mobile-grid.no-viz {
-    grid-template-rows: 26% 16% 12% 18% 14% 14%;
+  .mobile-row-track-info .responsive-artist {
+    font-size: clamp(0.75rem, 3.5vw, 1.1rem) !important;
+  }
+
+  .mobile-row-track-info .responsive-album,
+  .mobile-row-track-info .responsive-stream-info {
+    font-size: clamp(0.7rem, 3vw, 0.95rem) !important;
+  }
+
+  .mobile-row-track-info .track-info,
+  .mobile-row-track-info .cq-track-info {
+    gap: clamp(2px, 0.8vh, 6px) !important;
+    padding: clamp(4px, 0.8vh, 10px) clamp(8px, 3vw, 14px) !important;
   }
 }

@@ -44,12 +44,14 @@
       - Visualizations across the entire row
 - Mobile screens
   - Layout top to bottom, only 1 column (equal vertical gap)
-    - Row 1 (uses 30% of height)
+    - Row 1 (uses remaining height)
       - Player (make album art take as much space in the parent container without touching the edges.)
     - Row 2  (uses 10% of the height)
       - Vizualizations
-    - Row 3 (uses 20% of height)
-      - Track info (uses less vertical space)
+    - Row 3 (uses max 20%)
+      - Track info panel area
+      - Make title, album, artist, and stream info fonts smaller so that the track panel when enabled doesn't overlap above or below elements. 
+      - All rows equally spaced.
     - Row 4 (uses 10% height)
       - Track Seek bar (uses less vertical space, make sure there is enough heigh for the labels so they don't touch the slider knob). Font's should not be too small.
     - Row 5 (uses 10% height)
@@ -58,6 +60,7 @@
       - Fav / Add to playlist / Shuffle / Repeat other buttons
     - Row 7 Volume seek bar (10% height)
       - same rules as the seekbar.
+    - When any rows is hidden the height should be equally divided among other visible rows.
 
 * Large Desktops and Ultra Wide screens (>=1920w)
   - 2 rows
