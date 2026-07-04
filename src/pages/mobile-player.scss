@@ -308,6 +308,19 @@
   max-height: 100% !important;
 }
 
+/* Vinyl / CD drop shadows: the desktop-style large blurred shadows extend
+   well outside the artwork's box. On mobile the `.mobile-row-player` row
+   has `overflow: hidden` and the containers fill the row edge-to-edge,
+   so those big shadows would just get clipped. Swap in a small, subtle
+   shadow that fits inside the row without touching the boundaries. */
+.mobile-row-player .vinyl-record,
+.mobile-row-player .cd-disc,
+.mobile-row-player .album-sleeve,
+.mobile-row-player .cd-jewel-case,
+.mobile-row-player .cd-disc-spinning {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+}
+
 /* ═══════════════════════════════════════════════════
    ROW 2 — Visualizations (10%)
    ═══════════════════════════════════════════════════ */
