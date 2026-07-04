@@ -296,13 +296,13 @@
 }
 
 .custom-layout-player>.radio-container {
-  width: min(100%, calc(100cqh * 1.25)) !important;
+  width: min(100%, calc(100cqh * 1.12)) !important;
   height: auto !important;
   max-width: 100% !important;
   max-height: 100% !important;
   flex: 0 0 auto !important;
   align-self: flex-start;
-  aspect-ratio: 1.25 !important;
+  aspect-ratio: 560 / 500 !important;
 }
 
 .custom-layout-player>.vinyl-sleeve-container {
