@@ -230,31 +230,73 @@
 .mobile-row-player .vinyl-container,
 .mobile-row-player .cd-container,
 .mobile-row-player .radio-container,
-.mobile-row-player .reel-deck-container,
-.mobile-row-player .cd-case-container,
-.mobile-row-player .vinyl-sleeve-container {
+.mobile-row-player .reel-deck-container {
   width: auto !important;
   height: 100%;
   max-width: 100%;
   max-height: 100%;
 }
 
-.mobile-row-player .album-art-player,
+/* Wide-aspect covers (CD case = 1.4, vinyl sleeve = 1.5) need a special
+   sizing rule on mobile: with `height: 100%` the browser first sets
+   `width = height × aspect-ratio`, and if that exceeds the row's width
+   `max-width: 100%` caps the width but does NOT reduce height back via
+   the aspect ratio — the artwork ends up clipped horizontally. Instead,
+   derive the width from `min(row-width, row-height × aspect)` and let
+   `height: auto` follow via `aspect-ratio`, so the container always
+   fits inside both dimensions of the row. */
+.mobile-row-player .cd-case-container {
+  width: min(100%, calc(100cqh * 1.4)) !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+.mobile-row-player .vinyl-sleeve-container {
+  width: min(100%, calc(100cqh * 1.5)) !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Album-art player: keep the container square so `object-fit: cover`
+   doesn't crop the top/bottom of the album art on a non-square row.
+   Width is the smaller of the row width (`100%`) and the row height
+   (`100cqh`), and `aspect-ratio: 1/1` derives the matching height. */
+.mobile-row-player .album-art-player {
+  width: min(100%, 100cqh);
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
 .mobile-row-player .album-art-player .rainbow-border,
 .mobile-row-player .album-art-player .album-art-inner {
   width: 100%;
   height: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+/* Match the rounded-corner look used on tablet / desktop / large-screen
+   layouts. `.album-art-inner` already sets `overflow: hidden`, so
+   bumping its `border-radius` (and the outer `.rainbow-border`) clips
+   the image to a rounded box that's clearly visible at mobile sizes. */
+.mobile-row-player .album-art-player .rainbow-border {
+  border-radius: clamp(10px, 3vw, 18px);
 }
 
 .mobile-row-player .album-art-player .album-art-inner {
   background: transparent;
+  border-radius: clamp(8px, 2.4vw, 14px);
 }
 
 .mobile-row-player .album-art-player .album-art-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  /* `cover` fills the rounded container so the corners actually show
+     the clipped edge (matches other layouts). */
+  object-fit: cover;
   object-position: center;
+  border-radius: inherit;
 }
 
 /* Cassette inner element is position:absolute so it has no intrinsic size.
