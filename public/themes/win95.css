@@ -5977,12 +5977,15 @@ input[type=range]::-webkit-slider-runnable-track {
 .lcd-days {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: 0.8cqw;
   margin-bottom: 0.8cqw;
   font-family: "Pixelify Sans", "Courier New", monospace;
-  font-size: clamp(0.55rem, 1.1cqw, 1.8rem);
+  /* Bold + container-scaled so labels fill the LCD panel width. */
   font-weight: 700;
-  letter-spacing: 0.05em;
+  font-size: clamp(0.7rem, 3.2cqw, 3.5rem);
+  letter-spacing: 0.03em;
+  line-height: 1;
 }
 .lcd-days span {
   opacity: 0.2;
@@ -6212,11 +6215,12 @@ input[type=range]::-webkit-slider-runnable-track {
     transform: scale(min(92cqi / 68cqi, 85cqb / 42cqi)) !important;
   }
   /* Center the digit row inside the frame so it never appears left-aligned
-     even if the frame ever grows wider than its content. */
+     even if the frame ever grows wider than its content. `.lcd-days` is
+     excluded so the seven day letters keep spreading across the LCD
+     panel width via the base rule's `space-between`. */
   .lcd-time,
   .lcd-digits,
-  .lcd-info,
-  .lcd-days {
+  .lcd-info {
     justify-content: center !important;
   }
 }

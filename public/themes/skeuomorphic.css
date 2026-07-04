@@ -5951,12 +5951,18 @@ h2 {
 .lcd-days {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
+  /* The skeuomorphic display font renders wider than the sans-serif
+     fonts other themes use, so the day labels crowd each other quickly.
+     Keep a slightly smaller max font-size and a bit more letter-spacing
+     so the letters read as separate words at every size. */
   gap: 0.8cqw;
   margin-bottom: 0.8cqw;
   font-family: var(--font-display);
-  font-size: clamp(0.6rem, 1.2cqw, 2rem);
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  font-weight: 700;
+  font-size: clamp(0.7rem, 2.2cqw, 2.5rem);
+  letter-spacing: 0.08em;
+  line-height: 1;
   color: var(--color-gray-300, #c4c4c4);
 }
 .lcd-days span {
@@ -6148,11 +6154,12 @@ h2 {
     transform: scale(min(92cqi / 68cqi, 85cqb / 42cqi)) !important;
   }
   /* Center the digit row inside the frame so it never appears left-aligned
-     even if the frame ever grows wider than its content. */
+     even if the frame ever grows wider than its content. `.lcd-days` is
+     excluded so the seven day letters keep spreading across the LCD
+     panel width via the base rule's `space-between`. */
   .lcd-time,
   .lcd-digits,
-  .lcd-info,
-  .lcd-days {
+  .lcd-info {
     justify-content: center !important;
   }
 }

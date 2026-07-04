@@ -9,207 +9,210 @@ $lcd-bg: #000000;
 
 /* ── Centering wrapper ──────────────────────────────────────────────────── */
 .digital-clock-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90vw;
-    height: 90dvh;
-    max-width: 180dvh;
-    margin: 0 auto;
-    container-type: size;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  height: 90dvh;
+  max-width: 180dvh;
+  margin: 0 auto;
+  container-type: size;
 }
 
 /* ── Outer frame — minimal border on pure black ────────────────────────── */
 .digital-clock-frame {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    width: fit-content;
-    padding: 2cqw 2.5cqw;
-    background: #000000;
-    border: 1px solid rgba(255, 102, 0, 0.15);
-    border-radius: 8px;
-    box-shadow: none;
-    user-select: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  padding: 2cqw 2.5cqw;
+  background: #000000;
+  border: 1px solid rgba(255, 102, 0, 0.15);
+  border-radius: 8px;
+  box-shadow: none;
+  user-select: none;
 }
 
 /* ── LCD Panel ──────────────────────────────────────────────────────────── */
 .digital-clock {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 1.2cqw 1.8cqw;
-    border-radius: 4px;
-    background: $lcd-bg;
-    border: 1px solid rgba(255, 102, 0, 0.1);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.2cqw 1.8cqw;
+  border-radius: 4px;
+  background: $lcd-bg;
+  border: 1px solid rgba(255, 102, 0, 0.1);
 }
 
 /* ── Day-of-week bar ────────────────────────────────────────────────────── */
 .lcd-days {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.8cqw;
-    margin-bottom: 0.8cqw;
-    font-family: 'Doto', sans-serif;
-    font-size: clamp(0.55rem, 1.1cqw, 1.8rem);
-    font-weight: 600;
-    letter-spacing: 0.1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8cqw;
+  margin-bottom: 0.8cqw;
+  font-family: 'Doto', sans-serif;
+  /* Bold + container-scaled so labels fill the LCD panel width. */
+  font-weight: 700;
+  font-size: clamp(0.7rem, 3.2cqw, 3.5rem);
+  letter-spacing: 0.05em;
+  line-height: 1;
 
-    span {
-        opacity: 0.15;
-        color: $seg-color;
-    }
+  span {
+    opacity: 0.15;
+    color: $seg-color;
+  }
 
-    .active {
-        color: $seg-color;
-        opacity: 1;
-        border-bottom: 0.2cqw solid $seg-color;
-        filter: drop-shadow(0 0 4px rgba(255, 102, 0, 0.4));
-    }
+  .active {
+    color: $seg-color;
+    opacity: 1;
+    border-bottom: 0.2cqw solid $seg-color;
+    filter: drop-shadow(0 0 4px rgba(255, 102, 0, 0.4));
+  }
 }
 
 /* ── Time row ───────────────────────────────────────────────────────────── */
 .lcd-time {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.6cqw;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6cqw;
 }
 
 .lcd-digits {
-    display: flex;
-    align-items: center;
-    gap: 2cqw;
+  display: flex;
+  align-items: center;
+  gap: 2cqw;
 }
 
 .lcd-ampm {
-    font-family: 'Doto', sans-serif;
-    font-size: clamp(0.75rem, 2.2cqw, 3.5rem);
-    font-weight: 700;
-    color: $seg-color;
-    letter-spacing: 0.08em;
-    padding-bottom: 0.2cqw;
-    margin-left: 0.4cqw;
-    text-transform: uppercase;
-    filter: drop-shadow(0 0 4px rgba(255, 102, 0, 0.4));
+  font-family: 'Doto', sans-serif;
+  font-size: clamp(0.75rem, 2.2cqw, 3.5rem);
+  font-weight: 700;
+  color: $seg-color;
+  letter-spacing: 0.08em;
+  padding-bottom: 0.2cqw;
+  margin-left: 0.4cqw;
+  text-transform: uppercase;
+  filter: drop-shadow(0 0 4px rgba(255, 102, 0, 0.4));
 }
 
 /* ── Colon separator ────────────────────────────────────────────────────── */
 .lcd-colon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3cqw;
-    width: 2.5cqw;
-    height: 100%;
-    padding: 2cqh 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3cqw;
+  width: 2.5cqw;
+  height: 100%;
+  padding: 2cqh 0;
 }
 
 .lcd-colon-dot {
-    width: 1.4cqw;
-    height: 1.4cqw;
-    background: $seg-color;
-    border-radius: 1px;
-    filter: drop-shadow(0 0 4px rgba(255, 102, 0, 0.4));
+  width: 1.4cqw;
+  height: 1.4cqw;
+  background: $seg-color;
+  border-radius: 1px;
+  filter: drop-shadow(0 0 4px rgba(255, 102, 0, 0.4));
 }
 
 .lcd-colon--blink .lcd-colon-dot {
-    animation: lcd-blink 1s step-start infinite;
+  animation: lcd-blink 1s step-start infinite;
 }
 
 @keyframes lcd-blink {
 
-    0%,
-    100% {
-        opacity: 1;
-    }
+  0%,
+  100% {
+    opacity: 1;
+  }
 
-    50% {
-        opacity: 0.15;
-    }
+  50% {
+    opacity: 0.15;
+  }
 }
 
 /* ── Date + weather row ─────────────────────────────────────────────────── */
 .lcd-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5cqw;
-    margin-top: 1.5cqw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5cqw;
+  margin-top: 1.5cqw;
 }
 
 .lcd-date {
-    font-family: var(--font-display);
-    font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-primary);
-    text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  text-align: center;
 }
 
 .lcd-weather {
-    display: flex;
-    align-items: center;
-    gap: 0.5cqw;
+  display: flex;
+  align-items: center;
+  gap: 0.5cqw;
 }
 
 .lcd-weather-icon {
-    font-size: clamp(0.9rem, 2cqw, 3rem);
-    color: $seg-color;
+  font-size: clamp(0.9rem, 2cqw, 3rem);
+  color: $seg-color;
 }
 
 .lcd-weather-temp {
-    font-family: var(--font-display);
-    font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: $seg-color;
+  font-family: var(--font-display);
+  font-size: clamp(0.7rem, 1.8cqw, 2.8rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: $seg-color;
 }
 
 /* ── 7-Segment Digit ────────────────────────────────────────────────────── */
 .lcd-digit {
-    position: relative;
-    width: 11cqw;
-    height: calc(11cqw * 1.7);
-    filter: drop-shadow(0 0 4px rgba(255, 102, 0, 0.4));
+  position: relative;
+  width: 11cqw;
+  height: calc(11cqw * 1.7);
+  filter: drop-shadow(0 0 4px rgba(255, 102, 0, 0.4));
 }
 
 .seg {
-    position: absolute;
-    background: $seg-color;
-    transition: opacity 0.1s ease;
+  position: absolute;
+  background: $seg-color;
+  transition: opacity 0.1s ease;
 
-    &.on {
-        opacity: 1;
-    }
+  &.on {
+    opacity: 1;
+  }
 
-    &.off {
-        opacity: $seg-off-opacity;
-    }
+  &.off {
+    opacity: $seg-off-opacity;
+  }
 }
 
 // Horizontal segments (a, d, g)
 .seg-a,
 .seg-d,
 .seg-g {
-    left: 10%;
-    width: 80%;
-    height: 7%;
-    clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
+  left: 10%;
+  width: 80%;
+  height: 7%;
+  clip-path: polygon(12% 0%, 88% 0%, 100% 50%, 88% 100%, 12% 100%, 0% 50%);
 }
 
 .seg-a {
-    top: 0;
+  top: 0;
 }
 
 .seg-g {
-    top: 46.5%;
+  top: 46.5%;
 }
 
 .seg-d {
-    bottom: 0;
+  bottom: 0;
 }
 
 // Vertical segments (b, c, e, f)
@@ -217,29 +220,29 @@ $lcd-bg: #000000;
 .seg-c,
 .seg-e,
 .seg-f {
-    width: 13%;
-    height: 42%;
-    clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
+  width: 13%;
+  height: 42%;
+  clip-path: polygon(50% 0%, 100% 8%, 100% 92%, 50% 100%, 0% 92%, 0% 8%);
 }
 
 .seg-b {
-    top: 4%;
-    right: 0;
+  top: 4%;
+  right: 0;
 }
 
 .seg-c {
-    bottom: 4%;
-    right: 0;
+  bottom: 4%;
+  right: 0;
 }
 
 .seg-f {
-    top: 4%;
-    left: 0;
+  top: 4%;
+  left: 0;
 }
 
 .seg-e {
-    bottom: 4%;
-    left: 0;
+  bottom: 4%;
+  left: 0;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -247,50 +250,50 @@ $lcd-bg: #000000;
    ═══════════════════════════════════════════════════════════════════════ */
 
 .flip-clock-body {
-    background: #000000;
-    border-color: rgba(255, 102, 0, 0.2);
-    box-shadow: none;
+  background: #000000;
+  border-color: rgba(255, 102, 0, 0.2);
+  box-shadow: none;
 }
 
 .flip-clock-stand {
-    background: #000000;
-    border: 1px dotted rgba(255, 102, 0, 0.2);
+  background: #000000;
+  border: 1px dotted rgba(255, 102, 0, 0.2);
 }
 
 .flip-clock-date {
-    font-family: var(--font-display);
-    color: var(--color-primary);
+  font-family: var(--font-display);
+  color: var(--color-primary);
 }
 
 .flip-clock-weather {
-    font-family: var(--font-display);
-    color: var(--color-primary);
+  font-family: var(--font-display);
+  color: var(--color-primary);
 }
 
 .flip-clock-weather-icon {
-    color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .flip-colon {
-    font-family: var(--font-display);
-    color: var(--color-primary);
-    text-shadow: none;
+  font-family: var(--font-display);
+  color: var(--color-primary);
+  text-shadow: none;
 }
 
 .flip-ampm {
-    font-family: var(--font-display);
-    color: var(--color-primary);
-    text-shadow: none;
+  font-family: var(--font-display);
+  color: var(--color-primary);
+  text-shadow: none;
 }
 
 .tick-flip-panel {
-    font-family: var(--font-display) !important;
-    color: var(--color-primary) !important;
-    background-color: #000000 !important;
+  font-family: var(--font-display) !important;
+  color: var(--color-primary) !important;
+  background-color: #000000 !important;
 }
 
 .tick-flip-shadow {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -298,27 +301,27 @@ $lcd-bg: #000000;
    ═══════════════════════════════════════════════════════════════════════ */
 
 .weather-container {
-    color: var(--color-primary) !important;
-    background: #000000 !important;
+  color: var(--color-primary) !important;
+  background: #000000 !important;
 }
 
 .weather-container *,
 .weather-current *,
 .weather-forecast * {
-    color: var(--color-primary) !important;
-    opacity: 1 !important;
-    background-color: transparent !important;
-    background-image: none !important;
+  color: var(--color-primary) !important;
+  opacity: 1 !important;
+  background-color: transparent !important;
+  background-image: none !important;
 }
 
 .weather-loading-icon,
 .weather-error-icon,
 .weather-error-text {
-    color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
 }
 
 .weather-icon {
-    color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -326,56 +329,56 @@ $lcd-bg: #000000;
    ═══════════════════════════════════════════════════════════════════════ */
 
 .weather-full {
-    background: #000000 !important;
-    color: var(--color-primary) !important;
-    font-family: var(--font-display);
+  background: #000000 !important;
+  color: var(--color-primary) !important;
+  font-family: var(--font-display);
 }
 
 .weather-full *,
 .weather-full *::before,
 .weather-full *::after {
-    color: var(--color-primary) !important;
-    opacity: 1 !important;
+  color: var(--color-primary) !important;
+  opacity: 1 !important;
 }
 
 .weather-full-hero {
-    background: #000000 !important;
-    backdrop-filter: none !important;
+  background: #000000 !important;
+  backdrop-filter: none !important;
 }
 
 .weather-full-hero-icon {
-    color: var(--color-primary) !important;
-    opacity: 0.25 !important;
+  color: var(--color-primary) !important;
+  opacity: 0.25 !important;
 }
 
 .weather-full-tenday {
-    background: #000000 !important;
-    backdrop-filter: none !important;
-    border-left-color: rgba(255, 102, 0, 0.15) !important;
+  background: #000000 !important;
+  backdrop-filter: none !important;
+  border-left-color: rgba(255, 102, 0, 0.15) !important;
 }
 
 .weather-full-tenday-bar {
-    background: rgba(255, 102, 0, 0.1) !important;
+  background: rgba(255, 102, 0, 0.1) !important;
 }
 
 .weather-full-tenday-bar-fill {
-    background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-light)) !important;
+  background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-light)) !important;
 }
 
 .weather-full-hourly {
-    background: #000000 !important;
-    backdrop-filter: none !important;
-    border-top-color: rgba(255, 102, 0, 0.15) !important;
+  background: #000000 !important;
+  backdrop-filter: none !important;
+  border-top-color: rgba(255, 102, 0, 0.15) !important;
 }
 
 .weather-full-metrics {
-    border-top-color: rgba(255, 102, 0, 0.15) !important;
+  border-top-color: rgba(255, 102, 0, 0.15) !important;
 }
 
 .weather-full-tile {
-    background: #000000 !important;
-    backdrop-filter: none !important;
-    border-color: rgba(255, 102, 0, 0.1) !important;
+  background: #000000 !important;
+  backdrop-filter: none !important;
+  border-color: rgba(255, 102, 0, 0.1) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -383,39 +386,39 @@ $lcd-bg: #000000;
    ═══════════════════════════════════════════════════════════════════════ */
 
 .wallpaper-bg--empty {
-    background: #000000 !important;
+  background: #000000 !important;
 }
 
 .wallpaper-overlay {
-    background: none !important;
+  background: none !important;
 }
 
 .wallpaper-time {
-    font-family: var(--font-display) !important;
-    color: var(--color-primary) !important;
-    text-shadow: none !important;
+  font-family: var(--font-display) !important;
+  color: var(--color-primary) !important;
+  text-shadow: none !important;
 }
 
 .wallpaper-weather {
-    background: #000000 !important;
-    backdrop-filter: none !important;
-    border-color: rgba(255, 102, 0, 0.2) !important;
+  background: #000000 !important;
+  backdrop-filter: none !important;
+  border-color: rgba(255, 102, 0, 0.2) !important;
 }
 
 .wallpaper-weather-icon {
-    color: var(--color-primary) !important;
-    filter: none !important;
+  color: var(--color-primary) !important;
+  filter: none !important;
 }
 
 .wallpaper-weather-temp {
-    font-family: var(--font-display) !important;
-    color: var(--color-primary) !important;
-    text-shadow: none !important;
+  font-family: var(--font-display) !important;
+  color: var(--color-primary) !important;
+  text-shadow: none !important;
 }
 
 .wallpaper-weather-desc {
-    color: var(--color-primary) !important;
-    text-shadow: none !important;
+  color: var(--color-primary) !important;
+  text-shadow: none !important;
 }
 
 
@@ -477,11 +480,12 @@ $lcd-bg: #000000;
   }
 
   /* Center the digit row inside the frame so it never appears left-aligned
-     even if the frame ever grows wider than its content. */
+     even if the frame ever grows wider than its content. `.lcd-days` is
+     excluded so the seven day letters keep spreading across the LCD
+     panel width via the base rule's `space-between`. */
   .lcd-time,
   .lcd-digits,
-  .lcd-info,
-  .lcd-days {
+  .lcd-info {
     justify-content: center !important;
   }
 }

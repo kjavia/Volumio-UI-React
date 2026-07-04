@@ -17,285 +17,295 @@ $lcd-border: #060f0a;
 
 /* ── Outer wrapper ───────────────────────────────────────────────────── */
 .digital-clock-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90vw;
-    height: 90dvh;
-    max-width: 180dvh;
-    margin: 0 auto;
-    container-type: size;
-    background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  height: 90dvh;
+  max-width: 180dvh;
+  margin: 0 auto;
+  container-type: size;
+  background: transparent;
 }
 
 /* ── Outer device body — dark plastic casing ─────────────────────────── */
 .digital-clock-frame {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    width: fit-content;
-    padding: 2.5cqw 3cqw;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  padding: 2.5cqw 3cqw;
 
-    background: var(--casio-body);
-    border-radius: 1.5cqw;
+  background: var(--casio-body);
+  border-radius: 1.5cqw;
 
-    /* Plastic bevel */
-    border-top: 0.4cqw solid var(--casio-sheen);
-    border-left: 0.4cqw solid var(--casio-sheen);
-    border-bottom: 0.4cqw solid var(--casio-edge);
-    border-right: 0.4cqw solid var(--casio-edge);
+  /* Plastic bevel */
+  border-top: 0.4cqw solid var(--casio-sheen);
+  border-left: 0.4cqw solid var(--casio-sheen);
+  border-bottom: 0.4cqw solid var(--casio-edge);
+  border-right: 0.4cqw solid var(--casio-edge);
 
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.8),
-        0 2px 8px rgba(0, 0, 0, 0.6),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.8),
+    0 2px 8px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 
-    user-select: none;
+  user-select: none;
 }
 
 /* ── LCD panel — the signature green glass ──────────────────────────── */
 .digital-clock {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 1cqw 1.5cqw;
-    /* Light grey — same mid-point as track-info-group */
-    background: $lcd-bg;
-    border-radius: 0.3cqw;
-    color: $seg-color;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1cqw 1.5cqw;
+  /* Light grey — same mid-point as track-info-group */
+  background: $lcd-bg;
+  border-radius: 0.3cqw;
+  color: $seg-color;
 
-    /* Dark inset ring — panel embedded into frame */
-    border: 0.25cqw solid $lcd-border;
+  /* Dark inset ring — panel embedded into frame */
+  border: 0.25cqw solid $lcd-border;
 
-    box-shadow:
-        0 0 0 0.3cqw var(--casio-edge),
-        inset 0 2px 6px rgba(0, 0, 0, 0.14);
+  box-shadow:
+    0 0 0 0.3cqw var(--casio-edge),
+    inset 0 2px 6px rgba(0, 0, 0, 0.14);
 
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 
-    /* Subtle top dome glare on the panel surface */
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 30%;
-        background: linear-gradient(to bottom,
-                rgba(255, 255, 255, 0.28) 0%,
-                transparent 100%);
-        pointer-events: none;
-        border-radius: 0.3cqw 0.3cqw 0 0;
-    }
+  /* Subtle top dome glare on the panel surface */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.28) 0%,
+        transparent 100%);
+    pointer-events: none;
+    border-radius: 0.3cqw 0.3cqw 0 0;
+  }
 }
 
 /* ── Day-of-week bar — small indicator dots/caps like F-91W ─────────── */
 .lcd-days {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5cqw;
-    margin-bottom: 0.6cqw;
-    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
-    color: rgba(12, 30, 24, 0.30);
-    /* inactive day — dim on light bg */
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5cqw;
+  margin-bottom: 0.6cqw;
+  font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  /* Bold + container-scaled so the seven labels grow to fill the LCD
+       panel width while still fitting the widest locale. `cqw` refers to
+       `.digital-clock-wrapper`'s width (the sized container declared at
+       the top of this file), matching the rest of the digital clock's
+       responsive sizing. */
+  font-weight: 700;
+  font-size: clamp(0.7rem, 3.2cqw, 3.5rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: rgba(12, 30, 24, 0.30);
+  /* inactive day — dim on light bg */
 
-    .active {
-        color: $seg-color;
-        opacity: 1;
-        border-bottom: 0.15cqw solid $seg-color;
-    }
+  .active {
+    color: $seg-color;
+    opacity: 1;
+    border-bottom: 0.15cqw solid $seg-color;
+  }
 }
 
 /* ── Time row ─────────────────────────────────────────────────────────── */
 .lcd-time {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.5cqw;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5cqw;
 }
 
 .lcd-digits {
-    display: flex;
-    align-items: center;
-    gap: 1.5cqw;
+  display: flex;
+  align-items: center;
+  gap: 1.5cqw;
 }
 
 /* ── AM/PM indicator ─────────────────────────────────────────────────── */
 .lcd-ampm {
-    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
-    font-size: clamp(0.7rem, 2cqw, 3rem);
-    font-weight: 400;
-    font-style: italic;
-    color: $seg-color;
-    letter-spacing: 0.06em;
-    padding-bottom: 0.2cqw;
-    margin-left: 0.4cqw;
-    text-transform: uppercase;
-    -webkit-font-smoothing: antialiased;
-    text-shadow:
-        0 1px 1px rgba(0, 0, 0, 0.15),
-        0 -1px 0 rgba(255, 255, 255, 0.55);
+  font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  font-size: clamp(0.7rem, 2cqw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: $seg-color;
+  letter-spacing: 0.06em;
+  padding-bottom: 0.2cqw;
+  margin-left: 0.4cqw;
+  text-transform: uppercase;
+  -webkit-font-smoothing: antialiased;
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.15),
+    0 -1px 0 rgba(255, 255, 255, 0.55);
 }
 
 /* ── Colon ───────────────────────────────────────────────────────────── */
 .lcd-colon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5cqw;
-    width: 2cqw;
-    height: 100%;
-    padding: 1.5cqh 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5cqw;
+  width: 2cqw;
+  height: 100%;
+  padding: 1.5cqh 0;
 }
 
 .lcd-colon-dot {
-    width: 1.2cqw;
-    height: 1.2cqw;
-    background: $seg-color;
-    border-radius: 0;
-    /* square dots — like actual Casio segments */
-    box-shadow:
-        0 1px 0 rgba(0, 0, 0, 0.20),
-        0 -1px 0 rgba(255, 255, 255, 0.50);
+  width: 1.2cqw;
+  height: 1.2cqw;
+  background: $seg-color;
+  border-radius: 0;
+  /* square dots — like actual Casio segments */
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.20),
+    0 -1px 0 rgba(255, 255, 255, 0.50);
 }
 
 @keyframes lcd-blink {
 
-    0%,
-    100% {
-        opacity: 1;
-    }
+  0%,
+  100% {
+    opacity: 1;
+  }
 
-    50% {
-        opacity: 0;
-    }
+  50% {
+    opacity: 0;
+  }
 }
 
 .lcd-colon--blink .lcd-colon-dot {
-    animation: lcd-blink 1s step-start infinite;
+  animation: lcd-blink 1s step-start infinite;
 }
 
 /* ── Date + info row below the time ─────────────────────────────────── */
 .lcd-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5cqw;
-    margin-top: 0.5cqw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5cqw;
+  margin-top: 0.5cqw;
 }
 
 .lcd-date {
-    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
-    font-size: clamp(0.6rem, 1.6cqw, 2.5rem);
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(58, 88, 80, 0.45);
-    /* dim green for secondary info */
-    text-align: center;
-    -webkit-font-smoothing: antialiased;
-    text-shadow:
-        0 1px 1px rgba(0, 0, 0, 0.12),
-        0 -1px 0 rgba(255, 255, 255, 0.50);
+  font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  font-size: clamp(0.6rem, 1.6cqw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(58, 88, 80, 0.45);
+  /* dim green for secondary info */
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.12),
+    0 -1px 0 rgba(255, 255, 255, 0.50);
 }
 
 .lcd-weather {
-    display: flex;
-    align-items: center;
-    gap: 0.4cqw;
+  display: flex;
+  align-items: center;
+  gap: 0.4cqw;
 }
 
 .lcd-weather-icon {
-    font-size: clamp(0.8rem, 1.8cqw, 2.8rem);
-    color: rgba(58, 88, 80, 0.45);
-    text-shadow:
-        0 1px 1px rgba(0, 0, 0, 0.12),
-        0 -1px 0 rgba(255, 255, 255, 0.50);
+  font-size: clamp(0.8rem, 1.8cqw, 2.8rem);
+  color: rgba(58, 88, 80, 0.45);
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.12),
+    0 -1px 0 rgba(255, 255, 255, 0.50);
 }
 
 .lcd-weather-temp {
-    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
-    font-size: clamp(0.6rem, 1.6cqw, 2.5rem);
-    font-style: italic;
-    color: rgba(58, 88, 80, 0.45);
-    -webkit-font-smoothing: antialiased;
-    text-shadow:
-        0 1px 1px rgba(0, 0, 0, 0.12),
-        0 -1px 0 rgba(255, 255, 255, 0.50);
+  font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+  font-size: clamp(0.6rem, 1.6cqw, 2.5rem);
+  font-style: italic;
+  color: rgba(58, 88, 80, 0.45);
+  -webkit-font-smoothing: antialiased;
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.12),
+    0 -1px 0 rgba(255, 255, 255, 0.50);
 }
 
 /* ── 7-Segment Digit — font overlay (Casio only; segments hidden) ────── */
 .lcd-digit {
-    position: relative;
-    width: 14cqw;
-    height: calc(14cqw * 1.7);
+  position: relative;
+  width: 14cqw;
+  height: calc(14cqw * 1.7);
 
-    /* Hide the polygon segment divs — font does the rendering */
-    .seg {
-        display: none;
-    }
+  /* Hide the polygon segment divs — font does the rendering */
+  .seg {
+    display: none;
+  }
 
-    /* Ghost "8" — all-segments-on at off-segment opacity */
-    &::before {
-        content: '8';
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
-        font-size: clamp(2.5rem, 31cqw, 28rem);
-        font-style: italic;
-        line-height: 1;
-        color: $seg-color;
-        opacity: $seg-off-opacity;
-    }
+  /* Ghost "8" — all-segments-on at off-segment opacity */
+  &::before {
+    content: '8';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+    font-size: clamp(2.5rem, 31cqw, 28rem);
+    font-style: italic;
+    line-height: 1;
+    color: $seg-color;
+    opacity: $seg-off-opacity;
+  }
 
-    /* Active digit */
-    &::after {
-        content: attr(data-digit);
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
-        font-size: clamp(2.5rem, 31cqw, 28rem);
-        font-style: italic;
-        line-height: 1;
-        color: $seg-color;
-        text-shadow:
-            0 1px 0 rgba(0, 0, 0, 0.20),
-            0 -1px 0 rgba(255, 255, 255, 0.50);
-    }
+  /* Active digit */
+  &::after {
+    content: attr(data-digit);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DS Digital', 'Share Tech Mono', 'Courier New', monospace;
+    font-size: clamp(2.5rem, 31cqw, 28rem);
+    font-style: italic;
+    line-height: 1;
+    color: $seg-color;
+    text-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.20),
+      0 -1px 0 rgba(255, 255, 255, 0.50);
+  }
 }
 
 /* "1" only uses right-side segments on a real 7-segment display —
    keep the ghost "8" centered, shift active "1" right via transform. */
 .lcd-digit[data-digit="1"] {
-    &::after {
-        transform: translateX(32%);
-    }
+  &::after {
+    transform: translateX(32%);
+  }
 }
 
 /* ── Button row below display (decorative — like Casio's mode keys) ── */
 .digital-clock-frame::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 1.5cqw;
-    background: repeating-linear-gradient(to right,
-            #282828 0, #282828 3cqw,
-            #0a0a0a 3cqw, #0a0a0a 3.5cqw);
-    margin-top: 1.5cqw;
-    border-radius: 0.4cqw;
-    border-top: 0.2cqw solid #363636;
-    border-left: 0.2cqw solid #363636;
-    border-bottom: 0.2cqw solid #0a0a0a;
-    border-right: 0.2cqw solid #0a0a0a;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1.5cqw;
+  background: repeating-linear-gradient(to right,
+      #282828 0, #282828 3cqw,
+      #0a0a0a 3cqw, #0a0a0a 3.5cqw);
+  margin-top: 1.5cqw;
+  border-radius: 0.4cqw;
+  border-top: 0.2cqw solid #363636;
+  border-left: 0.2cqw solid #363636;
+  border-bottom: 0.2cqw solid #0a0a0a;
+  border-right: 0.2cqw solid #0a0a0a;
 }
 
 
@@ -357,11 +367,12 @@ $lcd-border: #060f0a;
   }
 
   /* Center the digit row inside the frame so it never appears left-aligned
-     even if the frame ever grows wider than its content. */
+     even if the frame ever grows wider than its content. `.lcd-days` is
+     intentionally excluded — it needs the base rule's `space-between` so
+     the seven day letters spread across the full LCD panel width. */
   .lcd-time,
   .lcd-digits,
-  .lcd-info,
-  .lcd-days {
+  .lcd-info {
     justify-content: center !important;
   }
 }

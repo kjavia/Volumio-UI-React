@@ -5456,9 +5456,19 @@ input[type=range]::-webkit-slider-thumb {
 .lcd-days {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: 0.5cqw;
   margin-bottom: 0.6cqw;
   font-family: "DS Digital", "Share Tech Mono", "Courier New", monospace;
+  /* Bold + container-scaled so the seven labels grow to fill the LCD
+       panel width while still fitting the widest locale. `cqw` refers to
+       `.digital-clock-wrapper`'s width (the sized container declared at
+       the top of this file), matching the rest of the digital clock's
+       responsive sizing. */
+  font-weight: 700;
+  font-size: clamp(0.7rem, 3.2cqw, 3.5rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
   color: rgba(12, 30, 24, 0.3);
   /* inactive day — dim on light bg */
 }
@@ -5692,11 +5702,12 @@ input[type=range]::-webkit-slider-thumb {
     transform: scale(min(92cqi / 68cqi, 85cqb / 42cqi)) !important;
   }
   /* Center the digit row inside the frame so it never appears left-aligned
-     even if the frame ever grows wider than its content. */
+     even if the frame ever grows wider than its content. `.lcd-days` is
+     intentionally excluded — it needs the base rule's `space-between` so
+     the seven day letters spread across the full LCD panel width. */
   .lcd-time,
   .lcd-digits,
-  .lcd-info,
-  .lcd-days {
+  .lcd-info {
     justify-content: center !important;
   }
 }
