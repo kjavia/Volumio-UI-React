@@ -1,14 +1,22 @@
 .alphabet-scroller {
+  /* Absolutely positioned inside the BrowseDialog's non-scrolling
+     `.browse-body` wrapper (see BrowseDialog.jsx / _dialog.scss) so it
+     stays pinned at the right edge while the sibling scroll viewport
+     scrolls independently. Offset inward from the very edge so it sits
+     clear of the scroll viewport's scrollbar. */
   position: absolute;
-  right: 2px;
+  right: 20px;
   top: 0;
   bottom: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* `space-around` gives each letter equal breathing room, plus the
+     per-letter padding below adds a bit more separation between labels. */
+  justify-content: space-around;
   align-items: center;
   z-index: 10;
-  width: 24px;
+  width: 34px;
+  padding-block: 0.35rem;
   user-select: none;
   touch-action: none;
   cursor: pointer;
@@ -18,10 +26,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    flex: 1 1 0;
+    width: 30px;
+    flex: 0 1 auto;
     min-height: 0;
-    font-size: clamp(1.2rem, 3cqi, 0.85rem);
+    padding-block: 0.12rem;
+    font-size: clamp(1rem, 4cqi, 1.35rem);
     font-weight: 600;
     color: var(--text-muted, rgba(255, 255, 255, 0.5));
     transition: transform 0.1s ease, font-size 0.1s ease;
@@ -29,12 +38,7 @@
 
     &--active {
       transform: scale(2.2);
-      font-size: 0.85rem;
-      color: var(--accent-color, #1db954);
-      font-weight: 700;
-    }
-
-    &--current {
+      font-size: 1.15rem;
       color: var(--accent-color, #1db954);
       font-weight: 700;
       opacity: 1;

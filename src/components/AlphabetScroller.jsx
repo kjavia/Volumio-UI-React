@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useMemo } from 'react';
+import { useRef, useState, useCallback, useMemo, useEffect } from 'react';
 import './AlphabetScroller.scss';
 
 const ALPHABET = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -20,6 +20,18 @@ const AlphabetScroller = ({ labels = ALPHABET, availableLetters, currentLetter, 
   const [dragging, setDragging] = useState(false);
 
   const availableSet = useMemo(() => new Set(availableLetters), [availableLetters]);
+
+  // Keep `activeLetter` in sync with the scroll-derived `currentLetter`
+  // whenever the user isn't dragging. This way there is always exactly
+  // one highlighted letter: the drag target while dragging, and the
+  // first-visible-item letter otherwise (which, right after release,
+  // settles on the letter the drag ended on).
+  useEffect(() => {
+    if (dragging) return;
+    if (currentLetter && currentLetter !== activeLetter) {
+      setActiveLetter(currentLetter);
+    }
+  }, [currentLetter, dragging, activeLetter]);
 
   const getLetterFromY = useCallback((clientY) => {
     const el = containerRef.current;
@@ -52,9 +64,11 @@ const AlphabetScroller = ({ labels = ALPHABET, availableLetters, currentLetter, 
     selectLetter(letter);
   }, [dragging, getLetterFromY, selectLetter]);
 
+  // Keep the last drag target highlighted after release. The effect
+  // above will then follow the scroll position as it settles — so the
+  // highlight moves in one smooth handoff rather than blinking off.
   const handleMouseUp = useCallback(() => {
     setDragging(false);
-    setActiveLetter(null);
   }, []);
 
   // Touch events
@@ -75,7 +89,6 @@ const AlphabetScroller = ({ labels = ALPHABET, availableLetters, currentLetter, 
 
   const handleTouchEnd = useCallback(() => {
     setDragging(false);
-    setActiveLetter(null);
   }, []);
 
   return (
@@ -94,8 +107,10 @@ const AlphabetScroller = ({ labels = ALPHABET, availableLetters, currentLetter, 
       aria-label="Alphabet quick scroll"
     >
       {displayLabels.map((letter) => {
+        // Exactly one letter is highlighted at any time: whichever
+        // `activeLetter` currently is. It's driven by drag while the
+        // user is interacting, and by the scroll position otherwise.
         const isActive = activeLetter === letter;
-        const isCurrent = !dragging && currentLetter === letter;
         const isAvailable = availableSet.has(letter);
         return (
           <div
@@ -103,7 +118,6 @@ const AlphabetScroller = ({ labels = ALPHABET, availableLetters, currentLetter, 
             className={[
               'alphabet-scroller__letter',
               isActive ? 'alphabet-scroller__letter--active' : '',
-              isCurrent ? 'alphabet-scroller__letter--current' : '',
               !isAvailable ? 'alphabet-scroller__letter--dim' : '',
             ].join(' ')}
           >

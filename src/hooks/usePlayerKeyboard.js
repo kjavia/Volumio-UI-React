@@ -55,6 +55,9 @@ const usePlayerKeyboard = ({
       if (!action) return;
       const tag = e.target?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return;
+      // Suppress player shortcuts while any dialog (browse, add-to-playlist,
+      // settings, etc.) is open — the dialog owns keyboard input.
+      if (document.querySelector('.dialog-container')) return;
       action();
       // Move focus to the corresponding button for visual feedback
       const btn = document.querySelector(`[data-shortcut-key="${key}"]`);

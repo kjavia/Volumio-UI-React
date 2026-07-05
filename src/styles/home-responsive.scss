@@ -1024,16 +1024,25 @@ body,
   animation: spin 1s linear infinite;
 }
 
-/* ── Browse Results — Grid ── */
+/* ── Browse Results — Grid ──
+   Tile size scales with the viewport (screen) width, not the dialog's
+   inner width — this is why we use `vw` inside `clamp()`. Range:
+     normal:  clamp(100px, 3.5vw, 130px)  → 130px at 4K
+     large:   clamp(200px, 7vw,   260px)  → exactly 2× the normal size
+   Using `repeat(auto-fill, <size>)` (not `minmax(<size>, 1fr)`) keeps
+   tiles at the exact clamp size — maximising the dialog just increases
+   the column count, it does NOT stretch each tile wider.
+   `justify-content: start` prevents the row from collapsing gaps. */
 .browse-results-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fill, clamp(100px, 3.5vw, 130px));
+  justify-content: start;
   gap: 1rem;
   padding: 0.25rem;
 }
 
 .browse-results-grid--large {
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, clamp(200px, 7vw, 260px));
 }
 
 .browse-result-card {
@@ -1049,6 +1058,26 @@ body,
   transition: opacity 0.15s, transform 0.12s;
   color: inherit;
   position: relative;
+
+  /* Move the focus/keyboard highlight from the whole card to the
+     artwork inside it. The card sits flush against the grid edges, so
+     an outline on the card itself gets clipped by the surrounding
+     scroll container; moving it inside the card's own padding keeps
+     the ring fully visible on edge tiles.
+
+     `!important` is required to beat the per-theme `.dialog
+     :focus-visible { outline: … }` rule (see e.g.
+     design-system/themes/aqua/dialog.scss) which has equal specificity
+     but loads after this stylesheet. */
+  &:focus-visible {
+    outline: none !important;
+  }
+
+  &:focus-visible .browse-result-card__art,
+  &.browse-result-card--focused .browse-result-card__art {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+  }
 }
 
 .browse-result-card:hover {

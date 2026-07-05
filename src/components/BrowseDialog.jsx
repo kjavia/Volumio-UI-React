@@ -88,6 +88,9 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   const browseBodyRef = useRef(null);
   const searchInputRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(
+    typeof window === 'undefined' ? 1920 : window.innerWidth
+  );
   const [focusedGridIndex, setFocusedGridIndex] = useState(-1);
   const pendingFocusIndex = useRef(-1);
 
@@ -128,26 +131,6 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     return () => clearTimeout(t);
   }, [search]);
 
-  // Forward alphanumeric keystrokes to the search bar when it isn't focused
-  useEffect(() => {
-    if (!open) return;
-    function handleKey(e) {
-      // Only single printable characters (letters, digits, common punctuation)
-      if (e.key.length !== 1) return;
-      // Skip if already typing in an input/textarea
-      const tag = document.activeElement?.tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-      // Skip modifier combos (Ctrl+C, etc.)
-      if (e.ctrlKey || e.metaKey || e.altKey) return;
-
-      e.preventDefault();
-      setSearch((prev) => prev + e.key);
-      searchInputRef.current?.focus();
-    }
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
-  }, [open]);
-
   // Observe dialog-body width for grid column calculation — useLayoutEffect so the
   // measurement is committed before the first paint, preventing a 0-width flash.
   useLayoutEffect(() => {
@@ -162,6 +145,16 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     ro.observe(el);
     return () => ro.disconnect();
   }, [open]);
+
+  // Track viewport width so the virtualised grid's tile size scales with the
+  // SCREEN, not the dialog's inner width (matches the CSS `clamp(_, vw, _)`
+  // used for the visible tile min-size).
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+    const handler = () => setViewportWidth(window.innerWidth);
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, []);
 
   const isFavouritesView = currentNav?.uri === 'favourites';
   const isPlaylistsView = currentNav?.uri === 'playlists';
@@ -317,9 +310,33 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   }, [browseItems, isSortableList, sortBy, sortDir]);
 
   const useVirtual = !isSearching && !isFavouritesView;
-  const gridItemMin = largeGrid ? 260 : 130;
+  // Tile size scales with the viewport width (not the dialog's inner width),
+  // clamped to a sensible range. Matches the CSS `.browse-results-grid`
+  // clamp() so JS-computed `numCols` lines up with what CSS renders.
+  //   normal:  clamp(100px, 3.5vw, 130px)  → 130px at 4K
+  //   large:   clamp(200px, 7vw,   260px)  → 2× the normal size
+  const gridItemMin = largeGrid
+    ? Math.min(Math.max(200, viewportWidth * 0.07), 260)
+    : Math.min(Math.max(100, viewportWidth * 0.035), 130);
+  // Column count mirrors CSS `repeat(auto-fill, X)` with a `gap: 1rem`
+  // (16px): fits `floor((W + gap) / (X + gap))` tiles. Ignoring the gap
+  // (as before) undercounted columns, so on wide dialogs there was
+  // visible empty space on the right of every row.
+  const GRID_GAP = 16;
+  // Estimate the browse-body content width before the ResizeObserver has
+  // measured the real value on first mount. Without this estimate,
+  // `containerWidth` starts at 0 and `numCols` falls back to 4 for the
+  // first render — the tiles only take ~50 % of the row until the next
+  // render finishes. Dialog is `dialog-lg` (max 800px) or `dialog-full`
+  // (100vw − 2rem), minus ~2rem body padding and 34px scroller reserve.
+  const estimatedContainerWidth = isFullscreen
+    ? Math.max(200, viewportWidth - 66)
+    : Math.max(200, Math.min(viewportWidth - 32, 800) - 34);
+  const effectiveContainerWidth = containerWidth > 0
+    ? containerWidth
+    : estimatedContainerWidth;
   const numCols = viewMode === 'grid'
-    ? (containerWidth > 0 ? Math.max(1, Math.floor(containerWidth / gridItemMin)) : 4)
+    ? Math.max(1, Math.floor((effectiveContainerWidth + GRID_GAP) / (gridItemMin + GRID_GAP)))
     : 1;
   const virtCount = useVirtual
     ? (viewMode === 'grid' ? Math.ceil(filteredItems.length / numCols) : filteredItems.length)
@@ -382,7 +399,47 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
       ? Math.floor(itemIndex / numCols)
       : itemIndex;
     browseVirtualizer.scrollToIndex(rowIndex, { align: 'start' });
+    // Also focus the first tile matching this letter so it becomes the
+    // selected item (arrow-nav / Enter target). The existing
+    // focusedGridIndex effect handles scrolling + focus after the
+    // virtualizer renders the row.
+    setFocusedGridIndex(itemIndex);
   }, [letterToIndex, viewMode, numCols, browseVirtualizer]);
+
+  // Forward alphanumeric keystrokes to the search bar when it isn't focused.
+  useEffect(() => {
+    if (!open) return;
+    function handleKey(e) {
+      // Only single printable characters (letters, digits, common punctuation)
+      if (e.key.length !== 1) return;
+      // Skip if already typing in an input/textarea
+      const tag = document.activeElement?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      // Skip modifier combos (Ctrl+C, etc.)
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+      e.preventDefault();
+      setSearch((prev) => prev + e.key);
+      searchInputRef.current?.focus();
+    }
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [open]);
+
+  // Look up which letter corresponds to a given item, using the same
+  // scheme as the alphabet scroller (decades for year sort, otherwise
+  // the first title/artist letter).
+  const letterForItem = useCallback((item) => {
+    if (!item) return null;
+    if (sortBy === 'year') {
+      const yr = parseInt(item.year, 10);
+      if (!yr) return null;
+      return `${Math.floor(yr / 10) * 10 % 100}`.padStart(2, '0');
+    }
+    const field = sortBy === 'artist' ? (item.artist || '') : (item.title || '');
+    const firstChar = field.charAt(0).toUpperCase();
+    return /[A-Z]/.test(firstChar) ? firstChar : '#';
+  }, [sortBy]);
 
   // Derive the current letter from the first visible item in the viewport
   const [currentScrollLetter, setCurrentScrollLetter] = useState(null);
@@ -397,20 +454,28 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
     const rowHeight = viewMode === 'grid' ? (largeGrid ? 330 : 200) : 56;
 
     const getLetterFromScroll = () => {
-      const scrollTop = el.scrollTop;
-      const firstRowIndex = Math.floor(scrollTop / rowHeight);
-      const itemIndex = viewMode === 'grid' ? firstRowIndex * numCols : firstRowIndex;
-      const item = filteredItems[Math.min(itemIndex, filteredItems.length - 1)];
-      if (!item) return null;
-
-      if (sortBy === 'year') {
-        const yr = parseInt(item.year, 10);
-        if (!yr) return null;
-        return `${Math.floor(yr / 10) * 10 % 100}`.padStart(2, '0');
+      // Prefer measuring the actual rendered tile art elements. A row is
+      // considered "visible" only once its artwork (top part of the tile)
+      // has cleared the toolbar / top edge — the moment the art scrolls
+      // above the viewport top we advance to the next row's letter.
+      const viewportTop = el.getBoundingClientRect().top;
+      const rows = el.querySelectorAll('[data-index]');
+      for (const row of rows) {
+        const art = row.querySelector('.browse-result-card__art, .browse-result-row__art');
+        const rect = (art || row).getBoundingClientRect();
+        // Small tolerance so subpixel scroll doesn't jitter.
+        if (rect.top >= viewportTop - 2) {
+          const rowIndex = parseInt(row.getAttribute('data-index'), 10);
+          if (Number.isNaN(rowIndex)) continue;
+          const itemIndex = viewMode === 'grid' ? rowIndex * numCols : rowIndex;
+          return letterForItem(filteredItems[Math.min(itemIndex, filteredItems.length - 1)]);
+        }
       }
-      const field = sortBy === 'artist' ? (item.artist || '') : (item.title || '');
-      const firstChar = field.charAt(0).toUpperCase();
-      return /[A-Z]/.test(firstChar) ? firstChar : '#';
+      // Fallback: nothing measured yet — approximate from scrollTop.
+      const scrollTop = el.scrollTop;
+      const firstRowIndex = Math.max(0, Math.round(scrollTop / rowHeight));
+      const itemIndex = viewMode === 'grid' ? firstRowIndex * numCols : firstRowIndex;
+      return letterForItem(filteredItems[Math.min(itemIndex, filteredItems.length - 1)]);
     };
 
     let rafId = null;
@@ -430,7 +495,49 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
       el.removeEventListener('scroll', handleScroll);
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [showAlphabetScroller, filteredItems, viewMode, numCols, sortBy, largeGrid]);
+  }, [showAlphabetScroller, filteredItems, viewMode, numCols, sortBy, largeGrid, letterForItem]);
+
+  // When the user scrolls (trackpad, wheel, drag) and the currently
+  // focused tile leaves the viewport, clear the focus so the highlight
+  // doesn't linger on an off-screen card.
+  useEffect(() => {
+    const el = browseBodyRef.current;
+    if (!el || focusedGridIndex < 0) return;
+    let rafId = null;
+    const checkVisibility = () => {
+      rafId = null;
+      const card = el.querySelector(`.browse-result-card[data-item-index="${focusedGridIndex}"], .browse-result-row[data-item-index="${focusedGridIndex}"]`);
+      if (!card) {
+        setFocusedGridIndex(-1);
+        return;
+      }
+      const bodyRect = el.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      // Consider the card off-screen once it's fully above or below the viewport.
+      if (cardRect.bottom <= bodyRect.top || cardRect.top >= bodyRect.bottom) {
+        setFocusedGridIndex(-1);
+      }
+    };
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(checkVisibility);
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      el.removeEventListener('scroll', onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [focusedGridIndex]);
+
+  // When the user is arrow-navigating between tiles, the highlighted
+  // letter should match the focused tile (not just the first visible
+  // tile). Fall back to the scroll-derived letter otherwise.
+  const currentLetter = useMemo(() => {
+    if (focusedGridIndex >= 0 && filteredItems[focusedGridIndex]) {
+      return letterForItem(filteredItems[focusedGridIndex]);
+    }
+    return currentScrollLetter;
+  }, [focusedGridIndex, filteredItems, letterForItem, currentScrollLetter]);
 
   // ── State-based grid keyboard navigation ──
   // When focusedGridIndex changes, scroll the virtualizer to the target row
@@ -879,9 +986,13 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
                   left: 0,
                   width: '100%',
                   transform: `translateY(${virtualRow.start}px)`,
-                  // Override CSS auto-fill with the computed column count;
-                  // minmax(0,1fr) prevents implicit auto-min expansion.
-                  gridTemplateColumns: `repeat(${numCols}, minmax(0, 1fr))`,
+                  // Fixed-size columns matching the CSS `clamp()` on
+                  // `.browse-results-grid` — using `1fr` here would let
+                  // each tile stretch when the dialog is maximized, which
+                  // defeats the viewport-based sizing. `justify-content:
+                  // start` leaves any leftover row space as trailing gap.
+                  gridTemplateColumns: `repeat(${numCols}, ${gridItemMin}px)`,
+                  justifyContent: 'start',
                   // Remove CSS class padding — rows are positioned absolutely, gap is handled
                   // by virtualRow.start offsets and paddingBottom on each row.
                   padding: 0,
@@ -946,17 +1057,19 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
       );
 
       return (
-        <>
-          {scrollContent}
+        <div className="browse-body">
+          <div className="browse-body__scroll" ref={browseBodyRef}>
+            {scrollContent}
+          </div>
           {showAlphabetScroller && (
             <AlphabetScroller
               labels={scrollerLabels || undefined}
               availableLetters={availableLetters}
-              currentLetter={currentScrollLetter}
+              currentLetter={currentLetter}
               onSelect={handleAlphabetSelect}
             />
           )}
-        </>
+        </div>
       );
     }
 
@@ -993,11 +1106,10 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
         onClose={onClose}
         title={isSearching ? `Search: ${debouncedSearch}` : currentNav ? currentNav.title : 'Browse'}
         size={isFullscreen ? 'full' : 'lg'}
-        className={[isFullscreen ? 'browse-dialog--fullscreen' : null, classNameProp].filter(Boolean).join(' ') || undefined}
+        className={[isFullscreen ? 'browse-dialog--fullscreen' : null, 'browse-dialog', classNameProp].filter(Boolean).join(' ') || undefined}
         headerActions={headerActions}
         toolbar={toolbar}
         footer={albumFooter}
-        bodyRef={browseBodyRef}
       >
         {isSearching || currentNav ? renderBrowseResults() : renderHome()}
       </Dialog>
