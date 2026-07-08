@@ -743,6 +743,20 @@ export default function LayoutDesigner() {
     applyLayoutUpdate({ ...activeLayout, cells: updateCellById(activeLayout.cells, cellId, { itemKey: null }) });
   }
 
+  function handleRemoveAllCells() {
+    if (!activeLayout) return;
+    if (!window.confirm(t('toolbar_confirm_remove_all') || 'Remove all cells and reset the layout to a single empty cell?')) return;
+    applyLayoutUpdate({
+      ...activeLayout,
+      rows: 1,
+      cols: 1,
+      rowFractions: [1],
+      colFractions: [1],
+      cells: [[makeCell()]],
+    });
+    setSelectedCells([]);
+  }
+
   function handleSetCellPlayerType(cellId, playerType) {
     if (!activeLayout) return;
     applyLayoutUpdate({ ...activeLayout, cells: updateCellById(activeLayout.cells, cellId, { playerType: playerType || null }) });
@@ -1017,6 +1031,16 @@ export default function LayoutDesigner() {
         >
           <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>delete_sweep</span>
           <span className="ms-1">{t('toolbar_clear')}</span>
+        </button>
+
+        <button
+          className="btn btn-sm btn-outline-secondary"
+          disabled={!activeLayout}
+          onClick={handleRemoveAllCells}
+          title={t('toolbar_title_remove_all') || 'Remove all cells (reset layout)'}
+        >
+          <span className="material-icons" style={{ fontSize: '1rem', verticalAlign: 'middle' }}>clear_all</span>
+          <span className="ms-1">{t('toolbar_remove_all') || 'Remove All'}</span>
         </button>
 
         {canAlign && (

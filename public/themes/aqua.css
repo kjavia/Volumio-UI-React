@@ -1831,10 +1831,10 @@ pre {
 }
 .btn-round::after {
   border-radius: 50%;
-  height: 45%;
-  top: 2px;
-  left: 3px;
-  right: 3px;
+  height: 46%;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .btn-square {

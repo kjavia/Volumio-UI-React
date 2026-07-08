@@ -280,6 +280,9 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
   }, []);
 
   const isSortableList = !isSearching && browseItems.length > 1 && !browseItems.every((i) => i.type === 'song');
+  // Sort controls (browse-sort-group) are only shown when the dialog
+  // is displaying the "Albums" section (matched by nav title).
+  const isAlbumListView = !isSearching && (currentNav?.title || '').trim().toLowerCase() === 'albums';
 
   const toggleSort = useCallback((field) => {
     if (sortBy === field) {
@@ -784,7 +787,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
             <span className="material-icons">{largeGrid ? 'zoom_out' : 'zoom_in'}</span>
           </Button>
         )}
-        {currentNav && isSortableList && (
+        {currentNav && isSortableList && isAlbumListView && (
           <div className="browse-sort-group">
             <Button
               classNames={`btn-icon btn-sort${sortBy === 'name' ? ' active' : ''}`}
