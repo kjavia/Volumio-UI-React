@@ -1,319 +1,321 @@
 :root {
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        COLOR PALETTE - Aqua Theme (macOS Classic)
        ═══════════════════════════════════════════════════════════════════════ */
 
-    /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
-    --color-primary: #147aff;
-    /* Classic macOS Aqua blue */
-    --color-primary-light: #6cabff;
-    --color-primary-dark: #1060e8;
-    --color-primary-deep: #0036ab;
+   /* ─── Primary (Aqua Blue) ──────────────────────────────────────────── */
+   /* Classic Lion-era Aqua selection blue — brighter and lighter than
+       the deep royal blue we had. Sampled from the standard reference
+       Lion UI: bright azure gradient family. */
+   --color-primary: #4a9cf0;
+   --color-primary-light: #7abaf5;
+   --color-primary-dark: #2e82e6;
+   --color-primary-deep: #1060c8;
 
-    /* ─── Neutrals (Silver/Grays) ─────────────────────────────────────── */
-    --color-black: #000000;
-    --color-gray-950: #1a1a1a;
-    --color-gray-900: #2c2c2c;
-    --color-gray-850: #323232;
-    --color-gray-800: #3a3a3a;
-    --color-gray-750: #4a4a4a;
-    --color-gray-700: #555555;
-    --color-gray-600: #6e6e6e;
-    --color-gray-550: #7a7a7a;
-    --color-gray-500: #888888;
-    --color-gray-400: #ababab;
-    --color-gray-300: #c4c4c4;
-    --color-gray-250: #d0d0d0;
-    --color-gray-200: #d6d6d6;
-    --color-gray-150: #e0e0e0;
-    --color-gray-100: #ebebeb;
-    /* Classic macOS window background */
-    --color-gray-075: #efefef;
-    --color-gray-050: #f2f2f2;
-    --color-gray-025: #f7f7f7;
-    --color-gray-010: #fafafa;
-    --color-white: #ffffff;
+   /* ─── Neutrals (Silver/Grays) ─────────────────────────────────────── */
+   --color-black: #000000;
+   --color-gray-950: #1a1a1a;
+   --color-gray-900: #2c2c2c;
+   --color-gray-850: #323232;
+   --color-gray-800: #3a3a3a;
+   --color-gray-750: #4a4a4a;
+   --color-gray-700: #555555;
+   --color-gray-600: #6e6e6e;
+   --color-gray-550: #7a7a7a;
+   --color-gray-500: #888888;
+   --color-gray-400: #ababab;
+   --color-gray-300: #c4c4c4;
+   --color-gray-250: #d0d0d0;
+   --color-gray-200: #d6d6d6;
+   --color-gray-150: #e0e0e0;
+   --color-gray-100: #ebebeb;
+   /* Classic macOS window background */
+   --color-gray-075: #efefef;
+   --color-gray-050: #f2f2f2;
+   --color-gray-025: #f7f7f7;
+   --color-gray-010: #fafafa;
+   --color-white: #ffffff;
 
-    /* ─── Warm Neutrals (Brushed Aluminum) ────────────────────────────── */
-    --color-aluminum-dark: #8a8a8a;
-    --color-aluminum-light: #e8e8e8;
-    --color-aluminum-medium: #c0c0c0;
+   /* ─── Warm Neutrals (Brushed Aluminum) ────────────────────────────── */
+   --color-aluminum-dark: #8a8a8a;
+   --color-aluminum-light: #e8e8e8;
+   --color-aluminum-medium: #c0c0c0;
 
-    /* ─── Secondary (Silver) ──────────────────────────────────────────── */
-    --color-secondary: #a0a0a0;
-    --color-secondary-light: #c0c0c0;
-    --color-secondary-dark: #808080;
+   /* ─── Secondary (Silver) ──────────────────────────────────────────── */
+   --color-secondary: #a0a0a0;
+   --color-secondary-light: #c0c0c0;
+   --color-secondary-dark: #808080;
 
-    /* ─── Success/Green (Traffic Light) ───────────────────────────────── */
-    --color-success: #28c840;
-    --color-success-dark: #1ea832;
-    --color-success-light: #5dd773;
+   /* ─── Success/Green (Traffic Light) ───────────────────────────────── */
+   --color-success: #28c840;
+   --color-success-dark: #1ea832;
+   --color-success-light: #5dd773;
 
-    /* ─── Warning/Yellow (Traffic Light) ──────────────────────────────── */
-    --color-warning: #ffbd2e;
-    --color-warning-dark: #e6a320;
-    --color-warning-light: #ffd76f;
+   /* ─── Warning/Yellow (Traffic Light) ──────────────────────────────── */
+   --color-warning: #ffbd2e;
+   --color-warning-dark: #e6a320;
+   --color-warning-light: #ffd76f;
 
-    /* ─── Danger/Red (Traffic Light) ──────────────────────────────────── */
-    --color-danger: #ff5f57;
-    --color-danger-dark: #d93832;
-    --color-danger-light: #ff8f88;
-    --color-danger-muted: #4a2020;
+   /* ─── Danger/Red (Traffic Light) ──────────────────────────────────── */
+   --color-danger: #ff5f57;
+   --color-danger-dark: #d93832;
+   --color-danger-light: #ff8f88;
+   --color-danger-muted: #4a2020;
 
-    /* ─── Info/Teal (Aqua Accent) ─────────────────────────────────────── */
-    --color-info: #00b4d8;
-    --color-info-dark: #0077b6;
-    --color-info-light: #48cae4;
+   /* ─── Info/Teal (Aqua Accent) ─────────────────────────────────────── */
+   --color-info: #00b4d8;
+   --color-info-dark: #0077b6;
+   --color-info-light: #48cae4;
 
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        SEMANTIC COLOR USAGE
        ═══════════════════════════════════════════════════════════════════════ */
 
-    /* ─── Text Colors ──────────────────────────────────────────────────── */
-    --text-primary: #1d1d1f;
-    /* Apple's near-black for text */
-    --text-secondary: var(--color-gray-600);
-    --text-accent: var(--color-primary);
-    --text-success: var(--color-success-dark);
-    --text-warning: var(--color-warning-dark);
-    --text-danger: var(--color-danger);
-    --text-info: var(--color-info-dark);
+   /* ─── Text Colors ──────────────────────────────────────────────────── */
+   --text-primary: #1d1d1f;
+   /* Apple's near-black for text */
+   --text-secondary: var(--color-gray-600);
+   --text-accent: var(--color-primary);
+   --text-success: var(--color-success-dark);
+   --text-warning: var(--color-warning-dark);
+   --text-danger: var(--color-danger);
+   --text-info: var(--color-info-dark);
 
-    /* ─── Background Colors ────────────────────────────────────────────── */
-    --bg-color: var(--color-gray-100);
-    /* Classic macOS window gray */
-    --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
-    --panel-bg-dark: #1c1c1e;
-    --device-surface: #dcdcdc;
-    /* Brushed aluminum panel */
+   /* ─── Background Colors ────────────────────────────────────────────── */
+   --bg-color: var(--color-gray-100);
+   /* Classic macOS window gray */
+   --album-art-shadow: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
+   --panel-bg-dark: #1c1c1e;
+   --device-surface: #dcdcdc;
+   /* Brushed aluminum panel */
 
-    /* ─── Button Colors ────────────────────────────────────────────────── */
-    --btn-bg-dark: #3a3a3c;
-    --btn-bg-light: var(--color-white);
-    --btn-bg-primary: var(--color-primary);
-    --btn-bg-secondary: var(--color-secondary);
-    --btn-bg-success: var(--color-success);
-    --btn-bg-warning: var(--color-warning);
-    --btn-bg-danger: var(--color-danger);
-    --btn-bg-info: var(--color-info);
+   /* ─── Button Colors ────────────────────────────────────────────────── */
+   --btn-bg-dark: #3a3a3c;
+   --btn-bg-light: var(--color-white);
+   --btn-bg-primary: var(--color-primary);
+   --btn-bg-secondary: var(--color-secondary);
+   --btn-bg-success: var(--color-success);
+   --btn-bg-warning: var(--color-warning);
+   --btn-bg-danger: var(--color-danger);
+   --btn-bg-info: var(--color-info);
 
-    /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
-    --alert-bg-success: rgba(40, 200, 64, 0.12);
-    --alert-bg-warning: rgba(255, 189, 46, 0.12);
-    --alert-bg-danger: rgba(255, 95, 87, 0.12);
-    --alert-bg-info: rgba(0, 180, 216, 0.12);
-    --alert-border-success: var(--color-success);
-    --alert-border-warning: var(--color-warning);
-    --alert-border-danger: var(--color-danger);
-    --alert-border-info: var(--color-info);
+   /* ─── Alert/Notification Backgrounds ──────────────────────────────── */
+   --alert-bg-success: rgba(40, 200, 64, 0.12);
+   --alert-bg-warning: rgba(255, 189, 46, 0.12);
+   --alert-bg-danger: rgba(255, 95, 87, 0.12);
+   --alert-bg-info: rgba(0, 180, 216, 0.12);
+   --alert-border-success: var(--color-success);
+   --alert-border-warning: var(--color-warning);
+   --alert-border-danger: var(--color-danger);
+   --alert-border-info: var(--color-info);
 
-    /* ─── UI Components ────────────────────────────────────────────────── */
-    --list-item-bg: rgba(255, 255, 255, 0.6);
-    --list-item-bg-hover: rgba(20, 122, 255, 0.12);
-    --border-dark: rgba(0, 0, 0, 0.12);
-    --border-light: rgba(255, 255, 255, 0.8);
-    --border-warm: var(--color-aluminum-medium);
-    --border-primary: var(--color-primary);
-    --border-secondary: var(--color-secondary);
-    --border-success: var(--color-success);
-    --border-warning: var(--color-warning);
-    --border-danger: var(--color-danger);
-    --border-info: var(--color-info);
+   /* ─── UI Components ────────────────────────────────────────────────── */
+   --list-item-bg: rgba(255, 255, 255, 0.6);
+   --list-item-bg-hover: rgba(20, 122, 255, 0.12);
+   --border-dark: rgba(0, 0, 0, 0.12);
+   --border-light: rgba(255, 255, 255, 0.8);
+   --border-warm: var(--color-aluminum-medium);
+   --border-primary: var(--color-primary);
+   --border-secondary: var(--color-secondary);
+   --border-success: var(--color-success);
+   --border-warning: var(--color-warning);
+   --border-danger: var(--color-danger);
+   --border-info: var(--color-info);
 
-    /* ─── Status & Indicators ──────────────────────────────────────────── */
-    --led-on: var(--color-success);
-    --led-off: #1a5c24;
-    --indicator-success: var(--color-success);
-    --indicator-warning: var(--color-warning);
-    --indicator-danger: var(--color-danger);
-    --indicator-info: var(--color-info);
-    --indicator-error: var(--color-danger);
+   /* ─── Status & Indicators ──────────────────────────────────────────── */
+   --led-on: var(--color-success);
+   --led-off: #1a5c24;
+   --indicator-success: var(--color-success);
+   --indicator-warning: var(--color-warning);
+   --indicator-danger: var(--color-danger);
+   --indicator-info: var(--color-info);
+   --indicator-error: var(--color-danger);
 
-    /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
-    --grad-primary: linear-gradient(180deg,
-            var(--color-primary-light),
-            var(--color-primary-dark));
-    --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
-    --grad-warm: linear-gradient(135deg,
-            var(--color-aluminum-light),
-            var(--color-aluminum-dark));
+   /* ─── Gradients (Glossy Aqua Gel Effect) ──────────────────────────── */
+   --grad-primary: linear-gradient(180deg,
+         var(--color-primary-light),
+         var(--color-primary-dark));
+   --grad-metallic: linear-gradient(180deg, #f5f5f5, #d8d8d8);
+   --grad-warm: linear-gradient(135deg,
+         var(--color-aluminum-light),
+         var(--color-aluminum-dark));
 
-    /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
-    --btn-black-top: var(--color-gray-700);
-    --btn-black-btm: var(--color-gray-800);
-    --btn-white-top: #ffffff;
-    --btn-white-btm: #dcdcdc;
-    --btn-primary-top: #6db3f2;
-    --btn-primary-btm: #1e69de;
-    --btn-secondary-top: var(--color-secondary-light);
-    --btn-secondary-btm: var(--color-secondary-dark);
-    --btn-success-top: var(--color-success-light);
-    --btn-success-btm: var(--color-success-dark);
-    --btn-warning-top: var(--color-warning-light);
-    --btn-warning-btm: var(--color-warning-dark);
-    --btn-danger-top: var(--color-danger-light);
-    --btn-danger-btm: var(--color-danger-dark);
-    --btn-info-top: var(--color-info-light);
-    --btn-info-btm: var(--color-info-dark);
+   /* ─── Button Gradients (Aqua Gel Style) ───────────────────────────── */
+   --btn-black-top: var(--color-gray-700);
+   --btn-black-btm: var(--color-gray-800);
+   --btn-white-top: #ffffff;
+   --btn-white-btm: #dcdcdc;
+   --btn-primary-top: #6db3f2;
+   --btn-primary-btm: #1e69de;
+   --btn-secondary-top: var(--color-secondary-light);
+   --btn-secondary-btm: var(--color-secondary-dark);
+   --btn-success-top: var(--color-success-light);
+   --btn-success-btm: var(--color-success-dark);
+   --btn-warning-top: var(--color-warning-light);
+   --btn-warning-btm: var(--color-warning-dark);
+   --btn-danger-top: var(--color-danger-light);
+   --btn-danger-btm: var(--color-danger-dark);
+   --btn-info-top: var(--color-info-light);
+   --btn-info-btm: var(--color-info-dark);
 
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        SHADOW & HIGHLIGHT OVERLAYS
        ═══════════════════════════════════════════════════════════════════════ */
 
-    /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
-    --shadow-02: rgba(0, 0, 0, 0.02);
-    --shadow-03: rgba(0, 0, 0, 0.03);
-    --shadow-05: rgba(0, 0, 0, 0.05);
-    --shadow-08: rgba(0, 0, 0, 0.08);
-    --shadow-10: rgba(0, 0, 0, 0.1);
-    --shadow-15: rgba(0, 0, 0, 0.15);
-    --shadow-20: rgba(0, 0, 0, 0.2);
-    --shadow-30: rgba(0, 0, 0, 0.3);
-    --shadow-40: rgba(0, 0, 0, 0.4);
-    --shadow-50: rgba(0, 0, 0, 0.5);
-    --shadow-60: rgba(0, 0, 0, 0.6);
-    --shadow-80: rgba(0, 0, 0, 0.8);
-    --shadow-90: rgba(0, 0, 0, 0.9);
+   /* ─── Shadow Overlays (Black with alpha) ──────────────────────────── */
+   --shadow-02: rgba(0, 0, 0, 0.02);
+   --shadow-03: rgba(0, 0, 0, 0.03);
+   --shadow-05: rgba(0, 0, 0, 0.05);
+   --shadow-08: rgba(0, 0, 0, 0.08);
+   --shadow-10: rgba(0, 0, 0, 0.1);
+   --shadow-15: rgba(0, 0, 0, 0.15);
+   --shadow-20: rgba(0, 0, 0, 0.2);
+   --shadow-30: rgba(0, 0, 0, 0.3);
+   --shadow-40: rgba(0, 0, 0, 0.4);
+   --shadow-50: rgba(0, 0, 0, 0.5);
+   --shadow-60: rgba(0, 0, 0, 0.6);
+   --shadow-80: rgba(0, 0, 0, 0.8);
+   --shadow-90: rgba(0, 0, 0, 0.9);
 
-    /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
-    --highlight-03: rgba(255, 255, 255, 0.03);
-    --highlight-05: rgba(255, 255, 255, 0.05);
-    --highlight-10: rgba(255, 255, 255, 0.1);
-    --highlight-15: rgba(255, 255, 255, 0.15);
-    --highlight-20: rgba(255, 255, 255, 0.2);
-    --highlight-30: rgba(255, 255, 255, 0.3);
-    --highlight-40: rgba(255, 255, 255, 0.4);
-    --highlight-50: rgba(255, 255, 255, 0.5);
-    --highlight-60: rgba(255, 255, 255, 0.6);
-    --highlight-80: rgba(255, 255, 255, 0.8);
+   /* ─── Highlight Overlays (White with alpha) ───────────────────────── */
+   --highlight-03: rgba(255, 255, 255, 0.03);
+   --highlight-05: rgba(255, 255, 255, 0.05);
+   --highlight-10: rgba(255, 255, 255, 0.1);
+   --highlight-15: rgba(255, 255, 255, 0.15);
+   --highlight-20: rgba(255, 255, 255, 0.2);
+   --highlight-30: rgba(255, 255, 255, 0.3);
+   --highlight-40: rgba(255, 255, 255, 0.4);
+   --highlight-50: rgba(255, 255, 255, 0.5);
+   --highlight-60: rgba(255, 255, 255, 0.6);
+   --highlight-80: rgba(255, 255, 255, 0.8);
 
-    /* ─── Glow Effects ─────────────────────────────────────────────────── */
-    --glow-primary: rgba(20, 122, 255, 0.4);
-    --glow-success: rgba(40, 200, 64, 0.4);
-    --glow-warning: rgba(255, 189, 46, 0.4);
-    --glow-danger: rgba(255, 95, 87, 0.4);
-    --glow-info: rgba(0, 180, 216, 0.4);
+   /* ─── Glow Effects ─────────────────────────────────────────────────── */
+   --glow-primary: rgba(20, 122, 255, 0.4);
+   --glow-success: rgba(40, 200, 64, 0.4);
+   --glow-warning: rgba(255, 189, 46, 0.4);
+   --glow-danger: rgba(255, 95, 87, 0.4);
+   --glow-info: rgba(0, 180, 216, 0.4);
 
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        TYPOGRAPHY
        ═══════════════════════════════════════════════════════════════════════ */
 
-    /* ─── Font Families ────────────────────────────────────────────────── */
-    --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
-    --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
-    --font-tech: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
-    --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
-    --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
+   /* ─── Font Families ────────────────────────────────────────────────── */
+   --font-body: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+   --font-label: -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+   --font-tech: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+   --font-display: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+   --font-mono: 'SF Mono', 'Menlo', 'Courier New', monospace;
 
-    /* ─── Type Scale ───────────────────────────────────────────────────── */
-    /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
+   /* ─── Type Scale ───────────────────────────────────────────────────── */
+   /* ── Fluid Type Scale (min: 320px viewport → max: 1440px viewport) ──────
        Formula: clamp(min, intercept + slope * 100vw, max)
        Generated via Utopia method: slope = (max−min)/(1440−320)
        ─────────────────────────────────────────────────────────────────── */
-    --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
-    /* 10→12px */
-    --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
-    /* 12→14px */
-    --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
-    /* 13→16px */
-    --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
-    /* 14→18px */
-    --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
-    /* 16→20px */
-    --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
-    /* 18→24px */
-    --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
-    /* 20→30px */
-    --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
-    /* 24→40px */
-    --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
-    /* 30→52px */
+   --text-xs: clamp(0.625rem, 0.589rem + 0.179vw, 0.75rem);
+   /* 10→12px */
+   --text-sm: clamp(0.75rem, 0.714rem + 0.179vw, 0.875rem);
+   /* 12→14px */
+   --text-base: clamp(0.8125rem, 0.759rem + 0.268vw, 1rem);
+   /* 13→16px */
+   --text-md: clamp(0.875rem, 0.804rem + 0.357vw, 1.125rem);
+   /* 14→18px */
+   --text-lg: clamp(1rem, 0.929rem + 0.357vw, 1.25rem);
+   /* 16→20px */
+   --text-xl: clamp(1.125rem, 1.018rem + 0.536vw, 1.5rem);
+   /* 18→24px */
+   --text-2xl: clamp(1.25rem, 1.071rem + 0.893vw, 1.875rem);
+   /* 20→30px */
+   --text-3xl: clamp(1.5rem, 1.214rem + 1.429vw, 2.5rem);
+   /* 24→40px */
+   --text-4xl: clamp(1.875rem, 1.482rem + 1.964vw, 3.25rem);
+   /* 30→52px */
 
-    /* ─── Line Heights ─────────────────────────────────────────────────── */
-    --leading-tight: 1.2;
-    --leading-normal: 1.5;
-    --leading-relaxed: 1.75;
+   /* ─── Line Heights ─────────────────────────────────────────────────── */
+   --leading-tight: 1.2;
+   --leading-normal: 1.5;
+   --leading-relaxed: 1.75;
 
-    /* ─── Letter Spacing ───────────────────────────────────────────────── */
-    --tracking-tight: -0.025em;
-    --tracking-normal: -0.01em;
-    /* Apple uses tighter tracking */
-    --tracking-wide: 0.01em;
-    --tracking-wider: 0.03em;
-    --tracking-widest: 0.06em;
+   /* ─── Letter Spacing ───────────────────────────────────────────────── */
+   --tracking-tight: -0.025em;
+   --tracking-normal: -0.01em;
+   /* Apple uses tighter tracking */
+   --tracking-wide: 0.01em;
+   --tracking-wider: 0.03em;
+   --tracking-widest: 0.06em;
 
-    /* ═══════════════════════════════════════════════════════════════════════
+   /* ═══════════════════════════════════════════════════════════════════════
        BACKWARD COMPATIBILITY ALIASES
        (Legacy variable names → New semantic names)
        ═══════════════════════════════════════════════════════════════════════ */
 
-    /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
-    --color-aqua-vivid: var(--color-primary);
-    --color-aqua-bright: var(--color-primary-light);
-    --color-aqua-mid: var(--color-primary-dark);
-    --color-aqua-deep: var(--color-primary-deep);
+   /* ─── Legacy Aqua ──────────────────────────────────────────────────── */
+   --color-aqua-vivid: var(--color-primary);
+   --color-aqua-bright: var(--color-primary-light);
+   --color-aqua-mid: var(--color-primary-dark);
+   --color-aqua-deep: var(--color-primary-deep);
 
-    /* ─── Legacy Orange (Maps to Aqua blue for consistency) ───────────── */
-    --color-orange-vivid: var(--color-primary);
-    --color-orange-light: var(--color-primary-light);
-    --color-orange-dark: var(--color-primary-dark);
-    --color-orange-deep: var(--color-primary-deep);
+   /* ─── Legacy Orange (Maps to Aqua blue for consistency) ───────────── */
+   --color-orange-vivid: var(--color-primary);
+   --color-orange-light: var(--color-primary-light);
+   --color-orange-dark: var(--color-primary-dark);
+   --color-orange-deep: var(--color-primary-deep);
 
-    /* ─── Legacy Colors ────────────────────────────────────────────────── */
-    --color-green-vivid: var(--color-success);
-    --color-green-dark: var(--color-success-dark);
-    --color-yellow-vivid: var(--color-warning);
-    --color-red-vivid: var(--color-danger);
-    --color-red-deep: var(--color-danger-dark);
+   /* ─── Legacy Colors ────────────────────────────────────────────────── */
+   --color-green-vivid: var(--color-success);
+   --color-green-dark: var(--color-success-dark);
+   --color-yellow-vivid: var(--color-warning);
+   --color-red-vivid: var(--color-danger);
+   --color-red-deep: var(--color-danger-dark);
 
-    /* ─── Legacy Teal ──────────────────────────────────────────────────── */
-    --color-teal-vivid: var(--color-info);
-    --color-teal-light: var(--color-info-light);
-    --color-teal-dark: var(--color-info-dark);
+   /* ─── Legacy Teal ──────────────────────────────────────────────────── */
+   --color-teal-vivid: var(--color-info);
+   --color-teal-light: var(--color-info-light);
+   --color-teal-dark: var(--color-info-dark);
 
-    /* ─── Legacy Text ──────────────────────────────────────────────────── */
-    --text-dark: var(--text-primary);
-    --text-light: var(--color-white);
-    --text-muted: var(--color-gray-600);
-    --text-dim: var(--color-gray-500);
-    --text-aqua: var(--text-accent);
-    --text-orange: var(--text-accent);
+   /* ─── Legacy Text ──────────────────────────────────────────────────── */
+   --text-dark: var(--text-primary);
+   --text-light: var(--color-white);
+   --text-muted: var(--color-gray-600);
+   --text-dim: var(--color-gray-500);
+   --text-aqua: var(--text-accent);
+   --text-orange: var(--text-accent);
 
-    /* ─── Legacy Buttons ───────────────────────────────────────────────── */
-    --btn-bg-accent: var(--btn-bg-primary);
-    --btn-bg-orange: var(--btn-bg-primary);
-    --btn-accent-top: var(--btn-primary-top);
-    --btn-accent-btm: var(--btn-primary-btm);
-    --btn-orange-top: var(--btn-primary-top);
-    --btn-orange-btm: var(--btn-primary-btm);
-    --btn-default-top: var(--btn-white-top);
-    --btn-default-btm: var(--btn-white-btm);
+   /* ─── Legacy Buttons ───────────────────────────────────────────────── */
+   --btn-bg-accent: var(--btn-bg-primary);
+   --btn-bg-orange: var(--btn-bg-primary);
+   --btn-accent-top: var(--btn-primary-top);
+   --btn-accent-btm: var(--btn-primary-btm);
+   --btn-orange-top: var(--btn-primary-top);
+   --btn-orange-btm: var(--btn-primary-btm);
+   --btn-default-top: var(--btn-white-top);
+   --btn-default-btm: var(--btn-white-btm);
 
-    /* ─── Legacy Indicators ────────────────────────────────────────────── */
-    --led-green-on: var(--led-on);
-    --led-green-off: var(--led-off);
+   /* ─── Legacy Indicators ────────────────────────────────────────────── */
+   --led-green-on: var(--led-on);
+   --led-green-off: var(--led-off);
 
-    /* ─── Legacy Gradients ─────────────────────────────────────────────── */
-    --grad-accent: var(--grad-primary);
-    --grad-orange-vivid: var(--grad-primary);
-    --grad-surface: var(--grad-metallic);
-    --grad-window: linear-gradient(180deg, #e8e8e8 0%, #d4d4d4 100%);
-    --glow-aqua-40: var(--glow-primary);
-    --glow-orange-40: var(--glow-primary);
-    --glow-aqua-60: rgba(20, 122, 255, 0.6);
-    --glow-aqua-20: rgba(20, 122, 255, 0.2);
+   /* ─── Legacy Gradients ─────────────────────────────────────────────── */
+   --grad-accent: var(--grad-primary);
+   --grad-orange-vivid: var(--grad-primary);
+   --grad-surface: var(--grad-metallic);
+   --grad-window: linear-gradient(180deg, #e8e8e8 0%, #d4d4d4 100%);
+   --glow-aqua-40: var(--glow-primary);
+   --glow-orange-40: var(--glow-primary);
+   --glow-aqua-60: rgba(20, 122, 255, 0.6);
+   --glow-aqua-20: rgba(20, 122, 255, 0.2);
 
-    /* ─── Legacy Aqua Gradients (Classic Gel) ─────────────────────────── */
-    --aqua-blue-top: var(--btn-primary-top);
-    --aqua-blue-btm: var(--btn-primary-btm);
-    --aqua-blue-border: #134db3;
-    --aqua-silver-top: var(--btn-white-top);
-    --aqua-silver-btm: var(--btn-white-btm);
-    --aqua-silver-border: var(--color-secondary);
+   /* ─── Legacy Aqua Gradients (Classic Gel) ─────────────────────────── */
+   --aqua-blue-top: var(--btn-primary-top);
+   --aqua-blue-btm: var(--btn-primary-btm);
+   --aqua-blue-border: #134db3;
+   --aqua-silver-top: var(--btn-white-top);
+   --aqua-silver-btm: var(--btn-white-btm);
+   --aqua-silver-border: var(--color-secondary);
 
-    /* ─── Legacy Borders ───────────────────────────────────────────────── */
-    --border-accent: var(--border-primary);
+   /* ─── Legacy Borders ───────────────────────────────────────────────── */
+   --border-accent: var(--border-primary);
 
-    /* ─── Legacy Panel ─────────────────────────────────────────────────── */
-    --panel-bg-light: rgba(255, 255, 255, 0.72);
+   /* ─── Legacy Panel ─────────────────────────────────────────────────── */
+   --panel-bg-light: rgba(255, 255, 255, 0.72);
 }

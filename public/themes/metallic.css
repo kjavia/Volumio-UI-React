@@ -800,10 +800,10 @@ pre {
 
 /* When the alphabet scroller is present, reserve horizontal space on the
    right so grid tiles and list rows don't slide underneath the letters.
-   The scroller sits at `right: 20px` (past the scrollbar) with a 34px
-   width — give ~60px of clearance so nothing overlaps. */
+   The scroller sits at `right: 28px` (past the scrollbar) with a 34px
+   width — give ~68px of clearance so nothing overlaps. */
 .browse-body:has(.alphabet-scroller) .browse-body__scroll {
-  padding-right: 60px;
+  padding-right: 68px;
 }
 
 @keyframes dialogBackdropFadeIn {
@@ -5672,5 +5672,3 @@ h2 {
 body {
   background-color: var(--bg-color);
 }
-
-/*# sourceMappingURL=metallic.css.map */

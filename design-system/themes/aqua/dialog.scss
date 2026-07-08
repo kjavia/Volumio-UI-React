@@ -60,17 +60,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
   flex-shrink: 0;
 
-  /* Pinstripe pattern (classic Aqua) */
-  background-color: #f2f2f2;
-  background-image: repeating-linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.7) 0px,
-      rgba(255, 255, 255, 0.7) 1px,
-      transparent 1px,
-      transparent 2px);
+  /* Flat, subtle gray title-bar — no pinstripe. */
+  background: linear-gradient(180deg, #e3e3e3 0%, #d1d1d1 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
   border-radius: 12px 12px 0 0;
 }
 
@@ -85,30 +81,65 @@
 
 .dialog-close {
   position: relative;
-  width: clamp(28px, 3.2vw, 32px);
-  height: clamp(28px, 3.2vw, 32px);
+  width: clamp(14px, 1.5vw, 16px);
+  height: clamp(14px, 1.5vw, 16px);
+  // Reset Bootstrap `.btn` sizing so the traffic-light stays circular
+  // when the same element also has `.btn.btn-icon` classes.
+  min-width: 0;
+  min-height: 0;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   border-radius: 50%;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: filter 0.12s ease;
   flex-shrink: 0;
 
-  // Gel shine overlay
+  // Classic Aqua traffic-light gel — a proper shiny dome:
+  //   • deep outer drop shadow anchors it on the toolbar
+  //   • bright inset top highlight + dark inset bottom shadow round
+  //     out the sphere
+  //   • the ::after adds the crisp arc-shaped gloss on top
+  //   • the ::before is the tiny bright specular reflection dot
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.28);
+
+  // Specular reflection dot — small bright oval near the top-center.
+  &::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    width: 40%;
+    height: 20%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.55) 55%,
+        rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  // Broader top-half gloss that curves around the dome. Nearly opaque
+  // white at the very top so the gel highlight really pops.
   &::after {
     content: '';
     position: absolute;
-    top: 1px;
-    left: 2px;
-    right: 2px;
-    height: 48%;
-    border-radius: 4px 4px 1px 1px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.08) 100%);
+    top: 4%;
+    left: 6%;
+    right: 6%;
+    height: 46%;
+    border-radius: 50%;
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.15) 100%);
     pointer-events: none;
+    z-index: 1;
   }
 
   // Hide icon — macOS traffic light dots show no symbol at rest
@@ -116,22 +147,44 @@
     display: none;
   }
 
-  &:hover {
-    filter: brightness(1.12);
+  // `.btn-icon:hover` from the shared button styles overrides the
+  // background to a transparent gray, wiping out the traffic-light
+  // color. Re-apply the base color on hover/focus (higher specificity
+  // via the compound selectors below) and use `filter: brightness()`
+  // for the actual hover feedback.
+  &:hover,
+  &:focus-visible {
+    filter: brightness(1.08);
   }
 
   &:active {
-    filter: brightness(0.88);
+    filter: brightness(0.9);
   }
 
-  // Default (close) — Aqua red traffic light
-  background: linear-gradient(to bottom, #ff7b7e 0%, var(--color-red-vivid) 50%, #c9302c 51%, #f07070 100%);
-  border: 1px solid #e04347;
+  // Default (close) — smooth Aqua red gel sphere. No hard seam: the
+  // colour glides from bright top → saturated mid → deeper bottom.
+  // The ::after gloss and ::before specular dot supply the highlight.
+  &,
+  &:hover,
+  &:focus-visible,
+  &:active {
+    background: linear-gradient(to bottom,
+        #ffa6a0 0%,
+        #f2544c 55%,
+        #b62820 100%);
+    border: 1px solid #6b1a15;
+  }
 
-  // Fullscreen/expand toggle — Aqua green traffic light
-  &.dialog-close--expand {
-    background: linear-gradient(to bottom, #6ee06e 0%, var(--color-green-vivid) 50%, #168a20 51%, #5ed85e 100%);
-    border: 1px solid #16aa29;
+  // Fullscreen/expand toggle — smooth Aqua green gel sphere.
+  &.dialog-close--expand,
+  &.dialog-close--expand:hover,
+  &.dialog-close--expand:focus-visible,
+  &.dialog-close--expand:active {
+    background: linear-gradient(to bottom,
+        #b8e8a5 0%,
+        #58c045 55%,
+        #197d16 100%);
+    border: 1px solid #063f05;
   }
 }
 
@@ -167,8 +220,10 @@
 
     /* remove Aqua gel-shine */
 
-    &:hover {
-      background: rgba(0, 0, 0, 0.88);
+    &:hover,
+    &:focus-visible {
+      background: var(--color-primary);
+      color: #ffffff;
       border-color: transparent;
       box-shadow: none;
     }
@@ -188,9 +243,13 @@
     background: rgba(255, 255, 255, 0.9);
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
 
-    &:focus {
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(0, 100, 200, 0.2);
+    &:focus,
+    &:focus-visible {
+      /* Turn the inner border blue and suppress the shared dialog
+         focus outline so we don't end up with two rings. */
+      border-color: #4c8fdc;
+      outline: none;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
     }
   }
 
@@ -209,30 +268,124 @@
   font-size: var(--text-base);
   line-height: 1.6;
 
-  /* Custom scrollbar */
-  &::-webkit-scrollbar {
-    width: 15px;
-    height: 15px;
-    background-color: #f8f8f8;
-    border-left: 1px solid #e0e0e0;
+  /* Flat white body — matches modern Finder / Yosemite reference. */
+  background: #ffffff;
+}
+
+/* Custom scrollbar — classic Aqua (2000 Mac OS X) gel style.
+   Applies to every scrolling element inside the dialog (dialog body,
+   BrowseDialog list / grid scroll viewport, slide panels, etc.). */
+.dialog ::-webkit-scrollbar,
+.slide-panel ::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+  background-color: #f5f5f5;
+}
+
+.dialog ::-webkit-scrollbar-track,
+.slide-panel ::-webkit-scrollbar-track {
+  /* Plain light-gray well, no pinstripe. */
+  background: #f2f2f2;
+  border-left: 1px solid #d0d0d0;
+  box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.06);
+}
+
+.dialog ::-webkit-scrollbar-thumb,
+.slide-panel ::-webkit-scrollbar-thumb {
+  /* Classic Aqua gel — gradient runs across the thumb's short axis
+     (left → right), so on a vertical scrollbar the highlight and the
+     51 % reflective seam appear as vertical bands running down the
+     pill (the signature vertical-scrollbar look). Kept static across
+     hover/active states so the thumb doesn't wash out or dim while
+     dragging. */
+  background:
+    linear-gradient(to right,
+      rgba(255, 255, 255, 0.75) 0%,
+      rgba(255, 255, 255, 0.15) 46%,
+      transparent 46%,
+      transparent 100%),
+    linear-gradient(to right,
+      #a8d0f8 0%,
+      #4ea3f5 49%,
+      #1c66d8 51%,
+      #6db3f4 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 40, 120, 0.4);
+  box-shadow:
+    inset 1px 0 0 rgba(255, 255, 255, 0.55),
+    inset -1px 0 1px rgba(0, 0, 0, 0.2),
+    0 0 1px rgba(0, 0, 0, 0.2);
+  min-height: 24px;
+}
+
+.dialog ::-webkit-scrollbar-corner,
+.slide-panel ::-webkit-scrollbar-corner {
+  background: #f2f2f2;
+}
+
+/* ── Scrollbar arrow buttons — classic Aqua up / down / left / right ──
+   WebKit hides these by default; opt in by giving them `display: block`
+   and explicit size. Single-arrow variant: up at top, down at bottom. */
+.dialog ::-webkit-scrollbar-button,
+.slide-panel ::-webkit-scrollbar-button {
+  display: none;
+}
+
+.dialog ::-webkit-scrollbar-button:vertical:decrement:start,
+.dialog ::-webkit-scrollbar-button:vertical:increment:end,
+.slide-panel ::-webkit-scrollbar-button:vertical:decrement:start,
+.slide-panel ::-webkit-scrollbar-button:vertical:increment:end,
+.dialog ::-webkit-scrollbar-button:horizontal:decrement:start,
+.dialog ::-webkit-scrollbar-button:horizontal:increment:end,
+.slide-panel ::-webkit-scrollbar-button:horizontal:decrement:start,
+.slide-panel ::-webkit-scrollbar-button:horizontal:increment:end {
+  display: block;
+  background: #f2f2f2;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 8px 8px;
+
+  &:hover {
+    background-color: #e6e6e6;
   }
 
-  &::-webkit-scrollbar-track {
-    background: repeating-linear-gradient(to bottom, #f9f9f9, #f9f9f9 2px, #efefef 2px, #efefef 4px);
-    box-shadow: inset 1px 0 0 white;
+  &:active {
+    background-color: #d8d8d8;
   }
+}
 
-  &::-webkit-scrollbar-thumb {
-    background: linear-gradient(to right, #7caef7 0%, #4a90e2 50%, #256bc1 51%, #6ea6e8 100%);
-    border-radius: 7px;
-    border: 1px solid #fff;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
-    min-height: 20px;
+/* Vertical scrollbar buttons — height 15px matching the scrollbar width. */
+.dialog ::-webkit-scrollbar-button:vertical:decrement:start,
+.slide-panel ::-webkit-scrollbar-button:vertical:decrement:start {
+  height: 15px;
+  border-bottom: 1px solid #d0d0d0;
+  border-left: 1px solid #d0d0d0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path fill='%23555' d='M4 2 L7 6 L1 6 Z'/></svg>");
+}
 
-    &:hover {
-      background: linear-gradient(to right, #8abdfa 0%, #5ba1f2 50%, #357bd1 51%, #7eb6f8 100%);
-    }
-  }
+.dialog ::-webkit-scrollbar-button:vertical:increment:end,
+.slide-panel ::-webkit-scrollbar-button:vertical:increment:end {
+  height: 15px;
+  border-top: 1px solid #d0d0d0;
+  border-left: 1px solid #d0d0d0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path fill='%23555' d='M4 6 L7 2 L1 2 Z'/></svg>");
+}
+
+/* Horizontal scrollbar buttons — width 15px matching the scrollbar height. */
+.dialog ::-webkit-scrollbar-button:horizontal:decrement:start,
+.slide-panel ::-webkit-scrollbar-button:horizontal:decrement:start {
+  width: 15px;
+  border-right: 1px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path fill='%23555' d='M2 4 L6 1 L6 7 Z'/></svg>");
+}
+
+.dialog ::-webkit-scrollbar-button:horizontal:increment:end,
+.slide-panel ::-webkit-scrollbar-button:horizontal:increment:end {
+  width: 15px;
+  border-left: 1px solid #d0d0d0;
+  border-top: 1px solid #d0d0d0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><path fill='%23555' d='M6 4 L2 1 L2 7 Z'/></svg>");
 }
 
 /* ── Footer ── */
@@ -424,14 +577,30 @@
     font-size: clamp(0.75rem, 1.5cqi, 1.1rem) !important;
     font-weight: 600;
   }
+
+  /* Aqua-selection blue on hover / keyboard focus, matching the
+     toolbar icon-buttons. Override the shared opacity dim from
+     home-responsive.scss. */
+  &:hover,
+  &:focus-visible {
+    background: var(--color-primary);
+    color: #ffffff;
+    opacity: 1;
+
+    .browse-tile__icon,
+    .browse-tile__label,
+    .material-icons {
+      color: #ffffff !important;
+    }
+  }
 }
 
-/* ── Focus ring — dark on light frosted-glass background ── */
+/* ── Focus ring — subtle Aqua blue halo on light backgrounds ── */
 .dialog,
 .slide-panel {
   :focus-visible {
-    outline: 5px solid #0a5dc2;
-    outline-offset: 2px;
+    outline: 2px solid #4c8fdc;
+    outline-offset: 1px;
   }
 
   [tabindex="-1"]:focus-visible {
