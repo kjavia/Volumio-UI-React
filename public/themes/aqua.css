@@ -7180,11 +7180,11 @@ input[type=range]::-moz-range-thumb:active {
   filter: brightness(0.9);
 }
 .dialog-close, .dialog-close:hover, .dialog-close:focus-visible, .dialog-close:active {
-  background: linear-gradient(to bottom, #ffa6a0 0%, #f2544c 55%, #b62820 100%);
+  background: linear-gradient(to bottom, #b62820 0%, #f2544c 45%, #ffa6a0 100%);
   border: 1px solid #6b1a15;
 }
 .dialog-close.dialog-close--expand, .dialog-close.dialog-close--expand:hover, .dialog-close.dialog-close--expand:focus-visible, .dialog-close.dialog-close--expand:active {
-  background: linear-gradient(to bottom, #b8e8a5 0%, #58c045 55%, #197d16 100%);
+  background: linear-gradient(to bottom, #197d16 0%, #58c045 45%, #b8e8a5 100%);
   border: 1px solid #063f05;
 }
 

@@ -161,29 +161,27 @@
     filter: brightness(0.9);
   }
 
-  // Default (close) — smooth Aqua red gel sphere. No hard seam: the
-  // colour glides from bright top → saturated mid → deeper bottom.
-  // The ::after gloss and ::before specular dot supply the highlight.
+  // Default (close) — reversed gel: darker top, brighter bottom.
   &,
   &:hover,
   &:focus-visible,
   &:active {
     background: linear-gradient(to bottom,
-        #ffa6a0 0%,
-        #f2544c 55%,
-        #b62820 100%);
+        #b62820 0%,
+        #f2544c 45%,
+        #ffa6a0 100%);
     border: 1px solid #6b1a15;
   }
 
-  // Fullscreen/expand toggle — smooth Aqua green gel sphere.
+  // Fullscreen/expand toggle — reversed gel.
   &.dialog-close--expand,
   &.dialog-close--expand:hover,
   &.dialog-close--expand:focus-visible,
   &.dialog-close--expand:active {
     background: linear-gradient(to bottom,
-        #b8e8a5 0%,
-        #58c045 55%,
-        #197d16 100%);
+        #197d16 0%,
+        #58c045 45%,
+        #b8e8a5 100%);
     border: 1px solid #063f05;
   }
 }
