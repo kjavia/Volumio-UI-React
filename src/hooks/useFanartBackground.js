@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import useFanartTv from './useFanartTv';
 import usePluginConfig from './usePluginConfig';
+import { useLayoutOverrides, resolveOverride } from '@/contexts/LayoutOverridesContext';
 
 /**
  * Provides a rotating fanart.tv background URL for the currently playing
@@ -21,7 +22,9 @@ import usePluginConfig from './usePluginConfig';
  */
 const useFanartBackground = ({ artist, album } = {}) => {
   const { data: pluginConfig } = usePluginConfig();
-  const enabled = pluginConfig?.displayFanartBackground === true;
+  // Per-layout Player overrides (LayoutDesigner) win over global.
+  const overrides = useLayoutOverrides();
+  const enabled = resolveOverride(overrides?.displayFanartBackground, pluginConfig?.displayFanartBackground);
   const grayscale = pluginConfig?.fanartBackgroundGrayscale === true;
   const slideshowInterval = Math.max(5, Number(pluginConfig?.slideshowInterval) || 30);
 

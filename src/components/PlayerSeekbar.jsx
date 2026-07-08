@@ -1,13 +1,16 @@
 import { Duration } from 'luxon';
 import { useSeek } from '@/contexts/SeekContext';
+import { useLayoutOverrides, resolveOverride } from '@/contexts/LayoutOverridesContext';
 import usePluginConfig from '@/hooks/usePluginConfig';
 
 const PlayerSeekbar = ({ readOnly }) => {
   const { seek, duration, seekTo } = useSeek();
   const { data: pluginConfig } = usePluginConfig();
-  const showRemainingTime = !!pluginConfig?.showRemainingTime;
-  const hideSeekHandle = !!pluginConfig?.hideSeekHandle;
-  const hideTrackTimes = !!pluginConfig?.hideTrackTimes;
+  // Per-layout Player overrides (LayoutDesigner) win over global settings.
+  const overrides = useLayoutOverrides();
+  const showRemainingTime = resolveOverride(overrides?.showRemainingTime, pluginConfig?.showRemainingTime);
+  const hideSeekHandle = resolveOverride(overrides?.hideSeekHandle, pluginConfig?.hideSeekHandle);
+  const hideTrackTimes = resolveOverride(overrides?.hideTrackTimes, pluginConfig?.hideTrackTimes);
 
   const handleSeek = (e) => {
     if (readOnly) return;

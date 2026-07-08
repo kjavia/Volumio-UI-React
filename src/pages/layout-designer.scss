@@ -5,7 +5,10 @@
 // Page
 // ---------------------------------------------------------------------------
 .layout-designer {
-  min-height: 100%;
+  // Parent <main> in App.jsx clips overflow, so the designer manages
+  // its own scroll — fill available height and scroll internally.
+  height: 100%;
+  overflow-y: auto;
   background-color: var(--bg-color);
   color: var(--text-primary);
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import FlipClock from '@/components/clocks/flip-clock';
 import DigitalClock from '@/components/clocks/digital-clock';
 import AnalogClock from '@/components/clocks/analog-clock';
@@ -13,6 +13,7 @@ import CustomLayout from './CustomLayout';
 import useIdleScreen from '@/hooks/useIdleScreen';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import usePluginConfig from '@/hooks/usePluginConfig';
+import { LayoutOverridesProvider } from '@/contexts/LayoutOverridesContext';
 import { normalizeConfigValue } from '@/utils/pluginConfigValue';
 
 const CLOCK_SCREENS = {
@@ -162,19 +163,56 @@ const Home = () => {
   }, [matchingLayouts.length]);
 
   // Apply user color overrides as CSS custom properties on :root
+  //
+  // Per-layout font overrides (from LayoutDesigner) take precedence over
+  // the global Settings values whenever a matching custom layout is
+  // active. Empty string / undefined means "inherit from the global
+  // setting". See LayoutDesigner.jsx > FONT_TARGETS for the shape.
+  const layoutFontOverrides = useMemo(() => {
+    const f = currentCustomLayout?.fonts;
+    if (!f) return null;
+    const pick = (k) => ({
+      family: f[k]?.family || '',
+      size: f[k]?.size || '',
+    });
+    return {
+      title: pick('title'),
+      artist: pick('artist'),
+      album: pick('album'),
+      bitrate: pick('bitrate'),
+      progress: pick('progress'),
+      volume: pick('volume'),
+    };
+  }, [currentCustomLayout?.fonts]);
+
+  // Per-layout colour overrides (mirrors the Settings > Colors block).
+  // Same precedence rule: layout value wins when set, otherwise fall
+  // back to the global. See LayoutDesigner.jsx > COLOR_TARGETS.
+  const layoutColorOverrides = useMemo(() => currentCustomLayout?.colors ?? null,
+    [currentCustomLayout?.colors]);
+
+  // Per-layout Player toggle overrides (mirrors Settings > Player). The
+  // context is consumed by PlayerSeekbar and useFanartBackground so they
+  // pick the overridden value when a matching custom layout is active.
+  const layoutPlayerOverrides = useMemo(() => currentCustomLayout?.player ?? null,
+    [currentCustomLayout?.player]);
+
   useEffect(() => {
     const root = document.documentElement;
+    // Layout override wins if truthy, otherwise fall back to the global.
+    const px = (layoutVal, globalVal) => (layoutVal && String(layoutVal).trim()) || globalVal;
+    const lc = layoutColorOverrides;
     const colorMap = {
-      '--sp-track-color': { val: pluginConfig?.trackColor, cls: 'sp-has-track-color' },
-      '--sp-artist-color': { val: pluginConfig?.artistColor, cls: 'sp-has-artist-color' },
-      '--sp-album-color': { val: pluginConfig?.albumColor, cls: 'sp-has-album-color' },
-      '--sp-stream-info-color': { val: pluginConfig?.streamInfoColor, cls: 'sp-has-stream-info-color' },
-      '--sp-button-color': { val: pluginConfig?.buttonColor, cls: 'sp-has-button-color' },
-      '--sp-btn-bg-color': { val: pluginConfig?.buttonBgColor, cls: 'sp-has-btn-bg-color' },
+      '--sp-track-color': { val: px(lc?.trackColor, pluginConfig?.trackColor), cls: 'sp-has-track-color' },
+      '--sp-artist-color': { val: px(lc?.artistColor, pluginConfig?.artistColor), cls: 'sp-has-artist-color' },
+      '--sp-album-color': { val: px(lc?.albumColor, pluginConfig?.albumColor), cls: 'sp-has-album-color' },
+      '--sp-stream-info-color': { val: px(lc?.streamInfoColor, pluginConfig?.streamInfoColor), cls: 'sp-has-stream-info-color' },
+      '--sp-button-color': { val: px(lc?.buttonColor, pluginConfig?.buttonColor), cls: 'sp-has-button-color' },
+      '--sp-btn-bg-color': { val: px(lc?.buttonBgColor, pluginConfig?.buttonBgColor), cls: 'sp-has-btn-bg-color' },
 
-      '--sp-bar-track-color': { val: pluginConfig?.barTrackColor, cls: 'sp-has-bar-track-color' },
-      '--sp-bar-text-color': { val: pluginConfig?.barTextColor, cls: 'sp-has-bar-text-color' },
-      '--sp-icon-btn-color': { val: pluginConfig?.iconBtnColor, cls: 'sp-has-icon-btn-color' },
+      '--sp-bar-track-color': { val: px(lc?.barTrackColor, pluginConfig?.barTrackColor), cls: 'sp-has-bar-track-color' },
+      '--sp-bar-text-color': { val: px(lc?.barTextColor, pluginConfig?.barTextColor), cls: 'sp-has-bar-text-color' },
+      '--sp-icon-btn-color': { val: px(lc?.iconBtnColor, pluginConfig?.iconBtnColor), cls: 'sp-has-icon-btn-color' },
     };
     Object.entries(colorMap).forEach(([prop, { val, cls }]) => {
       if (val) {
@@ -190,19 +228,23 @@ const Home = () => {
     } else {
       root.classList.remove('sp-btn-bg-transparent');
     }
-    if (pluginConfig?.hideTrackTimes === true) {
+    // Per-layout Player override for `hideTrackTimes` wins when set.
+    const effectiveHideTrackTimes = layoutPlayerOverrides?.hideTrackTimes === 'true'
+      || (layoutPlayerOverrides?.hideTrackTimes !== 'false' && pluginConfig?.hideTrackTimes === true);
+    if (effectiveHideTrackTimes) {
       root.classList.add('sp-hide-track-times');
     } else {
       root.classList.remove('sp-hide-track-times');
     }
     // Apply user font-size overrides as CSS custom properties on :root
+    // (per-layout overrides take precedence over the global settings).
     const fontMap = {
-      '--sp-title-font-size': { val: pluginConfig?.titleFontSize, cls: 'sp-has-title-font-size' },
-      '--sp-album-font-size': { val: pluginConfig?.albumFontSize, cls: 'sp-has-album-font-size' },
-      '--sp-artist-font-size': { val: pluginConfig?.artistFontSize, cls: 'sp-has-artist-font-size' },
-      '--sp-bitrate-font-size': { val: pluginConfig?.bitrateFontSize, cls: 'sp-has-bitrate-font-size' },
-      '--sp-progress-font-size': { val: pluginConfig?.progressFontSize, cls: 'sp-has-progress-font-size' },
-      '--sp-volume-font-size': { val: pluginConfig?.volumeFontSize, cls: 'sp-has-volume-font-size' },
+      '--sp-title-font-size': { val: px(layoutFontOverrides?.title.size, pluginConfig?.titleFontSize), cls: 'sp-has-title-font-size' },
+      '--sp-album-font-size': { val: px(layoutFontOverrides?.album.size, pluginConfig?.albumFontSize), cls: 'sp-has-album-font-size' },
+      '--sp-artist-font-size': { val: px(layoutFontOverrides?.artist.size, pluginConfig?.artistFontSize), cls: 'sp-has-artist-font-size' },
+      '--sp-bitrate-font-size': { val: px(layoutFontOverrides?.bitrate.size, pluginConfig?.bitrateFontSize), cls: 'sp-has-bitrate-font-size' },
+      '--sp-progress-font-size': { val: px(layoutFontOverrides?.progress.size, pluginConfig?.progressFontSize), cls: 'sp-has-progress-font-size' },
+      '--sp-volume-font-size': { val: px(layoutFontOverrides?.volume.size, pluginConfig?.volumeFontSize), cls: 'sp-has-volume-font-size' },
       '--sp-player-btn-size': { val: pluginConfig?.playerButtonSize, cls: 'sp-has-player-btn-size' },
       '--sp-icon-font-size': { val: pluginConfig?.secondaryRowFontSize, cls: 'sp-has-icon-font-size' },
     };
@@ -242,19 +284,24 @@ const Home = () => {
     pluginConfig?.volumeFontSize,
     pluginConfig?.playerButtonSize,
     pluginConfig?.secondaryRowFontSize,
+    layoutFontOverrides,
+    layoutColorOverrides,
+    layoutPlayerOverrides,
   ]);
 
   // Load Google Fonts and apply font-family CSS custom properties
   useEffect(() => {
     const root = document.documentElement;
 
+    // Per-layout font-family override wins over the global setting.
+    const pick = (layoutVal, globalVal) => (layoutVal && String(layoutVal).trim()) || globalVal;
     const fontFamilyMap = {
-      '--sp-title-font-family': { val: pluginConfig?.titleFontName, cls: 'sp-has-title-font-family' },
-      '--sp-album-font-family': { val: pluginConfig?.albumFontName, cls: 'sp-has-album-font-family' },
-      '--sp-artist-font-family': { val: pluginConfig?.artistFontName, cls: 'sp-has-artist-font-family' },
-      '--sp-bitrate-font-family': { val: pluginConfig?.bitrateFontName, cls: 'sp-has-bitrate-font-family' },
-      '--sp-progress-font-family': { val: pluginConfig?.progressFontName, cls: 'sp-has-progress-font-family' },
-      '--sp-volume-font-family': { val: pluginConfig?.volumeFontName, cls: 'sp-has-volume-font-family' },
+      '--sp-title-font-family': { val: pick(layoutFontOverrides?.title.family, pluginConfig?.titleFontName), cls: 'sp-has-title-font-family' },
+      '--sp-album-font-family': { val: pick(layoutFontOverrides?.album.family, pluginConfig?.albumFontName), cls: 'sp-has-album-font-family' },
+      '--sp-artist-font-family': { val: pick(layoutFontOverrides?.artist.family, pluginConfig?.artistFontName), cls: 'sp-has-artist-font-family' },
+      '--sp-bitrate-font-family': { val: pick(layoutFontOverrides?.bitrate.family, pluginConfig?.bitrateFontName), cls: 'sp-has-bitrate-font-family' },
+      '--sp-progress-font-family': { val: pick(layoutFontOverrides?.progress.family, pluginConfig?.progressFontName), cls: 'sp-has-progress-font-family' },
+      '--sp-volume-font-family': { val: pick(layoutFontOverrides?.volume.family, pluginConfig?.volumeFontName), cls: 'sp-has-volume-font-family' },
     };
 
     // Collect unique non-empty font names that are likely Google Fonts
@@ -300,6 +347,7 @@ const Home = () => {
     pluginConfig?.bitrateFontName,
     pluginConfig?.progressFontName,
     pluginConfig?.volumeFontName,
+    layoutFontOverrides,
   ]);
 
   const showPlayer = !idle || forcePlayer;
@@ -428,10 +476,12 @@ const Home = () => {
   );
 
   return (
-    <div className="position-relative h-100">
-      {floatingContextMenu}
-      {content}
-    </div>
+    <LayoutOverridesProvider value={layoutPlayerOverrides}>
+      <div className="position-relative h-100">
+        {floatingContextMenu}
+        {content}
+      </div>
+    </LayoutOverridesProvider>
   );
 };
 

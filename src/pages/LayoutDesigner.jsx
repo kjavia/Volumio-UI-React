@@ -3,11 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { useSocket } from '@/contexts/SocketContext';
 import usePluginConfig from '@/hooks/usePluginConfig';
+import usePluginTranslations from '@/hooks/usePluginTranslations';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/Toast';
 import Dialog from '@/components/Dialog';
 import AppMenu from '@/components/AppMenu';
 import ContextMenu from '@/components/ContextMenu';
+import ColorField from '@/components/settings/ColorField';
+import FontRowField from '@/components/settings/FontRowField';
+import SwitchField from '@/components/settings/SwitchField';
 import './layout-designer.scss';
 
 // ---------------------------------------------------------------------------
@@ -113,6 +117,73 @@ function makeCell() {
   };
 }
 
+/**
+ * Per-layout font override object. Each target has two optional overrides
+ * — font family and font size. Colors are captured separately (see
+ * COLOR_TARGETS below). Empty strings mean "inherit from the global
+ * plugin config" (the Settings page defaults).
+ *
+ * The `labelKey` / `sizeDocKey` values match the plugin's global
+ * translation keys (see src/config/settingsSections.js). Reusing them
+ * keeps the LayoutDesigner rows aligned with the Settings > Fonts labels.
+ */
+const FONT_TARGETS = [
+  { key: 'title', labelKey: 'TITLE_FONT', labelFallback: 'Track Title', icon: 'title', sizeDocKey: 'TITLE_FONT_SIZE_DESC' },
+  { key: 'artist', labelKey: 'ARTIST_FONT', labelFallback: 'Artist Name', icon: 'person', sizeDocKey: 'ARTIST_FONT_SIZE_DESC' },
+  { key: 'album', labelKey: 'ALBUM_FONT', labelFallback: 'Album Name', icon: 'album', sizeDocKey: 'ALBUM_FONT_SIZE_DESC' },
+  { key: 'bitrate', labelKey: 'BITRATE_FONT', labelFallback: 'Bitrate/Stream Info', icon: 'graphic_eq', sizeDocKey: 'BITRATE_FONT_SIZE_DESC' },
+  { key: 'progress', labelKey: 'PROGRESS_FONT', labelFallback: 'Progress Bar', icon: 'linear_scale', sizeDocKey: 'PROGRESS_FONT_SIZE_DESC' },
+  { key: 'volume', labelKey: 'VOLUME_FONT', labelFallback: 'Volume Label', icon: 'volume_up', sizeDocKey: 'VOLUME_FONT_SIZE_DESC' },
+];
+function makeFontsDefaults() {
+  const out = {};
+  for (const { key } of FONT_TARGETS) {
+    out[key] = { family: '', size: '' };
+  }
+  return out;
+}
+
+/**
+ * Per-layout color override object. Mirrors the "Colors" section of the
+ * global Settings page one-for-one; empty strings inherit from global.
+ * `labelKey` / `docKey` reuse the plugin's global translation keys.
+ */
+const COLOR_TARGETS = [
+  { key: 'trackColor', cssVar: '--sp-track-color', cls: 'sp-has-track-color', labelKey: 'TRACK_COLOR', labelFallback: 'Track Title Color', icon: 'title', docKey: 'TRACK_COLOR_DESC' },
+  { key: 'artistColor', cssVar: '--sp-artist-color', cls: 'sp-has-artist-color', labelKey: 'ARTIST_COLOR', labelFallback: 'Artist Name Color', icon: 'person', docKey: 'ARTIST_COLOR_DESC' },
+  { key: 'albumColor', cssVar: '--sp-album-color', cls: 'sp-has-album-color', labelKey: 'ALBUM_COLOR', labelFallback: 'Album Name Color', icon: 'album', docKey: 'ALBUM_COLOR_DESC' },
+  { key: 'streamInfoColor', cssVar: '--sp-stream-info-color', cls: 'sp-has-stream-info-color', labelKey: 'STREAM_INFO_COLOR', labelFallback: 'Stream Info Color', icon: 'stream', docKey: 'STREAM_INFO_COLOR_DESC' },
+  { key: 'buttonColor', cssVar: '--sp-button-color', cls: 'sp-has-button-color', labelKey: 'BUTTON_COLOR', labelFallback: 'Control Buttons Icon Color', icon: 'play_circle', docKey: 'BUTTON_COLOR_DESC' },
+  { key: 'buttonBgColor', cssVar: '--sp-btn-bg-color', cls: 'sp-has-btn-bg-color', labelKey: 'BUTTON_BG_COLOR', labelFallback: 'Control Buttons Background Color', icon: 'play_circle', docKey: 'BUTTON_BG_COLOR_DESC' },
+  { key: 'barTrackColor', cssVar: '--sp-bar-track-color', cls: 'sp-has-bar-track-color', labelKey: 'BAR_TRACK_COLOR', labelFallback: 'Progress / Volume Bar Track Color', icon: 'linear_scale', docKey: 'BAR_TRACK_COLOR_DESC' },
+  { key: 'barTextColor', cssVar: '--sp-bar-text-color', cls: 'sp-has-bar-text-color', labelKey: 'BAR_TEXT_COLOR', labelFallback: 'Progress / Volume Text Color', icon: 'text_fields', docKey: 'BAR_TEXT_COLOR_DESC' },
+  { key: 'iconBtnColor', cssVar: '--sp-icon-btn-color', cls: 'sp-has-icon-btn-color', labelKey: 'ICON_BTN_COLOR', labelFallback: 'Icon Button Color', icon: 'interests', docKey: 'ICON_BTN_COLOR_DESC' },
+];
+function makeColorsDefaults() {
+  const out = {};
+  for (const { key } of COLOR_TARGETS) out[key] = '';
+  return out;
+}
+
+/**
+ * Per-layout Player toggle overrides. Stores tri-state string values:
+ *   ''      → inherit from global Settings > Player
+ *   'true'  → force enabled for this layout
+ *   'false' → force disabled for this layout
+ * Consumed via LayoutOverridesContext (see contexts/LayoutOverridesContext.jsx).
+ */
+const PLAYER_TOGGLES = [
+  { key: 'displayFanartBackground', labelKey: 'DISPLAY_FANART_BACKGROUND', labelFallback: 'Display Fan Art in Background', icon: 'wallpaper', docKey: 'DISPLAY_FANART_BACKGROUND_DESC' },
+  { key: 'hideSeekHandle', labelKey: 'HIDE_SEEK_HANDLE', labelFallback: 'Hide Seek Bar Handle', icon: 'drag_handle', docKey: 'HIDE_SEEK_HANDLE_DESC' },
+  { key: 'hideTrackTimes', labelKey: 'HIDE_TRACK_TIMES', labelFallback: 'Hide Track Times', icon: 'timer_off', docKey: 'HIDE_TRACK_TIMES_DESC' },
+  { key: 'showRemainingTime', labelKey: 'SHOW_REMAINING_TIME', labelFallback: 'Show Remaining Time', icon: 'timer', docKey: 'SHOW_REMAINING_TIME_DESC' },
+];
+function makePlayerDefaults() {
+  const out = {};
+  for (const { key } of PLAYER_TOGGLES) out[key] = '';
+  return out;
+}
+
 function makeLayout(name, width, height) {
   return {
     id: generateId(),
@@ -125,6 +196,9 @@ function makeLayout(name, width, height) {
     rowFractions: [1],
     colFractions: [1],
     cells: [[makeCell()]],
+    fonts: makeFontsDefaults(),
+    colors: makeColorsDefaults(),
+    player: makePlayerDefaults(),
   };
 }
 
@@ -359,6 +433,9 @@ function CreateLayoutForm({ onSubmit, onCancel, existingNames }) {
 
 export default function LayoutDesigner() {
   const { t } = useTranslation('layoutDesigner');
+  // Reuse the label strings from the plugin's global Settings page so
+  // font/color rows have consistent, already-translated labels.
+  const pt = usePluginTranslations();
   const { socket } = useSocket();
   const { data: pluginConfig } = usePluginConfig();
   const { toasts, showToast } = useToast();
@@ -371,6 +448,9 @@ export default function LayoutDesigner() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showCanvasDialog, setShowCanvasDialog] = useState(false);
+  // Which per-layout override tab is showing (fonts vs colors) — same
+  // tab pattern as the global Settings page.
+  const [activeOverrideTab, setActiveOverrideTab] = useState('fonts');
 
   // Inline edit state for active layout metadata
   const [editName, setEditName] = useState('');
@@ -549,6 +629,43 @@ export default function LayoutDesigner() {
     setLayouts(updated);
     persistLayouts(updated);
     setShowDeleteConfirm(false);
+  }
+
+  // Update a single per-layout font override property (target × prop).
+  // Empty strings clear the override so the global setting is used again.
+  function handleUpdateFont(target, prop, value) {
+    if (!activeLayout) return;
+    const currentFonts = activeLayout.fonts || makeFontsDefaults();
+    const nextFonts = {
+      ...currentFonts,
+      [target]: {
+        ...(currentFonts[target] || { family: '', size: '' }),
+        [prop]: value,
+      },
+    };
+    applyLayoutUpdate({ ...activeLayout, fonts: nextFonts });
+  }
+
+  // Update a single per-layout color override. Empty string clears the
+  // override so the corresponding global Settings colour is used again.
+  function handleUpdateColor(key, value) {
+    if (!activeLayout) return;
+    const currentColors = activeLayout.colors || makeColorsDefaults();
+    applyLayoutUpdate({
+      ...activeLayout,
+      colors: { ...currentColors, [key]: value },
+    });
+  }
+
+  // Update a single per-layout Player toggle override. `value` is one of
+  // '' (inherit) / 'true' (force enabled) / 'false' (force disabled).
+  function handleUpdatePlayer(key, value) {
+    if (!activeLayout) return;
+    const currentPlayer = activeLayout.player || makePlayerDefaults();
+    applyLayoutUpdate({
+      ...activeLayout,
+      player: { ...currentPlayer, [key]: value },
+    });
   }
 
   // ---- Export / Import all layouts ----------------------------------------
@@ -1438,6 +1555,138 @@ export default function LayoutDesigner() {
                     onKeyDown={(e) => e.key === 'Enter' && e.target.blur()}
                     min={1}
                   />
+                </div>
+              </div>
+            )}
+
+            {/* Per-layout override tabs — mirrors the Settings > Fonts /
+                Colors tab pattern. Uses the shared ColorField /
+                FontRowField components so the visuals stay identical to
+                the global Settings page. */}
+            {activeLayout && (
+              <div className="ld-overrides mt-3">
+                <div className="settings-tabs" role="tablist">
+                  <button
+                    type="button"
+                    className={`settings-tab ${activeOverrideTab === 'fonts' ? 'settings-tab--active' : ''}`}
+                    role="tab"
+                    aria-selected={activeOverrideTab === 'fonts'}
+                    onClick={() => setActiveOverrideTab('fonts')}
+                  >
+                    <span className="material-icons settings-tab__icon">text_fields</span>
+                    <span className="settings-tab__label">{pt('FONTS', 'Fonts')}</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={`settings-tab ${activeOverrideTab === 'colors' ? 'settings-tab--active' : ''}`}
+                    role="tab"
+                    aria-selected={activeOverrideTab === 'colors'}
+                    onClick={() => setActiveOverrideTab('colors')}
+                  >
+                    <span className="material-icons settings-tab__icon">palette</span>
+                    <span className="settings-tab__label">{pt('COLORS', 'Colors')}</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={`settings-tab ${activeOverrideTab === 'player' ? 'settings-tab--active' : ''}`}
+                    role="tab"
+                    aria-selected={activeOverrideTab === 'player'}
+                    onClick={() => setActiveOverrideTab('player')}
+                  >
+                    <span className="material-icons settings-tab__icon">play_circle</span>
+                    <span className="settings-tab__label">{pt('PLAYER_CONFIG', 'Player')}</span>
+                  </button>
+                </div>
+
+                <div className="settings-content">
+                  {activeOverrideTab === 'fonts' && (
+                    <div className="settings-section">
+                      <div className="settings-section__body">
+                        {FONT_TARGETS.map((target) => {
+                          const cell = activeLayout.fonts?.[target.key] ?? { family: '', size: '' };
+                          const field = {
+                            label: pt(target.labelKey, target.labelFallback),
+                            icon: target.icon,
+                            nameId: `${target.key}FontName`,
+                            sizeId: `${target.key}FontSize`,
+                            nameLabel: pt('GOOGLE_FONT_NAME', 'Google Font Name'),
+                            sizeLabel: pt('FONT_SIZE', 'Font Size'),
+                            namePlaceholder: 'e.g. Arial',
+                            sizePlaceholder: 'e.g. 18px',
+                            nameDoc: pt('FONT_NAME_DESC', 'Get custom Google Font from https://fonts.google.com. Example: Nabla, Atomic Age. Leave empty to use the theme default.'),
+                            sizeDoc: pt(target.sizeDocKey, ''),
+                          };
+                          return (
+                            <FontRowField
+                              key={target.key}
+                              field={field}
+                              nameValue={cell.family}
+                              sizeValue={cell.size}
+                              onChange={(id, value) => {
+                                const prop = id === field.nameId ? 'family' : 'size';
+                                handleUpdateFont(target.key, prop, value);
+                              }}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {activeOverrideTab === 'colors' && (
+                    <div className="settings-section">
+                      <div className="settings-section__body">
+                        {COLOR_TARGETS.map((target) => {
+                          const field = {
+                            id: target.key,
+                            label: pt(target.labelKey, target.labelFallback),
+                            icon: target.icon,
+                            doc: pt(target.docKey, ''),
+                          };
+                          return (
+                            <ColorField
+                              key={target.key}
+                              field={field}
+                              value={activeLayout.colors?.[target.key] ?? ''}
+                              onChange={(_id, value) => handleUpdateColor(target.key, value)}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {activeOverrideTab === 'player' && (
+                    <div className="settings-section">
+                      <div className="settings-section__body">
+                        {PLAYER_TOGGLES.map((target) => {
+                          // Same SwitchField as the global Settings > Player
+                          // page. The stored value is the boolean the user
+                          // set; if they haven't touched it, the switch
+                          // shows the current global value. Once toggled
+                          // the layout value wins (see resolveOverride).
+                          const layoutVal = activeLayout.player?.[target.key];
+                          const effective = layoutVal === undefined || layoutVal === ''
+                            ? !!pluginConfig?.[target.key]
+                            : layoutVal === 'true' || layoutVal === true;
+                          const field = {
+                            id: target.key,
+                            label: pt(target.labelKey, target.labelFallback),
+                            icon: target.icon,
+                            doc: pt(target.docKey, ''),
+                          };
+                          return (
+                            <SwitchField
+                              key={target.key}
+                              field={field}
+                              value={effective}
+                              onChange={(_id, value) => handleUpdatePlayer(target.key, value ? 'true' : 'false')}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

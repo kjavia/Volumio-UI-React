@@ -9,22 +9,14 @@ import Toast from '@/components/Toast';
 import SettingsExportImport from '@/components/SettingsExportImport';
 import SettingsSection from '@/components/settings/SettingsSection';
 import getSections from '@/config/settingsSections';
+import usePluginTranslations from '@/hooks/usePluginTranslations';
 import './settings.scss';
 
 const PLUGIN_ENDPOINT = 'user_interface/stylish_player';
 
 /* ─── Translation hook — fetches i18n strings from REST API ────────────── */
-const useSettingsTranslations = () => {
-  const [strings, setStrings] = useState({});
-
-  useEffect(() => {
-    axios.get(`${PLUGIN_BASE_URL}/api/translations`)
-      .then(({ data }) => { if (data && typeof data === 'object') setStrings(data); })
-      .catch(() => { });
-  }, []);
-
-  return useCallback((key, fallback) => strings[key] || fallback || key, [strings]);
-};
+// Extracted to `src/hooks/usePluginTranslations.js` so other pages (e.g.
+// LayoutDesigner) can reuse the same label vocabulary.
 
 /* ═══════════════════════════════════════════════════════════════════════
    Settings Page
@@ -40,7 +32,7 @@ const Settings = () => {
   const [saving, setSaving] = useState(false);
   const [peppyFolders, setPeppyFolders] = useState([]);
   const [peppySpectrumFolders, setPeppySpectrumFolders] = useState([]);
-  const t = useSettingsTranslations();
+  const t = usePluginTranslations();
   const sections = getSections(t, peppyFolders, peppySpectrumFolders);
   const [activeTab, setActiveTab] = useState(sections[0].id);
   const effectiveValues = useMemo(
