@@ -11,6 +11,7 @@ import { createContext, useContext } from 'react';
  *   hideTrackTimes: '' | 'true' | 'false',
  *   showRemainingTime: '' | 'true' | 'false',
  *   displayFanartBackground: '' | 'true' | 'false',
+ *   fanartBackgroundGrayscale: '' | 'true' | 'false',
  * }
  *
  * Empty string / undefined means "inherit from global plugin config".

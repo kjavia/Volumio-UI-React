@@ -75,7 +75,10 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
   const albumArtMaxSpace = pluginConfig?.albumArtMaxSpace === true;
   const albumArtAnimated = pluginConfig?.albumArtAnimated !== false;
   const vizType = normalizeConfigValue(pluginConfig?.vizType) || 'spectrum';
-  const backgroundColor = pluginConfig?.backgroundColor || '';
+  // Per-layout Colors override (LayoutDesigner) wins over the global setting.
+  const backgroundColor = (layout?.colors?.backgroundColor && String(layout.colors.backgroundColor).trim())
+    || pluginConfig?.backgroundColor
+    || '';
   const peppyMeterFolder = normalizeConfigValue(pluginConfig?.peppyMeterFolder) || '';
   const peppyMeterModel = normalizeConfigValue(pluginConfig?.peppyMeterModel) || 'random';
   const peppySpectrumFolder = normalizeConfigValue(pluginConfig?.peppySpectrumFolder) || '';

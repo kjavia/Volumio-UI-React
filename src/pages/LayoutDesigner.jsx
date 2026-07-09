@@ -149,6 +149,7 @@ function makeFontsDefaults() {
  * `labelKey` / `docKey` reuse the plugin's global translation keys.
  */
 const COLOR_TARGETS = [
+  { key: 'backgroundColor', cssVar: '--sp-background-color', cls: 'sp-has-background-color', labelKey: 'BACKGROUND_COLOR', labelFallback: 'Background Color', icon: 'format_color_fill', docKey: 'BACKGROUND_COLOR_DESC' },
   { key: 'trackColor', cssVar: '--sp-track-color', cls: 'sp-has-track-color', labelKey: 'TRACK_COLOR', labelFallback: 'Track Title Color', icon: 'title', docKey: 'TRACK_COLOR_DESC' },
   { key: 'artistColor', cssVar: '--sp-artist-color', cls: 'sp-has-artist-color', labelKey: 'ARTIST_COLOR', labelFallback: 'Artist Name Color', icon: 'person', docKey: 'ARTIST_COLOR_DESC' },
   { key: 'albumColor', cssVar: '--sp-album-color', cls: 'sp-has-album-color', labelKey: 'ALBUM_COLOR', labelFallback: 'Album Name Color', icon: 'album', docKey: 'ALBUM_COLOR_DESC' },
@@ -174,6 +175,7 @@ function makeColorsDefaults() {
  */
 const PLAYER_TOGGLES = [
   { key: 'displayFanartBackground', labelKey: 'DISPLAY_FANART_BACKGROUND', labelFallback: 'Display Fan Art in Background', icon: 'wallpaper', docKey: 'DISPLAY_FANART_BACKGROUND_DESC' },
+  { key: 'fanartBackgroundGrayscale', labelKey: 'FANART_BACKGROUND_GRAYSCALE', labelFallback: 'Grayscale Fan Art Background', icon: 'filter_b_and_w', docKey: 'FANART_BACKGROUND_GRAYSCALE_DESC' },
   { key: 'hideSeekHandle', labelKey: 'HIDE_SEEK_HANDLE', labelFallback: 'Hide Seek Bar Handle', icon: 'drag_handle', docKey: 'HIDE_SEEK_HANDLE_DESC' },
   { key: 'hideTrackTimes', labelKey: 'HIDE_TRACK_TIMES', labelFallback: 'Hide Track Times', icon: 'timer_off', docKey: 'HIDE_TRACK_TIMES_DESC' },
   { key: 'showRemainingTime', labelKey: 'SHOW_REMAINING_TIME', labelFallback: 'Show Remaining Time', icon: 'timer', docKey: 'SHOW_REMAINING_TIME_DESC' },
@@ -450,7 +452,7 @@ export default function LayoutDesigner() {
   const [showCanvasDialog, setShowCanvasDialog] = useState(false);
   // Which per-layout override tab is showing (fonts vs colors) — same
   // tab pattern as the global Settings page.
-  const [activeOverrideTab, setActiveOverrideTab] = useState('fonts');
+  const [activeOverrideTab, setActiveOverrideTab] = useState('player');
 
   // Inline edit state for active layout metadata
   const [editName, setEditName] = useState('');
@@ -1568,13 +1570,13 @@ export default function LayoutDesigner() {
                 <div className="settings-tabs" role="tablist">
                   <button
                     type="button"
-                    className={`settings-tab ${activeOverrideTab === 'fonts' ? 'settings-tab--active' : ''}`}
+                    className={`settings-tab ${activeOverrideTab === 'player' ? 'settings-tab--active' : ''}`}
                     role="tab"
-                    aria-selected={activeOverrideTab === 'fonts'}
-                    onClick={() => setActiveOverrideTab('fonts')}
+                    aria-selected={activeOverrideTab === 'player'}
+                    onClick={() => setActiveOverrideTab('player')}
                   >
-                    <span className="material-icons settings-tab__icon">text_fields</span>
-                    <span className="settings-tab__label">{pt('FONTS', 'Fonts')}</span>
+                    <span className="material-icons settings-tab__icon">play_circle</span>
+                    <span className="settings-tab__label">{pt('PLAYER_CONFIG', 'Player')}</span>
                   </button>
                   <button
                     type="button"
@@ -1588,13 +1590,13 @@ export default function LayoutDesigner() {
                   </button>
                   <button
                     type="button"
-                    className={`settings-tab ${activeOverrideTab === 'player' ? 'settings-tab--active' : ''}`}
+                    className={`settings-tab ${activeOverrideTab === 'fonts' ? 'settings-tab--active' : ''}`}
                     role="tab"
-                    aria-selected={activeOverrideTab === 'player'}
-                    onClick={() => setActiveOverrideTab('player')}
+                    aria-selected={activeOverrideTab === 'fonts'}
+                    onClick={() => setActiveOverrideTab('fonts')}
                   >
-                    <span className="material-icons settings-tab__icon">play_circle</span>
-                    <span className="settings-tab__label">{pt('PLAYER_CONFIG', 'Player')}</span>
+                    <span className="material-icons settings-tab__icon">text_fields</span>
+                    <span className="settings-tab__label">{pt('FONTS', 'Fonts')}</span>
                   </button>
                 </div>
 

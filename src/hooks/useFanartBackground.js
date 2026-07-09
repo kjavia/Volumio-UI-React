@@ -25,7 +25,7 @@ const useFanartBackground = ({ artist, album } = {}) => {
   // Per-layout Player overrides (LayoutDesigner) win over global.
   const overrides = useLayoutOverrides();
   const enabled = resolveOverride(overrides?.displayFanartBackground, pluginConfig?.displayFanartBackground);
-  const grayscale = pluginConfig?.fanartBackgroundGrayscale === true;
+  const grayscale = resolveOverride(overrides?.fanartBackgroundGrayscale, pluginConfig?.fanartBackgroundGrayscale);
   const slideshowInterval = Math.max(5, Number(pluginConfig?.slideshowInterval) || 30);
 
   const { data: fanartData } = useFanartTv({
