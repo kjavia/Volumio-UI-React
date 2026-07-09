@@ -161,21 +161,52 @@
   height: 100%;
 }
 
-// Controls and button-row fill the entire cell so buttons can use cqh to
-// maximise their size. Volume and seekbar stay width-only so they don't
-// stretch taller than their content.
-.custom-layout-controls,
+// Controls and button-row wrappers fill the entire cell so buttons can use
+// cqh to maximise their size. Volume and seekbar stay width-only so they
+// don't stretch taller than their content.
+//
+// The button-row wrappers use display:flex with the alignItems /
+// justifyContent set inline from the LayoutDesigner cell alignment
+// (see CustomLayout.jsx). Default is center-center (matches previous
+// behaviour); when a cell overrides its alignment those inline styles
+// take effect and reposition the buttons within the cell.
+
+// Base .player-controls styles — replaces the Bootstrap `d-flex
+// align-items-center justify-content-center w-100` utilities that used
+// to live on the component's outer div. Those utilities live in
+// `@layer bootstrap` and their `!important` flags would beat any
+// per-context override (custom layouts), so we own the base styles here
+// and let the more specific `.custom-layout-controls .player-controls`
+// rule below adjust them for the layout designer.
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.custom-layout-controls {
+  width: 100%;
+  height: 100%;
+  // Flex container so the cell's alignItems / justifyContent (set inline
+  // in CustomLayout.jsx) actually positions the inner .player-controls
+  // within the cell. Defaults keep the previous centered layout.
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .custom-layout-button-row {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .custom-layout-button-row--single {
   padding: 4px;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .custom-layout-volume {
@@ -403,23 +434,32 @@
   // ── Control row spacing ────────────────────────────────────────────────
   // Use fixed px padding — % padding is always relative to the containing
   // block's WIDTH in CSS, so "8% 4%" on a wide cell means huge top/bottom gaps.
+  //
+  // The wrapper (.custom-layout-controls) is now a flex container that
+  // positions .player-controls using the cell's alignItems/justifyContent.
+  // So .player-controls stays content-sized (no `w-100`/`height:100%`
+  // forcing it to fill the cell) and the transport buttons use cqh for
+  // sizing so they don't depend on the parent's resolved height.
   .custom-layout-controls .player-controls {
-    height: 100%;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
     padding: 4px;
     box-sizing: border-box;
-    align-items: stretch;
   }
 
   .custom-layout-controls .player-controls .controls-transport-row {
-    height: 100%;
     gap: clamp(4px, 4cqw, 32px);
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
   }
 
   .custom-layout-controls .player-controls .controls-transport-row .btn-round {
-    height: calc(100% - 8px) !important;
-    max-height: calc(100% - 8px) !important;
+    // cqh is relative to the cell (container-type: size on
+    // .custom-layout-cell), so button size stays stable now that
+    // .player-controls is content-sized rather than filling the cell.
+    height: calc(100cqh - 8px) !important;
+    max-height: calc(100cqh - 8px) !important;
     width: auto !important;
     min-width: 0 !important;
     min-height: 0 !important;
@@ -428,8 +468,8 @@
   }
 
   .custom-layout-controls .player-controls .controls-transport-row .btn-round.btn-sm {
-    height: calc((100% - 8px) * 0.7) !important;
-    max-height: calc((100% - 8px) * 0.7) !important;
+    height: calc((100cqh - 8px) * 0.7) !important;
+    max-height: calc((100cqh - 8px) * 0.7) !important;
   }
 
   .custom-layout-controls .player-controls .controls-transport-row .btn-round .material-icons,
@@ -446,19 +486,28 @@
     gap: clamp(4px, 4cqw, 32px);
   }
 
-  // Secondary controls row: minimal fixed padding
+  // Secondary controls row: minimal fixed padding. The wrapper flex
+  // container (.custom-layout-button-row) positions this inner div using
+  // the cell's alignItems/justifyContent (set inline). Height stays auto
+  // so the wrapper alignment can push the row to top/middle/bottom, and
+  // max-width caps it at the wrapper so flex-wrap kicks in when buttons
+  // overflow — while narrow content still shrinks to fit so the wrapper's
+  // justify-content can reposition it horizontally.
   .custom-layout-button-row>div {
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     padding: 4px;
     box-sizing: border-box;
     gap: clamp(4px, 3cqw, 20px) !important;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
   }
 
   .custom-layout-button-row .btn-icon {
-    height: 95% !important;
+    // cqh is relative to the cell (container-type: size on
+    // .custom-layout-cell) rather than the wrapper. Using cqh keeps the
+    // button size stable even when the inner row is content-sized
+    // (rather than filling the wrapper vertically).
+    height: 95cqh !important;
     width: auto !important;
     min-width: 0 !important;
     min-height: 0 !important;
@@ -473,9 +522,12 @@
   }
 
   // Single "other" button cells (shuffle/repeat/queue/etc.) should use
-  // most of the cell while keeping a small margin around the button.
+  // most of the cell while keeping a small margin around the button. The
+  // wrapper flex container positions the button using the cell's
+  // alignItems/justifyContent; cqh sizing keeps the button size stable
+  // regardless of alignment.
   .custom-layout-button-row--single .btn-icon {
-    height: 100% !important;
+    height: 95cqh !important;
     width: auto !important;
     max-width: 100% !important;
     max-height: 100% !important;

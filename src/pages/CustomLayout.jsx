@@ -206,6 +206,14 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         : PLAYER_MAP[cellEffectivePlayerType] || AlbumArtPlayer;
     const cellVizType_ = cellVizType || vizType;
     const textAlign = justifyToTextAlign[justifyContent] || 'center';
+    // Button-row wrappers fill the whole cell (needed for cqh sizing), so the
+    // parent cell's flex alignment can't reach the buttons on its own. Mirror
+    // the cell's alignment onto the wrapper's own flex axes so alignment
+    // toolbar changes actually reposition the buttons.
+    const buttonRowAlignStyle = {
+      alignItems: cell.alignItems || 'center',
+      justifyContent: cell.justifyContent || 'center',
+    };
     switch (itemKey) {
       case 'trackName':
         return <TrackTitle title={title} align={textAlign} />;
@@ -229,7 +237,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'playerControls':
         return (
-          <div className="custom-layout-controls">
+          <div className="custom-layout-controls" style={buttonRowAlignStyle}>
             <PlayerControls
               isPlaying={isPlaying}
               onPlayPause={handlePlayPause}
@@ -281,7 +289,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonRow':
         return (
-          <div className="custom-layout-button-row">
+          <div className="custom-layout-button-row" style={buttonRowAlignStyle}>
             <SecondaryControls
               shuffle={random}
               repeat={repeat}
@@ -297,7 +305,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonShuffle':
         return (
-          <div className="custom-layout-button-row custom-layout-button-row--single">
+          <div className="custom-layout-button-row custom-layout-button-row--single" style={buttonRowAlignStyle}>
             <ShuffleButton
               shuffle={random}
               onShuffle={toggleRandom}
@@ -306,7 +314,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonRepeat':
         return (
-          <div className="custom-layout-button-row custom-layout-button-row--single">
+          <div className="custom-layout-button-row custom-layout-button-row--single" style={buttonRowAlignStyle}>
             <RepeatButton
               repeat={repeat}
               onRepeat={toggleRepeat}
@@ -315,7 +323,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonAddToPlaylist':
         return (
-          <div className="custom-layout-button-row custom-layout-button-row--single">
+          <div className="custom-layout-button-row custom-layout-button-row--single" style={buttonRowAlignStyle}>
             <AddToPlaylistButton
               onAddToPlaylist={() => setShowAddToPlaylist(true)}
             />
@@ -323,7 +331,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonFavourite':
         return (
-          <div className="custom-layout-button-row custom-layout-button-row--single">
+          <div className="custom-layout-button-row custom-layout-button-row--single" style={buttonRowAlignStyle}>
             <FavouriteButton
               isFavourite={isFavourite}
               onToggleFavourite={toggleFavourite}
@@ -332,7 +340,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonQueue':
         return (
-          <div className="custom-layout-button-row custom-layout-button-row--single">
+          <div className="custom-layout-button-row custom-layout-button-row--single" style={buttonRowAlignStyle}>
             <QueueButton
               onShowPlaylist={() => setShowPlaylist(true)}
             />
@@ -340,7 +348,7 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
         );
       case 'buttonBrowse':
         return (
-          <div className="custom-layout-button-row custom-layout-button-row--single">
+          <div className="custom-layout-button-row custom-layout-button-row--single" style={buttonRowAlignStyle}>
             <BrowseButton
               onBrowse={() => setShowBrowse(true)}
             />
@@ -528,3 +536,4 @@ const CustomLayout = ({ layout, vizStopped, onVizResumed, vizContainerRef }) => 
 
 
 export default CustomLayout;
+

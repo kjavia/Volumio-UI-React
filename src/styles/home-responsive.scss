@@ -266,13 +266,15 @@ body,
   color: var(--sp-icon-btn-color) !important;
 }
 
-/* Selected-state indicator for secondary buttons when icon color override is active */
+/* Selected-state indicator for secondary buttons when icon color override is active.
+   Only a subtle background tint — no border — so toggled buttons (shuffle,
+   repeat, favourite, mute, etc.) look flush with their neighbours. */
 :root.sp-has-icon-btn-color .player-controls .btn-icon.active,
 :root.sp-has-icon-btn-color .player-controls-container .btn-icon.active,
 :root.sp-has-icon-btn-color .custom-layout-button-row .btn-icon.active,
 :root.sp-has-icon-btn-color .lsp-btn-group .btn-icon.active {
-  background: rgba(255, 255, 255, 0.14) !important;
-  border: 1px solid rgba(255, 255, 255, 0.42) !important;
+  background: none !important;
+  border: none !important;
 }
 
 /* ── Hide Track Times: reserve space below seekbar ────────────────────────
