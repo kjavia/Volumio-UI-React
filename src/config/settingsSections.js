@@ -160,6 +160,10 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
         { id: 'wallpaperShowSeconds', element: 'switch', label: t('WALLPAPER_SHOW_SECONDS', 'Show Seconds'), icon: 'update' },
         { id: 'showWeatherInClock', element: 'switch', label: t('SHOW_WEATHER_IN_CLOCK', 'Show Weather in Clock'), icon: 'cloud', doc: t('SHOW_WEATHER_IN_CLOCK_DESC', 'Display weather on the clock face.') },
         { id: 'analogClockShowDate', element: 'switch', label: t('ANALOG_CLOCK_SHOW_DATE', 'Show Date on Analog Clock'), icon: 'event' },
+        { id: 'clockBackgroundColor', element: 'color', label: t('CLOCK_BACKGROUND_COLOR', 'Clock Background Color'), icon: 'format_color_fill', doc: t('CLOCK_BACKGROUND_COLOR_DESC', 'Background behind the clock (outside the frame). Leave empty for theme default.') },
+        { id: 'clockFrameColor', element: 'color', label: t('CLOCK_FRAME_COLOR', 'Clock Frame Color'), icon: 'crop_square', doc: t('CLOCK_FRAME_COLOR_DESC', 'Colour of the outer bezel / frame around the clock. Leave empty for theme default.') },
+        { id: 'clockFaceColor', element: 'color', label: t('CLOCK_FACE_COLOR', 'Clock Face Color'), icon: 'panorama_wide_angle', doc: t('CLOCK_FACE_COLOR_DESC', 'Colour of the inner face / display panel where the digits or hands sit. Leave empty for theme default.') },
+        { id: 'clockFontColor', element: 'color', label: t('CLOCK_FONT_COLOR', 'Clock Font Color'), icon: 'text_format', doc: t('CLOCK_FONT_COLOR_DESC', 'Colour of the digits, hands, date and weather text. Leave empty for theme default.') },
       ],
     },
     {

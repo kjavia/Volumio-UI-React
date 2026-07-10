@@ -12,155 +12,201 @@
    ────────────────────────────────────────────────────────────────────── */
 
 .led-matrix-clock {
-    container-type: size;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    user-select: none;
+  container-type: size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
 
-    // Layout constants — tuned so HH:MM:SS + AM/PM fits at ~90% width
-    // and ~70% height with a safety margin. The `--no-seconds` /
-    // `--no-ampm` modifiers below bump --dot-size up so shorter time
-    // strings still fill the panel nicely.
-    --dot-size: min(2.3cqh, 1.4cqw);
-    --dot-gap: calc(var(--dot-size) * 0.18);
-    --char-gap: calc(var(--dot-size) * 1.3);
+  // --dot-size is the single knob that drives every measurement below.
+  //
+  // Panel width is time-row-driven (info is absolutely positioned so
+  // it never expands the panel — see .lmc-info below). Widths in
+  // dot-units for each variant:
+  //   HH:MM:SS + AM/PM  ≈ 62 dots wide → 1.5cqw
+  //   HH:MM:SS          ≈ 51 dots wide → 1.8cqw
+  //   HH:MM + AM/PM     ≈ 46 dots wide → 2.05cqw
+  //   HH:MM             ≈ 35 dots wide → 2.7cqw
+  //
+  // The cqh cap (6cqh × ~15 dots ≈ 90% container height) protects
+  // very tall / narrow containers; in typical landscape idle screens
+  // the cqw cap dominates and the display fills ~95% of the width.
+  --dot-size: min(6cqh, 1.5cqw);
+  --dot-gap: calc(var(--dot-size) * 0.18);
+  --char-gap: calc(var(--dot-size) * 1.3);
 
-    // Colour palette — defaults to an amber LED. Themes can override
-    // any of these to switch to green, red, blue, etc. without touching
-    // the component.
-    --lmc-on: #ff9a30;
-    --lmc-off: color-mix(in srgb, var(--lmc-on) 10%, transparent);
-    --lmc-glow: color-mix(in srgb, var(--lmc-on) 65%, transparent);
-    --lmc-bg: #060606;
-    --lmc-panel-border: color-mix(in srgb, var(--lmc-on) 25%, #111);
+  // Info font size (date + weather) is expressed as a multiple of
+  // --dot-size. Each variant overrides this so the info row's
+  // intrinsic width comfortably fits inside the time-driven panel
+  // content area — otherwise `overflow: hidden` on .lmc-info would
+  // clip the day-of-week off the left of a centered date string.
+  // See the width table above; narrower variants need smaller info.
+  --info-scale: 1.7;
+
+  // Colour palette — defaults to an amber LED. Themes can override
+  // any of these to switch to green, red, blue, etc. without touching
+  // the component.
+  --lmc-on: #ff9a30;
+  --lmc-off: color-mix(in srgb, var(--lmc-on) 10%, transparent);
+  --lmc-glow: color-mix(in srgb, var(--lmc-on) 65%, transparent);
+  --lmc-bg: #060606;
+  --lmc-panel-border: color-mix(in srgb, var(--lmc-on) 25%, #111);
 }
 
-// Shorter time strings → bigger dots so the display still fills the
-// panel. HH:MM + AM/PM is ~30 dot-columns wide, HH:MM alone is ~22.
+// Shorter time strings → bigger dots. See width estimates above.
+// The --info-scale bump-down keeps the info row (font-size = dot-size
+// × --info-scale) narrow enough to fit inside the shorter panel.
 .led-matrix-clock--no-seconds {
-    --dot-size: min(2.6cqh, 1.9cqw);
+  --dot-size: min(6cqh, 2.05cqw);
+  --info-scale: 1.4;
 }
 
 .led-matrix-clock--no-ampm {
-    --dot-size: min(2.6cqh, 1.6cqw);
+  --dot-size: min(6cqh, 1.8cqw);
+  --info-scale: 1.5;
 }
 
 .led-matrix-clock--no-seconds.led-matrix-clock--no-ampm {
-    --dot-size: min(3cqh, 2.3cqw);
+  --dot-size: min(6cqh, 2.7cqw);
+  --info-scale: 1.0;
 }
 
-/* Framed panel — the "device" around the LED array */
+/* Framed panel — the "device" around the LED array.
+   Width is intentionally driven by the time row alone; the info row
+   is absolutely positioned below (see .lmc-info) so long dates in
+   any locale can never widen the panel past the container. */
 .lmc-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: calc(var(--dot-size) * 1.8);
-    padding: calc(var(--dot-size) * 2.2) calc(var(--dot-size) * 3);
-    background: var(--lmc-bg);
-    border: max(2px, calc(var(--dot-size) * 0.3)) solid var(--lmc-panel-border);
-    border-radius: calc(var(--dot-size) * 1.2);
-    box-shadow:
-        inset 0 0 calc(var(--dot-size) * 2) rgba(0, 0, 0, 0.85),
-        0 calc(var(--dot-size) * 0.5) calc(var(--dot-size) * 2) rgba(0, 0, 0, 0.45);
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding:
+    calc(var(--dot-size) * 2.2) calc(var(--dot-size) * 3) // Extra bottom padding reserves space for the absolutely-
+    // positioned info row (font-size ≈ 2 dot → ~2.4 dot line-box
+    // plus the 1.8 dot gap that used to sit between time and info).
+    calc(var(--dot-size) * 6);
+  background: var(--lmc-bg);
+  border: max(2px, calc(var(--dot-size) * 0.3)) solid var(--lmc-panel-border);
+  border-radius: calc(var(--dot-size) * 1.2);
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 calc(var(--dot-size) * 2) rgba(0, 0, 0, 0.85),
+    0 calc(var(--dot-size) * 0.5) calc(var(--dot-size) * 2) rgba(0, 0, 0, 0.45);
 }
 
 .lmc-time {
-    display: flex;
-    align-items: center;
-    gap: var(--char-gap);
+  display: flex;
+  align-items: center;
+  gap: var(--char-gap);
 }
 
 /* One 5×7 character (digit or colon). Grid enforces uniform dot
    positioning regardless of which bits are lit. */
 .lmc-digit {
-    display: grid;
-    grid-template-columns: repeat(5, var(--dot-size));
-    grid-template-rows: repeat(7, var(--dot-size));
-    gap: var(--dot-gap);
+  display: grid;
+  grid-template-columns: repeat(5, var(--dot-size));
+  grid-template-rows: repeat(7, var(--dot-size));
+  gap: var(--dot-gap);
 }
 
 .lmc-digit--colon {
-    grid-template-columns: var(--dot-size);
+  grid-template-columns: var(--dot-size);
 }
 
 /* Individual LED "dot" — off dots stay visible (faint) so the matrix
    grid remains readable, matching real dot-matrix displays. */
 .lmc-dot {
-    width: var(--dot-size);
-    height: var(--dot-size);
-    border-radius: 50%;
-    background: var(--lmc-off);
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 50%;
+  background: var(--lmc-off);
 }
 
 .lmc-dot.on {
-    background: var(--lmc-on);
-    // Two-layer glow: a tight halo close to the dot for the LED body
-    // and a wider soft halo for the bleed effect.
-    box-shadow:
-        0 0 calc(var(--dot-size) * 0.4) var(--lmc-on),
-        0 0 calc(var(--dot-size) * 1.1) var(--lmc-glow);
+  background: var(--lmc-on);
+  // Two-layer glow: a tight halo close to the dot for the LED body
+  // and a wider soft halo for the bleed effect.
+  box-shadow:
+    0 0 calc(var(--dot-size) * 0.4) var(--lmc-on),
+    0 0 calc(var(--dot-size) * 1.1) var(--lmc-glow);
 }
 
 /* Slow colon blink when seconds are hidden (mirrors digital-clock) */
 .lmc-digit--blink .lmc-dot.on {
-    animation: lmc-colon-blink 1s steps(2, start) infinite;
+  animation: lmc-colon-blink 1s steps(2, start) infinite;
 }
 
 @keyframes lmc-colon-blink {
 
-    0%,
-    49% {
-        background: var(--lmc-on);
-        box-shadow:
-            0 0 calc(var(--dot-size) * 0.4) var(--lmc-on),
-            0 0 calc(var(--dot-size) * 1.1) var(--lmc-glow);
-    }
+  0%,
+  49% {
+    background: var(--lmc-on);
+    box-shadow:
+      0 0 calc(var(--dot-size) * 0.4) var(--lmc-on),
+      0 0 calc(var(--dot-size) * 1.1) var(--lmc-glow);
+  }
 
-    50%,
-    100% {
-        background: var(--lmc-off);
-        box-shadow: none;
-    }
+  50%,
+  100% {
+    background: var(--lmc-off);
+    box-shadow: none;
+  }
 }
 
 /* AM/PM — same colour as the LEDs, aligned with the bottom of the
    digit column so it visually anchors to the baseline. */
 .lmc-ampm {
-    font-family: var(--font-mono, 'Roboto Mono', 'Menlo', monospace);
-    font-size: calc(var(--dot-size) * 3);
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: var(--lmc-on);
-    text-shadow: 0 0 calc(var(--dot-size) * 0.6) var(--lmc-glow);
-    align-self: flex-end;
-    padding-bottom: calc(var(--dot-size) * 0.3);
+  font-family: var(--font-mono, 'Roboto Mono', 'Menlo', monospace);
+  font-size: calc(var(--dot-size) * 3);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--lmc-on);
+  text-shadow: 0 0 calc(var(--dot-size) * 0.6) var(--lmc-glow);
+  align-self: flex-end;
+  padding-bottom: calc(var(--dot-size) * 0.3);
 }
 
-/* Date + weather row */
+/* Date + weather row.
+
+   Absolutely positioned inside the panel so its intrinsic width never
+   pushes the panel wider than the time row (long locale-specific date
+   strings like "Sáb., 10. jan. 2026" would otherwise widen the panel
+   past the container in the shorter time variants). If the info still
+   exceeds the panel content area — e.g. very long weather info in a
+   narrow container — overflow: hidden clips gracefully rather than
+   overflowing the frame. */
 .lmc-info {
-    display: flex;
-    align-items: center;
-    gap: calc(var(--dot-size) * 3);
-    font-family: var(--font-mono, 'Roboto Mono', 'Menlo', monospace);
-    font-size: calc(var(--dot-size) * 2);
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    color: var(--lmc-on);
-    text-shadow: 0 0 calc(var(--dot-size) * 0.5) var(--lmc-glow);
-    opacity: 0.9;
-    white-space: nowrap;
+  position: absolute;
+  left: calc(var(--dot-size) * 3);
+  right: calc(var(--dot-size) * 3);
+  bottom: calc(var(--dot-size) * 2.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--dot-size) * var(--info-scale) * 1.5);
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--font-mono, 'Roboto Mono', 'Menlo', monospace);
+  font-size: calc(var(--dot-size) * var(--info-scale));
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--lmc-on);
+  text-shadow: 0 0 calc(var(--dot-size) * 0.5) var(--lmc-glow);
+  opacity: 0.9;
+  white-space: nowrap;
 }
 
 .lmc-weather {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
 }
 
 .lmc-weather-icon {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }

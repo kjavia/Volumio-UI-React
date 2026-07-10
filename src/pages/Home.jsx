@@ -215,6 +215,14 @@ const Home = () => {
       '--sp-bar-track-color': { val: px(lc?.barTrackColor, pluginConfig?.barTrackColor), cls: 'sp-has-bar-track-color' },
       '--sp-bar-text-color': { val: px(lc?.barTextColor, pluginConfig?.barTextColor), cls: 'sp-has-bar-text-color' },
       '--sp-icon-btn-color': { val: px(lc?.iconBtnColor, pluginConfig?.iconBtnColor), cls: 'sp-has-icon-btn-color' },
+
+      // Idle-screen clock colour overrides. Applied by
+      // src/styles/clock-overrides.scss to every clock face (analog,
+      // digital, flip, LED matrix) via the paired sp-has-* classes.
+      '--sp-clock-bg': { val: pluginConfig?.clockBackgroundColor, cls: 'sp-has-clock-bg' },
+      '--sp-clock-frame': { val: pluginConfig?.clockFrameColor, cls: 'sp-has-clock-frame' },
+      '--sp-clock-face': { val: pluginConfig?.clockFaceColor, cls: 'sp-has-clock-face' },
+      '--sp-clock-font': { val: pluginConfig?.clockFontColor, cls: 'sp-has-clock-font' },
     };
     Object.entries(colorMap).forEach(([prop, { val, cls }]) => {
       if (val) {
@@ -278,6 +286,10 @@ const Home = () => {
     pluginConfig?.barTrackColor,
     pluginConfig?.barTextColor,
     pluginConfig?.iconBtnColor,
+    pluginConfig?.clockBackgroundColor,
+    pluginConfig?.clockFrameColor,
+    pluginConfig?.clockFaceColor,
+    pluginConfig?.clockFontColor,
     pluginConfig?.titleFontSize,
     pluginConfig?.albumFontSize,
     pluginConfig?.artistFontSize,
