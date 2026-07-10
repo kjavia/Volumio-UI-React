@@ -137,6 +137,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
             { value: 'analogClock', label: t('IDLE_SCREEN_ANALOG_CLOCK', 'Analog Clock') },
             { value: 'digitalClock', label: t('IDLE_SCREEN_DIGITAL_CLOCK', 'Digital Clock') },
             { value: 'flipClock', label: t('IDLE_SCREEN_FLIP_CLOCK', 'Flip Clock') },
+            { value: 'ledMatrixClock', label: t('IDLE_SCREEN_LED_MATRIX_CLOCK', 'LED Matrix Clock') },
             { value: 'weatherCurrent', label: t('IDLE_SCREEN_WEATHER_CURRENT', 'Weather (Current)') },
             { value: 'weatherHourly', label: t('IDLE_SCREEN_WEATHER_HOURLY', 'Weather (Hourly)') },
             { value: 'weatherDaily', label: t('IDLE_SCREEN_WEATHER_DAILY', 'Weather (Daily)') },

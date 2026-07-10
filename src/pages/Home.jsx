@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import FlipClock from '@/components/clocks/flip-clock';
 import DigitalClock from '@/components/clocks/digital-clock';
 import AnalogClock from '@/components/clocks/analog-clock';
+import LedMatrixClock from '@/components/clocks/led-matrix-clock';
 import IframeScreen from '@/components/IframeScreen';
 import Weather from '@/components/Weather';
 import Wallpaper from '@/components/Wallpaper';
@@ -20,6 +21,7 @@ const CLOCK_SCREENS = {
   analogClock: AnalogClock,
   digitalClock: DigitalClock,
   flipClock: FlipClock,
+  ledMatrixClock: LedMatrixClock,
 };
 
 const WEATHER_MODE_MAP = {
@@ -284,6 +286,7 @@ const Home = () => {
     pluginConfig?.volumeFontSize,
     pluginConfig?.playerButtonSize,
     pluginConfig?.secondaryRowFontSize,
+    pluginConfig?.hideTrackTimes,
     layoutFontOverrides,
     layoutColorOverrides,
     layoutPlayerOverrides,
