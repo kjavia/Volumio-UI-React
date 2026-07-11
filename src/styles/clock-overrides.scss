@@ -1,141 +1,39 @@
-/* ── Clock colour overrides ─────────────────────────────────────────────
+/* ── LED Matrix Clock colour overrides ───────────────────────────────────
 
-   Four user-facing settings under Settings > Clock — Background,
-   Frame, Face, Font colour — set the CSS variables `--sp-clock-bg`,
+   Four user-facing settings under Settings > Clock — Background, Frame,
+   Face, Font colour — set the CSS variables `--sp-clock-bg`,
    `--sp-clock-frame`, `--sp-clock-face`, `--sp-clock-font` on `:root`
    (see Home.jsx). The paired classes `sp-has-clock-*` are added when
    each value is present so these overrides only activate when the user
    has explicitly picked a colour; the theme default is used otherwise.
 
-   The four idle-screen clocks all use different DOM structures and
-   colour vectors, so each concept maps to the closest visual element
-   in each clock:
+   The settings only apply to the LED matrix clock (they are hidden in
+   the UI for any other idle-screen selection via `visibleIf`, see
+   settingsSections.js). The overrides here map each setting onto the
+   matching LED-matrix CSS variable defined in led-matrix-clock.scss,
+   which drives the panel background, border, dot colour and glow
+   throughout the component.
+   ────────────────────────────────────────────────────────────────────── */
 
-     Background — outermost area behind the whole clock
-     Frame      — outer bezel / border around the clock body
-     Face       — inner surface where digits / hands sit
-     Font       — primary colour of the digits, hands, ticks, and text
-
-   Overrides use `!important` because most themes ship strong theme-
-   specific colours (with their own `!important` in a few places).
-   ───────────────────────────────────────────────────────────────────── */
-
-/* ── Background ─────────────────────────────────────────────────────── */
-
-:root.sp-has-clock-bg .analog-clock-wrapper,
-:root.sp-has-clock-bg .digital-clock-wrapper,
-:root.sp-has-clock-bg .flip-clock,
+/* Background — .led-matrix-clock is the outer flexbox host that sits
+   behind the framed panel. */
 :root.sp-has-clock-bg .led-matrix-clock {
-    background: var(--sp-clock-bg) !important;
+  background: var(--sp-clock-bg) !important;
 }
 
-/* ── Frame ──────────────────────────────────────────────────────────── */
-
-/* Analog: .clock-bezel is the outer ring around the face. */
-:root.sp-has-clock-frame .clock-bezel {
-    background: var(--sp-clock-frame) !important;
-    border-color: var(--sp-clock-frame) !important;
-}
-
-/* Digital: the .digital-clock-frame wraps the LCD panel + info row. */
-:root.sp-has-clock-frame .digital-clock-frame {
-    background: var(--sp-clock-frame) !important;
-    border-color: var(--sp-clock-frame) !important;
-}
-
-/* Flip: the .flip-clock-body owns the bezel border and its footer stand. */
-:root.sp-has-clock-frame .flip-clock-body {
-    border-color: var(--sp-clock-frame) !important;
-}
-
-:root.sp-has-clock-frame .flip-clock-stand {
-    background: var(--sp-clock-frame) !important;
-}
-
-/* LED matrix: the .lmc-panel border is the frame; expose --lmc-panel-border. */
+/* Frame — the .lmc-panel border is the visible bezel. */
 :root.sp-has-clock-frame .led-matrix-clock {
-    --lmc-panel-border: var(--sp-clock-frame);
+  --lmc-panel-border: var(--sp-clock-frame);
 }
 
-/* ── Face ───────────────────────────────────────────────────────────── */
-
-/* Analog: .clock-face is the inner circle behind the hands. */
-:root.sp-has-clock-face .clock-face {
-    background: var(--sp-clock-face) !important;
-}
-
-/* Digital: the .digital-clock panel is the LCD screen. */
-:root.sp-has-clock-face .digital-clock {
-    background: var(--sp-clock-face) !important;
-}
-
-/* Flip: the individual flip tiles use --flip-panel-bg. */
-:root.sp-has-clock-face .flip-clock {
-    --flip-panel-bg: var(--sp-clock-face);
-}
-
-/* LED matrix: --lmc-bg is the panel background behind the LEDs. */
+/* Face — the .lmc-panel background is the dark surface behind the LEDs. */
 :root.sp-has-clock-face .led-matrix-clock {
-    --lmc-bg: var(--sp-clock-face);
+  --lmc-bg: var(--sp-clock-face);
 }
 
-/* ── Font (digits / hands / text) ───────────────────────────────────── */
-
-/* Analog: hands and ticks are drawn with `background: currentColor` in
-   most themes, and the hour digits + date + weather use `color`. Set
-   both `color` and a fallback `background` on the visual elements. */
-:root.sp-has-clock-font .analog-clock,
-:root.sp-has-clock-font .clock-face,
-:root.sp-has-clock-font .clock-hour-digit,
-:root.sp-has-clock-font .clock-face-day,
-:root.sp-has-clock-font .clock-face-date,
-:root.sp-has-clock-font .clock-face-weather-icon,
-:root.sp-has-clock-font .clock-face-weather-temp {
-    color: var(--sp-clock-font) !important;
-}
-
-:root.sp-has-clock-font .clock-hand,
-:root.sp-has-clock-font .clock-hand--hour,
-:root.sp-has-clock-font .clock-hand--minute,
-:root.sp-has-clock-font .clock-hand--second,
-:root.sp-has-clock-font .clock-center,
-:root.sp-has-clock-font .clock-tick::before,
-:root.sp-has-clock-font .clock-tick--hour::before,
-:root.sp-has-clock-font .clock-tick--minute::before {
-    background: var(--sp-clock-font) !important;
-    border-color: var(--sp-clock-font) !important;
-}
-
-/* Digital: segments, colon dots, day-of-week active, AM/PM, date, weather. */
-:root.sp-has-clock-font .lcd-digit .seg,
-:root.sp-has-clock-font .lcd-colon-dot {
-    background: var(--sp-clock-font) !important;
-}
-
-:root.sp-has-clock-font .lcd-days .active,
-:root.sp-has-clock-font .lcd-ampm,
-:root.sp-has-clock-font .lcd-date,
-:root.sp-has-clock-font .lcd-weather-icon,
-:root.sp-has-clock-font .lcd-weather-temp {
-    color: var(--sp-clock-font) !important;
-}
-
-/* Flip: the flip tile text colour comes from --flip-panel-color; the
-   colon, AM/PM, and the footer stand text all take `color`. */
-:root.sp-has-clock-font .flip-clock {
-    --flip-panel-color: var(--sp-clock-font);
-}
-
-:root.sp-has-clock-font .flip-colon,
-:root.sp-has-clock-font .flip-ampm,
-:root.sp-has-clock-font .flip-clock-date,
-:root.sp-has-clock-font .flip-clock-weather,
-:root.sp-has-clock-font .flip-clock-weather-icon {
-    color: var(--sp-clock-font) !important;
-}
-
-/* LED matrix: --lmc-on drives the dots + AM/PM + info text. The glow
-   layers use color-mix() with --lmc-on so they inherit automatically. */
+/* Font — --lmc-on drives the dots, AM/PM, date and weather text. The
+   glow layers use color-mix() with --lmc-on so they follow along
+   automatically. */
 :root.sp-has-clock-font .led-matrix-clock {
-    --lmc-on: var(--sp-clock-font);
+  --lmc-on: var(--sp-clock-font);
 }
