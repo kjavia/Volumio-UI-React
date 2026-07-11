@@ -23,28 +23,27 @@
 
   // --dot-size is the single knob that drives every measurement below.
   //
-  // Panel width is time-row-driven (info is absolutely positioned so
-  // it never expands the panel — see .lmc-info below). Widths in
-  // dot-units for each variant:
-  //   HH:MM:SS + AM/PM  ≈ 62 dots wide → 1.5cqw
-  //   HH:MM:SS          ≈ 51 dots wide → 1.8cqw
-  //   HH:MM + AM/PM     ≈ 46 dots wide → 2.05cqw
-  //   HH:MM             ≈ 35 dots wide → 2.7cqw
+  // AM/PM is absolutely positioned under the last digit (see .lmc-ampm
+  // below) so it never widens the time row. That means the panel and
+  // dot dimensions are the same whether 24-hour is ON or OFF — the
+  // AM/PM cell simply appears / disappears in the same-size frame.
+  //
+  // Widths in dot-units per seconds-state (based on the DIGIT row only,
+  // matching the previous --no-ampm variant sizing):
+  //   Seconds ON:  HH:MM:SS ≈ 51 dots wide → 1.8cqw ≈ 92% cqw
+  //   Seconds OFF: HH:MM    ≈ 35 dots wide → 2.7cqw ≈ 94% cqw
   //
   // The cqh cap (6cqh × ~15 dots ≈ 90% container height) protects
   // very tall / narrow containers; in typical landscape idle screens
-  // the cqw cap dominates and the display fills ~95% of the width.
-  --dot-size: min(6cqh, 1.5cqw);
+  // the cqw cap dominates.
+  --dot-size: min(6cqh, 1.8cqw);
   --dot-gap: calc(var(--dot-size) * 0.18);
   --char-gap: calc(var(--dot-size) * 1.3);
 
   // Info font size (date + weather) is expressed as a multiple of
-  // --dot-size. Each variant overrides this so the info row's
-  // intrinsic width comfortably fits inside the time-driven panel
-  // content area — otherwise `overflow: hidden` on .lmc-info would
-  // clip the day-of-week off the left of a centered date string.
-  // See the width table above; narrower variants need smaller info.
-  --info-scale: 1.7;
+  // --dot-size. Sized so the info row's intrinsic width comfortably
+  // fits inside the digit-driven panel content area.
+  --info-scale: 1.5;
 
   // Colour palette — defaults to an amber LED. Themes can override
   // any of these to switch to green, red, blue, etc. without touching
@@ -56,20 +55,10 @@
   --lmc-panel-border: color-mix(in srgb, var(--lmc-on) 25%, #111);
 }
 
-// Shorter time strings → bigger dots. See width estimates above.
-// The --info-scale bump-down keeps the info row (font-size = dot-size
-// × --info-scale) narrow enough to fit inside the shorter panel.
+// Hiding seconds shrinks the digit row so the dots can grow. AM/PM
+// toggle deliberately doesn't override these vars (see .lmc-ampm) so
+// the panel stays the same size when switching 24-hour on/off.
 .led-matrix-clock--no-seconds {
-  --dot-size: min(6cqh, 2.05cqw);
-  --info-scale: 1.4;
-}
-
-.led-matrix-clock--no-ampm {
-  --dot-size: min(6cqh, 1.8cqw);
-  --info-scale: 1.5;
-}
-
-.led-matrix-clock--no-seconds.led-matrix-clock--no-ampm {
   --dot-size: min(6cqh, 2.7cqw);
   --info-scale: 1.0;
 }
@@ -100,6 +89,7 @@
 }
 
 .lmc-time {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--char-gap);
@@ -158,17 +148,25 @@
   }
 }
 
-/* AM/PM — same colour as the LEDs, aligned with the bottom of the
-   digit column so it visually anchors to the baseline. */
+/* AM/PM — absolutely positioned directly below the last (right-most)
+   digit of the time row (`.lmc-time` is `position: relative`). Because
+   it's out of the flex flow, it doesn't widen the row — so 24-hour
+   ON and OFF produce identical panel dimensions and dot sizes. The
+   AM/PM sits in the small empty gap between the time and the info
+   row; keep the font size modest so it doesn't collide with either.
+*/
 .lmc-ampm {
+  position: absolute;
+  top: 80%;
+  right: -8%;
+  margin-top: calc(var(--dot-size) * 0.2);
   font-family: var(--font-mono, 'Roboto Mono', 'Menlo', monospace);
-  font-size: calc(var(--dot-size) * 3);
+  font-size: calc(var(--dot-size) * 1.5);
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--lmc-on);
   text-shadow: 0 0 calc(var(--dot-size) * 0.6) var(--lmc-glow);
-  align-self: flex-end;
-  padding-bottom: calc(var(--dot-size) * 0.3);
+  line-height: 1;
 }
 
 /* Date + weather row.
