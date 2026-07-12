@@ -205,16 +205,20 @@ textarea.input-field {
   transition: 0.2s;
 }
 
-// Checked State (Blue)
+// Checked State (Blue) — matches the new domed pill's blue gradient
+// (see button.scss > .btn-primary). Only the colour changes; the existing
+// slider chrome (border-radius, tiny inset track shadow) is kept.
 input:checked+.slider {
-  background: linear-gradient(to bottom, #6db3f2 0%, #1e69de 50%, #1254c0 51%, #539fe1 100%);
-  border-color: #104191;
+  background: linear-gradient(to bottom,
+      rgba(0, 65, 184, 0.625) 0%,
+      rgba(45, 115, 199, 0.625) 50%,
+      rgba(33, 160, 196, 0.625) 100%);
+  border-color: #0041b8;
 }
 
 input:checked+.slider:before {
   transform: translateX(22px);
-  border-color: #104191;
-  box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.2);
+  border-color: #0041b8;
 }
 
 // ─── Checkbox (Direct Input Styling) ─────────────────────────────────────────
@@ -239,10 +243,14 @@ input[type="checkbox"] {
   flex-shrink: 0;
 
   &:checked {
-    // Blue gel background — classic macOS Aqua style
-    background: linear-gradient(to bottom, #6eb8f8 0%, #1e69de 55%, #1050b4 100%);
-    border-color: #1050a0;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+    // Blue gel background — same gradient as the domed pill's
+    // .btn-primary in button.scss. No inset/outer shadows here so the
+    // checkbox stays flat, per design.
+    background: linear-gradient(to bottom,
+        rgba(0, 65, 184, 0.625) 0%,
+        rgba(45, 115, 199, 0.625) 50%,
+        rgba(33, 160, 196, 0.625) 100%);
+    border-color: #0041b8;
 
     // White checkmark on blue bg
     &::after {
@@ -303,8 +311,12 @@ input[type="radio"] {
       right: 3px;
       bottom: 3px;
       border-radius: 50%;
-      background: radial-gradient(circle at 40% 30%, #6eb8f8 0%, #1e69de 60%, #1050b4 100%);
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+      // Same blue gradient as the domed pill's .btn-primary. No
+      // additional shadow — the dot stays flat.
+      background: linear-gradient(to bottom,
+          rgba(0, 65, 184, 0.625) 0%,
+          rgba(45, 115, 199, 0.625) 50%,
+          rgba(33, 160, 196, 0.625) 100%);
     }
   }
 

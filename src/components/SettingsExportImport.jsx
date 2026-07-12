@@ -88,35 +88,33 @@ const SettingsExportImport = ({ currentSettings, currentLayouts, onImport, t }) 
   };
 
   return (
-    <div className="settings-export-import">
-      <div className="settings-export-import__actions">
-        <button
-          className="btn btn-sm btn-outline-primary"
-          onClick={handleExportSettings}
-          title={t('EXPORT_SETTINGS_TOOLTIP', 'Export all settings and layouts to a JSON file')}
-        >
-          <span className="material-icons">download</span>
-          {t('EXPORT_SETTINGS', 'Export Settings')}
-        </button>
+    <>
+      <button
+        className="btn btn-sm btn-outline-primary"
+        onClick={handleExportSettings}
+        title={t('EXPORT_SETTINGS_TOOLTIP', 'Export all settings and layouts to a JSON file')}
+      >
+        <span className="material-icons">download</span>
+        {t('EXPORT_SETTINGS', 'Export Settings')}
+      </button>
 
-        <button
-          className="btn btn-sm btn-outline-primary"
-          onClick={handleImportClick}
-          title={t('IMPORT_SETTINGS_TOOLTIP', 'Import settings and layouts from a JSON file')}
-        >
-          <span className="material-icons">upload</span>
-          {t('IMPORT_SETTINGS', 'Import Settings')}
-        </button>
+      <button
+        className="btn btn-sm btn-outline-primary"
+        onClick={handleImportClick}
+        title={t('IMPORT_SETTINGS_TOOLTIP', 'Import settings and layouts from a JSON file')}
+      >
+        <span className="material-icons">upload</span>
+        {t('IMPORT_SETTINGS', 'Import Settings')}
+      </button>
 
-        <input
-          ref={fileRef}
-          type="file"
-          accept=".json,application/json"
-          onChange={handleImportSettings}
-          style={{ display: 'none' }}
-        />
-      </div>
-    </div>
+      <input
+        ref={fileRef}
+        type="file"
+        accept=".json,application/json"
+        onChange={handleImportSettings}
+        style={{ display: 'none' }}
+      />
+    </>
   );
 };
 

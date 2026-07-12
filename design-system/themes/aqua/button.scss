@@ -1,8 +1,11 @@
 @use './variables.scss';
 
 // ─── Aqua Silver button — DEFAULT ────────────────────────────────────────────
-// In macOS Aqua/Lion, regular buttons are rounded-rect silver.
-// The blue pill is reserved for the primary/default action (.btn-primary).
+// Domed pill inspired by the mac-os-x-10-0-aqua-buttons reference:
+// heavy multi-layer box-shadows create the 3D recess, a ::before adds
+// the bright top-shine arc, and a ::after adds the softer bottom glow.
+// In macOS Aqua/Lion the silver pill is the default action; the blue
+// pill (.btn-primary) is reserved for the primary action.
 .btn {
   position: relative;
   display: inline-flex;
@@ -11,71 +14,106 @@
   gap: 0.4rem;
   padding: 4px 20px;
   min-height: 22px;
+  border: none;
 
-  // Silver gradient
-  background: linear-gradient(to bottom, #fafafa 0%, #e8e8e8 45%, #dcdcdc 55%, #f0f0f0 100%);
-  border: 1px solid #b0b0b0;
-  border-radius: 999px; // Aqua pill shape
+  // Silver gradient — semi-transparent so the multi-layer inset
+  // shadows below can bleed through and give the pill its domed
+  // "gel" body.
+  background: linear-gradient(rgba(160, 160, 160, 0.625), rgba(255, 255, 255, 0.625));
+  border-radius: 999px;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
 
-  // Text
+  // Text — dark ink with a subtle drop shadow. Sized via em so the
+  // shadow scales with whatever font-size the consumer picks.
   font-family: var(--font-label);
   font-size: var(--text-sm);
   font-weight: 400;
   color: #000000;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.0375em;
+  text-shadow: 0 0.25em 0.2em rgba(0, 0, 0, 0.25);
+  -webkit-text-stroke-width: 0.025em;
+  -webkit-text-stroke-color: #000000;
 
-  cursor: pointer;
-  user-select: none;
-  transition: none;
+  // Multi-layer shadow (all em-based so they scale with font-size):
+  //   1. Outer drop shadow beneath the button.
+  //   2. Thin outer ring for a soft edge.
+  //   3. Inner top shadow — dark rim around the top edge.
+  //   4. Inner top-band highlight — the light band along the top
+  //      surface that gives the button its domed appearance.
+  box-shadow:
+    0 0.375em 0.5em rgba(0, 0, 0, 0.2),
+    0 0.125em 0.125em rgba(0, 0, 0, 0.3),
+    inset 0 0.25em 0.25em rgba(0, 0, 0, 0.4),
+    inset 0 0.375em 0.5em 0.25em #BBBBBB;
+  transition: filter 0.12s ease, box-shadow 0.15s ease;
 
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-
-  // Hover — Aqua-selection blue fill (same treatment as icon buttons,
-  // toolbar buttons, and browse tiles so all interactive controls
-  // across settings / playlist manager / layout designer light up
-  // consistently on hover).
-  &:hover,
-  &:focus-visible {
-    background: var(--color-primary);
-    border-color: var(--color-primary-dark);
-    color: #ffffff;
-    text-shadow: none;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
-    outline: none;
-
-    .material-icons {
-      color: #ffffff;
-    }
+  // Hover — the pill "lights up": the highlight band brightens and a
+  // soft outer glow appears so the button reads as interactive without
+  // shifting layout. Focus / active override this with a stronger
+  // bloom (see below), so LVHA ordering is preserved.
+  &:hover {
+    filter: brightness(1.06);
+    box-shadow:
+      0 0.375em 0.5em rgba(0, 0, 0, 0.25),
+      0 0.125em 0.125em rgba(0, 0, 0, 0.3),
+      inset 0 0.25em 0.25em rgba(0, 0, 0, 0.4),
+      inset 0 0.375em 0.5em 0.25em #d0d0d0,
+      0 0 0.35em rgba(255, 255, 255, 0.55);
   }
 
-  // Active State (pushed in)
+  // Focus / active — same base shadow plus an outer bloom glow so
+  // pressed / keyboard-focused pills read as "energised".
+  &:focus,
+  &:focus-visible,
   &:active,
   &.active {
-    background: var(--color-primary-dark);
-    color: #ffffff;
-    text-shadow: none;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
-    border-color: var(--color-primary-deep);
+    box-shadow:
+      0 0.375em 0.5em rgba(0, 0, 0, 0.2),
+      0 0.125em 0.125em rgba(0, 0, 0, 0.3),
+      inset 0 0.25em 0.25em rgba(0, 0, 0, 0.4),
+      inset 0 0.375em 0.5em 0.25em #BBBBBB,
+      0 0 0.5em rgba(0, 0, 0, 0.25);
+  }
+
+  // Text sits above the ::before / ::after pseudo layers.
+  >* {
+    position: relative;
+    z-index: 3;
   }
 }
 
-// ─── Gel shine overlay — the signature Aqua highlight arc ────────────────────
-// This creates the "glassy" top half — clipped by overflow: hidden on the button
-.btn {
-  overflow: hidden;
+// ─── Top shine — bright arc across the upper half of the pill ─────────────────
+// The overflow: hidden on the button clips the arc to the pill shape.
+.btn::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 33%;
+  width: calc(100% - 0.875em);
+  top: 5%;
+  border-radius: 2em 2em 0.5em 0.5em;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
+  filter: blur(1px);
+  z-index: 2;
+  pointer-events: none;
 }
 
+// ─── Bottom glow — subtle wash of light along the lower half ──────────────────
 .btn::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 46%;
-  border-radius: inherit;
-  background: linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.6) 0%,
-      rgba(255, 255, 255, 0.05) 100%);
+  left: 50%;
+  transform: translateX(-50%);
+  height: 33%;
+  width: calc(100% - 1.25em);
+  bottom: 10%;
+  border-radius: 0.75em;
+  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.5));
+  filter: blur(3px);
   pointer-events: none;
 }
 
@@ -89,30 +127,46 @@
 
 // ─── Primary — the Blue Pill (default action button in Aqua) ─────────────────
 .btn-primary {
-  background: linear-gradient(to bottom, #7abaf5 0%, #4a9cf0 40%, #2e82e6 60%, #5ca8f0 100%);
-  border: 1px solid #4080d0;
-  border-radius: 999px; // Aqua pill shape
+  // Semi-transparent blue gradient so the multi-layer inset shadow
+  // below shapes the dome the same way the silver variant does.
+  background: linear-gradient(rgba(0, 65, 184, 0.625),
+      rgba(45, 115, 199, 0.625),
+      rgba(33, 160, 196, 0.625));
+  // Black ink on every domed pill variant — matches the base .btn
+  // (silver) so the whole new Aqua button system has a single, high-
+  // contrast label colour.
   color: #000000;
-  font-weight: 400;
-  text-shadow: none;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+  text-shadow: 0 0.25em 0.2em rgba(0, 0, 0, 0.25);
 
-  &::after {
-    background: linear-gradient(to bottom,
-        rgba(255, 255, 255, 0.55) 0%,
-        rgba(255, 255, 255, 0.05) 100%);
-  }
+  box-shadow:
+    0 0.375em 0.5em rgba(0, 0, 0, 0.3),
+    0 0.125em 0.125em rgba(0, 78, 187, 0.5),
+    inset 0 0.25em 0.5em rgba(0, 17, 49, 0.8),
+    inset 0 0.375em 0.5em 0.25em rgba(0, 78, 187, 0.75);
 
+  // Hover — the blue pill lights up with a subtle brightness boost
+  // and a soft blue outer glow. Focus / active add a stronger blue
+  // bloom on top of this.
   &:hover {
-    background: linear-gradient(to bottom, #8ec6f7 0%, #5eaaf3 40%, #3e8eea 60%, #6eb4f3 100%);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    filter: brightness(1.08);
+    box-shadow:
+      0 0.375em 0.5em rgba(0, 0, 0, 0.35),
+      0 0.125em 0.125em rgba(0, 78, 187, 0.6),
+      inset 0 0.25em 0.5em rgba(0, 17, 49, 0.7),
+      inset 0 0.375em 0.5em 0.25em rgba(52, 130, 220, 0.85),
+      0 0 0.4em rgba(52, 106, 227, 0.4);
   }
 
+  &:focus,
+  &:focus-visible,
   &:active,
   &.active {
-    background: linear-gradient(to bottom, #3670c0 0%, #2060b8 40%, #1854a8 60%, #4080cc 100%);
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
-    border-color: #305898;
+    box-shadow:
+      0 0.375em 0.5em rgba(0, 0, 0, 0.3),
+      0 0.125em 0.125em rgba(0, 78, 187, 0.5),
+      inset 0 0.25em 0.5em rgba(0, 17, 49, 0.8),
+      inset 0 0.375em 0.5em 0.25em rgba(0, 78, 187, 0.75),
+      0 0 0.5em rgba(52, 106, 227, 0.5);
   }
 }
 
@@ -261,15 +315,30 @@
   justify-content: center;
   align-items: center;
 
-  // Adjust the gel shine arc to follow the circle. Flush to the edges
-  // so no empty background strip shows above/beside the sheen (same fix
-  // as `.btn::after`).
-  &::after {
+  // Round buttons use a compact elliptical top-shine (orb highlight)
+  // instead of the pill's wide arc. The dome effect still comes from
+  // the base .btn multi-layer inset shadows, which read equally well
+  // on a circle.
+  &::before {
+    top: 8%;
+    left: 15%;
+    right: 15%;
+    bottom: auto;
+    width: auto;
+    height: 40%;
+    transform: none;
     border-radius: 50%;
-    height: 46%;
-    top: 0;
-    left: 0;
-    right: 0;
+    background: radial-gradient(ellipse at center top,
+        rgba(255, 255, 255, 0.85) 0%,
+        rgba(255, 255, 255, 0.2) 60%,
+        transparent 100%);
+    filter: blur(1px);
+  }
+
+  // Bottom-glow doesn't help on a small circle — hide it and let the
+  // ::before orb highlight + inset shadows do all the work.
+  &::after {
+    display: none;
   }
 }
 
@@ -288,6 +357,15 @@
     0 2px 5px var(--shadow-20),
     inset 0 1px 0 var(--highlight-60);
   cursor: pointer;
+
+  // The pill-shaped top-shine arc from the base .btn::before is tuned
+  // for a full pill; the softer squircle here reads better without it.
+  // The bottom-glow ::after also doesn't help on this hardware style,
+  // so drop both and rely on the explicit box-shadow above.
+  &::before,
+  &::after {
+    display: none;
+  }
 
   &:active {
     transform: translateY(1px);
@@ -318,7 +396,9 @@
     filter 0.1s,
     box-shadow 0.1s;
 
-  // Remove the Aqua gel ::after shine
+  // Remove the Aqua gel ::after shine and the base .btn::before pill
+  // top-shine — icon buttons are round toolbar chrome, no shine.
+  &::before,
   &::after {
     display: none;
   }
@@ -467,7 +547,9 @@
   padding: 0;
   text-decoration: none;
 
-  // Remove the Aqua gel shine overlay
+  // Remove the Aqua gel shine overlays (top-shine ::before and
+  // bottom-glow ::after inherited from .btn) — links are flat text.
+  &::before,
   &::after {
     display: none;
   }
@@ -496,4 +578,135 @@
   opacity: 0.4;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+// ─── Settings top toolbar — margin so the drop-shadow doesn't clip ──────
+// `.settings-topbar__actions` uses `overflow-x: auto`, which per the
+// CSS spec collapses `overflow-y` to `auto` too — the flex container
+// clips its children on the Y axis at its content-box. Give each
+// button a small margin-bottom so the flex parent grows to include
+// the drop-shadow area, keeping the (unchanged) domed pill shadow
+// fully visible. `align-items: center` on the parent then centers the
+// button + margin box, which visually shifts the button up by only
+// half the margin — barely noticeable.
+.settings-topbar .btn {
+  margin-bottom: 0.5em;
+}
+
+// ─── Settings Radio Button Group — flat aqua-classic override ───────────
+// The new domed pill styling on `.btn` (semi-transparent gradient +
+// multi-layer inset shadow + ::before top-shine + ::after bottom-glow)
+// is too visually heavy inside a segmented settings-radio-group control.
+// Restore the pre-domed aqua styling (opaque silver gradient, thin
+// border, flat drop-shadow) scoped to `.settings-radio.btn` only, so
+// the settings segmented control looks the way it did before today's
+// button rewrite.
+//
+// Typography matches `.settings-tab__label` / `.settings-tab` in
+// forms.scss so radio-group labels read as raised silver toolbar text,
+// consistent with the rest of the aqua settings tab strip.
+//
+// The DOM wraps each button in a `.settings-radio-wrapper` between the
+// group and the button (see components/settings/SelectField.jsx), so a
+// descendant selector — not a direct-child one — is required.
+.settings-radio-group {
+
+  .settings-radio.btn,
+  .settings-radio.btn.btn-secondary,
+  .settings-radio.btn.btn-primary {
+    background: linear-gradient(to bottom,
+        #fafafa 0%,
+        #e8e8e8 45%,
+        #dcdcdc 55%,
+        #f0f0f0 100%) !important;
+    border: 1px solid #b0b0b0 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
+
+    // Typography — matches .settings-tab / .settings-tab__label.
+    color: #333 !important;
+    font-weight: 500 !important;
+    letter-spacing: normal !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+    -webkit-text-stroke-width: 0 !important;
+
+    // Restore the original single ::after gel arc (top half only)
+    // and hide the new ::before pill top-shine.
+    &::before {
+      display: none !important;
+    }
+
+    &::after {
+      display: block !important;
+      content: '' !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: auto !important;
+      width: auto !important;
+      height: 46% !important;
+      transform: none !important;
+      filter: none !important;
+      border-radius: inherit !important;
+      background: linear-gradient(to bottom,
+          rgba(255, 255, 255, 0.6) 0%,
+          rgba(255, 255, 255, 0.05) 100%) !important;
+      pointer-events: none !important;
+    }
+  }
+
+  // Hover / focus — silver background lights up with the primary
+  // Aqua-selection blue and text uses the primary hover colour (same
+  // treatment as `.settings-tab:hover:not(--active)` in forms.scss).
+  .settings-radio.btn:hover,
+  .settings-radio.btn:focus-visible {
+    background: linear-gradient(to bottom,
+        #ffffff 0%,
+        #efefef 45%,
+        #e5e5e5 55%,
+        #f7f7f7 100%) !important;
+    border-color: #b0b0b0 !important;
+    color: var(--color-primary, #147aff) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  // Selected / primary — pale blue tab-strip gradient (matches
+  // `.settings-tab--active` in forms.scss). Dark text with light
+  // raised text-shadow, bumped-up weight.
+  .settings-radio.btn.btn-primary,
+  .settings-radio.btn.btn-primary:hover {
+    background: linear-gradient(to bottom,
+        #b8d4f0 0%,
+        #8bbae8 45%,
+        #6aa4e0 55%,
+        #a0c8f0 100%) !important;
+    border-color: #6090c0 !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08) !important;
+
+    &::after {
+      background: linear-gradient(to bottom,
+          rgba(255, 255, 255, 0.45) 0%,
+          rgba(255, 255, 255, 0.02) 100%) !important;
+    }
+  }
+
+  // Active / pressed — background tints darker, typography stays
+  // consistent with the selected/primary style above.
+  .settings-radio.btn:active,
+  .settings-radio.btn.active,
+  .settings-radio.btn.btn-primary:active {
+    background: linear-gradient(to bottom,
+        #a0c4e8 0%,
+        #78aae0 45%,
+        #5894d8 55%,
+        #90b8e8 100%) !important;
+    border-color: #4080b0 !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+  }
 }
