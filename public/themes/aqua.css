@@ -7212,8 +7212,8 @@ input[type=range]::-moz-range-thumb:active {
 
 .dialog-close {
   position: relative;
-  width: clamp(14px, 1.5vw, 16px);
-  height: clamp(14px, 1.5vw, 16px);
+  width: clamp(15px, 1.6vw, 18px);
+  height: clamp(15px, 1.6vw, 18px);
   min-width: 0;
   min-height: 0;
   padding: 0;
@@ -7225,19 +7225,8 @@ input[type=range]::-moz-range-thumb:active {
   cursor: pointer;
   transition: filter 0.12s ease;
   flex-shrink: 0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -2px 3px rgba(0, 0, 0, 0.28);
-}
-.dialog-close::before {
-  content: "";
-  position: absolute;
-  top: 10%;
-  left: 30%;
-  width: 40%;
-  height: 20%;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.55) 55%, rgba(255, 255, 255, 0) 100%);
-  pointer-events: none;
-  z-index: 2;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.45), 0 0 0 0.5px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.55), inset 0 -1.5px 2.5px rgba(0, 0, 0, 0.35);
 }
 .dialog-close::after {
   content: "";
@@ -7245,28 +7234,41 @@ input[type=range]::-moz-range-thumb:active {
   top: 4%;
   left: 6%;
   right: 6%;
-  height: 46%;
-  border-radius: 50%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.15) 100%);
+  height: 50%;
+  border-radius: 100% 100% 50% 50%/100% 100% 40% 40%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.55) 45%, rgba(255, 255, 255, 0.05) 100%);
   pointer-events: none;
   z-index: 1;
+}
+.dialog-close::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: 32%;
+  width: 36%;
+  height: 22%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.5) 55%, rgba(255, 255, 255, 0) 100%);
+  filter: blur(0.5px);
+  pointer-events: none;
+  z-index: 2;
 }
 .dialog-close .material-icons {
   display: none;
 }
 .dialog-close:hover, .dialog-close:focus-visible {
-  filter: brightness(1.08);
+  filter: brightness(1.1) saturate(1.05);
 }
 .dialog-close:active {
-  filter: brightness(0.9);
+  filter: brightness(0.88);
 }
 .dialog-close, .dialog-close:hover, .dialog-close:focus-visible, .dialog-close:active {
-  background: radial-gradient(ellipse at 50% 30%, #ff8478 0%, #ea4237 40%, #b62820 75%, #6b1a15 100%);
-  border: 1px solid #6b1a15;
+  background: radial-gradient(circle at 50% 32%, #ffb0a8 0%, #ff6b5e 25%, #ee3d33 55%, #b8241a 100%);
+  border-color: rgba(90, 12, 8, 0.7);
 }
 .dialog-close.dialog-close--expand, .dialog-close.dialog-close--expand:hover, .dialog-close.dialog-close--expand:focus-visible, .dialog-close.dialog-close--expand:active {
-  background: radial-gradient(ellipse at 50% 30%, #6ee55c 0%, #33a92a 40%, #197d16 75%, #0a4508 100%);
-  border: 1px solid #063f05;
+  background: radial-gradient(circle at 50% 32%, #b8f298 0%, #7dd85c 25%, #35b029 55%, #147a10 100%);
+  border-color: rgba(6, 55, 4, 0.7);
 }
 
 /* ── Toolbar ── */

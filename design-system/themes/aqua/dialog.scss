@@ -81,8 +81,10 @@
 
 .dialog-close {
   position: relative;
-  width: clamp(14px, 1.5vw, 16px);
-  height: clamp(14px, 1.5vw, 16px);
+  // Bump up a touch — classic macOS traffic lights are ~14–16px but
+  // read better at ~16–18px on modern hi-DPI displays.
+  width: clamp(15px, 1.6vw, 18px);
+  height: clamp(15px, 1.6vw, 18px);
   // Reset Bootstrap `.btn` sizing so the traffic-light stays circular
   // when the same element also has `.btn.btn-icon` classes.
   min-width: 0;
@@ -97,52 +99,69 @@
   transition: filter 0.12s ease;
   flex-shrink: 0;
 
-  // Classic Aqua traffic-light gel — a proper shiny dome:
-  //   • deep outer drop shadow anchors it on the toolbar
-  //   • bright inset top highlight + dark inset bottom shadow round
-  //     out the sphere
-  //   • the ::after adds the crisp arc-shaped gloss on top
-  //   • the ::before is the tiny bright specular reflection dot
+  // Classic macOS Aqua traffic-light gel. Layer order (bottom → top):
+  //   1. `background` — deep radial base with a subtle bright body
+  //      centre so the button reads as a coloured sphere.
+  //   2. `box-shadow`:
+  //        • outer drop shadow anchors the dot on the titlebar
+  //        • `inset 0 -1px 2px …` darkens the bottom rim
+  //        • `inset 0 1px 0 …` gives a hair-thin bright top edge
+  //   3. `::after` — crisp bright top-half gloss (the "wet" gel arc).
+  //      Uses an oval `border-radius` so the highlight curves
+  //      matching the sphere.
+  //   4. `::before` — a tiny concentrated specular reflection dot
+  //      near the top-centre for that "polished glass" pop.
+  //   5. The border is a saturated dark rim colour (redder / greener
+  //      than gray) so the dot stays clearly red/green rather than
+  //      picking up a neutral outline.
+  border: 1px solid transparent;
   box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    inset 0 -2px 3px rgba(0, 0, 0, 0.28);
+    0 1px 1.5px rgba(0, 0, 0, 0.45),
+    0 0 0 0.5px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1.5px 2.5px rgba(0, 0, 0, 0.35);
 
-  // Specular reflection dot — small bright oval near the top-center.
-  &::before {
-    content: '';
-    position: absolute;
-    top: 10%;
-    left: 30%;
-    width: 40%;
-    height: 20%;
-    border-radius: 50%;
-    background: radial-gradient(ellipse at center,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0.55) 55%,
-        rgba(255, 255, 255, 0) 100%);
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  // Broader top-half gloss that curves around the dome. Nearly opaque
-  // white at the very top so the gel highlight really pops.
+  // Top-half glossy arc — the signature Aqua gel highlight. Crisp,
+  // near-white at the very top, fading to translucent about half-way
+  // down the sphere. Uses `border-radius: 100% 100% 50% 50% / 100%
+  // 100% 40% 40%` so the bottom edge of the highlight curves like a
+  // meniscus rather than a straight line.
   &::after {
     content: '';
     position: absolute;
     top: 4%;
     left: 6%;
     right: 6%;
-    height: 46%;
-    border-radius: 50%;
+    height: 50%;
+    border-radius: 100% 100% 50% 50% / 100% 100% 40% 40%;
     background: linear-gradient(to bottom,
         rgba(255, 255, 255, 0.95) 0%,
-        rgba(255, 255, 255, 0.15) 100%);
+        rgba(255, 255, 255, 0.55) 45%,
+        rgba(255, 255, 255, 0.05) 100%);
     pointer-events: none;
     z-index: 1;
   }
 
-  // Hide icon — macOS traffic light dots show no symbol at rest
+  // Concentrated specular reflection dot near the top of the dome —
+  // small, bright, blurred slightly to look like glossy glass.
+  &::before {
+    content: '';
+    position: absolute;
+    top: 8%;
+    left: 32%;
+    width: 36%;
+    height: 22%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.5) 55%,
+        rgba(255, 255, 255, 0) 100%);
+    filter: blur(0.5px);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  // Hide icon — classic traffic-light dots show no symbol at rest.
   .material-icons {
     display: none;
   }
@@ -154,41 +173,41 @@
   // for the actual hover feedback.
   &:hover,
   &:focus-visible {
-    filter: brightness(1.08);
+    filter: brightness(1.1) saturate(1.05);
   }
 
   &:active {
-    filter: brightness(0.9);
+    filter: brightness(0.88);
   }
 
-  // Default (close) — classic Aqua traffic-light red gel. Radial
-  // gradient with a bright highlight near the top and a darker rim
-  // gives the button a proper domed sphere look; the ::before
-  // specular and ::after top gloss layers above sit on top to finish
-  // the effect.
+  // Default (close) — classic Aqua red traffic light. Radial base
+  // with warm bright centre, saturated red mid, deep maroon rim.
   &,
   &:hover,
   &:focus-visible,
   &:active {
-    background: radial-gradient(ellipse at 50% 30%,
-        #ff8478 0%,
-        #ea4237 40%,
-        #b62820 75%,
-        #6b1a15 100%);
-    border: 1px solid #6b1a15;
+    background:
+      radial-gradient(circle at 50% 32%,
+        #ffb0a8 0%,
+        #ff6b5e 25%,
+        #ee3d33 55%,
+        #b8241a 100%);
+    border-color: rgba(90, 12, 8, 0.7);
   }
 
-  // Fullscreen/expand toggle — classic Aqua traffic-light green gel.
+  // Fullscreen / expand toggle — classic Aqua green traffic light.
+  // Same layered gel formula, retuned to bright grass-green tones.
   &.dialog-close--expand,
   &.dialog-close--expand:hover,
   &.dialog-close--expand:focus-visible,
   &.dialog-close--expand:active {
-    background: radial-gradient(ellipse at 50% 30%,
-        #6ee55c 0%,
-        #33a92a 40%,
-        #197d16 75%,
-        #0a4508 100%);
-    border: 1px solid #063f05;
+    background:
+      radial-gradient(circle at 50% 32%,
+        #b8f298 0%,
+        #7dd85c 25%,
+        #35b029 55%,
+        #147a10 100%);
+    border-color: rgba(6, 55, 4, 0.7);
   }
 }
 
