@@ -1885,7 +1885,7 @@ pre {
   cursor: pointer;
   user-select: none;
   overflow: hidden;
-  transition: filter 0.1s, box-shadow 0.1s;
+  transition: color 0.12s ease;
 }
 .btn-icon::before, .btn-icon::after {
   display: none;
@@ -1898,28 +1898,61 @@ pre {
 }
 .btn-icon .material-icons {
   font-size: 1.25rem;
+  transition: color 0.12s ease;
 }
-.btn-icon:hover, .btn-icon:focus-visible {
-  background: var(--color-primary);
-  color: #ffffff;
+.btn-icon:hover, .btn-icon:focus {
+  background: transparent;
+  border: none;
   box-shadow: none;
+  outline: none;
+  color: var(--color-primary);
 }
-.btn-icon:hover .material-icons, .btn-icon:focus-visible .material-icons {
-  color: #ffffff;
+.btn-icon:hover .material-icons, .btn-icon:focus .material-icons {
+  color: var(--color-primary);
+}
+.btn-icon:focus-visible {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  outline: 1px solid #4c8fdc;
+  outline-offset: 1px;
+  color: var(--text-secondary, #666);
+}
+.btn-icon:focus-visible .material-icons {
+  color: var(--text-secondary, #666);
+}
+.btn-icon:focus-visible:hover {
+  color: var(--color-primary);
+}
+.btn-icon:focus-visible:hover .material-icons {
+  color: var(--color-primary);
 }
 .btn-icon:active {
-  background: var(--color-primary-dark);
-  color: #ffffff;
+  background: transparent;
+  border: none;
   box-shadow: none;
+  outline: none;
+  color: var(--color-primary-dark);
+}
+.btn-icon:active .material-icons {
+  color: var(--color-primary-dark);
 }
 .btn-icon.active {
-  background: linear-gradient(to bottom, #6eb8f8 0%, #1e69de 49%, #1050b4 51%, #4a90e2 100%);
-  border-color: #1050a0;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-  color: #ffffff;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  outline: 1px solid #4c8fdc;
+  outline-offset: 1px;
+  color: var(--color-primary);
+}
+.btn-icon.active .material-icons {
+  color: var(--color-primary);
 }
 .btn-icon.active:hover {
-  filter: brightness(1.1);
+  color: var(--color-primary-dark);
+}
+.btn-icon.active:hover .material-icons {
+  color: var(--color-primary-dark);
 }
 
 .led {

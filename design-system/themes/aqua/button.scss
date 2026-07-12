@@ -383,8 +383,9 @@
 }
 
 // ─── Icon Button (macOS Aqua toolbar style) ────────────────────────────────
-// Default: transparent. Hover: silver gel capsule (Tiger/Panther toolbar look).
-// Active/selected: blue-tinted highlight matching Aqua selection colour.
+// Chromeless icon-only chrome: transparent background at all states.
+// Hover / active only change the icon colour — no background pill, no
+// focus ring, no toggled fill.
 .btn-icon {
   width: 28px;
   height: 28px;
@@ -401,9 +402,7 @@
   cursor: pointer;
   user-select: none;
   overflow: hidden;
-  transition:
-    filter 0.1s,
-    box-shadow 0.1s;
+  transition: color 0.12s ease;
 
   // Remove the Aqua gel ::after shine and the base .btn::before pill
   // top-shine — icon buttons are round toolbar chrome, no shine.
@@ -418,42 +417,88 @@
      same specificity. */
   .material-icons {
     font-size: 1.25rem;
+    transition: color 0.12s ease;
   }
 
-  // Hover / focus: Aqua-selection blue tint (matches toolbar buttons
-  // in the dialog, settings, playlist manager, and layout designer).
+  // Hover — icon colour lifts to Aqua-selection blue; no background,
+  // no shadow. Covers `:focus` (mouse click) too so the base
+  // `.btn:focus` bloom shadow doesn't sneak through — keyboard focus
+  // gets its own thin-border treatment below.
   &:hover,
-  &:focus-visible {
-    background: var(--color-primary);
-    color: #ffffff;
+  &:focus {
+    background: transparent;
+    border: none;
     box-shadow: none;
+    outline: none;
+    color: var(--color-primary);
 
     .material-icons {
-      color: #ffffff;
+      color: var(--color-primary);
     }
   }
 
-  // Active / pressed
-  &:active {
-    background: var(--color-primary-dark);
-    color: #ffffff;
+  // Keyboard focus — thin Aqua-blue ring so it's visible without a
+  // background pill. Uses `outline` (drawn outside the border-box) so
+  // it doesn't push the icon around. Colour differs from the hover
+  // tint so keyboard focus is distinguishable.
+  &:focus-visible {
+    background: transparent;
+    border: none;
     box-shadow: none;
+    outline: 1px solid #4c8fdc;
+    outline-offset: 1px;
+    color: var(--text-secondary, #666);
+
+    .material-icons {
+      color: var(--text-secondary, #666);
+    }
   }
 
-  // Active/toggled state — Aqua blue gel
+  // Keyboard focus AND hover — combine both: blue icon + focus ring.
+  &:focus-visible:hover {
+    color: var(--color-primary);
+
+    .material-icons {
+      color: var(--color-primary);
+    }
+  }
+
+  // Active / pressed — deeper Aqua blue for the click flash.
+  &:active {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    color: var(--color-primary-dark);
+
+    .material-icons {
+      color: var(--color-primary-dark);
+    }
+  }
+
+  // Toggled / selected — same thin Aqua-blue outline ring as the
+  // keyboard focus state, plus a blue icon. Persistent visual cue
+  // that the button is in an "on" state, still with no background
+  // pill.
   &.active {
-    background: linear-gradient(to bottom,
-        #6eb8f8 0%,
-        #1e69de 49%,
-        #1050b4 51%,
-        #4a90e2 100%);
-    border-color: #1050a0;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
-    color: #ffffff;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    outline: 1px solid #4c8fdc;
+    outline-offset: 1px;
+    color: var(--color-primary);
+
+    .material-icons {
+      color: var(--color-primary);
+    }
   }
 
   &.active:hover {
-    filter: brightness(1.1);
+    color: var(--color-primary-dark);
+
+    .material-icons {
+      color: var(--color-primary-dark);
+    }
   }
 }
 
