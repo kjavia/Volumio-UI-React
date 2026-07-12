@@ -161,27 +161,33 @@
     filter: brightness(0.9);
   }
 
-  // Default (close) — reversed gel: darker top, brighter bottom.
+  // Default (close) — classic Aqua traffic-light red gel. Radial
+  // gradient with a bright highlight near the top and a darker rim
+  // gives the button a proper domed sphere look; the ::before
+  // specular and ::after top gloss layers above sit on top to finish
+  // the effect.
   &,
   &:hover,
   &:focus-visible,
   &:active {
-    background: linear-gradient(to bottom,
-        #b62820 0%,
-        #f2544c 45%,
-        #ffa6a0 100%);
+    background: radial-gradient(ellipse at 50% 30%,
+        #ff8478 0%,
+        #ea4237 40%,
+        #b62820 75%,
+        #6b1a15 100%);
     border: 1px solid #6b1a15;
   }
 
-  // Fullscreen/expand toggle — reversed gel.
+  // Fullscreen/expand toggle — classic Aqua traffic-light green gel.
   &.dialog-close--expand,
   &.dialog-close--expand:hover,
   &.dialog-close--expand:focus-visible,
   &.dialog-close--expand:active {
-    background: linear-gradient(to bottom,
-        #197d16 0%,
-        #58c045 45%,
-        #b8e8a5 100%);
+    background: radial-gradient(ellipse at 50% 30%,
+        #6ee55c 0%,
+        #33a92a 40%,
+        #197d16 75%,
+        #0a4508 100%);
     border: 1px solid #063f05;
   }
 }
@@ -558,6 +564,11 @@
 
 /* ── Browse Tiles ── */
 .browse-tile {
+  // Default state — inherits the silver gel from the base `.btn`
+  // (semi-transparent silver gradient + multi-layer inset dome
+  // shadows + `::before` top-shine arc + `::after` bottom glow).
+  // Hover / focus switches to the `.btn-primary` blue gel.
+
   .browse-tile__icon {
     display: block;
     margin-bottom: 4px;
@@ -568,19 +579,29 @@
     font-weight: 600;
   }
 
-  /* Aqua-selection blue on hover / keyboard focus, matching the
-     toolbar icon-buttons. Override the shared opacity dim from
-     home-responsive.scss. */
+  /* Hover / keyboard focus — blue gel dome matching
+     `.settings-section__footer > .btn-primary` with its :hover
+     brightness lift and outer blue bloom. */
   &:hover,
   &:focus-visible {
-    background: var(--color-primary);
-    color: #ffffff;
+    filter: brightness(1.08);
+    background: linear-gradient(rgba(0, 65, 184, 0.625),
+        rgba(45, 115, 199, 0.625),
+        rgba(33, 160, 196, 0.625));
+    color: #000000;
     opacity: 1;
+    text-shadow: 0 0.25em 0.2em rgba(0, 0, 0, 0.25);
+    box-shadow:
+      0 0.375em 0.5em rgba(0, 0, 0, 0.35),
+      0 0.125em 0.125em rgba(0, 78, 187, 0.6),
+      inset 0 0.25em 0.5em rgba(0, 17, 49, 0.7),
+      inset 0 0.375em 0.5em 0.25em rgba(52, 130, 220, 0.85),
+      0 0 0.4em rgba(52, 106, 227, 0.4);
 
     .browse-tile__icon,
     .browse-tile__label,
     .material-icons {
-      color: #ffffff !important;
+      color: #000000 !important;
     }
   }
 }

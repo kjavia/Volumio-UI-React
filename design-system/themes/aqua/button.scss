@@ -87,14 +87,20 @@
 
 // ─── Top shine — bright arc across the upper half of the pill ─────────────────
 // The overflow: hidden on the button clips the arc to the pill shape.
+// `height` is `min()`-capped with an em-based value so on tall buttons
+// (e.g. `.browse-tile`) the shine stays a thin arc at the top edge
+// instead of scaling to a huge dome that eats the button. `top: 0`
+// keeps the arc flush against the top edge so it covers the base
+// `.btn` inset dark-rim shadow — otherwise the shadow shows as a
+// black gap on tall buttons.
 .btn::before {
   content: '';
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  height: 33%;
+  height: min(33%, 1em);
   width: calc(100% - 0.875em);
-  top: 5%;
+  top: 0;
   border-radius: 2em 2em 0.5em 0.5em;
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
   filter: blur(1px);
@@ -103,14 +109,17 @@
 }
 
 // ─── Bottom glow — subtle wash of light along the lower half ──────────────────
+// Same `min()` cap on height + `bottom: 0` for tall buttons so the
+// glow hugs the bottom edge instead of ballooning to a third of the
+// button.
 .btn::after {
   content: '';
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  height: 33%;
+  height: min(33%, 1em);
   width: calc(100% - 1.25em);
-  bottom: 10%;
+  bottom: min(10%, 0.3em);
   border-radius: 0.75em;
   background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.5));
   filter: blur(3px);

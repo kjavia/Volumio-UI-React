@@ -1113,6 +1113,7 @@ const BrowseDialog = ({ open, onClose, initialFullscreen = false, initialLargeGr
         headerActions={headerActions}
         toolbar={toolbar}
         footer={albumFooter}
+        initialFocusRef={searchInputRef}
       >
         {isSearching || currentNav ? renderBrowseResults() : renderHome()}
       </Dialog>

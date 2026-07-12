@@ -8,14 +8,16 @@ const FOCUSABLE =
 /**
  * Traps keyboard focus inside a container while `active` is true.
  *
- * - On activation: focuses the first interactive child (or the container itself).
+ * - On activation: focuses the `initialFocusRef` if provided and visible,
+ *   otherwise the first interactive child (or the container itself).
  * - Tab / Shift+Tab wrap within the container.
  * - On deactivation: restores focus to the element that was focused before.
  *
  * @param {boolean} active — whether the trap is engaged (dialog open)
+ * @param {React.RefObject} [initialFocusRef] — optional element to focus on activation
  * @returns {React.RefObject} — attach to the container element
  */
-export default function useFocusTrap(active) {
+export default function useFocusTrap(active, initialFocusRef) {
   const containerRef = useRef(null);
   const previousFocus = useRef(null);
 
@@ -38,6 +40,11 @@ export default function useFocusTrap(active) {
 
     // Small delay so the DOM has rendered the dialog contents
     const id = requestAnimationFrame(() => {
+      const initial = initialFocusRef?.current;
+      if (initial && typeof initial.focus === 'function') {
+        initial.focus({ preventScroll: true });
+        return;
+      }
       const focusables = getFocusables();
       if (focusables.length > 0) {
         focusables[0].focus({ preventScroll: true });

@@ -1714,9 +1714,9 @@ pre {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  height: 33%;
+  height: min(33%, 1em);
   width: calc(100% - 0.875em);
-  top: 5%;
+  top: 0;
   border-radius: 2em 2em 0.5em 0.5em;
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
   filter: blur(1px);
@@ -1729,9 +1729,9 @@ pre {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  height: 33%;
+  height: min(33%, 1em);
   width: calc(100% - 1.25em);
-  bottom: 10%;
+  bottom: min(10%, 0.3em);
   border-radius: 0.75em;
   background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.5));
   filter: blur(3px);
@@ -7261,11 +7261,11 @@ input[type=range]::-moz-range-thumb:active {
   filter: brightness(0.9);
 }
 .dialog-close, .dialog-close:hover, .dialog-close:focus-visible, .dialog-close:active {
-  background: linear-gradient(to bottom, #b62820 0%, #f2544c 45%, #ffa6a0 100%);
+  background: radial-gradient(ellipse at 50% 30%, #ff8478 0%, #ea4237 40%, #b62820 75%, #6b1a15 100%);
   border: 1px solid #6b1a15;
 }
 .dialog-close.dialog-close--expand, .dialog-close.dialog-close--expand:hover, .dialog-close.dialog-close--expand:focus-visible, .dialog-close.dialog-close--expand:active {
-  background: linear-gradient(to bottom, #197d16 0%, #58c045 45%, #b8e8a5 100%);
+  background: radial-gradient(ellipse at 50% 30%, #6ee55c 0%, #33a92a 40%, #197d16 75%, #0a4508 100%);
   border: 1px solid #063f05;
 }
 
@@ -7618,21 +7618,24 @@ input[type=range]::-moz-range-thumb:active {
   font-weight: 600;
 }
 .browse-tile {
-  /* Aqua-selection blue on hover / keyboard focus, matching the
-     toolbar icon-buttons. Override the shared opacity dim from
-     home-responsive.scss. */
+  /* Hover / keyboard focus — blue gel dome matching
+     `.settings-section__footer > .btn-primary` with its :hover
+     brightness lift and outer blue bloom. */
 }
 .browse-tile:hover, .browse-tile:focus-visible {
-  background: var(--color-primary);
-  color: #ffffff;
+  filter: brightness(1.08);
+  background: linear-gradient(rgba(0, 65, 184, 0.625), rgba(45, 115, 199, 0.625), rgba(33, 160, 196, 0.625));
+  color: #000000;
   opacity: 1;
+  text-shadow: 0 0.25em 0.2em rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.375em 0.5em rgba(0, 0, 0, 0.35), 0 0.125em 0.125em rgba(0, 78, 187, 0.6), inset 0 0.25em 0.5em rgba(0, 17, 49, 0.7), inset 0 0.375em 0.5em 0.25em rgba(52, 130, 220, 0.85), 0 0 0.4em rgba(52, 106, 227, 0.4);
 }
 .browse-tile:hover .browse-tile__icon,
 .browse-tile:hover .browse-tile__label,
 .browse-tile:hover .material-icons, .browse-tile:focus-visible .browse-tile__icon,
 .browse-tile:focus-visible .browse-tile__label,
 .browse-tile:focus-visible .material-icons {
-  color: #ffffff !important;
+  color: #000000 !important;
 }
 
 /* ── Focus ring — subtle Aqua blue halo on light backgrounds ── */

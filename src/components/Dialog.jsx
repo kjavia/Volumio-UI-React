@@ -55,9 +55,10 @@ const Dialog = ({
   bodyRef,
   draggable = false,
   modal = true,
+  initialFocusRef,
 }) => {
   const dialogRef = useRef(null);
-  const trapRef = useFocusTrap(open);
+  const trapRef = useFocusTrap(open, initialFocusRef);
   const dragStateRef = useRef({ dragging: false, startX: 0, startY: 0, origX: 0, origY: 0 });
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
