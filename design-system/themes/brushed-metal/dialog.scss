@@ -160,8 +160,12 @@
     border-color: var(--color-gray-400);
     background: rgba(255, 255, 255, 0.5);
 
-    &:focus {
+    // Suppress the shared dialog `:focus-visible` outline so we only
+    // show a single blue border ring, not stacked outline + border.
+    &:focus,
+    &:focus-visible {
       border-color: var(--color-primary);
+      outline: none;
     }
   }
 

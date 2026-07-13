@@ -6106,8 +6106,9 @@ input[type=range]::-moz-range-thumb:active {
   border-color: var(--border-light);
   background: var(--list-item-bg);
 }
-.dialog-toolbar .browse-search__input:focus {
+.dialog-toolbar .browse-search__input:focus, .dialog-toolbar .browse-search__input:focus-visible {
   border-color: var(--color-primary);
+  outline: none;
 }
 .dialog-toolbar .browse-search__icon {
   color: var(--text-secondary);

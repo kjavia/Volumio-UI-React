@@ -5714,8 +5714,9 @@ h2 {
   color: rgba(255, 255, 255, 0.5);
   opacity: 1;
 }
-.dialog-toolbar .browse-search__input:focus {
+.dialog-toolbar .browse-search__input:focus, .dialog-toolbar .browse-search__input:focus-visible {
   border-color: var(--color-primary);
+  outline: none;
 }
 .dialog-toolbar .browse-search__icon {
   color: var(--text-light);

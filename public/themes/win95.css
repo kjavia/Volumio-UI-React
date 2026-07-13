@@ -5895,8 +5895,9 @@ input[type=range]::-webkit-slider-runnable-track {
   border-radius: 0;
   background: white;
 }
-.dialog-toolbar .browse-search__input:focus {
+.dialog-toolbar .browse-search__input:focus, .dialog-toolbar .browse-search__input:focus-visible {
   border-color: var(--win95-titlebar);
+  outline: none;
 }
 .dialog-toolbar .browse-search__icon {
   color: var(--text-primary);

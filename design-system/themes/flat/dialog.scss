@@ -61,8 +61,12 @@
     border-color: var(--border-light);
     background: var(--list-item-bg);
 
-    &:focus {
+    // Suppress the shared dialog `:focus-visible` outline so we only
+    // show a single border ring on focus.
+    &:focus,
+    &:focus-visible {
       border-color: var(--color-primary);
+      outline: none;
     }
   }
 

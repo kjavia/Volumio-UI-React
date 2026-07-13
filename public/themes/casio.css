@@ -5387,8 +5387,9 @@ input[type=range]::-webkit-slider-thumb {
   border-color: var(--casio-edge);
   background: var(--casio-body);
 }
-.dialog-toolbar .browse-search__input:focus {
+.dialog-toolbar .browse-search__input:focus, .dialog-toolbar .browse-search__input:focus-visible {
   border-color: var(--casio-lcd-bg);
+  outline: none;
 }
 .dialog-toolbar .browse-search__icon {
   color: var(--casio-on-dark-dim);

@@ -80,8 +80,12 @@
     border-radius: 0;
     background: white;
 
-    &:focus {
+    // Suppress the shared dialog `:focus-visible` outline so we only
+    // show a single border ring on focus.
+    &:focus,
+    &:focus-visible {
       border-color: var(--win95-titlebar);
+      outline: none;
     }
   }
 

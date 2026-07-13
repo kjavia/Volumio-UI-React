@@ -81,8 +81,12 @@
     border-color: var(--casio-edge);
     background: var(--casio-body);
 
-    &:focus {
+    // Suppress the shared dialog `:focus-visible` outline so we only
+    // show a single border ring on focus.
+    &:focus,
+    &:focus-visible {
       border-color: var(--casio-lcd-bg);
+      outline: none;
     }
   }
 

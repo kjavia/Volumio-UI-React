@@ -608,6 +608,16 @@
     font-size: clamp(2.5rem, 3.5cqi, 5rem) !important;
   }
 
+  // Match the material-icon size so rows containing service-logo or
+  // album-art tiles are the same height as rows with material-icon
+  // tiles — otherwise the last row (usually dynamic tiles with
+  // smaller art) is shorter than the rows above.
+  .browse-tile__art {
+    width: clamp(2.5rem, 3.5cqi, 5rem);
+    height: clamp(2.5rem, 3.5cqi, 5rem);
+    font-size: clamp(2.5rem, 3.5cqi, 5rem) !important;
+  }
+
   .browse-tile__label {
     font-size: clamp(0.85rem, 1cqi, 1.3rem);
   }

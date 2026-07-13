@@ -120,8 +120,12 @@
     border-color: rgba(255, 255, 255, 0.15);
     background: rgba(0, 0, 0, 0.20);
 
-    &:focus {
+    // Suppress the shared dialog `:focus-visible` outline so we only
+    // show a single border ring on focus.
+    &:focus,
+    &:focus-visible {
       border-color: var(--color-primary);
+      outline: none;
     }
   }
 

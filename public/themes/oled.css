@@ -6509,8 +6509,10 @@ input[type=range]::-moz-range-thumb:active {
   border-color: rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.03);
 }
-.dialog-toolbar .browse-search__input:focus {
+.dialog-toolbar .browse-search__input:focus, .dialog-toolbar .browse-search__input:focus-visible {
   border-color: var(--color-primary);
+  outline: none !important;
+  outline-offset: 0 !important;
 }
 .dialog-toolbar .browse-search__icon {
   color: var(--text-secondary);
