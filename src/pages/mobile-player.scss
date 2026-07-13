@@ -87,9 +87,11 @@
   display: none;
 }
 
-/* No player — track info takes over as the flexible row. */
+/* No player — the viz row absorbs the freed player space and becomes
+   the flexible row. Track-info drops back to intrinsic sizing so the
+   viz fills the whole area formerly occupied by the album art + viz. */
 .mobile-grid.no-player {
-  grid-template-rows: clamp(60px, 10vh, 120px) minmax(0, 1fr) auto auto auto auto;
+  grid-template-rows: minmax(0, 1fr) auto auto auto auto auto;
   grid-template-areas:
     'viz'
     'track-info'
@@ -155,7 +157,7 @@
 }
 
 .mobile-grid.no-player.no-controls {
-  grid-template-rows: clamp(60px, 10vh, 120px) minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr) auto auto;
   grid-template-areas:
     'viz'
     'track-info'
@@ -182,7 +184,7 @@
 }
 
 .mobile-grid.no-player.no-volume {
-  grid-template-rows: clamp(60px, 10vh, 120px) minmax(0, 1fr) auto auto auto;
+  grid-template-rows: minmax(0, 1fr) auto auto auto auto;
   grid-template-areas:
     'viz'
     'track-info'
