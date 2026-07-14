@@ -103,9 +103,12 @@ body,
   outline: none !important;
 }
 
-/* Suppress theme pseudo-element sheens (e.g. Aqua gel ::after) on transparent
-   buttons — at rest, on focus, and when active. Only :hover reveals them. */
+/* Suppress theme pseudo-element sheens (e.g. Aqua gel ::before top-shine and
+   ::after bottom-glow) on transparent buttons — at rest, on focus, and when
+   active. Only :hover reveals them. */
+:root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(:hover)::before,
 :root.sp-btn-bg-transparent .controls-transport-row .btn-round:not(:hover)::after,
+:root.sp-btn-bg-transparent .lsp-btn-group .btn-round:not(:hover)::before,
 :root.sp-btn-bg-transparent .lsp-btn-group .btn-round:not(:hover)::after {
   display: none !important;
 }

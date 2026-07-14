@@ -174,13 +174,18 @@
 /* ── Medium-compact: ≤560px panel height ── */
 @container (max-height: 560px) {
   .tp-controls .btn-round {
-    width: 60px !important;
-    height: 60px !important;
+    width: 70px !important;
+    height: 70px !important;
   }
 
+  /* Prev/next: ~68% of play — matches LSP transport-to-play ratio. */
   .tp-controls .btn-round.btn-sm {
-    width: 46px !important;
-    height: 46px !important;
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .tp-controls .btn-round .material-icons {
+    font-size: 2.6rem !important;
   }
 
   .tp-controls .btn-round.btn-sm .material-icons {
@@ -200,21 +205,22 @@
 /* ── Fully compact: ≤380px panel height ── */
 @container (max-height: 380px) {
   .tp-controls .btn-round {
-    width: 52px !important;
-    height: 52px !important;
+    width: 60px !important;
+    height: 60px !important;
   }
 
+  /* Prev/next: ~68% of play — matches LSP transport-to-play ratio. */
   .tp-controls .btn-round.btn-sm {
-    width: 40px !important;
-    height: 40px !important;
+    width: 42px !important;
+    height: 42px !important;
   }
 
   .tp-controls .btn-round .material-icons {
-    font-size: 1.5rem !important;
+    font-size: 2.25rem !important;
   }
 
   .tp-controls .btn-round.btn-sm .material-icons {
-    font-size: 1.15rem !important;
+    font-size: 1.25rem !important;
   }
 
   .tp-controls .btn-icon {
@@ -252,31 +258,31 @@
    they don't overwhelm the layout when the panel is tall. */
 @container (min-height: 700px) {
   .tp-controls .btn-round {
-    width: 70px !important;
-    height: 70px !important;
+    width: 80px !important;
+    height: 80px !important;
   }
 
   .tp-controls .btn-round.btn-sm {
-    width: 48px !important;
-    height: 48px !important;
+    width: 56px !important;
+    height: 56px !important;
   }
 
   .tp-controls .btn-round .material-icons,
   .tp-controls .btn-round .play-icon {
-    font-size: 2.2rem !important;
+    font-size: 3rem !important;
   }
 
   .tp-controls .btn-round.btn-sm .material-icons {
-    font-size: 1.5rem !important;
+    font-size: 1.75rem !important;
   }
 
   .tp-controls .controls-transport-row .btn-round .material-icons,
   .tp-controls .controls-transport-row .btn-round .play-icon {
-    font-size: 2.75rem !important;
+    font-size: 3.5rem !important;
   }
 
   .tp-controls .controls-transport-row .btn-round.btn-sm .material-icons {
-    font-size: 1.9rem !important;
+    font-size: 2.1rem !important;
   }
 
   .tp-controls .btn-icon {
@@ -372,33 +378,34 @@
 
   .tp-controls .controls-transport-row .btn-round .material-icons,
   .tp-controls .controls-transport-row .btn-round .play-icon {
-    font-size: 1.65rem !important;
+    font-size: 2rem !important;
   }
 
   /* Tablet button sizes at mid-height (slightly smaller on tablet/desktop). */
   @container (min-height: 500px) {
     .tp-controls .btn-round {
-      width: 62px !important;
-      height: 62px !important;
+      width: 72px !important;
+      height: 72px !important;
     }
 
+    /* Prev/next: ~68% of play — matches LSP transport-to-play ratio. */
     .tp-controls .btn-round.btn-sm {
-      width: 44px !important;
-      height: 44px !important;
+      width: 50px !important;
+      height: 50px !important;
     }
 
     .tp-controls .btn-round .material-icons,
     .tp-controls .btn-round .play-icon {
-      font-size: 1.75rem !important;
+      font-size: 2.6rem !important;
     }
 
     .tp-controls .btn-round.btn-sm .material-icons {
-      font-size: 1.2rem !important;
+      font-size: 1.4rem !important;
     }
 
     .tp-controls .controls-transport-row .btn-round .material-icons,
     .tp-controls .controls-transport-row .btn-round .play-icon {
-      font-size: 2.2rem !important;
+      font-size: 2.8rem !important;
     }
 
     .tp-controls .controls-transport-row .btn-round.btn-sm .material-icons {
@@ -480,18 +487,19 @@
 
     /* Bigger transport buttons */
     .btn-round {
-      width: clamp(64px, min(9cqw, 12cqh), 88px) !important;
-      height: clamp(64px, min(9cqw, 12cqh), 88px) !important;
+      width: clamp(74px, min(9cqw, 12cqh), 100px) !important;
+      height: clamp(74px, min(9cqw, 12cqh), 100px) !important;
     }
 
+    /* Prev/next: ~68% of play — matches LSP transport-to-play ratio. */
     .btn-round.btn-sm {
-      width: clamp(50px, min(7cqw, 10cqh), 66px) !important;
-      height: clamp(50px, min(7cqw, 10cqh), 66px) !important;
+      width: clamp(52px, min(6.2cqw, 8.2cqh), 68px) !important;
+      height: clamp(52px, min(6.2cqw, 8.2cqh), 68px) !important;
     }
 
     .btn-round .material-icons,
     .btn-round .play-icon {
-      font-size: clamp(1.8rem, min(5cqw, 6cqh), 3rem) !important;
+      font-size: clamp(2.4rem, min(6cqw, 7.2cqh), 3.75rem) !important;
     }
 
     .btn-round.btn-sm .material-icons {
@@ -614,22 +622,23 @@
   }
 
   .btn-round {
-    width: clamp(56px, min(10cqw, 13cqh), 84px) !important;
-    height: clamp(56px, min(10cqw, 13cqh), 84px) !important;
+    width: clamp(66px, min(10cqw, 13cqh), 96px) !important;
+    height: clamp(66px, min(10cqw, 13cqh), 96px) !important;
   }
 
+  /* Prev/next: ~68% of play — matches LSP transport-to-play ratio. */
   .btn-round.btn-sm {
-    width: clamp(46px, min(8cqw, 12cqh), 64px) !important;
-    height: clamp(46px, min(8cqw, 12cqh), 64px) !important;
+    width: clamp(46px, min(6.9cqw, 8.9cqh), 66px) !important;
+    height: clamp(46px, min(6.9cqw, 8.9cqh), 66px) !important;
   }
 
   .btn-round .material-icons {
-    font-size: clamp(1.8rem, min(6cqw, 7cqh), 2.8rem) !important;
+    font-size: clamp(2.5rem, min(7cqw, 8cqh), 3.6rem) !important;
     line-height: 1 !important;
   }
 
   .btn-round.btn-sm .material-icons {
-    font-size: clamp(1.5rem, min(5cqw, 7cqh), 2.2rem) !important;
+    font-size: clamp(1.6rem, min(5cqw, 7cqh), 2.4rem) !important;
     line-height: 1 !important;
   }
 
@@ -818,7 +827,7 @@
     }
 
     .btn-round .material-icons {
-      font-size: clamp(1.7rem, min(5.5cqw, 7cqh), 3.4rem) !important;
+      font-size: clamp(2.2rem, min(6.5cqw, 8.4cqh), 4.2rem) !important;
     }
 
     .btn-icon {
@@ -862,22 +871,23 @@
     }
 
     .btn-round {
-      width: 70px !important;
-      height: 70px !important;
+      width: 80px !important;
+      height: 80px !important;
     }
 
+    /* Prev/next: matches LSP default transport-to-play ratio (~68%). */
     .btn-round.btn-sm {
-      width: 52px !important;
-      height: 52px !important;
+      width: 56px !important;
+      height: 56px !important;
     }
 
     .btn-round .material-icons,
     .btn-round .play-icon {
-      font-size: 2.2rem !important;
+      font-size: 3rem !important;
     }
 
     .btn-round.btn-sm .material-icons {
-      font-size: 1.7rem !important;
+      font-size: 1.8rem !important;
     }
 
     .btn-icon {
@@ -963,7 +973,7 @@
     }
 
     .btn-round .material-icons {
-      font-size: clamp(1.2rem, min(4cqw, 5cqh), 2rem) !important;
+      font-size: clamp(1.6rem, min(4.8cqw, 6cqh), 2.4rem) !important;
     }
 
     .btn-icon {
