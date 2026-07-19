@@ -456,11 +456,18 @@
   }
 
   .custom-layout-controls .player-controls .controls-transport-row .btn-round {
+    // Size by BOTH cell height and width. The transport row lays out three
+    // round buttons (0.7× prev + 1× play + 0.7× next = 2.4× play_size) plus
+    // two gaps. Without a cqw cap the play button (aspect-ratio 1/1) grows
+    // to the full cell height in tall/narrow cells and the row overflows
+    // horizontally — the play button then gets clipped by the parent
+    // grid's `overflow: hidden`. Cap play_size at ~38cqw so
+    // 2.4 × 38cqw + 2 gaps ≈ 100cqw stays within the cell width.
     // cqh is relative to the cell (container-type: size on
     // .custom-layout-cell), so button size stays stable now that
     // .player-controls is content-sized rather than filling the cell.
-    height: calc(100cqh - 8px) !important;
-    max-height: calc(100cqh - 8px) !important;
+    height: min(calc(100cqh - 8px), 38cqw) !important;
+    max-height: min(calc(100cqh - 8px), 38cqw) !important;
     width: auto !important;
     min-width: 0 !important;
     min-height: 0 !important;
@@ -469,8 +476,8 @@
   }
 
   .custom-layout-controls .player-controls .controls-transport-row .btn-round.btn-sm {
-    height: calc((100cqh - 8px) * 0.7) !important;
-    max-height: calc((100cqh - 8px) * 0.7) !important;
+    height: min(calc((100cqh - 8px) * 0.7), calc(38cqw * 0.7)) !important;
+    max-height: min(calc((100cqh - 8px) * 0.7), calc(38cqw * 0.7)) !important;
   }
 
   .custom-layout-controls .player-controls .controls-transport-row .btn-round .material-icons,
@@ -559,38 +566,69 @@
   // ── Service logo — scale to fill the cell while leaving room for the
   //    drop-shadow added by `.sp-fanart-active` (the cell has
   //    `overflow: hidden`, so a logo sized 100% × 100% would have its
-  //    shadow clipped at the edges). Subtracting 12px from each axis
-  //    reserves ~6px on every side, which comfortably fits the shadow
-  //    blur radius. NB: the previous `.service-logo` / `.service-logo img`
-  //    selectors did not match the DOM emitted by `ServiceLogo.jsx`, which
-  //    uses `.service-logo-img`, `.service-logo-icon`, `.service-logo-badge`.
-  .service-logo-img {
-    width: auto;
-    height: auto;
-    max-width: calc(100cqw - 12px);
-    max-height: calc(100cqh - 12px);
+  //    shadow clipped at the edges). Reserve ~2.5% on every side via
+  //    95cqh/95cqw. A fixed `-12px` reservation looks reasonable in
+  //    tall cells but eats ~42% of a short (~29px) `serviceLogo` row,
+  //    which is what made the logo look "way too small" — proportional
+  //    reservation avoids that. NB: the previous
+  //    `.service-logo` / `.service-logo img` selectors did not match the
+  //    DOM emitted by `ServiceLogo.jsx`, which uses `.service-logo-img`,
+  //    `.service-logo-icon`, `.service-logo-badge`.
+  //
+  //    `ServiceLogo.jsx` renders the <img> with an inline `height: 1.6rem`
+  //    style. Inline styles beat any non-`!important` external rule
+  //    regardless of selector specificity, so plain `height: auto` here
+  //    would leave the logo stuck at ~25px and `max-height` would never
+  //    engage. Force the height with `!important`, drive it from the
+  //    cell height, and let width follow the intrinsic aspect ratio
+  //    with a width cap. `object-fit: contain` keeps the aspect ratio
+  //    if the width cap ends up clamping the box.
+  //
+  //    Specificity note: `home-responsive.scss` ships
+  //    `:root.sp-has-bitrate-font-size .service-logo-{img,icon,badge}`
+  //    rules at specificity 0,3,0 that force a small fixed size when the
+  //    "bitrate font size" plugin setting is enabled. A plain
+  //    `.custom-layout-cell .service-logo-*` selector (0,2,0) loses to
+  //    those and would show up crossed-out in devtools. Triple the leaf
+  //    class here to raise this rule to 0,4,0 — beating 0,3,0 on
+  //    specificity alone so cascade order can never regress the fix.
+  .service-logo-img.service-logo-img.service-logo-img {
+    height: 95cqh !important;
+    width: auto !important;
+    max-width: 95cqw;
+    max-height: none !important;
     object-fit: contain;
-    // react-icons' inline `height: 1.6rem` on <img> is overridden by
-    // max-* + auto above; no !important needed here.
   }
 
   // react-icons SVGs and material-icons spans are sized via font-size
   // (they have inline `fontSize: '1.8rem'` from the component, so
   // !important is required to override).
-  .service-logo-icon,
-  .material-icons.service-logo-icon {
-    font-size: min(calc(100cqh - 12px), calc(100cqw - 12px)) !important;
+  //
+  // react-icons render as <svg width="1em" height="1em" …>. CSS
+  // `width`/`height` win over those HTML presentation attributes, so
+  // setting them to `auto` collapses the SVG to its viewBox intrinsic
+  // size (e.g. 16×16) — that's what made service logos render tiny in
+  // custom-layout cells. Pin width/height to `1em` so the SVG follows
+  // the cell-sized `font-size` and actually fills the cell. Material
+  // icons are glyphs in a <span>, so `1em` there is a harmless upper
+  // bound on the inline box.
+  //
+  // Tripled leaf class for the same specificity reason as
+  // `.service-logo-img` above (must beat 0,3,0 from home-responsive).
+  .service-logo-icon.service-logo-icon.service-logo-icon,
+  .material-icons.service-logo-icon.service-logo-icon.service-logo-icon {
+    font-size: min(95cqh, 95cqw) !important;
     line-height: 1 !important;
-    width: auto !important;
-    height: auto !important;
+    width: 1em !important;
+    height: 1em !important;
   }
 
-  .service-logo-badge {
-    font-size: min(45cqh, 20cqw);
+  .service-logo-badge.service-logo-badge.service-logo-badge {
+    font-size: min(45cqh, 20cqw) !important;
     line-height: 1;
     white-space: nowrap;
-    max-width: calc(100cqw - 12px);
-    max-height: calc(100cqh - 12px);
+    max-width: 95cqw;
+    max-height: 95cqh;
   }
 }
 
