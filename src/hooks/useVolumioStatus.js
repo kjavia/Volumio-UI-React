@@ -89,6 +89,7 @@ const useVolumioStatus = () => {
   // used to protect `service` from being wiped by Volumio pause events that
   // omit or replace it with a generic fallback like `mpd`.
   const lastTrackUriRef = useRef('');
+  const lastAcceptedServiceRef = useRef('');
 
   useEffect(() => {
     if (!socket) return;
@@ -111,23 +112,30 @@ const useVolumioStatus = () => {
       setTrackType(data.trackType || '');
       setCodec(data.codec || '');
       setBitrate(data.bitrate != null ? String(data.bitrate) : '');
-      // `service` handling: Volumio's pushState during pause (and some seek/
-      // volume updates) can arrive with `service` missing, empty, or
-      // replaced by a generic fallback like `mpd` — even while the same
-      // track is still loaded. Overwriting `service` in those cases makes
-      // the <ServiceLogo> disappear and never come back until Volumio
-      // re-broadcasts a proper service value.
-      //
-      // Rule: only accept a new service value on a real track change (URI
-      // changed) or when playback is truly stopped with no track. Between
-      // those, keep the last valid service regardless of what the incoming
-      // update says.
+      // `service` handling: Volumio can emit pause/seek updates with a blank or
+      // generic source like `mpd` even while the current stream is still active.
+      // We must keep the last valid service in those cases, but still accept a
+      // real service switch such as Spotify -> Tidal when the payload contains a
+      // different provider name even if the track URI is missing.
       const newUri = data.uri || '';
+      const incomingService = (data.service || '').trim();
+      const normalizedIncomingService = incomingService.toLowerCase();
+      const isGenericService =
+        !incomingService ||
+        ['mpd', 'unknown', 'local'].includes(normalizedIncomingService);
       const isTrackChange = newUri && newUri !== lastTrackUriRef.current;
       const isFullyStopped = data.status === 'stop' && !data.title && !newUri;
-      if (isTrackChange || isFullyStopped) {
-        setService(data.service || '');
+      const serviceChanged =
+        !!incomingService &&
+        !isGenericService &&
+        incomingService !== lastAcceptedServiceRef.current;
+
+      if (isTrackChange || isFullyStopped || serviceChanged) {
+        const nextService = isGenericService ? '' : incomingService;
+        setService(nextService);
+        lastAcceptedServiceRef.current = nextService || lastAcceptedServiceRef.current;
       }
+
       lastTrackUriRef.current = newUri;
       setStreamUri(newUri);
       if (data.position >= 0) setPosition(data.position);
