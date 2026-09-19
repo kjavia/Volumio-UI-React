@@ -26,6 +26,7 @@ const useFanartBackground = ({ artist, album } = {}) => {
   const overrides = useLayoutOverrides();
   const enabled = resolveOverride(overrides?.displayFanartBackground, pluginConfig?.displayFanartBackground);
   const grayscale = resolveOverride(overrides?.fanartBackgroundGrayscale, pluginConfig?.fanartBackgroundGrayscale);
+  const opacity = Math.max(0, Math.min(100, Number(pluginConfig?.fanartBackgroundOpacity ?? 100))) / 100;
   const slideshowInterval = Math.max(5, Number(pluginConfig?.slideshowInterval) || 30);
 
   const { data: fanartData } = useFanartTv({
@@ -64,8 +65,9 @@ const useFanartBackground = ({ artist, album } = {}) => {
     el.style.setProperty('background-size', 'cover', 'important');
     el.style.setProperty('background-position', 'center', 'important');
     el.style.setProperty('filter', grayscale ? 'grayscale(100%)' : 'none', 'important');
+    el.style.setProperty('opacity', String(opacity), 'important');
     el.style.setProperty('transform', 'none', 'important');
-  }, [fanartBackgroundUrl, grayscale]);
+  }, [fanartBackgroundUrl, grayscale, opacity]);
 
   return { fanartBackgroundUrl, fanartBgRef, fanartActive: !!fanartBackgroundUrl };
 };
