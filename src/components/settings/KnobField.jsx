@@ -158,6 +158,7 @@ const KnobField = ({ field, value, onChange }) => {
                     min={min}
                     max={max}
                 />
+                {field.unit && <span className="settings-knob-unit">{field.unit}</span>}
             </div>
         </div>
     );

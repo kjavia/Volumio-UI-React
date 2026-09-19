@@ -541,6 +541,13 @@
   }
 }
 
+.settings-knob-unit {
+  font-size: var(--text-lg, 1.1rem);
+  font-weight: 600;
+  color: var(--text-secondary, #999);
+  margin-left: -0.5rem;
+}
+
 /* ─── JSON Editor ──────────────────────────────────────────────────────── */
 .settings-json-editor {
   margin-top: 0.35rem;
