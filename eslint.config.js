@@ -38,4 +38,10 @@ export default [
             'react/display-name': 'off',
         },
     },
+    {
+        files: ['scripts/**/*.js'],
+        languageOptions: {
+            globals: globals.node,
+        },
+    },
 ];

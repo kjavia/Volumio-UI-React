@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'fs';
 import path from 'path';
+import readline from 'readline/promises';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
@@ -11,6 +12,13 @@ function run(cmd, cwd) {
   console.log(`\n[${path.basename(cwd)}] $ ${cmd}`);
   const out = execSync(cmd, { cwd, stdio: 'inherit' });
   return out;
+}
+
+async function promptCommitMessage(defaultMessage) {
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  const answer = await rl.question(`\nCommit message [${defaultMessage}]: `);
+  rl.close();
+  return answer.trim() || defaultMessage;
 }
 
 const uiRepo = path.resolve(__dirname, '..');
@@ -26,7 +34,8 @@ if (!fs.existsSync(pluginRepo)) {
 }
 
 const lastCommit = execSync('git log -1 --pretty=%B', { cwd: uiRepo }).toString().trim();
-const commitMessage = `Building Plugin for - ${lastCommit}`;
+const defaultCommitMessage = `Building Plugin for - ${lastCommit}`;
+const commitMessage = await promptCommitMessage(defaultCommitMessage);
 
 console.log(`\nCommit message: ${commitMessage}`);
 

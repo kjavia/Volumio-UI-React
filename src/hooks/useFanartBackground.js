@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useFanartTv from './useFanartTv';
 import usePluginConfig from './usePluginConfig';
 import { useLayoutOverrides, resolveOverride } from '@/contexts/LayoutOverridesContext';
@@ -56,8 +56,10 @@ const useFanartBackground = ({ artist, album } = {}) => {
 
   // Apply the background image with !important via setProperty so theme
   // rules cannot override it (React's style prop cannot emit !important).
+  // useLayoutEffect (not useEffect) so the filter/opacity are set before the
+  // browser paints — otherwise each image rotation briefly flashes unfiltered.
   const fanartBgRef = useRef(null);
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = fanartBgRef.current;
     if (!el || !fanartBackgroundUrl) return;
     el.style.setProperty('background-image', `url("${fanartBackgroundUrl}")`, 'important');

@@ -446,7 +446,6 @@ const LargeScreenPlayer = ({ vizStopped = false, onVizResumed, menuSlot, vizCont
         <div className="lsp-bg" style={{ backgroundColor, filter: 'none', transform: 'none' }} />
       ) : fanartBackgroundUrl ? (
         <div
-          key={fanartBackgroundUrl}
           ref={fanartBgRef}
           className="lsp-bg sp-fanart-bg"
         />
