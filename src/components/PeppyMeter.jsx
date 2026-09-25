@@ -118,6 +118,11 @@ const PeppyMeter = ({
     album: trackInfo?.album || null,
   });
   const fanartTvImages = useMemo(() => {
+    // Rotating fanart region: artist backgrounds only — album covers and
+    // cdart are shown only in their designated regions (albumArt / vinyl).
+    // Fall back to the combined list when no artist backgrounds exist.
+    const bg = fanartTvData?.artistbackground;
+    if (Array.isArray(bg) && bg.length) return bg;
     const imgs = fanartTvData?.images || [];
     return Array.isArray(imgs) ? imgs : [];
   }, [fanartTvData]);

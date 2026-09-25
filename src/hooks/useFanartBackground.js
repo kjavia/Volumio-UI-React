@@ -36,6 +36,10 @@ const useFanartBackground = ({ artist, album } = {}) => {
 
   const images = useMemo(() => {
     if (!enabled) return [];
+    // Prefer artist backgrounds only — album covers / cdart make poor
+    // wallpaper. Fall back to the combined list when none exist.
+    const bg = fanartData?.artistbackground;
+    if (Array.isArray(bg) && bg.length) return bg;
     const imgs = fanartData?.images || [];
     return Array.isArray(imgs) ? imgs : [];
   }, [enabled, fanartData]);
