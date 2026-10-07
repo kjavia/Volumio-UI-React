@@ -85,8 +85,11 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
                     }
                 })}
                 {/* Upload section for peppy packs */}
-                {section.id === 'section_player_config' && (normalizeConfigValue(values.vizType) === 'peppyMeter' || normalizeConfigValue(values.vizType) === 'peppySpectrum') && (
-                    <PackUpload packType={normalizeConfigValue(values.vizType) === 'peppyMeter' ? 'meter' : 'spectrum'} onUploaded={onPackUploaded} t={t} />
+                {section.id === 'section_peppy' && (
+                    <>
+                        <PackUpload packType="meter" onUploaded={onPackUploaded} t={t} />
+                        <PackUpload packType="spectrum" onUploaded={onPackUploaded} t={t} />
+                    </>
                 )}
             </div>
             <div className="settings-section__footer">

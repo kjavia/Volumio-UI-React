@@ -5,6 +5,8 @@ import { fetchMeterConfigs } from './peppy-meter/parseMeterConfig';
 import { loadMeterImages, renderMeterFrame } from './peppy-meter/meterRenderer';
 import PeppySpectrum from './peppy-spectrum/PeppySpectrum';
 import useFanartTv from '@/hooks/useFanartTv';
+import usePluginConfig from '@/hooks/usePluginConfig';
+import { getSmoothedLevel, getMeterLevel } from './peppy-meter/meterLevels';
 import './peppy-meter/PeppyMeter.scss';
 
 // MediaElementSourceNode can only be created ONCE per HTMLMediaElement.
@@ -12,8 +14,6 @@ import './peppy-meter/PeppyMeter.scss';
 const mediaSourceCache = new WeakMap();
 
 const FFT_SIZE = 1024;
-const SMOOTH_BUFFER_SIZE = 6;
-const NEEDLE_SENSITIVITY = 0.5;
 
 const getChannelPeakLevel = (data) => {
   let peak = 0;
@@ -22,14 +22,6 @@ const getChannelPeakLevel = (data) => {
     if (sample > peak) peak = sample;
   }
   return Math.max(0, Math.min(1, peak));
-};
-
-const getSmoothedLevel = (buffer, level) => {
-  buffer.push(level);
-  if (buffer.length > SMOOTH_BUFFER_SIZE) buffer.shift();
-  let sum = 0;
-  for (let i = 0; i < buffer.length; i++) sum += buffer[i];
-  return sum / buffer.length;
 };
 
 /**
@@ -92,6 +84,9 @@ const PeppyMeter = ({
   stopped = false,
   className = '',
 }) => {
+  const { data: pluginConfig } = usePluginConfig();
+  const needleSensitivity = pluginConfig?.peppyNeedleSensitivity ?? 0.5;
+  const smoothness = pluginConfig?.peppySmoothness ?? 6;
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
   const analyserLRef = useRef(null);
@@ -467,8 +462,8 @@ const PeppyMeter = ({
       const rawL = getChannelPeakLevel(dataL);
       const rawR = getChannelPeakLevel(dataR);
       const smooth = smoothBuffersRef.current;
-      const leftLevel = Math.max(0, Math.min(1, getSmoothedLevel(smooth.left, rawL) * NEEDLE_SENSITIVITY));
-      const rightLevel = Math.max(0, Math.min(1, getSmoothedLevel(smooth.right, rawR) * NEEDLE_SENSITIVITY));
+      const leftLevel = getMeterLevel(getSmoothedLevel(smooth.left, rawL, smoothness), needleSensitivity);
+      const rightLevel = getMeterLevel(getSmoothedLevel(smooth.right, rawR, smoothness), needleSensitivity);
 
       // Accumulate reel rotation only when audio is playing (signal detected)
       if (cfg.reel && (rawL > 0.01 || rawR > 0.01)) {
@@ -553,7 +548,7 @@ const PeppyMeter = ({
     };
 
     tick();
-  }, [nativeW, nativeH]);
+  }, [nativeW, nativeH, needleSensitivity, smoothness]);
 
   // ── Auto-enable when playback starts ─────────────────────────────────────
 

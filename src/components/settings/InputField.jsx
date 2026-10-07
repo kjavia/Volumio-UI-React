@@ -9,6 +9,9 @@ const InputField = ({ field, value, onChange }) => (
       id={field.id}
       className="form-control settings-input"
       type={field.type || 'text'}
+      min={field.min}
+      max={field.max}
+      step={field.step}
       style={field.width ? { width: field.width } : undefined}
       value={value ?? ''}
       onChange={(e) => onChange(field.id, e.target.value)}
