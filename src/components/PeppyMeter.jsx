@@ -12,7 +12,7 @@ import './peppy-meter/PeppyMeter.scss';
 const mediaSourceCache = new WeakMap();
 
 const FFT_SIZE = 1024;
-const SMOOTH_BUFFER_SIZE = 4;
+const SMOOTH_BUFFER_SIZE = 6;
 const NEEDLE_SENSITIVITY = 0.5;
 
 const getChannelPeakLevel = (data) => {

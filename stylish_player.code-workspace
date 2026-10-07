@@ -12,6 +12,10 @@
       "/^diff /Volumes/Data/projects/Volumio-UI-React/public/assets/logos/hires\\.svg /Volumes/Data/projects/volumio-plugins-sources-bookworm/stylish_player/app/assets/logos/hires\\.svg$/": {
         "approve": true,
         "matchCommandLine": true
+      },
+      "/^node -e 'const fs=require\\(\"fs\"\\); const p=\"app/assets/index-CBiD7Lqh\\.js\"; const s=fs\\.readFileSync\\(p,\"utf8\"\\); for\\(const q of \\[\"peppyMeter\",\"peppy_meter\",\"needle\",\"PeppyMeter\"\\]\\)\\{let i=-1,n=0; while\\(\\(i=s\\.indexOf\\(q,i\\+1\\)\\)!==-1&&n\\+\\+<15\\) console\\.log\\(\"\\\\n--- \"\\+q\\+\" @\"\\+i\\+\" ---\\\\n\"\\+s\\.slice\\(Math\\.max\\(0,i-500\\),Math\\.min\\(s\\.length,i\\+900\\)\\)\\);\\}'$/": {
+        "approve": true,
+        "matchCommandLine": true
       }
     }
   },
