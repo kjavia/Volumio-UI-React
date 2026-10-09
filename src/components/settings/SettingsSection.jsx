@@ -13,9 +13,12 @@ import PackUpload from './PackUpload';
 
 const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolders, peppySpectrumFolders, onPackUploaded, t }) => {
     const [, setDeleting] = useState(null);
+    const [peppyType, setPeppyType] = useState(() =>
+        normalizeConfigValue(values.vizType) === 'peppySpectrum' ? 'spectrum' : 'meter');
 
     const isFieldVisible = (field) => {
         if (!field.visibleIf) return true;
+        if (field.visibleIf.field === 'peppyType') return peppyType === field.visibleIf.value;
         return normalizeConfigValue(values[field.visibleIf.field]) === field.visibleIf.value;
     };
 
@@ -62,6 +65,20 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
                 <h3 className="settings-section__title">{section.label}</h3>
             </div>
             <div className="settings-section__body">
+                {section.id === 'section_peppy' && (
+                    <SelectField
+                        field={{
+                            id: 'peppyType',
+                            label: t('PEPPY', 'Peppy'),
+                            options: [
+                                { value: 'meter', label: t('VIZ_TYPE_PEPPY_METER', 'Peppy Meter') },
+                                { value: 'spectrum', label: t('VIZ_TYPE_PEPPY_SPECTRUM', 'Peppy Spectrum') },
+                            ],
+                        }}
+                        value={peppyType}
+                        onChange={(_id, value) => setPeppyType(value)}
+                    />
+                )}
                 {section.fields.map((rawField) => {
                     if (!isFieldVisible(rawField)) return null;
                     const field = resolveField(rawField);
@@ -86,10 +103,7 @@ const SettingsSection = ({ section, values, onChange, onSave, saving, peppyFolde
                 })}
                 {/* Upload section for peppy packs */}
                 {section.id === 'section_peppy' && (
-                    <>
-                        <PackUpload packType="meter" onUploaded={onPackUploaded} t={t} />
-                        <PackUpload packType="spectrum" onUploaded={onPackUploaded} t={t} />
-                    </>
+                    <PackUpload key={peppyType} packType={peppyType} onUploaded={onPackUploaded} t={t} />
                 )}
             </div>
             <div className="settings-section__footer">

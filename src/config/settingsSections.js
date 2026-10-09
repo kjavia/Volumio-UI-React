@@ -89,6 +89,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
           id: 'peppyMeterFolder', element: 'select', label: t('PEPPY_METER_FOLDER', 'Peppy Meter Pack'), icon: 'folder',
           doc: t('PEPPY_METER_FOLDER_DESC', 'Select the meter asset pack.'),
           options: peppyFolderOptions,
+          visibleIf: { field: 'peppyType', value: 'meter' },
           deletable: true,
         },
         {
@@ -96,13 +97,15 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
           doc: t('PEPPY_METER_MODEL_DESC', 'Select a specific meter design, or Random to cycle on each track change.'),
           options: [], // Populated dynamically by SettingsSection based on selected folder
           dynamicOptionsFrom: 'peppyMeterFolder', // marker for dynamic options
+          visibleIf: { field: 'peppyType', value: 'meter' },
         },
-        { id: 'peppyNeedleSensitivity', element: 'input', type: 'number', label: t('PEPPY_NEEDLE_SENSITIVITY', 'Needle Sensitivity'), icon: 'speed', doc: t('PEPPY_NEEDLE_SENSITIVITY_DESC', 'Meter gain multiplier (0.1–5.0). Higher values increase needle movement. Default: 0.5.'), min: 0.1, max: 5, step: 0.1 },
-        { id: 'peppySmoothness', element: 'knob', label: t('PEPPY_SMOOTHNESS', 'Smoothness'), icon: 'show_chart', doc: t('PEPPY_SMOOTHNESS_DESC', 'Average over 1–30 frames. Higher values give smoother, slower movement. Default: 6.'), min: 1, max: 30 },
+        { id: 'peppyNeedleSensitivity', element: 'input', type: 'number', label: t('PEPPY_NEEDLE_SENSITIVITY', 'Needle Sensitivity'), icon: 'speed', doc: t('PEPPY_NEEDLE_SENSITIVITY_DESC', 'Meter gain multiplier (0.1–5.0). Higher values increase needle movement. Default: 0.5.'), min: 0.1, max: 5, step: 0.1, visibleIf: { field: 'peppyType', value: 'meter' } },
+        { id: 'peppySmoothness', element: 'knob', label: t('PEPPY_SMOOTHNESS', 'Smoothness'), icon: 'show_chart', doc: t('PEPPY_SMOOTHNESS_DESC', 'Average over 1–30 frames. Higher values give smoother, slower movement. Default: 6.'), min: 1, max: 30, visibleIf: { field: 'peppyType', value: 'meter' } },
         {
           id: 'peppySpectrumFolder', element: 'select', label: t('PEPPY_SPECTRUM_FOLDER', 'Peppy Spectrum Pack'), icon: 'folder',
           doc: t('PEPPY_SPECTRUM_FOLDER_DESC', 'Select the spectrum asset pack.'),
           options: peppySpectrumFolderOptions,
+          visibleIf: { field: 'peppyType', value: 'spectrum' },
           deletable: true,
         },
         {
@@ -110,6 +113,7 @@ const getSections = (t, peppyFolders = [], peppySpectrumFolders = []) => {
           doc: t('PEPPY_SPECTRUM_MODEL_DESC', 'Select a specific spectrum design, or Random to cycle on each track change.'),
           options: [], // Populated dynamically
           dynamicOptionsFrom: 'peppySpectrumFolder',
+          visibleIf: { field: 'peppyType', value: 'spectrum' },
         },
       ],
     },

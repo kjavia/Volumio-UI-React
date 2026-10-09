@@ -14,7 +14,10 @@ test('Peppy section owns all pack selectors and the response controls', () => {
     'peppyMeterFolder', 'peppyMeterModel', 'peppyNeedleSensitivity',
     'peppySmoothness', 'peppySpectrumFolder', 'peppySpectrumModel',
   ]);
-  assert.ok(peppy.fields.every((field) => !field.visibleIf));
+  assert.deepEqual(peppy.fields.map((field) => field.visibleIf), [
+    ...Array.from({ length: 4 }, () => ({ field: 'peppyType', value: 'meter' })),
+    ...Array.from({ length: 2 }, () => ({ field: 'peppyType', value: 'spectrum' })),
+  ]);
   assert.equal(peppy.fields[0].options[0].value, 'pack');
   assert.equal(peppy.fields[4].options[0].value, 'spectrum');
   assert.equal(peppy.fields[1].dynamicOptionsFrom, 'peppyMeterFolder');
